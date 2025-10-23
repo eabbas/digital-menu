@@ -1,0 +1,13 @@
+@import url("fontiran.css");
+
+* {
+  font-family: 'IRANSansX';
+}
+
+.samim{
+  font-family: 'Samim';
+}
+
+.yekan{
+  font-family: 'Yekan';
+}
