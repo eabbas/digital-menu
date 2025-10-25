@@ -44,6 +44,3 @@ Route::get('product/show/{product}' , [ProductController::class , 'show']);
 Route::get('product/edit/{product}' , [ProductController::class , 'edit']);
 Route::post('product/update' , [ProductController::class , 'update']);
 Route::get('product/delete/{product}' , [ProductController::class , 'delete']);
-
-
-

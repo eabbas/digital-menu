@@ -11,25 +11,24 @@ class ProductController extends Controller
     public function create()
     {
         $categories = category::all();
-        return view("product.create" , ['categories'=>$categories]);
+        return view("product.create", ['categories' => $categories]);
     }
     public function store(Request $request)
     {
-        if($request->home){
+        if ($request->home) {
             product::create([
-                'title'=> $request->title, 
+                'title' => $request->title,
                 'description' => $request->description,
-                'price' => $request->price , 
+                'price' => $request->price,
                 'discount' => $request->discount,
                 'show_in_home' => $request->home,
                 'cat_id' => $request->categoryId
             ]);
-        }
-        else{
+        } else {
             product::create([
-                'title'=> $request->title, 
+                'title' => $request->title,
                 'description' => $request->description,
-                'price' => $request->price , 
+                'price' => $request->price,
                 'discount' => $request->discount,
                 'cat_id' => $request->categoryId
             ]);
@@ -39,18 +38,18 @@ class ProductController extends Controller
     {
         $categories = category::all();
         $products = product::all();
-        return view("product.index" , ['categories'=>$categories , 'products'=>$products]);
+        return view("product.index", ['categories' => $categories, 'products' => $products]);
     }
 
     public function show(product $product)
     {
         $categories = category::all();
-        return view("product.single" , ['product'=>$product , 'categories'=>$categories]);
+        return view("product.single", ['product' => $product, 'categories' => $categories]);
     }
     public function edit(product $product)
     {
         $categories = category::all();
-        return view('product.edit' , ['product'=>$product , 'categories'=>$categories]);
+        return view('product.edit', ['product' => $product, 'categories' => $categories]);
     }
     public function update(Request $request)
     {
