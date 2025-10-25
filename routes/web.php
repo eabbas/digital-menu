@@ -6,7 +6,7 @@ use App\http\controllers\ResturantController;
 use App\Http\Controllers\UserController;
 use App\Http\controllers\CategoryController;
 use App\Http\controllers\ProductController;
-main
+
 
 
 Route::get('/', function () {
@@ -14,7 +14,6 @@ Route::get('/', function () {
 });
 
 
- mobina.resturants_v1
 Route::get('/resturant/create',[ResturantController::class,'create']);
 Route::get('/profile',[ResturantController::class,'profile']);
 Route::post('/profileStore',[ResturantController::class,'profileStore']);
@@ -55,4 +54,4 @@ Route::get('product/delete/{product}' , [ProductController::class , 'delete']);
 
 
 
- main
+
