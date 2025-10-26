@@ -3,40 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ثبت نام رستوران - دیجیتال منو</title>
+    <title>ثبت نام کسب وکار - دیجیتال منو</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
-    <form action="{{url('/profileStore')}}" method="POST" enctype='multipart/form-data'>
+    <form action="{{url('/store')}}" method="POST" enctype='multipart/form-data'>
         @csrf
         <!-- <input type="hidden" name="id" value=""> -->
     <div class="min-h-screen flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
             <!-- هدر -->
             <div class="text-center mb-8">
-                <h1 class="text-2xl font-bold text-gray-800">   تکمیل اطلاعات رستوران</h1>
-                <p class="text-gray-600 mt-2">اطلاعات رستوران خود را وارد کنید</p>
+                <h1 class="text-2xl font-bold text-gray-800">اطلاعات کسب وکار</h1>
+                <p class="text-gray-600 mt-2">اطلاعات کسب وکار خود را وارد کنید</p>
             </div>
 
            
                 <!--  لوگو   -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2"> لوگو رستوران</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2"> لوگو کسب وکار</label>
                     <input 
                         type="file" 
                         name='logo'
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder=" لوگو رستوران خود را وارد کنید"
+                        placeholder=" لوگو کسب وکار خود را وارد کنید"
                     >
                 </div>
-                <!-- نام رستوران -->
+                <!-- نام کسب وکار -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">نام رستوران</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">نام کسب وکار</label>
                     <input 
                         type="text"
-                        name='name' 
+                        name='title' 
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="نام رستوران خود را وارد کنید"
+                        placeholder="نام کسب وکار خود را وارد کنید"
                     >
                 </div>
                 <!--استان   -->
@@ -59,28 +59,19 @@
                         placeholder=" شهرخود را وارد کنید"
                     >
                 </div>
-                <!--  ادرس رستوران -->
+                <!--  ادرس کسب وکار -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2"> ادرس رستوران</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2"> ادرس کسب وکار</label>
                     <input 
                         type="text" 
                         name='address'
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder=" ادرس رستوران خود را وارد کنید"
+                        placeholder=" ادرس کسب وکار خود را وارد کنید"
                     >
                 </div>
 
                 <!--  qrcode -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2"> qrCode</label>
-                    <input 
-                        type="file" 
-                        name='qrCode'
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="09xxxxxxxxx"
-                    >
-                </div>
-               
+              
                 <!-- ایمیل -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">ایمیل</label>
@@ -89,6 +80,26 @@
                         name='email' 
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="email@example.com"
+                    >
+                </div>
+                <!-- توضیحات-->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">توضیحات</label>
+                    <input 
+                        type="text"
+                        name='description' 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="توضیحات کسب وکار"
+                    >
+                </div>
+                <!-- user_name-->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">توضیحات</label>
+                    <input 
+                        type="text"
+                        name='user_name' 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="user_name "
                     >
                 </div>
 

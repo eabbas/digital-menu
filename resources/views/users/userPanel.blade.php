@@ -69,7 +69,7 @@
                                 <a href="#" class="inline-block w-full py-3 px-4 text-sm">تست</a>
                             </li>
                             <li class="border-b border-gray-300">
-                                <a href="#" class="inline-block w-full py-3 px-4 text-sm">تست</a>
+                                <a href="" class="inline-block w-full py-3 px-4 text-sm">ثبت نام کسب وکار⩸</a>
                             </li>
                         </ul>
                     </div>
@@ -92,7 +92,7 @@
                 <a href="#" class="inline-block w-full py-3 px-4 text-sm">تست</a>
             </li>
             <li class="border-b border-gray-300">
-                <a href="#" class="inline-block w-full py-3 px-4 text-sm">تست</a>
+                <a href="{{url('career/create')}}" class="inline-block w-full py-3 px-4 text-sm">بت نام کسب وکارث⩸</a>
             </li>
         </ul>
     </aside>
