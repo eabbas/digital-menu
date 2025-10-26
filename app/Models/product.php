@@ -14,4 +14,9 @@ class product extends Model
         'show_in_home' ,
         'cat_id'
     ];
+
+    public function medias()
+    {
+        return $this->hasMany(media::class);
+    }
 }

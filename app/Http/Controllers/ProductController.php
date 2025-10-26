@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\category;
 use App\Models\product;
+use App\Models\media;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -15,8 +17,10 @@ class ProductController extends Controller
     }
     public function store(Request $request)
     {
+        
+        // dd($request->mainImage);
         if ($request->home) {
-            product::create([
+            $productId = product::insertGetId([
                 'title' => $request->title,
                 'description' => $request->description,
                 'price' => $request->price,
@@ -25,7 +29,7 @@ class ProductController extends Controller
                 'cat_id' => $request->categoryId
             ]);
         } else {
-            product::create([
+           $productId = product::insertGetId([
                 'title' => $request->title,
                 'description' => $request->description,
                 'price' => $request->price,
@@ -33,6 +37,14 @@ class ProductController extends Controller
                 'cat_id' => $request->categoryId
             ]);
         }
+        $type = $request->mainImage->getClientOriginalExtension();
+        $name = $request->mainImage->getClientOriginalName();
+        $fullName = Str::uuid()."_".$name;
+        $path = $request->file('mainImage')->storeAs('images', $fullName, 'public');
+        $products[]=['product_id'=>$productId, 'type'=>$type, 'path'=>$path, 'is_main'=>1];
+
+        media::insert($products);
+       
     }
     public function index()
     {
@@ -40,10 +52,11 @@ class ProductController extends Controller
         $products = product::all();
         return view("product.index", ['categories' => $categories, 'products' => $products]);
     }
-
+    
     public function show(product $product)
     {
         $categories = category::all();
+        $product->medias;
         return view("product.single", ['product' => $product, 'categories' => $categories]);
     }
     public function edit(product $product)
@@ -54,7 +67,6 @@ class ProductController extends Controller
     public function update(Request $request)
     {
         $product = product::find($request->id);
-        // dd($request->all());
         $product->title = $request->title;
         $product->description = $request->description;
         $product->price = $request->price;
@@ -65,6 +77,10 @@ class ProductController extends Controller
     }
     public function delete(product $product)
     {
+        // dd($product);
         $product->delete();
+        $x = media::where('product_id' , $product->id)->delete();
+        // dd($x);
+        return redirect('products');
     }
 }

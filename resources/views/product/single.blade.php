@@ -17,18 +17,28 @@
                 <th>Description</th>
                 <th>price</th>
                 <th>discount</th>
+                <th>finalCost</th>
                 <th>Show_home</th>
                 <th>category</th>
             </tr>
         </thead>
         <tbody>
-          
             <tr>
                 <td>{{ $product->id }}</td>
                 <td>{{ $product->title }}</td>
                 <td>{{ $product->description }}</td>
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->discount }}</td>
+                <?php
+                $discountPrice = $product->price*$product->discount/100;
+                $finalCost = $product->price - $discountPrice;
+                ?>
+                <td>{{ $finalCost }}</td>
+                @foreach($product->medias as $media)
+                    <img class="w-full rounded-large overflow-hidden inline-block"
+                    src="<?= asset("storage/" . $media->path) ?>"
+                    alt="product image">
+                @endforeach
                 <td>
                     @if($product->show_in_home)
                     {{ "  ✔  " }}
