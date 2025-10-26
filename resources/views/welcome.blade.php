@@ -170,9 +170,13 @@
                         </span>
                     </div>
                     <div class="w-full">
+
                     <img class="size-[148px]"
                     src="<?= asset("storage/" . $media->path) ?>"
                     alt="product image">
+
+                        <img class="size-[148px]" src="./img/removed1.png" alt="">
+
                     </div>
                     <div class="flex flex-row gap-2">
                         <img class="size-4" src="./img/fire.svg" alt="">

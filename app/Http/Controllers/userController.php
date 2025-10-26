@@ -1,4 +1,5 @@
 <?php
+// aylar1383
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,17 +15,25 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
-        $password = Hash::make($request->password);
-        User::create([
-            "name" => $request->name,
-            "email" => $request->email,
-            "password" => $password,
-        ]);
-        return "کاربرایجاد شد.";
+        $phone=User::where('phoneNumber',$request->phoneNumber)->first();
+        if(!$phone){
+            $password = Hash::make($request->password);
+            User::create([
+                "name" => $request->name,
+                "phoneNumber" => $request->phoneNumber,
+                "password" => $password,
+                "type"=>"general"
+            ]);
+            return "کاربرایجاد شد.";
+        }
+        else{
+            return redirect()->back()->with("message","این شماره تلفن قبلا استفاده شده");
+   
+        }
     }
     public function check(Request $request)
     {
-        $user=user::where('email',$request->email)->first();
+        $user=user::where('phoneNumber',$request->phoneNumber)->first();
         if(!$user){
          return"user not found";
         }
@@ -75,7 +84,8 @@ class UserController extends Controller
     {
         $user = User::find($request->id);
         $user->name = $request->name;
-        $user->email = $request->email;
+        $user->phoneNumber = $request->phoneNumber;
+        $user->type = $request->type;
         if ($request->password) {
             $password = Hash::make($request->password);
             $user->password = $password;

@@ -1,15 +1,29 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+ 
+use App\http\controllers\CareerController;
 use App\Http\Controllers\UserController;
 use App\Http\controllers\CategoryController;
 use App\Http\controllers\ProductController;
 use App\Http\controllers\SettingController;
 
+use App\Http\Controllers\QRCodeController;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/career/create',[CareerController::class,'create']);
+// Route::get('/profile',[CareerController::class,'profile']);
+Route::post('/store',[CareerController::class,'store']);
+
+
+
+Route::get('/resturant/create',[ResturantController::class,'create']);
+Route::get('/profile',[ResturantController::class,'profile']);
+Route::post('/profileStore',[ResturantController::class,'profileStore']);
 
 
 Route::get('/user/login', function () {
@@ -45,6 +59,7 @@ Route::get('product/show/{product}' , [ProductController::class , 'show']);
 Route::get('product/edit/{product}' , [ProductController::class , 'edit']);
 Route::post('product/update' , [ProductController::class , 'update']);
 Route::get('product/delete/{product}' , [ProductController::class , 'delete']);
+
 
 
 Route::group([
@@ -122,6 +137,11 @@ Route::group([
         Route::get('/show', 'showSingleAds')->name('showSingleAds');
     });
 });
+
+//////////////////
+// qr-code
+Route::get('qr-code', [QRCodeController::class, 'index']);
+
 
 Route::group([
     'prefix' => 'settings',
