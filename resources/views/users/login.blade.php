@@ -107,8 +107,8 @@
                 </div>
               
                 <div class="flex flex-col gap-1">
-                    <label for="email" class="kt-form-label text-[#0b0809]">ایمیل</label>
-                    <input type="email" name="email" id="email" class="kt-input" placeholder="test@example.com">
+                    <label for="phoneNumber" class="kt-form-label text-[#0b0809]">شماره تماس</label>
+                    <input type="phoneNumber" name="phoneNumber" id="phoneNumber" class="kt-input">
                 </div>
                 <div class="flex flex-col gap-1">
                     <label for="password" class="kt-form-label text-[#0b0809]">گذرواژه</label>

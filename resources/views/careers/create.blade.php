@@ -94,7 +94,7 @@
                 </div>
                 <!-- user_name-->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">توضیحات</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">نام کاربری</label>
                     <input 
                         type="text"
                         name='user_name' 
