@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('resturants', function (Blueprint $table) {
+        Schema::create('careers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('logo');
@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('address');
             $table->string('qrCode');
+            
         });
     }
 
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('resturants');
+        Schema::dropIfExists('careers');
     }
 };

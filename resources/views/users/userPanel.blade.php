@@ -59,6 +59,7 @@
                     </div>
                     <div class="h-[537px] overflow-y-auto">
                         <ul class="w-full p-2">
+                       
                             <li class="border-b border-gray-300">
                                 <a href="#" class="inline-block w-full py-3 px-4 text-sm">تست</a>
                             </li>
@@ -66,10 +67,7 @@
                                 <a href="#" class="inline-block w-full py-3 px-4 text-sm">تست</a>
                             </li>
                             <li class="border-b border-gray-300">
-                                <a href="#" class="inline-block w-full py-3 px-4 text-sm">تست</a>
-                            </li>
-                            <li class="border-b border-gray-300">
-                                <a href="" class="inline-block w-full py-3 px-4 text-sm">ثبت نام کسب وکار⩸</a>
+                                <a href="" class="inline-block w-full py-3 px-4 text-sm"> </a>
                             </li>
                         </ul>
                     </div>
@@ -79,9 +77,14 @@
          </div>
         <!-- mobile menu -->
     </header>
-
+   
     <aside class="hidden w-3/12 lg:h-[500px] border-l border-gray-300 lg:block">
         <ul class="w-full p-2">
+                        @if($user->type=="career")
+                            <li class="border-b border-gray-300">
+                                <a href="http://localhost/digital-menu/public/career/show/{{$user->id}}" class="inline-block w-full py-3 px-4 text-sm">لیست کسب وکارهای من</a>
+                            </li>
+                            @endif
             <li class="border-b border-gray-300">
                 <a href="#" class="inline-block w-full py-3 px-4 text-sm">تست</a>
             </li>
@@ -89,10 +92,7 @@
                 <a href="#" class="inline-block w-full py-3 px-4 text-sm">تست</a>
             </li>
             <li class="border-b border-gray-300">
-                <a href="#" class="inline-block w-full py-3 px-4 text-sm">تست</a>
-            </li>
-            <li class="border-b border-gray-300">
-                <a href="{{url('career/create')}}" class="inline-block w-full py-3 px-4 text-sm">بت نام کسب وکارث⩸</a>
+                <a href="{{url('career/create')}}" class="inline-block w-full py-3 px-4 text-sm">ثبت نام کسب وکار</a>
             </li>
         </ul>
     </aside>

@@ -1,5 +1,4 @@
 <?php
-// aylar1383
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +14,7 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
+        // dd($request->all());
         $phone=User::where('phoneNumber',$request->phoneNumber)->first();
         if(!$phone){
             $password = Hash::make($request->password);
@@ -24,7 +24,7 @@ class UserController extends Controller
                 "password" => $password,
                 "type"=>"general"
             ]);
-            return "کاربرایجاد شد.";
+            return redirect("/user/login");
         }
         else{
             return redirect()->back()->with("message","این شماره تلفن قبلا استفاده شده");
@@ -54,7 +54,9 @@ class UserController extends Controller
     public function logout()
     {
         Auth::logout();
-        return"شمااز حساب کاربری خود خارج شدید";
+        // return"شمااز حساب کاربری خود خارج شدید";
+        return redirect("/user/login");
+
         // return redirect("/");
     }
     public function index()

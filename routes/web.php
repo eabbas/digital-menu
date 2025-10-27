@@ -1,30 +1,17 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
- 
 use App\http\controllers\CareerController;
 use App\Http\Controllers\UserController;
 use App\Http\controllers\CategoryController;
 use App\Http\controllers\ProductController;
-
 use App\Http\Controllers\QRCodeController;
-
-
 Route::get('/', function () {
     return view('welcome');
 });
-
 Route::get('/career/create',[CareerController::class,'create']);
 // Route::get('/profile',[CareerController::class,'profile']);
 Route::post('/store',[CareerController::class,'store']);
-
-
-
-Route::get('/resturant/create',[ResturantController::class,'create']);
-Route::get('/profile',[ResturantController::class,'profile']);
-Route::post('/profileStore',[ResturantController::class,'profileStore']);
-
-
+Route::get('/career/show/{id}',[CareerController::class,'show']);
 Route::get('/user/login', function () {
     return view('users.login');
 })->name('user_login');
