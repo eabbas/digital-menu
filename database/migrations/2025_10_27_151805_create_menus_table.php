@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('careers', function (Blueprint $table) {
-            $table->string('social_media');
+        Schema::create('menus', function (Blueprint $table) {
+            $table->id();
+            $table->text('page_date');
+            $table->string('qr_num');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('careers', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('menus');
     }
 };

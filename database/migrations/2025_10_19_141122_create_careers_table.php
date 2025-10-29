@@ -20,6 +20,11 @@ return new class extends Migration
             $table->string('city');
             $table->string('address');
             $table->string('qrCode');
+            $table->string('social_media');
+            $table->string('email');
+
+
+
             
         });
     }

@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\career;
+use App\Models\qr_code;
 use App\Models\User;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+
 
 
 
@@ -25,15 +29,33 @@ class CareerController extends Controller
         $type=$request->logo->getClientOriginalExtension();
         $path=$request->logo->storeAs('files',$name,'public');
         $social_medias=json_encode($request->social_medias);
-        career::insert(['title'=>$request->title,'logo'=>$path,'province'=>$request->province,'city'=>$request->city,'address'=>$request->address,'social_media'=>$social_medias,'user_id'=>$user->id,'email'=>$request->email,'description'=>$request->description,'user_name'=>$request->user_name]);
-        //  QrCode::size(200)->generate($request->qrCode);
+        $random = Str::random(10);
+        $link = "/famenu.ir/QRCode/$user->id/".$random;
+        $qr_svg=QrCode::size(100)->generate($link);
+        $fileName = "qrcodes/".$user->id."_".$random.".svg";
+        $QRpath = Storage::disk('public')->put($fileName, $qr_svg);
+        $career_id=career::insertGetId([
+            'title'=>$request->title,
+            'logo'=>$path,
+            'province'=>$request->province,
+            'city'=>$request->city,
+            'address'=>$request->address,
+            'social_media'=>$social_medias,
+            'user_id'=>$user->id,
+            'email'=>$request->email,
+            'description'=>$request->description,
+            'user_name'=>$request->user_name
+        ]);
+        // dd($career);
+
+        qr_code::create(['qr_pass'=>$QRpath,'career_id'=>$career_id,'is_main'=>1]);
         return view("users.userPanel",["user"=>$user]);
     }
     public function show($id){
         $user=user::find($id);
-        $career=career::where('user_id',$user->id)->first();
-        // dd($user);
-        return view("careers.show",["user"=>$user,"career"=>$career]);
+        $careers=career::where('user_id',$user->id)->get();
+        // dd($careers);
+        return view("careers.show",["user"=>$user,"careers"=>$careers]);
 
     }
 }
