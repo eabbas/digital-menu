@@ -66,11 +66,12 @@ class UserController extends Controller
     }
     public function show($id)
     {
+        // dd($id);
         if (Auth::check()) {
             $user = Auth::user();
         }
         if (!Auth::check()) {
-            return to_route("users.login");
+            return redirect("user/login");
         }
         if ($id){
             $user = User::find($id);
@@ -84,6 +85,7 @@ class UserController extends Controller
     }
     public function update(Request $request)
     {
+        // dd($request->all());
         $user = User::find($request->id);
         $user->name = $request->name;
         $user->phoneNumber = $request->phoneNumber;

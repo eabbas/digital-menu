@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-
-
-class QRCodeController extends Controller
+class QrCodeController extends Controller
 {
-    public function index(Request $request){
-                return QrCode::size(300)->generate('https://www.itsolutionstuff.com');
+public function create(){
+    return view('menus.create');
+}
+    public function store(Request $request){
+       
+        
     }
 }

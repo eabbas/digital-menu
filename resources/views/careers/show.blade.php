@@ -99,7 +99,8 @@
         </aside>
 
         <!-- بخش اصلی و جدول اطلاعات career -->
-        <main class="w-full lg:w-9/12 p-4">
+         @foreach($careers as $career)
+        <main class="w-full flex flex-col lg:w-9/12 p-4">
             <div class="bg-white shadow-md rounded-lg ">
                 <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
                     <h2 class="text-lg font-bold text-gray-800">اطلاعات کسب و کار</h2>
@@ -115,6 +116,7 @@
                                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">توضیحات</th>
                                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">نام کاربری</th>
                                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">ایمیل</th>
+                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">لوگو</th>
                                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">عملیات</th>
                                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">لیست QR</th>
                             </tr>
@@ -129,12 +131,15 @@
                                 <td class="px-6 py-4 text-sm text-gray-900">{{ $career->description}}</td>
                                 <td class="px-6 py-4 text-sm text-gray-900">{{ $career->user_name}}</td>
                                 <td class="px-6 py-4 text-sm text-gray-900">{{ $career->email}}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900">
+                                      <img class="w-'[200px] h-[200px]" src="<?= asset("storage/" . $career->logo) ?>">
+                                </td>
                               
-                                <td class="px-6 py-4 text-sm font-medium">
-                                    <a href="#" class="ml-4 text-sky-700">ایجاد منو</a>
+                                <td class="px-6 py-4 text-sm font-medium"> 
+                                    <a href="http://localhost/digital-menu/public/create/menu/{{$career->id}}" class="ml-4 text-sky-700">ایجاد منو</a>
                                     
                                 </td>
-                                <td class="px-6 py-4 text-sm font-medium">
+                                 <td class="px-6 py-4 text-sm font-medium">
                                     <a href="#" class="ml-4 text-sky-700"> کدهای QR</a>
                                     
                                 </td>
@@ -151,6 +156,7 @@
                 </div>
             </div>
         </main>
+        @endforeach
     </div>
     
     <script>

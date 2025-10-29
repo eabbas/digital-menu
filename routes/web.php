@@ -4,6 +4,7 @@ use App\http\controllers\CareerController;
 use App\Http\Controllers\UserController;
 use App\Http\controllers\CategoryController;
 use App\Http\controllers\ProductController;
+use App\Http\controllers\MenuController;
 
 use App\Http\controllers\SettingController;
 
@@ -147,3 +148,6 @@ Route::group([
         Route::get('/show', 'showCategoryAds')->name('showCategoryAds');
     });
 });
+
+Route::get('create/menu/{id}',[MenuController::class,'create']);
+Route::post('store/menu',[MenuController::class,'store']);
