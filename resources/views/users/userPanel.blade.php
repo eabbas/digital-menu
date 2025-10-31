@@ -13,7 +13,7 @@
             <div class="w-7/12">
                 <ul class="w-ful flex flex-row gap-5">
                     <li>
-                        <a href="{{url('user/logout')}}">
+                        <a href="{{ route('user.logout') }}">
                             خروج از حساب کاربری
                         </a>
                     </li>
@@ -30,7 +30,6 @@
                   
                 </ul>
             </div>
-        
             <div class="w-3/12 flex flex-row justify-end items-center gap-3">
                 <span class="text-sm font-semibold text-gray-600"> {{$user->name}}</span>
                 <img src="https://picsum.photos/200/300" class="size-10 rounded-full border-2 border-gray-500" alt="user picture">
@@ -80,11 +79,11 @@
    
     <aside class="hidden w-3/12 lg:h-[500px] border-l border-gray-300 lg:block">
         <ul class="w-full p-2">
-                        @if($user->type=="career")
-                            <li class="border-b border-gray-300">
-                                <a href="http://localhost/digital-menu/public/career/show/{{$user->id}}" class="inline-block w-full py-3 px-4 text-sm">لیست کسب وکارهای من</a>
-                            </li>
-                            @endif
+            @if($user->type=="career")
+            <li class="border-b border-gray-300">
+                <a href="{{ route('career.user_careers', ['user'=>$user]) }}" class="inline-block w-full py-3 px-4 text-sm">لیست کسب وکارهای من</a>
+            </li>
+            @endif
             <li class="border-b border-gray-300">
                 <a href="#" class="inline-block w-full py-3 px-4 text-sm">تست</a>
             </li>

@@ -77,7 +77,7 @@
 <body>
     <main class="w-full h-svh bg-[url('https://keenthemes.com/static/metronic/tailwind/dist/assets/media/images/2600x1200/bg-10.png')] bg-cover bg-no-repeat flex flex-row justify-center items-center">
         <div class="kt-card max-w-[370px] w-full">
-            <form action="{{url('user/store')}}" method="post" class="flex flex-col gap-5 p-10 bg-white">
+            <form action="{{ route('user.store') }}" method="post" class="flex flex-col gap-5 p-10 bg-white">
                 @csrf
                 <div class="text-center mb-2.5">
                     <h3 class="text-lg font-medium text-mono leading-none mb-2.5">
@@ -111,7 +111,7 @@
                 </div>
                 <div class="flex flex-col gap-1">
                     <label for="phoneNumber" class="kt-form-label text-[#0b0809]">شماره تلفن</label>
-                    <input type="phoneNumber" name="phoneNumber" id="phoneNumber" class="kt-input" >
+                    <input type="number" name="phoneNumber" id="phoneNumber" class="kt-input" >
                 </div>
                 <div class="flex flex-col gap-1">
                     <label for="password" class="kt-form-label text-[#0b0809]">گذرواژه</label>

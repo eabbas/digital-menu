@@ -7,6 +7,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
+
+<h1 class="mmmmm">
+    <?php echo Auth::user()->name ?>
+</h1>
+
     <form action="{{url('/store')}}" method="POST" enctype='multipart/form-data'>
         @csrf
         <!-- <input type="hidden" name="id" value=""> -->

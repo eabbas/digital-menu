@@ -5,31 +5,59 @@ use App\Http\Controllers\UserController;
 use App\Http\controllers\CategoryController;
 use App\Http\controllers\ProductController;
 use App\Http\controllers\MenuController;
-
 use App\Http\controllers\SettingController;
-
-
 use App\Http\Controllers\QRCodeController;
+use App\Http\Middleware\UserMiddleware;
+
+
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/career/create',[CareerController::class,'create']);
-// Route::get('/profile',[CareerController::class,'profile']);
-Route::post('/store',[CareerController::class,'store']);
-Route::get('/career/show/{id}',[CareerController::class,'show']);
-Route::get('/user/login', function () {
-    return view('users.login');
-})->name('user_login');
+// Route::get('/career/create',[CareerController::class,'create']);
+// // Route::get('/profile',[CareerController::class,'profile']);
+// Route::post('/store',[CareerController::class,'store']);
+// Route::get('/career/show/{id}',[CareerController::class,'show']);
 
-Route::get("user/signup",[UserController::class,"create"])->name('user_signUp');
-Route::post("user/store",[UserController::class,"store"]);
-Route::post("user/check",[UserController::class,"check"])->name('checkUser');
-Route::get("user/logout",[UserController::class,"logout"]);
-Route::get("user/index",[UserController::class,"index"]);
-Route::get("user/show/{id}",[UserController::class,"show"]);
-Route::get("user/edit/{id}",[UserController::class,"edit"]);
-Route::post("user/update",[UserController::class,"update"])->name('userUpdate');
-Route::get("user/delete/{id}",[UserController::class,"delete"]);
+Route::group([
+    'prefix'=>'career',
+    'controller'=>CareerController::class,
+    'as'=>'career.'
+], function(){
+    Route::get('/create', 'create');
+    Route::post('/store', 'store');
+    Route::get('/user/careers/{user}', 'user_careers')->name('user_careers');
+
+    
+    Route::group([
+        'prefix'=>'menu',
+        'controller'=>MenuController::class,
+        'as'=>'menu.'
+    ], function(){
+        Route::get('/', 'index')->name('list');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+    });
+});
+
+
+
+Route::group([
+    'prefix'=>'users',
+    'controller'=>UserController::class,
+    'as'=>'user.',
+    'middleware'=>[UserMiddleware::class]
+], function(){
+    Route::get('/login', 'login')->name('login')->withoutMiddleware([UserMiddleware::class]);
+    Route::get("/signup", "create")->name('signup')->withoutMiddleware([UserMiddleware::class]);
+    Route::post("/store", "store")->name('store')->withoutMiddleware([UserMiddleware::class]);;
+    Route::post("/check", "check")->name('check')->withoutMiddleware([UserMiddleware::class]);;
+    Route::get("/logout", "logout")->name('logout');
+    Route::get("/","index")->name('list');
+    Route::get("/panel/{user}", "single")->name('single');
+    Route::get("/edit/{user}", "edit")->name('edit');
+    Route::post("/update", "update")->name('user');
+    Route::get("/delete/{user}", "delete")->name('delete');
+});
 
 //category.......................................................................
 Route::get('category/create' , [CategoryController::class , 'create']);
@@ -129,7 +157,6 @@ Route::group([
     });
 });
 
-//////////////////
 // qr-code
 Route::get('qr-code', [QRCodeController::class, 'index']);
 
@@ -148,6 +175,3 @@ Route::group([
         Route::get('/show', 'showCategoryAds')->name('showCategoryAds');
     });
 });
-
-Route::get('create/menu/{id}',[MenuController::class,'create']);
-Route::post('store/menu',[MenuController::class,'store']);

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->text('page_date');
+            $table->text('page_data');
             $table->string('qr_num');
             $table->timestamps();
         });

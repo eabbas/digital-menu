@@ -13,7 +13,7 @@
             <div class="w-7/12">
                 <ul class="w-ful flex flex-row gap-5">
                     <li>
-                        <a href="{{url('user/logout')}}">
+                        <a href="{{ route('user.logout') }}">
                             خروج از حساب کاربری
                         </a>
                     </li>
@@ -67,7 +67,7 @@
                                 <a href="#" class="inline-block w-full py-3 px-4 text-sm">تست</a>
                             </li>
                             <li class="border-b border-gray-300">
-                                <a href="" class="inline-block w-full py-3 px-4 text-sm"> </a>
+                                <a href="#" class="inline-block w-full py-3 px-4 text-sm"> </a>
                             </li>
                         </ul>
                     </div>
@@ -99,7 +99,7 @@
         </aside>
 
         <!-- بخش اصلی و جدول اطلاعات career -->
-         @foreach($careers as $career)
+         @foreach($user->careers as $career)
         <main class="w-full flex flex-col lg:w-9/12 p-4">
             <div class="bg-white shadow-md rounded-lg ">
                 <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
@@ -132,7 +132,7 @@
                                 <td class="px-6 py-4 text-sm text-gray-900">{{ $career->user_name}}</td>
                                 <td class="px-6 py-4 text-sm text-gray-900">{{ $career->email}}</td>
                                 <td class="px-6 py-4 text-sm text-gray-900">
-                                      <img class="w-'[200px] h-[200px]" src="<?= asset("storage/" . $career->logo) ?>">
+                                      <img class="max-w-[50px] max-h-[50px]" src="<?= asset("storage/" . $career->logo) ?>">
                                 </td>
                               
                                 <td class="px-6 py-4 text-sm font-medium"> 
