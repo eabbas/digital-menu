@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class menu extends Model
 {
-    protected $fillable = ['page_date', 'qr_num', 'career_id'];
+    protected $fillable = ['page_data', 'qr_num', 'career_id'];
 
     public function career()
     {

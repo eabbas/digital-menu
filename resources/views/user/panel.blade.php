@@ -10,13 +10,9 @@
 </head>
 
 <body>
-
-<?php $user = Auth::user()?>
-
-
     <div class="w-full flex flex-row">
         <!-- <div class=""> -->
-            <div class="hidden lg:block lg:w-3/12 2xl:w-2/12 bg-[#0D0E12] fixed right-0 top-0 h-dvh px-5 text-sm">
+            <div class="hidden lg:block lg:w-3/12 2xl:w-2/12 bg-[#282b37] fixed right-0 top-0 h-dvh px-5 text-sm">
                 <div class="flex justify-center">
                     <a href="#" class="right-0 mr-[15px]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="269" height="56" viewBox="0 0 269 56" fill="none"
@@ -258,7 +254,7 @@
                     <div class="w-6/12 flex justify-start">
                         <ul class="flex gap-4 items-center text-black font-semibold ">
                             <li class="color__a text-[#4B5675]">
-                                <a href="#" class="py-2">داشبورد ها</a>
+                                <a href="{{ route('user.logout') }}" class="py-2">خروج از حساب کاربری</a>
                             </li>
                             <li class="color__a text-[#4B5675]">
                                 <a href="#" class="py-2"> صفحات</a>
