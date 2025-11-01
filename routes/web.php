@@ -12,32 +12,11 @@ use App\Http\Middleware\UserMiddleware;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 // Route::get('/career/create',[CareerController::class,'create']);
 // // Route::get('/profile',[CareerController::class,'profile']);
 // Route::post('/store',[CareerController::class,'store']);
 // Route::get('/career/show/{id}',[CareerController::class,'show']);
-
-Route::group([
-    'prefix'=>'career',
-    'controller'=>CareerController::class,
-    'as'=>'career.'
-], function(){
-    Route::get('/create', 'create');
-    Route::post('/store', 'store');
-    Route::get('/user/careers/{user}', 'user_careers')->name('user_careers');
-
-    
-    Route::group([
-        'prefix'=>'menu',
-        'controller'=>MenuController::class,
-        'as'=>'menu.'
-    ], function(){
-        Route::get('/', 'index')->name('list');
-        Route::get('/create', 'create')->name('create');
-        Route::post('/store', 'store')->name('store');
-    });
-});
 
 
 
@@ -53,10 +32,31 @@ Route::group([
     Route::post("/check", "check")->name('check')->withoutMiddleware([UserMiddleware::class]);;
     Route::get("/logout", "logout")->name('logout');
     Route::get("/","index")->name('list');
-    Route::get("/panel/{user}", "single")->name('single');
+    Route::get("/panel/{user}", "panel")->name('panel');
+    Route::get('/profile/{user}', 'profile')->name('profile');
     Route::get("/edit/{user}", "edit")->name('edit');
     Route::post("/update", "update")->name('user');
     Route::get("/delete/{user}", "delete")->name('delete');
+
+    Route::group([
+        'prefix'=>'career',
+        'controller'=>CareerController::class,
+        'as'=>'career.'
+    ], function(){
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/careers', 'user_careers')->name('careers');
+        Route::get('/edit/{career}')->name('edit');
+        Route::group([
+            'prefix'=>'menu',
+            'controller'=>MenuController::class,
+            'as'=>'menu.'
+        ], function(){
+            Route::get('/', 'index')->name('list');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+        });
+    });
 });
 
 //category.......................................................................

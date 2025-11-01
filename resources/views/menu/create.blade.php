@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>create product</title>
-</head>
-
-<body>
+    @extends('user.panel')
+    @section('title', 'ایجاد منو')
+    @section('content')
     <div class="w-full h-full  bg-cover bg-no-repeat pb-10">
         <h2 class="text-3xl text-center font-bold py-5 text-[#425A8B]">فرم ایجاد منو</h2>
         <div class="w-1/2 mx-auto border border-[#D5DFE4] rounded-[10px] text-[#425A8B] p-5 bg-white text-sm">
-            <form action="{{route('menu.store')}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('user.career.menu.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col gap-3">
                     <div data-count="0">
@@ -91,6 +82,4 @@
         let v_count = 0
     </script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
-</body>
-
-</html>
+    @endsection

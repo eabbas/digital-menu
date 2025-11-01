@@ -14,8 +14,8 @@ class career extends Model
     return $this->belongsTo(User::class);
   }
 
-  public function menus()
+  public function menu()
   {
-    return $this->hasMany(menu::class)->chaperOne();
+    return $this->hasOne(menu::class)->chaperOne();
   }
 }

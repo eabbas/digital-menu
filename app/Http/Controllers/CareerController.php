@@ -45,14 +45,15 @@ class CareerController extends Controller
             'user_id'=>$user->id,
             'email'=>$request->email,
             'description'=>$request->description,
-            'user_name'=>$request->user_name
+            // 'user_name'=>$request->user_name
         ]);
         // dd($career);
 
         qr_code::create(['qr_pass'=>$fileName,'career_id'=>$career_id,'is_main'=>1]);
-        return view("users.userPanel",["user"=>$user]);
+        return view("user.profile",["user"=>$user]);
     }
-    public function user_careers(user $user){
+    public function user_careers(){
+        $user = Auth::user();
         return view("careers.userCareers",["user"=>$user]);
 
     }

@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function create()
     {
-        return view('users.signup');
+        return view('user.signup');
     }
 
     public function store(Request $request)
@@ -32,7 +32,6 @@ class UserController extends Controller
 
     public function check(Request $request)
     {
-        // dd($request->all());
         $user = User::where('phoneNumber', $request->phoneNumber)->first();
 
         if (!$user) {
@@ -42,7 +41,7 @@ class UserController extends Controller
         if ($checkHash) {
             if (!Auth::check()) {
                 Auth::login($user);
-                return to_route('user.single', ['user' => $user]);
+                return to_route('user.profile', ['user' => $user]);
             }
         } else {
             echo 'رمز ورود صحیح نمیباشد';
@@ -58,20 +57,24 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('users.index', ['users' => $users]);
+        return view('user.index', ['users' => $users]);
     }
 
-    public function single(user $user)
+    public function panel(user $user)
     {
         if (!Auth::check()) {
             return to_route('user.login');
         }
-        return view('users.userPanel', ['user' => $user]);
+        return view('user.panel', ['user' => $user]);
+    }
+
+    public function profile(user $user){
+        return view('user.profile', ['user'=>$user]);
     }
 
     public function edit(user $user)
     {
-        return view('users.edit', ['user' => $user]);
+        return view('user.edit', ['user' => $user]);
     }
 
     public function update(Request $request)
@@ -97,6 +100,6 @@ class UserController extends Controller
 
     public function login()
     {
-        return view('users.login');
+        return view('user.login');
     }
 }

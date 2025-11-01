@@ -10,20 +10,20 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Models\User;
 
 
 class MenuController extends Controller
 {
-    public function create()
+    public function create(user $user)
     {
-        return view('menu.create');
+        return view('menu.create', ['user'=>$user]);
     }
 
     public function store(Request $request)
     {
         $user = Auth::user();
         $career_id = $user->careers[0]->id;
-        // dd($request->all());
         $page_data = json_encode($request->page_data);
         menu::create(['page_data' => $page_data, 'qr_num'=>$request->qr_num, 'career_id' => $career_id]);
         $user_id = Auth::id();
@@ -41,9 +41,8 @@ class MenuController extends Controller
     public function index(){
         $user = Auth::user();
         $career = $user->careers[0];
-        $x = $career->menus[0]->page_data;
-        // dd(json_decode($x));
-        return view('menu.menu', ['career'=>$career]);
+        $career->menu->page_data;
+        return view('menu.menu', ['career'=>$career, 'user'=>$user]);
     }
 
     public function edit(menu $menu){}

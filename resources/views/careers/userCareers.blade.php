@@ -1,111 +1,18 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>پروفایل کاربری</title>
-</head>
-<body>
-    <header class="2xl:container mx-auto w-full border-b border-gray-300">
-        <!-- desktop menu -->
-        <div class="w-11/12 mx-auto hidden lg:flex flex-row justify-between items-center py-7">
-            <div class="w-7/12">
-                <ul class="w-ful flex flex-row gap-5">
-                    <li>
-                        <a href="{{ route('user.logout') }}">
-                            خروج از حساب کاربری
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            تست
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            تست
-                        </a>
-                    </li>
-                  
-                </ul>
-            </div>
-        
-            <div class="w-3/12 flex flex-row justify-end items-center gap-3">
-                <span class="text-sm font-semibold text-gray-600"> {{$user->name}}</span>
-                <img src="https://picsum.photos/200/300" class="size-10 rounded-full border-2 border-gray-500" alt="user picture">
-            </div>
-        </div>
-        <!-- desktop menu -->
 
-        <!-- mobile menu -->
-         <div class="lg:hidden w-11/12 mx-auto py-2 flex flex-row justify-between items-center">
-            <div class="flex flex-row justify-start items-center gap-3">
-                <img src="https://picsum.photos/200/300" class="size-10 rounded-full border-2 border-gray-500" alt="user picture">
-                <span class="text-xs font-semibold text-gray-600">{{$user->name}}  </span>
-            </div>
-            <div class="w-8 h-5 flex flex-col justify-between items-center" onclick="mobileMenu('open')">
-                <span class="inline-block w-full h-px bg-gray-600"></span>
-                <span class="inline-block w-full h-px bg-gray-600"></span>
-                <span class="inline-block w-full h-px bg-gray-600"></span>
-            </div>
-            <div class="fixed top-0 -right-full w-full h-svh bg-black/50 flex flex-row transition-all duration-500 ease-in-out" id="hamburgerMenu">
-                <div class="w-8/12 h-full bg-white">
-                    <div class="border-b border-gray-300 p-2">
-                        <div class="w-full flex flex-row justify-start items-center gap-3">
-                            <img src="https://picsum.photos/200/300" class="size-10 rounded-full border-2 border-gray-500" alt="user picture">
-                            <span class="text-xs font-semibold text-gray-600"></span>
-                        </div>
-                    </div>
-                    <div class="h-[537px] overflow-y-auto">
-                        <ul class="w-full p-2">
-                       
-                            <li class="border-b border-gray-300">
-                                <a href="#" class="inline-block w-full py-3 px-4 text-sm">تست</a>
-                            </li>
-                            <li class="border-b border-gray-300">
-                                <a href="#" class="inline-block w-full py-3 px-4 text-sm">تست</a>
-                            </li>
-                            <li class="border-b border-gray-300">
-                                <a href="#" class="inline-block w-full py-3 px-4 text-sm"> </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="w-4/12 h-full bg-transparent" onclick="mobileMenu('close')"></div>
-            </div>
-         </div>
-        <!-- mobile menu -->
-    </header>
+   @extends('user.panel')
 
-    <div class="2xl:container mx-auto w-full flex flex-col lg:flex-row">
-        <aside class="hidden w-3/12 lg:h-[500px] border-l border-gray-300 lg:block">
-            <ul class="w-full p-2">
-                @if($user->type=="career")
-                    <li class="border-b border-gray-300">
-                        <a href="#" class="inline-block w-full py-3 px-4 text-sm">لیست کسب وکارهای من</a>
-                    </li>
-                @endif
-                <li class="border-b border-gray-300">
-                    <a href="#" class="inline-block w-full py-3 px-4 text-sm">تست</a>
-                </li>
-                <li class="border-b border-gray-300">
-                    <a href="#" class="inline-block w-full py-3 px-4 text-sm">تست</a>
-                </li>
-                <li class="border-b border-gray-300">
-                    <a href="{{url('career/create')}}" class="inline-block w-full py-3 px-4 text-sm">ثبت نام کسب وکار</a>
-                </li>
-            </ul>
-        </aside>
-
-        <!-- بخش اصلی و جدول اطلاعات career -->
-         @foreach($user->careers as $career)
-        <main class="w-full flex flex-col lg:w-9/12 p-4">
-            <div class="bg-white shadow-md rounded-lg ">
-                <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
-                    <h2 class="text-lg font-bold text-gray-800">اطلاعات کسب و کار</h2>
-                </div>
-                <div class="overflow-x-auto">
+   @section('title', 'کسب و کارهای من')
+    
+    @section('content')
+      
+    <div class="w-full flex flex-col p-4">
+        <div class="bg-white rounded-lg">
+            <div class="px-6 py-4">
+                <h2 class="text-lg font-bold text-gray-800">اطلاعات کسب و کار</h2>
+            </div>
+            <div class="flex flex-col gap-5">
+            @foreach($user->careers as $career)
+                <div class="overflow-x-auto shadow-md" style="scrollbar-width: none;">
                     <table class="min-w-full bg-gray-200">
                         <thead class="bg-gray-100">
                             <tr>
@@ -115,13 +22,18 @@
                                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">ادرس</th>
                                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">توضیحات</th>
                                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">نام کاربری</th>
-                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">ایمیل</th>
+                                <!-- <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">ایمیل</th> -->
                                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">لوگو</th>
+                                @if(!$career->menu)
                                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">عملیات</th>
-                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">لیست QR</th>
+                                @endif
+                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">-</th>
+                                @if($career->menu)
+                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">-</th>
+                                @endif
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
+                        <tbody class="bg-white">
                             @if($career)
                             <tr>
                                 <td class="px-6 py-4 text-sm text-gray-900">{{ $career->title}}</td>
@@ -129,20 +41,26 @@
                                 <td class="px-6 py-4 text-sm text-gray-900">{{ $career->city}}</td>
                                 <td class="px-6 py-4 text-sm text-gray-900">{{ $career->address}}</td>
                                 <td class="px-6 py-4 text-sm text-gray-900">{{ $career->description}}</td>
-                                <td class="px-6 py-4 text-sm text-gray-900">{{ $career->user_name}}</td>
                                 <td class="px-6 py-4 text-sm text-gray-900">{{ $career->email}}</td>
                                 <td class="px-6 py-4 text-sm text-gray-900">
                                       <img class="max-w-[50px] max-h-[50px]" src="<?= asset("storage/" . $career->logo) ?>">
                                 </td>
-                              
+                              @if(!$career->menu)
                                 <td class="px-6 py-4 text-sm font-medium"> 
-                                    <a href="http://localhost/digital-menu/public/create/menu/{{$career->id}}" class="ml-4 text-sky-700">ایجاد منو</a>
+                                    <a href="{{ route('user.career.menu.create')}}" class="ml-4 text-sky-700">ایجاد منو</a>
                                     
                                 </td>
+                            @endif
                                  <td class="px-6 py-4 text-sm font-medium">
-                                    <a href="#" class="ml-4 text-sky-700"> کدهای QR</a>
+                                    <a href="#" class="ml-4 text-sky-700">مشاهده</a>
                                     
                                 </td>
+                                @if($career->menu)
+                                 <td class="px-6 py-4 text-sm font-medium">
+                                    <a href="{{ route('user.career.menu.list')}}" class="ml-4 text-sky-700">مشاهده منو</a>
+                                    
+                                </td>
+                                @endif
                             </tr>
                             @else
                             <tr>
@@ -154,23 +72,10 @@
                         </tbody>
                     </table>
                 </div>
+                @endforeach
             </div>
-        </main>
-        @endforeach
+            </div>
+        </div>
     </div>
+    @endsection
     
-    <script>
-        let hamburgerMenu = document.getElementById('hamburgerMenu')
-        function mobileMenu(state){
-            if (state == "open") {
-                hamburgerMenu.classList.remove('-right-full')
-                hamburgerMenu.classList.add('right-0')
-            }
-            if (state == "close") {
-                hamburgerMenu.classList.remove('right-0')
-                hamburgerMenu.classList.add('-right-full')
-            }
-        }
-    </script>
-</body>
-</html>
