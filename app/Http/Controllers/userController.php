@@ -1,91 +1,84 @@
 <?php
 namespace App\Http\Controllers;
+
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 
 class UserController extends Controller
 {
     public function create()
     {
-        return view('users.signup');
-    
+        return view('user.signup');
     }
+
     public function store(Request $request)
     {
-        // dd($request->all());
-        $phone=User::where('phoneNumber',$request->phoneNumber)->first();
-        if(!$phone){
+        $phone = User::where('phoneNumber', $request->phoneNumber)->first();
+        if (!$phone) {
             $password = Hash::make($request->password);
             User::create([
-                "name" => $request->name,
-                "phoneNumber" => $request->phoneNumber,
-                "password" => $password,
-                "type"=>"general"
+                'name' => $request->name,
+                'phoneNumber' => $request->phoneNumber,
+                'password' => $password,
+                'type' => 'general',
             ]);
-            return redirect("/user/login");
-        }
-        else{
-            return redirect()->back()->with("message","این شماره تلفن قبلا استفاده شده");
-   
+            return to_route('user.login');
+        } else {
+            return redirect()->back()->with('message', 'این شماره تلفن قبلا استفاده شده');
         }
     }
+
     public function check(Request $request)
     {
-        $user=user::where('phoneNumber',$request->phoneNumber)->first();
-        if(!$user){
-         return"user not found";
+        $user = User::where('phoneNumber', $request->phoneNumber)->first();
+
+        if (!$user) {
+            return 'user not found';
         }
-        $checkHash=Hash::check($request->password,$user->password);
-            if($checkHash){
-                if(!Auth::check()){
-                        Auth::login($user);
-                        return view("users.userPanel",["user"=>$user]);
-                }
-            else{
-              return view("users.userPanel",["user"=>$user]); 
-         }
+        $checkHash = Hash::check($request->password, $user->password);
+        if ($checkHash) {
+            if (!Auth::check()) {
+                Auth::login($user);
+                return to_route('user.profile', ['user' => $user]);
+            }
+        } else {
+            echo 'رمز ورود صحیح نمیباشد';
+        }
     }
-    else{
-      echo  "رمز ورود صحیح نمیباشد";
-    }  
-    }
+
     public function logout()
     {
         Auth::logout();
-        // return"شمااز حساب کاربری خود خارج شدید";
-        return redirect("/user/login");
-
-        // return redirect("/");
+        return to_route('user.login');
     }
+
     public function index()
     {
         $users = User::all();
-        return view('users.index', ["users" => $users]);
+        return view('user.index', ['users' => $users]);
     }
-    public function show($id)
+
+    public function panel(user $user)
     {
-        // dd($id);
-        if (Auth::check()) {
-            $user = Auth::user();
-        }
         if (!Auth::check()) {
-            return redirect("user/login");
+            return to_route('user.login');
         }
-        if ($id){
-            $user = User::find($id);
-        }
-        return view("users.userPanel", ["user" => $user]);
+        return view('user.panel', ['user' => $user]);
     }
-    public function edit($id)
+
+    public function profile(user $user){
+        return view('user.profile', ['user'=>$user]);
+    }
+
+    public function edit(user $user)
     {
-        $user = User::find($id);
-        return view("users.edit", ["user" => $user]);
+        return view('user.edit', ['user' => $user]);
     }
+
     public function update(Request $request)
     {
-        // dd($request->all());
         $user = User::find($request->id);
         $user->name = $request->name;
         $user->phoneNumber = $request->phoneNumber;
@@ -95,12 +88,18 @@ class UserController extends Controller
             $user->password = $password;
         }
         $user->save();
-        return redirect("/user/index");
+        return redirect('/user/index');
     }
-    public function delete($id){
-        $user=User::find($id);
-        $user->delete();
-        return redirect("/user/index");
 
+    public function delete($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return redirect('/user/index');
+    }
+
+    public function login()
+    {
+        return view('user.login');
     }
 }

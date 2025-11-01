@@ -172,10 +172,10 @@
                     <div class="w-full">
 
                     <img class="size-[148px]"
-                    src="<?= asset("storage/" . $media->path) ?>"
+                    src="<?php // asset("storage/" . $media?->path) ?>"
                     alt="product image">
 
-                        <img class="size-[148px]" src="./img/removed1.png" alt="">
+                        <!-- <img class="size-[148px]" src="./img/removed1.png" alt=""> -->
 
                     </div>
                     <div class="flex flex-row gap-2">

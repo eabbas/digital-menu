@@ -77,7 +77,7 @@
 <body>
     <main class="w-full h-svh bg-[url('https://keenthemes.com/static/metronic/tailwind/dist/assets/media/images/2600x1200/bg-10.png')] bg-cover bg-no-repeat flex flex-row justify-center items-center">
         <div class="kt-card max-w-[370px] w-full">
-            <form action="{{url('user/check')}}" method="post" class="flex flex-col gap-5 p-10 bg-white">
+            <form action="{{ route('user.check') }}" method="post" class="flex flex-col gap-5 p-10 bg-white">
                 @csrf
                 <div class="text-center mb-2.5">
                     <h3 class="text-lg font-medium text-mono leading-none mb-2.5">
@@ -87,7 +87,7 @@
                         <span class="text-sm text-secondary-foreground me-1.5">
                             اکانت ندارید؟
                         </span>
-                        <a href="{{route('user_signUp')}}" class="text-sm">ثبت نام</a>
+                        <a href="{{route('user.signup')}}" class="text-sm">ثبت نام</a>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-2.5">
