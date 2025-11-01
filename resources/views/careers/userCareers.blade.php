@@ -47,7 +47,7 @@
                                 </td>
                               @if(!$career->menu)
                                 <td class="px-6 py-4 text-sm font-medium"> 
-                                    <a href="{{ route('user.career.menu.create')}}" class="ml-4 text-sky-700">ایجاد منو</a>
+                                    <a href="{{ route('user.career.menu.create', [$career])}}" class="ml-4 text-sky-700">ایجاد منو</a>
                                     
                                 </td>
                             @endif
@@ -57,7 +57,7 @@
                                 </td>
                                 @if($career->menu)
                                  <td class="px-6 py-4 text-sm font-medium">
-                                    <a href="{{ route('user.career.menu.list')}}" class="ml-4 text-sky-700">مشاهده منو</a>
+                                    <a href="{{ route('user.career.menu.list', [$career])}}" class="ml-4 text-sky-700">مشاهده منو</a>
                                     
                                 </td>
                                 @endif

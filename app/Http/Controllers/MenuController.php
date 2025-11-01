@@ -15,15 +15,15 @@ use App\Models\User;
 
 class MenuController extends Controller
 {
-    public function create(user $user)
+    public function create(career $career)
     {
-        return view('menu.create', ['user'=>$user]);
+        $user = Auth::user();
+        return view('menu.create', ['user'=>$user, 'career'=>$career]);
     }
 
     public function store(Request $request)
     {
-        $user = Auth::user();
-        $career_id = $user->careers[0]->id;
+        $career_id = $request->career_id;
         $page_data = json_encode($request->page_data);
         menu::create(['page_data' => $page_data, 'qr_num'=>$request->qr_num, 'career_id' => $career_id]);
         $user_id = Auth::id();
@@ -35,12 +35,11 @@ class MenuController extends Controller
             Storage::disk('public')->put($fileName, $qr_svg);
             qr_code::create(['qr_pass' => $fileName, 'career_id' => $career_id, 'is_main' => 0]);
         }
-        return to_route('menu.list');
+        return to_route('user.career.careers');
     }
 
-    public function index(){
+    public function index(career $career){
         $user = Auth::user();
-        $career = $user->careers[0];
         $career->menu->page_data;
         return view('menu.menu', ['career'=>$career, 'user'=>$user]);
     }

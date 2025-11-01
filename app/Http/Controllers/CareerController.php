@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Storage;
 class CareerController extends Controller
 {
     public function create(){
-        return view('careers.create');
+        $user = Auth::user();
+        return view('careers.create', ['user'=>$user]);
     }
     
     public function store(Request $request){

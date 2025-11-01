@@ -6,6 +6,7 @@
         <div class="w-1/2 mx-auto border border-[#D5DFE4] rounded-[10px] text-[#425A8B] p-5 bg-white text-sm">
             <form action="{{route('user.career.menu.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="career_id" value="{{ $career->id }}">
                 <div class="flex flex-col gap-3">
                     <div data-count="0">
                         <div class="flex flex-col items-end gap-3 lg:gap-5 mt-3 md:mt-5 border-b border-gray-300 pb-3">

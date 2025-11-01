@@ -39,21 +39,21 @@ Route::group([
     Route::get("/delete/{user}", "delete")->name('delete');
 
     Route::group([
-        'prefix'=>'career',
+        'prefix'=>'careers',
         'controller'=>CareerController::class,
         'as'=>'career.'
     ], function(){
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
-        Route::get('/careers', 'user_careers')->name('careers');
+        Route::get('/list', 'user_careers')->name('careers');
         Route::get('/edit/{career}')->name('edit');
         Route::group([
-            'prefix'=>'menu',
+            'prefix'=>'menus',
             'controller'=>MenuController::class,
             'as'=>'menu.'
         ], function(){
-            Route::get('/', 'index')->name('list');
-            Route::get('/create', 'create')->name('create');
+            Route::get('/{career}', 'index')->name('list');
+            Route::get('/create/{career}', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
         });
     });
