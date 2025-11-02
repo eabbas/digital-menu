@@ -12,8 +12,6 @@
                     <h1 class="text-2xl font-bold text-gray-800">اطلاعات کسب وکار</h1>
                     <p class="text-gray-600 mt-2">اطلاعات کسب وکار خود را وارد کنید</p>
                 </div>
-
-
                 <!--  لوگو   -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2"> لوگو کسب وکار</label>

@@ -32,29 +32,34 @@ Route::group([
     Route::post("/check", "check")->name('check')->withoutMiddleware([UserMiddleware::class]);;
     Route::get("/logout", "logout")->name('logout');
     Route::get("/","index")->name('list');
-    Route::get("/panel/{user}", "panel")->name('panel');
-    Route::get('/profile/{user}', 'profile')->name('profile');
+    Route::get("/panel", "panel")->name('panel');
+    Route::get('/profile', 'profile')->name('profile');
     Route::get("/edit/{user}", "edit")->name('edit');
-    Route::post("/update", "update")->name('user');
+    Route::post("/update", "update")->name('update');
     Route::get("/delete/{user}", "delete")->name('delete');
 
     Route::group([
-        'prefix'=>'career',
+        'prefix'=>'careers',
         'controller'=>CareerController::class,
         'as'=>'career.'
     ], function(){
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
-        Route::get('/careers', 'user_careers')->name('careers');
-        Route::get('/edit/{career}')->name('edit');
+        Route::get('/list', 'user_careers')->name('careers');
+        Route::get('/edit/{career}','edit')->name('edit');
+        Route::post('/update','update')->name('update');
+        Route::get('/delete/{career}','delete')->name('delete');
         Route::group([
-            'prefix'=>'menu',
+            'prefix'=>'menus',
             'controller'=>MenuController::class,
             'as'=>'menu.'
         ], function(){
-            Route::get('/', 'index')->name('list');
-            Route::get('/create', 'create')->name('create');
+            Route::get('/{career}', 'index')->name('list');
+            Route::get('/create/{career}', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
+            Route::get('/edit/{menu}', 'edit')->name('edit');
+            Route::post('/update', 'update')->name('update');
+            Route::get('/delete/{menu}')->name('delete');
         });
     });
 });
@@ -158,7 +163,15 @@ Route::group([
 });
 
 // qr-code
-Route::get('qr-code', [QRCodeController::class, 'index']);
+Route::group([
+    'prefix'=>'QRCode',
+    'controller'=>QRCodeController::class,
+    'as'=>'qr.'
+], function(){
+    Route::get('/qr-code', 'index')->name('list');
+    Route::get('/delete/{qr_code}', 'delete')->name('delete');
+
+});
 
 
 Route::group([

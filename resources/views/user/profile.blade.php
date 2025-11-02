@@ -1,6 +1,5 @@
     @extends('user.panel')
     @section('title', 'پروفایل کاربری')
-
     @section('content')
     <div class="2xl:container mx-auto w-9/12 p-5">
         <div class="flex justify-between py-5">
@@ -9,7 +8,7 @@
                 <div class="text-[#99A1B7] text-sm flex flex-row items-center mt-2">
                     <a href="{{ route('home') }}">خانه</a>
                     <span class="mx-2">/</span>
-                    <a href="{{ route('user.panel', ['user'=>$user]) }}">پنل من</a>
+                    <a href="{{ route('user.panel') }}">پنل من</a>
                 </div>
             </div>
             <!-- <div class="flex flex-row gap-2">
@@ -96,7 +95,7 @@
                         <a class="hover:text-blue-700" href="">بررسی اجمالی</a>
                     </li>
                     <li>
-                        <a class="hover:text-blue-700" href="">تنظیمات</a>
+                        <a class="hover:text-blue-700" href="{{route('user.profileEdit') }}">تنظیمات کاربری</a>
                     </li>
                     <li>
                         <a class="hover:text-blue-700" href="">امنیت</a>
