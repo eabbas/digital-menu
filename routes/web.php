@@ -46,7 +46,9 @@ Route::group([
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
         Route::get('/list', 'user_careers')->name('careers');
-        Route::get('/edit/{career}')->name('edit');
+        Route::get('/edit/{career}','edit')->name('edit');
+        Route::post('/update','update')->name('update');
+        Route::get('/delete/{career}','delete')->name('delete');
         Route::group([
             'prefix'=>'menus',
             'controller'=>MenuController::class,

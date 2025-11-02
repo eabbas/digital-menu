@@ -55,6 +55,14 @@
                                     <a href="#" class="ml-4 text-sky-700">مشاهده</a>
                                     
                                 </td>
+                                 <td class="px-6 py-4 text-sm font-medium">
+                                    <a href="{{ route('user.career.edit', [$career])}}" class="ml-4 text-sky-700">ویرایش</a>
+                                    
+                                </td>
+                                 <td class="px-6 py-4 text-sm font-medium">
+                                    <a href="{{ route('user.career.delete', [$career])}}" class="ml-4 text-sky-700">حذف</a>
+                                    
+                                </td>
                                 @if($career->menu)
                                  <td class="px-6 py-4 text-sm font-medium">
                                     <a href="{{ route('user.career.menu.list', [$career])}}" class="ml-4 text-sky-700">مشاهده منو</a>
