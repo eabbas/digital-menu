@@ -22,6 +22,6 @@ class QrCodeController extends Controller
     }
 
     public function load(career $career, string $slug){
-        return to_route('user.career.menu.list', [$career]);
+        return to_route('client.menu', [$career, $slug]);
     }
 }
