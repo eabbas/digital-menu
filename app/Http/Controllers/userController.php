@@ -32,6 +32,7 @@ class UserController extends Controller
 
     public function check(Request $request)
     {
+        
         $user = User::where('phoneNumber', $request->phoneNumber)->first();
 
         if (!$user) {
@@ -41,6 +42,8 @@ class UserController extends Controller
         if ($checkHash) {
             if (!Auth::check()) {
                 Auth::login($user);
+            }
+            if(Auth::check()){
                 return to_route('user.profile', ['user' => $user]);
             }
             if (Auth::check()) {
@@ -63,15 +66,17 @@ class UserController extends Controller
         return view('user.index', ['users' => $users]);
     }
 
-    public function panel(user $user)
+    public function panel()
     {
+        $user=Auth::user();
         if (!Auth::check()) {
             return to_route('user.login');
         }
         return view('user.panel', ['user' => $user]);
     }
 
-    public function profile(user $user){
+    public function profile(){
+        $user=Auth::user();
         return view('user.profile', ['user'=>$user]);
     }
 
@@ -93,6 +98,7 @@ class UserController extends Controller
         $user->save();
         return redirect('/user/index');
     }
+    
 
     public function delete($id)
     {
