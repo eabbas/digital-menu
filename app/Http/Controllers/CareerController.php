@@ -1,9 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use App\Models\career;
 use App\Models\qr_code;
 use App\Models\User;
@@ -11,9 +8,6 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-
-
-
 
 class CareerController extends Controller
 {
@@ -57,5 +51,34 @@ class CareerController extends Controller
         $user = Auth::user();
         return view("careers.userCareers",["user"=>$user]);
 
+    }
+    public function edit(career $career){
+        $career->social_media=json_decode($career->social_media);
+        return view("careers.edit",["career"=>$career]);
+    }
+    public function update(Request $request){
+        $user=Auth::user();
+        $career = career::find($request->id);
+        if($request->logo){
+            Storage::disk('public')->delete($career->logo);
+            $logoName=$request->logo->getClientOriginalName();
+            $logoPath=$request->logo->storeAs('files',$logoName,'public');
+            $career->logo = $logoPath;
+        }
+        $career->social_media=json_encode($request->social_medias);
+        $career->province = $request->province;
+        $career->city = $request->city;
+        $career->title = $request->title;
+        $career->address = $request->address;
+        $career->description = $request->description;
+        $career->email = $request->email;
+        $career->save();
+        return view("careers.userCareers",["user"=>$user]);
+    }
+    public function delete(career $career){
+        dd($career->menu);
+        return($career->menu);
+        $careers->menu->delete();
+        $career->delete();
     }
 }

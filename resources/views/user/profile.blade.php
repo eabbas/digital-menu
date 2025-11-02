@@ -1,6 +1,5 @@
     @extends('user.panel')
     @section('title', 'پروفایل کاربری')
-
     @section('content')
     <div class="2xl:container mx-auto w-9/12 p-5">
         <div class="flex justify-between py-5">
