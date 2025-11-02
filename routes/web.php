@@ -7,6 +7,7 @@ use App\Http\controllers\ProductController;
 use App\Http\controllers\MenuController;
 use App\Http\controllers\SettingController;
 use App\Http\Controllers\QRCodeController;
+use App\Http\Controllers\ClientController;
 use App\Http\Middleware\UserMiddleware;
 
 
@@ -171,6 +172,15 @@ Route::group([
     Route::get('/qr-code', 'index')->name('list');
     Route::get('/delete/{qr_code}', 'delete')->name('delete');
     Route::get('/{career}/{slug}', 'load')->name('load');
+});
+
+// client
+Route::group([
+    'prefix'=>'client',
+    'controller'=>ClientController::class,
+    'as'=>'client.'
+], function(){
+    Route::get('/{career}/{slug}', 'show_menu')->name('menu');
 });
 
 
