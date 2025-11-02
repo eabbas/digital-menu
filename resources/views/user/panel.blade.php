@@ -12,7 +12,9 @@
 <body>
     <div class="w-full flex flex-row">
         <!-- <div class=""> -->
-            <div class="hidden lg:block lg:w-3/12 2xl:w-2/12 bg-[#282b37] fixed right-0 top-0 h-dvh px-5 text-sm">
+
+            <div class="hidden lg:block lg:w-[265px] bg-[#0D0E12] fixed right-0 top-0 h-dvh px-5 text-sm">
+
                 <div class="flex justify-center">
                     <a href="#" class="right-0 mr-[15px]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="269" height="56" viewBox="0 0 269 56" fill="none"
@@ -175,7 +177,7 @@
         <!-- کد های سپهر -->
         <div class="w-full">
             <div class="w-full fixed top-0 right-0 z-10">
-                <div class="w-full float-end lg:w-9/12 2xl:w-10/12 py-3 flex flex-row-reverse px-5 backdrop-blur-sm shadowHeader relative z-20">
+                <div class="w-full float-end lg:w-[calc(100%-265px)] py-3 flex flex-row-reverse px-5 backdrop-blur-sm shadowHeader relative z-20">
                     <div class="w-6/12 flex flex-row-reverse items-center">
                         <div> 
                             <a href="{{ route('user.profile') }}">
