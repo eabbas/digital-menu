@@ -43,6 +43,9 @@ class UserController extends Controller
                 Auth::login($user);
                 return to_route('user.profile', ['user' => $user]);
             }
+            if (Auth::check()) {
+                return to_route('user.profile', ['user' => $user]);
+            }
         } else {
             echo 'رمز ورود صحیح نمیباشد';
         }

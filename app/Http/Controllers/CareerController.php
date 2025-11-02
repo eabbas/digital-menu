@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Models\career;
 use App\Models\qr_code;
 use App\Models\User;
+use App\Models\Menu;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -76,9 +77,12 @@ class CareerController extends Controller
         return view("careers.userCareers",["user"=>$user]);
     }
     public function delete(career $career){
-        dd($career->menu);
-        return($career->menu);
-        $careers->menu->delete();
+        $user = Auth::user();
+        foreach ($career->menu->qr_codes as $menu) {
+            $menu->delete();
+        }
+        $career->menu->delete();
         $career->delete();
+        return to_route('user.profile', [$user]);
     }
 }
