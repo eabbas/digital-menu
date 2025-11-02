@@ -176,7 +176,7 @@ Route::group([
 
 // client
 Route::group([
-    'prefix'=>'client',
+    'prefix'=>'qrcodes',
     'controller'=>ClientController::class,
     'as'=>'client.'
 ], function(){
