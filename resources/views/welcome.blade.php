@@ -55,7 +55,7 @@
         <!-- banner end -->
 
         <!-- categories -->
-        <section class="mt-4 w-full overflow-x-auto">
+        <section class="mt-4 w-full hidden overflow-x-auto">
             <div class="grid grid-cols-4 gap-4">
                 <div class="bg-white rounded-lg p-3">
                     <a href="#" class="flex flex-col items-center gap-3">
@@ -96,7 +96,7 @@
 
         <!-- products -->
 
-        <section class="mt-4 w-full">
+        <section class="hidden mt-4 w-full">
             <!-- heading -->
             <div class="w-full py-3 flex flex-row justify-between items-center">
                 <div>
@@ -215,6 +215,9 @@
         </section>
 
         <!-- products end -->
+         <div class="w-full mt-3">
+            <a href="#" class="block py-2 bg-blue-400 text-white rounded-md text-center">مشاهده منو</a>
+         </div>
     </main>
     <footer class="w-full mt-5 py-4 flex flex-row justify-center fixed bottom-0 right-0 bg-[#fcfcfc] rounded-full">
         <div class="w-11/12 m-auto flex flex-row justify-between items-center">
