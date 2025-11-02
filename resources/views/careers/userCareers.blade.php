@@ -15,6 +15,7 @@
                 <div class="overflow-x-auto shadow-md" style="scrollbar-width: none;">
                     <table class="min-w-full bg-gray-200">
                         <thead class="bg-gray-100">
+                           
                             <tr>
                                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-600 ">عنوان</th>
                                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">استان</th>
