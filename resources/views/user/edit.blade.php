@@ -1,19 +1,6 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>editUser</title>
-    
-</head>
-<body>
-    <?php
-        // dd($user -> name);
-    ?>
-    <section class="2xl:container mx-auto">
-        <div class="w-11/12 mx-auto">
+@extends('user.panel')
+@section('title', 'ویرایش کاربر')
+@section('content')
             <div class="my-10">
                 <h1 class="lg:text-3xl md:text-2xl text-md font-semibold text-center text-gray-700">ثبت نام</h1>
             </div>
@@ -43,7 +30,4 @@
                     <button class="px-5 py-2 lg:px-10 lg:py-3 border rounded-md transition-all duration-150 hover:bg-gray-400 hover:border-gray-400 hover:text-white">ثبت</button>
                 </div>
             </form>
-        </div>
-    </section>
-</body>
-</html>
+@endsection
