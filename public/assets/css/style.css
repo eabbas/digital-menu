@@ -152,3 +152,12 @@ z-index: 1;
 .shadow__profaill__karbary {
     box-shadow: 0 0 4px -1px gray;
 }
+.shadow__header {
+    box-shadow: 0 0 12px -1px #e8355d;
+}
+.items__shadow {
+    box-shadow: 0 0 4px -1px #e8355d;
+}
+.in__shadow {
+    box-shadow: inset 0 0 10px -1px #e41505;
+}
