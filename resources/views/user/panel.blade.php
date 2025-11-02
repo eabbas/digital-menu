@@ -178,7 +178,7 @@
                 <div class="w-full float-end lg:w-9/12 2xl:w-10/12 py-3 flex flex-row-reverse px-5 backdrop-blur-sm shadowHeader relative z-20">
                     <div class="w-6/12 flex flex-row-reverse items-center">
                         <div> 
-                            <a href="{{ route('user.profile', ['user'=>$user]) }}">
+                            <a href="{{ route('user.profile') }}">
                                 <img src="{{ asset('assets/img/user.png') }}"
                                     alt="user__picture" class="size-10 rounded-xl">
                             </a>
