@@ -50,7 +50,7 @@ class CareerController extends Controller
         ]);
         // dd($career);
 
-        qr_code::create(['qr_pass'=>$fileName,'career_id'=>$career_id,'is_main'=>1]);
+        qr_code::create(['qr_path'=>$fileName,'career_id'=>$career_id,'is_main'=>1]);
         return view("user.profile",["user"=>$user]);
     }
     public function user_careers(){

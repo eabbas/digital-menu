@@ -55,6 +55,9 @@ Route::group([
             Route::get('/{career}', 'index')->name('list');
             Route::get('/create/{career}', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
+            Route::get('/edit/{menu}', 'edit')->name('edit');
+            Route::post('/update', 'update')->name('update');
+            Route::get('/delete/{menu}')->name('delete');
         });
     });
 });
@@ -158,7 +161,15 @@ Route::group([
 });
 
 // qr-code
-Route::get('qr-code', [QRCodeController::class, 'index']);
+Route::group([
+    'prefix'=>'QRCode',
+    'controller'=>QRCodeController::class,
+    'as'=>'qr.'
+], function(){
+    Route::get('/qr-code', 'index')->name('list');
+    Route::get('/delete/{qr_code}', 'delete')->name('delete');
+
+});
 
 
 Route::group([
