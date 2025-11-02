@@ -164,13 +164,13 @@ Route::group([
 
 // qr-code
 Route::group([
-    'prefix'=>'QRCode',
+    'prefix'=>'qrcode',
     'controller'=>QRCodeController::class,
     'as'=>'qr.'
 ], function(){
     Route::get('/qr-code', 'index')->name('list');
     Route::get('/delete/{qr_code}', 'delete')->name('delete');
-
+    Route::get('/{career}/{slug}', 'load')->name('load');
 });
 
 

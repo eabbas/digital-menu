@@ -22,15 +22,8 @@ class CareerController extends Controller
         $user->type="career";
         $user->save();
         $name=$request->logo->getClientOriginalName();
-        // dd($user , $request->all());
-        // $type=$request->logo->getClientOriginalExtension();
         $path=$request->logo->storeAs('files',$name,'public');
         $social_medias=json_encode($request->social_medias);
-        $random = Str::random(10);
-        $link = "https://famenu.ir/QRCode/$user->id/".$random;
-        $qr_svg=QrCode::size(100)->generate($link);
-        $fileName = "qrcodes/".$user->id."_".$random.".svg";
-        Storage::disk('public')->put($fileName, $qr_svg);
         $career_id=career::insertGetId([
             'title'=>$request->title,
             'logo'=>$path,
@@ -41,11 +34,13 @@ class CareerController extends Controller
             'user_id'=>$user->id,
             'email'=>$request->email,
             'description'=>$request->description,
-            // 'user_name'=>$request->user_name
         ]);
-        // dd($career);
-
-        qr_code::create(['qr_path'=>$fileName,'career_id'=>$career_id,'is_main'=>1]);
+        $random = Str::random(10);
+        $link = "https://famenu.ir/qrcode/$career_id/".$random;
+        $qr_svg=QrCode::size(100)->generate($link);
+        $fileName = "qrcodes/".$career_id."_".$random.".svg";
+        Storage::disk('public')->put($fileName, $qr_svg);
+        qr_code::create(['qr_path'=>$fileName,'career_id'=>$career_id,'is_main'=>1, 'slug'=>$career_id."/".$random]);
         return view("user.profile",["user"=>$user]);
     }
     public function user_careers(){
