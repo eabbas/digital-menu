@@ -14,17 +14,17 @@
 
 <body class="">
     <div class="flex flex-row-reverse">
-        <div class="flex justify-center  w-6/12 bg-[#056EE9] 2xl:h-full">
+        <div class="hidden flex justify-center  w-6/12 bg-[#056EE9] 2xl:h-full">
             <div class="flex flex-col my-12 items-center">
                 <div>
                    <h2 class="text-center font-bold text-white text-3xl">Faos</h2>
                 </div>
                 <div class="my-9">
-                    <img class="w-125 h-95"
+                    <img class="w-full h-95"
                         src="file:///F:/Metronic%20v8.2.6/Html/demo1/demo1/assets/media/misc/auth-screens.png"
                         alt="img">
                 </div>
-                <div class="flex flex-col items-center w-110 text-white">
+                <div class="flex flex-col items-center w-full text-white">
                     <h1 class="text-3xl font-bold">سریع، کارآمد و محصولی</h1>
 
                     <p class="text-sm mt-5 text-center font-bold">در این نوع پست، <a href="#"
@@ -35,11 +35,11 @@
                 </div>
             </div>
         </div>
-        <div class="w-6/12 bg-white 2xl:h-full flex justify-center ">
-            <div class="flex flex-col items-center   h-150 w-115 mt-[122px]">
+        <div class="w-full 2xl:w-6/12 bg-white 2xl:h-full flex justify-center ">
+            <div class="flex flex-col items-center h-150 w-115 mt-[30px]">
                 <h1 class="text-2xl font-bold">ورود</h1>
-                <a href="#" class="mt-2 text-[#99A1B7] text-sm font-bold text-"> توسط سوشیال کمپین ها</a>
-                <div class="flex flex-row-reverse gap-3 my-8">
+                <!-- <a href="#" class="mt-2 text-[#99A1B7] text-sm font-bold"> توسط سوشیال کمپین ها</a> -->
+                <!-- <div class="flex flex-col w-full p-[60px] lg:flex-row-reverse gap-3 m-0">
                     <div
                         class="flex flex-row-reverse items-center gap-1 border py-3 px-7 border-solid rounded-[7px] border-[#DBDFE9] text-[#4B5675] hover:text-[#1B84FF] cursor-pointer">
                         با اپلیکیشن وارد شوید
@@ -68,26 +68,26 @@
                                 fill="#EB4335" />
                         </svg>
                     </a>
-                </div>
+                </div> -->
                 <!-- <div class="flex flex-row-reverse items-center gap-6">
                     <div class="w-37 h-px bg-[#F1F1F4] "></div>
                     <div class="text-[#4B5675] text-sm ">توسط ایمیل !</div>
                     <div class="w-37 h-px bg-[#F1F1F4] "></div>
                 </div> -->
-                <div class="flex flex-col ">
-                    <form action="{{ route('user.check') }}" class="flex flex-col items-center my-6 gap-3 w-100 h-100" method="post">
+                <div class="flex flex-col w-full p-[60px] py-[30px]">
+                    <form action="{{ route('user.check') }}" class="flex flex-col items-center my-6 gap-3 w-full" method="post">
                         @csrf
                         <input type="number"
-                            class="p-[9px] mb-1 rounded-[7px] border border-[#DBDFE9] outline-none w-110"
+                            class="p-[9px] mb-1 rounded-[7px] border border-[#DBDFE9] outline-none w-full"
                             name="phoneNumber" placeholder="شماره تلفن">
                         <input type="password"
-                            class="p-[9px] mb-1 rounded-[7px] border border-[#DBDFE9] outline-none w-110"
+                            class="p-[9px] mb-1 rounded-[7px] border border-[#DBDFE9] outline-none w-full"
                             name="password" placeholder="کلمه عبور">
-                        <div class="text-right w-110">
+                        <div class="w-full text-center">
                             <a href="#" class="text-[#1B84FF] mb-4">فراموشی رمز عبور</a>
                         </div>
-                        <button class="text-center w-110 bg-[#056EE9] p-3 rounded-[10px] text-white cursor-pointer">ورود</button>
-                        <div class="w-110 text-right">
+                        <button class="text-center w-full bg-[#056EE9] p-3 rounded-[10px] text-white cursor-pointer">ورود</button>
+                        <div class="w-full text-center">
                             <span class="text-[#4B5675] mt-5"> هنوز عضو نشدی؟<a href="{{ route('user.signup') }}" class="text-[#1B84FF] mr-2">ثبت
                                     نام!</a></span>
                         </div>
