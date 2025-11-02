@@ -12,4 +12,7 @@ class menu extends Model
     {
         return $this->belongsTo(career::class);
     }
+    public function qr_codes(){
+        return $this->hasMany(qr_code::class)->chaperone();
+    }
 }
