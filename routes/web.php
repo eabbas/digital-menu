@@ -32,8 +32,8 @@ Route::group([
     Route::post("/check", "check")->name('check')->withoutMiddleware([UserMiddleware::class]);;
     Route::get("/logout", "logout")->name('logout');
     Route::get("/","index")->name('list');
-    Route::get("/panel", "panel")->name('panel');
-    Route::get('/profile', 'profile')->name('profile');
+    Route::get("/panel/{user}", "panel")->name('panel');
+    Route::get('/profile/{user}', 'profile')->name('profile');
     Route::get("/edit/{user}", "edit")->name('edit');
     Route::post("/update", "update")->name('update');
     Route::get("/delete/{user}", "delete")->name('delete');

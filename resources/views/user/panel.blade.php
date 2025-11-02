@@ -180,7 +180,7 @@
                 <div class="w-full float-end lg:w-[calc(100%-265px)] py-3 flex flex-row-reverse px-5 backdrop-blur-sm shadowHeader relative z-20">
                     <div class="w-6/12 flex flex-row-reverse items-center">
                         <div> 
-                            <a href="{{ route('user.profile') }}">
+                            <a href="{{ route('user.profile', [$user]) }}">
                                 <img src="{{ asset('assets/img/user.png') }}"
                                     alt="user__picture" class="size-10 rounded-xl">
                             </a>
