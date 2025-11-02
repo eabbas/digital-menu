@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\qr_code;
 use App\Models\menu;
 use Illuminate\Support\Facades\Storage;
+use App\Models\career;
 
 class QrCodeController extends Controller
 {
@@ -18,5 +19,9 @@ class QrCodeController extends Controller
         Storage::disk('public')->delete($qr_code->qr_path);
         $qr_code->delete();
         return to_route('user.career.menu.edit', [$menu]);
+    }
+
+    public function load(career $career, string $slug){
+        return to_route('user.career.menu.list', [$career]);
     }
 }
