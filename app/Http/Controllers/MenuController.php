@@ -24,7 +24,7 @@ class MenuController extends Controller
     {
         $career_id = $request->career_id;
         $page_data = json_encode($request->page_data);
-        $menu_id = menu::create(['page_data' => $page_data, 'qr_num'=>$request->qr_num, 'career_id' => $career_id]);
+        $menu_id = menu::insertGetId(['page_data' => $page_data, 'qr_num'=>$request->qr_num, 'career_id' => $career_id]);
         $user_id = Auth::id();
         for ($i = 1; $i <= $request->qr_num; $i++) {
             $random = Str::random(10);
