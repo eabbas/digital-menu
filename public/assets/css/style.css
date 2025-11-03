@@ -149,6 +149,9 @@ z-index: 1;
     }
     
 }
+.shadow__mobail__karbary {
+    box-shadow: inset 0 0 10px -1px gray;
+}
 .shadow__profaill__karbary {
     box-shadow: 0 0 4px -1px gray;
 }
