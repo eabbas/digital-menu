@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('qr_codes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('qr_pass');
+            $table->string('qr_path');
             $table->string('career_id');
             $table->string('is_main');
         });

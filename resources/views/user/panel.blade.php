@@ -177,7 +177,7 @@
         <!-- کد های سپهر -->
         <div class="w-full">
             <div class="w-full fixed top-0 right-0 z-10">
-                <div class="w-full float-end lg:w-[calc(100%-265px)] py-3 flex flex-row-reverse px-5 backdrop-blur-sm shadowHeader relative z-20">
+                <div class="w-full float-end lg:w-[calc(100%-265px)] py-3 hidden lg:flex flex-row-reverse px-5 backdrop-blur-sm shadowHeader relative z-20">
                     <div class="w-6/12 flex flex-row-reverse items-center">
                         <div> 
                             <a href="{{ route('user.profile', [$user]) }}">
@@ -276,7 +276,7 @@
                
                 
             </div>
-            <div class="w-9/12 2xl:w-10/12 float-end mt-20 px-5 overflow-y-auto" style="scrollbar-width:none;">
+            <div class="w-full lg:w-9/12 2xl:w-10/12 float-end mt-20 px-5 overflow-y-auto" style="scrollbar-width:none;">
                 
              @yield('content')
             </div>
