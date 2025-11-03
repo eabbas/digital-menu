@@ -13,8 +13,8 @@
 </head>
 
 <body class="">
-    <div class="flex flex-row-reverse">
-        <div class="hidden flex justify-center  w-6/12 bg-[#056EE9] 2xl:h-full">
+    <div class="lg:flex flex-row-reverse">
+        <div class="hidden lg:flex justify-center  w-6/12 bg-[#056EE9] 2xl:h-full">
             <div class="flex flex-col my-12 items-center">
                 <div>
                    <h2 class="text-center font-bold text-white text-3xl">Faos</h2>
