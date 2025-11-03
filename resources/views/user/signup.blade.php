@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
+    <!-- <link rel="stylesheet" href="./css/style.css" type="text/css"> -->
     <title>metronic</title>
     <style>
 
@@ -14,18 +14,19 @@
 
 <body class="">
     <div class="flex flex-row-reverse">
-        <div class="flex justify-center  w-6/12 bg-[#056EE9] 2xl:h-full">
+        <div class="hidden flex justify-center  w-6/12 bg-[#056EE9] 2xl:h-full">
             <div class="flex flex-col my-12 items-center">
                 <div>
-                    <h2 class="text-center font-bold text-white text-3xl">Faos</h2>
+                    <img class="cursor-pointer w-30 h-20"
+                        src="file:///F:/Metronic%20v8.2.6/Html/demo1/demo1/assets/media/logos/custom-1.png" alt="icon">
                 </div>
                 <div class="my-9">
                     <img class="w-125 h-95"
                         src="file:///F:/Metronic%20v8.2.6/Html/demo1/demo1/assets/media/misc/auth-screens.png"
                         alt="img">
                 </div>
-                <div class="flex flex-col items-center w-110 text-white">
-                    <h1 class="text-3xl font-bold">سریع، کارآمد و محصولی</h1>
+                <div class="flex flex-col items-center w-full text-white">
+                    <h1 class="text-3xl font-bold !font-bold">سریع، کارآمد و محصولی</h1>
 
                     <p class="text-sm mt-5 text-center font-bold">در این نوع پست، <a href="#"
                             class="text-yellow-400">وبلاگر</a> فردی را که با او مصاحبه کرده اند معرفی می کند
@@ -35,13 +36,13 @@
                 </div>
             </div>
         </div>
-        <div class="w-6/12 bg-white 2xl:h-full flex justify-center ">
-            <div class="flex flex-col items-center   h-150 w-115 mt-[122px]">
-                <h1 class="text-2xl font-bold">ورود</h1>
+        <div class="w-full bg-white 2xl:h-[100%] flex justify-center ">
+            <div class="flex flex-col items-center w-full mt-[32px]">
+                <h1 class="text-2xl font-bold !font-bold">ورود</h1>
                 <a href="#" class="mt-2 text-[#99A1B7] text-sm font-bold text-"> توسط سوشیال کمپین ها</a>
-                <div class="flex flex-row-reverse gap-3 my-8">
+                <div class="hidden flex flex-row-reverse gap-3 my-8">
                     <div
-                        class="flex flex-row-reverse items-center gap-1 border py-3 px-7 border-solid rounded-[7px] border-[#DBDFE9] text-[#4B5675] hover:text-[#1B84FF] hover:bg-[#F9F9F9] cursor-pointer">
+                        class="flex flex-row-reverse items-center gap-1 border-1 py-3 px-7 border-solid rounded-[7px] border-[#DBDFE9] text-[#4B5675] hover:text-[#1B84FF] hover:bg-[#F9F9F9]">
                         با اپلیکیشن وارد شوید
                         <svg class="size-4" xmlns="http://www.w3.org/2000/svg" width="2036" height="2500"
                             viewBox="0 0 456.008 560.035">
@@ -50,7 +51,7 @@
                         </svg>
                     </div>
                     <a href="#"
-                        class="flex flex-row-reverse items-center gap-1 border py-3 px-7 border-solid rounded-[7px] border-[#DBDFE9] text-[#4B5675] hover:text-[#1B84FF] hover:bg-[#F9F9F9]">ورود
+                        class="flex flex-row-reverse items-center gap-1 border-1 py-3 px-7 border-solid rounded-[7px] border-[#DBDFE9] text-[#4B5675] hover:text-[#1B84FF] hover:bg-[#F9F9F9]">ورود
                         از طریق گوگل
                         <svg class="size-4" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
                             viewBox="0 0 28 28" fill="none">
@@ -69,35 +70,41 @@
                         </svg>
                     </a>
                 </div>
-                <div class="flex flex-row-reverse items-center gap-6">
+                <div class="hidden flex flex-row-reverse items-center gap-6">
                     <div class="w-37 h-px bg-[#F1F1F4] "></div>
                     <div class="text-[#4B5675] text-sm ">توسط ایمیل !</div>
                     <div class="w-37 h-px bg-[#F1F1F4] "></div>
                 </div>
                 <div class="flex flex-col ">
-                    <form action="{{ route('user.store') }}" class="flex flex-col items-center my-6 gap-3 w-100 h-100 " method="post">
-                        @csrf
-                        <input type="text"
-                            class="p-[9px] mb-1 rounded-[7px] border border-[#DBDFE9] outline-none w-110"
-                            name="name" placeholder="نام">
-                        <input type="number" maxlength="8"
-                            class="p-[9px] mb-1 rounded-[7px] border border-[#DBDFE9] outline-none w-110"
-                            name="phoneNumber" placeholder="شماره تلفن">
-                        
-                       
+                    <form action="#" class="flex flex-col items-center my-6 gap-3 w-full h-100 " method="sepehr">
+                        <input type="email"
+                            class="focus:border-[#252F4A] p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none w-full"
+                            name="sepehr" placeholder="ایمیل">
                         <input type="password" maxlength="8"
-                            class="p-[9px] mb-1 rounded-[7px] border border-[#DBDFE9] outline-none w-110"
-                            name="password" placeholder=" کلمه عبور ">
-                        <div class="w-110 flex gap-2  items-center ">
+                            class="focus:border-[#252F4A] p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none w-full"
+                            name="sepehr" placeholder="کلمه عبور">
+                        <div class="w-full flex flex-row-reverse gap-1 ">
+                            <div class="w-full h-1 bg-[#DBDFE9] rounded-full"></div>
+                            <div class="w-full h-1 bg-[#DBDFE9] rounded-full"></div>
+                            <div class="w-full h-1 bg-[#DBDFE9] rounded-full"></div>
+                            <div class="w-full h-1 bg-[#DBDFE9] rounded-full"></div>
+                        </div>
+                        <div class="w-full mb-4">
+                            <p class="text-sm text-[#99A1B7]">کمتر از 8 کاراکتر , حروف ,نماد ها و اعداد استفاده کنید</p>
+                        </div>
+                        <input type="password" maxlength="8"
+                            class="focus:border-[#252F4A] p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none w-full"
+                            name="sepehr" placeholder=" تکرار کلمه عبور ">
+                        <div class="w-full flex gap-2  items-center ">
                             <input type="checkbox" name="Rules" class="size-5 my-4">
                             <label for="Rules" class="text-sm text-[#4B5675]">قوانین را قبول میکنم <a
-                                    href="#" class="text-[#1B84FF] mr-5">قوانین</a></label>
+                                    href="#">قوانین</a></label>
                         </div>
 
-                        <button class="text-center w-110 bg-[#056EE9] p-3 rounded-[10px] text-white cursor-pointer">ورود</button>
-                        <div class="w-110 text-center my-4 ">
-                            <span class="text-[#4B5675] mt-5"> از قبل اکانت داری؟<a href="{{ route('user.login') }}"
-                                    class="text-[#1B84FF] mr-2">ورود</a></span>
+                        <button class="text-center w-full bg-[#056EE9] p-3 rounded-[10px] text-white">ورود</button>
+                        <div class="w-full text-center my-4 ">
+                            <span class="text-[#4B5675] mt-5"> از قبل اکالنت داری؟<a href="#"
+                                    class="text-[#1B84FF]">ورود</a></span>
                         </div>
                     </form>
 
