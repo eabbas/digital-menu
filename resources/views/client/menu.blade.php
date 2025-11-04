@@ -19,10 +19,10 @@
                     <h2 class="text-xl font-semibold text-[#8e180f] mb-3">{{ $data->name }}</h2>
                     <div class="w-full flex flex-col gap-3">
                         @foreach($data->values as $value)
-                        <div class="flex grid grid-cols-3 gap-4">
-                            <div class="py-1 rounded-lg p-3 items__shadow text-center text-sm active:text-white active:bg-[#8e180f]">{{ $value->title }}</div>
-                            <div class="py-1 rounded-lg p-3 items__shadow text-center text-sm active:text-white active:bg-[#8e180f]">{{ $value->price }}</div>
-                            <div class="py-1 rounded-lg p-3 items__shadow text-center text-sm active:text-white active:bg-[#8e180f]">{{ $value->description }}</div>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="py-1 rounded-lg p-3 items__shadow text-center text-xs active:text-white active:bg-[#8e180f]">{{ $value->title }}</div>
+                            <div class="py-1 rounded-lg p-3 items__shadow text-center text-xs active:text-white active:bg-[#8e180f]">{{ $value->price }}</div>
+                            <div class="py-1 rounded-lg p-3 items__shadow text-center text-xs active:text-white active:bg-[#8e180f]">{{ $value->description }}</div>
                         </div>
                         @endforeach
                     </div>

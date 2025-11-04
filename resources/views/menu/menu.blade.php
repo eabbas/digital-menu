@@ -3,6 +3,7 @@
     @section('content')
     <div class="2xl:container mx-auto w-10/12">
         <div class="w-full p-5 border border-gray-400 mt-5 rounded-3xl relative">
+            <a href="{{ route('user.career.menu.qr_codes', [$career->menu]) }}" class="absolute top-10 left-36 p-2 border border-gray-300 rounded">مشاهده QR کد ها</a>
             <a href="{{ route('user.career.menu.edit', [$career->menu]) }}" class="absolute top-10 left-10 p-2 border border-gray-300 rounded">ویرایش منو</a>
             <h1 class="text-center text-3xl font-bold py-5 text-gray-700">
                 لیست منوی {{ $career->title }}

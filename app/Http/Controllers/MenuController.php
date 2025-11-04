@@ -80,4 +80,9 @@ class MenuController extends Controller
         $menu->delete();
         return to_route('user.profile', [$user]);
     }
+
+    public function qr_codes(menu $menu){
+        $user = Auth::user();
+        return view("menu.qrcodes", ['menu'=>$menu, 'user'=>$user]);
+    }
 }
