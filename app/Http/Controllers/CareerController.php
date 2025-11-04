@@ -49,8 +49,9 @@ class CareerController extends Controller
 
     }
     public function edit(career $career){
+        $user = Auth::user();
         $career->social_media=json_decode($career->social_media);
-        return view("careers.edit",["career"=>$career]);
+        return view("careers.edit",["career"=>$career, 'user'=>$user]);
     }
     public function update(Request $request){
         $user=Auth::user();

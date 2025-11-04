@@ -11,7 +11,7 @@
                 </div>
             </div>
            
-        <div class="flex flex-col shadow__mobail__karbary lg:shadow__profaill__karbary lg:p-5 rounded-[7px]">
+        <div class="flex flex-col border border-[#f1f1f4] lg:p-5 rounded-[7px]">
             <div class="block lg:flex flex-row justify-between gap-8">
                 <div class="flex flex-col lg:flex-row gap-7">
                     <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0" src="{{ asset('assets/img/user.png') }}" alt="">

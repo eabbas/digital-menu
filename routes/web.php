@@ -14,12 +14,6 @@ use App\Http\Middleware\UserMiddleware;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
-// Route::get('/career/create',[CareerController::class,'create']);
-// // Route::get('/profile',[CareerController::class,'profile']);
-// Route::post('/store',[CareerController::class,'store']);
-// Route::get('/career/show/{id}',[CareerController::class,'show']);
-
-
 
 Route::group([
     'prefix'=>'users',
@@ -60,7 +54,8 @@ Route::group([
             Route::post('/store', 'store')->name('store');
             Route::get('/edit/{menu}', 'edit')->name('edit');
             Route::post('/update', 'update')->name('update');
-            Route::get('/delete/{menu}')->name('delete');
+            Route::get('/delete/{menu}', 'delete')->name('delete');
+            Route::get('/qr_codes/{menu}', 'qr_codes')->name('qr_codes');
         });
     });
 });
