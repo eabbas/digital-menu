@@ -273,10 +273,17 @@
                         </ul>
                     </div>
                 </div>
-               
+               <div class="flex lg:hidden flex-row justify-between items-center py-2 px-5 backdrop-blur-sm shadowHeader relative z-20">
+                  <img class="size-12 rounded-lg" src="{{ asset('assets/img/user.png') }}" alt="">
+                  <div class="flex flex-col w-8 h-6 justify-between">
+                     <span class="w-full h-0.5 bg-black"></span>
+                     <span class="w-full h-0.5 bg-black"></span>
+                     <span class="w-full h-0.5 bg-black"></span>
+                  </div>
+               </div>
                 
             </div>
-            <div class="w-full lg:w-9/12 2xl:w-10/12 float-end mt-20 px-5 overflow-y-auto" style="scrollbar-width:none;">
+            <div class="w-full lg:w-9/12 2xl:w-10/12 float-end mt-20 lg:px-5 overflow-y-auto" style="scrollbar-width:none;">
                 
              @yield('content')
             </div>

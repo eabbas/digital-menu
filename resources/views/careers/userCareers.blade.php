@@ -5,9 +5,9 @@
     
     @section('content')
       
-    <div class="w-full flex flex-col p-4">
+    <div class="w-full flex flex-col px-5 py-4">
         <div class="bg-white rounded-lg">
-            <div class="px-6 py-4">
+            <div class="py-4">
                 <h2 class="text-lg font-bold text-gray-800">اطلاعات کسب و کار</h2>
             </div>
             <div class="flex flex-col gap-5">
