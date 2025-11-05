@@ -8,6 +8,8 @@ use App\Http\controllers\MenuController;
 use App\Http\controllers\SettingController;
 use App\Http\Controllers\QRCodeController;
 use App\Http\Middleware\UserMiddleware;
+use App\Http\Middleware\checkAuth;
+use App\Http\Middleware\checkLogin;
 
 
 Route::get('/', function () {
@@ -26,14 +28,14 @@ Route::group([
     'as'=>'user.',
     'middleware'=>[UserMiddleware::class]
 ], function(){
-    Route::get('/login', 'login')->name('login')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/login', 'login')->name('login')->middleware([checkLogin::class]);
     Route::get("/signup", "create")->name('signup')->withoutMiddleware([UserMiddleware::class]);
     Route::post("/store", "store")->name('store')->withoutMiddleware([UserMiddleware::class]);;
     Route::post("/check", "check")->name('check')->withoutMiddleware([UserMiddleware::class]);;
     Route::get("/logout", "logout")->name('logout');
     Route::get("/","index")->name('list');
     Route::get("/panel/{user}", "panel")->name('panel');
-    Route::get('/profile/{user}', 'profile')->name('profile');
+    Route::get('/profile/{user}', 'profile')->name('profile')->middleware([checkAuth::class]);
     Route::get("/edit/{user}", "edit")->name('edit');
     Route::post("/update", "update")->name('user');
     Route::get("/delete/{user}", "delete")->name('delete');

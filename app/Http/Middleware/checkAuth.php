@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class UserMiddleware
+
+class checkAuth
 {
     /**
      * Handle an incoming request.
@@ -16,6 +17,9 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+         if (!Auth::check()) {
+             return to_route('user.login');
+        }
         return $next($request);
     }
 }

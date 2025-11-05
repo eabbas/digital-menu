@@ -32,25 +32,19 @@ class UserController extends Controller
 
     public function check(Request $request)
     {
-        $user = User::where('phoneNumber', $request->phoneNumber)->first();
-
-        if (!$user) {
-            return 'user not found';
+        if (Auth::check()) {
+            return to_route('user.profile', Auth::user());
         }
+        $user = User::where('phoneNumber', $request->phoneNumber)->first();
         $checkHash = Hash::check($request->password, $user->password);
         if ($checkHash) {
-            if (!Auth::check()) {
-                Auth::login($user);
-                return to_route('user.profile', ['user' => $user]);
-            }
-            if (Auth::check()) {
-                return to_route('user.profile', ['user' => $user]);
-            }
-        } else {
-            echo 'رمز ورود صحیح نمیباشد';
+            Auth::login($user);
+            return to_route('user.profile', ['user' => $user]);
         }
+            if (!$user) {
+               return to_route('user.signup');
+            }
     }
-
     public function logout()
     {
         Auth::logout();
