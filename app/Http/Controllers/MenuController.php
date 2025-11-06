@@ -59,6 +59,19 @@ class MenuController extends Controller
     }
 
     public function update(Request $request){
+        $menu_data = $request->menu_data;
+        foreach($menu_data as $key => $data){
+            $name = $data['menu_image']->getClientOriginalName();
+            $fullName = time()."_".$name;
+            $path = $data['menu_image']->storeAs('images', $fullName, 'public');
+            $menu_data[$key]['menu_image'] = $path;
+            foreach($data['values'] as $gKey => $value){
+                $itemName = $value['gallery']->getClientOriginalName();
+                $itemFullName = time()."_".$itemName;
+                $itemPath = $value['gallery']->storeAs('images', $itemFullName, 'public');
+                $menu_data[$key]['values'][$gKey]['gallery'] = $itemPath;
+            }
+        }
         $menu = menu::find($request->menu_id);
         $menu->menu_data = json_encode($request->menu_data);
         $menu->career_id = $request->career_id;

@@ -27,8 +27,6 @@ function add() {
                 <div>
                     <button type="button" class="p-2 rounded-md bg-rose-500 hover:bg-rose-600 text-white cursor-pointer" onclick="remove(this)">حذف</button> 
                 </div>
-                    
-            
             </div>
             <div class="w-full flex flex-col gap-2" data-value="1">
                 <div class="w-full flex flex-row items-end gap-3">
@@ -56,7 +54,6 @@ function add() {
                                 class="outline-none pr-5 py-3 cursor-pointer"
                                 name="menu_data[${featureCount}][values][${valueCount}][gallery]">
                         </div>
-
                     </div>
                     <div class="flex items-end">
                         <button type="button"

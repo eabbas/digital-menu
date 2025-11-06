@@ -85,6 +85,26 @@ Route::post('product/update' , [ProductController::class , 'update']);
 Route::get('product/delete/{product}' , [ProductController::class , 'delete']);
 
 
+// qr-code
+Route::group([
+    'prefix'=>'qrcode',
+    'controller'=>QRCodeController::class,
+    'as'=>'qr.'
+], function(){
+    Route::get('/qr-code', 'index')->name('list');
+    Route::get('/delete/{qr_code}', 'delete')->name('delete');
+    Route::get('/{career}/{slug}', 'load')->name('load');
+});
+
+// client
+Route::group([
+    'prefix'=>'qrcodes',
+    'controller'=>ClientController::class,
+    'as'=>'client.'
+], function(){
+    Route::get('/{career}/{slug}', 'show_menu')->name('menu');
+});
+
 
 Route::group([
     'prefix' => 'settings',
@@ -160,26 +180,6 @@ Route::group([
         Route::post('/update', 'upsertSingleAds')->name('upsertSingleAds');
         Route::get('/show', 'showSingleAds')->name('showSingleAds');
     });
-});
-
-// qr-code
-Route::group([
-    'prefix'=>'qrcode',
-    'controller'=>QRCodeController::class,
-    'as'=>'qr.'
-], function(){
-    Route::get('/qr-code', 'index')->name('list');
-    Route::get('/delete/{qr_code}', 'delete')->name('delete');
-    Route::get('/{career}/{slug}', 'load')->name('load');
-});
-
-// client
-Route::group([
-    'prefix'=>'qrcodes',
-    'controller'=>ClientController::class,
-    'as'=>'client.'
-], function(){
-    Route::get('/{career}/{slug}', 'show_menu')->name('menu');
 });
 
 Route::group([
