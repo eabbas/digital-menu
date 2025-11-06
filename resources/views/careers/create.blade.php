@@ -6,7 +6,7 @@
         @csrf
         <!-- <input type="hidden" name="id" value=""> -->
         <div class="min-h-screen flex items-center justify-center p-4">
-            <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
+            <div class="bg-white rounded-2xl shadow-lg p-8 w-full lg:w-9/12">
                 <!-- هدر -->
                 <div class="text-center mb-8">
                     <h1 class="text-2xl font-bold text-gray-800">اطلاعات کسب وکار</h1>
@@ -14,87 +14,90 @@
                 </div>
                 <!--  لوگو   -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2"> لوگو کسب وکار</label>
-                    <input type="file" name='logo'
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder=" لوگو کسب وکار خود را وارد کنید">
+                        <fieldset class="mt-4 text-sm md:text-base border-1 border-gray-400 rounded-[20px] py-1 pr-3" for="province">
+                            <legend class="p-1 w-30 bg-gray-200 rounded-full flex flex-row justify-center text-sm">لوگو کسب وکار</legend>
+                            <input type="file" name='logo' placeholder=" لوگو کسب وکار خود را وارد کنید" class="w-full px-2 py-1 lg:px-5 lg:px-2 outline-none text-gray-500">
+                        </fieldset>
                 </div>
                 <!-- نام کسب وکار -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">نام کسب وکار</label>
-                    <input type="text" name='title'
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="نام کسب وکار خود را وارد کنید">
+                         <fieldset class="mt-4 text-sm md:text-base border-1 border-gray-400 rounded-[20px] py-1 pr-3" for="province">
+                            <legend class="p-1 w-30 bg-gray-200 rounded-full flex flex-row justify-center text-sm">نام کسب وکار</legend>
+                            <input type="text" name='title' placeholder="نام کسب وکار خود را وارد کنید" class="w-full px-2 py-1 lg:px-5 lg:px-2 outline-none text-gray-500">
+                        </fieldset>
                 </div>
                 <!--استان   -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">استان</label>
-                    <input type="text" name='province'
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="   استان خود را وارد کنید">
+                          <fieldset class="mt-4 text-sm md:text-base border-1 border-gray-400 rounded-[20px] py-1 pr-3" for="province">
+                            <legend class="p-1 w-30 bg-gray-200 rounded-full flex flex-row justify-center text-sm">استان</legend>
+                            <input type="text" name='province' placeholder="استان خود را وارد کنید" class="w-full px-2 py-1 lg:px-5 lg:px-2 outline-none text-gray-500">
+                        </fieldset>
                 </div>
                 <!--    شهر -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2"> شهر</label>
-                    <input type="text" name='city'
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder=" شهرخود را وارد کنید">
+                         <fieldset class="mt-4 text-sm md:text-base border-1 border-gray-400 rounded-[20px] py-1 pr-3" for="province">
+                            <legend class="p-1 w-30 bg-gray-200 rounded-full flex flex-row justify-center text-sm">شهر</legend>
+                            <input type="text" name='city' placeholder=" شهرخود را وارد کنید" class="w-full px-2 py-1 lg:px-5 lg:px-2 outline-none text-gray-500">
+                        </fieldset>
                 </div>
                 <!--  ادرس کسب وکار -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2"> ادرس کسب وکار</label>
-                    <input type="text" name='address'
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder=" ادرس کسب وکار خود را وارد کنید">
+                          <fieldset class="mt-4 text-sm md:text-base border-1 border-gray-400 rounded-[20px] py-1 pr-3" for="province">
+                            <legend class="p-1 w-30 bg-gray-200 rounded-full flex flex-row justify-center text-sm">ادرس کسب وکار</legend>
+                            <input type="text" name='address' placeholder=" ادرس کسب وکار خود را وارد کنید" class="w-full px-2 py-1 lg:px-5 lg:px-2 outline-none text-gray-500">
+                        </fieldset>
                 </div>
 
                 <!--  qrcode -->
 
                 <!-- ایمیل -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">ایمیل</label>
-                    <input type="email" name='email'
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="email@example.com">
+                         <fieldset class="mt-4 text-sm md:text-base border-1 border-gray-400 rounded-[20px] py-1 pr-3" for="province">
+                            <legend class="p-1 w-30 bg-gray-200 rounded-full flex flex-row justify-center text-sm">ایمیل</legend>
+                            <input type="email" name='email'placeholder="email@example.com" class="w-full px-2 py-1 lg:px-5 lg:px-2 outline-none text-gray-500">
+                        </fieldset>
                 </div>
                 <!-- توضیحات-->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">توضیحات</label>
-                    <input type="text" name='description'
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="توضیحات کسب وکار">
+                        <fieldset class="mt-4 text-sm md:text-base border-1 border-gray-400 rounded-[20px] py-1 pr-3" for="province">
+                            <legend class="p-1 w-30 bg-gray-200 rounded-full flex flex-row justify-center text-sm">توضیحات</legend>
+                            <input type="text" name='description' placeholder="توضیحات کسب وکار" class="w-full px-2 py-1 lg:px-5 lg:px-2 outline-none text-gray-500">
+                        </fieldset>
                 </div>
                 <!-- user_name-->
                 <div class="">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">شبکه های اجتماعی</label>
-                    <ul class="w-full px-4 py-3 border border-gray-300 rounded-lg mt-2">
+                        <fieldset class="mt-4 text-sm md:text-base border-1 border-gray-400 rounded-[20px] py-1 pr-3" for="province">
+                             <legend class="p-1 w-30 bg-gray-200 rounded-full flex flex-row justify-center text-sm">شبکه های اجتماعی</legend>
+                    <ul class="w-full px-4 py-3  mt-2">
                         <li>
-                            <label class="block text-sm font-medium text-gray-700 mb-2"> اینستاگرام:</label>
-                            <input type="text" name='social_medias[instagram]'
-                                class="w-full px-4 py-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-2"
-                                placeholder="آدرس شبکه های اجتماعی">
+                                 <fieldset class="mt-4 text-sm md:text-base border-1 border-gray-400 rounded-[10px] py-1 pr-3" for="province">
+                            <legend class="w-20 rounded-full flex flex-row justify-center text-sm">اینستاگرام:</legend>
+                            <input type="text" name='social_medias[instagram]' placeholder="آدرس شبکه های اجتماعی" class="w-full px-2 py-1 lg:px-5 lg:px-2 outline-none text-gray-500">
+                        </fieldset>
                         </li>
                         <li>
-                            <label class="block text-sm font-medium text-gray-700 mb-2"> تلگرام:</label>
-
-                            <input type="text" name='social_medias[telegram]'
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-2"
-                                placeholder="آدرس شبکه های اجتماعی">
+                           
+                                 <fieldset class="mt-4 text-sm md:text-base border-1 border-gray-400 rounded-[10px] py-1 pr-3" for="province">
+                            <legend class="w-15 rounded-full flex flex-row justify-center text-sm">تلگرام:</legend>
+                            <input type="text" name='social_medias[telegram]' placeholder="آدرس شبکه های اجتماعی" class="w-full px-2 py-1 lg:px-5 lg:px-2 outline-none text-gray-500">
+                        </fieldset>
                         </li>
                         <li>
-                            <label class="block text-sm font-medium text-gray-700 mb-2"> واتساپ:</label>
-                            <input type="text" name='social_medias[whatsapp]'
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-2"
-                                placeholder="آدرس شبکه های اجتماعی">
+                                    <fieldset class="mt-4 text-sm md:text-base border-1 border-gray-400 rounded-[10px] py-1 pr-3" for="province">
+                            <legend class="w-17 rounded-full flex flex-row justify-center text-sm">واتساپ:</legend>
+                            <input type="text" name='social_medias[whatsapp]' placeholder="آدرس شبکه های اجتماعی" class="w-full px-2 py-1 lg:px-5 lg:px-2 outline-none text-gray-500">
+                        </fieldset>
                         </li>
                     </ul>
 
                 </div>
                 <button type="submit"
-                    class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 font-medium">
+                    class="mt-4 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 font-medium">
                     ارسال اطلاعات
                 </button>
             </div>
         </div>
+         </fieldset>
+
     </form>
     @endsection
