@@ -2,7 +2,7 @@
     @extends('user.panel')
     @section('title', 'ثبت نام کسب و کار')
     @section('content')
-    <form action="{{ route('user.career.store') }}" method="POST" enctype='multipart/form-data'>
+    <form action="{{ route('career.store') }}" method="POST" enctype='multipart/form-data'>
         @csrf
         <!-- <input type="hidden" name="id" value=""> -->
         <div class="min-h-screen flex items-center justify-center p-4">
@@ -65,16 +65,6 @@
                         </fieldset>
                 </div>
                 <!-- user_name-->
-                <!-- <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">نام کاربری</label>
-                    <input 
-                        type="text"
-                        name='user_name' 
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="user_name "
-                    >
-                </div> -->
-
                 <div class="">
                         <fieldset class="mt-4 text-sm md:text-base border-1 border-gray-400 rounded-[20px] py-1 pr-3" for="province">
                              <legend class="p-1 w-30 bg-gray-200 rounded-full flex flex-row justify-center text-sm">شبکه های اجتماعی</legend>

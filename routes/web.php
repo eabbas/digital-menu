@@ -8,21 +8,21 @@ use App\Http\controllers\MenuController;
 use App\Http\controllers\SettingController;
 use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\ClientController;
+use App\Http\Middleware\LoginMiddleware;
 use App\Http\Middleware\UserMiddleware;
 
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
-
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware([LoginMiddleware::class]);
+Route::get('/signup', [UserController::class, "create"])->name('signup')->middleware([LoginMiddleware::class]);
 Route::group([
     'prefix'=>'users',
     'controller'=>UserController::class,
     'as'=>'user.',
     'middleware'=>[UserMiddleware::class]
 ], function(){
-    Route::get('/login', 'login')->name('login')->withoutMiddleware([UserMiddleware::class]);
-    Route::get("/signup", "create")->name('signup')->withoutMiddleware([UserMiddleware::class]);
     Route::post("/store", "store")->name('store')->withoutMiddleware([UserMiddleware::class]);;
     Route::post("/check", "check")->name('check')->withoutMiddleware([UserMiddleware::class]);;
     Route::get("/logout", "logout")->name('logout');
@@ -32,32 +32,36 @@ Route::group([
     Route::get("/edit/{user}", "edit")->name('edit');
     Route::post("/update", "update")->name('update');
     Route::get("/delete/{user}", "delete")->name('delete');
+    Route::get('/compelete', 'compelete_form')->name('compelete_form');
+    Route::post('/save', 'save')->name('save');
 
-    Route::group([
-        'prefix'=>'careers',
-        'controller'=>CareerController::class,
-        'as'=>'career.'
-    ], function(){
-        Route::get('/create', 'create')->name('create');
-        Route::post('/store', 'store')->name('store');
-        Route::get('/list', 'user_careers')->name('careers');
-        Route::get('/edit/{career}','edit')->name('edit');
-        Route::post('/update','update')->name('update');
-        Route::get('/delete/{career}','delete')->name('delete');
-        Route::group([
-            'prefix'=>'menus',
-            'controller'=>MenuController::class,
-            'as'=>'menu.'
-        ], function(){
-            Route::get('/{career}', 'index')->name('list');
-            Route::get('/create/{career}', 'create')->name('create');
-            Route::post('/store', 'store')->name('store');
-            Route::get('/edit/{menu}', 'edit')->name('edit');
-            Route::post('/update', 'update')->name('update');
-            Route::get('/delete/{menu}', 'delete')->name('delete');
-            Route::get('/qr_codes/{menu}', 'qr_codes')->name('qr_codes');
-        });
-    });
+});
+Route::group([
+    'prefix'=>'careers',
+    'controller'=>CareerController::class,
+    'as'=>'career.',
+    'middleware'=>[UserMiddleware::class]
+], function(){
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/list', 'user_careers')->name('careers');
+    Route::get('/edit/{career}','edit')->name('edit');
+    Route::post('/update','update')->name('update');
+    Route::get('/delete/{career}','delete')->name('delete');
+});
+Route::group([
+    'prefix'=>'menus',
+    'controller'=>MenuController::class,
+    'as'=>'menu.',
+    'middleware'=>[UserMiddleware::class]
+], function(){
+    Route::get('/{career}', 'index')->name('list');
+    Route::get('/create/{career}', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/edit/{menu}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{menu}', 'delete')->name('delete');
+    Route::get('/qr_codes/{menu}', 'qr_codes')->name('qr_codes');
 });
 
 //category.......................................................................
@@ -178,7 +182,6 @@ Route::group([
     Route::get('/{career}/{slug}', 'show_menu')->name('menu');
 });
 
-
 Route::group([
     'prefix' => 'settings',
     'controller' => SettingController::class,
@@ -192,4 +195,8 @@ Route::group([
         Route::post('/update', 'upsertCategoryAds')->name('upsertCategoryAds');
         Route::get('/show', 'showCategoryAds')->name('showCategoryAds');
     });
+});
+
+Route::fallback(function(){
+    return to_route('login');
 });

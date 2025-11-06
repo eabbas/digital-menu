@@ -88,7 +88,7 @@
                         </div>
                         <button class="text-center w-full bg-[#056EE9] p-3 rounded-[10px] text-white cursor-pointer">ورود</button>
                         <div class="w-full text-center">
-                            <span class="text-[#4B5675] mt-5"> هنوز عضو نشدی؟<a href="{{ route('user.signup') }}" class="text-[#1B84FF] mr-2">ثبت
+                            <span class="text-[#4B5675] mt-5"> هنوز عضو نشدی؟<a href="{{ route('signup') }}" class="text-[#1B84FF] mr-2">ثبت
                                     نام!</a></span>
                         </div>
                     </form>
