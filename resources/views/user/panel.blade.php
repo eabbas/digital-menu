@@ -87,12 +87,12 @@
                         <ul class="gap-2.5 mt-2.5 mb-2.5 pr-3">
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('user.career.careers') }}" class=" text-white py-1">کسب و کار های
+                                <a href="{{ route('career.careers') }}" class=" text-white py-1">کسب و کار های
                                     من</a>
                             </li>
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('user.career.create') }}" class=" text-white py-1">ایجاد کسب و کار
+                                <a href="{{ route('career.create') }}" class=" text-white py-1">ایجاد کسب و کار
                                     جدید</a>
                             </li>
                         </ul>
@@ -183,38 +183,32 @@
                     class="w-full float-end lg:w-[calc(100%-265px)] py-3 hidden lg:flex flex-row-reverse px-5 backdrop-blur-sm shadowHeader relative z-20">
                     <div class="w-6/12 flex flex-row-reverse items-center">
                         <div class="relative hover_profile">
-                            <a href="{{ route('user.profile', [$user]) }}">
-                                <img src="{{ asset('assets/img/user.png') }}" alt="user__picture"
+                            <div class="cursor-pointer">
+                                @if(!$user->main_image)
+                                <img src="{{ asset('assets/img/user.png') }}" alt="user__avatar"
                                     class="size-10 rounded-xl">
-                            </a>
+                                @else
+                                <img src="{{ asset('storage/'.$user->main_image) }}" alt="user__picture"
+                                    class="size-10 rounded-xl">
+                                @endif
+                            </div>
                             <div class="absolute left-0 pt-5 invisible opacity-0 transition-all duration-300">
                                 <div class="w-[250px] rounded-xl  py-4 bg-white shadow__all__prof">
                                     <div class="text-center px-2">
                                         <span class="font-bold">
-                                            {{ $user->name }}
+                                            {{ $user->name }} {{ $user?->family }}
                                         </span>
                                     </div>
                                     <div class="w-full h-px bg-gray-300 mt-4 "></div>
                                     <ul class="rtl text-right ">
-                                        <div
-                                            class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto p-2  rounded-lg">
-                                            <li class=" ">
-                                                <a href="{{ route('user.profile', [$user]) }}">پروفایل من</a>
-                                            </li>
-                                        </div>
-                                        <div
-                                            class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto p-2  rounded-lg flex flex-row gap-3 items-center">
-                                            <li class=" ">
-                                                <a href="">پروژه های من</a>
-                                            </li>
-                                            <span
-                                                class="px-1.5 py-[px] rounded-sm shadow__prosheh text-[#F8285A]">3</span>
-                                        </div>
-                                        <div
-                                            class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto p-2  rounded-lg flex flex-row justify-between items-center">
-                                            <li class=" ">
-                                                <a href="">اشتراک من</a>
-                                            </li>
+                                        <li class="hover:text-[#1B84FF] hover:bg-[#F1F1F4] mt-1 w-11/12 ml-auto mr-auto rounded-lg">
+                                            <a href="{{ route('user.profile', [$user]) }}" class="block w-full p-2">پروفایل من</a>
+                                        </li>
+                                        <li class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto rounded-lg">
+                                            <a href="{{ route('user.compelete_form') }}" class="block w-full p-2">تکمیل پروفایل</a>
+                                        </li>
+                                        <li class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto rounded-lg flex flex-row justify-between items-center">
+                                            <a href="" class="block w-full p-2">اشتراک من</a>
                                             <div class="">
                                                 <svg class="w-6 h-4 " xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
@@ -223,20 +217,17 @@
                                                         d="M15.75 19.5 8.25 12l7.5-7.5" />
                                                 </svg>
                                             </div>
-                                        </div>
-                                        <div
-                                            class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto p-2  rounded-lg">
-                                            <li class=" ">
-                                                <a href="">بیانه های من</a>
-                                            </li>
-                                        </div>
+                                        </li>
+                                        <li class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto p-2  rounded-lg">
+                                            <a href="">بیانه های من</a>
+                                        </li>
                                     </ul>
     
                                     <div class="w-full h-px bg-gray-300 my-2 "></div>
                                     <ul class="rtl text-right ">
                                         <div
                                             class="hover:text-[#1B84FF] hover:bg-[#F1F1F4] flex flex-row justify-between items-center  mt-1 w-11/12 ml-auto mr-auto p-2  rounded-lg">
-                                            <li class=" ">
+                                            <li>
                                                 <a href="">زبان</a>
                                             </li>
                                             <div class="flex flex-row gap-3 items-center">
@@ -302,82 +293,11 @@
                                     </ul>
                                 </div>
                             </div>
-
-
-
-
-
-                        </div>
-
-                        <div class="flex gap-7 ml-7">
-                            <div class="flex">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5">
-                                    <defs>
-                                        <style>
-                                            .fa-secondary {
-                                                opacity: .4
-                                            }
-                                        </style>
-                                    </defs>
-                                    <path class="fa-secondary"
-                                        d="M208 64a144 144 0 1 1 0 288 144 144 0 1 1 0-288zm0 352A208 208 0 1 0 208 0a208 208 0 1 0 0 416z" />
-                                    <path class="fa-primary"
-                                        d="M330.7 376L457.4 502.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L376 330.7C363.3 348 348 363.3 330.7 376z" />
-                                </svg>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5">
-                                    <defs>
-                                        <style>
-                                            .fa-secondary {
-                                                opacity: .4
-                                            }
-                                        </style>
-                                    </defs>
-                                    <path class="fa-secondary"
-                                        d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z" />
-                                    <path class="fa-primary" d="" />
-                                </svg>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5">
-                                    <defs>
-                                        <style>
-                                            .fa-secondary {
-                                                opacity: .4
-                                            }
-                                        </style>
-                                    </defs>
-                                    <path class="fa-secondary"
-                                        d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zM120 208H264c13.3 0 24 10.7 24 24s-10.7 24-24 24H120c-13.3 0-24-10.7-24-24s10.7-24 24-24zm224 0h48c13.3 0 24 10.7 24 24s-10.7 24-24 24H344c-13.3 0-24-10.7-24-24s10.7-24 24-24zM120 288h48c13.3 0 24 10.7 24 24s-10.7 24-24 24H120c-13.3 0-24-10.7-24-24s10.7-24 24-24zm128 0H392c13.3 0 24 10.7 24 24s-10.7 24-24 24H248c-13.3 0-24-10.7-24-24s10.7-24 24-24z" />
-                                    <path class="fa-primary"
-                                        d="M96 232c0-13.3 10.7-24 24-24H264c13.3 0 24 10.7 24 24s-10.7 24-24 24H120c-13.3 0-24-10.7-24-24zm224 0c0-13.3 10.7-24 24-24h48c13.3 0 24 10.7 24 24s-10.7 24-24 24H344c-13.3 0-24-10.7-24-24zM96 312c0-13.3 10.7-24 24-24h48c13.3 0 24 10.7 24 24s-10.7 24-24 24H120c-13.3 0-24-10.7-24-24zm128 0c0-13.3 10.7-24 24-24H392c13.3 0 24 10.7 24 24s-10.7 24-24 24H248c-13.3 0-24-10.7-24-24z" />
-                                </svg>
-                            </div>
-                            <div class="relative">
-                                <div
-                                    class="bg-green-500 size-1/3 absolute -top-2.5 rounded-full right-1.5 active-circle">
-                                </div>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5">
-                                    <defs>
-                                        <style>
-                                            .fa-secondary {
-                                                opacity: .4
-                                            }
-                                        </style>
-                                    </defs>
-                                    <path class="fa-secondary"
-                                        d="M188.3 408.7l44.5 89c4.4 8.8 13.3 14.3 23.2 14.3s18.8-5.5 23.2-14.3l44.5-89C432.2 384.5 512 303.8 512 208C512 93.1 397.4 0 256 0S0 93.1 0 208c0 95.8 79.8 176.5 188.3 200.7z" />
-                                    <path class="fa-primary" d="" />
-                                </svg>
-                            </div>
                         </div>
                     </div>
                     <div class="w-6/12 flex justify-start">
-                        <ul class="flex gap-4 items-center text-black font-semibold ">
-                            <li class="color__a text-[#4B5675]">
-                                <a href="{{ route('user.logout') }}" class="py-2">خروج از حساب کاربری</a>
-                            </li>
+                        <!-- <ul class="flex gap-4 items-center text-black font-semibold ">
+                           
                             <li class="color__a text-[#4B5675]">
                                 <a href="#" class="py-2"> صفحات</a>
                             </li>
@@ -390,7 +310,10 @@
                             <li class="color__a text-[#4B5675]">
                                 <a href="#" class="py-2"> کمک</a>
                             </li>
-                        </ul>
+                        </ul> -->
+                        <h3 class="text-2xl font-bold text-[#4B5675]">
+                            داشبورد
+                        </h3>
                     </div>
                 </div>
                <div class="flex lg:hidden flex-row justify-between items-center py-2 px-5 backdrop-blur-sm shadowHeader relative z-20">
@@ -403,8 +326,7 @@
                </div>
                 
             </div>
-            <div class="w-full lg:w-9/12 2xl:w-10/12 float-end mt-20 lg:px-5 overflow-y-auto" style="scrollbar-width:none;">
-                
+            <div class="w-full lg:w-[calc(100%-265px)] float-end mt-20 lg:px-5 overflow-y-auto px-5" style="scrollbar-width:none;">
              @yield('content')
             </div>
         </div>

@@ -16,38 +16,38 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $phone = User::where('phoneNumber', $request->phoneNumber)->first();
-        if (!$phone) {
-            $password = Hash::make($request->password);
-            User::create([
-                'name' => $request->name,
-                'phoneNumber' => $request->phoneNumber,
-                'password' => $password,
-                'type' => 'general',
-            ]);
-            return to_route('user.login');
-        } else {
+        if ($phone) {
             return redirect()->back()->with('message', 'این شماره تلفن قبلا استفاده شده');
         }
+        $password = Hash::make($request->password);
+        User::create([
+            'name'=>$request->name,
+            'family'=>$request->family,
+            'phoneNumber'=>$request->phoneNumber,
+            'password'=>$password,
+            'type'=>'general',
+        ]);
+        return to_route('login');
     }
 
     public function check(Request $request)
     {
         $user = User::where('phoneNumber', $request->phoneNumber)->first();
-        $checkHash = Hash::check($request->password, $user->password);
-
-        if (!$user) {
-            return to_route('user.signup');
+        if ($user) {
+            $checkHash = Hash::check($request->password, $user->password);
+            if ($checkHash) {
+                Auth::login($user);
+                return to_route('user.profile', [$user]);
+            }
+            return to_route('login');
         }
-        if ($checkHash) {
-            Auth::login($user);
-            return to_route('user.profile', [$user]);
-        }
+        return to_route('signup');
     }
 
     public function logout()
     {
         Auth::logout();
-        return to_route('user.login');
+        return to_route('login');
     }
 
     public function index()
@@ -60,7 +60,7 @@ class UserController extends Controller
     {
         $user=Auth::user();
         if (!Auth::check()) {
-            return to_route('user.login');
+            return to_route('login');
         }
         return view('user.panel', ['user' => $user]);
     }
@@ -100,5 +100,20 @@ class UserController extends Controller
     public function login()
     {
         return view('user.login');
+    }
+
+    public function compelete_form(){
+        return view('user.compelete_form', ['user'=>Auth::user()]);
+    }
+
+    public function save(Request $request){
+        $user = Auth::user();
+        $name = $request->main_image->getClientOriginalName();
+        $fullName = time()."_".$name;
+        $path = $request->file('main_image')->storeAs('images', $fullName, 'public');
+        $user->main_image = $path;
+        $user->email = $request->email;
+        $user->save();
+        return to_route('user.profile', [Auth::user()]);
     }
 }

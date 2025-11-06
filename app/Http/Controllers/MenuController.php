@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Career;
 use App\Models\menu;
 use App\Models\qr_code;
@@ -21,24 +20,36 @@ class MenuController extends Controller
 
     public function store(Request $request)
     {
+        $menu_data = $request->menu_data;
+        foreach($menu_data as $key => $data){
+            $name = $data['menu_image']->getClientOriginalName();
+            $fullName = time()."_".$name;
+            $path = $data['menu_image']->storeAs('images', $fullName, 'public');
+            $menu_data[$key]['menu_image'] = $path;
+            foreach($data['values'] as $gKey => $value){
+                $itemName = $value['gallery']->getClientOriginalName();
+                $itemFullName = time()."_".$itemName;
+                $itemPath = $value['gallery']->storeAs('images', $itemFullName, 'public');
+                $menu_data[$key]['values'][$gKey]['gallery'] = $itemPath;
+            }
+        }
         $career_id = $request->career_id;
-        $page_data = json_encode($request->page_data);
-        $menu_id = menu::insertGetId(['page_data' => $page_data, 'qr_num'=>$request->qr_num, 'career_id' => $career_id]);
-        // $user_id = Auth::id();
-        for ($i = 1; $i <= $request->qr_num; $i++) {
+        $menu_data = json_encode($menu_data);
+        $menu_id = menu::insertGetId(['menu_data' => $menu_data, 'qr_num'=>$request->qr_num, 'career_id' => $career_id]);
+        for ($i=0; $i<$request->qr_num; $i++) {
             $random = Str::random(10);
             $link = "/famenu.ir/qrcode/$career_id/" . $random;
             $qr_svg = QrCode::size(100)->generate($link);
             $fileName = 'qrcodes/' . $career_id . '_' . $random . '.svg';
             Storage::disk('public')->put($fileName, $qr_svg);
-            qr_code::create(['qr_path' => $fileName, 'career_id' => $career_id, 'is_main' => 0, 'menu_id'=>$menu_id, 'slug'=>$career_id.'/'.$random]);
+            qr_code::create(['qr_path' => $fileName, 'career_id' => $career_id, 'menu_id'=>$menu_id, 'slug'=>'qrcode/'.$career_id.'/'.$random]);
         }
-        return to_route('user.career.careers');
+        return to_route('career.careers');
     }
 
     public function index(career $career){
         $user = Auth::user();
-        $career->menu->page_data;
+        $career->menu->menu_data;
         return view('menu.menu', ['career'=>$career, 'user'=>$user]);
     }
 
@@ -49,7 +60,7 @@ class MenuController extends Controller
 
     public function update(Request $request){
         $menu = menu::find($request->menu_id);
-        $menu->page_data = json_encode($request->page_data);
+        $menu->menu_data = json_encode($request->menu_data);
         $menu->career_id = $request->career_id;
         $qr_count = 0;
         $career_id = $menu->career_id;
@@ -57,11 +68,11 @@ class MenuController extends Controller
             $qr_count = $request->qr_num - $menu->qr_num;
             while ($qr_count) {
                 $random = Str::random(10);
-                $link = "/famenu.ir/QRCode/$career_id/" . $random;
+                $link = "/famenu.ir/qrcodes/$career_id/" . $random;
                 $qr_svg = QrCode::size(100)->generate($link);
                 $fileName = 'qrcodes/' . $career_id . '_' . $random . '.svg';
                 Storage::disk('public')->put($fileName, $qr_svg);
-                qr_code::create(['qr_path' => $fileName, 'career_id' => $career_id, 'is_main' => 0, 'menu_id'=>$request->menu_id, 'slug'=> $career_id.'/'.$random]);
+                qr_code::create(['qr_path' => $fileName, 'career_id' => $career_id, 'menu_id'=>$request->menu_id, 'slug'=> 'qrcode/'.$career_id.'/'.$random]);
                 $qr_count--;
             } 
         }

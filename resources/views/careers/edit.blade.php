@@ -6,7 +6,7 @@
             <div class="my-10">
                 <h1 class="lg:text-3xl md:text-2xl text-md font-semibold text-center text-gray-700"> ویرایش اطلاعات کسب وکار</h1>
             </div>
-            <form action=" {{ route('user.career.update')}} " method="post" enctype='multipart/form-data' class="w-11/12 lg:w-3/4 mx-auto p-5 rounded-lg border">
+            <form action=" {{ route('career.update')}} " method="post" enctype='multipart/form-data' class="w-11/12 lg:w-3/4 mx-auto p-5 rounded-lg border">
                 @csrf
                 <?php
                 // dd($career->social_media->instagram);

@@ -1,8 +1,8 @@
     @extends('user.panel')
     @section('title', 'پروفایل کاربری')
     @section('content')
-   <div class="w-full p-5 px-7">
-            <div class="py-5 w-full">
+   <div class="w-full">
+            <div class="pb-5 w-full">
                 <h1 class="text-xl text-center lg:text-start">اکانت من</h1>
                 <div class="flex flex-row justify-center lg:justify-start items-center gap-2 text-[#99A1B7] text-[11px] lg:text-sm">
                     <a href="{{ route('home') }}" class="p-2">خانه</a>
@@ -14,10 +14,14 @@
         <div class="flex flex-col border border-[#f1f1f4] lg:p-5 rounded-[7px]">
             <div class="block lg:flex flex-row justify-between gap-8">
                 <div class="flex flex-col lg:flex-row gap-7">
-                    <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0" src="{{ asset('assets/img/user.png') }}" alt="">
+                    @if(!$user->main_image)
+                    <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0" src="{{ asset('assets/img/user.png') }}" alt="user__avatar">
+                    @else
+                    <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0" src="{{ asset('storage/'.$user->main_image) }}" alt="user__picture">
+                    @endif
                     <div class="flex flex-col gap-2">
                         <div class="div1 text-center lg:text-start">
-                            <strong>{{ $user->name }}</strong>
+                            <strong>{{ $user->name }} {{ $user?->family }}</strong>
                         </div>
                         <div class="div2 hidden">
                             <ul class="flex flex-col lg:flex-row gap-3 text-[#99A1B7]">
@@ -52,7 +56,7 @@
         
     </div>
     <!-- <hr> -->
-    <div class="lg:px-5 pt-3 mt-4 lg:mt-8">
+    <div class="pt-3 mt-4 lg:mt-8">
         <div class="my-6">
             <ul class="flex flex-row gap-5 overflow-x-auto" style="scrollbar-width: none;">
                 <li>
@@ -91,7 +95,7 @@
             <div class="flex gap-70 ">
                 <div class="flex w-full flex-col">
                     <libal class="p-2.5 text-gray-400">نام کامل</libal>
-                    <span class="p-2.5"><strong>{{ $user->name }}</strong></span>
+                    <span class="p-2.5"><strong>{{ $user->name }} {{ $user?->family }}</strong></span>
                     <libal class="p-2.5 text-gray-400">کمپانی</libal>
                     <span class="p-2.5">فائوس</span>
                     <libal class="p-2.5 text-gray-400">تماس با ما تلفن </libal>

@@ -1,94 +1,67 @@
+@extends('user.panel')
 
-   @extends('user.panel')
+@section('title', 'کسب و کارهای من')
 
-   @section('title', 'کسب و کارهای من')
-    
-    @section('content')
-      
-    <div class="w-full flex flex-col px-5 py-4">
-        <div class="bg-white rounded-lg">
-            <div class="py-4">
-                <h2 class="text-lg font-bold text-gray-800">اطلاعات کسب و کار</h2>
-            </div>
-            <div class="flex flex-col gap-5">
-                <div class="overflow-x-auto shadow-md" style="scrollbar-width: none;">
-                    <table class="min-w-full bg-gray-200">
-                        <thead class="bg-gray-100">
-                           
-                            <tr>
-                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-600 ">عنوان</th>
-                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">استان</th>
-                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">شهر</th>
-                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">ادرس</th>
-                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">توضیحات</th>
-                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">نام کاربری</th>
-                                <!-- <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">ایمیل</th> -->
-                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">لوگو</th>
-                               
-                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">عملیات</th>
-                              
-                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">-</th>
-                                
-                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">-</th>
-                               
-                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-600">-</th>
-                            </tr>
-                        </thead>
-                        
-                        
-                        <tbody class="bg-white divide-y divide-[#f1f1f4]">
-                                @foreach($user->careers as $career)
-                                @if($career)
-                                <tr>
-                                    <td class="px-6 py-4 text-sm text-gray-900">{{ $career->title}}</td>
-                                    <td class="px-6 py-4 text-sm text-gray-900">{{ $career->province}}</td>
-                                    <td class="px-6 py-4 text-sm text-gray-900">{{ $career->city}}</td>
-                                    <td class="px-6 py-4 text-sm text-gray-900">{{ $career->address}}</td>
-                                    <td class="px-6 py-4 text-sm text-gray-900">{{ $career->description}}</td>
-                                    <td class="px-6 py-4 text-sm text-gray-900">{{ $career->email}}</td>
-                                    <td class="px-6 py-4 text-sm text-gray-900">
-                                          <img class="max-w-[50px] max-h-[50px]" src="<?= asset("storage/" . $career->logo) ?>">
-                                    </td>
-                                     <td class="px-6 py-4 text-sm font-medium">
-                                        <a href="#" class="ml-4 text-sky-700">مشاهده</a>
-                                        
-                                    </td>
-                                     <td class="px-6 py-4 text-sm font-medium">
-                                        <a href="{{ route('user.career.edit', [$career])}}" class="ml-4 text-sky-700">ویرایش</a>
-                                        
-                                    </td>
-                                     <td class="px-6 py-4 text-sm font-medium">
-                                        <a href="{{ route('user.career.delete', [$career])}}" class="ml-4 text-sky-700">حذف</a>
-                                        
-                                    </td>
-                                    @if($career->menu)
-                                     <td class="px-6 py-4 text-sm font-medium">
-                                        <a href="{{ route('user.career.menu.list', [$career])}}" class="ml-4 text-sky-700">مشاهده منو</a>
-                                        
-                                    </td>
-                                    @endif
-                                     @if(!$career->menu)
-                                    <td class="px-6 py-4 text-sm font-medium"> 
-                                        <a href="{{ route('user.career.menu.create', [$career])}}" class="ml-4 text-sky-700">ایجاد منو</a>
-                                        
-                                    </td>
+@section('content')
+
+<div class="w-full flex flex-col pb-4">
+    <div class="bg-white rounded-lg">
+        <div class="pb-4">
+            <h2 class="text-lg font-bold text-gray-800">اطلاعات کسب و کار</h2>
+        </div>
+        <div class="flex flex-col gap-5">
+            <div class="overflow-x-auto shadow-md" style="scrollbar-width: none;">
+                <div class="min-w-full bg-gray-200">
+                    <div class="bg-gray-100 grid grid-cols-6 items-center divide-x divide-[#f1f1f4]">
+                        <div class="px-6 py-3 text-center text-xs font-medium text-gray-600">عنوان</div>
+                        <div class="px-6 py-3 text-center text-xs font-medium text-gray-600">توضیحات</div>
+                        <div class="px-6 py-3 text-center text-xs font-medium text-gray-600">لوگو</div>
+                        <div class="px-6 py-3 text-center text-xs font-medium text-gray-600 col-span-3">عملیات</div>
+                    </div>
+                    <div class="bg-white divide-y divide-[#f1f1f4]">
+                        @foreach($user->careers as $career)
+                        @if($career)
+                        <div class="grid grid-cols-6 items-center divide-x divide-[#f1f1f4]">
+                            <div class="p-3 text-sm h-full flex items-center justify-center text-gray-900">{{ $career->title}}</div>
+                            <div class="p-3 text-sm h-full flex items-center justify-center text-gray-900">{{ $career->description}}</div>
+                            <div class="p-3 text-sm h-full flex items-center justify-center text-gray-900">
+                                <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover" src="<?= asset("storage/" . $career->logo) ?>">
+                            </div>
+                            <div class="w-full grid grid-cols-4 col-span-3 h-full divide-x divide-[#f1f1f4]">
+                                <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
+                                    <a href="#" class="ml-4 text-sky-700">مشاهده</a>
+                                </div>
+                                <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
+                                    <a href="{{ route('career.edit', [$career])}}" class="ml-4 text-sky-700">ویرایش</a>
+                                </div>
+                                <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
+                                    <a href="{{ route('career.delete', [$career])}}" class="ml-4 text-sky-700">حذف</a>
+                                </div>
+                                @if($career->menu)
+                                <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
+                                    <a href="{{ route('menu.list', [$career])}}" class="ml-4 text-sky-700">مشاهده منو</a>
+                                </div>
                                 @endif
-                                </tr>
-                                @else
-                                <tr>
-                                    <td  class="px-6 py-4 text-center text-sm text-gray-500">
-                                        هیچ اطلاعاتی یافت نشد
-                                    </td>
-                                </tr>
+                                @if(!$career->menu)
+                                <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
+                                    <a href="{{ route('menu.create', [$career])}}" class="ml-4 text-sky-700">ایجاد منو</a>
+                                </div>
                                 @endif
-                                @endforeach
-                            </tbody>
-                       
-                    </table>
+                            </div>
+                        </div>
+                        @else
+                        <div>
+                            <div class="px-6 py-4 text-center text-sm text-gray-500">
+                                هیچ اطلاعاتی یافت نشد
+                            </div>
+                        </div>
+                        @endif
+                        @endforeach
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>
-    @endsection
-    
+</div>
+</div>
+@endsection
