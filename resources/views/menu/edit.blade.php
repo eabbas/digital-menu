@@ -12,15 +12,24 @@
             <div class="flex flex-col gap-3">
                 <div id="attribute">
                     <?php $i=0 ?>
-                    @foreach(json_decode($menu->page_data) as $data)
+                    @foreach(json_decode($menu->menu_data) as $data)
                     <?php $j=0?>
                     <div data-count="{{ $i }}">
                         <div class="flex flex-col items-end gap-3 lg:gap-5 mt-3 md:mt-5 border-b border-gray-300 pb-3">
-                            <div class="w-full flex flex-col">
-                                <label class="mb-2"> عنوان منو :</label>
-                                <input type="text"
-                                    class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                                    placeholder="نوشیدنی" name="page_data[{{ $i }}][name]" value="{{ $data->name }}">
+                            <div class="flex flex-row justify-between items-center">
+                                <div class="w-full flex flex-col">
+                                    <label class="mb-2"> عنوان منو :</label>
+                                    <input type="text"
+                                        class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
+                                        placeholder="نوشیدنی" name="menu_data[{{ $i }}][name]" value="{{ $data->name }}">
+                                </div>
+                                <div class="w-full flex flex-col">
+                                    <label class="mb-2"> تصویر منو :</label>
+                                    <input type="file"
+                                        class="outline-none pr-5 py-3 cursor-pointer"
+                                        name="menu_data[{{ $i }}][menu_image]">
+                                </div>
+
                             </div>
                             <div class="w-full flex flex-col gap-2" data-value="{{ $j }}">
                                 @foreach($data->values as $value)
@@ -30,19 +39,25 @@
                                             <label class="mb-2"> نام آیتم :</label>
                                             <input type="text"
                                                 class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                                                placeholder="نوشابه" name="page_data[{{ $i }}][values][{{ $j }}][title]" value="{{ $value->title }}">
+                                                placeholder="نوشابه" name="menu_data[{{ $i }}][values][{{ $j }}][title]" value="{{ $value->title }}">
                                         </div>
                                         <div class="w-full flex flex-col">
                                             <label class="mb-2"> قیمت آیتم :</label>
                                             <input type="number"
                                                 class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                                                name="page_data[{{ $i }}][values][{{ $j }}][price]" value="{{ $value->price }}">
+                                                name="menu_data[{{ $i }}][values][{{ $j }}][price]" value="{{ $value->price }}">
                                         </div>
                                         <div class="w-full flex flex-col">
                                             <label class="mb-2"> توضیحات آیتم :</label>
                                             <input type="text"
                                                 class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                                                placeholder="بدون قند" name="page_data[{{ $i }}][values][{{ $j }}][description]" value="{{ $value->description }}">
+                                                placeholder="بدون قند" name="menu_data[{{ $i }}][values][{{ $j }}][description]" value="{{ $value->description }}">
+                                        </div>
+                                        <div class="w-full flex flex-col">
+                                            <label class="mb-2"> تصویر آیتم :</label>
+                                            <input type="file"
+                                                class="outline-none pr-5 py-3 cursor-pointer"
+                                                name="menu_data[{{ $i }}][values][{{ $j }}][gallery]">
                                         </div>
                                     </div>
                                     <div class="flex items-end">
@@ -70,7 +85,7 @@
                 <div class="w-full flex flex-col">
                     <label class="mb-2"> تعداد کیو آر کد های خود را تعیین کنید :</label>
                     <input type="number" class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                        name="qr_num" value="{{ count($menu->qr_codes)-1 }}">
+                        name="qr_num" value="{{ count($menu->qr_codes) }}">
                 </div>
                 <div class="w-full flex flex-col gap-3">
                     <?php $i = 1; ?>
@@ -86,7 +101,6 @@
                         <?php $i++; ?>
                         @endif
                     @endforeach
-
                 </div>
                 <div class="text-center">
                     <button type="submit"
