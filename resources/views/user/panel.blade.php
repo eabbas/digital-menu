@@ -178,7 +178,7 @@
         <!-- </div> -->
         <!-- کد های سپهر -->
         <div class="w-full">
-            <div class="w-full fixed top-0 right-0 z-10">
+            <header class="w-full fixed top-0 right-0 z-10">
                 <div
                     class="w-full float-end lg:w-[calc(100%-265px)] py-3 hidden lg:flex flex-row-reverse px-5 backdrop-blur-sm shadowHeader relative z-20">
                     <div class="w-6/12 flex flex-row-reverse items-center">
@@ -317,20 +317,63 @@
                     </div>
                 </div>
                <div class="flex lg:hidden flex-row justify-between items-center py-2 px-5 backdrop-blur-sm shadowHeader relative z-20">
-                  <img class="size-12 rounded-lg" src="{{ asset('assets/img/user.png') }}" alt="">
-                  <div class="flex flex-col w-8 h-6 justify-between">
-                     <span class="w-full h-0.5 bg-black"></span>
-                     <span class="w-full h-0.5 bg-black"></span>
-                     <span class="w-full h-0.5 bg-black"></span>
-                  </div>
+                   <div class="flex flex-col w-5 h-3.5 justify-between cursor-pointer" onclick="hamburgerMenu('open', this)">
+                       <span class="w-full h-0.5 bg-black transition-all duration-300"></span>
+                       <span class="w-full h-0.5 bg-black transition-all duration-300"></span>
+                       <span class="w-full h-0.5 bg-black transition-all duration-300"></span>
+                    </div>
+                    @if(!$user->main_image)
+                    <img src="{{ asset('assets/img/user.png') }}" alt="user__avatar"
+                        class="size-10 rounded-xl">
+                    @else
+                    <img src="{{ asset('storage/'.$user->main_image) }}" alt="user__picture"
+                        class="size-10 rounded-xl">
+                    @endif
                </div>
-                
-            </div>
+                <div class="w-full h-dvh fixed top-0 -left-full bg-black/50 flex flex-row z-50 transition-all duration-500">
+                    <div class="w-1/3 bg-inherit h-full" onclick="hamburgerMenu('close', this)"></div>
+                    <div class="w-2/3 bg-white h-full p-2">
+                        <div class="flex flex-row justify-between items-center gap-3 pb-2 border-b border-gray-300">
+                            <div>
+                                @if(!$user->main_image)
+                                <img src="{{ asset('assets/img/user.png') }}" alt="user__avatar"
+                                    class="size-10 rounded-xl">
+                                @else
+                                <img src="{{ asset('storage/'.$user->main_image) }}" alt="user__picture"
+                                    class="size-10 rounded-xl">
+                                @endif
+                            </div>
+                            <div>
+                                <span class="text-xs text-gray-700 font-semibold">{{ $user->name }} {{ $user?->family }}</span>
+                            </div>
+                        </div>
+                        <div class="pt-2">
+                            <div>
+                                <h3 class="text-sm font-semibold text-gray-800 mb-1.5">کسب و کار ها</h3>
+                                <ul class="pr-3.5">
+                                    <li>
+                                        <a href="{{ route('career.careers') }}" class="block text-gray-700 py-1 text-xs">کسب و کار های
+                                            من</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('career.create') }}" class="block text-gray-700 py-1 text-xs">ایجاد کسب و کار
+                                            جدید</a>
+                                    </li>
+                                    <li class="mt-3">
+                                        <a href="{{ route('user.logout') }}" class="block text-rose-700 py-1 font-medium text-xs">خروج از حساب کاربری</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
             <div class="w-full lg:w-[calc(100%-265px)] float-end mt-20 lg:px-5 overflow-y-auto px-5" style="scrollbar-width:none;">
              @yield('content')
             </div>
         </div>
     </div>
+    <script src="{{ asset('assets/js/userPanel.js') }}"></script>
 </body>
 
 </html>
