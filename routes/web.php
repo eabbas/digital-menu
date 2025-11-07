@@ -199,5 +199,5 @@ Route::group([
 });
 
 Route::fallback(function(){
-    return to_route('login');
+    return view('login');
 });

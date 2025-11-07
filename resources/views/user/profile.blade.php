@@ -37,15 +37,15 @@
                             </ul>
                         </div>
                         <div class="flex flex-col lg:flex-row gap-3 mt-8">
-                            <div class="border-[#99A1B7] flex flex-row-reverse px-2 justify-between lg:flex-col border border-dashed rounded-[5px] p-1 ">
+                            <div class="border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px] p-1 ">
                                 <span class="font-bold">4,500</span>
                                 <span class="text-[#4B5675]">تعداد اسکن ها</span>
                             </div>
-                            <div class="border-[#99A1B7] flex flex-row-reverse px-2 justify-between lg:flex-col border border-dashed rounded-[5px] p-1 ">
+                            <div class="border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px] p-1 ">
                                 <span class="font-bold">56</span>
                                 <span class="text-[#4B5675]"> تعداد QR کد ها </span>
                             </div>
-                            <div class="border-[#99A1B7] flex flex-row-reverse px-2 justify-between lg:flex-col border border-dashed rounded-[5px] p-1 ">
+                            <div class="border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px] p-1 ">
                                 <span class="font-bold">6</span>
                                 <span class="text-[#4B5675]">تعداد کسب و کارها</span>
                             </div>

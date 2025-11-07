@@ -35,12 +35,18 @@
                     </div>
                     <div class="mt-2">
                         <ul class="flex flex-col gap-1 pr-3">
+                            @if(!Auth::check())
                             <li>
                                 <a href="{{ route('login') }}" class="block text-xs py-2 text-gray-700 font-medium hover:text-blue-600 transition-all duration-300">ورود</a>
                             </li>
                             <li>
                                 <a href="{{ route('signup') }}" class="block text-xs py-2 text-gray-700 font-medium hover:text-blue-600 transition-all duration-300">ثبت نام</a>
                             </li>
+                            @elseif(Auth::check())
+                            <li>
+                                <a href="{{ route('user.profile', [Auth::user()]) }}" class="block text-xs py-2 text-gray-700 font-medium hover:text-blue-600 transition-all duration-300">پروفایل من</a>
+                            </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
