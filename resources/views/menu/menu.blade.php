@@ -10,6 +10,7 @@
             </h1>
             <div class="w-full flex flex-col gap-3 p-3 border border-gray-300 rounded-lg">
                 @foreach(json_decode($career->menu->menu_data) as $data)
+   
                 <div class="w-10/12 m-auto">
                     <div class="flex flex-row items-end mb-3 gap-5">
                         <img src="{{ asset('storage/'.$data->menu_image) }}" alt="menu image" class="size-10">

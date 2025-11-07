@@ -21,7 +21,7 @@
                                 <label class="font-bold mb-2">تصویر منو :</label>
                                 <input type="file"
                                     class="outline-none w-full lg:w-1/2 pr-5 py-3 cursor-pointer"
-                                    placeholder="نوشیدنی" name="menu_data[0][menu_image]">
+                                    name="menu_data[0][menu_image]">
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-2" data-value="0">
@@ -49,7 +49,7 @@
                                         <label class="text-[#425a8bde] mb-2"> تصویر منو :</label>
                                         <input type="file"
                                             class="outline-none pr-5 py-3 cursor-pointer"
-                                            placeholder="بدون قند" name="menu_data[0][values][0][gallery]">
+                                            name="menu_data[0][values][0][gallery]">
                                     </div>
                                 </div>
                                 <div class="flex items-end">

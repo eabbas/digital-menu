@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Career;
 use App\Models\menu;
 use App\Models\qr_code;
@@ -15,69 +16,72 @@ class MenuController extends Controller
     public function create(career $career)
     {
         $user = Auth::user();
-        return view('menu.create', ['user'=>$user, 'career'=>$career]);
+        return view('menu.create', ['user' => $user, 'career' => $career]);
     }
 
     public function store(Request $request)
     {
         $menu_data = $request->menu_data;
-        foreach($menu_data as $key => $data){
+        foreach ($menu_data as $key => $data) {
             $name = $data['menu_image']->getClientOriginalName();
-            $fullName = time()."_".$name;
+            $fullName = time() . '_' . $name;
             $path = $data['menu_image']->storeAs('images', $fullName, 'public');
             $menu_data[$key]['menu_image'] = $path;
-            foreach($data['values'] as $gKey => $value){
+            foreach ($data['values'] as $gKey => $value) {
                 $itemName = $value['gallery']->getClientOriginalName();
-                $itemFullName = time()."_".$itemName;
+                $itemFullName = time() . '_' . $itemName;
                 $itemPath = $value['gallery']->storeAs('images', $itemFullName, 'public');
                 $menu_data[$key]['values'][$gKey]['gallery'] = $itemPath;
             }
         }
         $career_id = $request->career_id;
         $menu_data = json_encode($menu_data);
-        $menu_id = menu::insertGetId(['menu_data' => $menu_data, 'qr_num'=>$request->qr_num, 'career_id' => $career_id]);
-        for ($i=0; $i<$request->qr_num; $i++) {
+        $menu_id = menu::insertGetId(['menu_data' => $menu_data, 'qr_num' => $request->qr_num, 'career_id' => $career_id]);
+        for ($i = 0; $i < $request->qr_num; $i++) {
             $random = Str::random(10);
             $link = "/famenu.ir/qrcode/$career_id/" . $random;
             $qr_svg = QrCode::size(100)->generate($link);
             $fileName = 'qrcodes/' . $career_id . '_' . $random . '.svg';
             Storage::disk('public')->put($fileName, $qr_svg);
-            qr_code::create(['qr_path' => $fileName, 'career_id' => $career_id, 'menu_id'=>$menu_id, 'slug'=>'qrcode/'.$career_id.'/'.$random]);
+            qr_code::create(['qr_path' => $fileName, 'career_id' => $career_id, 'menu_id' => $menu_id, 'slug' => 'qrcode/' . $career_id . '/' . $random]);
         }
         return to_route('career.careers');
     }
 
-    public function index(career $career){
+    public function index(career $career)
+    {
         $user = Auth::user();
         $career->menu->menu_data;
-        return view('menu.menu', ['career'=>$career, 'user'=>$user]);
+        return view('menu.menu', ['career' => $career, 'user' => $user]);
     }
 
-    public function edit(menu $menu){
+    public function edit(menu $menu)
+    {
         $user = Auth::user();
-        return view('menu.edit', ['menu'=>$menu, 'user'=>$user]);
+        return view('menu.edit', ['menu' => $menu, 'user' => $user]);
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
         $menu_data = $request->menu_data;
-        foreach($menu_data as $key => $data){
+        foreach ($menu_data as $key => $data) {
             $name = $data['menu_image']->getClientOriginalName();
-            $fullName = time()."_".$name;
+            $fullName = time() . '_' . $name;
             $path = $data['menu_image']->storeAs('images', $fullName, 'public');
             $menu_data[$key]['menu_image'] = $path;
-            foreach($data['values'] as $gKey => $value){
+            foreach ($data['values'] as $gKey => $value) {
                 $itemName = $value['gallery']->getClientOriginalName();
-                $itemFullName = time()."_".$itemName;
+                $itemFullName = time() . '_' . $itemName;
                 $itemPath = $value['gallery']->storeAs('images', $itemFullName, 'public');
                 $menu_data[$key]['values'][$gKey]['gallery'] = $itemPath;
             }
         }
         $menu = menu::find($request->menu_id);
-        $menu->menu_data = json_encode($request->menu_data);
+        $menu->menu_data = json_encode($menu_data);
         $menu->career_id = $request->career_id;
         $qr_count = 0;
         $career_id = $menu->career_id;
-        if ($request->qr_num>$menu->qr_num) {
+        if ($request->qr_num > $menu->qr_num) {
             $qr_count = $request->qr_num - $menu->qr_num;
             while ($qr_count) {
                 $random = Str::random(10);
@@ -85,9 +89,9 @@ class MenuController extends Controller
                 $qr_svg = QrCode::size(100)->generate($link);
                 $fileName = 'qrcodes/' . $career_id . '_' . $random . '.svg';
                 Storage::disk('public')->put($fileName, $qr_svg);
-                qr_code::create(['qr_path' => $fileName, 'career_id' => $career_id, 'menu_id'=>$request->menu_id, 'slug'=> 'qrcode/'.$career_id.'/'.$random]);
+                qr_code::create(['qr_path' => $fileName, 'career_id' => $career_id, 'menu_id' => $request->menu_id, 'slug' => 'qrcode/' . $career_id . '/' . $random]);
                 $qr_count--;
-            } 
+            }
         }
         $menu->qr_num = $request->qr_num;
         $menu->save();
@@ -95,9 +99,10 @@ class MenuController extends Controller
         return to_route('user.profile', [$user]);
     }
 
-    public function delete(menu $menu){
+    public function delete(menu $menu)
+    {
         $user = Auth::user();
-        foreach($menu->qr_codes as $qr_code){
+        foreach ($menu->qr_codes as $qr_code) {
             Storage::disk('public')->delete($qr_code->qr_path);
             $qr_code->delete();
         }
@@ -105,8 +110,9 @@ class MenuController extends Controller
         return to_route('user.profile', [$user]);
     }
 
-    public function qr_codes(menu $menu){
+    public function qr_codes(menu $menu)
+    {
         $user = Auth::user();
-        return view("menu.qrcodes", ['menu'=>$menu, 'user'=>$user]);
+        return view('menu.qrcodes', ['menu' => $menu, 'user' => $user]);
     }
 }
