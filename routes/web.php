@@ -34,8 +34,8 @@ Route::group([
     Route::get("/delete/{user}", "delete")->name('delete');
     Route::get('/compelete', 'compelete_form')->name('compelete_form');
     Route::post('/save', 'save')->name('save');
-
 });
+
 Route::group([
     'prefix'=>'careers',
     'controller'=>CareerController::class,
@@ -49,6 +49,7 @@ Route::group([
     Route::post('/update','update')->name('update');
     Route::get('/delete/{career}','delete')->name('delete');
 });
+
 Route::group([
     'prefix'=>'menus',
     'controller'=>MenuController::class,
