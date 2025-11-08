@@ -119,4 +119,23 @@ class UserController extends Controller
         $user->save();
         return to_route('user.profile', [Auth::user()]);
     }
+    public function adminCreate(){
+        return view('admin.user.createAdmin');
+    }
+      public function adminStore(Request $request)
+    {
+        $phone = User::where('phoneNumber', $request->phoneNumber)->first();
+        if ($phone) {
+            return redirect()->back()->with('message', 'این شماره تلفن قبلا استفاده شده');
+        }
+        $password = Hash::make($request->password);
+        User::create([
+            'name'=>$request->name,
+            'family'=>$request->family,
+            'phoneNumber'=>$request->phoneNumber,
+            'password'=>$password,
+            'type'=>'admin'
+        ]);
+        return to_route('login');
+    }
 }
