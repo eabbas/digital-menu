@@ -16,6 +16,10 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if(Auth::User()->type=="admin"){
+            return to_route('admin.adminProfile');
+               
+        }
         if(!Auth::check()){
             return to_route('login');
         }

@@ -8,6 +8,7 @@ use App\Http\controllers\MenuController;
 use App\Http\controllers\SettingController;
 use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\adminController;
 use App\Http\Middleware\LoginMiddleware;
 use App\Http\Middleware\UserMiddleware;
 
@@ -201,3 +202,15 @@ Route::group([
 Route::fallback(function(){
     return view('login');
 });
+
+
+////admin
+// Route::get('/adminProfile', [adminController::class, 'adminPanel'])->name('adminPanel');
+Route::group([
+    'prefix'=>'admin',
+    'controller'=>adminController::class,
+    'as'=>'admin.'
+], function(){
+    Route::get('/profile', 'adminProfile')->name('adminProfile');
+});
+
