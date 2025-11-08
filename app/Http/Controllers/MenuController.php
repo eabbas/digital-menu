@@ -45,7 +45,7 @@ class MenuController extends Controller
             Storage::disk('public')->put($fileName, $qr_svg);
             qr_code::create(['qr_path' => $fileName, 'career_id' => $career_id, 'menu_id' => $menu_id, 'slug' => 'qrcode/' . $career_id . '/' . $random]);
         }
-        return to_route('career.careers');
+        return to_route('career.careers', [Auth::user()]);
     }
 
     public function index(career $career)
