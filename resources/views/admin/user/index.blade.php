@@ -30,7 +30,7 @@
                         <li class="w-full"> {{$user ->type}}</li>
                         <li class="w-full col-span-4 grid grid-cols-5 gap-3 xl:gap-5">
                             <div class="w-full">
-                                <a href="{{ route('user.profile', [$user->id]) }}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-gray-400 hover:text-white">نمایش</a>
+                                <a href="{{ route('user.show', [$user->id]) }}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-gray-400 hover:text-white">نمایش</a>
                             </div>
                             <div class="w-full">
                                 <a href="{{ route('user.edit', [$user->id]) }}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-teal-500 hover:text-white hover:border-teal-500">ویرایش</a>
