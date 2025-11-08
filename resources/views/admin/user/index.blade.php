@@ -42,6 +42,9 @@
                             <div class="w-full">
                                 <a href="http://localhost/digital-menu/public/users/delete/{{$user->id}}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-rose-500 hover:text-white hover:border-rose-500">حذف</a>
                             </div>
+                            <div class="w-full">
+                                <a href="http://localhost/digital-menu/public/users/delete/{{$user->id}}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-rose-500 hover:text-white hover:border-rose-500">مشاهده کسب وکار</a>
+                            </div>
                         </li>
                     </ul>
                 </div>

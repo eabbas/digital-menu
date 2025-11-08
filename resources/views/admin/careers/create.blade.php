@@ -3,7 +3,7 @@
             color:#2196F3;
         }
     </style>
-    @extends('user.panel')
+    @extends('admin.user.panel')
     @section('title', 'ثبت نام کسب و کار')
     @section('content')
     <form action="{{ route('career.store') }}" method="POST" enctype='multipart/form-data'>

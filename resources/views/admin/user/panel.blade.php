@@ -97,6 +97,37 @@
                             </li>
                         </ul>
                     </div>
+                    @if(Auth::user()->type == 'admin')
+                    <div class="dashbord ">
+                        <ul class="gap-2.5 mt-2.5 mb-2.5 pr-3">
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('user.list') }}" class=" text-white py-1">
+                                    مشاهده همه کاربران
+                                </a>
+                            </li>
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('career.careers') }}" class=" text-white py-1">
+                                    مشاهده همه کسب و کار ها
+                                </a>
+                            </li>
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('career.careers') }}" class=" text-white py-1">
+                                    ایجاد ادمین
+                                </a>
+                            </li>
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('career.careers') }}" class=" text-white py-1">
+                                   لیست ادمین ها
+                                </a>
+                            </li>
+                          
+                        </ul>
+                    </div>
+                    @endif
                 </div>
                 <!-- <div class="border-b border-gray-500">
                         <div class="flex justify-between flex-row-reverse">
