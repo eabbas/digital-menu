@@ -34,13 +34,13 @@
                         <li class="w-full"> {{$user ->phoneNumber}}</li>
                         <li class="w-full col-span-2 grid grid-cols-3 gap-3 xl:gap-5">
                             <div class="w-full">
-                                <a href="http://localhost/digital-menu/public/user/show/{{$user->id}}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-gray-400 hover:text-white">نمایش</a>
+                                <a href="http://localhost/digital-menu/public/users/show/{{$user->id}}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-gray-400 hover:text-white">نمایش</a>
                             </div>
                             <div class="w-full">
                                 <a href="http://localhost/digital-menu/public/users/edit/{{$user->id}}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-teal-500 hover:text-white hover:border-teal-500">ویرایش</a>
                             </div>
                             <div class="w-full">
-                                <a href="http://localhost/digital-menu/public/user/delete/{{$user->id}}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-rose-500 hover:text-white hover:border-rose-500">حذف</a>
+                                <a href="http://localhost/digital-menu/public/users/delete/{{$user->id}}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-rose-500 hover:text-white hover:border-rose-500">حذف</a>
                             </div>
                         </li>
                     </ul>
