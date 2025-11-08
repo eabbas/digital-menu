@@ -9,9 +9,9 @@
         <div class="pb-4">
             <h2 class="text-lg font-bold text-gray-800">اطلاعات کسب و کار</h2>
         </div>
-        <div class="flex flex-col gap-5">
-            <div class="overflow-x-auto shadow-md" style="scrollbar-width: none;">
-                <div class="min-w-full bg-gray-200">
+        <div class="flex flex-col gap-5 ">
+            <div class=" flex overflow-x-auto scroll-snap-x snap-mandatory gap-5 px-1 py-2 no-scrollbar" >
+                <div class="min-w-full bg-gray-200 flex-shrink-0 snap-center overflow-hidden">
                     <div class="bg-gray-100 grid grid-cols-6 items-center divide-x divide-[#f1f1f4]">
                         <div class="px-6 py-3 text-center text-xs font-medium text-gray-600">عنوان</div>
                         <div class="px-6 py-3 text-center text-xs font-medium text-gray-600">توضیحات</div>
@@ -25,17 +25,17 @@
                             <div class="p-3 text-sm h-full flex items-center justify-center text-gray-900">{{ $career->title}}</div>
                             <div class="p-3 text-sm h-full flex items-center justify-center text-gray-900">{{ $career->description}}</div>
                             <div class="p-3 text-sm h-full flex items-center justify-center text-gray-900">
-                                <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover" src="<?= asset("storage/" . $career->logo) ?>">
+                                <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-[10px]" src="<?= asset("storage/" . $career->logo) ?>">
                             </div>
                             <div class="w-full grid grid-cols-4 col-span-3 h-full divide-x divide-[#f1f1f4]">
                                 <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
                                     <a href="#" class="ml-4 text-sky-700">مشاهده</a>
                                 </div>
                                 <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
-                                    <a href="{{ route('career.edit', [$career])}}" class="ml-4 text-sky-700">ویرایش</a>
+                                    <a href="{{ route('career.edit', [$career])}}" class="ml-4 text-green-7 00">ویرایش</a>
                                 </div>
                                 <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
-                                    <a href="{{ route('career.delete', [$career])}}" class="ml-4 text-sky-700">حذف</a>
+                                    <a href="{{ route('career.delete', [$career])}}" class="ml-4 text-red-700">حذف</a>
                                 </div>
                                 @if($career->menu)
                                 <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
