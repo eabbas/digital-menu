@@ -114,7 +114,7 @@
                             </li>
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="#" class=" text-white py-1">
+                                <a href="{{ route('user.adminCreate') }}" class=" text-white py-1">
                                     ایجاد ادمین
                                 </a>
                             </li>

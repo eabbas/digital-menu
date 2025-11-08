@@ -24,8 +24,8 @@ Route::group([
     'as'=>'user.',
     'middleware'=>[UserMiddleware::class]
 ], function(){
-    Route::post("/store", "store")->name('store')->withoutMiddleware([UserMiddleware::class]);;
-    Route::post("/check", "check")->name('check')->withoutMiddleware([UserMiddleware::class]);;
+    Route::post("/store", "store")->name('store')->withoutMiddleware([UserMiddleware::class]);
+    Route::post("/check", "check")->name('check')->withoutMiddleware([UserMiddleware::class]);
     Route::get("/logout", "logout")->name('logout');
     Route::get("/","index")->name('list');
     Route::get("/panel/{user}", "panel")->name('panel');
@@ -36,6 +36,8 @@ Route::group([
     Route::get("/delete/{user}", "delete")->name('delete');
     Route::get('/compelete', 'compelete_form')->name('compelete_form');
     Route::post('/save', 'save')->name('save');
+    Route::get('/admin/create', 'adminCreate')->name('adminCreate');
+    Route::post('/admin/store', 'adminStore')->name('adminStore')->withoutMiddleware([UserMiddleware::class]);
 });
 
 Route::group([

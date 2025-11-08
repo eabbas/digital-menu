@@ -2,10 +2,10 @@
     @section('title', ' همه کسب وکارها')
     @section('content')
     @foreach($careers as $career)
-    {{$career->title}}
-    {{$career->title}}
-    {{$career->title}}
-    {{$career->title}}
-    {{$career->title}}
+    {{$career->title}}</br>
+    {{$career->province}}</br>
+    {{$career->city}}</br>
+    {{$career->address}}</br>
+    {{$career->description}}</br>
     @endforeach
     @endsection
