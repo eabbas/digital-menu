@@ -59,9 +59,7 @@
     <div class="pt-3 mt-4 lg:mt-8">
         <div class="my-6">
             <ul class="flex flex-row gap-5 overflow-x-auto" style="scrollbar-width: none;">
-                <li>
-                    <a class="hover:text-blue-700 block w-[100px]" href="">بررسی اجمالی</a>
-                </li>
+               
                 <li>
                     <a class="hover:text-blue-700 block w-[100px]" href="">تنظیمات</a>
                 </li>

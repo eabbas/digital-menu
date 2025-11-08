@@ -8,6 +8,7 @@ use App\Http\controllers\MenuController;
 use App\Http\controllers\SettingController;
 use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ContactusController;
 use App\Http\Middleware\LoginMiddleware;
 use App\Http\Middleware\UserMiddleware;
 
@@ -196,6 +197,19 @@ Route::group([
         Route::post('/update', 'upsertCategoryAds')->name('upsertCategoryAds');
         Route::get('/show', 'showCategoryAds')->name('showCategoryAds');
     });
+});
+Route::group([
+    'prefix'=>'contactus',
+    'controller'=>ContactusController::class,
+    'as'=>'contactus.'
+], function (){
+    Route::get('/create','createContactus')->name('create');
+    Route::post('/store','storeContactus')->name('store');
+    Route::get('/index','indexContactus')->name('list');
+    Route::get('/show/{contactus}','showContactus')->name('show');
+    Route::get('/edit/{contactus}','editContactus')->name('edit');
+    Route::post('/update','updateContactus')->name('update');
+    Route::get('/delete/{contactus}','deleteContactus')->name('delete');
 });
 
 Route::fallback(function(){

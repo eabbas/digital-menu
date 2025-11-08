@@ -95,6 +95,11 @@
                                 <a href="{{ route('career.create') }}" class=" text-white py-1">ایجاد کسب و کار
                                     جدید</a>
                             </li>
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{route('contactus.list')}}" class=" text-white py-1">   ارتباط با ما ها
+                                    جدید</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -359,6 +364,11 @@
                                         <a href="{{ route('career.create') }}" class="block text-gray-700 py-1 text-xs">ایجاد کسب و کار
                                             جدید</a>
                                     </li>
+                                    <li>
+                                        <a href="{{route('contactus.list')}}" class="block text-gray-700 py-1 text-xs">  ارتباط با ماها 
+                                            جدید</a>
+                                    </li>
+                                     
                                     <li class="mt-3">
                                         <a href="{{ route('user.logout') }}" class="block text-rose-700 py-1 font-medium text-xs">خروج از حساب کاربری</a>
                                     </li>
