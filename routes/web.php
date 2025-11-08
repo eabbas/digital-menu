@@ -30,6 +30,7 @@ Route::group([
     Route::get("/","index")->name('list');
     Route::get("/panel/{user}", "panel")->name('panel');
     Route::get('/profile/{user}', 'profile')->name('profile');
+    Route::get('/show/{user}', 'show')->name('show');
     Route::get("/edit/{user}", "edit")->name('edit');
     Route::post("/update", "update")->name('update');
     Route::get("/delete/{user}", "delete")->name('delete');
@@ -45,10 +46,11 @@ Route::group([
 ], function(){
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/list', 'user_careers')->name('careers');
+    Route::get('/list/{user}', 'user_careers')->name('careers');
     Route::get('/edit/{career}','edit')->name('edit');
     Route::post('/update','update')->name('update');
     Route::get('/delete/{career}','delete')->name('delete');
+    Route::get('/careers','index')->name('list');
 });
 
 Route::group([

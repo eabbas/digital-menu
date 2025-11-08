@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-
+use App\Models\user;
 use App\Models\career;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,9 +36,8 @@ class CareerController extends Controller
         return to_route('user.profile', ['user' => $user]);
     }
 
-    public function user_careers()
+    public function user_careers(User $user)
     {
-        $user = Auth::user();
         return view('admin.careers.userCareers', ['user' => $user]);
     }
 
@@ -78,5 +77,12 @@ class CareerController extends Controller
         $career->menu->delete();
         $career->delete();
         return to_route('user.profile', [$user]);
+    }
+    public function index()
+    {
+        $careers=career::all();
+        // dd($careers);
+        $user = Auth::user();
+        return view('admin.careers.index',['careers'=>$careers, 'user'=>$user]);
     }
 }

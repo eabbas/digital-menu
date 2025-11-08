@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>لیست کاربران</title>
-</head>
-<body>
+ @extends('admin.user.panel')
+    @section('title', 'پروفایل کاربری')
+    @section('content')
     <section class="2xl:container mx-auto">
         <div class="w-11/12 mx-auto">
             <div class="my-10">
@@ -32,18 +26,18 @@
                         <li class="w-full"> {{$user -> id}}</li>
                         <li class="w-full"> {{$user -> name}}</li>
                         <li class="w-full"> {{$user ->phoneNumber}}</li>
-                        <li class="w-full col-span-2 grid grid-cols-3 gap-3 xl:gap-5">
+                        <li class="w-full col-span-4 grid grid-cols-5 gap-3 xl:gap-5">
                             <div class="w-full">
-                                <a href="http://localhost/digital-menu/public/users/show/{{$user->id}}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-gray-400 hover:text-white">نمایش</a>
+                                <a href="{{ route('user.show', [$user->id]) }}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-gray-400 hover:text-white">نمایش</a>
                             </div>
                             <div class="w-full">
-                                <a href="http://localhost/digital-menu/public/users/edit/{{$user->id}}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-teal-500 hover:text-white hover:border-teal-500">ویرایش</a>
+                                <a href="{{ route('user.edit', [$user->id]) }}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-teal-500 hover:text-white hover:border-teal-500">ویرایش</a>
                             </div>
                             <div class="w-full">
-                                <a href="http://localhost/digital-menu/public/users/delete/{{$user->id}}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-rose-500 hover:text-white hover:border-rose-500">حذف</a>
+                                <a href="{{ route('user.delete', [$user->id]) }}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-rose-500 hover:text-white hover:border-rose-500">حذف</a>
                             </div>
-                            <div class="w-full">
-                                <a href="http://localhost/digital-menu/public/users/delete/{{$user->id}}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-rose-500 hover:text-white hover:border-rose-500">مشاهده کسب وکار</a>
+                            <div class="w-full col-span-2">
+                                <a href="{{ route('career.careers', [$user->id]) }}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-rose-500 hover:text-white hover:border-rose-500">مشاهده کسب وکار</a>
                             </div>
                         </li>
                     </ul>
