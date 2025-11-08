@@ -1,8 +1,8 @@
  @extends('admin.user.panel')
-    @section('title', 'پروفایل کاربری')
+    @section('title', 'همه کاربران')
     @section('content')
-    <section class="2xl:container mx-auto">
-        <div class="w-11/12 mx-auto">
+    
+        <div class="w-full">
             <div class="my-10">
                 <h1 class="lg:text-3xl md:text-2xl text-md font-semibold text-center text-gray-700">لیست کاربران</h1>
             </div>
@@ -49,7 +49,4 @@
 
             </div>
         </div>
-    </section>
-</body>
-
-</html>
+@endsection
