@@ -206,11 +206,11 @@ Route::fallback(function(){
 
 ////admin
 // Route::get('/adminProfile', [adminController::class, 'adminPanel'])->name('adminPanel');
-Route::group([
-    'prefix'=>'admin',
-    'controller'=>adminController::class,
-    'as'=>'admin.'
-], function(){
-    Route::get('/profile', 'adminProfile')->name('adminProfile');
-});
+// Route::group([
+//     'prefix'=>'admin',
+//     'controller'=>adminController::class,
+//     'as'=>'admin.'
+// ], function(){
+//     Route::get('/profile', 'adminProfile')->name('adminProfile');
+// });
 

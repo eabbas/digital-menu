@@ -1,4 +1,4 @@
-    @extends('user.panel')
+    @extends('admin.user.panel')
     @section('title', 'پروفایل کاربری')
     @section('content')
    <div class="w-full">

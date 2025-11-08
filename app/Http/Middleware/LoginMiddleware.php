@@ -17,7 +17,7 @@ class LoginMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check()) {
-            return to_route('admin.user.profile', Auth::user());
+            return to_route('user.profile', Auth::user());
         }
         return $next($request);
     }

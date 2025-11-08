@@ -16,7 +16,7 @@ class MenuController extends Controller
     public function create(career $career)
     {
         $user = Auth::user();
-        return view('menu.create', ['user' => $user, 'career' => $career]);
+        return view('admin.menu.create', ['user' => $user, 'career' => $career]);
     }
 
     public function store(Request $request)
@@ -52,13 +52,13 @@ class MenuController extends Controller
     {
         $user = Auth::user();
         $career->menu->menu_data;
-        return view('menu.menu', ['career' => $career, 'user' => $user]);
+        return view('admin.menu.menu', ['career' => $career, 'user' => $user]);
     }
 
     public function edit(menu $menu)
     {
         $user = Auth::user();
-        return view('menu.edit', ['menu' => $menu, 'user' => $user]);
+        return view('admin.menu.edit', ['menu' => $menu, 'user' => $user]);
     }
 
     public function update(Request $request)
@@ -113,6 +113,6 @@ class MenuController extends Controller
     public function qr_codes(menu $menu)
     {
         $user = Auth::user();
-        return view('menu.qrcodes', ['menu' => $menu, 'user' => $user]);
+        return view('admin.menu.qrcodes', ['menu' => $menu, 'user' => $user]);
     }
 }
