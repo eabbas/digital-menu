@@ -12,6 +12,7 @@ function showMenu(ev, index) {
 }
 
 function calc(el, state) {
+    console.log(5555)
     if (state == '+') {
         el.parentElement.children[0].value++
     }

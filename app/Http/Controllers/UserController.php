@@ -116,4 +116,17 @@ class UserController extends Controller
         $user->save();
         return to_route('user.profile', [Auth::user()]);
     }
+    public function set_order(Request $request)
+    {
+        dd($request->all());
+        foreach($request->titles as $key=>$title){
+            order::create([
+                'career_id'=>$request->career ,
+                'slug'=>$request->slug ,
+                'title'=>$request->title,
+                'count'=>$request->count
+            ]);
+        }
+
+    }
 }

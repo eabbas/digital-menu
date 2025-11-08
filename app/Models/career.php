@@ -18,4 +18,8 @@ class career extends Model
   {
     return $this->hasOne(menu::class)->chaperOne();
   }
+  public function orders()
+  {
+    return $this->hasMany(order::class)->chaperOne();
+  }
 }

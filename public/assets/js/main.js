@@ -28,6 +28,7 @@ function add() {
                     <button type="button" class="p-2 rounded-md bg-rose-500 hover:bg-rose-600 text-white cursor-pointer" onclick="remove(this)">حذف</button> 
                 </div>
             </div>
+            <input type="hidden" value="${valueCount}" name="menu_data[${featureCount}][values][${valueCount}][id]">
             <div class="w-full flex flex-col gap-2" data-value="1">
                 <div class="w-full flex flex-row items-end gap-3">
                     <div class="flex flex-col lg:flex-row items-center pr-10 gap-3">
@@ -78,6 +79,7 @@ function addAttr(el) {
     valueCount++
     div.classList = "w-full flex flex-row items-end gap-3"
     let element = `
+        <input type="hidden" name="menu_data[${num}][values][${valueCount}][id]" value="${valueCount}">
         <div class="w-full flex flex-col gap-2" data-value="${valueCount}">
             <div class="w-full flex flex-row items-end gap-3">
             <div class="flex flex-col lg:flex-row items-center pr-10 gap-3 mt-8 mb-0">

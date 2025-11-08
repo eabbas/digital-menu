@@ -33,6 +33,7 @@
                                             class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#efefef]"
                                             placeholder="نوشابه" name="menu_data[0][values][0][title]">
                                     </div>
+                                    <input type="hidden" value="0" name="menu_data[0][values][0][id]">
                                     <div class="w-full flex flex-col">
                                         <label class="text-[#425a8bde] mb-2"> قیمت آیتم :</label>
                                         <input type="number"
