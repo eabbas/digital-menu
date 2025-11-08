@@ -1,4 +1,4 @@
-@extends('user.panel')
+@extends('admin.user.panel')
 @section('title', 'ویرایش منو')
 @section('content')
 

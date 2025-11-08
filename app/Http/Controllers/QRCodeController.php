@@ -11,7 +11,7 @@ use App\Models\career;
 class QrCodeController extends Controller
 {
     public function create(){
-        return view('menus.create');
+        return view('admin.menus.create');
     }
 
     public function delete(qr_code $qr_code){

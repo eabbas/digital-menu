@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function create()
     {
-        return view('user.signup');
+        return view('client.signup');
     }
 
     public function store(Request $request)
@@ -53,7 +53,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('user.index', ['users' => $users]);
+        return view('admin.user.index', ['users' => $users]);
     }
 
     public function panel()
@@ -62,17 +62,20 @@ class UserController extends Controller
         if (!Auth::check()) {
             return to_route('login');
         }
-        return view('user.panel', ['user' => $user]);
+        return view('admin.user.panel', ['user' => $user]);
     }
 
     public function profile(){
         $user=Auth::user();
-        return view('user.profile', ['user'=>$user]);
+        return view('admin.user.profile', ['user'=>$user]);
     }
-
+    public function show(user $user)
+    {
+        return view('admin.user.single', ['user' => $user]);
+    }
     public function edit(user $user)
     {
-        return view('user.edit', ['user' => $user]);
+        return view('admin.user.edit', ['user' => $user]);
     }
 
     public function update(Request $request)
@@ -99,11 +102,11 @@ class UserController extends Controller
 
     public function login()
     {
-        return view('user.login');
+        return view('client.login');
     }
 
     public function compelete_form(){
-        return view('user.compelete_form', ['user'=>Auth::user()]);
+        return view('admin.user.compelete_form', ['user'=>Auth::user()]);
     }
 
     public function save(Request $request){

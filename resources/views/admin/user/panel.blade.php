@@ -87,16 +87,47 @@
                         <ul class="gap-2.5 mt-2.5 mb-2.5 pr-3">
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('career.careers') }}" class=" text-white py-1">کسب و کار های
+                                <a href="{{ route('career.careers', [Auth::user()]) }}" class=" text-white py-1">کسب و کار های
                                     من</a>
                             </li>
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('career.create') }}" class=" text-white py-1">ایجاد کسب و کار
+                                <a href="{{ route('career.create', [Auth::user()]) }}" class=" text-white py-1">ایجاد کسب و کار
                                     جدید</a>
                             </li>
                         </ul>
                     </div>
+                    @if(Auth::user()->type == 'admin')
+                    <div class="dashbord ">
+                        <ul class="gap-2.5 mt-2.5 mb-2.5 pr-3">
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('user.list') }}" class=" text-white py-1">
+                                    مشاهده همه کاربران
+                                </a>
+                            </li>
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('career.list') }}" class=" text-white py-1">
+                                    مشاهده همه کسب و کار ها
+                                </a>
+                            </li>
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('user.adminCreate') }}" class=" text-white py-1">
+                                    ایجاد ادمین
+                                </a>
+                            </li>
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="#" class=" text-white py-1">
+                                   لیست ادمین ها
+                                </a>
+                            </li>
+                          
+                        </ul>
+                    </div>
+                    @endif
                 </div>
                 <!-- <div class="border-b border-gray-500">
                         <div class="flex justify-between flex-row-reverse">
@@ -184,11 +215,11 @@
                     <div class="w-6/12 flex flex-row-reverse items-center">
                         <div class="relative hover_profile">
                             <div class="cursor-pointer">
-                                @if(!$user->main_image)
+                                @if(!Auth::user()->main_image)
                                 <img src="{{ asset('assets/img/user.png') }}" alt="user__avatar"
                                     class="size-10 rounded-xl">
                                 @else
-                                <img src="{{ asset('storage/'.$user->main_image) }}" alt="user__picture"
+                                <img src="{{ asset('storage/'.Auth::user()->main_image) }}" alt="user__picture"
                                     class="size-10 rounded-xl">
                                 @endif
                             </div>
@@ -196,13 +227,13 @@
                                 <div class="w-[250px] rounded-xl  py-4 bg-white shadow__all__prof">
                                     <div class="text-center px-2">
                                         <span class="font-bold">
-                                            {{ $user->name }} {{ $user?->family }}
+                                            {{ Auth::user()->name }} {{ Auth::user()?->family }}
                                         </span>
                                     </div>
                                     <div class="w-full h-px bg-gray-300 mt-4 "></div>
                                     <ul class="rtl text-right ">
                                         <li class="hover:text-[#1B84FF] hover:bg-[#F1F1F4] mt-1 w-11/12 ml-auto mr-auto rounded-lg">
-                                            <a href="{{ route('user.profile', [$user]) }}" class="block w-full p-2">پروفایل من</a>
+                                            <a href="{{ route('user.profile', [Auth::user()]) }}" class="block w-full p-2">پروفایل من</a>
                                         </li>
                                         <li class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto rounded-lg">
                                             <a href="{{ route('user.compelete_form') }}" class="block w-full p-2">تکمیل پروفایل</a>
@@ -322,11 +353,11 @@
                        <span class="w-full h-0.5 bg-black transition-all duration-300"></span>
                        <span class="w-full h-0.5 bg-black transition-all duration-300"></span>
                     </div>
-                    @if(!$user->main_image)
+                    @if(!Auth::user()->main_image)
                     <img src="{{ asset('assets/img/user.png') }}" alt="user__avatar"
                         class="size-10 rounded-xl">
                     @else
-                    <img src="{{ asset('storage/'.$user->main_image) }}" alt="user__picture"
+                    <img src="{{ asset('storage/'.Auth::user()->main_image) }}" alt="user__picture"
                         class="size-10 rounded-xl">
                     @endif
                </div>
@@ -335,16 +366,16 @@
                     <div class="w-2/3 bg-white h-full p-2">
                         <div class="flex flex-row justify-between items-center gap-3 pb-2 border-b border-gray-300">
                             <div>
-                                @if(!$user->main_image)
+                                @if(!Auth::user()->main_image)
                                 <img src="{{ asset('assets/img/user.png') }}" alt="user__avatar"
                                     class="size-10 rounded-xl">
                                 @else
-                                <img src="{{ asset('storage/'.$user->main_image) }}" alt="user__picture"
+                                <img src="{{ asset('storage/'.Auth::user()->main_image) }}" alt="user__picture"
                                     class="size-10 rounded-xl">
                                 @endif
                             </div>
                             <div>
-                                <span class="text-xs text-gray-700 font-semibold">{{ $user->name }} {{ $user?->family }}</span>
+                                <span class="text-xs text-gray-700 font-semibold">{{ Auth::user()->name }} {{ Auth::user()?->family }}</span>
                             </div>
                         </div>
                         <div class="pt-2">
@@ -352,7 +383,7 @@
                                 <h3 class="text-sm font-semibold text-gray-800 mb-1.5">کسب و کار ها</h3>
                                 <ul class="pr-3.5">
                                     <li>
-                                        <a href="{{ route('career.careers') }}" class="block text-gray-700 py-1 text-xs">کسب و کار های
+                                        <a href="{{ route('career.careers',[Auth::user()]) }}" class="block text-gray-700 py-1 text-xs">کسب و کار های
                                             من</a>
                                     </li>
                                     <li>

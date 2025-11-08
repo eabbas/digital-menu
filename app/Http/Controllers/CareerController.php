@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-
+use App\Models\user;
 use App\Models\career;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +11,7 @@ class CareerController extends Controller
     public function create()
     {
         $user = Auth::user();
-        return view('careers.create', ['user' => $user]);
+        return view('admin.careers.create', ['user' => $user]);
     }
 
     public function store(Request $request)
@@ -36,17 +36,16 @@ class CareerController extends Controller
         return to_route('user.profile', ['user' => $user]);
     }
 
-    public function user_careers()
+    public function user_careers(User $user)
     {
-        $user = Auth::user();
-        return view('careers.userCareers', ['user' => $user]);
+        return view('admin.careers.userCareers', ['user' => $user]);
     }
 
     public function edit(career $career)
     {
         $user = Auth::user();
         $career->social_media = json_decode($career->social_media);
-        return view('careers.edit', ['career' => $career, 'user' => $user]);
+        return view('admin.careers.edit', ['career' => $career, 'user' => $user]);
     }
 
     public function update(Request $request)
@@ -66,7 +65,7 @@ class CareerController extends Controller
         $career->description = $request->description;
         $career->email = $request->email;
         $career->save();
-        return view('careers.userCareers', ['user' => Auth::user()]);
+        return view('admin.careers.userCareers', ['user' => Auth::user()]);
     }
 
     public function delete(career $career)
@@ -78,5 +77,12 @@ class CareerController extends Controller
         $career->menu->delete();
         $career->delete();
         return to_route('user.profile', [$user]);
+    }
+    public function index()
+    {
+        $careers=career::all();
+        // dd($careers);
+        $user = Auth::user();
+        return view('admin.careers.index',['careers'=>$careers, 'user'=>$user]);
     }
 }

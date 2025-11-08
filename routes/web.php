@@ -24,17 +24,20 @@ Route::group([
     'as'=>'user.',
     'middleware'=>[UserMiddleware::class]
 ], function(){
-    Route::post("/store", "store")->name('store')->withoutMiddleware([UserMiddleware::class]);;
-    Route::post("/check", "check")->name('check')->withoutMiddleware([UserMiddleware::class]);;
+    Route::post("/store", "store")->name('store')->withoutMiddleware([UserMiddleware::class]);
+    Route::post("/check", "check")->name('check')->withoutMiddleware([UserMiddleware::class]);
     Route::get("/logout", "logout")->name('logout');
     Route::get("/","index")->name('list');
     Route::get("/panel/{user}", "panel")->name('panel');
     Route::get('/profile/{user}', 'profile')->name('profile');
+    Route::get('/show/{user}', 'show')->name('show');
     Route::get("/edit/{user}", "edit")->name('edit');
     Route::post("/update", "update")->name('update');
     Route::get("/delete/{user}", "delete")->name('delete');
     Route::get('/compelete', 'compelete_form')->name('compelete_form');
     Route::post('/save', 'save')->name('save');
+    Route::get('/admin/create', 'adminCreate')->name('adminCreate');
+    Route::post('/admin/store', 'adminStore')->name('adminStore')->withoutMiddleware([UserMiddleware::class]);
 });
 
 Route::group([
@@ -45,10 +48,11 @@ Route::group([
 ], function(){
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/list', 'user_careers')->name('careers');
+    Route::get('/list/{user}', 'user_careers')->name('careers');
     Route::get('/edit/{career}','edit')->name('edit');
     Route::post('/update','update')->name('update');
     Route::get('/delete/{career}','delete')->name('delete');
+    Route::get('/careers','index')->name('list');
 });
 
 Route::group([
@@ -206,12 +210,12 @@ Route::fallback(function(){
 
 ////admin
 // Route::get('/adminProfile', [adminController::class, 'adminPanel'])->name('adminPanel');
-Route::group([
-    'prefix'=>'admin',
-    'controller'=>adminController::class,
-    'as'=>'admin.'
-], function(){
-    Route::get('/profile', 'adminProfile')->name('adminProfile');
-});
+// Route::group([
+//     'prefix'=>'admin',
+//     'controller'=>adminController::class,
+//     'as'=>'admin.'
+// ], function(){
+//     Route::get('/profile', 'adminProfile')->name('adminProfile');
+// });
 
 route::post('/set_order' ,[UserController::class , 'set_order'])->name('set_order')->middleware([UserMiddleware::class]);
