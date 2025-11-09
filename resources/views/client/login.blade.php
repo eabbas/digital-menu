@@ -74,7 +74,7 @@
                     <div class="text-[#4B5675] text-sm ">توسط ایمیل !</div>
                     <div class="w-37 h-px bg-[#F1F1F4] "></div>
                 </div> -->
-                <div class="flex flex-col w-full p-[60px] py-[30px]">
+                <div class="flex flex-col w-full p-30">
                     <form action="{{ route('user.check') }}" class="flex flex-col items-center my-6 gap-3 w-full" method="post">
                         @csrf
                         <input type="number"

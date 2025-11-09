@@ -11,17 +11,17 @@
                 </div>
             </div>
            
-        <div class="flex flex-col border border-[#f1f1f4] lg:p-5 rounded-[7px]">
+        <div class="flex flex-col border-none lg:p-5 rounded-[7px]">
             <div class="block lg:flex flex-row justify-between gap-8">
-                <div class="flex flex-col lg:flex-row gap-7">
+                <div class="flex flex-col xm:flex-row lg:flex-row gap-5 py-3">
                     @if(!$user->main_image)
                     <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0" src="{{ asset('assets/img/user.png') }}" alt="user__avatar">
                     @else
                     <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0" src="{{ asset('storage/'.$user->main_image) }}" alt="user__picture">
                     @endif
-                    <div class="flex flex-col gap-2">
+                    <div class="flex flex-col justify-end">
                         <div class="div1 text-center lg:text-start">
-                            <strong>{{ $user->name }} {{ $user?->family }}</strong>
+                            <strong class="text-gray-700">{{ $user->name }} {{ $user?->family }}</strong>
                         </div>
                         <div class="div2 hidden">
                             <ul class="flex flex-col lg:flex-row gap-3 text-[#99A1B7]">
@@ -36,17 +36,17 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="flex flex-col lg:flex-row gap-3 mt-8">
-                            <div class="border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px] p-1 ">
-                                <span class="font-bold">4,500</span>
+                        <div class="flex flex-col lg:flex-row gap-2 mt-8 mx-10 lg:mx-0">
+                            <div class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border border-dashed rounded-[5px] p-1 ">
+                                <span class="font-bold text-blue-500">4,500</span>
                                 <span class="text-[#4B5675]">تعداد اسکن ها</span>
                             </div>
-                            <div class="border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px] p-1 ">
-                                <span class="font-bold">56</span>
+                            <div class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border border-dashed rounded-[5px] p-1 ">
+                                <span class="font-bold text-blue-500">56</span>
                                 <span class="text-[#4B5675]"> تعداد QR کد ها </span>
                             </div>
-                            <div class="border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px] p-1 ">
-                                <span class="font-bold">6</span>
+                            <div class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border max-sm:border-[1.5px] border-dashed rounded-[5px] p-1 ">
+                                <span class="font-bold text-blue-500">6</span>
                                 <span class="text-[#4B5675]">تعداد کسب و کارها</span>
                             </div>
                         </div>
@@ -57,58 +57,76 @@
     </div>
     <!-- <hr> -->
     <div class="pt-3 mt-4 lg:mt-8">
-        <div class="my-6">
-            <ul class="flex flex-row gap-5 overflow-x-auto" style="scrollbar-width: none;">
+        <div class="my-6 ">
+            <ul class="flex flex-row gap-2 overflow-x-auto scroll-snap-x snap-mandatory no-scrollbar" style="scrollbar-width: none;">
                 <li>
-                    <a class="hover:text-blue-700 block w-[100px]" href="">بررسی اجمالی</a>
+                    <a class="bg-gray-100 focus:text-blue-600 rounded-[13px] text-center text-gray-600 py-2 hover:text-blue-700 block w-[110px]" href="">بررسی اجمالی</a>
                 </li>
                 <li>
-                    <a class="hover:text-blue-700 block w-[100px]" href="">تنظیمات</a>
+                    <a class="bg-gray-100 focus:text-blue-600 rounded-[13px] text-center text-gray-600 py-2 hover:text-blue-700 block w-[110px]" href="">تنظیمات</a>
                 </li>
                 <li>
-                    <a class="hover:text-blue-700 block w-[100px]" href="">امنیت</a>
+                    <a class="bg-gray-100 focus:text-blue-600 rounded-[13px] text-center text-gray-600 py-2 hover:text-blue-700 block w-[110px]" href="">امنیت</a>
                 </li>
                 <li>
-                    <a class="hover:text-blue-700 block w-[100px]" href="">فعالیت</a>
+                    <a class="bg-gray-100 focus:text-blue-600 rounded-[13px] text-center text-gray-600 py-2 hover:text-blue-700 block w-[110px]" href="">فعالیت</a>
                 </li>
                 <li>
-                    <a class="hover:text-blue-700 block w-[100px]" href="">صورتحساب</a>
+                    <a class="bg-gray-100 focus:text-blue-600 rounded-[13px] text-center text-gray-600 py-2 hover:text-blue-700 block w-[110px]" href="">صورتحساب</a>
                 </li>
                 <li>
-                    <a class="hover:text-blue-700 block w-[100px]" href="">بیانه ها</a>
+                    <a class="bg-gray-100 focus:text-blue-600 rounded-[13px] text-center text-gray-600 py-2 hover:text-blue-700 block w-[110px]" href="">بیانه ها</a>
                 </li>
                 <li>
-                    <a class="hover:text-blue-700 block w-[100px]" href="">مراجعات</a>
+                    <a class="bg-gray-100 focus:text-blue-600 rounded-[13px] text-center text-gray-600 py-2 hover:text-blue-700 block w-[110px]" href="">مراجعات</a>
                 </li>
                 <li>
-                    <a class="hover:text-blue-700 block w-[100px]" href="">کلید ای پی ای</a>
+                    <a class="bg-gray-100 focus:text-blue-600 rounded-[13px] text-center text-gray-600 py-2 hover:text-blue-700 block w-[110px]" href="">کلید ای پی ای</a>
                 </li>
                 <li>
-                    <a class="hover:text-blue-700 block w-[100px]" href="">گزارش</a>
+                    <a class="bg-gray-100 focus:text-blue-600 rounded-[13px] text-center text-gray-600 py-2 hover:text-blue-700 block w-[110px]" href="">گزارش</a>
                 </li>
             </ul>
         </div>
         <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2">
-            <h1 class="text-xm lg:text-xl mt-5">جزییات پروفایل </h1>
+            <h1 class="text-xm lg:text-xl mt-5 font-bold mx-2">جزییات پروفایل </h1>
            
             <div class="w-full h-px bg-gray-200 my-5 "></div>
-            <div class="flex gap-70 ">
+            <div class="flex gap-7 sm:hidden block">
                 <div class="flex w-full flex-col">
                     <libal class="p-2.5 text-gray-400">نام کامل</libal>
-                    <span class="p-2.5"><strong>{{ $user->name }} {{ $user?->family }}</strong></span>
+                    <span class="p-2.5 text-gary-600"><strong>{{ $user->name }} {{ $user?->family }}</strong></span>
                     <libal class="p-2.5 text-gray-400">کمپانی</libal>
-                    <span class="p-2.5">فائوس</span>
+                    <span class="p-2.5 text-gary-600">فائوس</span>
                     <libal class="p-2.5 text-gray-400">تماس با ما تلفن </libal>
-                    <span class="p-2.5">{{ $user->phoneNumber }}<mark class="bg-green-400 px-1 rounded-md">تایید
+                    <span class="p-2.5 text-gary-600">{{ $user->phoneNumber }}<mark class="mx-2 text-green-700 bg-green-300 px-1 rounded-md">تایید
                             شده</mark></span>
                     <libal class="p-2.5 text-gray-400">سایت کمپانی</libal>
-                    <a href="#" class="p-2.5">famenu.ie</a>
+                    <a href="#" class="p-2.5 text-gary-600">famenu.ie</a>
                     <libal class="p-2.5 text-gray-400">کشور </libal>
-                    <span class="p-2.5">ایران</span>
+                    <span class="p-2.5 text-gary-600">ایران</span>
                     <libal class="p-2.5 text-gray-400">ارتباط</libal>
-                    <span class="p-2.5">ایمیل, تلفن</span>
-                    <libal class="p-2.5 text-gray-400">همه</libal>
-                    <span class="p-2.5">بله</span>
+                    <span class="p-2.5 text-gary-600">ایمیل, تلفن</span>
+                </div>
+            </div>
+
+            <div class="sm:grid sm:grid-cols-2 sm:grid-cols-[300px-minmax(200px,100px)] sm:gap-2 hidden sm:block">
+                <div class="flex w-full flex-col">
+                    <libal class="p-2.5 text-gray-400">نام کامل</libal>
+                    <libal class="p-2.5 text-gray-400">کمپانی</libal>
+                    <libal class="p-2.5 text-gray-400">تماس با ما تلفن </libal>
+                    <libal class="p-2.5 text-gray-400">سایت کمپانی</libal>
+                    <libal class="p-2.5 text-gray-400">کشور </libal>
+                    <libal class="p-2.5 text-gray-400">ارتباط</libal>
+                </div>
+                <div class="flex w-full flex-col">
+                    <span class="p-2.5 text-gary-600"><strong>{{ $user->name }} {{ $user?->family }}</strong></span>
+                    <span class="p-2.5 text-gary-600">فائوس</span>
+                    <span class="p-2.5 text-gary-600">{{ $user->phoneNumber }}<mark class="mx-2 text-green-700 bg-green-300 px-1 rounded-md">تایید
+                            شده</mark></span>
+                    <a href="#" class="p-2.5 text-gary-600">famenu.ie</a>
+                    <span class="p-2.5 text-gary-600">ایران</span>
+                    <span class="p-2.5 text-gary-600">ایمیل, تلفن</span>
                 </div>
             </div>
 
