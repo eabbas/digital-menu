@@ -50,6 +50,7 @@
                                         <input type="file"
                                             class="outline-none pr-5 py-3 cursor-pointer"
                                             name="menu_data[0][values][0][gallery]">
+                                            <input type="hidden" name="menu_data[0][values][0][id]" value="0">
                                     </div>
                                 </div>
                                 <div class="flex items-end">
