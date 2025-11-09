@@ -16,18 +16,16 @@
                                 <input type="text"
                                     class="outline-none w-full lg:w-1/2 pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#efefef]"
                                     placeholder="نوشیدنی" name="menu_data[0][name]">
+                                </div>
                             </div>
-                            <div class="w-full flex flex-col">
-                                <label class="font-bold mb-2">تصویر منو :</label>
-                                <input type="file"
-                                    class="outline-none w-full lg:w-1/2 pr-5 py-3 cursor-pointer"
-                                    name="menu_data[0][menu_image]">
-                            </div>
-                        </div>
-                        <div class="w-full flex flex-col gap-2" data-value="0">
-                            <div class="w-full flex flex-row items-end gap-3">
-                                <div class="flex flex-col lg:flex-row items-center pr-10 gap-3">
-                                    <div class="w-full flex flex-col">
+                            <div class="w-full flex flex-col gap-2" data-value="0">
+                                <div class="w-full flex flex-row items-end gap-3">
+                                    <div class="flex flex-col lg:flex-row items-center pr-10 gap-3">
+                                        <div class="w-full flex flex-col">
+                                        <label class="font-bold mb-2">تصویر منو :</label>
+                                        <input type="file"
+                                            class="outline-none w-full lg:w-1/2 pr-5 py-3 cursor-pointer"
+                                            name="menu_data[0][menu_image]">
                                         <label class="text-[#425a8bde] mb-2"> نام آیتم :</label>
                                         <input type="text"
                                             class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#efefef]"

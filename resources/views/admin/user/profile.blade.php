@@ -11,7 +11,7 @@
                 </div>
             </div>
            
-        <div class="flex flex-col border-none lg:p-5 rounded-[7px]">
+        <div class="flex flex-col border-none rounded-[7px]">
             <div class="block lg:flex flex-row justify-between gap-8">
                 <div class="flex flex-col xm:flex-row lg:flex-row gap-5 py-3">
                     @if(!$user->main_image)
@@ -37,15 +37,15 @@
                             </ul>
                         </div>
                         <div class="flex flex-col lg:flex-row gap-2 mt-8 mx-10 lg:mx-0">
-                            <div class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border border-dashed rounded-[5px] p-1 ">
+                            <div class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px] p-1 ">
                                 <span class="font-bold text-blue-500">4,500</span>
                                 <span class="text-[#4B5675]">تعداد اسکن ها</span>
                             </div>
-                            <div class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border border-dashed rounded-[5px] p-1 ">
+                            <div class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px] p-1 ">
                                 <span class="font-bold text-blue-500">56</span>
                                 <span class="text-[#4B5675]"> تعداد QR کد ها </span>
                             </div>
-                            <div class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border max-sm:border-[1.5px] border-dashed rounded-[5px] p-1 ">
+                            <div class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border max-sm:border-[1.5px] rounded-[5px] p-1 ">
                                 <span class="font-bold text-blue-500">6</span>
                                 <span class="text-[#4B5675]">تعداد کسب و کارها</span>
                             </div>
@@ -88,7 +88,7 @@
                 </li>
             </ul>
         </div>
-        <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2">
+        <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5">
             <h1 class="text-xm lg:text-xl mt-5 font-bold mx-2">جزییات پروفایل </h1>
            
             <div class="w-full h-px bg-gray-200 my-5 "></div>

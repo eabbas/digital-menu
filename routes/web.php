@@ -204,7 +204,7 @@ Route::group([
 });
 
 Route::fallback(function(){
-    return view('login');
+    return view('client.login');
 });
 
 
