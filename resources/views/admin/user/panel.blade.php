@@ -228,12 +228,14 @@
                                             <a href="{{ route('user.profile', [Auth::user()]) }}"
                                                 class="block w-full p-2">پروفایل من</a>
                                         </li>
+                                        @if(!Auth::user()->email)
                                         <li
                                             class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto rounded-lg">
                                             <a href="{{ route('user.compelete_form') }}" class="block w-full p-2">تکمیل
                                                 پروفایل</a>
                                         </li>
-                                        <li
+                                        @endif
+                                        <!-- <li
                                             class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto rounded-lg flex flex-row justify-between items-center">
                                             <a href="" class="block w-full p-2">اشتراک من</a>
                                             <div class="">
@@ -248,16 +250,16 @@
                                         <li
                                             class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto p-2  rounded-lg">
                                             <a href="">بیانه های من</a>
-                                        </li>
+                                        </li> -->
                                     </ul>
 
                                     <div class="w-full h-px bg-gray-300 my-2 "></div>
-                                    <ul class="rtl text-right ">
-                                        <div
+                                    <div class="rtl text-right ">
+                                        <!-- <div
                                             class="hover:text-[#1B84FF] hover:bg-[#F1F1F4] flex flex-row justify-between items-center  mt-1 w-11/12 ml-auto mr-auto p-2  rounded-lg">
-                                            <li>
+                                            <div>
                                                 <a href="">زبان</a>
-                                            </li>
+                                            </div>
                                             <div class="flex flex-row gap-3 items-center">
                                                 <spanh class="family ">English.US</spanh>
                                                 <svg class="size-6" xmlns="http://www.w3.org/2000/svg"
@@ -305,11 +307,11 @@
                                                     <g></g>
                                                 </svg>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div
-                                            class="hover:text-[#1B84FF] hover:bg-[#F1F1F4] flex flex-row justify-between mt-1 w-11/12 ml-auto mr-auto p-2 rounded-lg">
+                                            class="hover:text-[#1B84FF] hover:bg-[#F1F1F4] flex flex-row justify-between mt-1 w-11/12 ml-auto mr-auto rounded-lg">
 
-                                            <a href="">تنظیمات اکانت</a>
+                                            <a href="{{ route('user.setting') }}" class="block p-2">تنظیمات اکانت</a>
 
                                         </div>
                                         <div
@@ -318,7 +320,7 @@
                                             <a href="{{ route('user.logout') }}" class="p-2 block w-full">خروج</a>
 
                                         </div>
-                                    </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>

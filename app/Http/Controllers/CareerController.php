@@ -17,8 +17,10 @@ class CareerController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        $user->type = 'career';
-        $user->save();
+        if($user->type != 'admin'){
+            $user->type = 'career';
+            $user->save();
+        }
         $name = $request->logo->getClientOriginalName();
         $path = $request->logo->storeAs('files', $name, 'public');
         $social_medias = json_encode($request->social_medias);
