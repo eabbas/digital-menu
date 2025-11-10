@@ -83,10 +83,15 @@ class UserController extends Controller
         $user = User::find($request->id);
         $user->name = $request->name;
         $user->phoneNumber = $request->phoneNumber;
-        $user->type = $request->type;
+        if ($request->type) {
+            $user->type = $request->type;
+        }
         if ($request->password) {
             $password = Hash::make($request->password);
             $user->password = $password;
+        }
+        if($request->main_image){
+            $user->main_image = $request->main_image;
         }
         $user->save();
         return redirect('/user/index');
@@ -138,4 +143,8 @@ class UserController extends Controller
         ]);
         return to_route('login');
     }
+    public function setting(){
+        return view('admin.user.setting');
+    }
+   
 }
