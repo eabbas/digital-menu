@@ -24,4 +24,9 @@ class AboutUsController extends Controller
         return view('admin.aboutUs.index',['allAboutUs' => $allAboutUs] );
 
     }
+     public function delete(aboutUs $aboutUs)
+    {
+        $aboutUs->delete();
+        return redirect('/aboutUs/aboutUs');
+    }
 }

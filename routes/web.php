@@ -247,7 +247,6 @@ Route::group([
     Route::get('/create', 'create')->name('create');
     Route::post('/upsert', 'upsert')->name('upsert');
     Route::get('/aboutUs', 'index')->name('list');
-    Route::get('/edit/{slider}','edit')->name('edit');
-    Route::get('/delete/{slider}', 'delete')->name('sliderDelete');
+    Route::get('/delete/{aboutUs}', 'delete')->name('delete');
 });
 
