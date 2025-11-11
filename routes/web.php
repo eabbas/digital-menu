@@ -15,7 +15,7 @@ use App\Http\Middleware\UserMiddleware;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 })->name('home');
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware([LoginMiddleware::class]);
 Route::get('/signup', [UserController::class, "create"])->name('signup')->middleware([LoginMiddleware::class]);
@@ -39,6 +39,8 @@ Route::group([
     Route::post('/save', 'save')->name('save');
     Route::get('/admin/create', 'adminCreate')->name('adminCreate');
     Route::post('/admin/store', 'adminStore')->name('adminStore')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/setting', 'setting')->name('setting');
+    Route::post('/set', 'set')->name('set');
 });
 
 Route::group([

@@ -93,11 +93,15 @@
                             </li>
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('career.create') }}" class=" text-white py-1">ایجاد
+                                <a href="{{ route('career.create', [Auth::user()]) }}" class=" text-white py-1">ایجاد
                                     کسب و کار
                                     جدید</a>
                             </li>
-                            @if(Auth::user()->type == 'admin')
+                        </ul>
+                    </div>
+                    @if(Auth::user()->type == 'admin')
+                    <div class="dashbord ">
+                        <ul class="gap-2.5 mt-2.5 mb-2.5 pr-3">
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
                                 <a href="{{ route('user.list') }}" class=" text-white py-1">
@@ -116,31 +120,16 @@
                                     ایجاد ادمین
                                 </a>
                             </li>
-
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
                                 <a href="#" class=" text-white py-1">
-                                   لیست ادمین ها
+                                    لیست ادمین ها
                                 </a>
                             </li>
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
-                                <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('slider.sliderCreate') }}" class=" text-white py-1">
-                                    ایجاد اسلایدر
-                                </a>
-                            </li>
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
-                                <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="#" class=" text-white py-1">
-                                لیست اسلایدر
-                                </a>
-                            </li>
-                          
-
-                            @endif
 
                         </ul>
                     </div>
+                    @endif
                 </div>
                 <!-- <div class="border-b border-gray-500">
                         <div class="flex justify-between flex-row-reverse">
@@ -250,14 +239,12 @@
                                             <a href="{{ route('user.profile', [Auth::user()]) }}"
                                                 class="block w-full p-2">پروفایل من</a>
                                         </li>
-                                        @if(!Auth::user()->email)
                                         <li
                                             class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto rounded-lg">
                                             <a href="{{ route('user.compelete_form') }}" class="block w-full p-2">تکمیل
                                                 پروفایل</a>
                                         </li>
-                                        @endif
-                                        <!-- <li
+                                        <li
                                             class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto rounded-lg flex flex-row justify-between items-center">
                                             <a href="" class="block w-full p-2">اشتراک من</a>
                                             <div class="">
@@ -272,16 +259,16 @@
                                         <li
                                             class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto p-2  rounded-lg">
                                             <a href="">بیانه های من</a>
-                                        </li> -->
+                                        </li>
                                     </ul>
 
                                     <div class="w-full h-px bg-gray-300 my-2 "></div>
-                                    <div class="rtl text-right ">
-                                        <!-- <div
+                                    <ul class="rtl text-right ">
+                                        <div
                                             class="hover:text-[#1B84FF] hover:bg-[#F1F1F4] flex flex-row justify-between items-center  mt-1 w-11/12 ml-auto mr-auto p-2  rounded-lg">
-                                            <div>
+                                            <li>
                                                 <a href="">زبان</a>
-                                            </div>
+                                            </li>
                                             <div class="flex flex-row gap-3 items-center">
                                                 <spanh class="family ">English.US</spanh>
                                                 <svg class="size-6" xmlns="http://www.w3.org/2000/svg"
@@ -329,11 +316,11 @@
                                                     <g></g>
                                                 </svg>
                                             </div>
-                                        </div> -->
+                                        </div>
                                         <div
-                                            class="hover:text-[#1B84FF] hover:bg-[#F1F1F4] flex flex-row justify-between mt-1 w-11/12 ml-auto mr-auto rounded-lg">
+                                            class="hover:text-[#1B84FF] hover:bg-[#F1F1F4] flex flex-row justify-between mt-1 w-11/12 ml-auto mr-auto p-2 rounded-lg">
 
-                                            <a href="{{ route('user.setting') }}" class="block p-2">تنظیمات اکانت</a>
+                                            <a href="">تنظیمات اکانت</a>
 
                                         </div>
                                         <div
@@ -342,7 +329,7 @@
                                             <a href="{{ route('user.logout') }}" class="p-2 block w-full">خروج</a>
 
                                         </div>
-                                    </div>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -387,24 +374,24 @@
                 <div
                     class="w-full h-dvh fixed top-0 -left-full bg-black/50 flex flex-row z-50 transition-all duration-500">
                     <div class="w-1/3 bg-inherit h-full" onclick="hamburgerMenu('close', this)"></div>
-                    <div class="w-2/3 bg-white h-full p-2 flex flex-col justify-between">
-                        <div>
-                            <div class="flex flex-row justify-between items-center gap-3 pb-2 border-b border-gray-300">
-                                <div>
-                                    @if(!Auth::user()->main_image)
-                                    <img src="{{ asset('assets/img/user.png') }}" alt="user__avatar"
-                                        class="size-10 rounded-xl">
-                                    @else
-                                    <img src="{{ asset('storage/'.Auth::user()->main_image) }}" alt="user__picture"
-                                        class="size-10 rounded-xl">
-                                    @endif
-                                </div>
-                                <div>
-                                    <span class="text-xs text-gray-700 font-semibold">{{ Auth::user()->name }} {{
-                                        Auth::user()?->family }}</span>
-                                </div>
+                    <div class="w-2/3 bg-white h-full p-2">
+                        <div class="flex flex-row justify-between items-center gap-3 pb-2 border-b border-gray-300">
+                            <div>
+                                @if(!Auth::user()->main_image)
+                                <img src="{{ asset('assets/img/user.png') }}" alt="user__avatar"
+                                    class="size-10 rounded-xl">
+                                @else
+                                <img src="{{ asset('storage/'.Auth::user()->main_image) }}" alt="user__picture"
+                                    class="size-10 rounded-xl">
+                                @endif
                             </div>
-                            <div class="pt-2">
+                            <div>
+                                <span class="text-xs text-gray-700 font-semibold">{{ Auth::user()->name }} {{
+                                    Auth::user()?->family }}</span>
+                            </div>
+                        </div>
+                        <div class="pt-2">
+                            <div>
                                 <h3 class="text-sm font-semibold text-gray-800 mb-1.5">کسب و کار ها</h3>
                                 <ul class="pr-3.5">
                                     <li>
@@ -417,31 +404,43 @@
                                             class="block text-gray-700 py-1 text-xs">ایجاد کسب و کار
                                             جدید</a>
                                     </li>
-                                    @if(Auth::user()->type == 'admin')
-                                    <li>
-                                        <span class="size-1 rounded-sm"></span>
-                                        <a href="{{ route('user.list') }}" class="block text-gray-700 py-1 text-xs">
+                                    <li class="mt-3">
+                                        <a href="{{ route('user.logout') }}"
+                                            class="block text-rose-700 py-1 font-medium text-xs">خروج از حساب کاربری</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            @if(Auth::user()->type == 'admin')
+                            <div class="dashbord ">
+                                <ul class="gap-2.5 mt-2.5 mb-2.5 pr-3">
+                                    <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                        <span class="size-1 bg-white rounded-sm"></span>
+                                        <a href="{{ route('user.list') }}" class=" text-white py-1">
                                             مشاهده همه کاربران
                                         </a>
                                     </li>
-                                    <li>
-                                        <span class="size-1 rounded-sm"></span>
-                                        <a href="{{ route('career.list') }}" class="block text-gray-700 py-1 text-xs">
+                                    <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                        <span class="size-1 bg-white rounded-sm"></span>
+                                        <a href="{{ route('career.list') }}" class=" text-white py-1">
                                             مشاهده همه کسب و کار ها
                                         </a>
                                     </li>
-                                    <li>
-                                        <span class="size-1 rounded-sm"></span>
-                                        <a href="{{ route('user.adminCreate') }}" class="block text-gray-700 py-1 text-xs">
+                                    <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                        <span class="size-1 bg-white rounded-sm"></span>
+                                        <a href="{{ route('user.adminCreate') }}" class=" text-white py-1">
                                             ایجاد ادمین
                                         </a>
                                     </li>
-                                    @endif
+                                    <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                        <span class="size-1 bg-white rounded-sm"></span>
+                                        <a href="#" class=" text-white py-1">
+                                            لیست ادمین ها
+                                        </a>
+                                    </li>
+
                                 </ul>
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <a href="{{ route('user.logout') }}" class="block text-rose-700 py-1 font-medium text-xs text-center">خروج از حساب کاربری</a>
+                            @endif
                         </div>
                     </div>
                 </div>
