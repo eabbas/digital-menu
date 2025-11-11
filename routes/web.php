@@ -10,6 +10,7 @@ use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\AboutUsController;
 use App\Http\Middleware\LoginMiddleware;
 use App\Http\Middleware\UserMiddleware;
 
@@ -233,6 +234,20 @@ Route::group([
     Route::get('/sliders', 'index')->name('sliderList');
     Route::get('/edit/{slider}','edit')->name('sliderEdit');
     Route::post('/update', 'update')->name('sliderUpdate');
+    Route::get('/delete/{slider}', 'delete')->name('sliderDelete');
+});
+
+
+//////aboutUs
+Route::group([
+    'prefix'=>'aboutUs',
+    'controller'=>AboutUsController::class,
+    'as'=>'aboutUs.'
+], function(){
+    Route::get('/create', 'create')->name('create');
+    Route::post('/upsert', 'upsert')->name('upsert');
+    Route::get('/aboutUs', 'index')->name('list');
+    Route::get('/edit/{slider}','edit')->name('edit');
     Route::get('/delete/{slider}', 'delete')->name('sliderDelete');
 });
 

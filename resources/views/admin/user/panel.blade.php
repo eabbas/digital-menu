@@ -135,6 +135,18 @@
                                 لیست اسلایدر
                                 </a>
                             </li>
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('aboutUs.create') }}" class=" text-white py-1">
+                                 ایجاد درباره ما
+                                </a>
+                            </li>
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('aboutUs.list') }}" class=" text-white py-1">
+                                لیست درباره ما
+                                </a>
+                            </li>
                           
 
                             @endif
