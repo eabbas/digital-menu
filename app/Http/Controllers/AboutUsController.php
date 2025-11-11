@@ -14,7 +14,14 @@ class AboutUsController extends Controller
     public function upsert(Request $request){
          aboutUs::upsert([
             'title' => $request->title,
-            'description' => $request->description],['title'],['description']);
-            
+            'description' => $request->description],
+            ['title'],
+            ['description']);
+        return view('admin.user.panel', [Auth::user()]);
+    }
+    public function index(){
+        $allAboutUs=aboutUs::all();
+        return view('admin.aboutUs.index',['allAboutUs' => $allAboutUs] );
+
     }
 }
