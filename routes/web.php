@@ -9,6 +9,7 @@ use App\Http\controllers\SettingController;
 use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\SliderController;
 use App\Http\Middleware\LoginMiddleware;
 use App\Http\Middleware\UserMiddleware;
 
@@ -204,7 +205,7 @@ Route::group([
 });
 
 Route::fallback(function(){
-    return view('login');
+    return view('client.login');
 });
 
 
@@ -217,4 +218,17 @@ Route::fallback(function(){
 // ], function(){
 //     Route::get('/profile', 'adminProfile')->name('adminProfile');
 // });
+
+
+/////slider
+Route::group([
+    'prefix'=>'slider',
+    'controller'=>SliderController::class,
+    'as'=>'slider.'
+], function(){
+    Route::get('/create', 'create')->name('sliderCreate');
+    Route::post('/store', 'store')->name('sliderStore');
+  
+
+});
 
