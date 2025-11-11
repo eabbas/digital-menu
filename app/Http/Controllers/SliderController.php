@@ -28,7 +28,7 @@ class SliderController extends Controller
     }
     public function edit(slider $slider){
          $user = Auth::user();
-        return view('admin.slider.edit', ['slider' => $slider, 'user' => $user]);
+        return view('admin.slider.edit', ['slider' => $slider ,['user' => $user]]);
 
     }
      public function update(Request $request){
