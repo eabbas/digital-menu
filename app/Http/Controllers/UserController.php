@@ -47,7 +47,7 @@ class UserController extends Controller
     public function logout()
     {
         Auth::logout();
-        return to_route('login');
+        return to_route('home');
     }
 
     public function index()
