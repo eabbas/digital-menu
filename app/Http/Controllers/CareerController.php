@@ -84,7 +84,7 @@ class CareerController extends Controller
     {
         $careers=career::all();
         // dd($careers);
-        $user = Auth::user();
-        return view('admin.careers.index',['careers'=>$careers, 'user'=>$user]);
+        // $user = Auth::user();
+        return view('admin.careers.index',['careers'=>$careers]);
     }
 }

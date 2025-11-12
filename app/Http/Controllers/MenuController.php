@@ -63,6 +63,7 @@ class MenuController extends Controller
 
     public function update(Request $request)
     {
+        // dd($request->all());
         $menu_data = $request->menu_data;
         foreach ($menu_data as $key => $data) {
             $name = $data['menu_image']->getClientOriginalName();

@@ -23,7 +23,7 @@
                         @if($career)
                         <div class="grid grid-cols-8 items-center divide-x divide-[#f1f1f4]">
                             <div class="p-3 text-sm h-full flex items-center justify-center text-gray-900">{{ $career->title}}</div>
-                            <div class="p-3 text-sm h-full flex items-center justify-center text-gray-900 col-span-2">{{ $career->user->name }} {{ $career->user->family }}</div>
+                            <div class="p-3 text-sm h-full flex items-center justify-center text-gray-900 col-span-2">{{ $career?->user?->name }} {{ $career?->user?->family }}</div>
                             <div class="p-3 text-sm h-full flex items-center justify-center text-gray-900">{{ $career->description}}</div>
                             <div class="p-3 text-sm h-full flex items-center justify-center text-gray-900">
                                 <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover" src="<?= asset("storage/" . $career->logo) ?>">
