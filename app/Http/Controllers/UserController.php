@@ -94,15 +94,17 @@ class UserController extends Controller
             $user->main_image = $request->main_image;
         }
         $user->save();
-        return redirect('/user/index');
+        return to_route('user.list');
     }
     
 
-    public function delete($id)
+    public function delete(user $user)
     {
-        $user = User::find($id);
+        foreach ($user->careers as $career) {
+            $career->delete();
+        }
         $user->delete();
-        return redirect('/user/index');
+        return to_route('user.list');
     }
 
     public function login()

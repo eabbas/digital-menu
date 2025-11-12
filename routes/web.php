@@ -231,7 +231,7 @@ Route::group([
 ], function(){
     Route::get('/create', 'create')->name('sliderCreate');
     Route::post('/store', 'store')->name('sliderStore');
-    Route::get('/sliders', 'index')->name('sliderList');
+    Route::get('/sliders', 'index')->name('list');
     Route::get('/edit/{slider}','edit')->name('sliderEdit');
     Route::post('/update', 'update')->name('sliderUpdate');
     Route::get('/delete/{slider}', 'delete')->name('sliderDelete');
