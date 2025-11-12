@@ -244,8 +244,8 @@ Route::group([
     'controller'=>AboutUsController::class,
     'as'=>'aboutUs.'
 ], function(){
-    Route::get('/create', 'create')->name('create');
-    Route::post('/upsert', 'upsert')->name('upsert');
+    Route::get('/create_edit/{id?}', 'create_edit')->name('create_edit');
+    Route::post('/updateOrcreate', 'updateOrcreate')->name('updateOrcreate');
     Route::get('/aboutUs', 'index')->name('list');
     Route::get('/delete/{aboutUs}', 'delete')->name('delete');
 });
