@@ -69,8 +69,8 @@
                                 d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
                                 clip-rule="evenodd" />
                         </svg>
-                        <div class="flex flex-row-reverse gap-2">
-                            <span class=" text-[white] flex justify-end">کسب و کار ها</span>
+                        <div class="flex flex-row-reverse items-center gap-2">
+                            <span class=" text-[white] flex justify-end font-bold">کسب و کار ها</span>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="800px" height="800px"
                                 class="w-[30px] h-[30px] fill-white " viewBox="0 0 100 100"
                                 enable-background="new 0 0 100 100" xml:space="preserve">
@@ -98,6 +98,34 @@
                                     جدید</a>
                             </li>
                             @if(Auth::user()->type == 'admin')
+                            
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('career.list') }}" class=" text-white py-1">
+                                    مشاهده همه کسب و کار ها
+                                </a>
+                            </li>
+                            <div class="flex flex-row-reverse justify-between">
+                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="size-6 fill-white w-[15px]">
+                            <path fill-rule="evenodd"
+                                d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                                clip-rule="evenodd" />
+                        </svg> 
+                         <div class="flex flex-row-reverse items-center gap-2">
+                            <span class=" text-[white] flex justify-end font-bold">کاربران</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="800px" height="800px"
+                                class="w-[30px] h-[30px] fill-white " viewBox="0 0 100 100"
+                                enable-background="new 0 0 100 100" xml:space="preserve">
+                                <path
+                                    d="M22.5,19.7h20c1.4,0,2.5,1.1,2.5,2.5v54.9c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V22.2  C20,20.8,21.1,19.7,22.5,19.7z" />
+                                <path
+                                    d="M57.5,19.6h20c1.4,0,2.5,1.1,2.5,2.5V42c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V22.1  C55,20.7,56.1,19.6,57.5,19.6z" />
+                                <path
+                                    d="M57.5,54.6h20c1.4,0,2.5,1.1,2.5,2.5v19.9c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V57.1  C55,55.8,56.1,54.6,57.5,54.6z" />
+                            </svg>
+                        </div>
+                            </div>
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
                                 <a href="{{ route('user.list') }}" class=" text-white py-1">
@@ -106,16 +134,31 @@
                             </li>
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('career.list') }}" class=" text-white py-1">
-                                    مشاهده همه کسب و کار ها
-                                </a>
-                            </li>
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
-                                <span class="size-1 bg-white rounded-sm"></span>
                                 <a href="{{ route('user.adminCreate') }}" class=" text-white py-1">
                                     ایجاد ادمین
                                 </a>
                             </li>
+                               <div class="flex flex-row-reverse justify-between">
+                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="size-6 fill-white w-[15px]">
+                            <path fill-rule="evenodd"
+                                d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                                clip-rule="evenodd" />
+                        </svg> 
+                         <div class="flex flex-row-reverse items-center gap-2">
+                            <span class=" text-[white] flex justify-end font-bold">اسلایدر</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="800px" height="800px"
+                                class="w-[30px] h-[30px] fill-white " viewBox="0 0 100 100"
+                                enable-background="new 0 0 100 100" xml:space="preserve">
+                                <path
+                                    d="M22.5,19.7h20c1.4,0,2.5,1.1,2.5,2.5v54.9c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V22.2  C20,20.8,21.1,19.7,22.5,19.7z" />
+                                <path
+                                    d="M57.5,19.6h20c1.4,0,2.5,1.1,2.5,2.5V42c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V22.1  C55,20.7,56.1,19.6,57.5,19.6z" />
+                                <path
+                                    d="M57.5,54.6h20c1.4,0,2.5,1.1,2.5,2.5v19.9c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V57.1  C55,55.8,56.1,54.6,57.5,54.6z" />
+                            </svg>
+                        </div>
+                            </div>
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
                                 <a href="{{ route('slider.sliderCreate') }}" class=" text-white py-1">
@@ -128,6 +171,27 @@
                                 لیست اسلایدر
                                 </a>
                             </li>
+                               <div class="flex flex-row-reverse justify-between">
+                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="size-6 fill-white w-[15px]">
+                            <path fill-rule="evenodd"
+                                d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                                clip-rule="evenodd" />
+                        </svg> 
+                         <div class="flex flex-row-reverse items-center gap-2">
+                            <span class=" text-[white] flex justify-end font-bold">درباره ما</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="800px" height="800px"
+                                class="w-[30px] h-[30px] fill-white " viewBox="0 0 100 100"
+                                enable-background="new 0 0 100 100" xml:space="preserve">
+                                <path
+                                    d="M22.5,19.7h20c1.4,0,2.5,1.1,2.5,2.5v54.9c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V22.2  C20,20.8,21.1,19.7,22.5,19.7z" />
+                                <path
+                                    d="M57.5,19.6h20c1.4,0,2.5,1.1,2.5,2.5V42c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V22.1  C55,20.7,56.1,19.6,57.5,19.6z" />
+                                <path
+                                    d="M57.5,54.6h20c1.4,0,2.5,1.1,2.5,2.5v19.9c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V57.1  C55,55.8,56.1,54.6,57.5,54.6z" />
+                            </svg>
+                        </div>
+                            </div>
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
                                 <a href="{{ route('aboutUs.create_edit') }}" class=" text-white py-1">
