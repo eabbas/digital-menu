@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
-    <title>metronic</title>
+    <title>ورود</title>
     <style>
 
     </style>
 </head>
 
-<body class="">
+<body>
     <div class="w-full flex flex-col justify-center items-center md:flex-row-reverse">
         <div class="hidden md:flex justify-center md:w-4/12 bg-[#056EE9] h-dvh">
             <div class="flex flex-col my-12 items-center justify-center">
@@ -42,9 +42,10 @@
                         <button
                             class="focus:bg-[#2c44cb] hover:bg-[#2c44cb] transition-all duration-400 text-center w-1/2 md:w-full bg-[#056EE9] p-1 text-xs md:text-base md:p-3 rounded-[10px] text-white cursor-pointer">ورود</button>
                         <div class="w-full text-center">
-                            <span class="text-[#4B5675] mt-3 md:mt-5 text-xs md:text-base"> هنوز عضو نشدی؟<a href="{{ route('signup') }}"
-                                    class="text-[#1B84FF] mr-2">ثبت
-                                    نام!</a></span>
+                            <span class="text-[#4B5675] mt-3 md:mt-5 text-xs md:text-base">
+                                 هنوز عضو نشدی؟
+                                <a href="{{ route('signup') }}" class="text-[#1B84FF] mr-2">ثبت نام!</a>
+                            </span>
                         </div>
                     </form>
                 </div>
