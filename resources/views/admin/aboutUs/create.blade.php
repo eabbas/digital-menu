@@ -1,4 +1,4 @@
-    @extends('admin.user.panel')
+    @extends('admin.app.panel')
     @section('title', 'ایجاد درباره ما')
     @section('content')
     <form action="{{ route('aboutUs.updateOrcreate') }}" method="post">

@@ -70,7 +70,7 @@
                                 clip-rule="evenodd" />
                         </svg>
                         <div class="flex flex-row-reverse gap-2">
-                            <span class=" text-[white] flex justify-end"></span>
+                            <span class=" text-[white] flex justify-end">کسب و کار ها</span>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="800px" height="800px"
                                 class="w-[30px] h-[30px] fill-white " viewBox="0 0 100 100"
                                 enable-background="new 0 0 100 100" xml:space="preserve">
@@ -87,14 +87,63 @@
                         <ul class="gap-2.5 mt-2.5 mb-2.5 pr-3">
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('career.careers') }}" class=" text-white py-1">کسب و کار های
+                                <a href="{{ route('career.careers', [Auth::user()]) }}" class=" text-white py-1">کسب و
+                                    کار های
                                     من</a>
                             </li>
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('career.create') }}" class=" text-white py-1">ایجاد کسب و کار
+                                <a href="{{ route('career.create') }}" class=" text-white py-1">ایجاد
+                                    کسب و کار
                                     جدید</a>
                             </li>
+                            @if(Auth::user()->type == 'admin')
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('user.list') }}" class=" text-white py-1">
+                                    مشاهده همه کاربران
+                                </a>
+                            </li>
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('career.list') }}" class=" text-white py-1">
+                                    مشاهده همه کسب و کار ها
+                                </a>
+                            </li>
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('user.adminCreate') }}" class=" text-white py-1">
+                                    ایجاد ادمین
+                                </a>
+                            </li>
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('slider.sliderCreate') }}" class=" text-white py-1">
+                                    ایجاد اسلایدر
+                                </a>
+                            </li>
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('slider.list') }}" class=" text-white py-1">
+                                لیست اسلایدر
+                                </a>
+                            </li>
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('aboutUs.create_edit') }}" class=" text-white py-1">
+                                 ایجاد درباره ما
+                                </a>
+                            </li>
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('aboutUs.list') }}" class=" text-white py-1">
+                                لیست درباره ما
+                                </a>
+                            </li>
+                          
+
+                            @endif
+
                         </ul>
                     </div>
                 </div>
@@ -184,11 +233,11 @@
                     <div class="w-6/12 flex flex-row-reverse items-center">
                         <div class="relative hover_profile">
                             <div class="cursor-pointer">
-                                @if(!$user->main_image)
+                                @if(!Auth::user()->main_image)
                                 <img src="{{ asset('assets/img/user.png') }}" alt="user__avatar"
                                     class="size-10 rounded-xl">
                                 @else
-                                <img src="{{ asset('storage/'.$user->main_image) }}" alt="user__picture"
+                                <img src="{{ asset('storage/'.Auth::user()->main_image) }}" alt="user__picture"
                                     class="size-10 rounded-xl">
                                 @endif
                             </div>
@@ -196,18 +245,25 @@
                                 <div class="w-[250px] rounded-xl  py-4 bg-white shadow__all__prof">
                                     <div class="text-center px-2">
                                         <span class="font-bold">
-                                            {{ $user->name }} {{ $user?->family }}
+                                            {{ Auth::user()->name }} {{ Auth::user()?->family }}
                                         </span>
                                     </div>
                                     <div class="w-full h-px bg-gray-300 mt-4 "></div>
                                     <ul class="rtl text-right ">
-                                        <li class="hover:text-[#1B84FF] hover:bg-[#F1F1F4] mt-1 w-11/12 ml-auto mr-auto rounded-lg">
-                                            <a href="{{ route('user.profile', [$user]) }}" class="block w-full p-2">پروفایل من</a>
+                                        <li
+                                            class="hover:text-[#1B84FF] hover:bg-[#F1F1F4] mt-1 w-11/12 ml-auto mr-auto rounded-lg">
+                                            <a href="{{ route('user.profile', [Auth::user()]) }}"
+                                                class="block w-full p-2">پروفایل من</a>
                                         </li>
-                                        <li class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto rounded-lg">
-                                            <a href="{{ route('user.compelete_form') }}" class="block w-full p-2">تکمیل پروفایل</a>
+                                        @if(!Auth::user()->email)
+                                        <li
+                                            class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto rounded-lg">
+                                            <a href="{{ route('user.compelete_form') }}" class="block w-full p-2">تکمیل
+                                                پروفایل</a>
                                         </li>
-                                        <li class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto rounded-lg flex flex-row justify-between items-center">
+                                        @endif
+                                        <!-- <li
+                                            class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto rounded-lg flex flex-row justify-between items-center">
                                             <a href="" class="block w-full p-2">اشتراک من</a>
                                             <div class="">
                                                 <svg class="w-6 h-4 " xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -218,23 +274,24 @@
                                                 </svg>
                                             </div>
                                         </li>
-                                        <li class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto p-2  rounded-lg">
+                                        <li
+                                            class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto p-2  rounded-lg">
                                             <a href="">بیانه های من</a>
-                                        </li>
+                                        </li> -->
                                     </ul>
-    
+
                                     <div class="w-full h-px bg-gray-300 my-2 "></div>
-                                    <ul class="rtl text-right ">
-                                        <div
+                                    <div class="rtl text-right ">
+                                        <!-- <div
                                             class="hover:text-[#1B84FF] hover:bg-[#F1F1F4] flex flex-row justify-between items-center  mt-1 w-11/12 ml-auto mr-auto p-2  rounded-lg">
-                                            <li>
+                                            <div>
                                                 <a href="">زبان</a>
-                                            </li>
+                                            </div>
                                             <div class="flex flex-row gap-3 items-center">
                                                 <spanh class="family ">English.US</spanh>
                                                 <svg class="size-6" xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1"
-                                                    x="0px" y="0px" viewBox="0 0 512 512"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                                    id="Layer_1" x="0px" y="0px" viewBox="0 0 512 512"
                                                     style="enable-background:new 0 0 512 512;" xml:space="preserve">
                                                     <path style="fill:#41479B;"
                                                         d="M400,512H112C50.144,512,0,461.856,0,400V112C0,50.144,50.144,0,112,0h288  c61.856,0,112,50.144,112,112v288C512,461.856,461.856,512,400,512z" />
@@ -277,20 +334,20 @@
                                                     <g></g>
                                                 </svg>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div
-                                            class="hover:text-[#1B84FF] hover:bg-[#F1F1F4] flex flex-row justify-between mt-1 w-11/12 ml-auto mr-auto p-2 rounded-lg">
-                                            
-                                                <a href="">تنظیمات اکانت</a>
-                                            
+                                            class="hover:text-[#1B84FF] hover:bg-[#F1F1F4] flex flex-row justify-between mt-1 w-11/12 ml-auto mr-auto rounded-lg">
+
+                                            <a href="{{ route('user.setting') }}" class="block p-2">تنظیمات اکانت</a>
+
                                         </div>
                                         <div
                                             class="hover:text-[#1B84FF] hover:bg-[#F1F1F4] flex flex-row justify-between mt-1 w-11/12 ml-auto mr-auto rounded-lg">
-                                         
-                                                <a href="{{ route('user.logout') }}" class="p-2 block w-full">خروج</a>
-                                            
+
+                                            <a href="{{ route('user.logout') }}" class="p-2 block w-full">خروج</a>
+
                                         </div>
-                                    </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -316,60 +373,88 @@
                         </h3>
                     </div>
                 </div>
-               <div class="flex lg:hidden flex-row justify-between items-center py-2 px-5 backdrop-blur-sm shadowHeader relative z-20">
-                   <div class="flex flex-col w-5 h-3.5 justify-between cursor-pointer" onclick="hamburgerMenu('open', this)">
-                       <span class="w-full h-0.5 bg-black transition-all duration-300"></span>
-                       <span class="w-full h-0.5 bg-black transition-all duration-300"></span>
-                       <span class="w-full h-0.5 bg-black transition-all duration-300"></span>
+                <div
+                    class="flex lg:hidden flex-row justify-between items-center py-2 px-5 backdrop-blur-sm shadowHeader relative z-20">
+                    <div class="flex flex-col w-5 h-3.5 justify-between cursor-pointer"
+                        onclick="hamburgerMenu('open', this)">
+                        <span class="w-full h-0.5 bg-black transition-all duration-300"></span>
+                        <span class="w-full h-0.5 bg-black transition-all duration-300"></span>
+                        <span class="w-full h-0.5 bg-black transition-all duration-300"></span>
                     </div>
-                    @if(!$user->main_image)
-                    <img src="{{ asset('assets/img/user.png') }}" alt="user__avatar"
-                        class="size-10 rounded-xl">
+                    @if(!Auth::user()->main_image)
+                    <img src="{{ asset('assets/img/user.png') }}" alt="user__avatar" class="size-10 rounded-xl">
                     @else
-                    <img src="{{ asset('storage/'.$user->main_image) }}" alt="user__picture"
+                    <img src="{{ asset('storage/'.Auth::user()->main_image) }}" alt="user__picture"
                         class="size-10 rounded-xl">
                     @endif
-               </div>
-                <div class="w-full h-dvh fixed top-0 -left-full bg-black/50 flex flex-row z-50 transition-all duration-500">
+                </div>
+                <!-- hamburger menu -->
+                <div
+                    class="w-full h-dvh fixed top-0 -left-full bg-black/50 flex flex-row z-50 transition-all duration-500">
                     <div class="w-1/3 bg-inherit h-full" onclick="hamburgerMenu('close', this)"></div>
-                    <div class="w-2/3 bg-white h-full p-2">
-                        <div class="flex flex-row justify-between items-center gap-3 pb-2 border-b border-gray-300">
-                            <div>
-                                @if(!$user->main_image)
-                                <img src="{{ asset('assets/img/user.png') }}" alt="user__avatar"
-                                    class="size-10 rounded-xl">
-                                @else
-                                <img src="{{ asset('storage/'.$user->main_image) }}" alt="user__picture"
-                                    class="size-10 rounded-xl">
-                                @endif
+                    <div class="w-2/3 bg-white h-full p-2 flex flex-col justify-between">
+                        <div>
+                            <div class="flex flex-row justify-between items-center gap-3 pb-2 border-b border-gray-300">
+                                <div>
+                                    @if(!Auth::user()->main_image)
+                                    <img src="{{ asset('assets/img/user.png') }}" alt="user__avatar"
+                                        class="size-10 rounded-xl">
+                                    @else
+                                    <img src="{{ asset('storage/'.Auth::user()->main_image) }}" alt="user__picture"
+                                        class="size-10 rounded-xl">
+                                    @endif
+                                </div>
+                                <div>
+                                    <span class="text-xs text-gray-700 font-semibold">{{ Auth::user()->name }} {{
+                                        Auth::user()?->family }}</span>
+                                </div>
                             </div>
-                            <div>
-                                <span class="text-xs text-gray-700 font-semibold">{{ $user->name }} {{ $user?->family }}</span>
-                            </div>
-                        </div>
-                        <div class="pt-2">
-                            <div>
+                            <div class="pt-2">
                                 <h3 class="text-sm font-semibold text-gray-800 mb-1.5">کسب و کار ها</h3>
                                 <ul class="pr-3.5">
                                     <li>
-                                        <a href="{{ route('career.careers') }}" class="block text-gray-700 py-1 text-xs">کسب و کار های
+                                        <a href="{{ route('career.careers',[Auth::user()]) }}"
+                                            class="block text-gray-700 py-1 text-xs">کسب و کار های
                                             من</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('career.create') }}" class="block text-gray-700 py-1 text-xs">ایجاد کسب و کار
+                                        <a href="{{ route('career.create') }}"
+                                            class="block text-gray-700 py-1 text-xs">ایجاد کسب و کار
                                             جدید</a>
                                     </li>
-                                    <li class="mt-3">
-                                        <a href="{{ route('user.logout') }}" class="block text-rose-700 py-1 font-medium text-xs">خروج از حساب کاربری</a>
+                                    @if(Auth::user()->type == 'admin')
+                                    <li>
+                                        <span class="size-1 rounded-sm"></span>
+                                        <a href="{{ route('user.list') }}" class="block text-gray-700 py-1 text-xs">
+                                            مشاهده همه کاربران
+                                        </a>
                                     </li>
+                                    <li>
+                                        <span class="size-1 rounded-sm"></span>
+                                        <a href="{{ route('career.list') }}" class="block text-gray-700 py-1 text-xs">
+                                            مشاهده همه کسب و کار ها
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <span class="size-1 rounded-sm"></span>
+                                        <a href="{{ route('user.adminCreate') }}" class="block text-gray-700 py-1 text-xs">
+                                            ایجاد ادمین
+                                        </a>
+                                    </li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <a href="{{ route('user.logout') }}" class="block text-rose-700 py-1 font-medium text-xs text-center">خروج از حساب کاربری</a>
+                        </div>
                     </div>
                 </div>
+                <!-- hamburger menu end -->
             </header>
-            <div class="w-full lg:w-[calc(100%-265px)] float-end mt-20 lg:px-5 overflow-y-auto px-5" style="scrollbar-width:none;">
-             @yield('content')
+            <div class="w-full lg:w-[calc(100%-265px)] float-end mt-20 lg:px-5 overflow-y-auto px-5"
+                style="scrollbar-width:none;">
+                @yield('content')
             </div>
         </div>
     </div>

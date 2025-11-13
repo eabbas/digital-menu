@@ -1,4 +1,4 @@
-    @extends('admin.user.panel')
+    @extends('admin.app.panel')
     @section('title', 'ایجاد اسلایدر')
     @section('content')
     <form action="{{ route('slider.sliderStore') }}" method="post" enctype='multipart/form-data'>

@@ -1,4 +1,4 @@
-@extends('admin.user.panel')
+@extends('admin.app.panel')
 @section('title', 'ایجاد منو')
 @section('content')
 <div class="w-full h-full bg-cover bg-no-repeat pb-10">

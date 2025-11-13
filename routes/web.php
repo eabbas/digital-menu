@@ -57,6 +57,7 @@ Route::group([
     Route::post('/update','update')->name('update');
     Route::get('/delete/{career}','delete')->name('delete');
     Route::get('/careers','index')->name('list');
+    Route::get('/show/{career}', 'single')->name('single');
 });
 
 Route::group([

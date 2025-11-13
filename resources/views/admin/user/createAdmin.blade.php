@@ -1,4 +1,4 @@
-@extends('admin.user.panel')
+@extends('admin.app.panel')
 @section('title', 'ایجاد ادمین')
 @section('content')
             <div class="w-2/3 max-lg:w-full mx-auto flex flex-col items-center mt-8">

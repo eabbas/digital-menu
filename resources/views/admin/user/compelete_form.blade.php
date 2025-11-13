@@ -1,4 +1,4 @@
-@extends('admin.user.panel')
+@extends('admin.app.panel')
 @section('title', 'تکمیل پروفایل');
 @section('content')
 <form action="{{ route('user.save') }}" class="w-1/2 mx-auto flex flex-col items-center my-6 gap-3" method="post" enctype="multipart/form-data">
