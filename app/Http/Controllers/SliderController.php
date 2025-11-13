@@ -19,7 +19,7 @@ class SliderController extends Controller
             'title' => $request->title,
             'slider_img' => $path,
      ]);
-            return to_route('user.profile', ['user' => $user]);
+            return to_route('slider.list', ['user' => $user]);
     }
     public function index(){
         $sliders=slider::all();
