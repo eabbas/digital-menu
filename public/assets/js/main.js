@@ -14,55 +14,57 @@ function add() {
     let div = document.createElement('div')
     div.setAttribute('data-count', featureCount);
     let element = `
-        <div class="flex flex-col items-start lg:items-end gap-3 lg:gap-5 mt-3 md:mt-5 border-b border-gray-300 pb-3">
-            <div class="w-full flex flex-row justify-between gap-2">
-                <div class="flex flex-col">
-                    <label class="font-bold mb-2"> عنوان :</label>
-                    <input type="text" class="outline-none w-full pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]" placeholder="نام" name="menu_data[${featureCount}][name]">
+        <div class="w-full flex flex-col items-end gap-3 lg:gap-5 mt-3 md:mt-5 border-b border-gray-300 pb-3">
+            <div class="w-full flex flex-row max-md:flex-col items-end gap-1 lg:gap-5 mt-3 md:mt-5 pb-3">
+                <div class="w-full flex flex-row gap-3 items-center max-md:justify-center">
+                <div class="w-55 max-md:w-4/12 flex flex-col">
+                <label class="max-md:text-sm mb-2 font-bold">عنوان منو</label>
+                <input type="text" class="border border-gray-300 rounded-[13px] w-full outline-none pr-5 py-2 max-md:pr-1 cursor-pointer" placeholder="نام" name="menu_data[${featureCount}][name]">
                 </div>
-                <div class="flex flex-col">
-                    <label class="font-bold mb-2"> تصویر :</label>
-                    <input type="file" class="outline-none w-full lg:w-1/2 pr-5 py-3 cursor-pointer" name="menu_data[${featureCount}][menu_image]">
+                <div class="w-55 max-md:w-4/12 flex flex-col">
+                <label class="max-md:text-sm mb-2 font-bold">تصویر منو</label>
+                <input type="file" class="outline-none pr-5 py-2 bg-[#F9F9F9] border border-gray-300 rounded-xl focus:bg-[#f1f1f4]" name="menu_data[${featureCount}][menu_image]">
                 </div>
-                <div>
+                </div>
+                <div class="w-full flex flex-row justify-center">
                     <button type="button" class="p-2 rounded-md bg-rose-500 hover:bg-rose-600 text-white cursor-pointer" onclick="remove(this)">حذف</button> 
                 </div>
             </div>
             <div class="w-full flex flex-col gap-2" data-value="1">
-                <div class="w-full flex flex-row items-end gap-3">
-                    <div class="flex flex-col lg:flex-row items-center pr-10 gap-3">
+                <div class="w-12/12 flex flex-row max-md:flex-col items-end gap-3 my-2">
+                    <div class="w-full flex flex-row max-md:grid max-md:grid-cols-2 items-center gap-3 mb-0">
                         <div class="w-full flex flex-col">
-                            <label class="text-[#425a8bde] mb-2"> نام آیتم :</label>
+                            <label class="text-gray-600 font-bold mb-2">نام آیتم</label>
                             <input type="text"
-                                class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
+                                class="border border-gray-300 rounded-[13px] w-full outline-none pr-5 py-2 max-md:pr-1 cursor-pointer"
                                 placeholder="نوشابه" name="menu_data[${featureCount}][values][${valueCount}][title]">
                         </div>
                         <div class="w-full flex flex-col">
-                            <label class="text-[#425a8bde] mb-2"> قیمت آیتم :</label>
+                            <label class="text-gray-600 font-bold mb-2">قیمت آیتم</label>
                             <input type="number" placeholder="500.000تومان"
-                                class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]" name="menu_data[${featureCount}][values][${valueCount}][price]">
+                                class="border border-gray-300 rounded-[13px] w-full outline-none pr-5 py-2 max-md:pr-1 cursor-pointer" name="menu_data[${featureCount}][values][${valueCount}][price]">
                         </div>
                         <div class="w-full flex flex-col">
-                            <label class="text-[#425a8bde] mb-2"> توضیحات آیتم :</label>
+                            <label class="text-gray-600 font-bold mb-2">توضیحات آیتم </label>
                             <input type="text"
-                                class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
+                                class="border border-gray-300 rounded-[13px] w-full outline-none pr-5 py-2 max-md:pr-1 cursor-pointer"
                                 placeholder="بدون قند" name="menu_data[${featureCount}][values][${valueCount}][description]">
                         </div>
                         <div class="w-full flex flex-col">
-                            <label class="text-[#425a8bde] mb-2"> تصویر آیتم :</label>
+                            <label class="text-gray-600 font-bold mb-2"> تصویر آیتم</label>
                             <input type="file"
-                                class="outline-none pr-5 py-3 cursor-pointer"
+                                class="border border-gray-300 rounded-[13px] w-full outline-none pr-5 py-2 max-md:pr-1 cursor-pointer"
                                 name="menu_data[${featureCount}][values][${valueCount}][gallery]">
                         </div>
                     </div>
-                    <div class="flex items-end">
+                    <div class="flex items-end max-md:w-full max-md:justify-end">
                         <button type="button"
-                            class="size-11 text-xs rounded-md bg-rose-500 hover:bg-rose-600 text-white cursor-pointer"
+                            class="mt-2 size-8 mb-[3px] max-md:h-9 text-xs rounded-md bg-rose-500 hover:bg-rose-600 text-white cursor-pointer"
                             onclick="removeAttrButton(this)">X</button>
                     </div>
                 </div>
             </div>
-            <button type="button" class="w-full rounded-lg bg-green-500 h-10 text-white text-lg text-center inline-block mt-3 cursor-pointer" onclick="addAttr(this)">+</button>
+            <button type="button" class="w-6/12 font-bold md:w-8/12 h-10 mx-auto rounded-[8px] bg-green-500 text-white text-lgd:jus text-center inline-block mt-3" onclick="addAttr(this)">+</button>
         </div>`
     div.innerHTML = element
     attribute.appendChild(div)
@@ -79,34 +81,34 @@ function addAttr(el) {
     div.classList = "w-full flex flex-row items-end gap-3"
     let element = `
         <div class="w-full flex flex-col gap-2" data-value="${valueCount}">
-            <div class="w-full flex flex-row items-end gap-3">
-            <div class="flex flex-col lg:flex-row items-center pr-10 gap-3 mt-8 mb-0">
-                    <div class="w-full flex flex-col">
-                        <label class="text-[#425a8bde] mb-2"> نام آیتم :</label>
+            <div class="w-full flex flex-row max-md:flex-col items-end gap-3">
+            <div class="w-full flex flex-row max-md:grid max-md:grid-cols-2 items-center gap-3 mb-0">
+                    <div class="w-3/12 max-md:w-full flex flex-col">
+                        <label class="text-gray-600 font-bold mb-2"> نام آیتم</label>
                         <input type="text"
-                            class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
+                            class="border border-gray-300 rounded-[13px] w-full outline-none pr-5 py-2 max-md:pr-1 cursor-pointer"
                             placeholder="نوشابه" name="menu_data[${num}][values][${valueCount}][title]">
                     </div>
-                    <div class="w-full flex flex-col">
-                        <label class="text-[#425a8bde] mb-2"> قیمت آیتم :</label>
+                    <div class="w-3/12 max-md:w-full flex flex-col">
+                        <label class="text-gray-600 font-bold mb-2"> قیمت آیتم</label>
                         <input type="number" placeholder="500.000تومان"
-                            class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]" name="menu_data[${num}][values][${valueCount}][price]">
+                            class="  border border-gray-300 rounded-[13px] w-full outline-none pr-5 py-2 max-md:pr-1 cursor-pointer" name="menu_data[${num}][values][${valueCount}][price]">
                     </div>
-                    <div class="w-full flex flex-col">
-                        <label class="text-[#425a8bde] mb-2"> توضیحات آیتم :</label>
+                    <div class="w-3/12 max-md:w-full flex flex-col">
+                        <label class="text-gray-600 font-bold mb-2"> توضیحات آیتم</label>
                         <input type="text"
-                            class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
+                            class="  border border-gray-300 rounded-[8px] w-full outline-none pr-5 py-2 max-md:pr-1 cursor-pointer"
                             placeholder="بدون قند" name="menu_data[${num}][values][${valueCount}][description]">
                     </div>
-                    <div class="w-full flex flex-col">
-                        <label class="text-[#425a8bde] mb-2"> تصویر آیتم :</label>
+                    <div class="w-3/12 max-md:w-full flex flex-col">
+                        <label class="text-gray-600 font-bold mb-2"> تصویر آیتم</label>
                         <input type="file"
-                            class="outline-none pr-5 py-3 cursor-pointer"
+                            class="border border-gray-300 rounded-[8px] w-full outline-none pr-5 py-2 max-md:pr-1 cursor-pointer"
                             name="menu_data[${num}][values][${valueCount}][gallery]">
                     </div>
                 </div>
-                <div class="flex items-end">
-                    <button type="button" class="size-11 text-xs rounded-md bg-rose-500 hover:bg-rose-600 text-white cursor-pointer" onclick="removeAttrButton(this)">X</button>
+                <div class="flex items-end max-md:w-full max-md:justify-end">
+                    <button type="button" class="mt-2 size-8 mb-[3px] max-md:h-9 text-xs rounded-md bg-rose-500 hover:bg-rose-600 text-white cursor-pointer" onclick="removeAttrButton(this)">X</button>
             </div>
         </div>
         </div> `

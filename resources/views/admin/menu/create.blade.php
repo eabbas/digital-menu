@@ -1,7 +1,7 @@
 @extends('admin.user.panel')
 @section('title', 'ایجاد منو')
 @section('content')
-<div class="w-full h-full  bg-cover bg-no-repeat pb-10">
+<div class="w-full h-full bg-cover bg-no-repeat pb-10">
     <h2 class="text-xl lg:text-3xl text-center font-bold py-5 text-[#425A8B]">فرم ایجاد منو</h2>
     <div class="w-full mx-auto border border-[#D5DFE4] rounded-[10px] text-[#425A8B] p-5 bg-white text-sm ">
         <form action="{{route('menu.store')}}" method="post" enctype="multipart/form-data">
@@ -10,22 +10,25 @@
             <div class="flex flex-col items-center gap-3">
                 <div data-count="0" class="flex flex-row justify-center">
                     <div class="flex flex-col items-end gap-3 lg:gap-5 mt-3 md:mt-5 border-b border-gray-300 pb-3">
-                        <div class="w-full flex flex-row justify-between">
-                            <div class="w-full flex flex-col">
+                        <div class="w-full flex flex-row justify-between items-center gap-10">
+                            <div class="w-60 flex flex-col">
                                 <label class="font-bold mb-2"> عنوان منو :</label>
                                 <input type="text"
-                                    class="outline-none w-full lg:w-1/2 pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#efefef]"
+                                    class="outline-none w-full lg:w-full pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#efefef]"
                                     placeholder="نوشیدنی" name="menu_data[0][name]">
-                                </div>
                             </div>
-                            <div class="w-full flex flex-col gap-2" data-value="0">
-                                <div class="w-full flex flex-row items-end gap-3">
-                                    <div class="flex flex-col lg:flex-row items-center pr-10 gap-3">
-                                        <div class="w-full flex flex-col">
-                                        <label class="font-bold mb-2">تصویر منو :</label>
-                                        <input type="file"
-                                            class="outline-none w-full lg:w-1/2 pr-5 py-3 cursor-pointer"
-                                            name="menu_data[0][menu_image]">
+                            <div class="w-full flex flex-col py-4 justify-center items-start">
+                                <label class="font-bold mb-2">تصویر منو :</label>
+                                <input type="file"
+                                    class="outline-none w-50 p-3 bg-[#1b84ff] text-white rounded-xl cursor-pointer"
+                                    name="menu_data[0][menu_image]">
+                            </div>
+                        </div>
+                        <div class="w-full flex flex-col gap-2" data-value="0">
+                            <div class="w-full flex flex-row items-end gap-3">
+                                <div class="flex flex-col md:flex-col items-center pr-10 gap-3
+                                                          lg:flex-row" >
+                                    <div class="w-full flex flex-col">
                                         <label class="text-[#425a8bde] mb-2"> نام آیتم :</label>
                                         <input type="text"
                                             class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#efefef]"
@@ -44,9 +47,8 @@
                                             placeholder="بدون قند" name="menu_data[0][values][0][description]">
                                     </div>
                                     <div class="w-full flex flex-col">
-                                        <label class="text-[#425a8bde] mb-2"> تصویر منو :</label>
-                                        <input type="file"
-                                            class="outline-none pr-5 py-3 cursor-pointer"
+                                        <label class="text-[#425a8bde] mb-2"> تصویر آیتم :</label>
+                                        <input type="file" class="outline-none pr-5 py-3 cursor-pointer"
                                             name="menu_data[0][values][0][gallery]">
                                     </div>
                                 </div>
@@ -56,6 +58,7 @@
                                         onclick="removeAttrButton(this)">X</button>
                                 </div>
                             </div>
+                            
                         </div>
                         <button type="button"
                             class="w-full h-10 rounded-lg bg-green-500 text-white text-lg text-center inline-block mt-3 cursor-pointer"
@@ -70,11 +73,10 @@
                 <div class="w-full flex items-center flex-col">
                     <label class="mb-2 font-bold"> تعداد کیو آر کد های خود را تعیین کنید :</label>
                     <input type="number" placeholder="1"
-                        class="outline-none w-60 pr-5 py-3 bg-[#F9F9F9] rounded-lg focus:bg-[#f1f1f4]"
-                        name="qr_num">
+                        class="outline-none w-60 pr-5 py-3 bg-[#F9F9F9] rounded-lg focus:bg-[#f1f1f4]" name="qr_num">
                 </div>
                 <div class="text-center">
-                    <button type="submit" 
+                    <button type="submit"
                         class="w-60 py-3 px-10 rounded-[10px] bg-[#1B84FF] hover:bg-[#056EE9] text-white cursor-pointer">ثبت</button>
                 </div>
             </div>
