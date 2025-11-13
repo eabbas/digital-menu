@@ -230,3 +230,13 @@ input[type=number] {
     visibility: visible;
     opacity: 1;
 }
+
+.closeButtonXmark>svg>path{
+    transition: all 300ms;
+}
+.closeButtonXmark:hover{
+    border-color: black;
+}
+.closeButtonXmark:hover svg>path{
+    fill: black;
+}

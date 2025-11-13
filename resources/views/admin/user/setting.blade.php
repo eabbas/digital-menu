@@ -90,6 +90,7 @@
         </div> -->
         <form action="{{ route('user.update') }}" method="post" class="shadow__profaill__list_products rounded-lg pb-4" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="id" value="{{ Auth::id() }}">
             <div class="w-full flex items-center">
                 <div class="">
                     <h2 class="text-xl mr-5">جزییات پروفایل</h2>
@@ -104,8 +105,7 @@
                             <td>
                                 <img class="size-30 rounded-[5px] border-3 shadow__fhoto__insetting__profaill border-white"
                                     src="{{ asset('storage/'.Auth::user()->main_image) }}" alt="user imag">
-                                <div class="text-[#99A1B7] mt-2 text-sm">همه بدهکار هستیم file types: png, jpg,
-                                    jpeg.</div>
+                                    <input type="file" name="main_image" class="cursor-pointer">
                             </td>
                         </tr>
                         <tr>

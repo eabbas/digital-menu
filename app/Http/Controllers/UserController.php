@@ -5,6 +5,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -15,19 +16,22 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $phone = User::where('phoneNumber', $request->phoneNumber)->first();
-        if ($phone) {
-            return redirect()->back()->with('message', 'این شماره تلفن قبلا استفاده شده');
+        if ($request->rules) {
+            $phone = User::where('phoneNumber', $request->phoneNumber)->first();
+            if ($phone) {
+                return redirect()->back()->with('message', 'این شماره تلفن قبلا استفاده شده');
+            }
+            $password = Hash::make($request->password);
+            User::create([
+                'name'=>$request->name,
+                'family'=>$request->family,
+                'phoneNumber'=>$request->phoneNumber,
+                'password'=>$password,
+                'type'=>'general',
+            ]);
+            return to_route('login');
         }
-        $password = Hash::make($request->password);
-        User::create([
-            'name'=>$request->name,
-            'family'=>$request->family,
-            'phoneNumber'=>$request->phoneNumber,
-            'password'=>$password,
-            'type'=>'general',
-        ]);
-        return to_route('login');
+        return to_route('signup');
     }
 
     public function check(Request $request)
@@ -91,7 +95,11 @@ class UserController extends Controller
             $user->password = $password;
         }
         if($request->main_image){
-            $user->main_image = $request->main_image;
+            Storage::disk('public')->delete($user->main_image);
+            $name = $request->main_image->getClientOriginalName();
+            $fullName = time()."_".$name;
+            $path = $request->file('main_image')->storeAs('images', $fullName, 'public');
+            $user->main_image = $path;
         }
         $user->save();
         return to_route('user.list');
