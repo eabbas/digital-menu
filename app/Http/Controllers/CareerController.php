@@ -35,7 +35,7 @@ class CareerController extends Controller
             'email' => $request->email,
             'description' => $request->description,
         ]);
-        return to_route('user.profile', ['user' => $user]);
+        return to_route('career.careers', [Auth::user()]);
     }
 
     public function user_careers(User $user)
@@ -83,8 +83,9 @@ class CareerController extends Controller
     public function index()
     {
         $careers=career::all();
-        // dd($careers);
-        // $user = Auth::user();
         return view('admin.careers.index',['careers'=>$careers]);
+    }
+    public function single(career $career){
+        return view('admin.careers.single', ['career'=>$career]);
     }
 }

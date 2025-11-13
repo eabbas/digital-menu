@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
             $table->text('menu_data');
-            $table->string('qr_num');
+            $table->integer('qr_num')->default(0);
             $table->timestamps();
         });
     }

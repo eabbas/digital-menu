@@ -1,4 +1,4 @@
-    @extends('admin.user.panel')
+    @extends('admin.app.panel')
     @section('title', 'مشاهده منو')
     @section('content')
     <div class="2xl:container mx-auto w-10/12">

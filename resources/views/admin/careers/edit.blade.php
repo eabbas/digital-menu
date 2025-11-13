@@ -1,4 +1,4 @@
-@extends('admin.user.panel')
+@extends('admin.app.panel')
 @section('title', 'ویرایش منو')
 @section('content')
 <section class="2xl:container mx-auto">

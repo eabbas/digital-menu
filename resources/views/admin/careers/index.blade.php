@@ -1,4 +1,4 @@
-@extends('admin.user.panel')
+@extends('admin.app.panel')
     @section('title', ' همه کسب وکارها')
     @section('content')
 
@@ -30,7 +30,7 @@
                             </div>
                             <div class="w-full grid grid-cols-4 col-span-3 h-full divide-x divide-[#f1f1f4]">
                                 <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
-                                    <a href="#" class="ml-4 text-sky-700">مشاهده</a>
+                                    <a href="{{ route('career.single', [$career]) }}" class="ml-4 text-sky-700">مشاهده</a>
                                 </div>
                                 <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
                                     <a href="{{ route('career.edit', [$career])}}" class="ml-4 text-sky-700">ویرایش</a>
