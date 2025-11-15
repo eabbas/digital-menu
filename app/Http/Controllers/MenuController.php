@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Career;
+use App\Models\career;
 use App\Models\menu;
 use App\Models\qr_code;
 use Illuminate\Http\Request;

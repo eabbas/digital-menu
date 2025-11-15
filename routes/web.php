@@ -1,23 +1,22 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\http\controllers\CareerController;
+use App\Http\Controllers\CareerController;
 use App\Http\Controllers\UserController;
-use App\Http\controllers\CategoryController;
-use App\Http\controllers\ProductController;
-use App\Http\controllers\MenuController;
-use App\Http\controllers\SettingController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\adminController;
+// use App\Http\Controllers\adminController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Middleware\LoginMiddleware;
 use App\Http\Middleware\UserMiddleware;
+use App\Http\Controllers\HomeController;
 
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware([LoginMiddleware::class]);
 Route::get('/signup', [UserController::class, "create"])->name('signup')->middleware([LoginMiddleware::class]);
 Route::group([
@@ -50,9 +49,9 @@ Route::group([
     'as'=>'career.',
     'middleware'=>[UserMiddleware::class]
 ], function(){
-    Route::get('/create', 'create')->name('create');
+    Route::get('/create/{user?}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/list/{user}', 'user_careers')->name('careers');
+    Route::get('/list/{user?}', 'user_careers')->name('careers');
     Route::get('/edit/{career}','edit')->name('edit');
     Route::post('/update','update')->name('update');
     Route::get('/delete/{career}','delete')->name('delete');
@@ -230,12 +229,12 @@ Route::group([
     'controller'=>SliderController::class,
     'as'=>'slider.'
 ], function(){
-    Route::get('/create', 'create')->name('sliderCreate');
-    Route::post('/store', 'store')->name('sliderStore');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
     Route::get('/sliders', 'index')->name('list');
-    Route::get('/edit/{slider}','edit')->name('sliderEdit');
-    Route::post('/update', 'update')->name('sliderUpdate');
-    Route::get('/delete/{slider}', 'delete')->name('sliderDelete');
+    Route::get('/edit/{slider}','edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{slider}', 'delete')->name('delete');
 });
 
 

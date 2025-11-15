@@ -1,7 +1,7 @@
 @extends('admin.app.panel')
 @section('title', 'تکمیل پروفایل');
 @section('content')
-<form action="{{ route('user.save') }}" class="w-1/2 mx-auto flex flex-col items-center my-6 gap-3" method="post" enctype="multipart/form-data">
+<form action="{{ route('user.save') }}" class="w-full lg:w-1/2 lg:mx-auto flex flex-col items-center my-6 gap-3" method="post" enctype="multipart/form-data">
     @csrf
     <div class="w-full flex flex-col gap-3">
         <label>عکس پروفایل</label>

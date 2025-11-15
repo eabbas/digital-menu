@@ -156,5 +156,4 @@ class UserController extends Controller
     public function setting(){
         return view('admin.user.setting');
     }
-   
 }
