@@ -93,14 +93,14 @@
             <input type="hidden" name="id" value="{{ Auth::id() }}">
             <div class="w-full flex items-center">
                 <div class="">
-                    <h2 class="text-xl mr-5">جزییات پروفایل</h2>
+                    <h2 class="text-xl mr-5 mb-4">جزییات پروفایل</h2>
                 </div>
             </div>
             <div class="h-px bg-gray-200 mb-5"></div>
             <div class="p-5 px-6">
                 <table class="w-full">
                     <tbody class="tsble">
-                        <tr>
+                        <tr class="flex flex-col lg:flex-row">
                             <td>تصویر</td>
                             <td>
                                 <img class="size-30 rounded-[5px] border-3 shadow__fhoto__insetting__profaill border-white"
@@ -108,18 +108,18 @@
                                     <input type="file" name="main_image" class="cursor-pointer">
                             </td>
                         </tr>
-                        <tr>
-                            <td class="text-sm py-4">نام کامل</td>
-                            <td class="text-sm py-4 flex gap-4">
+                        <tr class="flex flex-col lg:flex-row">
+                            <td class="w-full lg:w-2/12 text-sm py-4">نام کامل</td>
+                            <td class="w-full lg:w-10/12 text-sm py-4 flex flex-col lg:flex-row gap-4">
                                 <input
-                                    class="w-[50%] p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] "
+                                    class="w-full lg:w-1/2 p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] "
                                     type="text" value="{{ Auth::user()->name }}" name="name" placeholder="نام">
                                 <input
-                                    class="w-[50%] p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] "
+                                    class="w-full lg:w-1/2 p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] "
                                     type="text" value="{{ Auth::user()->family }}" name="family" placeholder="نام خانوادگی">
                             </td>
                         </tr>
-                        <!-- <tr>
+                        <!-- <tr class="flex flex-col lg:flex-row">
                             <td class="text-sm py-4">کمپانی</td>
                             <td class="text-sm py-4">
                                 <input
@@ -127,32 +127,32 @@
                                     type="text" value="fous" placeholder="نام کمپانی">
                             </td>
                         </tr> -->
-                        <tr>
-                            <td class="text-sm">تماس تلفنی با ما </td>
-                            <td class="text-sm">
+                        <tr class="flex flex-col lg:flex-row">
+                            <td class="w-full lg:w-2/12 text-sm py-4">تماس تلفنی با ما </td>
+                            <td class="w-full lg:w-10/12 text-sm">
                                 <input
-                                    class="w-1/2 p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9]"
+                                    class="w-full lg:w-1/2 p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9]"
                                     type="number" name="phoneNumber" value="{{ Auth::user()->phoneNumber }}" placeholder="شماره تلفن">
                             </td>
                         </tr>
                      
-                        <tr>
-                            <td class="text-sm py-4">ایمیل</td>
-                            <td class="text-sm py-4">
+                        <tr class="flex flex-col lg:flex-row">
+                            <td class="w-full lg:w-2/12 text-sm py-4">ایمیل</td>
+                            <td class="w-full lg:w-10/12 text-sm py-4">
                                 <input
                                     class="w-full p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9]"
                                     type="email" name="email" value="{{ Auth::user()->email }}" placeholder="ایمیل">
                             </td>
                         </tr>
-                        <tr>
-                            <td class="text-sm py-4">رمز عبور</td>
-                            <td class="text-sm py-4">
+                        <tr class="flex flex-col lg:flex-row">
+                            <td class="w-full lg:w-2/12 text-sm py-4">رمز عبور</td>
+                            <td class="w-full lg:w-10/12 text-sm py-4">
                                 <input
                                     class="w-full p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9]"
                                     type="password" name="password" placeholder="رمز عبور">
                             </td>
                         </tr>
-                        <!-- <tr>
+                        <!-- <tr class="flex flex-col lg:flex-row">
                             <td class="text-sm py-4">زبان</td>
                             <td class="text-sm py-4">
                                 <select
@@ -169,14 +169,14 @@
                                 </select>
                             </td>
                         </tr> -->
-                        <!-- <tr>
+                        <!-- <tr class="flex flex-col lg:flex-row">
                             <td class="text-sm py-4">زمان محلی</td>
                             <td
                                 class="text-sm py-4 px-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7]">
                                 <span class="">انتخاب منطقه زمانی</span>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="flex flex-col lg:flex-row">
                             <td class="text-sm py-4">واحد پول*</td>
                             <td class="text-sm py-4">
                                 <div
@@ -184,7 +184,7 @@
                                     انتخاب واحد پول</div>
                             </td>
                         </tr> -->
-                        <!-- <tr>
+                        <!-- <tr class="flex flex-col lg:flex-row">
                             <td class="text-sm py-4">ارتباط</td>
                             <td class="text-sm py-4 flex items-center gap-4">
                                 <div class="flex items-center gap-2">
@@ -197,7 +197,7 @@
                                 </div>
                             </td>
                         </tr> -->
-                        <!-- <tr>
+                        <!-- <tr class="flex flex-col lg:flex-row">
                             <td class="text-sm py-4">بازاریابی*</td>
                             <td class="text-sm py-4">
                                 <label class="relative inline-flex" for=""></label>

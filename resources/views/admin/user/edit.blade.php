@@ -27,7 +27,7 @@
                    
                 </div>
                 <div class="md:text-left text-center md:px-12 mt-5 lg:mt-10">
-                    <button class="px-5 py-2 lg:px-10 lg:py-3 border rounded-md transition-all duration-150 hover:bg-gray-400 hover:border-gray-400 hover:text-white">ثبت</button>
+                    <button class="px-5 py-2 lg:px-10 lg:py-3 border rounded-md transition-all duration-150 hover:bg-gray-400 hover:border-gray-400 hover:text-white cursor-pointer">ثبت</button>
                 </div>
             </form>
 @endsection

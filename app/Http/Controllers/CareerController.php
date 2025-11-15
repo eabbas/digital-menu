@@ -1,17 +1,20 @@
 <?php
 namespace App\Http\Controllers;
-use App\Models\user;
+use App\Models\User;
 use App\Models\career;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
 class CareerController extends Controller
 {
-    public function create()
+    public function create(User $user=null)
     {
-        $user = Auth::user();
-        return view('admin.careers.create', ['user' => $user]);
+        if($user){
+            return view('admin.careers.create', ['user' => $user]);
+        }
+        return view('admin.careers.create', ['user'=>Auth::user()]);
     }
 
     public function store(Request $request)
@@ -22,7 +25,8 @@ class CareerController extends Controller
             $user->save();
         }
         $name = $request->logo->getClientOriginalName();
-        $path = $request->logo->storeAs('files', $name, 'public');
+        $fullName =  Str::uuid()."_".$name;
+        $path = $request->file('logo')->storeAs('files', $fullName, 'public');
         $social_medias = json_encode($request->social_medias);
         career::insertGetId([
             'title' => $request->title,
@@ -38,9 +42,12 @@ class CareerController extends Controller
         return to_route('career.careers', [Auth::user()]);
     }
 
-    public function user_careers(User $user)
+    public function user_careers(User $user=null)   
     {
-        return view('admin.careers.userCareers', ['user' => $user]);
+        if($user){
+            return view('admin.careers.userCareers', ['user' => $user]);
+        } 
+        return view('admin.careers.userCareers', ['user' => Auth::user()]);
     }
 
     public function edit(career $career)
@@ -53,10 +60,12 @@ class CareerController extends Controller
     public function update(Request $request)
     {
         $career = career::find($request->id);
+        // dd($request->logo);
         if ($request->logo) {
             Storage::disk('public')->delete($career->logo);
             $logoName = $request->logo->getClientOriginalName();
-            $logoPath = $request->logo->storeAs('files', $logoName, 'public');
+            $fullLogoName = Str::uuid()."_".$logoName;
+            $logoPath = $request->file('logo')->storeAs('files', $fullLogoName, 'public');
             $career->logo = $logoPath;
         }
         $career->social_media = json_encode($request->social_medias);

@@ -4,7 +4,7 @@
             <div class="my-10">
                 <h1 class="lg:text-3xl md:text-2xl text-md font-semibold text-center text-gray-700">ویرایش اسلایدر</h1>
             </div>
-            <form action="{{ route('slider.sliderUpdate') }}" method="post" enctype='multipart/form-data' class="w-11/12 lg:w-3/4 mx-auto p-5 rounded-lg border">
+            <form action="{{ route('slider.update') }}" method="post" enctype='multipart/form-data' class="w-11/12 lg:w-3/4 mx-auto p-5 rounded-lg border">
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-5 lg:gap-10">
                     <div class="w-full flex flex-col">
