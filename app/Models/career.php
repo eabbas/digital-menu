@@ -18,4 +18,9 @@ class career extends Model
   {
     return $this->hasOne(menu::class)->chaperOne();
   }
+
+  public function careerCategory()
+  {
+    return $this->belongsTo(careerCategory::class);
+  }
 }

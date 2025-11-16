@@ -138,34 +138,22 @@
                 <span class="size-2 rounded-full bg-gray-300"></span>
             </div>
              <div class="flex flex-row justify-between items-center">
-                <h1 class="text-xl">محصولات</h1>
+                <h1 class="text-xl">دسته بندی</h1>
                 <a class="text-[13px] text-[#00897b]" href="#">مشاهده همه</a>
             </div>
             <div class="flex flex-row gap-1 justify-between my-4">
                 <div class="flex flex-col justify-center items-center">
                     <div class="size-17 rounded-full bg-gray-200 overflow-hidden">
-                         <img class="h-full w-full rounded-inherit object-cover" src="{{ asset('assets/img/FiletMignon.png') }}" alt="">
+                        @foreach ($careerCategories as $careerCategory)
+                            @if ($careerCategory->main_image)
+                                
+                            <img class="h-full w-full rounded-inherit object-cover" src="{{ asset('storage/'.$careerCategory->main_image) }}" alt="">
+                            @endif
+                        @endforeach
                     </div>
                     <span class="text-sm ">غذای اصلی</span>
                 </div>
-                <div class="flex flex-col justify-center items-center">
-                    <div class="size-17 rounded-full bg-gray-200 overflow-hidden">
-                         <img class="h-full w-full rounded-inherit object-cover" src="{{ asset('assets/img/Griledsalmon.png') }}" alt="">
-                    </div>
-                    <span class="text-sm ">دسر</span>
-                </div>
-                <div class="flex flex-col justify-center items-center">
-                    <div class="size-17 rounded-full bg-gray-200 overflow-hidden">
-                        <img class="h-full w-full rounded-inherit object-cover" src="{{ asset('assets/img/CoqauVin.png') }}" alt="">
-                    </div>
-                    <span class="text-sm ">پیش غذا</span>
-                </div>
-                <div class="flex flex-col justify-center items-center">
-                    <div class="size-17 rounded-full bg-gray-200 overflow-hidden">
-                         <img class="h-full w-full rounded-inherit object-cover" src="{{ asset('assets/img/AsianDuckBreast.png') }}" alt="">
-                    </div>
-                    <span class="text-sm ">نوشیدنی</span>
-                </div>
+                
             </div>
             <div class="flex flex-row justify-between items-center mt-5 mb-3">
           <h1 class="text-xl">پر فروش ترین محصولات</h1>
