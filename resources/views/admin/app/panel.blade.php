@@ -101,6 +101,18 @@
                                 مشاهده همه کسب و کار ها
                             </a>
                         </li>
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('cc.create') }}" class=" text-white py-1">
+                                ایجاد دسته کسب و کار
+                            </a>
+                        </li>
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('cc.list') }}" class=" text-white py-1">
+                                همه دسته های کسب و کارها
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="dashboard">
@@ -349,6 +361,18 @@
                                     <span class="size-1 rounded-sm"></span>
                                     <a href="{{ route('user.adminCreate') }}" class="block text-gray-700 py-2 text-md">
                                         ایجاد ادمین
+                                    </a>
+                                </li>
+                                <li>
+                                    <span class="size-1 rounded-sm"></span>
+                                    <a href="{{ route('cc.create') }}" class="block text-gray-700 py-2 text-md">
+                                        ایجاد دسته کسب و کار
+                                    </a>
+                                </li>
+                                <li>
+                                    <span class="size-1 rounded-sm"></span>
+                                    <a href="{{ route('cc.list') }}" class="block text-gray-700 py-2 text-md">
+                                       همه دسته های کسب و کارها
                                     </a>
                                 </li>
                                 @endif
