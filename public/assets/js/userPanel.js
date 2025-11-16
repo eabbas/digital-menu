@@ -21,3 +21,15 @@ function hamburgerMenu(state, element){
         element.parentElement.previousElementSibling.children[0].children[2].classList.remove('opacity-0')
     }
 }
+
+// let menus = document.querySelectorAll('.dashboard')
+// menus.forEach((element)=>{
+//     element.children[0].addEventListener('click', ()=>{
+//         menus.forEach((item)=>{
+//             item.children[1].classList.remove('max-h-[500px]')
+//             item.children[1].classList.add('max-h-0')
+//         })
+//         element.children[1].classList.remove('max-h-0');
+//         element.children[1].classList.add('max-h-[500px]');
+//     })
+// })

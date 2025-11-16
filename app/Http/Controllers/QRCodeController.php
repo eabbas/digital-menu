@@ -18,7 +18,7 @@ class QrCodeController extends Controller
         $menu = menu::find($qr_code->menu_id);
         Storage::disk('public')->delete($qr_code->qr_path);
         $qr_code->delete();
-        return to_route('user.career.menu.edit', [$menu]);
+        return to_route('menu.edit', [$menu]);
     }
 
     public function load(career $career, string $slug){

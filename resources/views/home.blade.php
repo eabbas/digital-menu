@@ -42,53 +42,53 @@
         <div class="fixed w-full h-dvh top-0 -right-full transition-all duration-500 opacity-0 bg-black/50 flex flex-row z-50" id="home_hamburger_menu">
             <div class="w-2/3 h-full bg-[#fc6a43] p-3 relative">
                 <div class="absolute w-full p-2 h-20 bg-[#fc6a43] rounded-l-full -left-8 top-10 flex flex-row justify-end items-center gap-5">
-                    @if(Auth::user())
+                    @if(Auth::check())
                     <div class="flex flex-col gap-1">
                         <div class="text-white font-medium">{{ Auth::user()->name }} {{ Auth::user()->family }}</div>
                         @if(Auth::user()->email)
-                        <div class="text-white text-sm">{{ Auth::user()->email }}</div>
+                        <div class="text-white text-xs">{{ Auth::user()->email }}</div>
                         @endif
                     </div>
                     <img class="size-16 rounded-full" src="{{ asset('storage/'.Auth::user()->main_image) }}" alt="">
                     @endif
-                    @if(!Auth::user())
+                    @if(!Auth::check())
                     <img class="size-16 rounded-full" src="{{ asset('assets/img/user.png') }}" alt="">
                     @endif
                 </div>
                 <div class="w-full mt-28">
                     <ul class="w-full flex flex-col gap-1 pr-5">
-                        @if(!Auth::user())
+                        @if(!Auth::check())
                         <li>
-                            <a href="{{ route('login') }}" class="block py-2 text-white text-sm">
+                            <a href="{{ route('login') }}" class="block py-2 text-white font-medium">
                                 ورود | ثبتنام
                             </a>
                         </li>
                         @endif
                         <li>
-                            <a href="{{ route('home') }}" class="block py-2 text-white text-sm">
+                            <a href="{{ route('home') }}" class="block py-2 text-white font-medium">
                                 خانه
                             </a>
                         </li>
-                        @if(Auth::user())
+                        @if(Auth::check())
                         <li>
-                            <a href="{{ route('user.profile', [Auth::user()]) }}" class="block py-2 text-white text-sm">
+                            <a href="{{ route('user.profile', [Auth::user()]) }}" class="block py-2 text-white font-medium">
                                 پروفایل
                             </a>
                         </li>
                         @endif
                         <li>
-                            <a href="#" class="block py-2 text-white text-sm">
+                            <a href="{{ route('aboutUs.list') }}" class="block py-2 text-white font-medium">
                                 درباره ما
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="block py-2 text-white text-sm">
+                            <a href="#" class="block py-2 text-white font-medium">
                                 ارتباط با ما
                             </a>
                         </li>
                     </ul>
                 </div>
-                @if(Auth::user())
+                @if(Auth::check())
                 <a href="{{ route('user.logout') }}" class="absolute bottom-5 left-5 w-1/3 p-2 rounded-md bg-white/10 flex flex-row items-center gap-5">
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 512 512">
                         <path fill="white" d="M280 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V264c0 13.3 10.7 24 24 24s24-10.7 24-24V24zM134.2 107.3c10.7-7.9 12.9-22.9 5.1-33.6s-22.9-12.9-33.6-5.1C46.5 112.3 8 182.7 8 262C8 394.6 115.5 502 248 502s240-107.5 240-240c0-79.3-38.5-149.7-97.8-193.3c-10.7-7.9-25.7-5.6-33.6 5.1s-5.6 25.7 5.1 33.6c47.5 35 78.2 91.2 78.2 154.7c0 106-86 192-192 192S56 368 56 262c0-63.4 30.7-119.7 78.2-154.7z"/>
@@ -127,7 +127,9 @@
                 <a class="text-[13px] text-[#00897b]" href="#">مشاهده همه</a>
             </div>
             <div class="w-full bg-green-300 h-40 overflow-hidden rounded-[15px] my-3">
+                <!-- slider -->
                 <img class="h-full w-full rounded-inherit object-cover" src="{{ asset('assets/img/b1ddaeba-d51c-4633-9813-5c71022038d1.png') }}" alt="">
+                <!-- slider end -->
             </div>
             <div class="my-3 flex flex-row justify-center items-center gap-2">
                 <span class="size-2 rounded-full bg-gray-300"></span>

@@ -25,25 +25,25 @@
 
         <div class="w-10/12 md:w-8/12 bg-white h-full flex flex-col justify-center items-center px-4">
             <div
-                class="w-10/12 flex flex-col items-center justify-center md:justify-center lg:w-115">
+                class="w-full flex flex-col items-center justify-center md:justify-center h-dvh lg:w-115 md:w-10/12 px-4">
                 <h1 class="text-base md:text-2xl font-bold">ورود</h1>
                 <div class="flex flex-col w-full">
                     <form action="{{ route('user.check') }}" class="flex flex-col items-center my-6 gap-3 w-full"
                         method="post">
                         @csrf
                         <input type="number"
-                            class="focus:border focus:border-blue-400 p-[9px] text-xs md:text-base mb-1 rounded-[7px] border border-[#DBDFE9] outline-none w-full"
+                            class="focus:border focus:border-blue-400 p-2 md:p-[9px] mb-1 rounded-[7px] border border-[#DBDFE9] outline-none w-full"
                             name="phoneNumber" placeholder="شماره تلفن">
                         <input type="password"
-                            class="focus:border focus:border-blue-400 p-[9px] text-xs md:text-base mb-1 rounded-[7px] border border-[#DBDFE9] outline-none w-full"
+                            class="focus:border focus:border-blue-400 p-2 md:p-[9px] mb-1 rounded-[7px] border border-[#DBDFE9] outline-none w-full"
                             name="password" placeholder="کلمه عبور">
                         <div class="w-full text-center">
-                            <a href="#" class="text-[#1B84FF] mb-4 text-xs md:text-base">فراموشی رمز عبور</a>
+                            <a href="#" class="text-[#1B84FF] inline-block my-4">فراموشی رمز عبور</a>
                         </div>
                         <button
-                            class="w-full focus:bg-[#2c44cb] hover:bg-[#2c44cb] transition-all duration-400 text-center bg-[#056EE9] text-xs md:text-base p-3 rounded-[10px] text-white cursor-pointer">ورود</button>
+                            class="focus:bg-[#2c44cb] hover:bg-[#2c44cb] transition-all duration-400 text-center w-1/2 md:w-full bg-[#056EE9] p-2 md:p-3 rounded-[10px] text-white cursor-pointer">ورود</button>
                         <div class="w-full text-center">
-                            <span class="text-[#4B5675] mt-3 md:mt-5 text-xs md:text-base">
+                            <span class="text-[#4B5675] mt-3 md:mt-5">
                                  هنوز عضو نشدی؟
                                 <a href="{{ route('signup') }}" class="text-[#1B84FF] mr-2">ثبت نام!</a>
                             </span>

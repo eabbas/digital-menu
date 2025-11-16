@@ -1,4 +1,4 @@
- @extends('admin.user.panel')
+ @extends('admin.app.panel')
     @section('title', 'همه کاربران')
     @section('content')
     
@@ -6,7 +6,7 @@
             <div class="my-10">
                 <h1 class="lg:text-3xl md:text-2xl text-md font-semibold text-center text-gray-700">لیست کاربران</h1>
             </div>
-            <div class="overflow-x-auto">
+            <div class="overflow-x-auto" style="scrollbar-width: thin;">
 
                 <div class="w-[890px] xl:w-full mx-auto">
                     <ul class="grid grid-cols-8 gap-3 md:gap-5 lg:gap-10 text-center text-gray-700 font-semibold xl:text-lg border-b-2 border-gray-400 pb-3 mb-3">
@@ -39,8 +39,11 @@
                                 <a href="{{ route('user.delete', [$user->id]) }}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-rose-500 hover:text-white hover:border-rose-500">حذف</a>
                             </div>
                             <div class="w-full col-span-2">
-                                <a href="{{ route('career.careers', [$user->id]) }}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-rose-500 hover:text-white hover:border-rose-500">مشاهده کسب وکار</a>
+                                <a href="{{ route('career.careers', [$user->id]) }}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-teal-500 hover:text-white hover:border-teal-500">مشاهده کسب وکار</a>
                             </div>
+                            {{-- <div class="w-full col-span-2">
+                                <a href="{{ route('career.create', [$user->id]) }}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-teal-500 hover:text-white hover:border-teal-500">ایجاد کسب وکار</a>
+                            </div> --}}
                         </li>
                     </ul>
                 </div>

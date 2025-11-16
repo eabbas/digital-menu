@@ -3,9 +3,10 @@
             color:#2196F3;
         }
     </style>
-    @extends('admin.user.panel')
+    @extends('admin.app.panel')
     @section('title', 'ثبت نام کسب و کار')
     @section('content')
+    {{ dd($user) }}
     <form action="{{ route('career.store') }}" method="post" enctype='multipart/form-data'>
         @csrf
         <div class="min-h-screen flex items-start justify-center">

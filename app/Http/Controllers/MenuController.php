@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Career;
+use App\Models\career;
 use App\Models\menu;
 use App\Models\qr_code;
 use Illuminate\Http\Request;
@@ -63,7 +63,6 @@ class MenuController extends Controller
 
     public function update(Request $request)
     {
-        // dd($request->all());
         $menu_data = $request->menu_data;
         foreach ($menu_data as $key => $data) {
             $name = $data['menu_image']->getClientOriginalName();
@@ -82,22 +81,23 @@ class MenuController extends Controller
         $menu->career_id = $request->career_id;
         $qr_count = 0;
         $career_id = $menu->career_id;
-        if ($request->qr_num > $menu->qr_num) {
-            $qr_count = $request->qr_num - $menu->qr_num;
-            while ($qr_count) {
-                $random = Str::random(10);
-                $link = "/famenu.ir/qrcodes/$career_id/" . $random;
-                $qr_svg = QrCode::size(100)->generate($link);
-                $fileName = 'qrcodes/' . $career_id . '_' . $random . '.svg';
-                Storage::disk('public')->put($fileName, $qr_svg);
-                qr_code::create(['qr_path' => $fileName, 'career_id' => $career_id, 'menu_id' => $request->menu_id, 'slug' => 'qrcode/' . $career_id . '/' . $random]);
-                $qr_count--;
+        if ($request->qr_num) {
+            if ($request->qr_num > $menu->qr_num) {
+                $qr_count = $request->qr_num - $menu->qr_num;
+                while ($qr_count) {
+                    $random = Str::random(10);
+                    $link = "/famenu.ir/qrcodes/$career_id/" . $random;
+                    $qr_svg = QrCode::size(100)->generate($link);
+                    $fileName = 'qrcodes/' . $career_id . '_' . $random . '.svg';
+                    Storage::disk('public')->put($fileName, $qr_svg);
+                    qr_code::create(['qr_path' => $fileName, 'career_id' => $career_id, 'menu_id' => $request->menu_id, 'slug' => 'qrcode/' . $career_id . '/' . $random]);
+                    $qr_count--;
+                }
             }
         }
         $menu->qr_num = $request->qr_num;
         $menu->save();
-        $user = Auth::user();
-        return to_route('user.profile', [$user]);
+        return to_route('career.careers', [Auth::user()]);
     }
 
     public function delete(menu $menu)

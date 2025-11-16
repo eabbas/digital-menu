@@ -1,4 +1,4 @@
-@extends('admin.user.panel')
+@extends('admin.app.panel')
 @section('title', 'مشاهده QR کد ها')
 @section('content')
 <div class="w-full grid grid-cols-1 md:grid-cols-4 xl:grid-cols-8 mt-5">
