@@ -13,16 +13,17 @@
 </head>
 
 <body>
-    <div class="w-full flex flex-col justify-center items-center md:flex-row-reverse">
-        <div class="hidden md:flex justify-center md:w-4/12 bg-[#056EE9] h-dvh">
+    <div class="w-full h-[100vh] flex flex-col justify-center items-center md:flex-row-reverse">
+        <div class="flex justify-center max-sm:h-35 max-md:h-40 md:h-dvh md:w-4/12 lg:w-5/12 xl:w-6/12 bg-[#056EE9]">
             <div class="flex flex-col my-12 items-center justify-center">
-                <div>
-                    <h2 class="text-center font-bold text-white text-3xl">Faos</h2>
+                <div class="w-full flex flex-row justify-center items-center">
+                    <img class="max-md:w-5/12 w-8/12" src="{{ asset('assets/img/e125edbd-f303-47f3-9dbc-af414f99ccb2.webp') }}" alt="">
+                    <!-- <h2 class="text-center font-bold text-white text-3xl">Faos</h2> -->
                 </div>
             </div>
         </div>
 
-        <div class="w-10/12 md:w-8/12 bg-white h-full flex flex-col justify-center items-center">
+        <div class="w-10/12 md:w-8/12 bg-white h-full flex flex-col justify-center items-center px-4">
             <div
                 class="w-full flex flex-col items-center justify-center md:justify-center h-dvh lg:w-115 md:w-10/12 px-4">
                 <h1 class="text-base md:text-2xl font-bold">ورود</h1>
@@ -52,7 +53,12 @@
             </div>
         </div>
     </div>
-
+    <footer>
+        <div class="w-full h-20 bg-[#056ee9] absolute bottom-0 flex flex-col justify-center items-center md:hidden">
+            <div class="">اکادمی <b class="text-xl">Faos</b></div>
+            <a href="tell:"><b class="text-white">09147794595</b></a>
+        </div>
+    </footer>
 </body>
 
 </html>
