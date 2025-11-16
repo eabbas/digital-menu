@@ -13,17 +13,16 @@
 </head>
 
 <body>
-    <div class="h-dvh flex flex-row-reverse">
-        <div class="hidden md:flex justify-center w-4/12 bg-[#056EE9] 2xl:h-full">
+    <div class="w-full h-[100vh] flex flex-col justify-start items-center md:flex-row-reverse">
+         <div class="flex justify-center max-sm:h-25 max-md:h-30 md:h-dvh md:w-4/12 lg:w-5/12 xl:w-6/12 bg-[#056EE9]">
             <div class="flex flex-col my-12 items-center justify-center">
-                <div>
-                    <h1 class="text-3xl text-center font-bold text-white">
-                        Faos
-                    </h1>
+                <div class="w-full flex flex-row justify-center items-center">
+                    <img class="max-md:w-4/12 w-8/12" src="{{ asset('assets/img/e125edbd-f303-47f3-9dbc-af414f99ccb2.webp') }}" alt="Faos">
+
                 </div>
             </div>
         </div>
-        <div class="w-full md:w-8/12 bg-white flex justify-center ">
+        <div class="w-full md:w-8/12 bg-white flex justify-center md:px-5 mt-5">
             <div class="flex flex-col items-center justify-center w-full">
                 <h1 class="md:text-2xl font-bold text-base">ثبت نام</h1>
                 <div class="w-2/3 md:w-1/2 mx-auto flex flex-col">
@@ -42,8 +41,8 @@
                             class="w-full p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border border-[#DBDFE9] outline-none"
                             name="password" placeholder="کلمه عبور" required>
                         <div class="w-full flex gap-2 items-center ">
-                            <input type="checkbox" name="rules" value="1" class="size-5 my-4">
-                            <label for="rules" class="text-[#4B5675] cursor-pointer">قوانین را قبول میکنم 
+                            <input type="checkbox" name="rules" value="1" class="size-5 max-md:my-1">
+                            <label for="rules" class="max-md:text-sm text-[#4B5675] cursor-pointer">قوانین را قبول میکنم 
                                 <span class="text-[#056EE9] cursor-pointer" onclick="rules('open')">قوانین</span>
                             </label>
                         </div>
@@ -67,9 +66,9 @@
                             </div>
                         </div>
                         <!-- rules end -->
-                        <button class="focus:bg-[#2c44cb] hover:bg-[#2c44cb] transition-all duration-400 text-center w-1/3 md:w-full bg-[#056EE9] py-2 md:p-3 rounded-[10px] text-white cursor-pointer">ثبت نام</button>
-                        <div class="w-full text-center my-2 md:my-4">
-                            <span class="text-[#4B5675] mt-5">
+                        <button class="focus:bg-[#2c44cb] hover:bg-[#2c44cb] transition-all duration-400 text-center w-full bg-[#056EE9] py-2 md:p-3 rounded-[10px] text-white cursor-pointer">ثبت نام</button>
+                        <div class="w-full text-center my-1 md:my-4">
+                            <span class="text-sm text-[#4B5675] mt-5">
                                  از قبل اکانت داری؟
                                 <a href="{{ route('login') }}" class="text-[#1B84FF]">
                                     ورود
@@ -83,6 +82,12 @@
             </div>
         </div>
     </div>
+     <footer>
+        <div class="w-full h-10 bg-[#056ee9] absolute bottom-0 flex flex-row gap-4 justify-center items-center md:hidden">
+            <div class="">اکادمی <b class="text-xl">Faos</b></div>
+            <a href="tell:"><b class="text-white">09147794595</b></a>
+        </div>
+    </footer>
     <script src="{{ asset('assets/js/rules.js') }}"></script>
 </body>
 
