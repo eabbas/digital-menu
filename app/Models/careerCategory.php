@@ -15,6 +15,6 @@ class careerCategory extends Model
 
     public function careers()
     {
-        return $this->hasMany(career::class)->chaperone();
+        return $this->hasMany(career::class, 'career_category_id')->chaperone();
     }
 }

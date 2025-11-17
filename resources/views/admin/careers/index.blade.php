@@ -33,7 +33,7 @@
                                     <a href="{{ route('career.single', [$career]) }}" class="ml-4 text-sky-700">مشاهده</a>
                                 </div>
                                 <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
-                                    <a href="{{ route('career.edit', [$career])}}" class="ml-4 text-sky-700">ویرایش</a>
+                                    <a href="{{ route('career.edit', [$career, $career->user])}}" class="ml-4 text-sky-700">ویرایش</a>
                                 </div>
                                 <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
                                     <a href="{{ route('career.delete', [$career])}}" class="ml-4 text-sky-700">حذف</a>

@@ -77,7 +77,7 @@ function add() {
     attribute.appendChild(div)
     featureCount++
     console.log(valueCount);
-    
+
 }
 
 
@@ -122,8 +122,8 @@ function addAttr(el) {
     div.innerHTML = element
     el.parentElement.children[1].appendChild(div)
     console.log(valueCount);
-    
-    
+
+
 }
 
 function removeAttrButton(element) {

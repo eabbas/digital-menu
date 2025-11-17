@@ -6,15 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\Models\careerCategory;
 
 class CareerController extends Controller
 {
     public function create(User $user=null)
     {
+        $careerCategories = careerCategory::all();
         if($user){
-            return view('admin.careers.create', ['user' => $user]);
+            return view('admin.careers.create', ['user' => $user, 'careerCategories'=>$careerCategories]);
         }
-        return view('admin.careers.create', ['user'=>Auth::user()]);
+        return view('admin.careers.create', ['user'=>Auth::user(), 'careerCategories'=>$careerCategories]);
     }
 
     public function store(Request $request)
@@ -38,6 +40,7 @@ class CareerController extends Controller
             'user_id' => $user->id,
             'email' => $request->email,
             'description' => $request->description,
+            'career_category_id'=>$request->careerCategory
         ]);
         return to_route('career.careers', [Auth::user()]);
     }
@@ -50,17 +53,19 @@ class CareerController extends Controller
         return view('admin.careers.userCareers', ['user' => Auth::user()]);
     }
 
-    public function edit(career $career)
+    public function edit(career $career, User $user=null)
     {
-        $user = Auth::user();
+        if(!$user){
+            $user = Auth::user();
+        }
+        $careerCategories = careerCategory::all();
         $career->social_media = json_decode($career->social_media);
-        return view('admin.careers.edit', ['career' => $career, 'user' => $user]);
+        return view('admin.careers.edit', ['career' => $career, 'user' => $user, 'careerCategories'=>$careerCategories]);
     }
 
     public function update(Request $request)
     {
         $career = career::find($request->id);
-        // dd($request->logo);
         if ($request->logo) {
             Storage::disk('public')->delete($career->logo);
             $logoName = $request->logo->getClientOriginalName();
