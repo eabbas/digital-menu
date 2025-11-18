@@ -17,7 +17,6 @@ use App\Http\Middleware\UserMiddleware;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CareerCategoryController;
 
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware([LoginMiddleware::class]);
 Route::get('/signup', [UserController::class, "create"])->name('signup')->middleware([LoginMiddleware::class]);
