@@ -53,7 +53,7 @@ Route::group([
 ], function () {
     Route::get('/create/{user?}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/list/{user?}', 'user_careers')->name('careers');
+    Route::get('/list/{user?}', 'user_careers')->name('careers')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/edit/{career}/{user?}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{career}', 'delete')->name('delete');
@@ -129,6 +129,7 @@ Route::group([
     'as' => 'client.'
 ], function () {
     Route::get('/{career}/{slug}', 'show_menu')->name('menu');
+    Route::get('/{career}', 'career_menu')->name('careerMenu');
 });
 
 
