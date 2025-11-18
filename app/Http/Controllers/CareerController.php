@@ -29,6 +29,10 @@ class CareerController extends Controller
         $name = $request->logo->getClientOriginalName();
         $fullName =  Str::uuid()."_".$name;
         $path = $request->file('logo')->storeAs('files', $fullName, 'public');
+
+        $bannerName = $request->banner->getClientOriginalName();
+        $fullBannerName = Str::uuid()."_".$bannerName;
+        $bannerPath = $request->file('banner')->storeAs('files', $fullBannerName, 'public');
         $social_medias = json_encode($request->social_medias);
         career::insertGetId([
             'title' => $request->title,
@@ -40,7 +44,8 @@ class CareerController extends Controller
             'user_id' => $user->id,
             'email' => $request->email,
             'description' => $request->description,
-            'career_category_id'=>$request->careerCategory
+            'career_category_id'=>$request->careerCategory,
+            'banner'=>$bannerPath
         ]);
         return to_route('career.careers', [Auth::user()]);
     }
@@ -72,6 +77,13 @@ class CareerController extends Controller
             $fullLogoName = Str::uuid()."_".$logoName;
             $logoPath = $request->file('logo')->storeAs('files', $fullLogoName, 'public');
             $career->logo = $logoPath;
+        }
+        if ($request->banner) {
+            Storage::disk('public')->delete($career->banner);
+            $bannerName = $request->banner->getClientOriginalName();
+            $fullBannerName = Str::uuid()."_".$bannerName;
+            $bannerPath = $request->file('banner')->storeAs('files', $fullBannerName, 'public');
+            $career->banner = $bannerPath;
         }
         $career->social_media = json_encode($request->social_medias);
         $career->province = $request->province;
