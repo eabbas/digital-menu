@@ -57,7 +57,7 @@ Route::group([
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{career}', 'delete')->name('delete');
     Route::get('/careers', 'index')->name('list');
-    Route::get('/show/{career}', 'single')->name('single');
+    Route::get('/show/{career}', 'single')->name('single')->withoutMiddleware([UserMiddleware::class]);
 });
 
 Route::group([
@@ -80,13 +80,13 @@ Route::group([
     'as' => 'menu.',
     'middleware' => [UserMiddleware::class]
 ], function () {
-    Route::get('/{career}', 'index')->name('list');
+    Route::get('/{career}', 'index')->name('list')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/create/{career}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::get('/edit/{menu}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{menu}', 'delete')->name('delete');
-    Route::get('/qr_codes/{menu}', 'qr_codes')->name('qr_codes');
+    Route::get('/qr_codes/{menu}', 'qr_codes')->name('qr_codes')->withoutMiddleware([UserMiddleware::class]);
 });
 
 //category.......................................................................
