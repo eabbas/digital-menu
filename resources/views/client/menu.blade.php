@@ -61,17 +61,17 @@
         </div>
         <div class="w-full bg-[#F4F8F9] pt-3">
             <div class="w-11/12 flex flex-row items-center gap-3 pb-3 mx-auto overflow-x-auto" style="scrollbar-width: none;">
-                <?php //$menuIndex = 0;?>   
-                {{-- @foreach(json_decode($career->menu->menu_data) as $data)
+                <?php $menuIndex = 0;?>   
+                @foreach(json_decode($career->menu->menu_data) as $data)
                 <div>
                     <a href="#" class="w-20 gap-2 bg-white rounded-lg p-2 flex flex-col items-center" onclick='showMenu(event, "<?= $menuIndex?>")'>
                         <img class="size-10" src="{{ asset('storage/'.$data->menu_image) }}" alt="menu image">
                         <span class="block w-full title_category_icon text-center truncate text-xs">{{ $data->name
                             }}</span>
                     </a>
-                </div> --}}
-                <?php //$menuIndex++;?>
-                {{-- @endforeach --}}
+                </div>
+                <?php $menuIndex++;?>
+                @endforeach
             </div>
             <div class="w-11/12 mx-auto">
                 <div class="my-5">
