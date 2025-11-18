@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="w-full h-[100vh] flex flex-col justify-start items-center md:flex-row-reverse">
+    <div class="w-full h-dvh flex flex-col justify-start items-center md:flex-row-reverse">
          <div class="flex justify-center max-sm:h-25 max-md:h-30 md:h-dvh md:w-4/12 lg:w-5/12 xl:w-6/12 bg-[#056EE9]">
             <div class="flex flex-col my-12 items-center justify-center">
                 <div class="w-full flex flex-row justify-center items-center">
