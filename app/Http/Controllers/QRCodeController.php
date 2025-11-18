@@ -15,10 +15,13 @@ class QrCodeController extends Controller
     }
 
     public function delete(qr_code $qr_code){
-        $menu = menu::find($qr_code->menu_id);
+        $count = $qr_code->menu->qr_num;
+        $count-=1;
+        $qr_code->menu->qr_num = $count;
+        $qr_code->menu->save();
         Storage::disk('public')->delete($qr_code->qr_path);
         $qr_code->delete();
-        return to_route('menu.edit', [$menu]);
+        return to_route('menu.edit', [$qr_code->menu]);
     }
 
     public function load(career $career, string $slug){
