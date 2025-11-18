@@ -39,7 +39,7 @@ class MenuController extends Controller
         $menu_id = menu::insertGetId(['menu_data' => $menu_data, 'qr_num' => $request->qr_num, 'career_id' => $career_id]);
         for ($i = 0; $i < $request->qr_num; $i++) {
             $random = Str::random(10);
-            $link = "/famenu.ir/qrcode/$career_id/" . $random;
+            $link = "famenu.ir/qrcode/$career_id/" . $random;
             $qr_svg = QrCode::size(100)->generate($link);
             $fileName = 'qrcodes/' . $career_id . '_' . $random . '.svg';
             Storage::disk('public')->put($fileName, $qr_svg);
@@ -86,7 +86,7 @@ class MenuController extends Controller
                 $qr_count = $request->qr_num - $menu->qr_num;
                 while ($qr_count) {
                     $random = Str::random(10);
-                    $link = "/famenu.ir/qrcodes/$career_id/" . $random;
+                    $link = "famenu.ir/qrcodes/$career_id/" . $random;
                     $qr_svg = QrCode::size(100)->generate($link);
                     $fileName = 'qrcodes/' . $career_id . '_' . $random . '.svg';
                     Storage::disk('public')->put($fileName, $qr_svg);
