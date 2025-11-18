@@ -79,7 +79,9 @@ class CareerController extends Controller
             $career->logo = $logoPath;
         }
         if ($request->banner) {
-            Storage::disk('public')->delete($career->banner);
+            if ($career->banner) {
+                Storage::disk('public')->delete($career->banner);
+            }
             $bannerName = $request->banner->getClientOriginalName();
             $fullBannerName = Str::uuid()."_".$bannerName;
             $bannerPath = $request->file('banner')->storeAs('files', $fullBannerName, 'public');
