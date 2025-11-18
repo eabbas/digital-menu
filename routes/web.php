@@ -16,6 +16,7 @@ use App\Http\Middleware\LoginMiddleware;
 use App\Http\Middleware\UserMiddleware;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CareerCategoryController;
+use App\Models\career;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware([LoginMiddleware::class]);
@@ -129,7 +130,9 @@ Route::group([
 ], function () {
     Route::get('/{career}/{slug}', 'show_menu')->name('menu');
     Route::get('/{career}', 'career_menu')->name('careerMenu');
+    // Route::get('/career/{$career}', 'show_career')->name('show_career');
 });
+Route::get('/career/{career}', [ClientController::class, 'show_career'])->name('show_career');
 
 
 Route::group([
