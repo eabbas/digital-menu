@@ -1,8 +1,8 @@
 @extends('client.document')
-@section('title', 'کسب و کار  {{ $career->title }}')
+@section('title', 'کسب و کار  ')
 @section('content')
     <div class="w-full">
-        <div class="pb-5 w-full">
+        <div class="py-5 w-full">
             <h1 class="text-xl text-center lg:text-start">{{ $career->title }}</h1>
         </div>
 
