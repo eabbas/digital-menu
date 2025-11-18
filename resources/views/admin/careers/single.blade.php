@@ -35,9 +35,16 @@
         <div
             class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5"
         >
+        <div class="flex flex-row justify-between items-center">
             <h1 class="lg:text-xl mt-5 font-bold pb-3 border-b border-gray-200">
-                جزییات کسب و کار
+                جزئیات کسب و کار
             </h1>
+            @if($career->menu)
+            <div class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
+                <a href="{{ route('menu.list', [$career])}}" class="text-sky-700">مشاهده منو</a>
+            </div>
+            @endif  
+        </div>
 
             <div class="w-full lg:w-1/2 flex flex-col gap-y-3 lg:gap-y-5 mt-5">
                 <div
