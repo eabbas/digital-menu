@@ -37,7 +37,7 @@
                         <input type="number"
                             class="w-full p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border border-[#DBDFE9] outline-none"
                             name="phoneNumber" placeholder="شماره تلفن" required>
-                        <input type="password" maxlength="8"
+                        <input type="password"
                             class="w-full p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border border-[#DBDFE9] outline-none"
                             name="password" placeholder="کلمه عبور" required>
                         <div class="w-full flex gap-2 items-center ">
