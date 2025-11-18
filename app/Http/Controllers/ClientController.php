@@ -10,4 +10,8 @@ class ClientController extends Controller
     public function show_menu(career $career, string $slug){
         return view('client.menu', ['career'=>$career]);
     }
+
+    public function career_menu(career $career){
+        return view('client.menu', ['career'=>$career]);
+    }
 }
