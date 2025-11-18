@@ -63,8 +63,11 @@ class MenuController extends Controller
 
     public function update(Request $request)
     {
+       
+       
         $menu_data = $request->menu_data;
-        foreach ($menu_data as $key => $data) {
+        foreach ($menu_data as $key => $data) 
+        {
             $name = $data['menu_image']->getClientOriginalName();
             $fullName = time() . '_' . $name;
             $path = $data['menu_image']->storeAs('images', $fullName, 'public');
@@ -94,6 +97,9 @@ class MenuController extends Controller
                     $qr_count--;
                 }
             }
+            // if ($request->qr_num<=$menu->qr_num) {
+            //     # code...
+            // }
         }
         $menu->qr_num = $request->qr_num;
         $menu->save();
