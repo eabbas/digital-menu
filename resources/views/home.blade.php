@@ -8,17 +8,17 @@
                 <a class="text-[13px] text-[#00897b]" href="#">مشاهده همه</a>
             </div>
             <div class="w-full bg-green-300 h-40 overflow-hidden rounded-[15px] my-3">
-                <!-- slider -->
-                <img class="h-full w-full rounded-inherit object-cover"
+                {{-- slider --}}
+                <img class="size-full rounded-inherit object-cover"
                     src="{{ asset('assets/img/b1ddaeba-d51c-4633-9813-5c71022038d1.png') }}" alt="">
-                <!-- slider end -->
+                {{-- slider end --}}
             </div>
-            <div class="my-3 flex flex-row justify-center items-center gap-2">
+            {{-- <div class="my-3 flex flex-row justify-center items-center gap-2">
                 <span class="size-2 rounded-full bg-gray-300"></span>
                 <span class="size-2 rounded-full bg-[#00897b]"></span>
                 <span class="size-2 rounded-full bg-gray-300"></span>
                 <span class="size-2 rounded-full bg-gray-300"></span>
-            </div>
+            </div> --}}
             <div class="flex flex-row justify-between items-center">
                 <h1 class="text-xl">دسته بندی</h1>
                 <a class="text-[13px] text-[#00897b]" href="#">مشاهده همه</a>

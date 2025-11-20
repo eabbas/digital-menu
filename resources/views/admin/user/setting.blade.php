@@ -38,15 +38,15 @@
                         </div>
                         <div class="flex flex-col lg:flex-row gap-2 mt-8 mx-10 lg:mx-0">
                             <div class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px]">
-                                <span class="font-bold text-blue-500">4,500</span>
+                                <span class="font-bold text-blue-500">0</span>
                                 <span class="text-[#4B5675]">تعداد اسکن ها</span>
                             </div>
                             <div class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px]">
-                                <span class="font-bold text-blue-500">56</span>
+                                <span class="font-bold text-blue-500">0</span>
                                 <span class="text-[#4B5675]"> تعداد QR کد ها </span>
                             </div>
                             <div class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border max-sm:border-[1.5px] rounded-[5px]">
-                                <span class="font-bold text-blue-500">6</span>
+                                <span class="font-bold text-blue-500">{{ count(Auth::user()->careers) }}</span>
                                 <span class="text-[#4B5675]">تعداد کسب و کارها</span>
                             </div>
                         </div>
