@@ -98,9 +98,13 @@
                     <span class="p-2.5 text-gary-600"><strong>{{ $user->name }} {{ $user?->family }}</strong></span>
                     {{-- <label class="p-2.5 text-gray-400">کمپانی</label>
                     <span class="p-2.5 text-gary-600">فائوس</span> --}}
-                    <label class="p-2.5 text-gray-400">تماس با ما </label>
+                    <label class="p-2.5 text-gray-400">شماره تلفن</label>
                     <span class="p-2.5 text-gary-600">{{ $user->phoneNumber }}<mark class="mx-2 text-green-700 bg-green-300 px-1 rounded-md">تایید
                             شده</mark></span>
+                    <label class="p-2.5 text-gray-400">ایمیل</label>
+                    <span class="p-2.5 text-gary-600">{{ $user->email }}</span>
+                    <label class="p-2.5 text-gray-400">نقش</label>
+                    <span class="p-2.5 text-gary-600">{{ $user->type }}</span>
                     {{-- <label class="p-2.5 text-gray-400">سایت کمپانی</label>
                     <a href="#" class="p-2.5 text-gary-600">famenu.ie</a>
                     <label class="p-2.5 text-gray-400">کشور </label>
@@ -113,10 +117,10 @@
             <div class="sm:grid sm:grid-cols-2 sm:gap-2 hidden">
                 <div class="flex w-full flex-col">
                     <label class="p-2.5 text-gray-400">نام کامل</label>
-                    {{-- <label class="p-2.5 text-gray-400">کمپانی</label>
-                    <label class="p-2.5 text-gray-400">تماس با ما تلفن </label>
-                    <label class="p-2.5 text-gray-400">سایت کمپانی</label>
-                    <label class="p-2.5 text-gray-400">کشور </label>
+                    <label class="p-2.5 text-gray-400">شماره تلفن</label>
+                    <label class="p-2.5 text-gray-400">ایمیل</label>
+                    <label class="p-2.5 text-gray-400">نقش</label>
+                    {{-- <label class="p-2.5 text-gray-400">کشور </label>
                     <label class="p-2.5 text-gray-400">ارتباط</label> --}}
                 </div>
                 <div class="flex w-full flex-col">
@@ -124,6 +128,8 @@
                     {{-- <span class="p-2.5 text-gary-600">فائوس</span> --}}
                     <span class="p-2.5 text-gary-600">{{ $user->phoneNumber }}<mark class="mx-2 text-green-700 bg-green-300 px-1 rounded-md">تایید
                             شده</mark></span>
+                    <span class="p-2.5 text-gary-600">{{ $user->email }}</span>
+                    <span class="p-2.5 text-gary-600">{{ $user->type }}</span>
                     {{-- <a href="#" class="p-2.5 text-gary-600">famenu.ie</a>
                     <span class="p-2.5 text-gary-600">ایران</span>
                     <span class="p-2.5 text-gary-600">ایمیل, تلفن</span> --}}
