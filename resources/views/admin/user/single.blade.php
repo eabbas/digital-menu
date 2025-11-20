@@ -24,7 +24,7 @@
                             <strong class="text-gray-700">{{ $user->name }} {{ $user?->family }}</strong>
                         </div>
                         <div class="div2 hidden">
-                            <ul class="flex flex-col lg:flex-row gap-3 text-[#99A1B7]">
+                            {{-- <ul class="flex flex-col lg:flex-row gap-3 text-[#99A1B7]">
                                 <li>
                                     <a href="">توسعه دهنده</a>
                                 </li>
@@ -32,9 +32,9 @@
                                     <a href="">منطقه زندگی</a>
                                 </li>
                                 <li>
-                                    <a href="">max@kt.com</a>
+                                    <a href="">{{ $user?->email }}</a>
                                 </li>
-                            </ul>
+                            </ul> --}}
                         </div>
                         <div class="flex flex-col lg:flex-row gap-2 mt-8 mx-10 lg:mx-0">
                             <div class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px]">
@@ -96,37 +96,37 @@
                 <div class="flex w-full flex-col">
                     <label class="p-2.5 text-gray-400">نام کامل</label>
                     <span class="p-2.5 text-gary-600"><strong>{{ $user->name }} {{ $user?->family }}</strong></span>
-                    <label class="p-2.5 text-gray-400">کمپانی</label>
+                    {{-- <label class="p-2.5 text-gray-400">کمپانی</label>
                     <span class="p-2.5 text-gary-600">فائوس</span>
-                    <label class="p-2.5 text-gray-400">تماس با ما تلفن </label>
+                    <label class="p-2.5 text-gray-400">تماس با ما تلفن </label> --}}
                     <span class="p-2.5 text-gary-600">{{ $user->phoneNumber }}<mark class="mx-2 text-green-700 bg-green-300 px-1 rounded-md">تایید
                             شده</mark></span>
-                    <label class="p-2.5 text-gray-400">سایت کمپانی</label>
+                    {{-- <label class="p-2.5 text-gray-400">سایت کمپانی</label>
                     <a href="#" class="p-2.5 text-gary-600">famenu.ie</a>
                     <label class="p-2.5 text-gray-400">کشور </label>
                     <span class="p-2.5 text-gary-600">ایران</span>
                     <label class="p-2.5 text-gray-400">ارتباط</label>
-                    <span class="p-2.5 text-gary-600">ایمیل, تلفن</span>
+                    <span class="p-2.5 text-gary-600">ایمیل, تلفن</span> --}}
                 </div>
             </div>
 
             <div class="sm:grid sm:grid-cols-2 sm:gap-2 hidden">
                 <div class="flex w-full flex-col">
                     <label class="p-2.5 text-gray-400">نام کامل</label>
-                    <label class="p-2.5 text-gray-400">کمپانی</label>
+                    {{-- <label class="p-2.5 text-gray-400">کمپانی</label>
                     <label class="p-2.5 text-gray-400">تماس با ما تلفن </label>
                     <label class="p-2.5 text-gray-400">سایت کمپانی</label>
                     <label class="p-2.5 text-gray-400">کشور </label>
-                    <label class="p-2.5 text-gray-400">ارتباط</label>
+                    <label class="p-2.5 text-gray-400">ارتباط</label> --}}
                 </div>
                 <div class="flex w-full flex-col">
                     <span class="p-2.5 text-gary-600"><strong>{{ $user->name }} {{ $user?->family }}</strong></span>
-                    <span class="p-2.5 text-gary-600">فائوس</span>
+                    {{-- <span class="p-2.5 text-gary-600">فائوس</span> --}}
                     <span class="p-2.5 text-gary-600">{{ $user->phoneNumber }}<mark class="mx-2 text-green-700 bg-green-300 px-1 rounded-md">تایید
                             شده</mark></span>
-                    <a href="#" class="p-2.5 text-gary-600">famenu.ie</a>
+                    {{-- <a href="#" class="p-2.5 text-gary-600">famenu.ie</a>
                     <span class="p-2.5 text-gary-600">ایران</span>
-                    <span class="p-2.5 text-gary-600">ایمیل, تلفن</span>
+                    <span class="p-2.5 text-gary-600">ایمیل, تلفن</span> --}}
                 </div>
             </div>
 
