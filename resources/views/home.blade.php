@@ -60,7 +60,7 @@
                         @if(!Auth::check())
                         <li>
                             <a href="{{ route('login') }}" class="block py-2 text-white font-medium">
-                                ورود | ثبتنام
+                                ورود | ثبت نام
                             </a>
                         </li>
                         @endif
