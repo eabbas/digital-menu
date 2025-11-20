@@ -256,8 +256,12 @@
                 @endif
             </div>
             <!-- hamburger menu -->
-            <div class="w-full h-dvh fixed top-0 -left-full bg-black/50 flex flex-row z-50 transition-all duration-500">
-                <div class="w-1/3 bg-inherit h-full" onclick="hamburgerMenu('close', this)"></div>
+            <div class="w-full h-dvh fixed top-0 -right-full bg-black/50 flex flex-row-reverse z-50 transition-all duration-500 backdrop-blur-sm">
+                <div class="w-1/3 bg-inherit h-full relative" onclick="hamburgerMenu('close', this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-6 absolute top-5 left-5 cursor-pointer" viewBox="0 0 384 512">
+                        <path fill="white" d="M324.5 411.1c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L214.6 256 347.1 123.5c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L192 233.4 59.5 100.9c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L169.4 256 36.9 388.5c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L192 278.6 324.5 411.1z"/>
+                    </svg>
+                </div>
                 <div class="w-2/3 bg-white h-full p-2 flex flex-col justify-between">
                     <div>
                         <div class="flex flex-row items-center gap-3 pb-2 border-b border-gray-300">

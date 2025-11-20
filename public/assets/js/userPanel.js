@@ -1,8 +1,8 @@
 
 function hamburgerMenu(state, element){
     if (state == "open") {
-        element.parentElement.nextElementSibling.classList.remove('-left-full')
-        element.parentElement.nextElementSibling.classList.add('left-0')
+        element.parentElement.nextElementSibling.classList.remove('-right-full')
+        element.parentElement.nextElementSibling.classList.add('right-0')
         element.children[0].classList.add('-translate-x-[30px]')
         element.children[0].classList.add('opacity-0')
         element.children[1].classList.add('translate-x-[30px]')
@@ -11,8 +11,8 @@ function hamburgerMenu(state, element){
         element.children[2].classList.add('opacity-0')
     }
     if (state == "close") {
-        element.parentElement.classList.remove('left-0')
-        element.parentElement.classList.add('-left-full')
+        element.parentElement.classList.remove('right-0')
+        element.parentElement.classList.add('-right-full')
         element.parentElement.previousElementSibling.children[0].children[0].classList.remove('-translate-x-[30px]')
         element.parentElement.previousElementSibling.children[0].children[0].classList.remove('opacity-0')
         element.parentElement.previousElementSibling.children[0].children[1].classList.remove('translate-x-[30px]')
