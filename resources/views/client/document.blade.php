@@ -44,9 +44,9 @@
 
         <div class="fixed w-full h-dvh top-0 -right-full transition-all duration-500 opacity-0 bg-black/50 flex flex-row z-50"
             id="home_hamburger_menu">
-            <div class="w-2/3 h-full bg-[#fc6a43] p-3 relative">
+            <div class="w-2/3 h-full bg-[#00897b] p-3 relative">
                 <div
-                    class="absolute w-full p-2 h-20 bg-[#fc6a43] rounded-l-full -left-8 top-10 flex flex-row justify-end items-center gap-5">
+                    class="absolute w-full p-2 h-20 bg-[#00897b] rounded-l-full -left-8 top-10 flex flex-row justify-end items-center gap-5">
                     @if(Auth::check())
                     <div class="flex flex-col gap-1">
                         <div class="text-white font-medium">{{ Auth::user()->name }} {{ Auth::user()->family }}</div>

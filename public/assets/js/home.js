@@ -15,7 +15,9 @@ function home_menu(state){
 
 let careers = document.querySelectorAll('.careers')
 let careerCat = document.querySelectorAll('.careerCat')
+let careerCatTitle = document.getElementById('careerCatTitle')
 function showCareer(index, el){
+    careerCatTitle.innerText = ""
     careers.forEach((item)=>{
         item.classList.remove('flex')
         item.classList.add('hidden')
@@ -28,4 +30,8 @@ function showCareer(index, el){
         element.classList.remove('bg-[#00897b]')
     })
     el.children[0].classList.add('bg-[#00897b]')
+    careerCatTitle.innerHTML = `
+    <span>کسب و کار های</span> 
+        <span class="font-bold">${el.children[1].innerText}</span>
+    `
 }
