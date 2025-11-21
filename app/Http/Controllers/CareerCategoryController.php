@@ -42,7 +42,6 @@ class CareerCategoryController extends Controller
     }
     public function update(Request $request)
     {
-        // dd($request->all());
         $name = $request->main_image->getClientOriginalName();
         $fullName = Str::uuid()."_".$name;
         $path = $request->file('main_image')->storeAs('images', $fullName, 'public');
@@ -53,6 +52,7 @@ class CareerCategoryController extends Controller
         $careerCategory->main_image = $path;
 
         $careerCategory->save();
+        return to_route('cc.list');
     }
     public function delete(careerCategory $careerCategory)
     {
