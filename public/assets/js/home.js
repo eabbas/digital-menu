@@ -14,7 +14,8 @@ function home_menu(state){
 }
 
 let careers = document.querySelectorAll('.careers')
-function showCareer(index){
+let careerCat = document.querySelectorAll('.careerCat')
+function showCareer(index, el){
     careers.forEach((item)=>{
         item.classList.remove('flex')
         item.classList.add('hidden')
@@ -23,4 +24,8 @@ function showCareer(index){
             item.classList.remove('hidden')
         }
     })
+    careerCat.forEach((element)=>{
+        element.classList.remove('bg-[#00897b]')
+    })
+    el.children[0].classList.add('bg-[#00897b]')
 }
