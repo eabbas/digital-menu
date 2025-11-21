@@ -23,7 +23,7 @@
                 <h1 class="text-xl">دسته بندی</h1>
                 <a class="text-[13px] text-[#00897b]" href="#">مشاهده همه</a>
             </div>
-            <div class="flex flex-row gap-3 my-4 overflow-x-auto" style="scrollbar-width: none;">
+            <div class="flex flex-row gap-3 my-4 overflow-x-auto overflow-y-clip" style="scrollbar-width: none;">
                 @foreach ($careerCategories as $careerCategory)
                 <div class="flex flex-col gap-3 justify-center items-center cursor-pointer" onclick='showCareer({{ $careerCategory->id }}, this)'>
                     <div class="size-20 rounded-md border border-gray-300 p-2 overflow-hidden careerCat">
