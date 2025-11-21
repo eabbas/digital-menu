@@ -41,8 +41,8 @@
 
             </div>
             <div class="flex flex-row justify-between items-center mt-5 mb-3">
-                <h1 class="text-xl">
-                   کسب و کار های مرتبط
+                <h1 class="text-xl" id="careerCatTitle">
+                  کسب و کار ها
                 </h1>
                 <a class="text-[13px] text-[#00897b]" href="#">مشاهده همه</a>
             </div>
