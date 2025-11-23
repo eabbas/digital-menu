@@ -19,12 +19,8 @@
                         <div class="px-6 py-3 text-center text-xs font-medium text-gray-600 col-span-3">عملیات</div>
                     </div>
                     <div class="bg-white divide-y divide-[#f1f1f4]">
-                      
+      @foreach($careers as $career)
                         @if($career)
-                        <?php
-                        // dd($career->id);
-                        ?>
-
                         <div class="grid grid-cols-8 items-center divide-x divide-[#f1f1f4]">
                             <div class="p-3 text-sm h-full flex items-center justify-center text-gray-900">{{ $career->title}}</div>
                             <div class="p-3 text-sm h-full flex items-center justify-center text-gray-900 col-span-2">{{ $career?->user?->name }} {{ $career?->user?->family }}</div>
@@ -50,7 +46,7 @@
                             </div>
                         </div>
                         @endif
-                    
+                        @endforeach
                     </div>
                 </div>
             </div>
