@@ -14,4 +14,10 @@ class HomeController extends Controller
         $careers = career::all();
         return view('home', ['sliders'=>$sliders ,'careerCategories'=>$careerCategories, 'careers'=>$careers]);
     }
+    public function search(Request $request)
+    {
+        $careerTitles = career::where('title' , $request->search)->get();
+        // dd($request->search);
+        return view('client.search.index' , ['careerTitles'=>$careerTitles]);
+    }
 }
