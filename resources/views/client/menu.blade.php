@@ -1,60 +1,6 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
-    <title>فائوس</title>
-</head>
-
-<body>
-    <div class="2xl:container mx-auto w-full">
-        <header class="fixed top-0 right-0 w-full flex flex-row justify-center bg-[#F4F8F9] z-20">
-            <div class="w-11/12 mx-auto flex items-center justify-between flex-row-reverse py-2">
-                <div class="size-10 rounded-full">
-                    <img class="size-full object-cover" src="{{ asset('storage/'.$career->logo) }}" alt="profile_user">
-                    <span class="text-sm text-gray-600 font-medium">
-                                {{ $career->title }}
-                            </span>
-                </div>
-                <div class="w-5 h-3.5 flex flex-col justify-between cursor-pointer" onclick="hamburgerMenu('open', this)">
-                    <div class="w-full h-0.5 bg-black rounded-full transition-all duration-300"></div>
-                    <div class="w-full h-0.5 bg-black rounded-full transition-all duration-300"></div>
-                    <div class="w-full h-0.5 bg-black rounded-full transition-all duration-300"></div>
-                </div>
-            </div>
-            <div class="lg:hidden fixed w-full h-dvh bg-black/50 top-0 -left-full flex flex-row transition-all duration-500 ease-in-out">
-                <div class="w-1/3 h-full bg-inherit" onclick="hamburgerMenu('close', this)"></div>
-                <div class="w-2/3 h-full bg-[#f1f1f4] p-2">
-                    <div>
-                        <a href="#" class="flex flex-row items-center gap-3 pb-2 border-b border-gray-300">
-                            <img class="size-10" src="{{ asset('storage/'.$career->logo) }}" alt="career logo">
-                            <span class="text-sm text-gray-600 font-medium">
-                                {{$career->title}}
-                            </span>
-                        </a>
-                    </div>
-                    <div class="mt-2">
-                        <ul class="flex flex-col gap-1 pr-3">
-                            @if(!Auth::check())
-                            <li>
-                                <a href="{{ route('login') }}" class="block text-xs py-2 text-gray-700 font-medium hover:text-blue-600 transition-all duration-300">ورود</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('signup') }}" class="block text-xs py-2 text-gray-700 font-medium hover:text-blue-600 transition-all duration-300">ثبت نام</a>
-                            </li>
-                            @elseif(Auth::check())
-                            <li>
-                                <a href="{{ route('user.profile', [Auth::user()]) }}" class="block text-xs py-2 text-gray-700 font-medium hover:text-blue-600 transition-all duration-300">پروفایل من</a>
-                            </li>
-                            @endif
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </header>
+@extends('client.document')
+@section('title', 'فائوس')
+@section('content')
         <div class="w-full pt-16 bg-[#F4F8F9]">
             @if(!$career->banner)
             <img src="{{ asset('storage/images/banner01.jpg') }}" class="w-11/12 h-[120px] sm:h-[180px] mx-auto rounded-md object-cover" alt="career banner">
@@ -131,7 +77,5 @@
                 </div>
             </div>
         </div>
-    </div>
 <script src="{{ asset('assets/js/menu.js') }}"></script>
-</body>
-</html>
+@endsection

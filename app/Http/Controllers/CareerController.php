@@ -21,6 +21,7 @@ class CareerController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
         $user = Auth::user();
         if($user->type != 'admin'){
             $user->type = 'career';
@@ -100,13 +101,16 @@ class CareerController extends Controller
 
     public function delete(career $career)
     {
-        $user = Auth::user();
-        foreach ($career->menu->qr_codes as $menu) {
-            $menu->delete();
+        if ($career->menu) {
+            if ($career->menu->qr_codes) {
+                foreach ($career->menu->qr_codes as $menu) {
+                    $menu->delete();
+                }
+            }
+            $career->menu->delete();
         }
-        $career->menu->delete();
         $career->delete();
-        return to_route('user.profile', [$user]);
+        return to_route('user.profile', [Auth::user()]);
     }
     public function index()
     {

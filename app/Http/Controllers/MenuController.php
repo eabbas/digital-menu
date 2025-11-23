@@ -24,20 +24,27 @@ class MenuController extends Controller
         $valueCount = 1;
         $menu_data = $request->menu_data;
         foreach ($menu_data as $key => $data) {
-            $name = $data['menu_image']->getClientOriginalName();
-            $fullName = time() . '_' . $name;
-            $path = $data['menu_image']->storeAs('images', $fullName, 'public');
-            $menu_data[$key]['menu_image'] = $path;
+            if (isset($data['menu_image'])) {
+                $name = $data['menu_image']->getClientOriginalName();
+                $fullName = time() . '_' . $name;
+                $path = $data['menu_image']->storeAs('images', $fullName, 'public');
+                $menu_data[$key]['menu_image'] = $path;
+            } else {
+                $data['menu_image'] = null;
+            }
             foreach ($data['values'] as $gKey => $value) {
-                $itemName = $value['gallery']->getClientOriginalName();
-                $itemFullName = time() . '_' . $itemName;
-                $itemPath = $value['gallery']->storeAs('images', $itemFullName, 'public');
-                $menu_data[$key]['values'][$gKey]['gallery'] = $itemPath;
+                if (isset($value['gallery'])) {
+                    $itemName = $value['gallery']->getClientOriginalName();
+                    $itemFullName = time() . '_' . $itemName;
+                    $itemPath = $value['gallery']->storeAs('images', $itemFullName, 'public');
+                    $menu_data[$key]['values'][$gKey]['gallery'] = $itemPath;
+                } else {
+                    $value['gallery'] = null;
+                }
                 $menu_data[$key]['values'][$gKey]['id']=$valueCount;
                 $valueCount ++;
             }
         }
-        // dd($menu_data);
         $career_id = $request->career_id;
         $menu_data = json_encode($menu_data);
         $menu_id = menu::insertGetId(['menu_data' => $menu_data, 'qr_num' => $request->qr_num, 'career_id' => $career_id]);
@@ -67,8 +74,6 @@ class MenuController extends Controller
 
     public function update(Request $request)
     {
-       
-       
         $menu_data = $request->menu_data;
         foreach ($menu_data as $key => $data) 
         {
