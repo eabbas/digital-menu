@@ -3,7 +3,7 @@
             color:#2196F3;
         }
     </style>
-    @extends('admin.user.panel')
+    @extends('admin.app.panel')
     @section('title', 'ثبت نام کسب و کار')
     @section('content')
     <form action="{{ route('career.store') }}" method="post" enctype='multipart/form-data'>
@@ -15,7 +15,7 @@
                     <h1 class="text-2xl font-bold text-gray-800">اطلاعات کسب وکار</h1>
                     <p class="text-gray-600 mt-2">اطلاعات کسب وکار خود را وارد کنید</p>
                 </div class="w-full">
-            <div class="md:flex md:flex-row md:w-full md:items-center md:gap-5">
+            <div class="md:flex md:flex-row md:w-full md:gap-5">
                 <!--  لوگو   -->
                 <div class="md:flex md:flex-col md:w-full">
                         <fieldset class="mt-2 text-sm md:text-base border border-gray-400 rounded-[15px] py-1 pr-3" for="province">
@@ -26,6 +26,10 @@
                          <fieldset class="mt-2 text-sm md:text-base border border-gray-400 rounded-[15px] py-1 pr-3" for="province">
                             <legend class="p-1 w-30 bg-[#1cb7fd] text-white rounded-full flex flex-row justify-center text-sm">نام کسب وکار</legend>
                             <input type="text" name='title' placeholder="نام کسب وکار خود را وارد کنید" class="w-full px-2 py-1 md:px-2 outline-none text-gray-500">
+                        </fieldset>
+                         <fieldset class="mt-2 text-sm md:text-base border border-gray-400 rounded-[15px] py-1 pr-3" for="province">
+                            <legend class="p-1 w-30 bg-[#1cb7fd] text-white rounded-full flex flex-row justify-center text-sm">بنر کسب و کار</legend>
+                            <input type="file" name='banner' class="w-full px-2 py-1 md:px-2 outline-none text-gray-500">
                         </fieldset>
                 </div>
                 <!--استان   -->
@@ -38,6 +42,16 @@
                          <fieldset class="mt-2 text-sm md:text-base border border-gray-400 rounded-[15px] py-1 pr-3" for="province">
                             <legend class="p-1 w-30 bg-[#1cb7fd] text-white rounded-full flex flex-row justify-center text-sm">شهر</legend>
                             <input type="text" name='city' placeholder=" شهرخود را وارد کنید" class="w-full px-2 py-1 md:px-2 outline-none text-gray-500">
+                        </fieldset>
+
+                         <fieldset class="mt-2 text-sm md:text-base border border-gray-400 rounded-[15px] py-1 pr-3" for="province">
+                            <legend class="p-1 w-30 bg-[#1cb7fd] text-white rounded-full flex flex-row justify-center text-sm">دسته کسب و کار</legend>
+                            <select name="careerCategory" class="w-full px-2 py-1 md:px-2 outline-none text-gray-500">
+                                <option value="0" disabled selected>دسته کسب و کار خود را انتخاب کنید</option>
+                                @foreach($careerCategories as $careerCategory)
+                                <option value="{{ $careerCategory->id }}">{{ $careerCategory->title }}</option>
+                                @endforeach
+                            </select>
                         </fieldset>
                 </div>
             </div>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
-    <title>Document</title>
+    <title>فائوس</title>
 </head>
 
 <body>
@@ -53,8 +53,11 @@
             </div>
         </header>
         <div class="w-full pt-16 bg-[#F4F8F9]">
-            <img src="{{ asset('storage/images/banner01.jpg') }}"
-                class="w-11/12 h-[120px] sm:h-[180px] mx-auto rounded-md object-cover" alt="career banner">
+            @if(!$career->banner)
+            <img src="{{ asset('storage/images/banner01.jpg') }}" class="w-11/12 h-[120px] sm:h-[180px] mx-auto rounded-md object-cover" alt="career banner">
+            @else
+            <img src="{{ asset('storage/'.$career->banner) }}" class="w-11/12 h-[120px] sm:h-[180px] mx-auto rounded-md object-cover" alt="career banner">
+            @endif
         </div>
         <div class="w-full bg-[#F4F8F9] pt-3">
             <div class="w-11/12 flex flex-row items-center gap-3 pb-3 mx-auto overflow-x-auto" style="scrollbar-width: none;">
@@ -95,15 +98,24 @@
                                             {{ $value->price }} تومان
                                         </h4>
                                     </div>
-                                    <div class="w-1/3 flex relative">
-                                        <input
-                                            class="w-full outline-none text-xs rounded-sm px-2 py-1 text-center text-gray-800"
-                                            type="number" name="count" min="0" value="1">
-                                        <button type="button"
-                                            class="absolute size-4 flex items-center justify-center rounded-sm top-0.5 right-0.5 text-white bg-[#68bc75] cursor-pointer" onclick="calc(this, '+')">+</button>
-                                        <button type="button"
-                                            class="absolute size-4 flex items-center justify-center rounded-sm top-0.5 left-0.5 text-white bg-[#68bc75] cursor-pointer" onclick="calc(this, '-')">-</button>
-                                    </div>
+                                    <form class="w-1/3 flex  flex-col relative" method="post" action="{{ route('set_order') }}">
+                                        @csrf
+                                        <div>
+                                            <input
+                                                class="w-full outline-none text-xs rounded-sm px-2 py-1 text-center text-gray-800"
+                                                type="number" name="count" min="0" value="1">
+                                            <input type="hidden" name="career" value="{{$career->id}}">
+                                            <input type="hidden" name="slug" value="{{$slug}}">
+                                            <input type="hidden" name="titles[]" value="{{$value->title}}">
+                                            <button type="button"
+                                                class="absolute size-4 flex items-center justify-center rounded-sm top-0.5 right-0.5 text-white bg-[#68bc75] cursor-pointer" onclick="calc(this, '+')">+</button>
+                                            <button type="button"
+                                                class="absolute size-4 flex items-center justify-center rounded-sm top-0.5 left-0.5 text-white bg-[#68bc75] cursor-pointer" onclick="calc(this, '-')">-</button>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button class="w-full py-1 text-[12px] bg-[#68bc75] rounded-sm text-white">ثبت سفارش</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -1,4 +1,4 @@
-    @extends('admin.user.panel')
+    @extends('admin.app.panel')
     @section('title', 'پروفایل کاربری')
     @section('content')
    <div class="w-full">
@@ -11,7 +11,7 @@
                 </div>
             </div>
            
-        <div class="flex flex-col border-none lg:p-5 rounded-[7px]">
+        <div class="flex flex-col border-none rounded-[7px]">
             <div class="block lg:flex flex-row justify-between gap-8">
                 <div class="flex flex-col xm:flex-row lg:flex-row gap-5 py-3">
                     @if(!$user->main_image)
@@ -37,16 +37,16 @@
                             </ul>
                         </div>
                         <div class="flex flex-col lg:flex-row gap-2 mt-8 mx-10 lg:mx-0">
-                            <div class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border border-dashed rounded-[5px] p-1 ">
-                                <span class="font-bold text-blue-500">4,500</span>
+                            <div class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px]">
+                                <span class="font-bold text-blue-500">0</span>
                                 <span class="text-[#4B5675]">تعداد اسکن ها</span>
                             </div>
-                            <div class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border border-dashed rounded-[5px] p-1 ">
-                                <span class="font-bold text-blue-500">56</span>
+                            <div class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px]">
+                                <span class="font-bold text-blue-500">0</span>
                                 <span class="text-[#4B5675]"> تعداد QR کد ها </span>
                             </div>
-                            <div class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border max-sm:border-[1.5px] border-dashed rounded-[5px] p-1 ">
-                                <span class="font-bold text-blue-500">6</span>
+                            <div class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border max-sm:border-[1.5px] rounded-[5px]">
+                                <span class="font-bold text-blue-500">{{ count($user->careers) }}</span>
                                 <span class="text-[#4B5675]">تعداد کسب و کارها</span>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
     </div>
     <!-- <hr> -->
     <div class="pt-3 mt-4 lg:mt-8">
-        <div class="my-6 ">
+        <!-- <div class="my-6 ">
             <ul class="flex flex-row gap-2 overflow-x-auto scroll-snap-x snap-mandatory no-scrollbar" style="scrollbar-width: none;">
                 <li>
                     <a class="bg-gray-100 focus:text-blue-600 rounded-[13px] text-center text-gray-600 py-2 hover:text-blue-700 block w-[110px]" href="">بررسی اجمالی</a>
@@ -87,46 +87,52 @@
                     <a class="bg-gray-100 focus:text-blue-600 rounded-[13px] text-center text-gray-600 py-2 hover:text-blue-700 block w-[110px]" href="">گزارش</a>
                 </li>
             </ul>
-        </div>
-        <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2">
-            <h1 class="text-xm lg:text-xl mt-5 font-bold mx-2">جزییات پروفایل </h1>
+        </div> -->
+        <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5">
+            <h1 class="lg:text-xl mt-5 font-bold mx-2">جزییات پروفایل </h1>
            
             <div class="w-full h-px bg-gray-200 my-5 "></div>
-            <div class="flex gap-7 sm:hidden block">
+            <div class="flex gap-7 sm:hidden">
                 <div class="flex w-full flex-col">
-                    <libal class="p-2.5 text-gray-400">نام کامل</libal>
+                    <label class="p-2.5 text-gray-400">نام کامل</label>
                     <span class="p-2.5 text-gary-600"><strong>{{ $user->name }} {{ $user?->family }}</strong></span>
-                    <libal class="p-2.5 text-gray-400">کمپانی</libal>
-                    <span class="p-2.5 text-gary-600">فائوس</span>
-                    <libal class="p-2.5 text-gray-400">تماس با ما تلفن </libal>
+                    {{-- <label class="p-2.5 text-gray-400">کمپانی</label>
+                    <span class="p-2.5 text-gary-600">فائوس</span> --}}
+                    <label class="p-2.5 text-gray-400">شماره تلفن</label>
                     <span class="p-2.5 text-gary-600">{{ $user->phoneNumber }}<mark class="mx-2 text-green-700 bg-green-300 px-1 rounded-md">تایید
                             شده</mark></span>
-                    <libal class="p-2.5 text-gray-400">سایت کمپانی</libal>
+                    <label class="p-2.5 text-gray-400">ایمیل</label>
+                    <span class="p-2.5 text-gary-600">{{ $user->email }}</span>
+                    <label class="p-2.5 text-gray-400">نقش</label>
+                    <span class="p-2.5 text-gary-600">{{ $user->type }}</span>
+                    {{-- <label class="p-2.5 text-gray-400">سایت کمپانی</label>
                     <a href="#" class="p-2.5 text-gary-600">famenu.ie</a>
-                    <libal class="p-2.5 text-gray-400">کشور </libal>
+                    <label class="p-2.5 text-gray-400">کشور </label>
                     <span class="p-2.5 text-gary-600">ایران</span>
-                    <libal class="p-2.5 text-gray-400">ارتباط</libal>
-                    <span class="p-2.5 text-gary-600">ایمیل, تلفن</span>
+                    <label class="p-2.5 text-gray-400">ارتباط</label>
+                    <span class="p-2.5 text-gary-600">ایمیل, تلفن</span> --}}
                 </div>
             </div>
 
-            <div class="sm:grid sm:grid-cols-2 sm:grid-cols-[300px-minmax(200px,100px)] sm:gap-2 hidden sm:block">
+            <div class="sm:grid sm:grid-cols-2 sm:gap-2 hidden">
                 <div class="flex w-full flex-col">
-                    <libal class="p-2.5 text-gray-400">نام کامل</libal>
-                    <libal class="p-2.5 text-gray-400">کمپانی</libal>
-                    <libal class="p-2.5 text-gray-400">تماس با ما تلفن </libal>
-                    <libal class="p-2.5 text-gray-400">سایت کمپانی</libal>
-                    <libal class="p-2.5 text-gray-400">کشور </libal>
-                    <libal class="p-2.5 text-gray-400">ارتباط</libal>
+                    <label class="p-2.5 text-gray-400">نام کامل</label>
+                    <label class="p-2.5 text-gray-400">شماره تلفن</label>
+                    <label class="p-2.5 text-gray-400">ایمیل</label>
+                    <label class="p-2.5 text-gray-400">نقش</label>
+                    {{-- <label class="p-2.5 text-gray-400">کشور </label>
+                    <label class="p-2.5 text-gray-400">ارتباط</label> --}}
                 </div>
                 <div class="flex w-full flex-col">
                     <span class="p-2.5 text-gary-600"><strong>{{ $user->name }} {{ $user?->family }}</strong></span>
-                    <span class="p-2.5 text-gary-600">فائوس</span>
+                    {{-- <span class="p-2.5 text-gary-600">فائوس</span> --}}
                     <span class="p-2.5 text-gary-600">{{ $user->phoneNumber }}<mark class="mx-2 text-green-700 bg-green-300 px-1 rounded-md">تایید
                             شده</mark></span>
-                    <a href="#" class="p-2.5 text-gary-600">famenu.ie</a>
+                    <span class="p-2.5 text-gary-600">{{ $user->email }}</span>
+                    <span class="p-2.5 text-gary-600">{{ $user->type }}</span>
+                    {{-- <a href="#" class="p-2.5 text-gary-600">famenu.ie</a>
                     <span class="p-2.5 text-gary-600">ایران</span>
-                    <span class="p-2.5 text-gary-600">ایمیل, تلفن</span>
+                    <span class="p-2.5 text-gary-600">ایمیل, تلفن</span> --}}
                 </div>
             </div>
 

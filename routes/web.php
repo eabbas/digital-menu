@@ -1,33 +1,36 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
-use App\http\controllers\CareerController;
+use App\Http\Controllers\CareerController;
 use App\Http\Controllers\UserController;
-use App\Http\controllers\CategoryController;
-use App\Http\controllers\ProductController;
-use App\Http\controllers\MenuController;
-use App\Http\controllers\SettingController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\adminController;
+// use App\Http\Controllers\adminController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\AboutUsController;
 use App\Http\Middleware\LoginMiddleware;
 use App\Http\Middleware\UserMiddleware;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CareerCategoryController;
+use App\Models\career;
 
-
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware([LoginMiddleware::class]);
 Route::get('/signup', [UserController::class, "create"])->name('signup')->middleware([LoginMiddleware::class]);
 Route::group([
-    'prefix'=>'users',
-    'controller'=>UserController::class,
-    'as'=>'user.',
-    'middleware'=>[UserMiddleware::class]
-], function(){
+    'prefix' => 'users',
+    'controller' => UserController::class,
+    'as' => 'user.',
+    'middleware' => [UserMiddleware::class]
+], function () {
     Route::post("/store", "store")->name('store')->withoutMiddleware([UserMiddleware::class]);
     Route::post("/check", "check")->name('check')->withoutMiddleware([UserMiddleware::class]);
     Route::get("/logout", "logout")->name('logout');
-    Route::get("/","index")->name('list');
+    Route::get("/", "index")->name('list');
     Route::get("/panel/{user}", "panel")->name('panel');
     Route::get('/profile/{user}', 'profile')->name('profile');
     Route::get('/show/{user}', 'show')->name('show');
@@ -38,65 +41,82 @@ Route::group([
     Route::post('/save', 'save')->name('save');
     Route::get('/admin/create', 'adminCreate')->name('adminCreate');
     Route::post('/admin/store', 'adminStore')->name('adminStore')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/setting', 'setting')->name('setting');
+    Route::post('/set', 'set')->name('set');
 });
 
 Route::group([
-    'prefix'=>'careers',
-    'controller'=>CareerController::class,
-    'as'=>'career.',
-    'middleware'=>[UserMiddleware::class]
-], function(){
+    'prefix' => 'careers',
+    'controller' => CareerController::class,
+    'as' => 'career.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create/{user?}', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/list/{user?}', 'user_careers')->name('careers')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/edit/{career}/{user?}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{career}', 'delete')->name('delete');
+    Route::get('/careers', 'index')->name('list');
+    Route::get('/show/{career}', 'single')->name('single')->withoutMiddleware([UserMiddleware::class]);
+});
+
+Route::group([
+    'prefix' => 'careerCategory',
+    'controller' => CareerCategoryController::class,
+    'as' => 'cc.'
+], function () {
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/list/{user}', 'user_careers')->name('careers');
-    Route::get('/edit/{career}','edit')->name('edit');
-    Route::post('/update','update')->name('update');
-    Route::get('/delete/{career}','delete')->name('delete');
-    Route::get('/careers','index')->name('list');
+    Route::get('/', 'list')->name('list');
+    Route::get('/show/{careerCategory}', 'show')->name('single');
+    Route::get('/edit/{careerCategory}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{careerCategory}' , 'delete')->name('delete');
 });
 
 Route::group([
-    'prefix'=>'menus',
-    'controller'=>MenuController::class,
-    'as'=>'menu.',
-    'middleware'=>[UserMiddleware::class]
-], function(){
-    Route::get('/{career}', 'index')->name('list');
+    'prefix' => 'menus',
+    'controller' => MenuController::class,
+    'as' => 'menu.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/{career}', 'index')->name('list')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/create/{career}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::get('/edit/{menu}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{menu}', 'delete')->name('delete');
-    Route::get('/qr_codes/{menu}', 'qr_codes')->name('qr_codes');
+    Route::get('/qr_codes/{menu}', 'qr_codes')->name('qr_codes')->withoutMiddleware([UserMiddleware::class]);
 });
 
 //category.......................................................................
-Route::get('category/create' , [CategoryController::class , 'create']);
-Route::post('category/store' , [CategoryController::class , 'store']);
-Route::get('categories' , [CategoryController::class , 'index']);
-Route::get('category/show/{category}' , [CategoryController::class , 'show']);
-Route::get('category/edit/{category}' , [CategoryController::class , 'edit']);
-Route::post('category/update' , [CategoryController::class , 'update']);
-Route::get('category/delete/{category}' , [CategoryController::class , 'delete']);
+Route::get('category/create', [CategoryController::class, 'create']);
+Route::post('category/store', [CategoryController::class, 'store']);
+Route::get('categories', [CategoryController::class, 'index']);
+Route::get('category/show/{category}', [CategoryController::class, 'show']);
+Route::get('category/edit/{category}', [CategoryController::class, 'edit']);
+Route::post('category/update', [CategoryController::class, 'update']);
+Route::get('category/delete/{category}', [CategoryController::class, 'delete']);
 
 
 
 //product.................................................................................
-Route::get('product/create' , [ProductController::class , 'create']);
-Route::post('product/store' , [ProductController::class , 'store']);
-Route::get('products' , [ProductController::class , 'index']);
-Route::get('product/show/{product}' , [ProductController::class , 'show']);
-Route::get('product/edit/{product}' , [ProductController::class , 'edit']);
-Route::post('product/update' , [ProductController::class , 'update']);
-Route::get('product/delete/{product}' , [ProductController::class , 'delete']);
+Route::get('product/create', [ProductController::class, 'create']);
+Route::post('product/store', [ProductController::class, 'store']);
+Route::get('products', [ProductController::class, 'index']);
+Route::get('product/show/{product}', [ProductController::class, 'show']);
+Route::get('product/edit/{product}', [ProductController::class, 'edit']);
+Route::post('product/update', [ProductController::class, 'update']);
+Route::get('product/delete/{product}', [ProductController::class, 'delete']);
 
 
 // qr-code
 Route::group([
-    'prefix'=>'qrcode',
-    'controller'=>QRCodeController::class,
-    'as'=>'qr.'
-], function(){
+    'prefix' => 'qrcode',
+    'controller' => QRCodeController::class,
+    'as' => 'qr.'
+], function () {
     Route::get('/qr-code', 'index')->name('list');
     Route::get('/delete/{qr_code}', 'delete')->name('delete');
     Route::get('/{career}/{slug}', 'load')->name('load');
@@ -104,12 +124,15 @@ Route::group([
 
 // client
 Route::group([
-    'prefix'=>'qrcodes',
-    'controller'=>ClientController::class,
-    'as'=>'client.'
-], function(){
+    'prefix' => 'qrcodes',
+    'controller' => ClientController::class,
+    'as' => 'client.'
+], function () {
     Route::get('/{career}/{slug}', 'show_menu')->name('menu');
+    Route::get('/{career}', 'career_menu')->name('careerMenu');
+    // Route::get('/career/{$career}', 'show_career')->name('show_career');
 });
+Route::get('/career/{career}', [ClientController::class, 'show_career'])->name('show_career');
 
 
 Route::group([
@@ -137,7 +160,7 @@ Route::group([
         'prefix' => 'logo',
         'as' => 'logo.'
     ], function () {
-        Route::get('/create' , 'createLogo')->name('createLogo');
+        Route::get('/create', 'createLogo')->name('createLogo');
         Route::post('/update', 'upsertLogo')->name('upsertLogo');
         Route::get('/show', 'showLogo')->name('showLogo');
     });
@@ -152,7 +175,7 @@ Route::group([
         'prefix' => 'main_ads',
         'as' => 'mainAds.'
     ], function () {
-        Route::get('/create' , 'createMainAds')->name('createMainAds');
+        Route::get('/create', 'createMainAds')->name('createMainAds');
         Route::post('/update', 'upsertMainAds')->name('upsertMainAds');
         Route::get('/show', 'showMainAds')->name('showMainAds');
     });
@@ -167,7 +190,7 @@ Route::group([
         'prefix' => 'main_banner_home',
         'as' => 'mainBanner.'
     ], function () {
-        Route::get('/create' , 'createMainBanner')->name('createMainBanner');
+        Route::get('/create', 'createMainBanner')->name('createMainBanner');
         Route::post('/update', 'upsertMainBanner')->name('upsertMainBanner');
         Route::get('/show', 'showMainBanner')->name('showMainBanner');
     });
@@ -182,7 +205,7 @@ Route::group([
         'prefix' => 'single_ads',
         'as' => 'singleAds.'
     ], function () {
-        Route::get('/create' , 'createSingleAds')->name('createSingleAds');
+        Route::get('/create', 'createSingleAds')->name('createSingleAds');
         Route::post('/update', 'upsertSingleAds')->name('upsertSingleAds');
         Route::get('/show', 'showSingleAds')->name('showSingleAds');
     });
@@ -197,14 +220,14 @@ Route::group([
         'prefix' => 'category_ads',
         'as' => 'categoryAds.'
     ], function () {
-        Route::get('/create' , 'createCategoryAds')->name('createCategoryAds');
+        Route::get('/create', 'createCategoryAds')->name('createCategoryAds');
         Route::post('/update', 'upsertCategoryAds')->name('upsertCategoryAds');
         Route::get('/show', 'showCategoryAds')->name('showCategoryAds');
     });
 });
 
-Route::fallback(function(){
-    return view('login');
+Route::fallback(function () {
+    return view('client.login');
 });
 
 
@@ -218,3 +241,31 @@ Route::fallback(function(){
 //     Route::get('/profile', 'adminProfile')->name('adminProfile');
 // });
 
+route::post('/set_order' ,[UserController::class , 'set_order'])->name('set_order')->middleware([UserMiddleware::class]);
+
+/////slider
+Route::group([
+    'prefix' => 'slider',
+    'controller' => SliderController::class,
+    'as' => 'slider.'
+], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/sliders', 'index')->name('list');
+    Route::get('/edit/{slider}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{slider}', 'delete')->name('delete');
+});
+
+
+//////aboutUs
+Route::group([
+    'prefix' => 'aboutUs',
+    'controller' => AboutUsController::class,
+    'as' => 'aboutUs.'
+], function () {
+    Route::get('/create_edit/{id?}', 'create_edit')->name('create_edit');
+    Route::post('/updateOrcreate', 'updateOrcreate')->name('updateOrcreate');
+    Route::get('/aboutUs', 'index')->name('list');
+    Route::get('/delete/{aboutUs}', 'delete')->name('delete');
+});

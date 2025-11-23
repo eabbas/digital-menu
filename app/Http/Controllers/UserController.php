@@ -5,6 +5,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -15,19 +16,22 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $phone = User::where('phoneNumber', $request->phoneNumber)->first();
-        if ($phone) {
-            return redirect()->back()->with('message', 'این شماره تلفن قبلا استفاده شده');
+        if ($request->rules) {
+            $phone = User::where('phoneNumber', $request->phoneNumber)->first();
+            if ($phone) {
+                return redirect()->back()->with('message', 'این شماره تلفن قبلا استفاده شده');
+            }
+            $password = Hash::make($request->password);
+            User::create([
+                'name'=>$request->name,
+                'family'=>$request->family,
+                'phoneNumber'=>$request->phoneNumber,
+                'password'=>$password,
+                'type'=>'general',
+            ]);
+            return to_route('login');
         }
-        $password = Hash::make($request->password);
-        User::create([
-            'name'=>$request->name,
-            'family'=>$request->family,
-            'phoneNumber'=>$request->phoneNumber,
-            'password'=>$password,
-            'type'=>'general',
-        ]);
-        return to_route('login');
+        return to_route('signup');
     }
 
     public function check(Request $request)
@@ -47,7 +51,7 @@ class UserController extends Controller
     public function logout()
     {
         Auth::logout();
-        return to_route('login');
+        return to_route('home');
     }
 
     public function index()
@@ -83,21 +87,32 @@ class UserController extends Controller
         $user = User::find($request->id);
         $user->name = $request->name;
         $user->phoneNumber = $request->phoneNumber;
-        $user->type = $request->type;
+        if ($request->type) {
+            $user->type = $request->type;
+        }
         if ($request->password) {
             $password = Hash::make($request->password);
             $user->password = $password;
         }
+        if($request->main_image){
+            Storage::disk('public')->delete($user->main_image);
+            $name = $request->main_image->getClientOriginalName();
+            $fullName = time()."_".$name;
+            $path = $request->file('main_image')->storeAs('images', $fullName, 'public');
+            $user->main_image = $path;
+        }
         $user->save();
-        return redirect('/user/index');
+        return to_route('user.list');
     }
     
 
-    public function delete($id)
+    public function delete(user $user)
     {
-        $user = User::find($id);
+        foreach ($user->careers as $career) {
+            $career->delete();
+        }
         $user->delete();
-        return redirect('/user/index');
+        return to_route('user.list');
     }
 
     public function login()
@@ -119,23 +134,20 @@ class UserController extends Controller
         $user->save();
         return to_route('user.profile', [Auth::user()]);
     }
-    public function adminCreate(){
-        return view('admin.user.createAdmin');
-    }
-      public function adminStore(Request $request)
+    public function set_order(Request $request)
     {
-        $phone = User::where('phoneNumber', $request->phoneNumber)->first();
-        if ($phone) {
-            return redirect()->back()->with('message', 'این شماره تلفن قبلا استفاده شده');
+        dd($request->all());
+        foreach($request->titles as $key=>$title){
+            order::create([
+                'career_id'=>$request->career ,
+                'slug'=>$request->slug ,
+                'title'=>$request->title,
+                'count'=>$request->count
+            ]);
         }
-        $password = Hash::make($request->password);
-        User::create([
-            'name'=>$request->name,
-            'family'=>$request->family,
-            'phoneNumber'=>$request->phoneNumber,
-            'password'=>$password,
-            'type'=>'admin'
-        ]);
-        return to_route('login');
+
+    }
+    public function setting(){
+        return view('admin.user.setting');
     }
 }
