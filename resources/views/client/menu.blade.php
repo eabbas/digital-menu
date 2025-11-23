@@ -1,7 +1,15 @@
 @extends('client.document')
 @section('title', 'فائوس')
 @section('content')
+        <div class="w-full flex flex-row justify-between gap-3 pt-8 pb-8 rounded-2xl">
+            <div class="w-1/2  p-1 lg:p-3 text-xs  lg:text-sm h-full font-medium">
+               <a href="{{ route('show_career', [$career]) }}" class="text-sky-700">مشاهده جزئیات کسب وکار</a>
+            </div>
+        </div>
         <div class="w-full pt-16 bg-[#F4F8F9]">
+            <div class="pb-4 text-3xl text-center font-bold">
+                <h2>{{$career->title}}</h2>
+            </div>
             @if(!$career->banner)
             <img src="{{ asset('storage/images/banner01.jpg') }}" class="w-11/12 h-[120px] sm:h-[180px] mx-auto rounded-md object-cover" alt="career banner">
             @else
