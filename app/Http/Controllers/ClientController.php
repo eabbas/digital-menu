@@ -7,7 +7,7 @@ use App\Models\career;
 
 class ClientController extends Controller
 {
-    public function show_menu(career $career, string $slug){
+    public function show_menu(career $career, string $slug=null){
         // dd($career);
         return view('client.menu', ['career'=>$career , 'slug'=>$slug]);
     }

@@ -43,6 +43,7 @@ Route::group([
     Route::post('/admin/store', 'adminStore')->name('adminStore')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/setting', 'setting')->name('setting');
     Route::post('/set', 'set')->name('set');
+    route::post('/set_order', 'set_order')->name('set_order');
 });
 
 Route::group([
@@ -128,7 +129,7 @@ Route::group([
     'controller' => ClientController::class,
     'as' => 'client.'
 ], function () {
-    Route::get('/{career}/{slug}', 'show_menu')->name('menu');
+    Route::get('/{career}/{slug?}', 'show_menu')->name('menu');
     Route::get('/{career}', 'career_menu')->name('careerMenu');
     // Route::get('/career/{$career}', 'show_career')->name('show_career');
 });
@@ -241,7 +242,7 @@ Route::fallback(function () {
 //     Route::get('/profile', 'adminProfile')->name('adminProfile');
 // });
 
-route::post('/set_order' ,[UserController::class , 'set_order'])->name('set_order')->middleware([UserMiddleware::class]);
+
 
 /////slider
 Route::group([
