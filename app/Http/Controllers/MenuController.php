@@ -21,7 +21,7 @@ class MenuController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        $valueCount = 1;
         $menu_data = $request->menu_data;
         foreach ($menu_data as $key => $data) {
             $name = $data['menu_image']->getClientOriginalName();
@@ -33,8 +33,11 @@ class MenuController extends Controller
                 $itemFullName = time() . '_' . $itemName;
                 $itemPath = $value['gallery']->storeAs('images', $itemFullName, 'public');
                 $menu_data[$key]['values'][$gKey]['gallery'] = $itemPath;
+                $menu_data[$key]['values'][$gKey]['id']=$valueCount;
+                $valueCount ++;
             }
         }
+        // dd($menu_data);
         $career_id = $request->career_id;
         $menu_data = json_encode($menu_data);
         $menu_id = menu::insertGetId(['menu_data' => $menu_data, 'qr_num' => $request->qr_num, 'career_id' => $career_id]);
