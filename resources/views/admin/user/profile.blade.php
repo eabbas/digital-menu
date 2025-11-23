@@ -15,9 +15,9 @@
             <div class="block lg:flex flex-row justify-between gap-8">
                 <div class="flex flex-col xm:flex-row lg:flex-row gap-5 py-3">
                     @if(!$user->main_image)
-                    <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0" src="{{ asset('assets/img/user.png') }}" alt="user__avatar">
+                    <img class="size-27 lg:size-40 rounded-lg mx-auto lg:m-0" src="{{ asset('assets/img/user.png') }}" alt="user__avatar">
                     @else
-                    <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0" src="{{ asset('storage/'.$user->main_image) }}" alt="user__picture">
+                    <img class="size-27 lg:size-40 rounded-lg mx-auto lg:m-0" src="{{ asset('storage/'.$user->main_image) }}" alt="user__picture">
                     @endif
                     <div class="flex flex-col justify-end">
                         <div class="div1 text-center lg:text-start">
