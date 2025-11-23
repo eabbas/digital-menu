@@ -12,6 +12,7 @@ use App\Http\Controllers\ClientController;
 // use App\Http\Controllers\adminController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\favoriteCareerController;
 use App\Http\Middleware\LoginMiddleware;
 use App\Http\Middleware\UserMiddleware;
 use App\Http\Controllers\HomeController;
@@ -267,4 +268,15 @@ Route::group([
     Route::post('/updateOrcreate', 'updateOrcreate')->name('updateOrcreate');
     Route::get('/aboutUs', 'index')->name('list');
     Route::get('/delete/{aboutUs}', 'delete')->name('delete');
+});
+
+//////favoriteCareer
+Route::group([
+    'prefix' => 'favoriteCareer',
+    'controller' => favoriteCareerController::class,
+    'as' => 'favoriteCareer.'
+], function () {
+    Route::get('/create/{id}', 'create')->name('create')->middleware([UserMiddleware::class]);
+    Route::get('/favoriteCareers', 'index')->name('list');
+    Route::get('/delete/{career}', 'delete')->name('delete');
 });

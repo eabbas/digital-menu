@@ -15,6 +15,9 @@
             <div class="w-11/12 mx-auto flex items-center justify-between flex-row-reverse py-2">
                 <div class="size-10 rounded-full">
                     <img class="size-full object-cover" src="{{ asset('storage/'.$career->logo) }}" alt="profile_user">
+                    <span class="text-sm text-gray-600 font-medium">
+                                {{ $career->title }}
+                            </span>
                 </div>
                 <div class="w-5 h-3.5 flex flex-col justify-between cursor-pointer" onclick="hamburgerMenu('open', this)">
                     <div class="w-full h-0.5 bg-black rounded-full transition-all duration-300"></div>
@@ -29,7 +32,7 @@
                         <a href="#" class="flex flex-row items-center gap-3 pb-2 border-b border-gray-300">
                             <img class="size-10" src="{{ asset('storage/'.$career->logo) }}" alt="career logo">
                             <span class="text-sm text-gray-600 font-medium">
-                                {{ $career->title }}
+                                {{$career->title}}
                             </span>
                         </a>
                     </div>

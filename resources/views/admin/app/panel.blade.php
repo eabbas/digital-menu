@@ -54,6 +54,10 @@
                                 کسب و کار
                                 جدید</a>
                         </li>
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('favoriteCareer.list') }}" class=" text-white py-1">لیست علاقه مندی ها</a>
+                        </li>
                         @if(Auth::user()->type == 'admin')
 
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
