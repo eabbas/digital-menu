@@ -10,4 +10,8 @@ class qr_code extends Model
     public function menu(){
         return $this->belongsTo(menu::class);
     }
+    public function orders()
+    {
+        return $this->hasMany(order::class)->chaperOne();
+    }
 }

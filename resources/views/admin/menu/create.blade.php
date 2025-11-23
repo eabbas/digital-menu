@@ -36,6 +36,7 @@
                                             placeholder="نوشابه"
                                             name="menu_data[0][values][0][title]">
                                     </div>
+                                    <input type="hidden" value="0" name="menu_data[0][values][0][id]">
                                     <div class="w-full flex flex-col">
                                         <label class="text-gray-600 font-bold mb-2">قیمت آیتم</label>
                                         <input type="number" placeholder="500.000تومان"

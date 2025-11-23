@@ -134,24 +134,18 @@ class UserController extends Controller
         $user->save();
         return to_route('user.profile', [Auth::user()]);
     }
-    public function adminCreate(){
-        return view('admin.user.createAdmin');
-    }
-      public function adminStore(Request $request)
+    public function set_order(Request $request)
     {
-        $phone = User::where('phoneNumber', $request->phoneNumber)->first();
-        if ($phone) {
-            return redirect()->back()->with('message', 'این شماره تلفن قبلا استفاده شده');
+        dd($request->all());
+        foreach($request->titles as $key=>$title){
+            order::create([
+                'career_id'=>$request->career ,
+                'slug'=>$request->slug ,
+                'title'=>$request->title,
+                'count'=>$request->count
+            ]);
         }
-        $password = Hash::make($request->password);
-        User::create([
-            'name'=>$request->name,
-            'family'=>$request->family,
-            'phoneNumber'=>$request->phoneNumber,
-            'password'=>$password,
-            'type'=>'admin'
-        ]);
-        return to_route('login');
+
     }
     public function setting(){
         return view('admin.user.setting');

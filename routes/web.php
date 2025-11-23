@@ -241,6 +241,7 @@ Route::fallback(function () {
 //     Route::get('/profile', 'adminProfile')->name('adminProfile');
 // });
 
+route::post('/set_order' ,[UserController::class , 'set_order'])->name('set_order')->middleware([UserMiddleware::class]);
 
 /////slider
 Route::group([
