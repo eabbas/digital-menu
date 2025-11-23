@@ -55,6 +55,7 @@
                                         <input type="file"
                                             class="border border-gray-300 rounded-[13px] w-full outline-none pr-5 py-2 max-md:pr-1 cursor-pointer"
                                             name="menu_data[0][values][0][gallery]">
+                                            <input type="hidden" name="menu_data[0][values][0][id]" value="0">
                                     </div>
                                 </div>
                                 <div class="flex items-end max-md:w-full max-md:justify-end">

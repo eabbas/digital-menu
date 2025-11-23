@@ -1,15 +1,15 @@
-
 let featureCount = 1
 if (rowCount) {
     featureCount = rowCount
 }
 
-let valueCount = 0
+let valueCount = 1
 if (v_count) {
     valueCount = v_count
 }
+let valueId = 1
 function add() {
-    valueCount = 0
+    valueCount = 1
     let attribute = document.getElementById('attribute')
     let div = document.createElement('div')
     div.setAttribute('data-count', featureCount);
@@ -101,6 +101,7 @@ function addAttr(el) {
     let num = el.parentElement.parentElement.getAttribute('data-count')
     let div = document.createElement('div')
     valueCount++
+    valueId++
     div.classList = "w-full flex flex-row items-end gap-3"
     let element = `
         <input type="hidden" name="menu_data[${num}][values][${valueCount}][id]" value="${valueCount}">
@@ -135,7 +136,8 @@ function addAttr(el) {
                     <button type="button" class="mt-2 size-8 mb-[3px] max-md:h-9 text-xs rounded-md bg-rose-500 hover:bg-rose-600 text-white cursor-pointer" onclick="removeAttrButton(this)">X</button>
             </div>
         </div>
-        </div> `
+    </div>
+         `
     div.innerHTML = element
     el.parentElement.children[1].appendChild(div)
     console.log(valueCount);
