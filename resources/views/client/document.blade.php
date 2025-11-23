@@ -9,7 +9,7 @@
     <title>@yield('title')</title>
 </head>
 
-<body class="bg-[#fffff]">
+<body class="bg-[#ffffff]">
     <header class="w-full px-6 pt-4 pb-4 rounded-b-[15px] bg-[#00897b]">
         <div class="w-full flex flex-row items-center justify-between">
             <div class="flex flex-row items-center gap-3">

@@ -22,7 +22,7 @@
                             <span class="block w-20 lg:w-full">لوگو</span>
                         </div>
                         <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-3">
-                            <span class="block w-[240px] lg:w-full">عملیات</span>
+                            <span class="block w-60 lg:w-full">عملیات</span>
                         </div>
                     </div>
                     <div class="bg-white divide-y divide-[#f1f1f4]">
@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                             <div class="w-full col-span-3">
-                                <div class="grid grid-cols-4 h-full divide-x divide-[#f1f1f4] w-[240px] lg:w-full">
+                                <div class="grid grid-cols-4 h-full divide-x divide-[#f1f1f4] w-60 lg:w-full">
                                     <div class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
                                         <a href="{{ route('career.single', [$career]) }}" class="text-sky-700">مشاهده</a>
                                     </div>
@@ -78,5 +78,5 @@
         </div>
     </div>
 </div>
-</div>
+
 @endsection
