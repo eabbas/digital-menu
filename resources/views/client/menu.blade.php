@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
-    <title>Document</title>
+    <title>فائوس</title>
 </head>
 
 <body>
@@ -53,8 +53,11 @@
             </div>
         </header>
         <div class="w-full pt-16 bg-[#F4F8F9]">
-            <img src="{{ asset('storage/images/banner01.jpg') }}"
-                class="w-11/12 h-[120px] sm:h-[180px] mx-auto rounded-md object-cover" alt="career banner">
+            @if(!$career->banner)
+            <img src="{{ asset('storage/images/banner01.jpg') }}" class="w-11/12 h-[120px] sm:h-[180px] mx-auto rounded-md object-cover" alt="career banner">
+            @else
+            <img src="{{ asset('storage/'.$career->banner) }}" class="w-11/12 h-[120px] sm:h-[180px] mx-auto rounded-md object-cover" alt="career banner">
+            @endif
         </div>
         <div class="w-full bg-[#F4F8F9] pt-3">
             <div class="w-11/12 flex flex-row items-center gap-3 pb-3 mx-auto overflow-x-auto" style="scrollbar-width: none;">

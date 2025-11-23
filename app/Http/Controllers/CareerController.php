@@ -1,26 +1,38 @@
 <?php
 namespace App\Http\Controllers;
-use App\Models\user;
+use App\Models\User;
 use App\Models\career;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\Models\careerCategory;
 
 class CareerController extends Controller
 {
-    public function create()
+    public function create(User $user=null)
     {
-        $user = Auth::user();
-        return view('admin.careers.create', ['user' => $user]);
+        $careerCategories = careerCategory::all();
+        if($user){
+            return view('admin.careers.create', ['user' => $user, 'careerCategories'=>$careerCategories]);
+        }
+        return view('admin.careers.create', ['user'=>Auth::user(), 'careerCategories'=>$careerCategories]);
     }
 
     public function store(Request $request)
     {
         $user = Auth::user();
-        $user->type = 'career';
-        $user->save();
+        if($user->type != 'admin'){
+            $user->type = 'career';
+            $user->save();
+        }
         $name = $request->logo->getClientOriginalName();
-        $path = $request->logo->storeAs('files', $name, 'public');
+        $fullName =  Str::uuid()."_".$name;
+        $path = $request->file('logo')->storeAs('files', $fullName, 'public');
+
+        $bannerName = $request->banner->getClientOriginalName();
+        $fullBannerName = Str::uuid()."_".$bannerName;
+        $bannerPath = $request->file('banner')->storeAs('files', $fullBannerName, 'public');
         $social_medias = json_encode($request->social_medias);
         career::insertGetId([
             'title' => $request->title,
@@ -32,20 +44,28 @@ class CareerController extends Controller
             'user_id' => $user->id,
             'email' => $request->email,
             'description' => $request->description,
+            'career_category_id'=>$request->careerCategory,
+            'banner'=>$bannerPath
         ]);
-        return to_route('user.profile', ['user' => $user]);
+        return to_route('career.careers', [Auth::user()]);
     }
 
-    public function user_careers(User $user)
+    public function user_careers(User $user=null)   
     {
-        return view('admin.careers.userCareers', ['user' => $user]);
+        if($user){
+            return view('admin.careers.userCareers', ['user' => $user]);
+        } 
+        return view('admin.careers.userCareers', ['user' => Auth::user()]);
     }
 
-    public function edit(career $career)
+    public function edit(career $career, User $user=null)
     {
-        $user = Auth::user();
+        if(!$user){
+            $user = Auth::user();
+        }
+        $careerCategories = careerCategory::all();
         $career->social_media = json_decode($career->social_media);
-        return view('admin.careers.edit', ['career' => $career, 'user' => $user]);
+        return view('admin.careers.edit', ['career' => $career, 'user' => $user, 'careerCategories'=>$careerCategories]);
     }
 
     public function update(Request $request)
@@ -54,8 +74,18 @@ class CareerController extends Controller
         if ($request->logo) {
             Storage::disk('public')->delete($career->logo);
             $logoName = $request->logo->getClientOriginalName();
-            $logoPath = $request->logo->storeAs('files', $logoName, 'public');
+            $fullLogoName = Str::uuid()."_".$logoName;
+            $logoPath = $request->file('logo')->storeAs('files', $fullLogoName, 'public');
             $career->logo = $logoPath;
+        }
+        if ($request->banner) {
+            if ($career->banner) {
+                Storage::disk('public')->delete($career->banner);
+            }
+            $bannerName = $request->banner->getClientOriginalName();
+            $fullBannerName = Str::uuid()."_".$bannerName;
+            $bannerPath = $request->file('banner')->storeAs('files', $fullBannerName, 'public');
+            $career->banner = $bannerPath;
         }
         $career->social_media = json_encode($request->social_medias);
         $career->province = $request->province;
@@ -81,8 +111,9 @@ class CareerController extends Controller
     public function index()
     {
         $careers=career::all();
-        // dd($careers);
-        $user = Auth::user();
-        return view('admin.careers.index',['careers'=>$careers, 'user'=>$user]);
+        return view('admin.careers.index',['careers'=>$careers]);
+    }
+    public function single(career $career){
+        return view('admin.careers.single', ['career'=>$career]);
     }
 }
