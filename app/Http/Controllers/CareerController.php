@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\career;
+use App\Models\role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -14,17 +15,21 @@ class CareerController extends Controller
     {
         $careerCategories = careerCategory::all();
         if($user){
+            $user->role[0];
             return view('admin.careers.create', ['user' => $user, 'careerCategories'=>$careerCategories]);
         }
-        return view('admin.careers.create', ['user'=>Auth::user(), 'careerCategories'=>$careerCategories]);
+        return view('admin.careers.create', ['user'=>Auth::user()->role, 'careerCategories'=>$careerCategories]);
     }
 
     public function store(Request $request)
     {
-        dd($request->all());
+      //  dd($request->all());
+      $rols=role::all();
+      //dd($rols);
         $user = Auth::user();
-        if($user->type != 'admin'){
-            $user->type = 'career';
+        if($user->role[0]->title != 'admin'){
+            // $user->type = 'career';
+            $user->role[0]=$rols[2];
             $user->save();
         }
         $name = $request->logo->getClientOriginalName();
@@ -47,13 +52,18 @@ class CareerController extends Controller
             'description' => $request->description,
             'career_category_id'=>$request->careerCategory,
             'banner'=>$bannerPath
+            
         ]);
-        return to_route('career.careers', [Auth::user()]);
+        $user=Auth::user();
+        $user->role;
+        return to_route('career.careers', [$user]);
     }
 
     public function user_careers(User $user=null)   
     {
+        // dd(Auth::user()->role);
         if($user){
+            $user->role;
             return view('admin.careers.userCareers', ['user' => $user]);
         } 
         return view('admin.careers.userCareers', ['user' => Auth::user()]);
@@ -63,6 +73,7 @@ class CareerController extends Controller
     {
         if(!$user){
             $user = Auth::user();
+            $user->role;
         }
         $careerCategories = careerCategory::all();
         $career->social_media = json_decode($career->social_media);
@@ -96,7 +107,7 @@ class CareerController extends Controller
         $career->description = $request->description;
         $career->email = $request->email;
         $career->save();
-        return view('admin.careers.userCareers', ['user' => Auth::user()]);
+        return view('admin.careers.userCareers', ['user' => Auth::user()->role]);
     }
 
     public function delete(career $career)

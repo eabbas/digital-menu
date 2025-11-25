@@ -2,6 +2,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\role;
+use App\Models\role_user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -22,13 +24,13 @@ class UserController extends Controller
                 return redirect()->back()->with('message', 'این شماره تلفن قبلا استفاده شده');
             }
             $password = Hash::make($request->password);
-            User::create([
+            $user_id=User::insertGetId([
                 'name'=>$request->name,
                 'family'=>$request->family,
                 'phoneNumber'=>$request->phoneNumber,
                 'password'=>$password,
-                'type'=>'general',
             ]);
+            role_user::create(['role_id'=>2,'user_id'=>$user_id]);
             return to_route('login');
         }
         return to_route('signup');
@@ -37,9 +39,11 @@ class UserController extends Controller
     public function check(Request $request)
     {
         $user = User::where('phoneNumber', $request->phoneNumber)->first();
+        
         if ($user) {
             $checkHash = Hash::check($request->password, $user->password);
             if ($checkHash) {
+                $user->role;
                 Auth::login($user);
                 return to_route('user.profile', [$user]);
             }
@@ -63,6 +67,8 @@ class UserController extends Controller
     public function panel()
     {
         $user=Auth::user();
+                $user->role;
+
         if (!Auth::check()) {
             return to_route('login');
         }
@@ -71,6 +77,7 @@ class UserController extends Controller
 
     public function profile(){
         $user=Auth::user();
+        $user->role;
         return view('admin.user.profile', ['user'=>$user]);
     }
     public function show(user $user)
@@ -87,9 +94,7 @@ class UserController extends Controller
         $user = User::find($request->id);
         $user->name = $request->name;
         $user->phoneNumber = $request->phoneNumber;
-        if ($request->type) {
-            $user->type = $request->type;
-        }
+       
         if ($request->password) {
             $password = Hash::make($request->password);
             $user->password = $password;
@@ -121,11 +126,13 @@ class UserController extends Controller
     }
 
     public function compelete_form(){
-        return view('admin.user.compelete_form', ['user'=>Auth::user()]);
+        return view('admin.user.compelete_form', ['user'=>Auth::user()->role]);
     }
 
     public function save(Request $request){
         $user = Auth::user();
+                $user->role;
+
         $name = $request->main_image->getClientOriginalName();
         $fullName = time()."_".$name;
         $path = $request->file('main_image')->storeAs('images', $fullName, 'public');
