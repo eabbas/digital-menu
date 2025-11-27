@@ -48,7 +48,7 @@
             </div>
             <div class="grid grid-cols-2 gap-4">
                 @foreach($careers as $career)
-                <a href="{{ route('show_career', [$career]) }}" data-index="{{ $career->career_category_id }}"
+                <a href="{{ route('client.careerMenu', [$career]) }}" data-index="{{ $career->career_category_id }}"
                     class="px-5 w-full h-40 bg-[#f2f4f7] rounded-[11px] flex flex-col items-center justify-center gap-2 careers">
                     <div class="w-full h-28 rounded-md overflow-hidden">
                         <img class="size-28 mx-auto roundede-md rounded-inherit object-cover"

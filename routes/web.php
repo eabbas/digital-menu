@@ -20,6 +20,7 @@ use App\Http\Controllers\CareerCategoryController;
 use App\Models\career;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('search' , [HomeController::class, 'search'])->name('search');
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware([LoginMiddleware::class]);
 Route::get('/signup', [UserController::class, "create"])->name('signup')->middleware([LoginMiddleware::class]);
 Route::group([
