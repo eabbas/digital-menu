@@ -1,6 +1,7 @@
     @extends('admin.app.panel')
     @section('title', 'پروفایل کاربری')
     @section('content')
+    <?php //dd($user->role); ?>
    <div class="w-full">
             <div class="pb-5 w-full">
                 <h1 class="text-xl text-center lg:text-start">اکانت من</h1>
@@ -104,7 +105,7 @@
                     <label class="p-2.5 text-gray-400">ایمیل</label>
                     <span class="p-2.5 text-gary-600">{{ $user->email }}</span>
                     <label class="p-2.5 text-gray-400">نقش</label>
-                    <span class="p-2.5 text-gary-600">{{ $user->type }}</span>
+                    <span class="p-2.5 text-gary-600">{{ $user->role[0]->title }}</span>
                     {{-- <label class="p-2.5 text-gray-400">سایت کمپانی</label>
                     <a href="#" class="p-2.5 text-gary-600">famenu.ie</a>
                     <label class="p-2.5 text-gray-400">کشور </label>

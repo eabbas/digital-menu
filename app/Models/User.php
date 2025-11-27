@@ -21,7 +21,6 @@ class User extends Authenticatable
         'name',
         'phoneNumber',
         'password',
-        'type',
         'family',
         'main_image'
     ];
@@ -51,5 +50,9 @@ class User extends Authenticatable
 
     public function careers(){
         return $this->hasMany(career::class)->chaperOne();
+    }
+    public function role(){
+      return $this->belongsToMany(role::class,'role_users');
+
     }
 }

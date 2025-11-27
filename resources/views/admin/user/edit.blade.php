@@ -18,7 +18,7 @@
                     </div>
                     <div class="w-full flex flex-col">
                         <label class="text-sm md:text-base" for="type"> نوع کاربر :</label>
-                        <input type="type" name="type"  value="{{$user -> type}}" id="email" class="w-full px-2 py-1 lg:px-2 outline-none border-b" required>
+                        <input type="type" name="type"  value="{{$user->roel->tile}}" id="email" class="w-full px-2 py-1 lg:px-2 outline-none border-b" required>
                     </div>
                     <div class="w-full flex flex-col">
                         <label class="text-sm md:text-base" for="password">تغییر رمز عبور :</label>

@@ -27,7 +27,7 @@
                         <li class="w-full"> {{$user -> id}}</li>
                         <li class="w-full"> {{$user -> name}}</li>
                         <li class="w-full"> {{$user ->phoneNumber}}</li>
-                        <li class="w-full"> {{$user ->type}}</li>
+                        <li class="w-full"> {{$user ->role[0]->title}}</li>
                         <li class="w-full col-span-4 grid grid-cols-5 gap-3 xl:gap-5">
                             <div class="w-full">
                                 <a href="{{ route('user.show', [$user->id]) }}" class="px-3 xl:px-5 py-1 border border-gray-300 rounded-md transition-all duration-150 hover:bg-gray-400 hover:text-white">نمایش</a>
