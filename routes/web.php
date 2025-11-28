@@ -17,6 +17,7 @@ use App\Http\Middleware\LoginMiddleware;
 use App\Http\Middleware\UserMiddleware;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CareerCategoryController;
+use App\Http\Controllers\CustomProductController;
 use App\Models\career;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -283,3 +284,19 @@ Route::group([
     Route::get('/favoriteCareers', 'index')->name('list');
     Route::get('/delete/{career}', 'delete')->name('delete');
 });
+
+
+Route::group([
+    'prefix' => 'customProducts',
+    'controller' => CustomProductController::class,
+    'as' => 'cp.'
+], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/customProductList', 'index')->name('list');
+    Route::get('/show/{customProduct}', 'show')->name('single');
+    Route::get('/edit/{customProduct}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{customProduct}', 'delete')->name('delete');
+});
+
