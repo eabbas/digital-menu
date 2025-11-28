@@ -1,43 +1,44 @@
 <?php
 namespace App\Http\Controllers;
-use App\Models\User;
+
 use App\Models\career;
+use App\Models\careerCategory;
 use App\Models\role;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-use App\Models\careerCategory;
+use Illuminate\Support\Str;
 
 class CareerController extends Controller
 {
-    public function create(User $user=null)
+    public function create(User $user = null)
     {
         $careerCategories = careerCategory::all();
-        if($user){
+        if ($user) {
             $user->role[0];
-            return view('admin.careers.create', ['user' => $user, 'careerCategories'=>$careerCategories]);
+            return view('admin.careers.create', ['user' => $user, 'careerCategories' => $careerCategories]);
         }
-        return view('admin.careers.create', ['user'=>Auth::user()->role, 'careerCategories'=>$careerCategories]);
+        return view('admin.careers.create', ['user' => Auth::user()->role, 'careerCategories' => $careerCategories]);
     }
 
     public function store(Request $request)
     {
-      //  dd($request->all());
-      $rols=role::all();
-      //dd($rols);
+        // dd($request->all());
+        $roles = role::all();
+        // dd($roles);
         $user = Auth::user();
-        if($user->role[0]->title != 'admin'){
+        if ($user->role[0]->title != 'admin') {
             // $user->type = 'career';
-            $user->role[0]=$rols[2];
+            $user->role[0] = $roles[1];
             $user->save();
         }
         $name = $request->logo->getClientOriginalName();
-        $fullName =  Str::uuid()."_".$name;
+        $fullName = Str::uuid() . '_' . $name;
         $path = $request->file('logo')->storeAs('files', $fullName, 'public');
 
         $bannerName = $request->banner->getClientOriginalName();
-        $fullBannerName = Str::uuid()."_".$bannerName;
+        $fullBannerName = Str::uuid() . '_' . $bannerName;
         $bannerPath = $request->file('banner')->storeAs('files', $fullBannerName, 'public');
         $social_medias = json_encode($request->social_medias);
         career::insertGetId([
@@ -50,34 +51,30 @@ class CareerController extends Controller
             'user_id' => $user->id,
             'email' => $request->email,
             'description' => $request->description,
-            'career_category_id'=>$request->careerCategory,
-            'banner'=>$bannerPath
-            
+            'career_category_id' => $request->careerCategory,
+            'banner' => $bannerPath
         ]);
-        $user=Auth::user();
-        $user->role;
-        return to_route('career.careers', [$user]);
+        return to_route('career.careers', [Auth::user()]);
     }
 
-    public function user_careers(User $user=null)   
+    public function user_careers(User $user = null)
     {
-        // dd(Auth::user()->role);
-        if($user){
+        if ($user) {
             $user->role;
             return view('admin.careers.userCareers', ['user' => $user]);
-        } 
+        }
         return view('admin.careers.userCareers', ['user' => Auth::user()]);
     }
 
-    public function edit(career $career, User $user=null)
+    public function edit(career $career, User $user = null)
     {
-        if(!$user){
+        if (!$user) {
             $user = Auth::user();
             $user->role;
         }
         $careerCategories = careerCategory::all();
         $career->social_media = json_decode($career->social_media);
-        return view('admin.careers.edit', ['career' => $career, 'user' => $user, 'careerCategories'=>$careerCategories]);
+        return view('admin.careers.edit', ['career' => $career, 'user' => $user, 'careerCategories' => $careerCategories]);
     }
 
     public function update(Request $request)
@@ -86,7 +83,7 @@ class CareerController extends Controller
         if ($request->logo) {
             Storage::disk('public')->delete($career->logo);
             $logoName = $request->logo->getClientOriginalName();
-            $fullLogoName = Str::uuid()."_".$logoName;
+            $fullLogoName = Str::uuid() . '_' . $logoName;
             $logoPath = $request->file('logo')->storeAs('files', $fullLogoName, 'public');
             $career->logo = $logoPath;
         }
@@ -95,7 +92,7 @@ class CareerController extends Controller
                 Storage::disk('public')->delete($career->banner);
             }
             $bannerName = $request->banner->getClientOriginalName();
-            $fullBannerName = Str::uuid()."_".$bannerName;
+            $fullBannerName = Str::uuid() . '_' . $bannerName;
             $bannerPath = $request->file('banner')->storeAs('files', $fullBannerName, 'public');
             $career->banner = $bannerPath;
         }
@@ -123,12 +120,15 @@ class CareerController extends Controller
         $career->delete();
         return to_route('user.profile', [Auth::user()]);
     }
+
     public function index()
     {
-        $careers=career::all();
-        return view('admin.careers.index',['careers'=>$careers]);
+        $careers = career::all();
+        return view('admin.careers.index', ['careers' => $careers]);
     }
-    public function single(career $career){
-        return view('admin.careers.single', ['career'=>$career]);
+
+    public function single(career $career)
+    {
+        return view('admin.careers.single', ['career' => $career]);
     }
 }

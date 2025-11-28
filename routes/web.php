@@ -17,6 +17,7 @@ use App\Http\Middleware\LoginMiddleware;
 use App\Http\Middleware\UserMiddleware;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CareerCategoryController;
+use App\Http\Controllers\MenuCategoryController;
 use App\Http\Controllers\CustomProductController;
 use App\Models\career;
 
@@ -79,19 +80,33 @@ Route::group([
     Route::get('/delete/{careerCategory}' , 'delete')->name('delete');
 });
 
+// Route::group([
+//     'prefix' => 'menus',
+//     'controller' => MenuController::class,
+//     'as' => 'menu.',
+//     'middleware' => [UserMiddleware::class]
+// ], function () {
+//     Route::get('/{career}', 'index')->name('list')->withoutMiddleware([UserMiddleware::class]);
+//     Route::get('/create/{career}', 'create')->name('create');
+//     Route::post('/store', 'store')->name('store');
+//     Route::get('/edit/{menu}', 'edit')->name('edit');
+//     Route::post('/update', 'update')->name('update');
+//     Route::get('/delete/{menu}', 'delete')->name('delete');
+//     Route::get('/qr_codes/{menu}', 'qr_codes')->name('qr_codes')->withoutMiddleware([UserMiddleware::class]);
+// });
+
 Route::group([
-    'prefix' => 'menus',
-    'controller' => MenuController::class,
-    'as' => 'menu.',
-    'middleware' => [UserMiddleware::class]
-], function () {
-    Route::get('/{career}', 'index')->name('list')->withoutMiddleware([UserMiddleware::class]);
+    'prefix'=>'menuCategory',
+    'controller'=>MenuCategoryController::class,
+    'middleware'=>[UserMiddleware::class],
+    'as'=>'menuCat.'
+], function(){
     Route::get('/create/{career}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/edit/{menu}', 'edit')->name('edit');
+    Route::get('/list', 'index')->name('list');
+    Route::get('/edit/{menu_category}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
-    Route::get('/delete/{menu}', 'delete')->name('delete');
-    Route::get('/qr_codes/{menu}', 'qr_codes')->name('qr_codes')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/delete/{menu_category}', 'delete')->name('delete');
 });
 
 //category.......................................................................
