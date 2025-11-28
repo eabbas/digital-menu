@@ -307,7 +307,7 @@
                                         class="block text-gray-700 py-2 text-md">ایجاد کسب و کار
                                         جدید</a>
                                 </li>
-                                @if(Auth::user()->type == 'admin')
+                              
                                 <li>
                                     <span class="size-1 rounded-sm"></span>
                                     <a href="{{ route('career.list') }}" class="block text-gray-700 py-2 text-md">
