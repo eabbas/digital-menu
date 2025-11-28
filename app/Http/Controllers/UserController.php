@@ -30,7 +30,7 @@ class UserController extends Controller
                 'phoneNumber'=>$request->phoneNumber,
                 'password'=>$password,
             ]);
-            role_user::create(['role_id'=>2,'user_id'=>$user_id]);
+            role_user::create(['role_id'=>3,'user_id'=>$user_id]);
             return to_route('login');
         }
         return to_route('signup');
@@ -43,6 +43,7 @@ class UserController extends Controller
         if ($user) {
             $checkHash = Hash::check($request->password, $user->password);
             if ($checkHash) {
+                // return $user;
                 $user->role;
                 Auth::login($user);
                 return to_route('user.profile', [$user]);

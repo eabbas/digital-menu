@@ -27,6 +27,7 @@
                     </div>
                     <div class="bg-white divide-y divide-[#f1f1f4]">
                         @foreach($user->careers as $career)
+                        {{-- {{ dd($career->menu_categories) }} --}}
                         @if($career)
                         <div class="w-full flex flex-row lg:grid lg:grid-cols-6 items-center divide-x divide-[#f1f1f4]">
                             <div class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
@@ -51,7 +52,7 @@
                                     <div class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
                                         <a href="{{ route('career.delete', [$career])}}" class="text-sky-700">حذف</a>
                                     </div>
-                                    @if($career->menu)
+                                    {{-- @if($career->menu)
                                     <div class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
                                         <a href="{{ route('menu.list', [$career])}}" class="text-sky-700">مشاهده منو</a>
                                     </div>
@@ -59,6 +60,15 @@
                                     @if(!$career->menu)
                                     <div class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
                                         <a href="{{ route('menu.create', [$career])}}" class="text-sky-700">ایجاد منو</a>
+                                    </div>
+                                    @endif --}}
+                                    @if (count($career->menu_categories))
+                                    <div class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
+                                        <a href="{{ route('menuCat.list')}}" class="text-sky-700">مشاهده دسته بندی منو</a>
+                                    </div>
+                                    @else
+                                    <div class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
+                                        <a href="{{ route('menuCat.create', [$career])}}" class="text-sky-700">ایجاد دسته منو</a>
                                     </div>
                                     @endif
                                 </div>
