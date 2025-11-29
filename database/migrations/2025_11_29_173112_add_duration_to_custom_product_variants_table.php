@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('custom_products', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('description')->nullable();
+        Schema::table('custom_product_variants', function (Blueprint $table) {
+            $table->string('duration')->nullable();
             $table->string('image')->nullable();
-            $table->integer('material_limit');
-            $table->timestamps();
         });
     }
 
@@ -26,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('custom_products');
+        Schema::table('custom_product_variants', function (Blueprint $table) {
+            //
+        });
     }
 };
