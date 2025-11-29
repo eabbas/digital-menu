@@ -24,7 +24,7 @@ class MenuCategoryController extends Controller
             $menuCats[$key]['career_id']=$request->career_id;
         }
         menu_category::insert($menuCats);
-        return to_route('menuCat.list');
+        return to_route('menuCat.list', [$request->career_id]);
     }
 
     public function index(){
@@ -48,11 +48,16 @@ class MenuCategoryController extends Controller
             $menu_cat->image = $path;
         }
         $menu_cat->save();
-        return to_route('menuCat.list');
+        return to_route('menuCat.list', [$request->career_id]);
     }
 
     public function delete(menu_category $menu_category){
+        $career_id = $menu_category->career->id;
         $menu_category->delete();
-        return to_route('menuCat.list');
+        return to_route('menuCat.list', [$career_id]);
+    }
+
+    public function menu(career $career){
+        return view('admin.menu.menu', ['career'=>$career]);
     }
 }

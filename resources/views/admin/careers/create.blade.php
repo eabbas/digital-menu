@@ -1,23 +1,15 @@
-    <style>
-        input:focus {
-            color: #2196F3;
-        }
-    </style>
     @extends('admin.app.panel')
     @section('title', 'ثبت نام کسب و کار')
     @section('content')
         <form action="{{ route('career.store') }}" method="post" enctype='multipart/form-data'>
             @csrf
             <div class="min-h-screen flex items-start justify-center">
-                <div class="bg-white rounded-2xl shadow-md p-3 w-full md:w-9/12">
+                <div class="bg-white rounded-2xl shadow-md p-3 w-full">
                     <div class="text-center mb-4">
                         <h1 class="text-2xl font-bold text-gray-800">فرم اطلاعات کسب وکار</h1>
-                        {{-- <p class="text-gray-600 mt-2">اطلاعات کسب وکار خود را وارد کنید</p> --}}
-
                         <div class="w-full flex flex-col gap-3 my-4">
                             <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">لوگو کسب وکار</label>
-
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="file"
@@ -26,7 +18,6 @@
                             </div>
                             <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">نام کسب وکار</label>
-
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
@@ -46,6 +37,14 @@
                                             سایر
                                         </option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">تعداد QR کد</label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="number"
+                                        name='qrcode_count' min="1" value="1" class="w-full px-3 py-1 md:px-2 outline-none text-gray-500">
                                 </div>
                             </div>
                             <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
