@@ -10,7 +10,7 @@ class menu_item extends Model
         'title',
         'description',
         'parent_id',
-        'menu_categories_id',
+        'menu_category_id',
         'image',
         'customizable',
         'price',
@@ -20,9 +20,9 @@ class menu_item extends Model
         return $this->belongsTo(menu_category::class);
     }
     public function ingredients(){
-        return $this->hasMany(ingredients::class)->chaperone();
+        return $this->hasMany(ingredients::class);
     }
     public function menu_custom_ingredients(){
-        return $this->hasMany(menu_custom_ingredients::class)->chaperone();
+        return $this->hasMany(menu_custom_ingredients::class);
     }
 }

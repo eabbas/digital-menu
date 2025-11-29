@@ -3,13 +3,13 @@
  همه دسته های منوی کسب و کار {{ $categories[0]->career->title }}
 @endsection
 @section('content')
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full mb-3">
         <div class="flex flex-row justify-between items-center my-4">
             <div>
                 {{-- <h1 class="text-xm font-bold"> محصولات </h1>
                 <span class="text-sm text-gray-300">خانه _ تجارت - کاتالوگ</span> --}}
             </div>
-            <div class="flex flex-row-reverse gap-2">
+            {{-- <div class="flex flex-row-reverse gap-2">
                 <div class="cursor-pointer w-15 flex justify-center items-center rounded-lg h-9  bg-blue-500 text-white">
                     <a href="" class="text-sm">ساختن</a>
                 </div>
@@ -18,18 +18,18 @@
                         فیلتر
                     </a>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="flex flex-col p-6 gap-3 shadow__profaill__list_products rounded-[7px]">
-            <div class="flex flex-rwo justify-between">
-                <div class="bg-gray-100 pr-3 w-65 h-10 rounded-md flex flex-row items-center gap-2">
+            <div class="flex flex-rwo justify-end">
+                {{-- <div class="bg-gray-100 pr-3 w-65 h-10 rounded-md flex flex-row items-center gap-2">
                     <svg class="size-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                     </svg>
                     <input class="text-gray-600" type="text" placeholder="جستجو">
-                </div>
+                </div> --}}
                 <div class="flex flex-row gap-3 justify-between">
                     {{-- <div class="cursor-pointer w-38 h-10 rounded-[7px] flex pr-3 items-center bg-gray-200 justify-between text-gray-500">
                         <a href="">وضعیت
@@ -78,11 +78,14 @@
                                             d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                     </svg>
                                 </div>
-                                <div class="absolute w-full top-full right-[calc(100%-20px)] z-555 opacity-0 invisible -translate-y-5 transition-all duration-200">
+                                <div class="absolute w-full top-full right-0 z-555 opacity-0 invisible -translate-y-5 transition-all duration-200">
                                     <ul class="text-sm bg-gray-200 mt-1 rounded-sm p-1">
                                         {{-- اگه منو داشت، لینک ویرایش منو بیاد براش اگه نداشت ایجاد منو --}}
                                         <li>
-                                            <a href="#" class="inline-block w-full hover:bg-gray-300 p-1 rounded-sm text-gray-700">ایجاد منو</a>
+                                            <a href="{{ route('menu.create', [$category->id]) }}" class="inline-block w-full hover:bg-gray-300 p-1 rounded-sm text-gray-700">ایجاد آیتم منو</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('menu.items', [$category->id]) }}" class="inline-block w-full hover:bg-gray-300 p-1 rounded-sm text-gray-700">آیتم ها</a>
                                         </li>
                                         <li>
                                             <a href="{{ route('menuCat.edit', [$category->id]) }}" class="inline-block w-full hover:bg-gray-300 p-1 rounded-sm text-gray-700">ویرایش</a>
@@ -143,7 +146,7 @@
                 </div>
             </div> --}}
         </div>
-        <div class="flex justify-between my-5 items-center">
+        {{-- <div class="flex justify-between my-5 items-center">
             <div class="flex gap-2">
                 <span class="text-gray-400 text-sm">2024©</span>
                 <a href="" class="text-sm">ساتراس وب</a>
@@ -159,7 +162,7 @@
                     <a class="text-gray-400 text-sm" href="">خرید</a>
                 </li>
             </ul>
-        </div>
+        </div> --}}
     </div>
     <script src="{{ asset('assets/js/menuCat.js') }}"></script>
 @endsection

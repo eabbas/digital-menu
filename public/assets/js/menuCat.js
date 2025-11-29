@@ -31,14 +31,23 @@ function newMenuCat(){
 
                 <div
                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="file"
+                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2 cursor-pointer" type="file"
                         name="menuCat[${num}][image]" title="تصویر دسته">
                 </div>
+            </div>
+            <div class="flex items-end pb-4">
+                <button type="button" onclick="removeCat(this)" class="p-1 rounded-md bg-red-300 hover:bg-red-500 text-sm cursor-pointer hover:text-white">حذف</button>
             </div>
     `
     div.innerHTML = element
     menuCat.appendChild(div)
     num++
+}
+
+function removeCat(el){
+    console.log(555);
+    
+    el.parentElement.parentElement.remove()
 }
 
 let activities = document.querySelectorAll('.activities')

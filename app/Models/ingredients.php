@@ -9,7 +9,9 @@ class ingredients extends Model
     protected $fillable = [
         'title',
         'description',
-        'menu_items_id'
+        'price_per_unit',
+        'image',
+        'menu_item_id'
     ];
     public function menu_item(){
         return $this->belongsTo(menu_item::class);

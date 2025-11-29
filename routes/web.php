@@ -19,6 +19,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CareerCategoryController;
 use App\Http\Controllers\MenuCategoryController;
 use App\Http\Controllers\CustomProductController;
+use App\Http\Controllers\MenuItemController;
 use App\Models\career;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -94,6 +95,23 @@ Route::group([
 //     Route::get('/delete/{menu}', 'delete')->name('delete');
 //     Route::get('/qr_codes/{menu}', 'qr_codes')->name('qr_codes')->withoutMiddleware([UserMiddleware::class]);
 // });
+
+Route::group([
+    'prefix'=>'menu',
+    'controller'=>MenuItemController::class,
+    'middleware'=>[UserMiddleware::class],
+    'as'=>'menu.'
+], function(){
+    Route::get('/create/{menu_category}', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/list', 'all')->name('list');
+    Route::get('/addVariants/{menu_item}', 'variants')->name('variants');
+    Route::get('/items/{menu_category}', 'items')->name('items');
+    Route::get('/edit/{menu_item}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/show/{menu_item}', 'single')->name('single');
+    Route::get('/delete/{menu_item}', 'delete')->name('delete');
+});
 
 Route::group([
     'prefix'=>'menuCategory',
