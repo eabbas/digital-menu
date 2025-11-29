@@ -10,7 +10,9 @@ class custom_product_variant extends Model
         'title' ,
         'description' ,
         'custom_product_id' ,
-        'min_amount_unit'
+        'min_amount_unit' ,
+        'duration',
+        'image' 
     ];
     public function custom_product()
     {

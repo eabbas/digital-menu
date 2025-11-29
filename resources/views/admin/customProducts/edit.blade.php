@@ -30,30 +30,13 @@
                                 class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
                         </fieldset>
                     </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="duration">
-                            <legend class="p-1 w-25 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">
-                                زمان آماده شدن</legend>
-                            <input type="duration" name="duration" value="{{$customProduct -> duration}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
+                    
                     <div class="w-full flex flex-col">
                         <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
                             for="material_limit">
                             <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">
                                 حد مواد  </legend>
                             <input type="material_limit" name="material_limit" value="{{$customProduct -> material_limit}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="min_amount_unit">
-                            <legend class="p-1 w-30 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">
-                                حداقل مقدار واحد </legend>
-                            <input type="min_amount_unit" name="min_amount_unit" value="{{$customProduct -> min_amount_unit}}"
                                 class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
                         </fieldset>
                     </div>

@@ -20,6 +20,7 @@ use App\Http\Controllers\CareerCategoryController;
 use App\Http\Controllers\MenuCategoryController;
 use App\Http\Controllers\CustomProductController;
 use App\Http\Controllers\CustomProductVariantController;
+use App\Http\Controllers\CustomProductMaterialController;
 use App\Http\Controllers\CustomCategoryController;
 use App\Models\career;
 
@@ -332,6 +333,19 @@ Route::group([
 });
 
 
+Route::group([
+    'prefix' => 'customProductMaterial',
+    'controller' => CustomProductMaterialController::class,
+    'as' => 'cpm.'
+], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/materialList', 'index')->name('list');
+    Route::get('/show/{cpm}', 'show')->name('single');
+    Route::get('/edit/{cpm}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{cpm}', 'delete')->name('delete');
+});
 Route::group([
     'prefix' => 'customCategories',
     'controller' => CustomCategoryController::class,
