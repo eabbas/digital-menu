@@ -20,6 +20,7 @@ use App\Http\Controllers\CareerCategoryController;
 use App\Http\Controllers\MenuCategoryController;
 use App\Http\Controllers\CustomProductController;
 use App\Http\Controllers\CustomProductVariantController;
+use App\Http\Controllers\CustomCategoryController;
 use App\Models\career;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -328,4 +329,19 @@ Route::group([
     Route::get('/edit/{cpVariants}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{cpVariants}', 'delete')->name('delete');
+});
+
+
+Route::group([
+    'prefix' => 'customCategories',
+    'controller' => CustomCategoryController::class,
+    'as' => 'custmCategory.'
+], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/custmoCategoryList', 'index')->name('list');
+    Route::get('/show/{customCategory}', 'show')->name('single');
+    Route::get('/edit/{customCategory}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{customCategory}', 'delete')->name('delete');
 });
