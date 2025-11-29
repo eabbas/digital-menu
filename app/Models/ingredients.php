@@ -11,7 +11,8 @@ class ingredients extends Model
         'description',
         'price_per_unit',
         'image',
-        'menu_item_id'
+        'menu_item_id',
+        'max_unit_amount'
     ];
     public function menu_item(){
         return $this->belongsTo(menu_item::class);

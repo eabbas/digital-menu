@@ -14,7 +14,8 @@ class menu_item extends Model
         'image',
         'customizable',
         'price',
-        'discount'
+        'discount',
+        'duration'
     ];
     public function menu_category(){
         return $this->belongsTo(menu_category::class);

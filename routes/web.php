@@ -65,6 +65,7 @@ Route::group([
     Route::get('/delete/{career}', 'delete')->name('delete');
     Route::get('/careers', 'index')->name('list');
     Route::get('/show/{career}', 'single')->name('single')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/qrcodes/{career}', 'qr_codes')->name('qr_codes');
 });
 
 Route::group([
@@ -104,7 +105,6 @@ Route::group([
 ], function(){
     Route::get('/create/{menu_category}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/list', 'all')->name('list');
     Route::get('/addVariants/{menu_item}', 'variants')->name('variants');
     Route::get('/items/{menu_category}', 'items')->name('items');
     Route::get('/edit/{menu_item}', 'edit')->name('edit');
@@ -121,10 +121,11 @@ Route::group([
 ], function(){
     Route::get('/create/{career}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/list', 'index')->name('list');
+    Route::get('/list/{career}', 'index')->name('list');
     Route::get('/edit/{menu_category}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{menu_category}', 'delete')->name('delete');
+    Route::get('/{career}', 'menu')->name('menu');
 });
 
 //category.......................................................................

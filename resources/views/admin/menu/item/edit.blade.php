@@ -17,7 +17,7 @@
                         <input type="hidden" name="menu_categories_id" value="{{ $menu->menu_category->id }}">
                         <input type="hidden" name="parent_id" value="{{ $menu->parent_id }}">
                         <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان آیتم:</label>
+                            <label class="w-32 text-sm mb-1 mt-2.5 flex">عنوان آیتم:</label>
                             <div
                                 class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="w-full focus:outline-none text-sm font-bold mr-2" type="text"
@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="w-30 text-sm mb-1 mt-2.5 flex">تصویر آیتم:</label>
+                            <label class="w-32 text-sm mb-1 mt-2.5 flex">تصویر آیتم:</label>
                             <div
                                 class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="w-full focus:outline-none text-sm font-bold mr-2" type="file"
@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="w-30 text-sm mb-1 mt-2.5 flex">توضیحات:</label>
+                            <label class="w-32 text-sm mb-1 mt-2.5 flex">توضیحات:</label>
                             <div
                                 class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="w-full focus:outline-none text-sm font-bold mr-2" type="text"
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="w-30 text-sm mb-1 mt-2.5 flex">قیمت:</label>
+                            <label class="w-32 text-sm mb-1 mt-2.5 flex">قیمت:</label>
                             <div
                                 class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="w-full focus:outline-none text-sm font-bold mr-2" type="number"
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="w-30 text-sm mb-1 mt-2.5 flex">تخفیف:</label>
+                            <label class="w-32 text-sm mb-1 mt-2.5 flex">تخفیف:</label>
                             <div
                                 class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="w-full focus:outline-none text-sm font-bold mr-2" type="number"
@@ -57,7 +57,13 @@
                             </div>
                         </div>
                         <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <div class="w-30 flex items-center justify-center">
+                            <label class="w-32 text-sm mb-1 mt-2.5 flex">زمان تقریبی پخت:</label>
+                            <div class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                <input class="w-full focus:outline-none text-sm font-bold mr-2" type="number" name='duration' placeholder="دقیقه" value="{{ $menu->duration }}">
+                            </div>
+                        </div>
+                        <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                            <div class="w-32 flex items-center justify-center">
                                 <input class="size-4 focus:outline-none text-sm font-bold cursor-pointer" type="checkbox"
                                     name='customizable' value="1"
                                     @if ($menu->customizable) {{ 'checked' }} @endif>
@@ -68,11 +74,10 @@
                     <div class="w-full p-3 bg-gray-100 rounded-lg">
                         <div class="flex flex-col" id="ingredients">
                             <?php
-                                $num = 0;    
+                            $num = 0;
                             ?>
-                            
-                            @foreach ($menu->ingredients as $ingredient)
 
+                            @foreach ($menu->ingredients as $ingredient)
                                 <div class="w-full flex flex-col my-4 bg-gray-200 p-3 rounded-lg">
                                     <div class="flex justify-end pb-4">
                                         <button type="button" onclick="removeIngre(this)"
@@ -80,21 +85,22 @@
                                     </div>
                                     <div class="flex flex-row gap-3">
                                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                            <label class="w-30 text-sm mb-1 mt-2.5 flex flex-row">
+                                            <label class="w-32 text-sm mb-1 mt-2.5 flex flex-row">
                                                 <span>عنوان :</span>
                                                 <span class="text-rose-500">*</span>
                                             </label>
-    
+
                                             <div
                                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                                 <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
-                                                    type="text" placeholder="عنوان" name="ingredients[{{ $num }}][title]"
-                                                    required value="{{ $ingredient->title }}">
+                                                    type="text" placeholder="عنوان"
+                                                    name="ingredients[{{ $num }}][title]" required
+                                                    value="{{ $ingredient->title }}">
                                             </div>
                                         </div>
-    
+
                                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                            <label class="w-30 text-sm mb-1 mt-2.5 flex">توضیحات</label>
+                                            <label class="w-32 text-sm mb-1 mt-2.5 flex">توضیحات</label>
                                             <div
                                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                                 <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
@@ -105,7 +111,7 @@
                                     </div>
                                     <div class="flex flex-row gap-3">
                                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                            <label class="w-30 text-sm mb-1 mt-2.5 flex">قیمت واحد</label>
+                                            <label class="w-32 text-sm mb-1 mt-2.5 flex">قیمت واحد</label>
                                             <div
                                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                                 <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
@@ -114,7 +120,7 @@
                                             </div>
                                         </div>
                                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                            <label class="w-30 text-sm mb-1 mt-2.5 flex">تصویر</label>
+                                            <label class="w-32 text-sm mb-1 mt-2.5 flex">تصویر</label>
                                             <div
                                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                                 <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
@@ -122,11 +128,20 @@
                                                     placeholder="تصویر " value="{{ $ingredient->description }}">
                                             </div>
                                         </div>
+                                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                            <label class="w-32 text-sm mb-1 mt-2.5 flex">بیشترین حد مجاز</label>
+                                            <div
+                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
+                                                    type="number" name='ingredients[${num}][max_unit_amount]'
+                                                    placeholder="x واحد">
+                                            </div>
+                                        </div>
                                     </div>
-                                    
+
                                 </div>
                                 <?php
-                                    $num++;
+                                $num++;
                                 ?>
                             @endforeach
                         </div>

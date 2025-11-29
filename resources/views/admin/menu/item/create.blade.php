@@ -13,37 +13,43 @@
                     <div class="w-full flex flex-col gap-3 my-4">
                         <input type="hidden" name="menu_categories_id" value="{{ $category->id }}">
                         <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان آیتم:</label>
+                            <label class="w-32 text-sm mb-1 mt-2.5 flex">عنوان آیتم:</label>
                             <div class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="w-full focus:outline-none text-sm font-bold mr-2" type="text" name='title' placeholder="عنوان">
                             </div>
                         </div>
                         <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="w-30 text-sm mb-1 mt-2.5 flex">تصویر آیتم:</label>
+                            <label class="w-32 text-sm mb-1 mt-2.5 flex">تصویر آیتم:</label>
                             <div class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="w-full focus:outline-none text-sm font-bold mr-2" type="file" name='image'>
                             </div>
                         </div>
                         <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="w-30 text-sm mb-1 mt-2.5 flex">توضیحات:</label>
+                            <label class="w-32 text-sm mb-1 mt-2.5 flex">توضیحات:</label>
                             <div class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="w-full focus:outline-none text-sm font-bold mr-2" type="text" name='description' placeholder="توضیحات">
                             </div>
                         </div>
                         <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="w-30 text-sm mb-1 mt-2.5 flex">قیمت:</label>
+                            <label class="w-32 text-sm mb-1 mt-2.5 flex">قیمت:</label>
                             <div class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="w-full focus:outline-none text-sm font-bold mr-2" type="number" name='price' placeholder="10000">
                             </div>
                         </div>
                         <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="w-30 text-sm mb-1 mt-2.5 flex">تخفیف:</label>
+                            <label class="w-32 text-sm mb-1 mt-2.5 flex">تخفیف:</label>
                             <div class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="w-full focus:outline-none text-sm font-bold mr-2" type="number" name='discount' placeholder="2000">
                             </div>
                         </div>
                         <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <div class="w-30 flex items-center justify-center">
+                            <label class="w-32 text-sm mb-1 mt-2.5 flex">زمان تقریبی پخت:</label>
+                            <div class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                <input class="w-full focus:outline-none text-sm font-bold mr-2" type="number" name='duration' placeholder="دقیقه">
+                            </div>
+                        </div>
+                        <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                            <div class="w-32 flex items-center justify-center">
                                 <input class="size-4 focus:outline-none text-sm font-bold cursor-pointer" type="checkbox" name='customizable' value="1">
                             </div>
                             <label class="text-sm mb-1 mt-2.5 flex">قابلیت شخصی سازی دارد:</label>

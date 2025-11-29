@@ -45,6 +45,7 @@ class MenuItemController extends Controller
 
         if(isset($request->ingredients)){
             foreach($request->ingredients as $ingre){
+               
                 if(isset($ingre['image'])){
                     $ingreImage = $ingre['image']->getClientOriginalName();
                     $fullIngreImageName = Str::uuid().'_'.$ingreImage;
@@ -55,6 +56,7 @@ class MenuItemController extends Controller
                     'description'=>$ingre['description'],
                     'image'=>$imagePath,
                     'price_per_unit'=>$ingre['price_per_unit'],
+                    'max_unit_amount'=>$ingre['max_unit_amount'],
                     'menu_item_id'=>$menu_id
                 ]);
             }
@@ -109,6 +111,7 @@ class MenuItemController extends Controller
                     'description'=>$ingre['description'],
                     'image'=>$imagePath,
                     'price_per_unit'=>$ingre['price_per_unit'],
+                    'max_unit_amount'=>$ingre['max_unit_amount'],
                     'menu_item_id'=>$request->id
                 ]);
             }

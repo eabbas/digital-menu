@@ -349,7 +349,7 @@
             </div>
             <!-- hamburger menu end -->
         </header>
-        <div class="w-full h-dvh lg:w-[calc(100%-265px)] float-end mt-20 lg:px-5 overflow-y-auto px-5"
+        <div class="w-full h-[calc(100dvh-80px)] lg:w-[calc(100%-265px)] float-end mt-20 lg:px-5 overflow-y-auto px-5"
             style="scrollbar-width:none;">
             @yield('content')
         </div>

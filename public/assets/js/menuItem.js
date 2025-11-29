@@ -52,6 +52,15 @@ function addIngre(){
                     name='ingredients[${num}][image]'>
             </div>
         </div>
+
+         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+            <label class="w-30 text-sm mb-1 mt-2.5 flex">بیشترین حد مجاز</label>
+            <div
+                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="number"
+                    name='ingredients[${num}][max_unit_amount]' placeholder="x واحد">
+            </div>
+        </div>
     </div>
 
     
