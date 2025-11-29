@@ -8,8 +8,8 @@
         <div class="flex flex-col border-none rounded-[7px]">
             <div class="block lg:flex flex-row justify-between gap-8">
                 <div class="flex flex-col xm:flex-row lg:flex-row gap-5 py-3">
-                    @if($customProduct->image)
-                    <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0" src="{{ asset('storage/'.$customProduct->image) }}" alt="custopmProduct logo">
+                    @if($cpm->image)
+                    <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0" src="{{ asset('storage/'.$cpm->image) }}" alt="custopmProduct logo">
                     @else {{ "عکس ندارد" }}
                     @endif
                 </div>
@@ -27,7 +27,7 @@
                         نام محصول
                     </div>
                     <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                       {{ $customProduct->title }}
+                       {{ $cpm->title }}
                     </div>
                 </div>
                 <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
@@ -35,15 +35,43 @@
                        توضیحات
                     </div>
                     <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                       {{ $customProduct->description }}
+                       {{ $cpm->description }}
                     </div>
                 </div>
                 <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
                     <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
-                       حد مواد  
+                       قیمت بر اساس واحد  
                     </div>
                     <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                       {{ $customProduct->material_limit }}
+                       {{ $cpm->price_per_unit }}
+                    </div>
+                </div>
+                <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
+                    <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
+                       اولویت     
+                    </div>
+                    <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
+                       {{ $cpm->order }}
+                    </div>
+                </div>
+                <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
+                    <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
+                       محدودیت  واحد   
+                    </div>
+                    <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
+                       {{ $cpm->max_unit_limit }}
+                    </div>
+                </div>
+                <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
+                    <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
+                       لزوم    
+                    </div>
+                    <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
+                        @if ($cpm->required == 1)
+                        {{ "بودن آن الزامی است" }}
+                        @else
+                        {{ "بودن آن الزامی نیست" }} 
+                        @endif
                     </div>
                 </div>
             </div>

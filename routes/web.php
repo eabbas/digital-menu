@@ -20,6 +20,9 @@ use App\Http\Controllers\CareerCategoryController;
 use App\Http\Controllers\MenuCategoryController;
 use App\Http\Controllers\CustomProductController;
 use App\Http\Controllers\MenuItemController;
+use App\Http\Controllers\CustomProductVariantController;
+use App\Http\Controllers\CustomProductMaterialController;
+use App\Http\Controllers\CustomCategoryController;
 use App\Models\career;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -334,3 +337,44 @@ Route::group([
     Route::get('/delete/{customProduct}', 'delete')->name('delete');
 });
 
+Route::group([
+    'prefix' => 'customProductVariants',
+    'controller' => CustomProductVariantController::class,
+    'as' => 'cpv.'
+], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/variantList', 'index')->name('list');
+    Route::get('/show/{cpVariants}', 'show')->name('single');
+    Route::get('/edit/{cpVariants}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{cpVariants}', 'delete')->name('delete');
+});
+
+
+Route::group([
+    'prefix' => 'customProductMaterial',
+    'controller' => CustomProductMaterialController::class,
+    'as' => 'cpm.'
+], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/materialList', 'index')->name('list');
+    Route::get('/show/{cpm}', 'show')->name('single');
+    Route::get('/edit/{cpm}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{cpm}', 'delete')->name('delete');
+});
+Route::group([
+    'prefix' => 'customCategories',
+    'controller' => CustomCategoryController::class,
+    'as' => 'custmCategory.'
+], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/custmoCategoryList', 'index')->name('list');
+    Route::get('/show/{customCategory}', 'show')->name('single');
+    Route::get('/edit/{customCategory}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{customCategory}', 'delete')->name('delete');
+});

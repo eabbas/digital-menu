@@ -10,12 +10,10 @@ class custom_product_material extends Model
         'title' , 
         'description' ,
         'price_per_unit' ,
-        'category_name' ,
         'image' ,
         'required' , 
         'order' ,
-        'category_limit' ,
-        'unit_limit' ,
+        'max_unit_amount' ,
         'custom_product_id'
     ];
     public function custom_product()

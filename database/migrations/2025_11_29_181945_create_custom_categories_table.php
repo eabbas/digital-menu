@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('custom_products', function (Blueprint $table) {
+        Schema::create('custom_categories', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description')->nullable();
-            $table->string('image')->nullable();
-            $table->integer('material_limit');
+            $table->integer('max_item_amount');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('custom_products');
+        Schema::dropIfExists('custom_categories');
     }
 };
