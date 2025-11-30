@@ -40,26 +40,10 @@
                 </div>
                 <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
                     <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
-                       زمان آماده سازی
-                    </div>
-                    <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                       {{ $customProduct->duration }}
-                    </div>
-                </div>
-                <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
-                    <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
                        حد مواد  
                     </div>
                     <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
                        {{ $customProduct->material_limit }}
-                    </div>
-                </div>
-                <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
-                    <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
-                       حداقل مقدار واحد   
-                    </div>
-                    <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                       {{ $customProduct->min_amount_unit }}
                     </div>
                 </div>
             </div>

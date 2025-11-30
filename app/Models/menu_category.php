@@ -16,6 +16,6 @@ class menu_category extends Model
         return $this->belongsTo(career::class);
     }
     public function menu_items(){
-        return $this->hasMany(menu_item::class)->chaperone();
+        return $this->hasMany(menu_item::class);
     }
 }

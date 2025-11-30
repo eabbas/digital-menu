@@ -10,16 +10,19 @@ class custom_product_material extends Model
         'title' , 
         'description' ,
         'price_per_unit' ,
-        'category_name' ,
         'image' ,
         'required' , 
         'order' ,
-        'category_limit' ,
-        'unit_limit' ,
-        'custom_product_id'
+        'max_unit_amount' ,
+        'custom_product_id' ,
+        'category_id'
     ];
     public function custom_product()
     {
         return $this->belongsTo(custom_product::class);
+    }
+    public function customCategory()
+    {
+        return $this->belongsTo(customCategory::class, 'category_id');
     }
 }

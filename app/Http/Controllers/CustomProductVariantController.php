@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\custom_product_variant;
+use Illuminate\Support\Facades\Storage;
 use App\Models\custom_product;
 
 class CustomProductVariantController extends Controller
@@ -16,18 +17,25 @@ class CustomProductVariantController extends Controller
     }
     public function store(Request $request)
     {
-        custom_product_variant::create([
-            'title'=>$request->title ,
-            'description' => $request->description ,
-            'custom_product_id' => $request->custom_product_id ,
-            'min_amount_unit' => $request->min_amount_unit ,
-        ]);
-        return to_route('cpv.list');
-    }
-    public function index()
-    {
+        // dd($request->all());
+   
+                $name = $request->image->getClientOriginalName();
+                $fullName = time()."_".$name;
+                $path = $request->file('image')->storeAs('images', $fullName, 'public');
+            custom_product_variant::create([
+                'title'=>$request->title ,
+                'description' => $request->description ,
+                'custom_product_id' => $request->custom_product_id ,
+                'duration' => $request->duration ,
+                'min_amount_unit' => $request->min_amount_unit ,
+                'image' => $path
+            ]);
+            return to_route('cpv.list');
+        }
+        public function index()
+        {
        $cpVariants = custom_product_variant::with('custom_product')->get();
-    
+    //    dd($cpVariants);
        return view('admin.customProductVariants.index', ['cpVariants'=>$cpVariants]);
     }
     public function show(custom_product_variant $cpVariants)
@@ -36,6 +44,7 @@ class CustomProductVariantController extends Controller
     }
     public function edit(custom_product_variant $cpVariants)
     {
+        // dd($cpVariants);
         $customProducts  = custom_product::all();
         return view('admin.customProductVariants.edit' , ['cpVariants'=>$cpVariants , 'customProducts'=>$customProducts]);
     }
@@ -46,11 +55,22 @@ class CustomProductVariantController extends Controller
        $cpv->description = $request->description;
        $cpv->custom_product_id = $request->custom_product_id;
        $cpv->min_amount_unit = $request->min_amount_unit;
+       $cpv->duration = $request->duration;
+
+       if(isset($request->image)){
+            Storage::disk('public')->delete($cpv->image);
+            $name = $request->image->getClientOriginalName();
+            $fullName = time()."_".$name;
+            $path = $request->file('image')->storeAs('images', $fullName, 'public');
+            $cpv->image = $path;
+        }
+
        $cpv->save();
        return to_route('cpv.list');
     }
     public function delete(custom_product_variant $cpVariants)
     {
+        Storage::disk('public')->delete($cpVariants->image);
         $cpVariants->delete();
        return to_route('cpv.list');
     }

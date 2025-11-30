@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\custom_product;
+use App\Models\career;
 use Illuminate\Support\Facades\Storage;
 
 class CustomProductController extends Controller
 {
-    public function create()
+    public function create(career $career)
     {
-        return view('admin.customProducts.create');
+        // dd($career->id);
+        return view('admin.customProducts.create' , ['career'=>$career]);
     }
     public function store(Request $request)
     {
@@ -24,9 +26,8 @@ class CustomProductController extends Controller
         custom_product::create([
             'title'=>$request->title ,
             'description' => $request->description ,
-            'duration' => $request->duration ,
+            'career_id' => $request->id ,
             'material_limit' => $request->material_limit ,
-            'min_amount_unit' => $request->min_amount_unit ,
             'image'=>$path
         ]);
         return to_route('cp.list');
@@ -34,6 +35,8 @@ class CustomProductController extends Controller
     public function index()
     {
         $allCustomProduct = custom_product::all();
+        // $allCustomProduct = custom_product::with('custom_product_materials')->get();
+        // return $allCustomProduct;
         return view('admin.customProducts.index' , ['allCustomProduct'=>$allCustomProduct]);
     }
     public function show(custom_product $customProduct)
@@ -46,26 +49,33 @@ class CustomProductController extends Controller
     }
     public function update(Request $request)
     {
-        $name = $request->customProductImage->getClientOriginalName();
-        $fullName = time()."_".$name;
-        $path = $request->file('customProductImage')->storeAs('images', $fullName, 'public');
-
         $customProduct =  custom_product::find($request->id);
         $customProduct->title = $request->title;
         $customProduct->description = $request->description;
-        $customProduct->duration = $request->duration;
         $customProduct->material_limit = $request->material_limit;
-        $customProduct->min_amount_unit = $request->min_amount_unit;
-        Storage::disk('public')->delete($customProduct->image);
-        $customProduct->image = $path;
+        if(isset($request->customProductImage)){
+            Storage::disk('public')->delete($customProduct->image);
+            $name = $request->customProductImage->getClientOriginalName();
+            $fullName = time()."_".$name;
+            $path = $request->file('customProductImage')->storeAs('images', $fullName, 'public');
+            $customProduct->image = $path;
+        }
         $customProduct->save();
 
         return to_route('cp.list');
     }
     public function delete(custom_product $customProduct)
     {
-        $customProduct->delete();
+        $customProductWithVariants = custom_Product::with('custom_product_variants')->get();
+        $customProductWithMaterials = custom_Product::with('custom_product_materials')->get();
+        foreach($customProductWithVariants as $variants){
+            $variants->delete();
+        }
+        foreach($customProductWithMaterials as $materials){
+            $materials->delete();
+        }
         Storage::disk('public')->delete($customProduct->image);
+        $customProduct->delete();
 
         return to_route('cp.list');
 
