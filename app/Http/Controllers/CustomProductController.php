@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\custom_product;
+use App\Models\career;
 use Illuminate\Support\Facades\Storage;
 
 class CustomProductController extends Controller
 {
-    public function create()
+    public function create(career $career)
     {
-        return view('admin.customProducts.create');
+        // dd($career->id);
+        return view('admin.customProducts.create' , ['career'=>$career]);
     }
     public function store(Request $request)
     {
@@ -24,6 +26,7 @@ class CustomProductController extends Controller
         custom_product::create([
             'title'=>$request->title ,
             'description' => $request->description ,
+            'career_id' => $request->id ,
             'material_limit' => $request->material_limit ,
             'image'=>$path
         ]);

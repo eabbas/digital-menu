@@ -37,6 +37,12 @@
                                 <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
                                     <a href="{{ route('cp.delete', [$customProduct])}}" class="ml-4 text-sky-700">حذف</a>
                                 </div>
+                                <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
+                                    <a href="{{ route('cpv.create')}}" class="ml-4 text-sky-700">ایجاد نوع محصول</a>
+                                </div>
+                                <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
+                                    <a href="{{ route('cpv.list')}}" class="ml-4 text-sky-700">لیست انواع محصولات</a>
+                                </div>
                             </div>
                         </div>
                      

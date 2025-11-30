@@ -29,4 +29,8 @@ class career extends Model
   public function menu_categories(){
     return $this->hasMany(menu_category::class)->chaperone();
   }
+  public function custom_product()
+  {
+    return $this->hasMany(custom_product::class)->chaperone();
+  }
 }

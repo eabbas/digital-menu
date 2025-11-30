@@ -17,19 +17,18 @@ class CustomProductVariantController extends Controller
     }
     public function store(Request $request)
     {
-        
-        if(isset($request->image)){
+        // dd($request->all());
+   
                 $name = $request->image->getClientOriginalName();
                 $fullName = time()."_".$name;
                 $path = $request->file('image')->storeAs('images', $fullName, 'public');
-                custom_product_variant::create(['image' => $path]);
-            }
             custom_product_variant::create([
                 'title'=>$request->title ,
                 'description' => $request->description ,
                 'custom_product_id' => $request->custom_product_id ,
                 'duration' => $request->duration ,
                 'min_amount_unit' => $request->min_amount_unit ,
+                'image' => $path
             ]);
             return to_route('cpv.list');
         }

@@ -45,6 +45,12 @@
                                 <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
                                     <a href="{{ route('cpv.delete', [$cpVariant])}}" class="ml-4 text-sky-700">حذف</a>
                                 </div>
+                                <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
+                                    <a href="{{ route('custmCategory.create')}}" class="ml-4 text-sky-700">ایجاد دسته</a>
+                                </div>
+                                <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
+                                    <a href="{{ route('custmCategory.list')}}" class="ml-4 text-sky-700">لیست دسته</a>
+                                </div>
                             </div>
                         </div>
                      

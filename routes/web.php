@@ -309,7 +309,7 @@ Route::group([
     'controller' => CustomProductController::class,
     'as' => 'cp.'
 ], function () {
-    Route::get('/create', 'create')->name('create');
+    Route::get('/create/{career}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::get('/customProductList', 'index')->name('list');
     Route::get('/show/{customProduct}', 'show')->name('single');

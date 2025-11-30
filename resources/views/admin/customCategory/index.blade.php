@@ -32,6 +32,12 @@
                                 <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
                                     <a href="{{ route('custmCategory.delete', [$customCategory])}}" class="ml-4 text-sky-700">حذف</a>
                                 </div>
+                                <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
+                                    <a href="{{ route('cpm.create')}}" class="ml-4 text-sky-700">ایجاد آیتم</a>
+                                </div>
+                                <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
+                                    <a href="{{ route('cpm.list')}}" class="ml-4 text-sky-700">لیست آیتم ها</a>
+                                </div>
                             </div>
                         </div>
                      
