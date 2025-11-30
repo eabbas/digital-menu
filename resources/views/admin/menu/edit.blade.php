@@ -88,17 +88,17 @@
                         name="qr_num" value="{{ count($menu->qr_codes) }}">
                 </div>
                 <div class="w-full flex flex-col gap-3">
-                    <?php $i = 1; ?>
+                    <?php $k = 1; ?>
                     @foreach($menu->qr_codes as $qr_code)
                         @if(!$qr_code->is_main)
                         <div class="w-full flex flex-row items-center justify-between">
                             <div class="flex flex-row items-center gap-3">
-                                {{ $i }}
+                                {{ $k }}
                                 <img class="size-20" src="{{ asset('storage/'.$qr_code->qr_path) }}" alt="QRCode">
                             </div>
                             <a href="{{ route('qr.delete', [$qr_code]) }}" class="p-3 bg-rose-500 rounded-lg text-white font-semibold text-sm cursor-pointer" onclick="remove_qr(this)">حذف</a>
                         </div>
-                        <?php $i++; ?>
+                        <?php $k++; ?>
                         @endif
                     @endforeach
                 </div>
