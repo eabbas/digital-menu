@@ -29,6 +29,11 @@
                 <option value="{{ $customProduct->id }}">{{ $customProduct->title }}</option>
             @endforeach
         </select>
+        <select name="custom_category_id">
+            @foreach($customCategories as $customCategory)
+                <option value="{{ $customCategory->id }}">{{ $customCategory->title }}</option>
+            @endforeach
+        </select>
         <button>ثبت</button>
     </form>
 @endsection
