@@ -21,6 +21,10 @@ use App\Http\Controllers\MenuCategoryController;
 use App\Http\Controllers\CustomProductController;
 use App\Http\Controllers\MenuItemController;
 use App\Http\Controllers\CustomProductVariantController;
+use App\Http\Controllers\SocialMediaController;
+use App\Http\Controllers\SiteLinkController;
+use App\Http\Controllers\SocialAddressController;
+use App\Http\Controllers\CoversController;
 use App\Http\Controllers\CustomProductMaterialController;
 use App\Http\Controllers\CustomCategoryController;
 use App\Models\career;
@@ -351,6 +355,58 @@ Route::group([
     Route::get('/delete/{cpVariants}', 'delete')->name('delete');
 });
 
+/////socialMedia
+Route::group([
+    'prefix' => 'socialMedia',
+    'controller' => SocialMediaController::class,
+    'as' => 'socialMedia.'
+], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/socialMedias', 'index')->name('list');
+    Route::get('/edit/{socialMedia}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{socialMedia}', 'delete')->name('delete');
+});
+////siteLink
+Route::group([
+    'prefix' => 'siteLink',
+    'controller' => SiteLinkController::class,
+    'as' => 'siteLink.'
+], function () {
+    Route::get('/create/{covers?}', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/medias', 'index')->name('list');
+    Route::get('/edit/{site_link}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{site_link}', 'delete')->name('delete');
+});
+/////socialAddress
+Route::group([
+    'prefix' => 'socialAddress',
+    'controller' => SocialAddressController::class,
+    'as' => 'socialAddress.'
+], function () {
+    Route::get('/create/{covers?}', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/socialAddress', 'index')->name('list');
+    Route::get('/edit/{social_address}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{social_address}', 'delete')->name('delete');
+});
+//////covers
+Route::group([
+    'prefix' => 'covers',
+    'controller' => CoversController::class,
+    'as' => 'covers.'
+], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/covers', 'index')->name('list');
+    Route::get('/edit/{covers}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{covers}', 'delete')->name('delete');
+});
 
 Route::group([
     'prefix' => 'customProductMaterial',
