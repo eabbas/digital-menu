@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\custom_product;
 use App\Models\custom_product_material;
+use App\Models\customCategory;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -13,11 +14,12 @@ class CustomProductMaterialController extends Controller
     public function create()
     {
         $customProducts = custom_product::all();
-        return view('admin.customProductMaterials.create' , ['customProducts'=>$customProducts]);
+        $customCategories = customCategory::all();
+        return view('admin.customProductMaterials.create' , ['customProducts'=>$customProducts , 'customCategories'=>$customCategories]);
     }
     public function store(Request $request)
     {
-        // dd($request->required);
+        // dd($request->custom_category_id);
         $name = $request->image->getClientOriginalName();
         $fullName = time()."_".$name;
         $path = $request->file('image')->storeAs('images', $fullName, 'public');
@@ -32,6 +34,7 @@ class CustomProductMaterialController extends Controller
                 'category_limit' => $request->category_limit , 
                 'max_unit_amount' => $request->max_unit_amount , 
                 'custom_product_id' => $request->custom_product_id ,
+                'category_id' => $request->custom_category_id ,
                 'image' => $path
             ]);
         }else{
@@ -45,6 +48,7 @@ class CustomProductMaterialController extends Controller
                'category_limit' => $request->category_limit , 
                'max_unit_amount' => $request->max_unit_amount , 
                'custom_product_id' => $request->custom_product_id ,
+               'category_id' => $request->custom_category_id ,
                'image' => $path
             ]);
         }
@@ -52,17 +56,20 @@ class CustomProductMaterialController extends Controller
     }
     public function index()
     {
-        $cpmWithCustomproduct = custom_product_material::with('custom_product')->get();
+        // $cpmWithCustomproduct = custom_product_material::with('custom_product')->get();
+        $cpmWithCustomproduct = custom_product_material::with('customCategory')->get();
        return view('admin.customProductMaterials.index', ['cpmWithCustomproduct'=>$cpmWithCustomproduct]);
     }
     public function show(custom_product_material $cpm)
     {
-        return view('admin.customProductMaterials.single' , ['cpm'=>$cpm]);
+        $cpmWithCustomproduct = custom_product_material::with('customCategory')->get();
+        return view('admin.customProductMaterials.single' , ['cpm'=>$cpm , 'cpmWithCustomproduct'=>$cpmWithCustomproduct]);
     }
     public function edit(custom_product_material $cpm)
     {
         $customProducts  = custom_product::all();
-        return view('admin.customProductMaterials.edit' , ['cpm'=>$cpm , 'customProducts'=>$customProducts]);
+        $customCategories = customCategory::all();
+        return view('admin.customProductMaterials.edit' , ['cpm'=>$cpm , 'customProducts'=>$customProducts , 'customCategories'=>$customCategories]);
     }
     public function update(Request $request)
     {
@@ -74,12 +81,11 @@ class CustomProductMaterialController extends Controller
         $customProductMaterial->title = $request->title;
         $customProductMaterial->description = $request->description;
         $customProductMaterial->price_per_unit = $request->price_per_unit;
-        $customProductMaterial->category_name = $request->category_name;
         $customProductMaterial->required = $request->required;
         $customProductMaterial->order = $request->order;
-        $customProductMaterial->category_limit = $request->category_limit;
         $customProductMaterial->max_unit_amount = $request->max_unit_amount;
         $customProductMaterial->custom_product_id = $request->custom_product_id;
+        $customProductMaterial->category_id = $request->custom_category_id;
         Storage::disk('public')->delete($customProductMaterial->image);
         $customProductMaterial->image = $path;
         $customProductMaterial->save();

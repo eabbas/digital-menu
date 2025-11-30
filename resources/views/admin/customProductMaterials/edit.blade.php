@@ -80,6 +80,11 @@
                         <option value="{{ $customProduct->id }}" @if($customProduct->id == $cpm->custom_product_id) {{ "selected" }} @endif>{{ $customProduct->title }}</option>
                     @endforeach
                 </select>
+                <select name="custom_category_id">
+                    @foreach($customCategories as $customCategory)
+                        <option value="{{ $customCategory->id }}" @if($customCategory->id == $cpm->category_id) {{ "selected" }} @endif>{{ $customCategory->title }}</option>
+                    @endforeach
+                </select>
                 <div class="text-center md:px-12 mt-5 lg:mt-10">
                     <button
                         class="w-5/12 max-sm:bg-blue-500 max-sm:text-white px-5 py-2 lg:px-10 lg:py-3 rounded-[8px] transition-all duration-250 bg-blue-400 text-white hover:bg-blue-600 hover:border-gray-400 hover:text-white text-gray-500 cursor-pointer">ویرایش</button>
