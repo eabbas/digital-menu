@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('menu.update') }}" method="post" enctype='multipart/form-data'>
+    <form action="{{ route('menuItem.update') }}" method="post" enctype='multipart/form-data'>
         @csrf
         <div class="min-h-screen flex items-start justify-center">
             <div class="bg-white rounded-2xl shadow-md p-3 w-full md:w-9/12">
@@ -114,9 +114,7 @@
                                             <label class="w-32 text-sm mb-1 mt-2.5 flex">قیمت واحد</label>
                                             <div
                                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
-                                                    type="number" name='ingredients[{{ $num }}][price_per_unit]'
-                                                    placeholder="قیمت واحد " value="{{ $ingredient->price }}">
+                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="number" name='ingredients[{{ $num }}][price_per_unit]' placeholder="قیمت واحد " value="{{ $ingredient->price_per_unit }}">
                                             </div>
                                         </div>
                                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -132,9 +130,7 @@
                                             <label class="w-32 text-sm mb-1 mt-2.5 flex">بیشترین حد مجاز</label>
                                             <div
                                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
-                                                    type="number" name='ingredients[${num}][max_unit_amount]'
-                                                    placeholder="x واحد">
+                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="number" name='ingredients[{{ $num }}][max_unit_amount]' placeholder="x واحد" value="{{ $ingredient->max_unit_amount }}">
                                             </div>
                                         </div>
                                     </div>

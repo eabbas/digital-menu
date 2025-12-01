@@ -8,6 +8,7 @@ class qr_code extends Model
 {
     protected $fillable=[
         'qr_path',
+        'menu_id',
         'career_id',
         'slug'
     ];

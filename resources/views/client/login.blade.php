@@ -7,13 +7,15 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
     <title>ورود</title>
-    <style>
-
+        <style>
+        input:focus{
+            color:#2196F3;
+        }
     </style>
 </head>
 
 <body>
-    <div class="w-full h-[100vh] flex flex-col justify-start items-center md:flex-row-reverse">
+    <div class="w-full h-dvh flex flex-col justify-start items-center md:flex-row-reverse">
         <div class="flex justify-center max-sm:h-30 max-md:h-35 md:h-dvh md:w-4/12 lg:w-5/12 xl:w-6/12 bg-[#056EE9]">
             <div class="flex flex-col my-12 items-center justify-center">
                 <div class="w-full flex flex-row justify-center items-center">
@@ -32,10 +34,10 @@
                         method="post">
                         @csrf
                         <input type="number"
-                            class="focus:border focus:border-blue-400 p-2 md:p-[9px] mb-1 rounded-[7px] border border-[#DBDFE9] outline-none w-full"
+                            class="focus:border focus:border-blue-400 p-2 md:p-[9px] mb-1 rounded-[7px] border border-[#DBDFE9] focus:outline-none w-full"
                             name="phoneNumber" placeholder="شماره تلفن">
                         <input type="password"
-                            class="focus:border focus:border-blue-400 p-2 md:p-[9px] mb-1 rounded-[7px] border border-[#DBDFE9] outline-none w-full"
+                            class="focus:border focus:border-blue-400 p-2 md:p-[9px] mb-1 rounded-[7px] border border-[#DBDFE9] focus:outline-none w-full"
                             name="password" placeholder="کلمه عبور">
                         <div class="w-full text-center">
                             <a href="#" class="text-[#1B84FF] inline-block max-md:my-1 my-4 max-md:text-sm">فراموشی رمز عبور</a>

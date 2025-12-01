@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('menu.store') }}" method="post" enctype='multipart/form-data'>
+    <form action="{{ route('menuItem.store') }}" method="post" enctype='multipart/form-data'>
         @csrf
         <div class="min-h-screen flex items-start justify-center">
             <div class="bg-white rounded-2xl shadow-md p-3 w-full md:w-9/12">

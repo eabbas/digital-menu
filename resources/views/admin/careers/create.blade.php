@@ -39,23 +39,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                <label class="w-30 text-sm mb-1 mt-2.5 flex">تعداد QR کد</label>
-                                <div
-                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="number"
-                                        name='qrcode_count' min="1" value="1" class="w-full px-3 py-1 md:px-2 outline-none text-gray-500">
-                                </div>
-                            </div>
-                            <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                <label class="w-30 text-sm mb-1 mt-2.5 flex">توضیحات</label>
-                                <div
-                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='description' placeholder="توضیحات کسب وکار"
-                                        class="w-full px-3 py-1 md:px-2 outline-none text-gray-500">
-                                </div>
-                            </div>
+
                             <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">بنر کسب و کار</label>
 
@@ -90,7 +74,7 @@
                                         name='address' placeholder=" ادرس کسب وکار خود را وارد کنید">
                                 </div>
                             </div>
-                            
+
                             <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">ایمیل</label>
                                 <div
@@ -99,7 +83,17 @@
                                         name='email' placeholder="email@example.com">
                                 </div>
                             </div>
-                            
+
+                            <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">توضیحات</label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <textarea rows="5" class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                        name='description' placeholder="توضیحات کسب وکار"
+                                        class="w-full px-3 py-1 md:px-2 outline-none text-gray-500"></textarea>
+                                </div>
+                            </div>
+
                             <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">اینستاگرام</label>
                                 <div
@@ -128,7 +122,7 @@
                         <div class="w-full text-left ">
                             <button type="submit"
                                 class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium">
-                                ارسال اطلاعات
+                               ثبت
                             </button>
                         </div>
                     </div>

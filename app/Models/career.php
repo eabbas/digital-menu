@@ -30,11 +30,6 @@ class career extends Model
     return $this->belongsTo(careerCategory::class);
   }
 
-  public function menu_categories()
-  {
-    return $this->hasMany(menu_category::class)->chaperone();
-  }
-
   public function qr_codes(){
     return $this->hasMany(qr_code::class);
   }

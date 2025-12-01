@@ -4,17 +4,8 @@
 @endsection
 @section('content')
   <div class="w-full">
-            <div class="pb-5 w-full">
-                {{-- <h1 class="text-xl text-center lg:text-start">اکانت من</h1>
-                <div
-                    class="flex flex-row justify-center lg:justify-start items-center gap-2 text-[#99A1B7] text-[11px] lg:text-sm">
-                    <a href="{{ route('home') }}" class="p-2">خانه</a>
-                    <span>/</span>
-                    <a href="{{ route('user.profile', [$user]) }}">اکانت من</a>
-                </div> --}}
-            </div>
-
             <div class="flex flex-col border-none rounded-[7px]">
+              
                 <div class="block lg:flex flex-row justify-between gap-8">
                     <div class="flex flex-col xm:flex-row lg:flex-row gap-5 py-3">
                         @if (!$item->image)
@@ -30,22 +21,19 @@
                                     <a class="p-2.5 text-gary-600 bg-gray-100 rounded-lg hover:bg-gray-200" href="#">{{ $item->title }} خودتو بساز</a>
                                 @endif
                             </div>
-                           
-                           
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="pt-3 mt-4 lg:mt-8">
-
+                <div class="w-full flex flex-row justify-end pb-3">
+                    <a href="{{ route('menuItem.items', [$item->menu_category->id]) }}" class="px-5 py-1 rounded-md bg-sky-500 hover:bg-sky-600 text-sm text-white">بازگشت</a>
+                </div>
                 <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5">
                     <h1 class="lg:text-xl mt-5 font-bold mx-2">
                         جزئیات {{ $item->title }} 
                     </h1>
-
-                    <div class="w-full h-px bg-gray-200 my-5 "></div>
                     <div class="flex gap-7 sm:hidden">
                         <div class="flex w-full flex-col">
                             <label class="p-2.5 text-gray-400">توضیحات</label>

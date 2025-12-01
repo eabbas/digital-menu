@@ -11,6 +11,19 @@
 .yekan {
     font-family: 'Yekan';
 }
+/* 
+input[class*="border"],
+input, select, textarea {
+    border: 1px solid #DBDFE9 !important;
+    border-radius: 7px !important;
+    padding: 8px !important;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #3B82F6 !important;  /* یا #1D4ED8 برای آبی تیره‌تر 
+    outline: none !important;
+    /* box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3) !important;
+} */
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

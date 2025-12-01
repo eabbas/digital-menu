@@ -16,9 +16,12 @@ class MenuItemController extends Controller
     }
 
     public function store(Request $request){
-        $name = $request->image->getClientOriginalName();
-        $fullName = time().'_'.$name;
-        $path = $request->file('image')->storeAs('images', $fullName, 'public');
+        $path = null;
+        if (isset($request->image)) {
+            $name = $request->image->getClientOriginalName();
+            $fullName = time().'_'.$name;
+            $path = $request->file('image')->storeAs('images', $fullName, 'public');
+        }
         $parent_id = 0;
         $customizable = 0;
         $discount = 0;
@@ -61,7 +64,7 @@ class MenuItemController extends Controller
                 ]);
             }
         }
-        return to_route('menu.items', [$request->menu_categories_id]);
+        return to_route('menuItem.items', [$request->menu_categories_id]);
     }
 
     public function items(menu_category $menu_category){
@@ -79,15 +82,17 @@ class MenuItemController extends Controller
 
     public function update(Request $request){
         $item = menu_item::find($request->id);
+        // dd($request->all(), $item->ingredients);
         $item->title = $request->title;
         $item->description = $request->description;
-        $item->customizable = $request->customizable;
+        $item->customizable = $request->customizable ? $request->customizable : 0;
         $item->price = $request->price;
+        $imagePath = null;
         if (isset($request->discount)) {
             $item->discount = $request->discount;
         }
         if (isset($request->image)) {
-            Storage::disk('public')->delete($item->image);
+            $item->image && Storage::disk('public')->delete($item->image);
             $name = $request->image->getClientOriginalName();
             $fullName = time().'_'.$name;
             $path = $request->file('image')->storeAs('images', $fullName, 'public');
@@ -117,10 +122,11 @@ class MenuItemController extends Controller
             }
         }
         $item->save();
-        return to_route('menu.single', [$item->id]);
+        return to_route('menuItem.single', [$item->id]);
     }
 
     public function single(menu_item $menu_item){
+        // dd($menu_item);
         return view('admin.menu.item.single', ['item'=>$menu_item]);
     }
 
@@ -132,6 +138,6 @@ class MenuItemController extends Controller
             }
         }
         $menu_item->delete();
-        return to_route('menu.items', [$id]);
+        return to_route('menuItem.items', [$id]);
     }
 }

@@ -10,10 +10,10 @@ class menu_category extends Model
         'title',
         'description',
         'image',
-        'career_id'
+        'menu_id'
     ];
-    public function career(){
-        return $this->belongsTo(career::class);
+    public function menu(){
+        return $this->belongsTo(menu::class);
     }
     public function menu_items(){
         return $this->hasMany(menu_item::class);

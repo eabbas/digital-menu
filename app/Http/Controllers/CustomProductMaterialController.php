@@ -27,7 +27,7 @@ class CustomProductMaterialController extends Controller
                 'description' => $request->description ,
                 'price_per_unit' => $request->price_per_unit ,
                 'category_name' => $request->category_name , 
-                'order' => $request->order , 
+                'order' => $request->order, 
                 'required' => $request->required , 
                 'category_limit' => $request->category_limit , 
                 'max_unit_amount' => $request->max_unit_amount , 
