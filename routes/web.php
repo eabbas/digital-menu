@@ -89,35 +89,27 @@ Route::group([
     Route::get('/delete/{careerCategory}' , 'delete')->name('delete');
 });
 
-// Route::group([
-//     'prefix' => 'menus',
-//     'controller' => MenuController::class,
-//     'as' => 'menu.',
-//     'middleware' => [UserMiddleware::class]
-// ], function () {
-//     Route::get('/{career}', 'index')->name('list')->withoutMiddleware([UserMiddleware::class]);
-//     Route::get('/create/{career}', 'create')->name('create');
-//     Route::post('/store', 'store')->name('store');
-//     Route::get('/edit/{menu}', 'edit')->name('edit');
-//     Route::post('/update', 'update')->name('update');
-//     Route::get('/delete/{menu}', 'delete')->name('delete');
-//     Route::get('/qr_codes/{menu}', 'qr_codes')->name('qr_codes')->withoutMiddleware([UserMiddleware::class]);
-// });
+
+
+
+
+
+
 
 Route::group([
     'prefix'=>'menu',
-    'controller'=>MenuItemController::class,
+    'controller'=>MenuController::class,
     'middleware'=>[UserMiddleware::class],
     'as'=>'menu.'
 ], function(){
-    Route::get('/create/{menu_category}', 'create')->name('create');
+    Route::get('/create/{career}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/addVariants/{menu_item}', 'variants')->name('variants');
-    Route::get('/items/{menu_category}', 'items')->name('items');
-    Route::get('/edit/{menu_item}', 'edit')->name('edit');
+    Route::get('/show/{menu}', 'single')->name('single');
+    Route::get('/qrcodes/{menu}', 'qrcodes')->name('qrcodes');
+    Route::get('/edit/{menu}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
-    Route::get('/show/{menu_item}', 'single')->name('single');
-    Route::get('/delete/{menu_item}', 'delete')->name('delete');
+    Route::get('/delete/{menu}', 'delete')->name('delete');
+    Route::get('/showMenu/{menu}', 'showMenu')->name('showMenu');
 });
 
 Route::group([
@@ -126,14 +118,40 @@ Route::group([
     'middleware'=>[UserMiddleware::class],
     'as'=>'menuCat.'
 ], function(){
-    Route::get('/create/{career}', 'create')->name('create');
+    Route::get('/create/{menu}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/list/{career}', 'index')->name('list');
+    Route::get('/list/{menu}', 'index')->name('list');
     Route::get('/edit/{menu_category}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{menu_category}', 'delete')->name('delete');
-    Route::get('/{career}', 'menu')->name('menu');
+    Route::get('/{menu}', 'menu')->name('menu');
 });
+
+Route::group([
+    'prefix' => 'menuItem',
+    'controller' => MenuItemController::class,
+    'as' => 'menuItem.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    // Route::get('/{menu_category}', 'index')->name('list');
+    Route::get('/create/{menu_category}', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/edit/{menu_item}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{menu_item}', 'delete')->name('delete');
+    Route::get('/qr_codes/{menu_item}', 'qr_codes')->name('qr_codes');
+    Route::get('/items/{menu_category}', 'items')->name('items');
+    Route::get('/variants/{menu_item}', 'variants')->name('variants');
+    Route::get('/{menu_item}', 'single')->name('single');
+});
+
+
+
+
+
+
+
+
 
 //category.......................................................................
 Route::get('category/create', [CategoryController::class, 'create']);

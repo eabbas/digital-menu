@@ -43,9 +43,9 @@
                     <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden">
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('career.careers') }}" class=" text-white py-1">کسب و
-                                کار های
-                                من</a>
+                            <a href="{{ route('career.careers') }}" class=" text-white py-1">
+                                لیست کسب و کار های من
+                            </a>
                         </li>
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
@@ -319,8 +319,9 @@
                                 </li>
                                 <li>
                                     <a href="{{ route('career.careers') }}"
-                                        class="block text-gray-700 py-2 text-md">کسب و کار های
-                                        من</a>
+                                        class="block text-gray-700 py-2 text-md">
+                                        لیست کسب و کار های من
+                                    </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('career.create') }}"

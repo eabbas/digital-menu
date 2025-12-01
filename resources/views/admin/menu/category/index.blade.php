@@ -1,18 +1,19 @@
 @extends('admin.app.panel')
 @section('title')
-    همه دسته های منوی کسب و کار {{ $categories[0]->career->title }}
+    همه دسته های منوی    {{ $menu->title }}
 @endsection
 @section('content')
+{{-- @dd($menu->menu_categories) --}}
     <div class="flex flex-col w-full mb-3">
         <div class="flex flex-row justify-between items-center my-4">
             <div>
-                <h1 class="text-xm font-bold">  همه دسته های منوی کسب و کار {{ $categories[0]->career->title }} </h1>
+                <h1 class="text-xm font-bold">  همه دسته های منوی {{ $menu->title }} </h1>
             </div>
         </div>
         <div class="flex flex-col p-6 gap-3 shadow__profaill__list_products rounded-[7px]">
             <div class="flex flex-rwo justify-end">
                 <div class="cursor-pointer w-38 h-10 rounded-[7px] flex justify-center items-center bg-blue-500 text-white">
-                    <a href="{{ route('menuCat.create', [$categories[0]->career]) }}">افزودن دسته جدید</a>
+                    <a href="{{ route('menuCat.create', [$menu]) }}">افزودن دسته جدید</a>
                 </div>
             </div>
             <div class="p-3">
@@ -27,7 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($categories as $category)
+                        @foreach ($menu->menu_categories as $category)
                             <tr>
                                 <td class="flex flex-row gap-4 items-center">
                                     {{-- <input class="size-5 ml-2 bg-gray-300" type="checkbox"> --}}
@@ -52,13 +53,13 @@
                                         class="absolute w-full top-full right-0 z-555 opacity-0 invisible -translate-y-5 transition-all duration-200">
                                         <ul class="text-sm bg-gray-200 mt-1 rounded-sm p-1">
                                             <li>
-                                                <a href="{{ route('menu.create', [$category->id]) }}"
+                                                <a href="{{ route('menuItem.create', [$category->id]) }}"
                                                     class="inline-block w-full hover:bg-gray-300 p-1 rounded-sm text-gray-700">ایجاد
-                                                    آیتم منو</a>
+                                                     منو</a>
                                             </li>
                                             @if (count($category->menu_items))
                                                 <li>
-                                                    <a href="{{ route('menu.items', [$category->id]) }}"
+                                                    <a href="{{ route('menuItem.items', [$category->id]) }}"
                                                         class="inline-block w-full hover:bg-gray-300 p-1 rounded-sm text-gray-700">آیتم
                                                         ها</a>
                                                 </li>

@@ -3,23 +3,23 @@
     @section('content')
     <div class="2xl:container mx-auto w-full">
         <div class="w-full pt-16">
-            @if(!$career->banner)
-            <img src="{{ asset('storage/images/banner01.jpg') }}" class="w-11/12 h-[120px] sm:h-[180px] lg:h-[260px] mx-auto rounded-md object-cover" alt="career banner">
+            @if(!$menu->banner)
+            <img src="{{ asset('storage/images/banner01.jpg') }}" class="w-11/12 h-[120px] sm:h-[180px] lg:h-[260px] mx-auto rounded-md object-cover" alt="menu banner">
             @else
-            <img src="{{ asset('storage/'.$career->banner) }}" class="w-11/12 h-[120px] sm:h-[180px] lg:h-[260px] mx-auto rounded-md object-cover" alt="career banner">
+            <img src="{{ asset('storage/'.$menu->banner) }}" class="w-11/12 h-[120px] sm:h-[180px] lg:h-[260px] mx-auto rounded-md object-cover" alt="menu banner">
             @endif
         </div>
         <div class="w-full py-5 mt-5 rounded-[10px]">
             <div class="flex flex-row-reverse justify-between">
                 <div class="flex flex-row items-center gap-1">
-                    <a href="{{ route('career.qr_codes', [$career->id]) }}" class="bg-[#03A9F4] text-white border border-gray-300 rounded-md p-2 text-sm">مشاهده QR کد ها</a>
+                    <a href="{{ route('menu.qrcodes', [$menu->id]) }}" class="bg-[#03A9F4] text-white border border-gray-300 rounded-md p-2 text-sm">مشاهده QR کد ها</a>
                 </div>
                 <h1 class="font-bold py-5 text-gray-500 lg:text-2xl md:text-xl ">
-                    لیست منوی  {{ $career->title }}
+                    لیست منوی  {{ $menu->title }}
                 </h1>
             </div>
             <div class="w-full flex flex-col gap-3 p-3 border border-gray-300 rounded-lg">
-                @foreach($career->menu_categories as $category)
+                @foreach($menu->menu_categories as $category)
    
                 <div class="w-full lg:w-10/12 m-auto">
                     <div class="flex flex-row justify-between items-center">
@@ -40,7 +40,7 @@
                                 <div class="shrink-0 text-xs lg:text-base snap-center py-1 text-gray-600 flex flex-row justify-center items-center border border-gray-400 rounded-[7px] p-3">{{ $item->price }}</div>
                                 <div class="shrink-0 text-xs lg:text-base snap-center py-1 text-gray-600 flex flex-row justify-center items-center border border-gray-400 rounded-[7px] p-3">{{ $item->description }}</div>
                             </div>
-                            <a href="{{ route('menu.edit', [$item->id]) }}" class="bg-[#03A9F4] text-white border border-gray-300 rounded-md p-2 text-sm">ویرایش منو</a>
+                            <a href="{{ route('menuItem.edit', [$item->id]) }}" class="bg-[#03A9F4] text-white border border-gray-300 rounded-md p-2 text-sm">ویرایش منو</a>
                         </div>
                         @endforeach
                     </div>

@@ -10,7 +10,7 @@
                 <h2 class="text-lg font-bold text-gray-800">اطلاعات کسب و کار</h2>
             </div>
             <div class="flex flex-col gap-5">
-                <div class="w-2/3 mx-auto bg-gray-100 shadow-md rounded">
+                <div class="w-full mx-auto bg-gray-100 shadow-md rounded">
                     <div class="w-full flex flex-row lg:grid lg:grid-cols-5 items-center divide-x divide-[#f1f1f4]">
                         <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
                             <span class="block w-20 lg:w-full">عنوان</span>
@@ -58,16 +58,6 @@
                                             <div
                                                 class="absolute w-full top-full right-0 z-555 opacity-0 invisible -translate-y-5 transition-all duration-200">
                                                 <ul class="text-sm bg-gray-200 mt-1 rounded-sm p-1">
-                                                    @if (count($career->menu_categories))
-                                                    <li>
-                                                        <a href="{{ route('menuCat.list', [$career]) }}"
-                                                            class="inline-block w-full hover:bg-gray-300 p-1 rounded-sm text-gray-700">دسته منو</a>
-                                                    </li>
-                                                    @endif
-                                                    <li>
-                                                        <a href="{{ route('menuCat.create', [$career]) }}"
-                                                            class="inline-block w-full hover:bg-gray-300 p-1 rounded-sm text-gray-700">ایجاد دسته منو</a>
-                                                    </li>
                                                     <li>
                                                         <a href="{{ route('career.single', [$career]) }}"
                                                             class="inline-block w-full hover:bg-gray-300 p-1 rounded-sm text-gray-700">مشاهده</a>
@@ -83,13 +73,15 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        {{-- اینجا یک باگ است --}}
-                                        @if (count($career->menu_categories))
+                                        @if (isset($career->menu))
                                         <div class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                            <a href="{{ route('menuCat.menu', [$career]) }}" class="text-sky-700">مشاهده منو</a>
+                                            <a href="{{ route('menu.single', [$career->menu]) }}" class="text-sky-700">مشاهده منو</a>
+                                        </div>
+                                        @else
+                                        <div class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
+                                            <a href="{{ route('menu.create', [$career]) }}" class="text-sky-700">ایجاد منو</a>
                                         </div>
                                         @endif
-                                        {{-- تمام --}}
                                     </div>
                                 </div>
                             @else

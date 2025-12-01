@@ -8,23 +8,12 @@
         <div class="flex flex-row justify-between items-center my-4">
             <div>
                 <h1 class="text-xm font-bold"> لیست آیتم های منو {{ $category->title }} </h1>
-                {{-- <span class="text-sm text-gray-300">خانه _ تجارت - کاتالوگ</span> --}}
             </div>
-            {{-- <div class="flex flex-row-reverse gap-2">
-                <div class="cursor-pointer w-15 flex justify-center items-center rounded-lg h-9  bg-blue-500 text-white">
-                    <a href="" class="text-sm">ساختن</a>
-                </div>
-                <div class="cursor-pointer w-15 flex justify-center items-center rounded-lg h-9  bg-gray-300">
-                    <a href="#" class="text-sm">
-                        فیلتر
-                    </a>
-                </div>
-            </div> --}}
         </div>
         <div class="flex flex-col p-6 gap-3 shadow__profaill__list_products rounded-[7px]">
             <div class="flex flex-row justify-end">
                 <div class="cursor-pointer w-38 h-10 rounded-[7px] flex justify-center items-center bg-blue-500 text-white">
-                    <a href="{{ route('menu.create', [$category->id]) }}">افزودن آیتم جدید</a>
+                    <a href="{{ route('menuItem.create', [$category->id]) }}">افزودن آیتم جدید</a>
                 </div>
             </div>
             <div class="p-3">
@@ -43,16 +32,13 @@
                         @foreach ($category->menu_items as $item)
                         <tr>
                             <td class="flex flex-row gap-4 items-center">
-                                {{-- <input class="size-5 ml-2 bg-gray-300" type="checkbox"> --}}
                                 <div class="flex gap-4 flex-row-reverse items-center">
                                     <img class="size-11 rounded-[7px]" src="{{ asset('storage/'.$item->image) }}" alt="">
                                 </div>
                             </td>
                             <td class="text-sm">{{ $item->title }}</td>
-                           
                             <td class="column text-sm">{{ $item->description }}</td>
                             <td class="column text-sm">{{ $item->menu_category->title }}</td>
-                           
                             <td class="flex w-full relative">
                                 <div
                                     class="w-25 bg-gray-200 flex justify-center items-center h-10 py-1 rounded-sm gap-2 cursor-pointer hover:bg-gray-300 activities">
@@ -63,22 +49,21 @@
                                             d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                     </svg>
                                 </div>
-                                       
                                 <div class="absolute w-full top-full right-0 z-555 opacity-0 invisible -translate-y-5 transition-all duration-200">
                                     <ul class="text-sm bg-gray-200 mt-1 rounded-sm p-1">
                                         @if($item->parent_id == 0)
                                         <li>
-                                            <a href="{{ route('menu.variants', [$item->id]) }}" class="inline-block w-full hover:bg-gray-300 p-1 rounded-sm text-gray-700">ایجاد نوع دیگر</a>
+                                            <a href="{{ route('menuItem.variants', [$item->id]) }}" class="inline-block w-full hover:bg-gray-300 p-1 rounded-sm text-gray-700">ایجاد نوع دیگر</a>
                                         </li>
                                         @endif
                                         <li>
-                                            <a href="{{ route('menu.single', [$item->id]) }}" class="inline-block w-full hover:bg-gray-300 p-1 rounded-sm text-gray-700">مشاهده</a>
+                                            <a href="{{ route('menuItem.single', [$item->id]) }}" class="inline-block w-full hover:bg-gray-300 p-1 rounded-sm text-gray-700">مشاهده</a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('menu.edit', [$item->id]) }}" class="inline-block w-full hover:bg-gray-300 p-1 rounded-sm text-gray-700">ویرایش</a>
+                                            <a href="{{ route('menuItem.edit', [$item->id]) }}" class="inline-block w-full hover:bg-gray-300 p-1 rounded-sm text-gray-700">ویرایش</a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('menu.delete', [$item->id]) }}" class="inline-block w-full hover:bg-gray-300 p-1 rounded-sm text-gray-700">حذف</a>
+                                            <a href="{{ route('menuItem.delete', [$item->id]) }}" class="inline-block w-full hover:bg-gray-300 p-1 rounded-sm text-gray-700">حذف</a>
                                         </li>
                                     </ul>
                                 </div>

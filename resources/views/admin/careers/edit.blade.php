@@ -47,15 +47,6 @@
                                     </div>
                                 </div>
                                 <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">تعداد QR کد</label>
-                                    <div
-                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                        <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="number"
-                                            name='qrcode_count' min="1" value="{{ $career->qr_count }}"
-                                            class="w-full px-3 py-1 md:px-2 outline-none text-gray-500">
-                                    </div>
-                                </div>
-                                <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                     <label class="w-30 text-sm mb-1 mt-2.5 flex">توضیحات</label>
                                     <div
                                         class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
@@ -139,23 +130,6 @@
                                             value="{{ $career->social_media->whatsapp }}">
                                     </div>
                                 </div>
-
-                                <div class="w-full flex flex-col gap-3">
-                                    <?php $k = 1; ?>
-                                    @foreach ($career->qr_codes as $qr_code)
-                                        <div class="w-full flex flex-row items-center justify-between">
-                                            <div class="flex flex-row items-center gap-3">
-                                                {{ $k }}
-                                                <img class="size-20" src="{{ asset('storage/' . $qr_code->qr_path) }}"
-                                                    alt="QRCode">
-                                            </div>
-                                            <a href="{{ route('qr.delete', [$qr_code]) }}"
-                                                class="p-3 bg-rose-500 rounded-lg text-white font-semibold text-sm cursor-pointer">حذف</a>
-                                        </div>
-                                        <?php $k++; ?>
-                                    @endforeach
-                                </div>
-
                             </div>
                             <div class="w-full text-left ">
                                 <button type="submit"
