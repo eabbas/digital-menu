@@ -10,4 +10,9 @@ class customCategory extends Model
         'title' , 
         'max_item_amount'
     ];
+
+     public function custom_product_material()
+    {
+        return $this->hasMany(custom_product_material::class, 'category_id');
+    }
 }
