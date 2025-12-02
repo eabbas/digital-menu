@@ -16,7 +16,7 @@ class SocialAddressController extends Controller
     }
     public function store(Request $request)
     {
-        // dd($request->);
+
         $socialMedia=socialMedia::find($request->socialMedia_id);
         social_address ::create([
             'socialMedia_id' => $request->socialMedia_id,
@@ -34,6 +34,7 @@ class SocialAddressController extends Controller
 
     public function edit(social_address $socialAddress)
     {
+    //   dd($socialAddress->socialMedia);
         $socialMedias=socialMedia::all();
         return view('admin.socialAddress.edit', ['socialAddress' => $socialAddress,'socialMedias' => $socialMedias]);
     }

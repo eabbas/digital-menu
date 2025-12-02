@@ -376,7 +376,7 @@ Route::group([
 ], function () {
     Route::get('/create/{covers?}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/medias', 'index')->name('list');
+    Route::get('/siteLinks', 'index')->name('list');
     Route::get('/edit/{site_link}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{site_link}', 'delete')->name('delete');
