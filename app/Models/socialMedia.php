@@ -12,7 +12,7 @@ class socialMedia extends Model
         'icon_path'  
     ];
       public function covers(){
-      return $this->belongsToMany(covers::class,'social_addresses','covers_id','socialMedia_id')->chaperone();
+      return $this->belongsToMany(covers::class,'social_addresses','covers_id','socialMedia_id');
     }
       public function social_addresses()
     {

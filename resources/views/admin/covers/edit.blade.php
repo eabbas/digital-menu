@@ -2,7 +2,7 @@
 @section('title', 'ویرایش کاور ولوگو')
 @section('content')
             <div class="my-10">
-                <h1 class="lg:text-3xl md:text-2xl text-md font-semibold text-center text-gray-700">ویرایش بنر</h1>
+                <h1 class="lg:text-3xl md:text-2xl text-md font-semibold text-center text-gray-700">ویرایش صفحه شبکه های اجتماعی</h1>
             </div>
             <form action="{{ route('covers.update') }}" method="post" enctype='multipart/form-data' class="w-11/12 lg:w-3/4 mx-auto p-5 rounded-lg border">
                 @csrf
@@ -33,7 +33,7 @@
                         <input type="text" name="description"  value="{{$covers -> description}}" class="w-full px-2 py-1 lg:px-2 outline-none border-b" required>
                     </div>
                 <div class="md:text-left text-center md:px-12 mt-5 lg:mt-10">
-                    <button class="px-5 py-2 lg:px-10 lg:py-3 border rounded-md transition-all duration-150 hover:bg-gray-400 hover:border-gray-400 hover:text-white">ثبت</button>
+                    <button class="px-5 py-2 lg:px-10 lg:py-3 border rounded-md bg-blue-300 transition-all duration-150 hover:bg-gray-400 hover:border-gray-400 hover:text-white">ثبت</button>
                 </div>
             </form>
 @endsection
