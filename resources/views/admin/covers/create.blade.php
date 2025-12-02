@@ -12,7 +12,7 @@
             <div class="bg-white rounded-2xl shadow-md p-3 w-full md:w-9/12">
                 <!-- هدر -->
                 <div class="text-center mb-4">
-                    <h1 class="text-lg font-bold text-gray-800">ایجاد بنر</h1>
+                    <h1 class="text-lg font-bold text-gray-800">ایجادصفحه شبکه های اجتماعی</h1>
                 </div class="w-full">
             <div class="md:flex md:flex-col md:w-full md:items-center md:gap-5">
                 <div class="md:flex md:flex-col md:w-full">

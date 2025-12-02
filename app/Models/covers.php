@@ -15,7 +15,7 @@ class covers extends Model
         'description' 
     ];
      public function socialMedia(){
-      return $this->belongsToMany(socialMedia::class,'social_addresses','socialMedia_id','covers_id');
+      return $this->belongsToMany(socialMedia::class,'social_addresses','covers_id','socialMedia_id');
 
     }
 }

@@ -1,10 +1,10 @@
 @extends('admin.app.panel')
-@section('title', ' همه  منوها')
+@section('title', ' همه صفحه شبکه های اجتماعی ')
 @section('content')
     <div class="w-full flex flex-col pb-4">
         <div class="bg-white rounded-lg">
             <div class="pb-4">
-                <h2 class="text-lg font-bold text-gray-800">اطلاعات   منو</h2>
+                <h2 class="text-lg font-bold text-gray-800">اطلاعات صفحه های اجتماعی</h2>
             </div>
             <div class="flex flex-col gap-5">
                 <div class="overflow-x-auto shadow-md" style="scrollbar-width: none;">
@@ -47,7 +47,7 @@
                                         <div class="p-3 text-sm h-full flex items-center justify-center text-gray-900">
                                             <div>
                                                 <img class="w-12 h-12 object-cover mx-auto"
-                                                    src="<?= asset('storage/' . $cover->logo) ?>">
+                                                    src="<?= asset('storage/' . $cover->logo_path) ?>">
                                             </div>
                                         </div>
                                         
@@ -55,7 +55,7 @@
                                         <div class="p-3 text-sm h-full flex items-center justify-center text-gray-900">
                                             <div>
                                                 <img class="w-12 h-12 object-cover mx-auto"
-                                                    src="<?= asset('storage/' . $cover->cover) ?>">
+                                                    src="<?= asset('storage/' . $cover->cover_path) ?>">
                                             </div>
                                         </div>
                                         
