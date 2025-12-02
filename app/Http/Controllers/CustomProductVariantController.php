@@ -35,7 +35,7 @@ class CustomProductVariantController extends Controller
         public function index()
         {
        $cpVariants = custom_product_variant::with('custom_product')->get();
-    //    dd($cpVariants);
+       dd($cpVariants);
        return view('admin.customProductVariants.index', ['cpVariants'=>$cpVariants]);
     }
     public function show(custom_product_variant $cpVariants)

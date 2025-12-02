@@ -110,8 +110,6 @@ class UserController extends Controller
         $user->save();
         return to_route('user.list');
     }
-    
-
     public function delete(user $user)
     {
         foreach ($user->careers as $career) {
