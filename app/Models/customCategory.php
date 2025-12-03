@@ -8,6 +8,7 @@ class customCategory extends Model
 {
     protected $fillable=[
         'title' , 
+        'required' ,
         'max_item_amount'
     ];
 

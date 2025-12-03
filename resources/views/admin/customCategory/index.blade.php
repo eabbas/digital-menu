@@ -13,6 +13,7 @@
                 <div class="min-w-full bg-gray-200">
                     <div class="bg-gray-100 grid grid-cols-8 items-center divide-x divide-[#f1f1f4]">
                         <div class="px-6 py-3 text-center text-xs font-medium text-gray-600 col-span-1">نام محصول</div>
+                        <div class="px-6 py-3 text-center text-xs font-medium text-gray-600 col-span-1">الزامی بودن یا نبودن </div>
                         <div class="px-6 py-3 text-center text-xs font-medium text-gray-600">حداکثر مقدار مواد</div>
                         <div class="px-6 py-3 text-center text-xs font-medium text-gray-600 col-span-3">عملیات</div>
                     </div>
@@ -20,6 +21,10 @@
                         @foreach($customCategories as $customCategory)
                         <div class="grid grid-cols-8 items-center divide-x divide-[#f1f1f4]">
                             <div class="p-3 text-sm h-full flex items-center justify-center text-gray-900">{{ $customCategory->title}}</div>
+                            @if($customCategory->required == 1)
+                            <div class="p-3 text-sm h-full flex items-center justify-center text-gray-900">{{  "انتخاب ان الزامی است" }}</div>
+                            @else{{ 'انتخا به صورت دلبخواهی' }}
+                            @endif
                             <div class="p-3 text-sm h-full flex items-center justify-center text-gray-900">{{ $customCategory->max_item_amount}}</div>
                    
                             <div class="w-full grid grid-cols-4 col-span-3 h-full divide-x divide-[#f1f1f4]">
