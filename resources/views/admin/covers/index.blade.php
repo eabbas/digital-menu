@@ -1,99 +1,101 @@
 @extends('admin.app.panel')
-@section('title', ' همه  منوها')
+@section('title', ' همه صفحه شبکه های اجتماعی ')
 @section('content')
     <div class="w-full flex flex-col pb-4">
         <div class="bg-white rounded-lg">
             <div class="pb-4">
-                <h2 class="text-lg font-bold text-gray-800">اطلاعات   منو</h2>
+                <h2 class="text-lg font-bold text-gray-800">اطلاعات صفحه های اجتماعی</h2>
             </div>
             <div class="flex flex-col gap-5">
-                <div class="overflow-x-auto shadow-md" style="scrollbar-width: none;">
+                <div class="overflow-x-auto shadow-sm" style="scrollbar-width: none;">
                     <div class="min-w-full bg-gray-200">
-                        <div class="w-full flex flex-col lg:grid lg:grid-cols-4 items-center divide-x divide-[#f1f1f4]">
-                            <div class="px-1 lg:px-4 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
-                                <span class="block w-20 lg:w-full">عنوان</span>
+                        <!-- هدر جدول -->
+                        <!-- <div class="w-full grid grid-cols-6 items-center divide-x divide-[#f1f1f4]">
+                            <div class="px-4 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
+                                <span>عنوان</span>
                             </div>
-                            <div class="px-1 lg:px-4 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
-                                <span class="block w-24 lg:w-full">زیرعنوان</span>
+                            <div class="px-4 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
+                                <span>زیرعنوان</span>
                             </div>
-                            <div class="px-1 lg:px-4 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
-                                <span class="block w-20 lg:w-full">لوگو</span>
+                            <div class="px-4 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
+                                <span>لوگو</span>
                             </div>
-                            <div class="px-1 lg:px-4 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
-                                <span class="block w-20 lg:w-full">کاور</span>
+                            <div class="px-4 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
+                                <span>کاور</span>
                             </div>
-                            <div
-                                class="px-1 lg:px-4 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-3">
-                                <span class="block w-60 lg:w-full">عملیات</span>
+                            <div class="px-4 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-2">
+                                <span>عملیات</span>
                             </div>
-                        </div>
+                        </div> -->
+                        
+                        <!-- بدنه جدول -->
                         <div class="bg-white divide-y divide-[#f1f1f4]">
                             @foreach ($covers as $cover)
                                 @if ($cover)
-                                    <div
-                                        class="w-full flex flex-row lg:grid lg:grid-cols-6 items-center divide-x divide-[#f1f1f4]">
-                                        <div
-                                            class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
-                                            <span class="block w-20 lg:w-full">{{ $cover->title }}</span>
+                                    <div class="w-full flex flex-row justify-between shadow-sm items-center px-3">
+                                        <div class="w-9/12">
+                                            <a href="{{ route('covers.single', [$cover]) }}" class="flex flex-row items-center gap-3 py-3">
+                                                <!-- لوگو -->
+                                                <div class="text-sm h-full flex items-center justify-center text-gray-900">
+                                                    
+                                                        <img class="size-10 rounded-full object-cover mx-auto" src="{{ asset('storage/' . $cover->logo_path) }}">
+                                                    
+                                                </div>
+                                                <!-- عنوان -->
+                                                <div class="text-sm h-full flex items-center justify-center text-gray-900 text-center">
+                                                    <span>{{ $cover->title }}</span>
+                                                </div>
+                                                <!-- عملیات -->
+                                                {{-- <div class="p-3 col-span-2">
+                                                    <div class="grid grid-cols-3 gap-2">
+                                                        <div class="text-center">
+                                                            <a href="{{ route('socialAddress.create', [$cover])}}"
+                                                                class="text-sky-700 text-sm block py-1">افزودن شبکه اجتماعی</a>
+                                                        </div>
+                                                        <div class="text-center">
+                                                            <a href="{{ route('socialAddress.list')}}"
+                                                                class="text-sky-700 text-sm block py-1">مشاهده شبکه های اجتماعی</a>
+                                                        </div>
+                                                        <div class="text-center">
+                                                            <a href="{{ route('siteLink.create', [$cover])}}"
+                                                                class="text-sky-700 text-sm block py-1">افزودن لینک</a>
+                                                        </div>
+                                                        <div class="text-center">
+                                                            <a href="{{ route('siteLink.list')}}"
+                                                                class="text-sky-700 text-sm block py-1">مشاهده لینک ها</a>
+                                                        </div>
+                                                        <div class="text-center">
+                                                            <a href="{{ route('covers.edit',[$cover])}}"
+                                                                class="text-sky-700 text-sm block py-1">ویرایش</a>
+                                                        </div>
+                                                        <div class="text-center">
+                                                            <a href="{{ route('covers.delete',[$cover])}}"
+                                                                class="text-sky-700 text-sm block py-1">حذف</a>
+                                                        </div>
+                                                    </div>
+                                                </div> --}}
+                                            </a>
                                         </div>
-                                        <div
-                                            class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center">
-                                            <span class="block w-24 lg:w-full">{{ $cover->subTitle }}</span>
-                                        </div>
-                                        <div
-                                            class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
-                                            <div class="w-20 lg:w-full">
-                                                <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover"
-                                                    src="<?= asset('storage/' . $cover->logo) ?>">
+                                        <div class="w-3/12 flex flex-row justify-end items-center gap-3">
+                                            <div>
+                                                <a href="{{ route('covers.edit',[$cover])}}" class="text-sky-700 text-sm block py-1">ویرایش</a>
+                                            </div>
+                                            <div>
+                                                <a href="{{ route('covers.delete',[$cover])}}" class="text-sky-700 text-sm block py-1">حذف</a>
+                                            </div>
+                                            <div>
+                                                <a href="{{ route('covers.single', [$cover]) }}" class="inline-block p-2 rounded-md bg-gray-100 cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
+                                                        <path d="M256 0c17 0 33.6 1.7 49.8 4.8c7.9 1.5 21.8 6.1 29.4 20.1c2 3.7 3.6 7.6 4.6 11.8l9.3 38.5C350.5 81 360.3 86.7 366 85l38-11.2c4-1.2 8.1-1.8 12.2-1.9c16.1-.5 27 9.4 32.3 15.4c22.1 25.1 39.1 54.6 49.9 86.3c2.6 7.6 5.6 21.8-2.7 35.4c-2.2 3.6-4.9 7-8 10L459 246.3c-4.2 4-4.2 15.5 0 19.5l28.7 27.3c3.1 3 5.8 6.4 8 10c8.2 13.6 5.2 27.8 2.7 35.4c-10.8 31.7-27.8 61.1-49.9 86.3c-5.3 6-16.3 15.9-32.3 15.4c-4.1-.1-8.2-.8-12.2-1.9L366 427c-5.7-1.7-15.5 4-16.9 9.8l-9.3 38.5c-1 4.2-2.6 8.2-4.6 11.8c-7.7 14-21.6 18.5-29.4 20.1C289.6 510.3 273 512 256 512s-33.6-1.7-49.8-4.8c-7.9-1.5-21.8-6.1-29.4-20.1c-2-3.7-3.6-7.6-4.6-11.8l-9.3-38.5c-1.4-5.8-11.2-11.5-16.9-9.8l-38 11.2c-4 1.2-8.1 1.8-12.2 1.9c-16.1 .5-27-9.4-32.3-15.4c-22-25.1-39.1-54.6-49.9-86.3c-2.6-7.6-5.6-21.8 2.7-35.4c2.2-3.6 4.9-7 8-10L53 265.7c4.2-4 4.2-15.5 0-19.5L24.2 218.9c-3.1-3-5.8-6.4-8-10C8 195.3 11 181.1 13.6 173.6c10.8-31.7 27.8-61.1 49.9-86.3c5.3-6 16.3-15.9 32.3-15.4c4.1 .1 8.2 .8 12.2 1.9L146 85c5.7 1.7 15.5-4 16.9-9.8l9.3-38.5c1-4.2 2.6-8.2 4.6-11.8c7.7-14 21.6-18.5 29.4-20.1C222.4 1.7 239 0 256 0zM218.1 51.4l-8.5 35.1c-7.8 32.3-45.3 53.9-77.2 44.6L97.9 120.9c-16.5 19.3-29.5 41.7-38 65.7l26.2 24.9c24 22.8 24 66.2 0 89L59.9 325.4c8.5 24 21.5 46.4 38 65.7l34.6-10.2c31.8-9.4 69.4 12.3 77.2 44.6l8.5 35.1c24.6 4.5 51.3 4.5 75.9 0l8.5-35.1c7.8-32.3 45.3-53.9 77.2-44.6l34.6 10.2c16.5-19.3 29.5-41.7 38-65.7l-26.2-24.9c-24-22.8-24-66.2 0-89l26.2-24.9c-8.5-24-21.5-46.4-38-65.7l-34.6 10.2c-31.8 9.4-69.4-12.3-77.2-44.6l-8.5-35.1c-24.6-4.5-51.3-4.5-75.9 0zM208 256a48 48 0 1 0 96 0 48 48 0 1 0 -96 0zm48 96a96 96 0 1 1 0-192 96 96 0 1 1 0 192z"/>
+                                                    </svg>
+                                                </a>
                                             </div>
                                         </div>
-                                        <div
-                                            class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
-                                            <div class="w-20 lg:w-full">
-                                                <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover"
-                                                    src="<?= asset('storage/' . $cover->cover) ?>">
-                                            </div>
-                                        </div>
-                                        <div class="w-full col-span-3">
-                                            <div
-                                                class="grid grid-cols-4 h-full divide-x divide-[#f1f1f4] w-60 lg:w-full">
-                                                <div
-                                                    class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                                    <a href="{{ route('socialAddress.create', [$cover])}}"
-                                                        class="text-sky-700">افزودن شبکه اجتماعی</a>
-                                                </div>
-                                                <div
-                                                    class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                                    <a href="{{ route('socialAddress.list')}}"
-                                                        class="text-sky-700">مشاهده شبکه های اجتماعی</a>
-                                                </div>
-                                                <div
-                                                    class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                                    <a href="{{ route('siteLink.create', [$cover])}}"
-                                                        class="text-sky-700"> افزودن لینک</a>
-                                                </div>
-                                                <div
-                                                    class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                                    <a href="{{ route('siteLink.list')}}"
-                                                        class="text-sky-700">مشاهده لینک ها</a>
-                                                </div>
-                                                <div
-                                                    class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                                    <a href="#"
-                                                        class="text-sky-700">ویرایش</a>
-                                                </div>
-                                                <div
-                                                    class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                                    <a href="#"
-                                                        class="text-sky-700">حذف</a>
-                                                </div>
-                                          
-                                            </div>
-                                        </div>
+                                      
                                     </div>
                                 @else
                                     <div>
-                                        <div class="px-1 lg:px-6 py-4 text-center text-xs lg:text-sm text-gray-500">
+                                        <div class="px-6 py-4 text-center text-sm text-gray-500">
                                             هیچ اطلاعاتی یافت نشد
                                         </div>
                                     </div>

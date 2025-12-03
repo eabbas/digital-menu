@@ -33,6 +33,8 @@ class SocialMediaController extends Controller
 
     public function edit(socialMedia $socialMedia)
     {
+       dd($socialMedia->covers);
+        
         return view('admin.socialMedia.edit', ['socialMedia' => $socialMedia]);
     }
 
@@ -53,6 +55,9 @@ class SocialMediaController extends Controller
 
     public function delete(socialMedia $socialMedia)
     {
+        foreach($socialMedia->social_addresses as $address){
+            $address->delete();
+        }
         $socialMedia->delete();
         return to_route('socialMedia.list');
     }

@@ -21,10 +21,6 @@ use App\Http\Controllers\MenuCategoryController;
 use App\Http\Controllers\CustomProductController;
 use App\Http\Controllers\MenuItemController;
 use App\Http\Controllers\CustomProductVariantController;
-use App\Http\Controllers\SocialMediaController;
-use App\Http\Controllers\SiteLinkController;
-use App\Http\Controllers\SocialAddressController;
-use App\Http\Controllers\CoversController;
 use App\Http\Controllers\CustomProductMaterialController;
 use App\Http\Controllers\CustomCategoryController;
 use App\Models\career;
@@ -89,28 +85,38 @@ Route::group([
     Route::get('/delete/{careerCategory}' , 'delete')->name('delete');
 });
 
-
-
-
-
-
-
+// Route::group([
+//     'prefix' => 'menus',
+//     'controller' => MenuController::class,
+//     'as' => 'menu.',
+//     'middleware' => [UserMiddleware::class]
+// ], function () {
+//     Route::get('/{career}', 'index')->name('list')->withoutMiddleware([UserMiddleware::class]);
+//     Route::get('/create/{career}', 'create')->name('create');
+//     Route::post('/store', 'store')->name('store');
+//     Route::get('/edit/{menu}', 'edit')->name('edit');
+//     Route::post('/update', 'update')->name('update');
+//     Route::get('/delete/{menu}', 'delete')->name('delete');
+//     Route::get('/qr_codes/{menu}', 'qr_codes')->name('qr_codes')->withoutMiddleware([UserMiddleware::class]);
+// });
 
 Route::group([
     'prefix'=>'menu',
-    'controller'=>MenuController::class,
+    'controller'=>MenuItemController::class,
     'middleware'=>[UserMiddleware::class],
     'as'=>'menu.'
 ], function(){
-    Route::get('/create/{career}', 'create')->name('create');
+    Route::get('/create/{menu_category}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/show/{menu}', 'single')->name('single');
-    Route::get('/qrcodes/{menu}', 'qrcodes')->name('qrcodes');
-    Route::get('/edit/{menu}', 'edit')->name('edit');
+    Route::get('/addVariants/{menu_item}', 'variants')->name('variants');
+    Route::get('/items/{menu_category}', 'items')->name('items');
+    Route::get('/edit/{menu_item}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{menu}', 'delete')->name('delete');
     Route::get('/showMenu/{menu}', 'showMenu')->name('showMenu');
     Route::get('/createMenu/{user}', 'createMenu')->name('createMenu');
+    Route::get('/show/{menu_item}', 'single')->name('single');
+    Route::get('/delete/{menu_item}', 'delete')->name('delete');
 });
 
 Route::group([
@@ -119,40 +125,14 @@ Route::group([
     'middleware'=>[UserMiddleware::class],
     'as'=>'menuCat.'
 ], function(){
-    Route::get('/create/{menu}', 'create')->name('create');
+    Route::get('/create/{career}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/list/{menu}', 'index')->name('list');
+    Route::get('/list/{career}', 'index')->name('list');
     Route::get('/edit/{menu_category}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{menu_category}', 'delete')->name('delete');
-    Route::get('/{menu}', 'menu')->name('menu');
+    Route::get('/{career}', 'menu')->name('menu');
 });
-
-Route::group([
-    'prefix' => 'menuItem',
-    'controller' => MenuItemController::class,
-    'as' => 'menuItem.',
-    'middleware' => [UserMiddleware::class]
-], function () {
-    // Route::get('/{menu_category}', 'index')->name('list');
-    Route::get('/create/{menu_category}', 'create')->name('create');
-    Route::post('/store', 'store')->name('store');
-    Route::get('/edit/{menu_item}', 'edit')->name('edit');
-    Route::post('/update', 'update')->name('update');
-    Route::get('/delete/{menu_item}', 'delete')->name('delete');
-    Route::get('/qr_codes/{menu_item}', 'qr_codes')->name('qr_codes');
-    Route::get('/items/{menu_category}', 'items')->name('items');
-    Route::get('/variants/{menu_item}', 'variants')->name('variants');
-    Route::get('/{menu_item}', 'single')->name('single');
-});
-
-
-
-
-
-
-
-
 
 //category.......................................................................
 Route::get('category/create', [CategoryController::class, 'create']);
@@ -352,6 +332,7 @@ Route::group([
     'as' => 'cp.'
 ], function () {
     Route::get('/create/{career}', 'create')->name('create');
+    Route::get('/createFromDashboard/{user}', 'createFromDashboard')->name('createFromDashboard');
     Route::post('/store', 'store')->name('store');
     Route::get('/customProductList', 'index')->name('list');
     Route::get('/show/{customProduct}', 'show')->name('single');
@@ -395,7 +376,7 @@ Route::group([
 ], function () {
     Route::get('/create/{covers?}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/medias', 'index')->name('list');
+    Route::get('/siteLinks', 'index')->name('list');
     Route::get('/edit/{site_link}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{site_link}', 'delete')->name('delete');
@@ -425,6 +406,7 @@ Route::group([
     Route::get('/edit/{covers}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{covers}', 'delete')->name('delete');
+    Route::get('/show/{covers}', 'single')->name('single');
 });
 
 Route::group([

@@ -11,4 +11,11 @@ class socialMedia extends Model
         'link' , 
         'icon_path'  
     ];
+      public function covers(){
+      return $this->belongsToMany(covers::class,'social_addresses','covers_id','socialMedia_id');
+    }
+      public function social_addresses()
+    {
+        return $this->hasMany(social_address::class,'socialMedia_id');
+    }
 }

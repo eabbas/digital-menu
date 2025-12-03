@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <link rel="stylesheet" href="{{ url('assets/css/style.css') }}" type="text/css">
     <title>@yield('title')</title>
 </head>
@@ -43,9 +44,9 @@
                     <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden">
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('career.careers') }}" class=" text-white py-1">
-                                لیست کسب و کار های من
-                            </a>
+                            <a href="{{ route('career.careers') }}" class=" text-white py-1">کسب و
+                                کار های
+                                من</a>
                         </li>
                         @if (count(Auth::user()->careers))
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
@@ -65,14 +66,10 @@
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('favoriteCareer.list') }}" class=" text-white py-1">لیست علاقه مندی ها</a>
                         </li>
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                        {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('covers.create') }}" class=" text-white py-1">ایجادمنو</a>
-                        </li>
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
-                            <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('covers.list') }}" class=" text-white py-1">مشاهده منو</a>
-                        </li>
+                            <a href="{{ route('cp.createFromDashboard', [Auth::user()])}}" class=" text-white py-1">   ایجاد محصول شخصی سازی جدید</a>
+                        </li> --}}
                         @if(Auth::user()->role[0]->title == 'admin')
 
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
@@ -91,18 +88,6 @@
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('cc.list') }}" class=" text-white py-1">
                                 همه دسته های کسب و کارها
-                            </a>
-                        </li>
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
-                            <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('socialMedia.create') }}" class=" text-white py-1">
-                                ایجاد شبکه اجتماعی
-                            </a>
-                        </li>
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
-                            <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('socialMedia.list') }}" class=" text-white py-1">
-                                مشاهده شبکه های اجتماعی
                             </a>
                         </li>
                     </ul>
@@ -327,9 +312,8 @@
                                 </li>
                                 <li>
                                     <a href="{{ route('career.careers') }}"
-                                        class="block text-gray-700 py-2 text-md">
-                                        لیست کسب و کار های من
-                                    </a>
+                                        class="block text-gray-700 py-2 text-md">کسب و کار های
+                                        من</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('career.create') }}"
@@ -378,7 +362,7 @@
             </div>
             <!-- hamburger menu end -->
         </header>
-        <div class="w-full h-[calc(100dvh-80px)] lg:w-[calc(100%-265px)] float-end mt-20 lg:px-5 overflow-y-auto px-5"
+        <div class="w-full h-[calc(100dvh-80px)] lg:w-[calc(100%-265px)] float-end mt-20 lg:px-5 overflow-y-auto px-5 relative"
             style="scrollbar-width:none;">
             @yield('content')
         </div>

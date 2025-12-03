@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\Models\covers;
+use App\Models\social_address;
+use App\Models\site_link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class CoversController extends Controller
 {
@@ -37,7 +40,8 @@ class CoversController extends Controller
         return view('admin.covers.index', ['covers' => $covers]);
     }
     public function edit(covers $covers)
-    {
+    { 
+        // dd($covers->with('socialMedia')->get());
         return view('admin.covers.edit', ['covers' => $covers]);
     }
 
@@ -60,10 +64,26 @@ class CoversController extends Controller
         $covers->subTitle = $request->subTitle;
         $covers->description = $request->description;
         $covers->save();
+        return to_route('covers.list');
+
     }
 
     public function delete(covers $covers)
     {
-        $covers->delete();
+         $socialAddresses = social_address::where('covers_id', $covers->id)->get();
+         $site_links = site_link::where('covers_id', $covers->id)->get();
+            foreach ($socialAddresses as $address) {
+                $address->delete();
+            }
+            foreach ($site_links as $site_link) {
+                $site_link->delete();
+            }
+                $covers->delete();
+        return to_route('covers.list');
+
+    }
+
+    public function single(covers $covers){
+        return view('admin.covers.single', ['cover'=>$covers]);
     }
 }
