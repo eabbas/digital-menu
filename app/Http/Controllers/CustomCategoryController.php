@@ -16,6 +16,7 @@ class CustomCategoryController extends Controller
     {
         customCategory::create([
             'title'=>$request->title ,
+            'required' => $request->required , 
             'max_item_amount' => $request->max_item_amount 
         ]);
         return to_route('custmCategory.list');
@@ -37,6 +38,7 @@ class CustomCategoryController extends Controller
     {
         $customCategory =  customCategory::find($request->id);
         $customCategory->title = $request->title;
+        $customCategory->required = $request->required;
         $customCategory->max_item_amount = $request->max_item_amount;
         $customCategory->save();
 
