@@ -22,7 +22,11 @@ use App\Http\Controllers\CustomProductController;
 use App\Http\Controllers\MenuItemController;
 use App\Http\Controllers\CustomProductVariantController;
 use App\Http\Controllers\CustomProductMaterialController;
+use App\Http\Controllers\SiteLinkController;
 use App\Http\Controllers\CustomCategoryController;
+use App\Http\Controllers\SocialMediaController;
+use App\Http\Controllers\SocialAddressController;
+use App\Http\Controllers\CoversController;
 use App\Models\career;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
