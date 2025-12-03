@@ -13,9 +13,8 @@ class CustomProductMaterialController extends Controller
 {
     public function create()
     {
-        $customProducts = custom_product::all();
         $customCategories = customCategory::all();
-        return view('admin.customProductMaterials.create' , ['customProducts'=>$customProducts , 'customCategories'=>$customCategories]);
+        return view('admin.customProductMaterials.create' , ['customCategories'=>$customCategories]);
     }
     public function store(Request $request)
     {

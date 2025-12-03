@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\custom_product;
 use App\Models\career;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
 class CustomProductController extends Controller
@@ -18,15 +19,19 @@ class CustomProductController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        // $type = $request->customProductImage->getClientOriginalExtension();
-        $name = $request->customProductImage->getClientOriginalName();
-        $fullName = time()."_".$name;
-        $path = $request->file('customProductImage')->storeAs('images', $fullName, 'public');
+        // $path = null;
+        if(isset($request->customProductImage)){
+
+            $name = $request->customProductImage->getClientOriginalName();
+            $fullName = time()."_".$name;
+            $path = $request->file('customProductImage')->storeAs('images', $fullName, 'public');
+
+        }
         // dd($path);
         custom_product::create([
             'title'=>$request->title ,
             'description' => $request->description ,
-            'career_id' => $request->id ,
+            'career_id' => $request->career_id ,
             'material_limit' => $request->material_limit ,
             'image'=>$path
         ]);
@@ -66,18 +71,27 @@ class CustomProductController extends Controller
     }
     public function delete(custom_product $customProduct)
     {
-        $customProductWithVariants = custom_Product::with('custom_product_variants')->get();
-        $customProductWithMaterials = custom_Product::with('custom_product_materials')->get();
-        foreach($customProductWithVariants as $variants){
-            $variants->delete();
+        // $customProduct->custom_product_variants;
+        // $customProduct->custom_product_materials;
+        // return $customProduct;
+        if(count($customProduct->custom_product_variants)){
+            foreach($customProduct->custom_product_variants as $variants){
+                $variants->delete();
+            }
         }
-        foreach($customProductWithMaterials as $materials){
-            $materials->delete();
+        if(count($customProduct->custom_product_materials)){
+            foreach($customProduct->custom_product_materials as $materials){
+                $materials->delete();
+            }
         }
-        Storage::disk('public')->delete($customProduct->image);
+        if($customProduct->image){
+            Storage::disk('public')->delete($customProduct->image);
+        }
         $customProduct->delete();
-
         return to_route('cp.list');
-
+    }
+    public function createFromDashboard(User $user)
+    {
+        return view('admin.customProducts.createFromDashboard' , ['user'=>$user]);
     }
 }
