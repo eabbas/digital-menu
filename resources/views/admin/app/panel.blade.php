@@ -44,18 +44,10 @@
                     <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden">
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('career.careers') }}" class=" text-white py-1">کسب و
-                                کار های
-                                من</a>
-                        </li>
-                        @if (count(Auth::user()->careers))
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
-                            <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('menu.createMenu', [Auth::user()]) }}" class=" text-white py-1">
-                               ایجاد منو
+                            <a href="{{ route('career.careers') }}" class=" text-white py-1">
+                                لیست کسب و کار های من
                             </a>
                         </li>
-                        @endif
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('career.create') }}" class=" text-white py-1">ایجاد
@@ -66,10 +58,14 @@
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('favoriteCareer.list') }}" class=" text-white py-1">لیست علاقه مندی ها</a>
                         </li>
-                        {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('cp.createFromDashboard', [Auth::user()])}}" class=" text-white py-1">   ایجاد محصول شخصی سازی جدید</a>
-                        </li> --}}
+                            <a href="{{ route('covers.create') }}" class=" text-white py-1">ایجادصفحه شبکه های اجتماعی</a>
+                        </li>
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('covers.list') }}" class=" text-white py-1"> لیست صفحه شبکه های اجتماعی</a>
+                        </li>
                         @if(Auth::user()->role[0]->title == 'admin')
 
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
@@ -88,6 +84,18 @@
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('cc.list') }}" class=" text-white py-1">
                                 همه دسته های کسب و کارها
+                            </a>
+                        </li>
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('socialMedia.create') }}" class=" text-white py-1">
+                                ایجاد شبکه اجتماعی
+                            </a>
+                        </li>
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('socialMedia.list') }}" class=" text-white py-1">
+                                لیست شبکه های اجتماعی
                             </a>
                         </li>
                     </ul>
@@ -312,8 +320,9 @@
                                 </li>
                                 <li>
                                     <a href="{{ route('career.careers') }}"
-                                        class="block text-gray-700 py-2 text-md">کسب و کار های
-                                        من</a>
+                                        class="block text-gray-700 py-2 text-md">
+                                        لیست کسب و کار های من
+                                    </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('career.create') }}"
