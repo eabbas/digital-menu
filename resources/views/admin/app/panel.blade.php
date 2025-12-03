@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <link rel="stylesheet" href="{{ url('assets/css/style.css') }}" type="text/css">
     <title>@yield('title')</title>
 </head>
@@ -353,7 +354,7 @@
             </div>
             <!-- hamburger menu end -->
         </header>
-        <div class="w-full lg:w-[calc(100%-265px)] float-end mt-20 lg:px-5 overflow-y-auto px-5"
+        <div class="w-full h-[calc(100dvh-80px)] lg:w-[calc(100%-265px)] float-end mt-20 lg:px-5 overflow-y-auto px-5 relative"
             style="scrollbar-width:none;">
             @yield('content')
         </div>

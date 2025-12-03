@@ -7,6 +7,7 @@ use App\Models\site_link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class CoversController extends Controller
 {
@@ -40,7 +41,7 @@ class CoversController extends Controller
     }
     public function edit(covers $covers)
     { 
-        dd($covers->with('socialMedia')->get());
+        // dd($covers->with('socialMedia')->get());
         return view('admin.covers.edit', ['covers' => $covers]);
     }
 
@@ -80,5 +81,9 @@ class CoversController extends Controller
                 $covers->delete();
         return to_route('covers.list');
 
+    }
+
+    public function single(covers $covers){
+        return view('admin.covers.single', ['cover'=>$covers]);
     }
 }
