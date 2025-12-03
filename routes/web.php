@@ -112,6 +112,9 @@ Route::group([
     Route::get('/items/{menu_category}', 'items')->name('items');
     Route::get('/edit/{menu_item}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{menu}', 'delete')->name('delete');
+    Route::get('/showMenu/{menu}', 'showMenu')->name('showMenu');
+    Route::get('/createMenu/{user}', 'createMenu')->name('createMenu');
     Route::get('/show/{menu_item}', 'single')->name('single');
     Route::get('/delete/{menu_item}', 'delete')->name('delete');
 });
