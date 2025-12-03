@@ -33,8 +33,6 @@ class SocialMediaController extends Controller
 
     public function edit(socialMedia $socialMedia)
     {
-       dd($socialMedia->covers);
-        
         return view('admin.socialMedia.edit', ['socialMedia' => $socialMedia]);
     }
 

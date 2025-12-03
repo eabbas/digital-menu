@@ -15,7 +15,7 @@
                             <input type="file" name="cover_path" class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
                         </fieldset>
                         <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] py-1 pr-3">
-                            <legend class="p-1 w-20 bg-gray-200 rounded-full flex flex-row justify-center text-sm"> بوگو
+                            <legend class="p-1 w-20 bg-gray-200 rounded-full flex flex-row justify-center text-sm"> لوگو
                             </legend>
                             <input type="file" name="logo_path" class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
                         </fieldset>
