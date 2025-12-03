@@ -424,6 +424,7 @@ Route::group([
     Route::get('/edit/{covers}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{covers}', 'delete')->name('delete');
+    Route::get('/show/{covers}', 'single')->name('single');
 });
 
 Route::group([
