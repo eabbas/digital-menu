@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Models\User;
 
 use function Symfony\Component\Clock\now;
 
@@ -139,5 +140,9 @@ class MenuController extends Controller
 
     public function showMenu(menu $menu){
         return view('admin.menu.menu', ['menu'=>$menu]);
+    }
+
+    public function createMenu(User $user){
+        return view('admin.menu.createMenu', ['user'=>$user]);
     }
 }

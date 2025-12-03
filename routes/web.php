@@ -110,6 +110,7 @@ Route::group([
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{menu}', 'delete')->name('delete');
     Route::get('/showMenu/{menu}', 'showMenu')->name('showMenu');
+    Route::get('/createMenu/{user}', 'createMenu')->name('createMenu');
 });
 
 Route::group([
