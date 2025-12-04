@@ -1,4 +1,5 @@
 @extends('admin.app.panel')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 @section('title')
     ایجاد شبکه اجتماعی {{ $cover->title }}
 @endsection
@@ -33,32 +34,33 @@
                 <img src="{{ asset('storage/'.$cover->logo_path) }}" class="size-30 rounded-full absolute inset-1/2 translate-x-1/2 -translate-y-1/5" alt="">
             </div>
             <div class="w-full mt-10 flex flex-col gap-5">
-                <div class="py-2">
+
+                @foreach ($cover->socialAddresses as $item)
+                <div class="py-2"> 
                     <h3 class="text-lg font-bold text-gray-800 text-center">
-                        ورود به تلگرام
+                        ورود به {{ $item->socialMedia->title }}
                     </h3>
                     <div class="mt-3">
-                        <a href="#" class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-blue-100 rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 496 512">
-                                <path fill="blue" d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"/>
-                            </svg>
-                            <span class="font-bold text-gray-800">تلگرام</span>
-                        </a>
+                        <div  class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-blue-100 rounded-full cursor-pointer"  onclick='editSocial("{{ $item->id }}")'>
+                            <img src="{{ asset('storage/'.$item->socialMedia->icon_path) }}" class="size-5 rounded-md" alt="">
+                            <span class="font-bold text-gray-800">{{ $item->socialMedia->title }}</span>
+                        </div>
                     </div>
                 </div>
+                @endforeach
+                @if ($cover->siteLink)
                 <div class="py-2">
                     <h3 class="text-lg font-bold text-gray-800 text-center">
-                        ورود به اینستاگرام
+                        ورود به {{ $cover->siteLink->title }}
                     </h3>
                     <div class="mt-3">
-                        <a href="#" class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-orange-100 rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 448 512">
-                                <path fill="orange" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
-                            </svg>
-                            <span class="font-bold text-gray-800">اینستاگرام</span>
-                        </a>
+                        <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-blue-100 rounded-full cursor-pointer" onclick='editLink("{{ $cover->siteLink->id }}")'>
+                            <img src="{{ asset('storage/'.$cover->siteLink->icon_path) }}" class="size-5 rounded-md" alt="">
+                            <span class="font-bold text-gray-800">{{ $cover->siteLink->title }}</span>
+                        </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
 
@@ -121,13 +123,13 @@
                                 </div>
                             </div>
                         <label for="socialMedia_id">شبکه اجتماعی:</label>
-                        {{-- <select name="socialMedia_id">
+                        <select name="socialMedia_id">
                             @foreach($socialMedias as $socialMedia)
                                 <option value="{{$socialMedia->id}}">{{$socialMedia->title}}</option>
                             @endforeach
-                        </select> --}}
+                        </select>
                                 <button type="submit"
-                                    class="active:bg-[#0080e5] mt-2 w-full bg-[#03A9F4] text-white py-3 rounded-md hover:bg-blue-700 transition duration-200 font-medium">
+                                    class="active:bg-[#0080e5] mt-2 w-full bg-[#03A9F4] text-white py-3 rounded-md hover:bg-blue-700 transition duration-200 font-medium" >
                                     ارسال اطلاعات
                                 </button>
                             </div>
@@ -178,11 +180,84 @@
                     </form>
                     {{-- create link end --}}
 
+                    {{-- edit social media --}}
+                    <div class="w-full bg-white py-5 rounded-lg transition-all duration-300 opacity-0 absolute top-full invisible" id="editsocialMediaForm">
+                        <div class="w-full flex flex-row items-center gap-5 py-2.5 border-b border-gray-300 px-5 cursor-pointer" >
+                               <svg xmlns="http://www.w3.org/2000/svg" class="size-5" onclick="closeSocialForm()" viewBox="0 0 384 512">
+                                   <path d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
+                               </svg>
+                               <span class="text-gray-700 font-bold"> ادیت شبکه اجتماعی </span>
+                           </div>
+                          <form action="{{ route('socialAddress.update') }}" method="post" enctype='multipart/form-data' class="w-11/12 lg:w-3/4 mx-auto p-5 rounded-lg border">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $item->id }}">
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-5 lg:gap-10">
+                                <!-- عنوان شبکه اجتماعی -->
+                                <div class="w-full flex flex-col">
+                                    <label class="text-sm md:text-base mb-2" for="username">عنوان شبکه اجتماعی:</label>
+                                    <input type="text" name="username" value="{{ $item->username }}" class="w-full px-3 py-2 outline-none border rounded-lg" required>
+                                </div>
+                                <!-- انتخاب شبکه اجتماعی -->
+                                <div class="w-full flex flex-col">
+                                    <label class="text-sm md:text-base mb-2" for="socialMedia_id">شبکه اجتماعی:</label>
+                                    <select name="socialMedia_id" class="w-full px-3 py-2 outline-none border rounded-lg">
+                                        @foreach($socialMedias as $socialMedia)
+                                            <option value="{{ $socialMedia->id }}" @if($socialMedia->id == $item->socialMedia_id) selected @endif>
+                                                {{ $socialMedia->title }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- دکمه ثبت -->
+                            <div class="text-center mt-8">
+                                <button type="submit" class="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-150">
+                                    ثبت تغییرات
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    {{-- edit social media end --}}
 
+                    {{-- edit site link  --}}
+                    <div class="w-full bg-white py-5 rounded-lg transition-all duration-300 opacity-0 absolute top-full invisible" id="editSiteLinkForm">
+                        <div class="w-full flex flex-row items-center gap-5 py-2.5 border-b border-gray-300 px-5 cursor-pointer" >
+                               <svg xmlns="http://www.w3.org/2000/svg" class="size-5" onclick="closeSiteLinkForm()" viewBox="0 0 384 512">
+                                   <path d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
+                               </svg>
+                               <span class="text-gray-700 font-bold"> ادیت  لینک </span>
+                           </div>
+                        <form action="{{ route('siteLink.update') }}" method="post" enctype='multipart/form-data' class="w-11/12 lg:w-3/4 mx-auto p-5 rounded-lg border">
+                            @csrf
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-5 lg:gap-10">
+                                <div class="w-full flex flex-col">
+                                    <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] py-1 pr-3">
+                                        <legend class="p-1 w-20 bg-gray-200 rounded-full flex flex-row justify-center text-sm">آیکون لینک
+                                        </legend>
+                                        <input type="file" name="icon_path" class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
+                                    </fieldset>
+                                </div>
+                                <div class="w-full flex flex-col">
+                                    <label class="text-sm md:text-base" for="title">عنوان  لینک :</label>
+                                </div>
+                                <div class="w-full flex flex-col">
+                                    <label class="text-sm md:text-base" for="address">آدرس  لینک  :</label>
+                                </div>
+                            <div class="md:text-left text-center md:px-12 mt-5 lg:mt-10">
+                                <button class="px-5 py-2 lg:px-10 lg:py-3 border rounded-md transition-all duration-150 hover:bg-gray-400 hover:border-gray-400 hover:text-white">ثبت</button>
+                            </div>
+                        </form>
+                    </div>
+                    {{-- edit site link end --}}
 
                 </div>
             </div>
         </div>
     </div>
+    <script>
+
+    </script>
     <script src="{{ asset('assets/js/blocks.js') }}"></script>
 @endsection

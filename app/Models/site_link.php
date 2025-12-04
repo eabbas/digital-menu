@@ -13,4 +13,8 @@ class site_link extends Model
         'icon_path',
         'covers_id', 
     ];
+
+    public function cover(){
+        return $this->belongsTo(covers::class);
+    }
 }

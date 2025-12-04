@@ -24,7 +24,7 @@ class SocialAddressController extends Controller
             'covers_id' => $request->covers_id,
             'username' =>  $socialMedia->link . $request->username ,
         ]);
-        return to_route('socialAddress.list');
+        return to_route('covers.single', [$request->covers_id]);
     }
        public function index()
     {

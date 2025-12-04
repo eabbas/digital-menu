@@ -18,4 +18,11 @@ class covers extends Model
       return $this->belongsToMany(socialMedia::class,'social_addresses','covers_id','socialMedia_id');
 
     }
+    public function socialAddresses(){
+      return $this->hasMany(social_address::class);
+    }
+
+    public function siteLink(){
+      return $this->hasOne(site_link::class);
+    }
 }

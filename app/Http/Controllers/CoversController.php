@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\covers;
 use App\Models\social_address;
 use App\Models\site_link;
+use App\Models\socialMedia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -84,6 +85,8 @@ class CoversController extends Controller
     }
 
     public function single(covers $covers){
-        return view('admin.covers.single', ['cover'=>$covers]);
+        $socialMedias=socialMedia::all();
+        // dd($covers->socialAddresses);
+        return view('admin.covers.single', ['cover'=>$covers,'socialMedias'=>$socialMedias]);
     }
 }
