@@ -18,14 +18,14 @@ class SiteLinkController extends Controller
         $name = $request->icon_path->getClientOriginalName();
         $path = $request->icon_path->storeAs('socialMedia', $name, 'public');
         site_link::create([
-            'address' => $request->address,
+            'address' =>'https://'. $request->address,
             'user_id' => Auth::id(),
             'title' => $request->title,
             'covers_id' => $request->covers_id,
             'icon_path'=>$path
 
         ]);
-        return to_route('siteLink.list');
+        return to_route('covers.single', [$request->covers_id]);
     }
         public function index()
     {

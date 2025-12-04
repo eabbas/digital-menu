@@ -14,6 +14,10 @@ class social_address extends Model
     ];
      public function socialMedia()
     {
-        return $this->belongsTo(socialMedia::class);
+        return $this->belongsTo(socialMedia::class, 'socialMedia_id');
+    }
+
+    public function cover(){
+        return $this->belongsTo(covers::class);
     }
 }
