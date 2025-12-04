@@ -142,7 +142,7 @@ class MenuController extends Controller
         return view('admin.menu.menu', ['menu'=>$menu]);
     }
 
-    public function createMenu(User $user){
-        return view('admin.menu.createMenu', ['user'=>$user]);
+    public function createMenu(){
+        return view('admin.menu.createMenu');
     }
 }
