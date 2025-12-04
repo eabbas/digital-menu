@@ -1,8 +1,24 @@
+// plus icon
 let block = document.getElementById('block')
-let editSocialM = document.getElementById('editsocialMediaForm')
-let siteLinkForm = document.getElementById('siteLinkForm')
+
+
+// create link and create socialmedia div
 let group = document.getElementById('group')
+
+
+// create socialmedia form
 let socialMediaForm = document.getElementById('socialMediaForm')
+
+
+// link form
+let siteLinkForm = document.getElementById('siteLinkForm')
+
+
+// edit socialmedia div
+let editSocialM = document.getElementById('editsocialMediaForm')
+
+
+// edit socialmedia form
 let linkForm = document.getElementById('editSiteLinkForm')
 
 
@@ -10,122 +26,67 @@ function addBlock(state) {
     if (state == 'open') {
         block.classList.remove('invisible')
         block.classList.remove('opacity-0')
-        block.children[0].children[0].children[0].classList.remove('scale-95')
-        block.children[0].children[0].children[0].classList.remove('opacity-0')
-        editSocialM.classList.add('invisible')
-        editSocialM.classList.add('opacity-0')
-        socialMediaForm.classList.add('invisible')
-        socialMediaForm.classList.add('opacity-0')
+        group.classList.remove('scale-95')
+        group.classList.remove('opacity-0')
+        group.classList.remove('invisible')
     }
     if (state == 'close') {
         block.classList.add('invisible')
         block.classList.add('opacity-0')
-        block.children[0].children[0].children[0].classList.add('scale-95')
-        block.children[0].children[0].children[0].classList.add('opacity-0')
-        editSocialM.classList.add('invisible')
-        editSocialM.classList.add('opacity-0')
-        socialMediaForm.classList.add('invisible')
-        socialMediaForm.classList.add('opacity-0')
+        group.classList.add('scale-95')
+        group.classList.add('opacity-0')
+        group.classList.add('invisible')
     }
 }
 
 function addSocialMedia() {
-    group.classList.add('hidden')
-    editSocialM.classList.add('invisible')
-    editSocialM.classList.add('opacity-0')
+    group.classList.add('scale-95')
+    group.classList.add('opacity-0')
+    group.classList.add('invisible')
     socialMediaForm.classList.remove('invisible')
     socialMediaForm.classList.remove('opacity-0')
     socialMediaForm.classList.remove('top-full')
     socialMediaForm.classList.add('top-0')
-    socialMediaForm.classList.add('-translate-y-1/2')
-}
-
-function closeSocialForm() {
-    group.classList.remove('hidden')
-    editSocialM.classList.add('invisible')
-    editSocialM.classList.add('opacity-0')
-    socialMediaForm.classList.add('invisible')
-    socialMediaForm.classList.add('opacity-0')
-    socialMediaForm.classList.add('top-full')
-    socialMediaForm.classList.remove('top-0')
-    socialMediaForm.classList.remove('-translate-y-1/2')
-    block.classList.add('invisible')
-    block.classList.add('opacity-0')
+    socialMediaForm.classList.add('-translate-y-1/7')
 }
 
 function addLink() {
-    group.classList.add('hidden')
+    group.classList.add('scale-95')
+    group.classList.add('opacity-0')
+    group.classList.add('invisible')
+
     siteLinkForm.classList.remove('invisible')
     siteLinkForm.classList.remove('opacity-0')
     siteLinkForm.classList.remove('top-full')
     siteLinkForm.classList.add('top-0')
-    siteLinkForm.classList.add('-translate-y-1/2')
-    editSocialM.classList.add('invisible')
-    editSocialM.classList.add('opacity-0')
+    siteLinkForm.classList.add('-translate-y-1/7')
 }
 
-function closeLinkForm() {
-    group.classList.remove('hidden')
-    siteLinkForm.classList.add('invisible')
-    siteLinkForm.classList.add('opacity-0')
-    siteLinkForm.classList.add('top-full')
-    siteLinkForm.classList.remove('top-0')
-    siteLinkForm.classList.remove('-translate-y-1/2')
+
+let forms = document.querySelectorAll('.form')
+function closeForm(){
+    forms.forEach((form)=>{
+        form.classList.add('invisible')
+        form.classList.add('opacity-0')
+        form.classList.remove('-translate-y-1/7')
+    })
     block.classList.add('invisible')
     block.classList.add('opacity-0')
-    editSocialM.classList.add('invisible')
-    editSocialM.classList.add('opacity-0')
+    group.classList.add('scale-95')
+    group.classList.add('opacity-0')
+    group.classList.add('invisible')
 }
 
-
-function editSocial(id) {
-    group.classList.add('hidden')
-    block.classList.remove('invisible')
-    block.classList.remove('opacity-0')
-    editSocialM.classList.remove('invisible')
-    editSocialM.classList.remove('top-full')
-    editSocialM.classList.add('top-0')
-    editSocialM.classList.remove('opacity-0')
-    editSocialM.classList.add('-translate-y-1/2')
-}
-function closeSocialForm() {
-    group.classList.remove('hidden')
-    block.classList.add('invisible')
-    block.classList.add('opacity-0')
-    editSocialM.classList.add('invisible')
-    editSocialM.classList.add('top-full')
-    editSocialM.classList.remove('top-0')
-    editSocialM.classList.add('opacity-0')
-    editSocialM.classList.remove('-translate-y-1/2')
-}
-
-function editLink(id) {
-    group.classList.add('hidden')
-    block.classList.remove('invisible')
-    block.classList.remove('opacity-0')
-    linkForm.classList.remove('invisible')
-    linkForm.classList.remove('top-full')
-    linkForm.classList.add('top-0')
-    linkForm.classList.remove('opacity-0')
-    linkForm.classList.add('-translate-y-1/2')
-    
-    editSocialM.classList.add('invisible')
-    editSocialM.classList.add('opacity-0')
-    socialMediaForm.classList.add('invisible')
-    socialMediaForm.classList.add('opacity-0')
-}
-function closeSiteLinkForm() {
-    group.classList.remove('hidden')
-    block.classList.add('invisible')
-    block.classList.add('opacity-0')
-    linkForm.classList.add('invisible')
-    linkForm.classList.add('top-full')
-    linkForm.classList.remove('top-0')
-    linkForm.classList.add('opacity-0')
-    linkForm.classList.remove('-translate-y-1/2')
-    
-    editSocialM.classList.add('invisible')
-    editSocialM.classList.add('opacity-0')
-    socialMediaForm.classList.add('invisible')
-    socialMediaForm.classList.add('opacity-0')
+// --------------------------------------
+let editSMF = document.getElementById('editSMF')
+function openDropdown(page){
+    if (page == 'media') {
+        if(editSMF.classList.contains('max-h-0')){
+            editSMF.classList.remove('max-h-0')
+            editSMF.classList.add('max-h-[500px]')
+        } else {
+            editSMF.classList.add('max-h-0')
+            editSMF.classList.remove('max-h-[500px]')
+        }
+    }
 }
