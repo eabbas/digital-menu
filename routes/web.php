@@ -408,7 +408,7 @@ Route::group([
     Route::get('/create/{covers?}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::get('/socialAddress', 'index')->name('list');
-    Route::get('/edit/{social_address}', 'edit')->name('edit');
+    Route::post('/edit/{social_address}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{social_address}', 'delete')->name('delete');
 });

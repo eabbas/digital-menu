@@ -34,9 +34,9 @@ class SocialAddressController extends Controller
 
     public function edit(social_address $socialAddress)
     {
-    //   dd($socialAddress->socialMedia);
-        $socialMedias=socialMedia::all();
-        return view('admin.socialAddress.edit', ['socialAddress' => $socialAddress,'socialMedias' => $socialMedias]);
+        $datas['socialMedias']=socialMedia::all();
+        $datas['data']=$socialAddress;
+        return response()->json($datas);
     }
 
     public function update(Request $request)
@@ -44,8 +44,9 @@ class SocialAddressController extends Controller
         $social_address = social_address::find($request->id);
         $social_address->socialMedia_id = $request->socialMedia_id;
         $social_address->username = $request->username;
+        $social_address->covers_id = $request->cover_id;
         $social_address->save();
-        return to_route('socialAddress.list');
+        return to_route('covers.single', [$request->cover_id]);
         
     }
 
