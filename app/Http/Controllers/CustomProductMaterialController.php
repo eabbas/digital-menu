@@ -6,34 +6,36 @@ use App\Http\Controllers\Controller;
 use App\Models\custom_product;
 use App\Models\custom_product_material;
 use App\Models\customCategory;
+use App\Models\career;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class CustomProductMaterialController extends Controller
 {
-    public function create()
+    public function create(career $career , custom_product $customProduct)
     {
-        $customCategories = customCategory::all();
-        return view('admin.customProductMaterials.create' , ['customCategories'=>$customCategories]);
+        return view('admin.customProductMaterials.create' , ['career'=>$career, 'customProduct'=>$customProduct]);
     }
     public function store(Request $request)
     {
+        // dd($request->all());
         // dd($request->custom_category_id);
-        $name = $request->image->getClientOriginalName();
-        $fullName = time()."_".$name;
-        $path = $request->file('image')->storeAs('images', $fullName, 'public');
+        $path = null;
+        if(isset($request->image)){
+            $name = $request->image->getClientOriginalName();
+            $fullName = time()."_".$name;
+            $path = $request->file('image')->storeAs('images', $fullName, 'public');
+        }
         if($request->required){
             custom_product_material::create([
                 'title' => $request->title , 
                 'description' => $request->description ,
                 'price_per_unit' => $request->price_per_unit ,
-                'category_name' => $request->category_name , 
                 'order' => $request->order, 
-                'required' => $request->required , 
-                'category_limit' => $request->category_limit , 
                 'max_unit_amount' => $request->max_unit_amount , 
-                'custom_product_id' => $request->custom_product_id ,
-                'category_id' => $request->custom_category_id ,
+                'category_id' => $request->category_id , 
+                'custom_product_id' => $request->custom_pro_id ,
+                'required' => $request->required , 
                 'image' => $path
             ]);
         }else{
@@ -41,23 +43,19 @@ class CustomProductMaterialController extends Controller
                'title' => $request->title , 
                'description' => $request->description ,
                'price_per_unit' => $request->price_per_unit ,
-               'category_name' => $request->category_name , 
                'order' => $request->order , 
-                'required' => 0 , 
-               'category_limit' => $request->category_limit , 
                'max_unit_amount' => $request->max_unit_amount , 
-               'custom_product_id' => $request->custom_product_id ,
-               'category_id' => $request->custom_category_id ,
+               'custom_product_id' => $request->custom_pro_id ,
+               'category_id' => $request->category_id ,
+               'required' => 0 , 
                'image' => $path
             ]);
         }
-        return to_route('cpm.list');
+        // return to_route('cpm.list');
     }
-    public function index()
+    public function index(custom_product $customProduct)
     {
-        // $cpmWithCustomproduct = custom_product_material::with('custom_product')->get();
-        $cpmWithCustomproduct = custom_product_material::with('customCategory')->get();
-       return view('admin.customProductMaterials.index', ['cpmWithCustomproduct'=>$cpmWithCustomproduct]);
+       return view('admin.customProductMaterials.index', ['customProduct'=>$customProduct]);
     }
     public function show(custom_product_material $cpm)
     {
@@ -89,12 +87,14 @@ class CustomProductMaterialController extends Controller
         $customProductMaterial->image = $path;
         $customProductMaterial->save();
 
-        return to_route('cpm.list');
+        // return to_route('cpm.list');
     }
     public function delete(custom_product_material $cpm)
     {
-        Storage::disk('public')->delete($cpm->image);
+        if($cpm->image){
+            Storage::disk('public')->delete($cpm->image);
+        }
         $cpm->delete();
-        return to_route('cpm.list');
+        // return to_route('cpm.list');
     }
 }

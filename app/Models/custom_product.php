@@ -22,7 +22,12 @@ class custom_product extends Model
     {
         return $this->hasMany(custom_product_variant::class);
     }
-      public function career(){
+    public function career()
+    {
         return $this->belongsTo(career::class);
     }
+   public function customCategories()
+   {
+    return $this->hasMany(customCategory::class , 'custom_pro_id');
+   }
 }

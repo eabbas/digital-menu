@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\role;
+use App\Models\order;
 use App\Models\role_user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -73,7 +73,7 @@ class UserController extends Controller
         if (!Auth::check()) {
             return to_route('login');
         }
-        return view('admin.user.panel', ['user' => $user]);
+        return view('admin.app.panel', ['user' => $user]);
     }
 
     public function profile(){

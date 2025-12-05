@@ -79,32 +79,10 @@
                            class="w-full p-2 border rounded focus:border-blue-500 focus:outline-none">
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium mb-1">
-                        محصول اصلی *
-                    </label>
-                    <select name="custom_product_id"
-                            required
-                            class="w-full p-2 border rounded focus:border-blue-500 focus:outline-none bg-white">
-                        @foreach($customProducts as $customProduct)
-                            <option value="{{ $customProduct->id }}">{{ $customProduct->title }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium mb-1">
-                        دسته بندی *
-                    </label>
-                    <select name="custom_category_id"
-                            required
-                            class="w-full p-2 border rounded focus:border-blue-500 focus:outline-none bg-white">
-                        @foreach($customCategories as $customCategory)
-                            <option value="{{ $customCategory->id }}">{{ $customCategory->title }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
+                <input type="hidden" name="custom_pro_id" value="{{ $customProduct->id }}">
+                @foreach ($customProduct->customCategories as $customCategory)
+                    <input type="hidden" name="category_id" value="{{ $customCategory->id }}">
+                @endforeach
                 <div class="flex items-center">
                     <input type="checkbox" 
                            name="required" 
