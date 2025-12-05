@@ -19,7 +19,7 @@ class CustomProductController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        // $path = null;
+        $path = null;
         if(isset($request->customProductImage)){
 
             $name = $request->customProductImage->getClientOriginalName();
@@ -35,7 +35,7 @@ class CustomProductController extends Controller
             'material_limit' => $request->material_limit ,
             'image'=>$path
         ]);
-        return to_route('cp.list');
+        return to_route('menu.customProList');
     }
     public function index()
     {
@@ -54,6 +54,7 @@ class CustomProductController extends Controller
     }
     public function update(Request $request)
     {
+        // dd($request->all());
         $customProduct =  custom_product::find($request->id);
         $customProduct->title = $request->title;
         $customProduct->description = $request->description;
@@ -67,7 +68,7 @@ class CustomProductController extends Controller
         }
         $customProduct->save();
 
-        return to_route('cp.list');
+        return to_route('menu.customProList', [$request->career_id]);
     }
     public function delete(custom_product $customProduct)
     {
@@ -88,7 +89,7 @@ class CustomProductController extends Controller
             Storage::disk('public')->delete($customProduct->image);
         }
         $customProduct->delete();
-        return to_route('cp.list');
+        // return to_route('cp.list');
     }
     public function createFromDashboard(User $user)
     {

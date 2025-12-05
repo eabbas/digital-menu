@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\career;
+use App\Models\custom_product;
 use App\Models\menu;
 use App\Models\qr_code;
 use Illuminate\Http\Request;
@@ -144,5 +145,10 @@ class MenuController extends Controller
 
     public function createMenu(User $user){
         return view('admin.menu.createMenu', ['user'=>$user]);
+    }
+    public function customProMenu(career $career)
+    {
+        // $career = career::where('id' , $career)->first();
+        return view('admin.menu.customProList' , ['career'=>$career]);
     }
 }

@@ -162,6 +162,43 @@
                         </li>
                     </ul>
                 </div>
+            {{-- customPro_list --}}
+                 <div class="dashboard">
+                    <div class="flex flex-row-reverse justify-between">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="size-6 fill-white w-[15px]">
+                            <path fill-rule="evenodd"
+                                d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                                clip-rule="evenodd" />
+                        </svg> 
+                        
+                        <div class="flex flex-row-reverse items-center gap-2">
+                            <span class=" text-[white] flex justify-end font-bold">مشاهده همه محصولات شخصی سازی شده</span>
+                            <svg xmlns="http://www.w3.org/2000/svg"  class="w-[30px] h-[30px] fill-white " viewBox="0 0 448 512">
+                                <path d="M416 0C400 0 288 32 288 176V288c0 35.3 28.7 64 64 64h32V480c0 17.7 14.3 32 32 32s32-14.3 32-32V352 240 32c0-17.7-14.3-32-32-32zM64 16C64 7.8 57.9 1 49.7 .1S34.2 4.6 32.4 12.5L2.1 148.8C.7 155.1 0 161.5 0 167.9c0 45.9 35.1 83.6 80 87.7V480c0 17.7 14.3 32 32 32s32-14.3 32-32V255.6c44.9-4.1 80-41.8 80-87.7c0-6.4-.7-12.8-2.1-19.1L191.6 12.5c-1.8-8-9.3-13.3-17.4-12.4S160 7.8 160 16V150.2c0 5.4-4.4 9.8-9.8 9.8c-5.1 0-9.3-3.9-9.8-9L127.9 14.6C127.2 6.3 120.3 0 112 0s-15.2 6.3-15.9 14.6L83.7 151c-.5 5.1-4.7 9-9.8 9c-5.4 0-9.8-4.4-9.8-9.8V16zm48.3 152l-.3 0-.3 0 .3-.7 .3 .7z"/>
+                            </svg>
+                        </div>
+                    </div> 
+                    @foreach (Auth::user()->careers as $career)
+                        <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden">
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('cp.create') }}" class=" text-white py-1">
+                                  ایجاد محصولات شخصی سازی شده
+                                </a>
+                            </li>
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('cp.list') }}" class=" text-white py-1">
+                                  لیست محصولات شخصی سازی شده
+                                </a>
+                            </li>
+                        </ul>
+                    @endforeach
+                </div>
+                {{-- end customPro_list --}}
+
+                
                 <div class="dashboard">
                     <div class="flex flex-row-reverse justify-between">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"

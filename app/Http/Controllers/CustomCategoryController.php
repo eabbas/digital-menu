@@ -3,28 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\custom_product_variant;
 use Illuminate\Http\Request;
 use App\Models\customCategory;
+use App\Models\career;
+use App\Models\custom_product;
 
 class CustomCategoryController extends Controller
 {
-       public function create()
+    public function create(custom_product $customProduct , career $career)
     {
-        return view('admin.customCategory.create');
+        return view('admin.customCategory.create' , ['customProduct'=>$customProduct , 'career'=>$career]);
     }
     public function store(Request $request)
     {
+        // dd($request->all());
         customCategory::create([
             'title'=>$request->title ,
             'required' => $request->required , 
-            'max_item_amount' => $request->max_item_amount 
+            'max_item_amount' => $request->max_item_amount ,
+            'custom_pro_id' => $request->custom_pro_id 
         ]);
-        return to_route('custmCategory.list');
+        return to_route('custmCategory.list' , [$request->career_id , $request->custom_pro_id]);
     }
-    public function index()
+    public function index(career $career , custom_product $customProduct)
     {
-        $customCategories = customCategory::all();
-        return view('admin.customCategory.index' , ['customCategories'=>$customCategories]);
+        // dd($customProduct->customCategories);
+        return view('admin.customCategory.index' , ['career'=>$career ,'customProduct'=>$customProduct]);
     }
     public function show(customCategory $customCategory)
     {
@@ -36,13 +41,14 @@ class CustomCategoryController extends Controller
     }
     public function update(Request $request)
     {
+        dd($request->all());
         $customCategory =  customCategory::find($request->id);
         $customCategory->title = $request->title;
         $customCategory->required = $request->required;
         $customCategory->max_item_amount = $request->max_item_amount;
         $customCategory->save();
 
-        return to_route('custmCategory.list');
+        // return to_route('custmCategory.list' , [$request]);
     }
     public function delete(customCategory $customCategory)
     {

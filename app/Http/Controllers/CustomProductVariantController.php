@@ -7,54 +7,57 @@ use Illuminate\Http\Request;
 use App\Models\custom_product_variant;
 use Illuminate\Support\Facades\Storage;
 use App\Models\custom_product;
+use App\Models\career;
 
 class CustomProductVariantController extends Controller
 {
-    public function create()
+    public function create(career $career ,custom_product $custom_product)
     {
-        $customProducts = custom_product::all();
-        return view('admin.customProductVariants.create' , ['customProducts'=>$customProducts]);
+        // dd($custom_product->id);
+        return view('admin.customProductVariants.create' , ['career'=>$career , 'custom_product'=>$custom_product]);
     }
     public function store(Request $request)
     {
-        // dd($request->all());
-   
-                $name = $request->image->getClientOriginalName();
-                $fullName = time()."_".$name;
-                $path = $request->file('image')->storeAs('images', $fullName, 'public');
-            custom_product_variant::create([
-                'title'=>$request->title ,
-                'description' => $request->description ,
-                'custom_product_id' => $request->custom_product_id ,
-                'duration' => $request->duration ,
-                'min_amount_unit' => $request->min_amount_unit ,
-                'image' => $path
-            ]);
-            return to_route('cpv.list');
+        $path = null;
+        if(isset($request->image)){
+            // dd($request->all());
+
+            $name = $request->image->getClientOriginalName();
+            $fullName = time()."_".$name;
+            $path = $request->file('image')->storeAs('images', $fullName, 'public');
         }
-        public function index()
-        {
-       $cpVariants = custom_product_variant::with('custom_product')->get();
-       return view('admin.customProductVariants.index', ['cpVariants'=>$cpVariants]);
+        custom_product_variant::create([
+            'title'=>$request->title ,
+            'min_amount_unit' => $request->min_amount_unit ,
+            'duration' => $request->duration ,
+            'custom_product_id' => $request->custom_product_id ,
+            'description' => $request->description ,
+            'image' => $path
+        ]);
+        return to_route('cpv.list' , [$request->career_id , $request->custom_product_id]);
+    }
+    public function index(career $career , custom_product $customProduct)
+    {
+       return view('admin.customProductVariants.index', ['customProduct'=>$customProduct , 'career'=>$career]);
     }
     public function show(custom_product_variant $cpVariants)
     {
         return view('admin.customProductVariants.single' , ['cpVariants'=>$cpVariants]);
     }
-    public function edit(custom_product_variant $cpVariants)
+    public function edit(custom_product_variant $cpVariants,career $career,custom_product $customProduct)
     {
-        // dd($cpVariants);
-        $customProducts  = custom_product::all();
-        return view('admin.customProductVariants.edit' , ['cpVariants'=>$cpVariants , 'customProducts'=>$customProducts]);
+        // dd($career);
+        return view('admin.customProductVariants.edit' , ['cpVariants'=>$cpVariants ,'career'=>$career ,'customProduct'=>$customProduct]);
     }
     public function update(Request $request)
     {
+        // dd($request->all());
        $cpv = custom_product_variant::find($request->id);
        $cpv->title = $request->title;
        $cpv->description = $request->description;
-       $cpv->custom_product_id = $request->custom_product_id;
        $cpv->min_amount_unit = $request->min_amount_unit;
        $cpv->duration = $request->duration;
+       $cpv->custom_product_id = $request->custom_product_id;
 
        if(isset($request->image)){
             Storage::disk('public')->delete($cpv->image);
@@ -65,12 +68,12 @@ class CustomProductVariantController extends Controller
         }
 
        $cpv->save();
-       return to_route('cpv.list');
+       return to_route('cpv.list' , [$request->career_id]);
     }
-    public function delete(custom_product_variant $cpVariants)
+    public function delete(custom_product_variant $cpVariants , career $career , custom_product $customProduct)
     {
         Storage::disk('public')->delete($cpVariants->image);
         $cpVariants->delete();
-       return to_route('cpv.list');
+       return to_route('cpv.list' , [$career , $customProduct]);
     }
 }

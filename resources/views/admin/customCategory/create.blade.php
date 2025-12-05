@@ -45,6 +45,8 @@
                     ثبت
                 </button>
             </div>
+            <input type="hidden" name="custom_pro_id" value="{{ $customProduct->id }}">
+                <input type="hidden" name="career_id" value="{{ $customProduct->career->id }}">
         </form>
     </div>
 

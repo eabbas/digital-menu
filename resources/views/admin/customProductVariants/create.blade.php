@@ -34,7 +34,7 @@
                 <!-- مدت زمان -->
                 <div>
                     <label for="duration" class="block text-sm font-medium text-gray-700 mb-2">
-                        مدت زمان آماده سازی (ساعت)
+                        مدت زمان آماده سازی (دقیقه)
                     </label>
                     <input type="number" 
                            name="duration" 
@@ -44,19 +44,8 @@
                 </div>
 
                 <!-- محصول اصلی -->
-                <div>
-                    <label for="custom_product_id" class="block text-sm font-medium text-gray-700 mb-2">
-                        محصول اصلی <span class="text-red-500">*</span>
-                    </label>
-                    <select name="custom_product_id" 
-
-                            required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 bg-white">
-                        @foreach($customProducts as $customProduct)
-                            <option value="{{ $customProduct->id }}">{{ $customProduct->title }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                    <input type="hidden" name="custom_product_id" value="{{ $custom_product->id }}">
+                    <input type="hidden" name="career_id" value="{{ $custom_product->career->id }}">
 
                 <!-- تصویر -->
                 <div class="md:col-span-2">
@@ -102,62 +91,4 @@
             </div>
         </form>
     </div>
-
-    @push('scripts')
-    <script>
-        // پیش‌نمایش تصویر
-        document.getElementById('image').addEventListener('change', function(e) {
-            const preview = document.getElementById('preview');
-            const previewContainer = document.querySelector('.image-preview');
-            
-            if (this.files && this.files[0]) {
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                    previewContainer.classList.remove('hidden');
-                }
-                
-                reader.readAsDataURL(this.files[0]);
-            } else {
-                previewContainer.classList.add('hidden');
-            }
-        });
-
-        // اعتبارسنجی فرم
-        document.querySelector('form').addEventListener('submit', function(e) {
-            const title = document.getElementById('title').value;
-            const product = document.getElementById('custom_product_id').value;
-            
-            if (!title.trim()) {
-                e.preventDefault();
-                alert('لطفا عنوان را وارد کنید.');
-                return false;
-            }
-            
-            if (!product) {
-                e.preventDefault();
-                alert('لطفا محصول اصلی را انتخاب کنید.');
-                return false;
-            }
-        });
-    </script>
-    @endpush
-
-    <style>
-        /* استایل‌های اضافی */
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-        }
-        
-        .file-upload:hover {
-            background-color: #f7fafc;
-        }
-        
-        @media (max-width: 768px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
 @endsection

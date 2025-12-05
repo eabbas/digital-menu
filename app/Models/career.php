@@ -38,6 +38,10 @@ class career extends Model
   {
     return $this->hasMany(custom_product::class)->chaperone();
   }
+  public function custom_product_variant()
+  {
+    return $this->hasMany(custom_product_variant::class)->chaperone();
+  }
   public function qr_codes(){
     return $this->hasMany(qr_code::class);
   }
