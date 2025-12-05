@@ -186,10 +186,11 @@
                         </div>
                     </div> 
                     @foreach (Auth::user()->careers as $career)
+                    {{-- @dd($career) --}}
                         <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden">
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('cp.create') }}" class=" text-white py-1">
+                                <a href="{{ route('cp.create' , [$career->id]) }}" class=" text-white py-1">
                                   ایجاد محصولات شخصی سازی شده
                                 </a>
                             </li>

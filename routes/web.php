@@ -101,7 +101,7 @@ Route::group([
     'middleware'=>[UserMiddleware::class],
     'as'=>'menu.'
 ], function(){
-    Route::get('/create/{career}', 'create')->name('create');
+    Route::get('/create/{career?}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::get('/show/{menu}', 'single')->name('single');
     Route::get('/customProList/{career}', 'customProMenu')->name('customProList');
@@ -357,7 +357,7 @@ Route::group([
     Route::get('/show/{customProduct}', 'show')->name('single');
     Route::get('/edit/{customProduct}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
-    Route::get('/delete/{customProduct}', 'delete')->name('delete');
+    Route::get('/delete/{customProduct?}', 'delete')->name('delete');
 });
 
 Route::group([
@@ -365,13 +365,13 @@ Route::group([
     'controller' => CustomProductVariantController::class,
     'as' => 'cpv.'
 ], function () {
-    Route::get('/create/{career?}/{custom_product?}', 'create')->name('create');
+    Route::get('/create/{custom_product?}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/variantList/{career?}/{customProduct?}', 'index')->name('list');
-    Route::get('/show/{cpVariants}', 'show')->name('single');
-    Route::get('/edit/{cpVariant}/{career?}/{customProduct?}', 'edit')->name('edit');
+    Route::get('/variantList/{customProduct?}', 'index')->name('list');
+    Route::get('/show/{cpVariant}', 'show')->name('single');
+    Route::get('/edit/{cpVariant}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
-    Route::get('/delete/{cpVariants}/{career?}/{customProduct?}', 'delete')->name('delete');
+    Route::get('/delete/{cpVariant}', 'delete')->name('delete');
 });
 
 /////socialMedia
@@ -432,7 +432,7 @@ Route::group([
     'controller' => CustomProductMaterialController::class,
     'as' => 'cpm.'
 ], function () {
-    Route::get('/create/{career?}/{customProduct?}', 'create')->name('create');
+    Route::get('/create/{customProduct?}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::get('/materialList/{customProduct?}', 'index')->name('list');
     Route::get('/show/{cpm}', 'show')->name('single');
@@ -447,9 +447,9 @@ Route::group([
 ], function () {
     Route::get('/create/{customProduct?}/{career?}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/custmoCategoryList/{career}/{customProduct}', 'index')->name('list');
+    Route::get('/custmoCategoryList/{customProduct?}', 'index')->name('list');
     Route::get('/show/{customCategory}', 'show')->name('single');
-    Route::get('/edit/{customCategory}/{customProduct?}/{career?}', 'edit')->name('edit');
+    Route::get('/edit/{customCategory?}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
-    Route::get('/delete/{customCategory}/{customProduct?}/{career?}', 'delete')->name('delete');
+    Route::get('/delete/{customCategory?}', 'delete')->name('delete');
 });

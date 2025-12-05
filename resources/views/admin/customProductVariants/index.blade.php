@@ -18,7 +18,7 @@
                         </span> --}}
                     </div>
                 </div>
-                <a href="{{ route('cpv.create', [$customProduct->career]) }}" 
+                <a href="{{ route('cpv.create', [$customProduct]) }}" 
                    class="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors text-sm">
                     <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
@@ -92,13 +92,13 @@
                                class="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
                                 مشاهده
                             </a>
-                            {{-- @dd($customProduct->career) --}}
+                            {{-- @dd($cpVariant) --}}
                             {{-- @dd($customProduct->career->id) --}}
-                            <a href="{{ route('cpv.edit', [$cpVariant, $customProduct->career , $customProduct]) }}" 
+                            <a href="{{ route('cpv.edit', [$cpVariant]) }}" 
                                class="text-green-600 hover:text-green-800 text-sm font-medium transition-colors">
                                 ویرایش
                             </a>
-                            <a href="{{ route('cpv.delete', [$cpVariant,$customProduct->career->id , $customProduct]) }}" 
+                            <a href="{{ route('cpv.delete', [$cpVariant]) }}" 
                                class="text-red-600 hover:text-red-800 text-sm font-medium transition-colors">
                                 حذف
                             </a>
@@ -117,7 +117,7 @@
         <!-- List Categories Button -->
         @if(count($customProduct->custom_product_variants ?? []) > 0)
         <div class="mt-4 flex justify-end">
-            <a href="{{ route('custmCategory.list' , [$career , $customProduct]) }}" 
+            <a href="{{ route('custmCategory.list' , [$customProduct]) }}" 
                class="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition-colors text-sm">
                 <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>

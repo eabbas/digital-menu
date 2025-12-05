@@ -51,7 +51,7 @@ class CustomProductMaterialController extends Controller
                'image' => $path
             ]);
         }
-        // return to_route('cpm.list');
+        return to_route('cpm.list' , [$request->custom_pro_id]);
     }
     public function index(custom_product $customProduct)
     {
@@ -70,9 +70,12 @@ class CustomProductMaterialController extends Controller
     }
     public function update(Request $request)
     {
-        $name = $request->image->getClientOriginalName();
-        $fullName = time()."_".$name;
-        $path = $request->file('image')->storeAs('images', $fullName, 'public');
+        $path = null;
+        if(isset($request->image)){
+            $name = $request->image->getClientOriginalName();
+            $fullName = time()."_".$name;
+            $path = $request->file('image')->storeAs('images', $fullName, 'public');
+        }
 
         $customProductMaterial =  custom_product_material::find($request->id);
         $customProductMaterial->title = $request->title;
@@ -87,6 +90,7 @@ class CustomProductMaterialController extends Controller
         $customProductMaterial->image = $path;
         $customProductMaterial->save();
 
+        return to_route('cpm.list' , [$request->custom_product_id]);
         // return to_route('cpm.list');
     }
     public function delete(custom_product_material $cpm)
@@ -95,6 +99,6 @@ class CustomProductMaterialController extends Controller
             Storage::disk('public')->delete($cpm->image);
         }
         $cpm->delete();
-        // return to_route('cpm.list');
+        return to_route('cpm.list' , [$cpm->custom_product->id]);
     }
 }

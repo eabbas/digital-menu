@@ -44,6 +44,7 @@
                 </div>
 
                 <!-- محصول اصلی -->
+                {{-- @dd($custom_product->career->id) --}}
                     <input type="hidden" name="custom_product_id" value="{{ $custom_product->id }}">
                     <input type="hidden" name="career_id" value="{{ $custom_product->career->id }}">
 

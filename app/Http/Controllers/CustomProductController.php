@@ -19,6 +19,7 @@ class CustomProductController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+        // return $career->custom_product;
         $path = null;
         if(isset($request->customProductImage)){
 
@@ -28,14 +29,14 @@ class CustomProductController extends Controller
 
         }
         // dd($path);
-        custom_product::create([
+        $customPro_id = custom_product::insertGetId([
             'title'=>$request->title ,
             'description' => $request->description ,
             'career_id' => $request->career_id ,
             'material_limit' => $request->material_limit ,
             'image'=>$path
         ]);
-        return to_route('menu.customProList');
+        return to_route('menu.customProList' , [$request->career_id]);
     }
     public function index()
     {
@@ -67,11 +68,11 @@ class CustomProductController extends Controller
             $customProduct->image = $path;
         }
         $customProduct->save();
-
-        return to_route('menu.customProList', [$request->career_id]);
+        return to_route('menu.customProList' , [$customProduct->career_id]);
     }
     public function delete(custom_product $customProduct)
     {
+        // return $customProduct->career->id;
         // $customProduct->custom_product_variants;
         // $customProduct->custom_product_materials;
         // return $customProduct;
@@ -89,7 +90,7 @@ class CustomProductController extends Controller
             Storage::disk('public')->delete($customProduct->image);
         }
         $customProduct->delete();
-        // return to_route('cp.list');
+        return to_route('menu.customProList' , [$customProduct->career_id]);
     }
     public function createFromDashboard(User $user)
     {
