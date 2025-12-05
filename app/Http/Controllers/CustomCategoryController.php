@@ -24,7 +24,7 @@ class CustomCategoryController extends Controller
             'max_item_amount' => $request->max_item_amount ,
             'custom_pro_id' => $request->custom_pro_id 
         ]);
-        return to_route('custmCategory.list' , [$request->career_id , $request->custom_pro_id]);
+        return to_route('custmCategory.list' , [$request->custom_pro_id]);
     }
     public function index(career $career , custom_product $customProduct)
     {
@@ -41,19 +41,17 @@ class CustomCategoryController extends Controller
     }
     public function update(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $customCategory =  customCategory::find($request->id);
         $customCategory->title = $request->title;
         $customCategory->required = $request->required;
         $customCategory->max_item_amount = $request->max_item_amount;
         $customCategory->save();
-
-        // return to_route('custmCategory.list' , [$request]);
+        return to_route('custmCategory.list' , [$request->custom_pro_id]);
     }
     public function delete(customCategory $customCategory)
     {
         $customCategory->delete();
-        return to_route('custmCategory.list');
-
+        return to_route('custmCategory.list' , [$customCategory->custom_products->id]);
     }
 }

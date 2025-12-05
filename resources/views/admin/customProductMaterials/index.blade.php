@@ -97,7 +97,7 @@
                 @if(!$hasItems)
                     <div class="py-12 text-center">
                         <p class="text-gray-500 mb-4">هیچ آیتمی یافت نشد</p>
-                        <a href="{{ route('cpm.create' , [$career , $customProduct]) }}" 
+                        <a href="{{ route('cpm.create' , [$customProduct]) }}" 
                            class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm">
                             ایجاد اولین آیتم
                         </a>

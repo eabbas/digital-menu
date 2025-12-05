@@ -101,7 +101,7 @@
             </div>
         </form>
     </div>
-
+   
     <script>
         // Image Preview Script
         document.getElementById('customProductImage').addEventListener('change', function(event) {

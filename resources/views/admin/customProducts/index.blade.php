@@ -44,6 +44,7 @@
                                     <a href="{{ route('cpv.list' , [$customProduct])}}" class="ml-4 text-sky-700">لیست انواع محصولات</a>
                                 </div>
                             </div>
+                            
                         </div>
                         @endforeach
                     </div>

@@ -11,8 +11,7 @@
                 class="w-11/12 lg:w-3/4 mx-auto py-5 rounded-lg">
                 @csrf
                 <input type="hidden" name="id" value="{{$customCategory -> id}}">
-                <input type="hidden" name="id" value="{{$customProduct -> id}}">
-                <input type="hidden" name="career_id" value="{{ $customProduct->career->id }}">
+                <input type="hidden" name="custom_pro_id" value="{{ $customCategory->custom_products->id }}">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 lg:gap-4">
                     <div class="w-full flex flex-col">
                         <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"

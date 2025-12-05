@@ -11,10 +11,10 @@ use App\Models\career;
 
 class CustomProductVariantController extends Controller
 {
-    public function create(career $career ,custom_product $custom_product)
+    public function create(custom_product $custom_product)
     {
         // dd($custom_product->id);
-        return view('admin.customProductVariants.create' , ['career'=>$career , 'custom_product'=>$custom_product]);
+        return view('admin.customProductVariants.create' , ['custom_product'=>$custom_product]);
     }
     public function store(Request $request)
     {
@@ -34,25 +34,25 @@ class CustomProductVariantController extends Controller
             'description' => $request->description ,
             'image' => $path
         ]);
-        return to_route('cpv.list' , [$request->career_id , $request->custom_product_id]);
+        return to_route('cpv.list' , [$request->custom_product_id]);
     }
-    public function index(career $career , custom_product $customProduct)
+    public function index(custom_product $customProduct)
     {
-       return view('admin.customProductVariants.index', ['customProduct'=>$customProduct , 'career'=>$career]);
+       return view('admin.customProductVariants.index', ['customProduct'=>$customProduct]);
     }
     public function show(custom_product_variant $cpVariants)
     {
         return view('admin.customProductVariants.single' , ['cpVariants'=>$cpVariants]);
     }
-    public function edit(custom_product_variant $cpVariants,career $career,custom_product $customProduct)
+    public function edit(custom_product_variant $cpVariant)
     {
-        // dd($career);
-        return view('admin.customProductVariants.edit' , ['cpVariants'=>$cpVariants ,'career'=>$career ,'customProduct'=>$customProduct]);
+        // dd($cpVariant->custom_product);
+        return view('admin.customProductVariants.edit' , ['cpVariant'=>$cpVariant]);
     }
     public function update(Request $request)
     {
         // dd($request->all());
-       $cpv = custom_product_variant::find($request->id);
+        $cpv = custom_product_variant::find($request->cpvId);
        $cpv->title = $request->title;
        $cpv->description = $request->description;
        $cpv->min_amount_unit = $request->min_amount_unit;
@@ -68,12 +68,14 @@ class CustomProductVariantController extends Controller
         }
 
        $cpv->save();
-       return to_route('cpv.list' , [$request->career_id]);
+        return to_route('cpv.list' , [$request->custom_product_id]);
+
+
     }
-    public function delete(custom_product_variant $cpVariants , career $career , custom_product $customProduct)
+    public function delete(custom_product_variant $cpVariant)
     {
-        Storage::disk('public')->delete($cpVariants->image);
-        $cpVariants->delete();
-       return to_route('cpv.list' , [$career , $customProduct]);
+        Storage::disk('public')->delete($cpVariant->image);
+        $cpVariant->delete();
+        return to_route('cpv.list' , [$cpVariant->custom_product->id]);
     }
 }
