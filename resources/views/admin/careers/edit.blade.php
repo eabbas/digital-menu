@@ -6,6 +6,8 @@
             <form action="{{ route('career.update') }}" method="post" enctype='multipart/form-data'>
                 @csrf
                 <input type="hidden" name="id" value="{{ $career->id }}">
+                <input type="hidden" name="user_id" value="{{ $career->user->id }}">
+
                 <div class="min-h-screen flex items-start justify-center">
                     <div class="bg-white rounded-2xl shadow-md p-3 w-full">
                         <div class="text-center mb-4">

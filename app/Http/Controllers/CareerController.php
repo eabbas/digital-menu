@@ -99,14 +99,16 @@ class CareerController extends Controller
         $career->address = $request->address;
         $career->description = $request->description;
         $career->email = $request->email;
+        $career->user_id = $request->user_id;
         $career->save();
-        return view('admin.careers.userCareers', ['user' => Auth::user()->role]);
+        $user=user::find($request->user_id);
+        return  to_route('career.careers', ['user' => $user]);
     }
 
     public function delete(career $career)
     {
         if ($career->menu) {
-            foreach ($$career->menu->qr_codes as $qr_code) {
+            foreach ($career->menu->qr_codes as $qr_code) {
                 $qr_code->delete();
             }
             if (count($career->menu->menu_categories)) {

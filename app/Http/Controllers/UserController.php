@@ -92,9 +92,12 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
+        // dd($request->all());
         $user = User::find($request->id);
         $user->name = $request->name;
+        $user->family = $request->family;
         $user->phoneNumber = $request->phoneNumber;
+        $user->email = $request->email;
        
         if ($request->password) {
             $password = Hash::make($request->password);
@@ -108,7 +111,7 @@ class UserController extends Controller
             $user->main_image = $path;
         }
         $user->save();
-        return to_route('user.list');
+        return to_route('user.profile',[Auth::user()]);
     }
     public function delete(user $user)
     {

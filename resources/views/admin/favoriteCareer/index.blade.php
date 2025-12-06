@@ -34,7 +34,7 @@
                                 </div>
                                 @if($career->menu)
                                 <div class="p-3 text-sm h-full flex items-center justify-center font-medium">
-                                    <a href="{{ route('menu.list', [$career])}}" class="ml-4 text-sky-700">مشاهده منو</a>
+                                    {{-- <a href="{{ route('menu.list', [$career])}}" class="ml-4 text-sky-700">مشاهده منو</a> --}}
                                 </div>
                                 @endif
                             </div>

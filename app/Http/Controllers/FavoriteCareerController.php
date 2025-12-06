@@ -8,10 +8,13 @@ use App\Models\favoriteCareer;
 use App\Models\career;
 class FavoriteCareerController extends Controller
 {
-    public function create($careerId){
-        $user_id=Auth::id();
-        favoriteCareer::create(['user_id'=>$user_id,'career_id'=>$careerId]);
-        return to_route('favoriteCareer.list');
+    public function create(Request $request){
+        $favoriteCareer=favoriteCareer::where('career_id',$request->id)->first();
+        if(!$favoriteCareer){
+            $user_id=Auth::id();
+            favoriteCareer::create(['user_id'=>$user_id,'career_id'=>$request->id]);
+        }
+        // return to_route('favoriteCareer.list');
     }
     public function index(){
         $favoriteCareers=favoriteCareer::where('user_id',Auth::id())->get();

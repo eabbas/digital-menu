@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <div class="flex flex-col border-none rounded-[7px]">
+    <div class="flex flex-row border-none rounded-[7px]">
         <div class="block lg:flex flex-row justify-between gap-8">
             <div class="flex flex-col xm:flex-row lg:flex-row gap-5 py-3">
                 @if(!$career->logo)
@@ -31,6 +31,27 @@
             </div>
         </div>
     </div>
+
+ {{-- <div class="flex flex-row border-none rounded-[7px]">
+        <div class="block lg:flex flex-row justify-between gap-8">
+            <div class="flex flex-col xm:flex-row lg:flex-row gap-5 py-3">
+                @if(!$career->banner)
+                <img
+                    class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0"
+                    src="{{ asset('assets/img/user.png') }}"
+                    alt="career banner"
+                />
+                @else
+                <img
+                    class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0"
+                    src="{{ asset('storage/'.$career->banner) }}"
+                    alt="career banner"
+                />
+                @endif
+            </div>
+        </div>
+    </div> --}}
+
     <div class="pt-3 mt-4 lg:mt-8">
         <div
             class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5"

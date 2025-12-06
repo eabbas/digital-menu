@@ -13,7 +13,7 @@
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="file"
-                                        name='logo' placeholder=" لوگو کسب وکار خود را وارد کنید" title="لوگو کسب و کار">
+                                        name='logo' placeholder=" لوگو کسب وکار خود را وارد کنید" title="لوگو کسب و کار"required>
                                 </div>
                             </div>
                             <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -21,7 +21,7 @@
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='title' placeholder="نام کسب وکار خود را وارد کنید">
+                                        name='title' placeholder="نام کسب وکار خود را وارد کنید"required>
                                 </div>
                             </div>
                             <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -46,7 +46,7 @@
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="file"
-                                        name="banner" title="بنر کسب و کار">
+                                        name="banner" title="بنر کسب و کار" required>
                                 </div>
                             </div>
                             <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -55,7 +55,7 @@
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='province' placeholder="استان خود را وارد کنید">
+                                        name='province' placeholder="استان خود را وارد کنید"required>
                                 </div>
                             </div>
                             <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -63,7 +63,7 @@
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='city' placeholder=" شهرخود را وارد کنید">
+                                        name='city' placeholder=" شهرخود را وارد کنید"required>
                                 </div>
                             </div>
                             <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -71,7 +71,7 @@
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='address' placeholder=" ادرس کسب وکار خود را وارد کنید">
+                                        name='address' placeholder=" ادرس کسب وکار خود را وارد کنید"required>
                                 </div>
                             </div>
 
@@ -90,7 +90,7 @@
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <textarea rows="5" class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
                                         name='description' placeholder="توضیحات کسب وکار"
-                                        class="w-full px-3 py-1 md:px-2 outline-none text-gray-500"></textarea>
+                                        class="w-full px-3 py-1 md:px-2 outline-none text-gray-500"required></textarea>
                                 </div>
                             </div>
 
@@ -99,7 +99,7 @@
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='social_medias[instagram]' placeholder="آدرس شبکه های اجتماعی">
+                                        name='social_medias[instagram]' placeholder="آدرس اینستاگرام">
                                 </div>
                             </div>
                             <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -107,7 +107,7 @@
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='social_medias[telegram]' placeholder="آدرس شبکه های اجتماعی">
+                                        name='social_medias[telegram]' placeholder="آدرس تلگرام">
                                 </div>
                             </div>
                             <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -115,7 +115,7 @@
                                 <div
                                     class="w-full p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] flex">
                                     <input class="w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='social_medias[whatsapp]' placeholder="آدرس شبکه های اجتماعی">
+                                        name='social_medias[whatsapp]' placeholder="آدرس واتساپ">
                                 </div>
                             </div>
                         </div>
