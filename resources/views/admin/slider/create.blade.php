@@ -8,11 +8,11 @@
                 <div class="md:flex md:flex-col md:w-full">
                         <fieldset class="mt-2 text-sm md:text-base border border-gray-400 rounded-[15px] py-1 pr-3">
                             <legend class="kelass p-1 w-30 bg-[#1cb7fd] text-white rounded-full flex flex-row justify-center text-sm">عکس اسلایدر</legend>
-                            <input type="file" name='slider_img' class="w-full px-2 py-1 md:px-5 outline-none text-gray-500">
+                            <input type="file" name='slider_img' class="w-full px-2 py-1 md:px-5 outline-none text-gray-500"required>
                         </fieldset>
                          <fieldset class="mt-2 text-sm md:text-base border border-gray-400 rounded-[15px] py-1 pr-3">
                             <legend class="p-1 w-30 bg-[#1cb7fd] text-white rounded-full flex flex-row justify-center text-sm">نام اسلایدر</legend>
-                            <input type="text" name='title' class="w-full px-2 py-1 md:px-5 outline-none text-gray-500">
+                            <input type="text" name='title' class="w-full px-2 py-1 md:px-5 outline-none text-gray-500"required>
                         </fieldset>
                 </div>
                 <button type="submit"

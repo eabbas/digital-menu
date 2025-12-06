@@ -339,7 +339,7 @@ Route::group([
     'controller' => favoriteCareerController::class,
     'as' => 'favoriteCareer.'
 ], function () {
-    Route::get('/create/{id}', 'create')->name('create')->middleware([UserMiddleware::class]);
+    Route::post('/create', 'create')->name('create')->middleware([UserMiddleware::class]);
     Route::get('/favoriteCareers', 'index')->name('list');
     Route::get('/delete/{career}', 'delete')->name('delete');
 });
