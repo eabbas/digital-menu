@@ -33,7 +33,7 @@
                             name="name" placeholder="نام" required>
                         <input type="text"
                             class="w-full p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border border-[#DBDFE9] outline-none"
-                            name="family" placeholder="نام خانوادگی">
+                            name="family" placeholder="نام خانوادگی" required>
                         <input type="number"
                             class="w-full p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border border-[#DBDFE9] outline-none"
                             name="phoneNumber" placeholder="شماره تلفن" required>
