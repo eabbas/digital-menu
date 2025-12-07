@@ -86,7 +86,7 @@ class CoversController extends Controller
 
     public function single(covers $covers){
         $socialMedias=socialMedia::all();
-        // dd($covers->socialAddresses);
+        // dd($covers->siteLinks);
         return view('admin.covers.single', ['cover'=>$covers,'socialMedias'=>$socialMedias]);
     }
 }
