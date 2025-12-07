@@ -11,16 +11,16 @@ use App\Models\custom_product;
 
 class CustomCategoryController extends Controller
 {
-    public function create(custom_product $customProduct , career $career)
+    public function create(custom_product $custom_product)
     {
-        return view('admin.customCategory.create' , ['customProduct'=>$customProduct , 'career'=>$career]);
+        return view('admin.customCategory.create' , ['custom_product'=>$custom_product]);
     }
     public function store(Request $request)
     {
         // dd($request->all());
         customCategory::create([
             'title'=>$request->title ,
-            'required' => $request->required , 
+            'required' => $request->required ? $request->required : 0 , 
             'max_item_amount' => $request->max_item_amount ,
             'custom_pro_id' => $request->custom_pro_id 
         ]);
@@ -54,4 +54,11 @@ class CustomCategoryController extends Controller
         $customCategory->delete();
         return to_route('custmCategory.list' , [$customCategory->custom_products->id]);
     }
+    public function item_list(customCategory $customCategory)
+    {
+        // dd($customCategory->id);
+        // return $customCategory->custom_products->id;
+        return view('admin.customCategory.item_list' , ['customCategory'=>$customCategory]);
+    }
+
 }

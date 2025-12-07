@@ -38,7 +38,6 @@
                     name="description" 
                     id="description" 
                     rows="4"
-                    required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200 resize-none"
                     placeholder="توضیحات محصول را وارد کنید"
                 ></textarea>
@@ -81,11 +80,12 @@
                     محدودیت متریال
                 </label>
                 <input 
-                    type="text" 
+                    type="number" 
                     name="material_limit" 
                     id="material_limit"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
                     placeholder="محدودیت متریال را وارد کنید"
+                    required
                 >
             </div>
 

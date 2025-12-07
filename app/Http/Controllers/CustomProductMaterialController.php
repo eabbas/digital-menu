@@ -12,9 +12,9 @@ use Illuminate\Http\Request;
 
 class CustomProductMaterialController extends Controller
 {
-    public function create(career $career , custom_product $customProduct)
+    public function create(customCategory $customCategory)
     {
-        return view('admin.customProductMaterials.create' , ['career'=>$career, 'customProduct'=>$customProduct]);
+        return view('admin.customProductMaterials.create' , ['customCategory'=>$customCategory]);
     }
     public function store(Request $request)
     {
@@ -71,12 +71,7 @@ class CustomProductMaterialController extends Controller
     public function update(Request $request)
     {
         $path = null;
-        if(isset($request->image)){
-            $name = $request->image->getClientOriginalName();
-            $fullName = time()."_".$name;
-            $path = $request->file('image')->storeAs('images', $fullName, 'public');
-        }
-
+        
         $customProductMaterial =  custom_product_material::find($request->id);
         $customProductMaterial->title = $request->title;
         $customProductMaterial->description = $request->description;
@@ -86,7 +81,16 @@ class CustomProductMaterialController extends Controller
         $customProductMaterial->max_unit_amount = $request->max_unit_amount;
         $customProductMaterial->custom_product_id = $request->custom_product_id;
         $customProductMaterial->category_id = $request->custom_category_id;
-        Storage::disk('public')->delete($customProductMaterial->image);
+        
+        if(isset($request->image)){
+            if($customProductMaterial->image){
+
+                Storage::disk('public')->delete($customProductMaterial->image);
+            }
+            $name = $request->image->getClientOriginalName();
+            $fullName = time()."_".$name;
+            $path = $request->file('image')->storeAs('images', $fullName, 'public');
+        }
         $customProductMaterial->image = $path;
         $customProductMaterial->save();
 

@@ -51,6 +51,7 @@
                            name="order" 
                            id="order"
                            min="0"
+                           required
                            class="w-full p-2 border rounded focus:border-blue-500 focus:outline-none">
                 </div>
             </div>
@@ -76,13 +77,12 @@
                            name="max_unit_amount" 
                            id="max_unit_amount"
                            min="1"
+                           required
                            class="w-full p-2 border rounded focus:border-blue-500 focus:outline-none">
                 </div>
-
-                <input type="hidden" name="custom_pro_id" value="{{ $customProduct->id }}">
-                @foreach ($customProduct->customCategories as $customCategory)
-                    <input type="hidden" name="category_id" value="{{ $customCategory->id }}">
-                @endforeach
+                {{-- @dd($customCategory->id); --}}
+                <input type="hidden" name="custom_pro_id" value="{{ $customCategory->custom_products->id }}">
+                <input type="hidden" name="category_id" value="{{ $customCategory->id }}">
                 <div class="flex items-center">
                     <input type="checkbox" 
                            name="required" 

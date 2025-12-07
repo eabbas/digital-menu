@@ -29,4 +29,5 @@ class menu extends Model
     public function menu_categories(){
         return $this->hasMany(menu_category::class);
     }
+
 }
