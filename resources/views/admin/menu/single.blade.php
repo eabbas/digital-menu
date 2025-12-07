@@ -49,6 +49,7 @@
                         class="text-sm px-5 py-2 bg-violet-500 text-white hover:bg-violet-600 transition-all duration-150 rounded-lg shadow-sm hover:shadow-md">
                         محصولات شخصی‌سازی شده
                     </a>
+                    {{-- @dd($menu->career->custom_product) --}}
                     <a href="{{ route('cp.create', [$menu->career])}}"
                         class="text-sm px-5 py-2 bg-indigo-500 text-white hover:bg-indigo-600 transition-all duration-150 rounded-lg shadow-sm hover:shadow-md">
                         ایجاد محصول شخصی‌سازی

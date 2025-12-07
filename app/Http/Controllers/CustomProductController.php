@@ -61,7 +61,9 @@ class CustomProductController extends Controller
         $customProduct->description = $request->description;
         $customProduct->material_limit = $request->material_limit;
         if(isset($request->customProductImage)){
-            Storage::disk('public')->delete($customProduct->image);
+            if($customProduct->image){
+                Storage::disk('public')->delete($customProduct->image);
+            }
             $name = $request->customProductImage->getClientOriginalName();
             $fullName = time()."_".$name;
             $path = $request->file('customProductImage')->storeAs('images', $fullName, 'public');
@@ -72,10 +74,7 @@ class CustomProductController extends Controller
     }
     public function delete(custom_product $customProduct)
     {
-        // return $customProduct->career->id;
-        // $customProduct->custom_product_variants;
-        // $customProduct->custom_product_materials;
-        // return $customProduct;
+        // dd($customProduct->customCategories);
         if(count($customProduct->custom_product_variants)){
             foreach($customProduct->custom_product_variants as $variants){
                 $variants->delete();
@@ -86,14 +85,26 @@ class CustomProductController extends Controller
                 $materials->delete();
             }
         }
+        if(count($customProduct->customCategories)){
+            foreach($customProduct->customCategories as $category){
+                $category->delete();
+            }
+        }
         if($customProduct->image){
             Storage::disk('public')->delete($customProduct->image);
         }
         $customProduct->delete();
         return to_route('menu.customProList' , [$customProduct->career_id]);
     }
+
     public function createFromDashboard(User $user)
     {
         return view('admin.customProducts.createFromDashboard' , ['user'=>$user]);
+    }
+
+        public function category_list(custom_product $custom_product)
+    {
+        // dd($custom_product->customCategories);
+        return view('admin.customProducts.category_list' , ['custom_product'=>$custom_product]);
     }
 }

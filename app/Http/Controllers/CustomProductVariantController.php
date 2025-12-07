@@ -60,7 +60,9 @@ class CustomProductVariantController extends Controller
        $cpv->custom_product_id = $request->custom_product_id;
 
        if(isset($request->image)){
-            Storage::disk('public')->delete($cpv->image);
+            if ($cpv->image) {
+                Storage::disk('public')->delete($cpv->image);
+            }
             $name = $request->image->getClientOriginalName();
             $fullName = time()."_".$name;
             $path = $request->file('image')->storeAs('images', $fullName, 'public');
@@ -72,10 +74,13 @@ class CustomProductVariantController extends Controller
 
 
     }
-    public function delete(custom_product_variant $cpVariant)
+    public function delete(custom_product_variant $cpVariants)
     {
-        Storage::disk('public')->delete($cpVariant->image);
-        $cpVariant->delete();
-        return to_route('cpv.list' , [$cpVariant->custom_product->id]);
+        if($cpVariants->image){
+            Storage::disk('public')->delete($cpVariants->image);
+        }
+        $cpVariants->delete();
+        return to_route('cpv.list' , [$cpVariants->custom_product->id]);
     }
+    
 }

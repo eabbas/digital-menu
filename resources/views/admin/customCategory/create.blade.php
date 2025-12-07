@@ -15,17 +15,16 @@
                        name="title" 
                        id="title"
                        required
-                       class="w-full p-2 border rounded focus:border-blue-500 focus:outline-none">
+                       class="w-3/12 p-2 border rounded focus:border-blue-500 focus:outline-none">
             </div>
             <div class="mb-4">
-                <label for="required" class="block text-sm font-medium mb-2">
+                <label for="required" class="block text-sm font-medium">
                      الزامی بودن یا نبودن 
                 </label>
                 <input type="checkbox" 
                        name="required" 
                        value="1"
-                       required
-                       class="w-full p-2 border rounded focus:border-blue-500 focus:outline-none">
+                       class="w-3/12 p-1 border rounded focus:border-blue-500">
             </div>
 
             <div class="mb-6">
@@ -37,7 +36,7 @@
                        id="max_item_amount"
                        required
                        min="1"
-                       class="w-full p-2 border rounded focus:border-blue-500 focus:outline-none">
+                       class="w-3/12 p-2 rounded border-gray-300 rounded focus:border-blue-500 focus:outline-none">
             </div>
 
             <div class="flex gap-3">
@@ -45,8 +44,9 @@
                     ثبت
                 </button>
             </div>
-            <input type="hidden" name="custom_pro_id" value="{{ $customProduct->id }}">
-                <input type="hidden" name="career_id" value="{{ $customProduct->career->id }}">
+            {{-- @dd($cpVariant->custom_product->career->id) --}}
+            <input type="hidden" name="custom_pro_id" value="{{ $custom_product->id }}">
+                <input type="hidden" name="career_id" value="{{ $custom_product->career->id }}">
         </form>
     </div>
 
