@@ -22,7 +22,7 @@ class covers extends Model
       return $this->hasMany(social_address::class);
     }
 
-    public function siteLink(){
-      return $this->hasOne(site_link::class);
+    public function siteLinks(){
+      return $this->hasMany(site_link::class);
     }
 }

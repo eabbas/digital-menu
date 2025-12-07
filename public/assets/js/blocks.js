@@ -11,15 +11,11 @@ let socialMediaForm = document.getElementById('socialMediaForm')
 
 
 // link form
-let siteLinkForm = document.getElementById('siteLinkForm')
+let siteLinkForm = document.querySelector('.createSiteLink')
 
 
 // edit socialmedia div
-let editSocialM = document.getElementById('editsocialMediaForm')
-
-
-// edit socialmedia form
-let linkForm = document.getElementById('editSiteLinkForm')
+let editSocialM = document.querySelector('.editsocialMediaForm')
 
 
 function addBlock(state) {
@@ -64,12 +60,18 @@ function addLink() {
 
 
 let forms = document.querySelectorAll('.form')
+let editSMF = document.querySelector('.editSMF')
+let editSLF = document.querySelector('.editSLF')
 function closeForm(){
     forms.forEach((form)=>{
         form.classList.add('invisible')
         form.classList.add('opacity-0')
         form.classList.remove('-translate-y-1/7')
     })
+    editSMF.classList.remove('max-h-[500px]')
+    editSMF.classList.add('max-h-0')
+    editSLF.classList.remove('max-h-[500px]')
+    editSLF.classList.add('max-h-0')
     block.classList.add('invisible')
     block.classList.add('opacity-0')
     group.classList.add('scale-95')
@@ -77,16 +79,23 @@ function closeForm(){
     group.classList.add('invisible')
 }
 
-// --------------------------------------
-let editSMF = document.getElementById('editSMF')
 function openDropdown(page){
     if (page == 'media') {
         if(editSMF.classList.contains('max-h-0')){
             editSMF.classList.remove('max-h-0')
             editSMF.classList.add('max-h-[500px]')
         } else {
-            editSMF.classList.add('max-h-0')
             editSMF.classList.remove('max-h-[500px]')
+            editSMF.classList.add('max-h-0')
+        }
+    }
+    if (page == 'link') {
+        if(editSLF.classList.contains('max-h-0')){
+            editSLF.classList.remove('max-h-0')
+            editSLF.classList.add('max-h-[500px]')
+        } else {
+            editSLF.classList.remove('max-h-[500px]')
+            editSLF.classList.add('max-h-0')
         }
     }
 }

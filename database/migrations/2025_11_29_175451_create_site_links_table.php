@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('user_id');
             $table->string('title');
-            $table->string('icon_path');
+            $table->string('icon_path')->nullable();
             $table->timestamps();
         });
     }

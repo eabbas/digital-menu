@@ -16,15 +16,15 @@ class SocialAddressController extends Controller
     }
     public function store(Request $request)
     {
-
-        $socialMedia=socialMedia::find($request->socialMedia_id);
-        social_address ::create([
+        $socialAddress = social_address::insertGetId([
             'socialMedia_id' => $request->socialMedia_id,
             'user_id' => Auth::id(),
-            'covers_id' => $request->covers_id,
-            'username' =>  $socialMedia->link . $request->username ,
+            'covers_id' => $request->cover_id,
+            'username' =>  $request->userName ,
         ]);
-        return to_route('covers.single', [$request->covers_id]);
+        $data['address'] = social_address::find($socialAddress);
+        $data['socialMedia']=socialMedia::find($request->socialMedia_id);
+        return response()->json($data);
     }
        public function index()
     {
@@ -46,14 +46,19 @@ class SocialAddressController extends Controller
         $social_address->username = $request->username;
         $social_address->covers_id = $request->cover_id;
         $social_address->save();
-        return to_route('covers.single', [$request->cover_id]);
+        return response()->json($social_address);
+        // return to_route('covers.single', [$request->cover_id]);
         
     }
 
-    public function delete(social_address $social_address)
+    public function delete(Request $request)
     {
+        // dd($social_address);
+        $id = $request->input('social_address_id');
+        $social_address = social_address::find($id);
         $social_address->delete();
-        return to_route('socialAddress.list');
+        return response()->json('ok');
+        // return to_route('socialAddress.list');
 
     }
 }
