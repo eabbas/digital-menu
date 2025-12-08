@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\socialMedia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -8,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class SocialMediaController extends Controller
 {
-     public function create()
+    public function create()
     {
         return view('admin.socialMedia.create');
     }
@@ -21,11 +22,11 @@ class SocialMediaController extends Controller
             'title' => $request->title,
             'icon_path' => $path,
             'link' => $request->link,
-
         ]);
         return to_route('socialMedia.list');
     }
-      public function index()
+
+    public function index()
     {
         $socialMedias = socialMedia::all();
         return view('admin.socialMedia.index', ['socialMedias' => $socialMedias]);
@@ -53,7 +54,7 @@ class SocialMediaController extends Controller
 
     public function delete(socialMedia $socialMedia)
     {
-        foreach($socialMedia->social_addresses as $address){
+        foreach ($socialMedia->social_addresses as $address) {
             $address->delete();
         }
         $socialMedia->delete();

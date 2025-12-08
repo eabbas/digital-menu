@@ -27,7 +27,6 @@
                                 <span>عملیات</span>
                             </div>
                         </div> -->
-                        
                         <!-- بدنه جدول -->
                         <div class="bg-white divide-y divide-[#f1f1f4]">
                             @foreach ($covers as $cover)

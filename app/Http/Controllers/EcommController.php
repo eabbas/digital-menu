@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Models\ecomm;
 use App\Models\role;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+
 class EcommController extends Controller
 {
     public function create(User $user = null)
@@ -22,12 +22,9 @@ class EcommController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $roles = role::all();
-        // dd($roles);
         $user = Auth::user();
-        if ($user->role[0]->title!='admin') {
-            // $user->type = 'ecomm';
+        if ($user->role[0]->title != 'admin') {
             $user->role[0] = $roles[2];
             $user->save();
         }
@@ -54,13 +51,11 @@ class EcommController extends Controller
         return to_route('ecomm.ecomms', [Auth::user()]);
     }
 
-    public function user_ecomms(User $user=null )
+    public function user_ecomms(User $user = null)
     {
         if ($user) {
             return view('admin.ecomms.userecomms', ['user' => $user]);
-        }else{
-
-           // dd(Auth::user()->ecomms);
+        } else {
             return view('admin.ecomms.userecomms', ['user' => Auth::user()]);
         }
     }
@@ -101,17 +96,11 @@ class EcommController extends Controller
         $ecomm->description = $request->description;
         $ecomm->email = $request->email;
         $ecomm->save();
-        // $user= Auth::user();
-        // return view('admin.ecomms.userecomms', ['user' =>Auth::user()]);
-        return to_route('ecomm.ecomms',[Auth::user()]);
+        return to_route('ecomm.ecomms', [Auth::user()]);
     }
 
     public function delete(ecomm $ecomm)
     {
-        // $ecomm_category=$ecomm->ecomm_category;
-        // dd($ecomm_category[0]->ecomm_products);
-        
-        
         if ($ecomm->menu) {
             if ($ecomm->menu->qr_codes) {
                 foreach ($ecomm->menu->qr_codes as $menu) {
@@ -120,21 +109,21 @@ class EcommController extends Controller
             }
             // $ecomm->menu->delete();
         }
-        if($ecomm->ecomm_category){
-
-            foreach($ecomm->ecomm_category as $ecomm_category){
-                if($ecomm_category->ecomm_products){
-                    foreach($ecomm_category->ecomm_products as $ecomm_product){
-                                 $ecomm_product->delete();
+        if ($ecomm->ecomm_category) {
+            foreach ($ecomm->ecomm_category as $ecomm_category) {
+                if ($ecomm_category->ecomm_products) {
+                    foreach ($ecomm_category->ecomm_products as $ecomm_product) {
+                        $ecomm_product->delete();
                     }
                 }
                 $ecomm_category->delete();
             }
         }
         $ecomm->delete();
-        
-    $user= Auth::user();
-        return view('admin.ecomms.userecomms', ['user' =>$user]);    }
+
+        $user = Auth::user();
+        return view('admin.ecomms.userecomms', ['user' => $user]);
+    }
 
     public function index()
     {
@@ -146,6 +135,4 @@ class EcommController extends Controller
     {
         return view('admin.ecomms.single', ['ecomm' => $ecomm]);
     }
-    }
-
-
+}

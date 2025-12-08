@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\covers;
-use App\Models\social_address;
 use App\Models\site_link;
+use App\Models\social_address;
 use App\Models\socialMedia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,7 @@ use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class CoversController extends Controller
 {
-       public function create()
+    public function create()
     {
         return view('admin.covers.create');
     }
@@ -21,7 +22,6 @@ class CoversController extends Controller
     {
         $logoName = $request->logo_path->getClientOriginalName();
         $logoPath = $request->logo_path->storeAs('logo_cover', $logoName, 'public');
-
         $coverName = $request->cover_path->getClientOriginalName();
         $coverPath = $request->cover_path->storeAs('logo_cover', $coverName, 'public');
         covers::create([
@@ -31,18 +31,18 @@ class CoversController extends Controller
             'user_id' => Auth::id(),
             'logo_path' => $logoPath,
             'cover_path' => $coverPath,
-
         ]);
         return to_route('covers.list');
     }
-     public function index()
+
+    public function index()
     {
         $covers = covers::all();
         return view('admin.covers.index', ['covers' => $covers]);
     }
+
     public function edit(covers $covers)
-    { 
-        // dd($covers->with('socialMedia')->get());
+    {
         return view('admin.covers.edit', ['covers' => $covers]);
     }
 
@@ -66,27 +66,25 @@ class CoversController extends Controller
         $covers->description = $request->description;
         $covers->save();
         return to_route('covers.list');
-
     }
 
     public function delete(covers $covers)
     {
-         $socialAddresses = social_address::where('covers_id', $covers->id)->get();
-         $site_links = site_link::where('covers_id', $covers->id)->get();
-            foreach ($socialAddresses as $address) {
-                $address->delete();
-            }
-            foreach ($site_links as $site_link) {
-                $site_link->delete();
-            }
-                $covers->delete();
+        $socialAddresses = social_address::where('covers_id', $covers->id)->get();
+        $site_links = site_link::where('covers_id', $covers->id)->get();
+        foreach ($socialAddresses as $address) {
+            $address->delete();
+        }
+        foreach ($site_links as $site_link) {
+            $site_link->delete();
+        }
+        $covers->delete();
         return to_route('covers.list');
-
     }
 
-    public function single(covers $covers){
-        $socialMedias=socialMedia::all();
-        // dd($covers->siteLinks);
-        return view('admin.covers.single', ['cover'=>$covers,'socialMedias'=>$socialMedias]);
+    public function single(covers $covers)
+    {
+        $socialMedias = socialMedia::all();
+        return view('admin.covers.single', ['cover' => $covers, 'socialMedias' => $socialMedias]);
     }
 }
