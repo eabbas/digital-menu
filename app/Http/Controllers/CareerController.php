@@ -24,24 +24,21 @@ class CareerController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $roles = role::all();
-        // dd($roles);
         $user = Auth::user();
         if ($user->role[0]->title != 'admin') {
-            // $user->type = 'career';
             $user->role[0] = $roles[1];
             $user->save();
         }
+        
         $name = $request->logo->getClientOriginalName();
         $fullName = Str::uuid() . '_' . $name;
         $path = $request->file('logo')->storeAs('files', $fullName, 'public');
-
         $bannerName = $request->banner->getClientOriginalName();
         $fullBannerName = Str::uuid() . '_' . $bannerName;
         $bannerPath = $request->file('banner')->storeAs('files', $fullBannerName, 'public');
         $social_medias = json_encode($request->social_medias);
-        career::insertGetId([
+        $career_id = career::insertGetId([
             'title' => $request->title,
             'logo' => $path,
             'province' => $request->province,
@@ -52,7 +49,7 @@ class CareerController extends Controller
             'email' => $request->email,
             'description' => $request->description,
             'career_category_id' => $request->careerCategory,
-            'banner' => $bannerPath
+            'banner' => $bannerPath,
         ]);
         return to_route('career.careers', [Auth::user()]);
     }
@@ -80,14 +77,14 @@ class CareerController extends Controller
     public function update(Request $request)
     {
         $career = career::find($request->id);
-        if ($request->logo) {
+        if (isset($request->logo)) {
             Storage::disk('public')->delete($career->logo);
             $logoName = $request->logo->getClientOriginalName();
             $fullLogoName = Str::uuid() . '_' . $logoName;
             $logoPath = $request->file('logo')->storeAs('files', $fullLogoName, 'public');
             $career->logo = $logoPath;
         }
-        if ($request->banner) {
+        if (isset($request->banner)) {
             if ($career->banner) {
                 Storage::disk('public')->delete($career->banner);
             }
@@ -103,16 +100,31 @@ class CareerController extends Controller
         $career->address = $request->address;
         $career->description = $request->description;
         $career->email = $request->email;
+        $career->user_id = $request->user_id;
         $career->save();
-        return view('admin.careers.userCareers', ['user' => Auth::user()->role]);
+        $user=user::find($request->user_id);
+        return  to_route('career.careers', ['user' => $user]);
     }
 
     public function delete(career $career)
     {
         if ($career->menu) {
-            if ($career->menu->qr_codes) {
-                foreach ($career->menu->qr_codes as $menu) {
-                    $menu->delete();
+            foreach ($career->menu->qr_codes as $qr_code) {
+                $qr_code->delete();
+            }
+            if (count($career->menu->menu_categories)) {
+                foreach ($career->menu->menu_categories as $category) {
+                    if (count($category->menu_items)) {
+                        foreach ($category->menu_items as $item) {
+                            if (count($item->ingredients)) {
+                                foreach ($item->ingredients as $ingredients) {
+                                    $ingredients->delete();
+                                }
+                            }
+                            $item->delete();
+                        }
+                    }
+                    $category->delete();
                 }
             }
             $career->menu->delete();

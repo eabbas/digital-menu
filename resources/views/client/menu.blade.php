@@ -19,7 +19,7 @@
         <div class="w-full bg-[#F4F8F9] pt-3">
             <div class="w-11/12 flex flex-row items-center gap-3 pb-3 mx-auto overflow-x-auto" style="scrollbar-width: none;">
                 <?php $menuIndex = 0;?>   
-                @foreach(json_decode($career->menu->menu_data) as $data)
+                {{-- @foreach(json_decode($career->menu->menu_data) as $data)
                 <div>
                     <a href="#" class="w-20 gap-2 bg-white rounded-lg p-2 flex flex-col items-center" onclick='showMenu(event, "<?= $menuIndex?>")'>
                         <img class="size-10" src="{{ asset('storage/'.$data->menu_image) }}" alt="menu image">
@@ -28,7 +28,7 @@
                     </a>
                 </div>
                 <?php $menuIndex++;?>
-                @endforeach
+                @endforeach --}}
             </div>
             <div class="w-11/12 mx-auto">
                 <div class="my-5">
@@ -38,7 +38,7 @@
                 </div>
                 <div class="flex flex-col gap-3">
                     <?php $i=0; ?>
-                    @foreach(json_decode($career->menu->menu_data) as $data)
+                    {{-- @foreach(json_decode($career->menu->menu_data) as $data)
                     <div class="flex flex-col gap-3 parent_menu" data-index-menu="{{ $i }}">
                         @foreach($data->values as $value)
                         <div class="w-full bg-white flex flex-row items-center gap-4 p-4 rounded-lg">
@@ -78,10 +78,10 @@
                                 </div>
                             </div>
                         </div>
-                        @endforeach
-                        <?php $i++;?>
+                        @endforeach --}}
+                        {{-- <?php $i++;?>
                     </div>
-                    @endforeach
+                    @endforeach --}}
                 </div>
             </div>
         </div>

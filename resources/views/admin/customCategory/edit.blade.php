@@ -11,6 +11,7 @@
                 class="w-11/12 lg:w-3/4 mx-auto py-5 rounded-lg">
                 @csrf
                 <input type="hidden" name="id" value="{{$customCategory -> id}}">
+                <input type="hidden" name="custom_pro_id" value="{{ $customCategory->custom_products->id }}">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 lg:gap-4">
                     <div class="w-full flex flex-col">
                         <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
@@ -18,6 +19,15 @@
                             <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">عنوان
                             </legend>
                             <input type="title" name="title" value="{{$customCategory -> title}}"
+                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
+                        </fieldset>
+                    </div>
+                    <div class="w-full flex flex-col">
+                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
+                            for="required">
+                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">عنوان
+                            </legend>
+                            <input type="checkbox" name="required" value="{{$customCategory -> required}}" @if($customCategory->required) {{ "checked" }}  @endif
                                 class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
                         </fieldset>
                     </div>

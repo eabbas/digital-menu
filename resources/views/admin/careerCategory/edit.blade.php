@@ -26,7 +26,7 @@
                             for="main_image">
                             <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">عکس
                             </legend>
-                            <input type="file" name="main_image" class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500" value={{ $careerCategory->main_image }}>
+                            <input type="file" name="main_image" class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500" value={{ $careerCategory->main_image }} required>
                         </fieldset>
                     </div>
                     <div class="w-full flex flex-col">

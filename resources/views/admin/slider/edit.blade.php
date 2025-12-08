@@ -18,7 +18,7 @@
                     </div>
                     <div class="w-full flex flex-col">
                         <label class="text-sm md:text-base" for="title">عنوان اسلایدر :</label>
-                        <input type="title" name="title"  value="{{$slider -> title}}" class="w-full px-2 py-1 lg:px-2 outline-none border-b" required>
+                        <input type="title" name="title"  value="{{$slider -> title}}" class="w-full px-2 py-1 lg:px-2 outline-none border-b" >
                     </div>
                 <div class="md:text-left text-center md:px-12 mt-5 lg:mt-10">
                     <button class="px-5 py-2 lg:px-10 lg:py-3 border rounded-md transition-all duration-150 hover:bg-gray-400 hover:border-gray-400 hover:text-white">ثبت</button>

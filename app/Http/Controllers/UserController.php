@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\role;
+use App\Models\order;
 use App\Models\role_user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -73,7 +73,7 @@ class UserController extends Controller
         if (!Auth::check()) {
             return to_route('login');
         }
-        return view('admin.user.panel', ['user' => $user]);
+        return view('admin.app.panel', ['user' => $user]);
     }
 
     public function profile(){
@@ -92,9 +92,12 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
+        // dd($request->all());
         $user = User::find($request->id);
         $user->name = $request->name;
+        $user->family = $request->family;
         $user->phoneNumber = $request->phoneNumber;
+        $user->email = $request->email;
        
         if ($request->password) {
             $password = Hash::make($request->password);
@@ -108,10 +111,8 @@ class UserController extends Controller
             $user->main_image = $path;
         }
         $user->save();
-        return to_route('user.list');
+        return to_route('user.profile',[Auth::user()]);
     }
-    
-
     public function delete(user $user)
     {
         foreach ($user->careers as $career) {

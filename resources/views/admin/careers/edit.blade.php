@@ -1,135 +1,148 @@
 @extends('admin.app.panel')
 @section('title', 'ویرایش کسب و کار')
 @section('content')
-<section class="2xl:container mx-auto">
-    <div class="w-full mx-auto pb-5">
-        <fieldset class="border-2 rounded-[10px] border-gray-400 shadow">
-            <legend class="lg:text-3xl md:text-2xl text-md font-semibold text-end text-gray-500 p-5 rounded-full">
-                ویرایش اطلاعات کسب وکار
-            </legend>
-            <form action="{{ route('career.update')}}" method="post" enctype='multipart/form-data'
-                class="w-11/12 lg:w-3/4 mx-auto py-5 rounded-lg">
+    <section class="2xl:container mx-auto">
+        <div class="w-full mx-auto pb-5">
+            <form action="{{ route('career.update') }}" method="post" enctype='multipart/form-data'>
                 @csrf
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 lg:gap-4">
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="title">
-                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">عنوان
-                            </legend>
-                            <input type="title" name="title" value="{{$career -> title}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
+                <input type="hidden" name="id" value="{{ $career->id }}">
+                <input type="hidden" name="user_id" value="{{ $career->user->id }}">
+
+                <div class="min-h-screen flex items-start justify-center">
+                    <div class="bg-white rounded-2xl shadow-md p-3 w-full">
+                        <div class="text-center mb-4">
+                            <h1 class="text-2xl font-bold text-gray-800">فرم ویرایش کسب وکار</h1>
+                            <div class="w-full flex flex-col gap-3 my-4">
+                                <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">لوگو کسب وکار</label>
+                                    <div
+                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                        <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="file"
+                                            name='logo' placeholder=" لوگو کسب وکار خود را وارد کنید"
+                                            title="لوگو کسب و کار">
+                                    </div>
+                                </div>
+                                <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">نام کسب وکار</label>
+                                    <div
+                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                        <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                            name='title' placeholder="نام کسب وکار خود را وارد کنید"
+                                            value="{{ $career->title }}">
+                                    </div>
+                                </div>
+                                <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">دسته کسب و کار</label>
+                                    <div
+                                        class="p-3 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex pl-3">
+                                        <select name="careerCategory"
+                                            class="w-full font-bold px-2 py-1 md:px-2 outline-none text-gray-500">
+                                            @foreach ($careerCategories as $careerCategory)
+                                                <option value="{{ $careerCategory->id }}"
+                                                    @if ($career->career_category_id == $careerCategory->id) {{ 'selected' }} @endif>
+                                                    {{ $careerCategory->title }}</option>
+                                            @endforeach
+                                            <option value="0">
+                                                سایر
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">توضیحات</label>
+                                    <div
+                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                        <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                            name='description' placeholder="توضیحات کسب وکار"
+                                            class="w-full px-3 py-1 md:px-2 outline-none text-gray-500"
+                                            value="{{ $career->description }}">
+                                    </div>
+                                </div>
+                                <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">بنر کسب و کار</label>
+
+                                    <div
+                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                        <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="file"
+                                            name="banner" title="بنر کسب و کار">
+                                    </div>
+                                </div>
+                                <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">استان</label>
+
+                                    <div
+                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                        <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                            name='province' placeholder="استان خود را وارد کنید"
+                                            value="{{ $career->province }}">
+                                    </div>
+                                </div>
+                                <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">شهر</label>
+                                    <div
+                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                        <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                            name='city' placeholder=" شهرخود را وارد کنید" value="{{ $career->city }}">
+                                    </div>
+                                </div>
+                                <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">آدرس</label>
+                                    <div
+                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                        <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                            name='address' placeholder=" ادرس کسب وکار خود را وارد کنید"
+                                            value="{{ $career->address }}">
+                                    </div>
+                                </div>
+
+                                <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">ایمیل</label>
+                                    <div
+                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                        <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="email"
+                                            name='email' placeholder="email@example.com" value="{{ $career->email }}">
+                                    </div>
+                                </div>
+
+
+                                <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">اینستاگرام</label>
+                                    <div
+                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                        <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                            name='social_medias[instagram]' placeholder="آدرس شبکه های اجتماعی"
+                                            value="{{ $career->social_media->instagram }}">
+                                    </div>
+                                </div>
+                                <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">تلگرام</label>
+                                    <div
+                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                        <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                            name='social_medias[telegram]' placeholder="آدرس شبکه های اجتماعی"
+                                            value="{{ $career->social_media->telegram }}">
+                                    </div>
+                                </div>
+                                <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">واتساپ</label>
+                                    <div
+                                        class="w-full p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] flex">
+                                        <input class="w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                            name='social_medias[whatsapp]' placeholder="آدرس شبکه های اجتماعی"
+                                            value="{{ $career->social_media->whatsapp }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full text-left ">
+                                <button type="submit"
+                                    class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium">
+                                    ارسال اطلاعات
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="w-full flex flex-col">
-                        <input type="hidden" name="id" value="{{$career -> id}}">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="logo">
-                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">لوگو
-                            </legend>
-                            <input type="file" name="logo" class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3">
-                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">بنر
-                            </legend>
-                            <input type="file" name="banner" class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3">
-                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">دسته
-                            </legend>
-                            <select name="careerCategory" class="w-full px-2 py-1 md:px-2 outline-none text-gray-500">
-                            <option value="0" disabled>دسته کسب و کار خود را انتخاب کنید</option>
-                                @foreach($careerCategories as $careerCategory)
-                                <option value="{{ $careerCategory->id }}" @if($career->career_category_id == $careerCategory->id){{ 'selected' }} @endif>{{ $careerCategory->title }}</option>
-                                @endforeach
-                            </select>
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="province">
-                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">استان
-                            </legend>
-                            <input type="province" name="province" value="{{$career -> province}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="city">
-                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">شهر
-                            </legend>
-                            <input type="city" name="city" value="{{$career -> city}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="address">
-                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">ادرس
-                            </legend>
-                            <input type="address" name="address" value="{{$career -> address}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="description">
-                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">
-                                توضیحات</legend>
-                            <input type="description" name="description" value="{{$career -> description}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="email">
-                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">ایمیل
-                            </legend>
-                            <input type="email" name="email" value="{{$career -> email}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="instagram">
-                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">
-                                اینستاگرام</legend>
-                            <input type="text" name="social_medias[instagram]"
-                                value="{{$career ->social_media->instagram}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="telegram">
-                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">
-                                تلگرام</legend>
-                            <input type="text" name="social_medias[telegram]"
-                                value="{{$career ->social_media->telegram}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="whatsapp">
-                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">
-                                واتساپ</legend>
-                            <input type="text" name="social_medias[whatsapp]"
-                                value="{{$career ->social_media->whatsapp}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                </div>
-                <div class="text-center md:px-12 mt-5 lg:mt-10">
-                    <button
-                        class="w-5/12 max-sm:bg-blue-500 max-sm:text-white px-5 py-2 lg:px-10 lg:py-3 rounded-[8px] transition-all duration-250 bg-blue-400 text-white hover:bg-blue-600 hover:border-gray-400 hover:text-white text-gray-500 cursor-pointer">ثبت</button>
                 </div>
             </form>
-        </fieldset>
-    </div>
-</section>
+        </div>
+    </section>
 @endsection

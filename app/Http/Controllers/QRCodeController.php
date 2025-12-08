@@ -10,9 +10,9 @@ use App\Models\career;
 
 class QrCodeController extends Controller
 {
-    public function create(){
-        return view('admin.menus.create');
-    }
+    // public function create(){
+    //     return view('admin.menus.create');
+    // }
 
     public function delete(qr_code $qr_code){
         $count = $qr_code->menu->qr_num;
@@ -21,7 +21,7 @@ class QrCodeController extends Controller
         $qr_code->menu->save();
         Storage::disk('public')->delete($qr_code->qr_path);
         $qr_code->delete();
-        return to_route('menu.edit', [$qr_code->menu]);
+        return to_route('menu.edit', [$qr_code->career]);
     }
 
     public function load(career $career, string $slug){
