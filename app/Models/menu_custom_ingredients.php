@@ -10,7 +10,7 @@ class menu_custom_ingredients extends Model
         'title',
         'description',
         'price',
-        'menu_items_id',
+        'menu_item_id',
         'image',
         'ingredients_id'
     ];

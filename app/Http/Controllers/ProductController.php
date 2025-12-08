@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\category;
-use App\Models\product;
 use App\Models\media;
+use App\Models\product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -13,12 +13,11 @@ class ProductController extends Controller
     public function create()
     {
         $categories = category::all();
-        return view("product.create", ['categories' => $categories]);
+        return view('product.create', ['categories' => $categories]);
     }
+
     public function store(Request $request)
     {
-        
-        // dd($request->mainImage);
         if ($request->home) {
             $productId = product::insertGetId([
                 'title' => $request->title,
@@ -29,7 +28,7 @@ class ProductController extends Controller
                 'cat_id' => $request->categoryId
             ]);
         } else {
-           $productId = product::insertGetId([
+            $productId = product::insertGetId([
                 'title' => $request->title,
                 'description' => $request->description,
                 'price' => $request->price,
@@ -39,31 +38,33 @@ class ProductController extends Controller
         }
         $type = $request->mainImage->getClientOriginalExtension();
         $name = $request->mainImage->getClientOriginalName();
-        $fullName = Str::uuid()."_".$name;
+        $fullName = Str::uuid() . '_' . $name;
         $path = $request->file('mainImage')->storeAs('images', $fullName, 'public');
-        $products[]=['product_id'=>$productId, 'type'=>$type, 'path'=>$path, 'is_main'=>1];
+        $products[] = ['product_id' => $productId, 'type' => $type, 'path' => $path, 'is_main' => 1];
 
         media::insert($products);
-       
     }
+
     public function index()
     {
         $categories = category::all();
         $products = product::all();
-        return view("product.index", ['categories' => $categories, 'products' => $products]);
+        return view('product.index', ['categories' => $categories, 'products' => $products]);
     }
-    
+
     public function show(product $product)
     {
         $categories = category::all();
         $product->medias;
-        return view("product.single", ['product' => $product, 'categories' => $categories]);
+        return view('product.single', ['product' => $product, 'categories' => $categories]);
     }
+
     public function edit(product $product)
     {
         $categories = category::all();
         return view('product.edit', ['product' => $product, 'categories' => $categories]);
     }
+
     public function update(Request $request)
     {
         $product = product::find($request->id);
@@ -75,12 +76,11 @@ class ProductController extends Controller
         $product->cat_id = $request->categoryId;
         $product->save();
     }
+
     public function delete(product $product)
     {
-        // dd($product);
+        media::where('product_id', $product->id)->delete();
         $product->delete();
-        $x = media::where('product_id' , $product->id)->delete();
-        // dd($x);
         return redirect('products');
     }
 }

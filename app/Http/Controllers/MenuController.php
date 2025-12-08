@@ -6,12 +6,12 @@ use App\Models\career;
 use App\Models\custom_product;
 use App\Models\menu;
 use App\Models\qr_code;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use App\Models\User;
 
 use function Symfony\Component\Clock\now;
 
@@ -139,16 +139,18 @@ class MenuController extends Controller
         return to_route('career.careers', [Auth::user()]);
     }
 
-    public function showMenu(menu $menu){
-        return view('admin.menu.menu', ['menu'=>$menu]);
+    public function showMenu(menu $menu)
+    {
+        return view('admin.menu.menu', ['menu' => $menu]);
     }
 
-    public function createMenu(){
+    public function createMenu()
+    {
         return view('admin.menu.createMenu');
     }
+
     public function customProMenu(career $career)
     {
-        // $career = career::where('id' , $career)->first();
-        return view('admin.menu.customProList' , ['career'=>$career]);
+        return view('admin.menu.customProList', ['career' => $career]);
     }
 }

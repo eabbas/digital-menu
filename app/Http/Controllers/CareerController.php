@@ -30,7 +30,7 @@ class CareerController extends Controller
             $user->role[0] = $roles[1];
             $user->save();
         }
-        
+
         $name = $request->logo->getClientOriginalName();
         $fullName = Str::uuid() . '_' . $name;
         $path = $request->file('logo')->storeAs('files', $fullName, 'public');
@@ -102,8 +102,8 @@ class CareerController extends Controller
         $career->email = $request->email;
         $career->user_id = $request->user_id;
         $career->save();
-        $user=user::find($request->user_id);
-        return  to_route('career.careers', ['user' => $user]);
+        $user = user::find($request->user_id);
+        return to_route('career.careers', ['user' => $user]);
     }
 
     public function delete(career $career)
