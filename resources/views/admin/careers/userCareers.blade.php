@@ -23,6 +23,7 @@
                         </div>
                     </div>
                     <div class="bg-white divide-y divide-[#f1f1f4]">
+                        @if($user->careers)
                         @foreach ($user->careers as $career)
                             @if ($career)
                                 <div
@@ -88,7 +89,7 @@
                                 </div>
                             @endif
                         @endforeach
-
+                            @endif
                         
                           {{-- <div class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
                                         <a href="{{ route('cpm.create', [$career])}}" class="text-sky-700">ایجاد منوی شخصی سازی شده </a>

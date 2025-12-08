@@ -30,6 +30,7 @@ class CareerController extends Controller
             $user->role[0] = $roles[1];
             $user->save();
         }
+        
         $name = $request->logo->getClientOriginalName();
         $fullName = Str::uuid() . '_' . $name;
         $path = $request->file('logo')->storeAs('files', $fullName, 'public');
