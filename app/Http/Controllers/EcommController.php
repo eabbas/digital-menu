@@ -1,0 +1,151 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use App\Models\ecomm;
+use App\Models\role;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+class EcommController extends Controller
+{
+    public function create(User $user = null)
+    {
+        if ($user) {
+            return view('admin.ecomms.create', ['user' => $user]);
+        }
+        return view('admin.ecomms.create', ['user' => Auth::user()]);
+    }
+
+    public function store(Request $request)
+    {
+        // dd($request->all());
+        $roles = role::all();
+        // dd($roles);
+        $user = Auth::user();
+        if ($user->role[0]->title!='admin') {
+            // $user->type = 'ecomm';
+            $user->role[0] = $roles[2];
+            $user->save();
+        }
+        $name = $request->logo->getClientOriginalName();
+        $fullName = Str::uuid() . '_' . $name;
+        $path = $request->file('logo')->storeAs('files', $fullName, 'public');
+
+        $bannerName = $request->banner->getClientOriginalName();
+        $fullBannerName = Str::uuid() . '_' . $bannerName;
+        $bannerPath = $request->file('banner')->storeAs('files', $fullBannerName, 'public');
+        $social_medias = json_encode($request->social_medias);
+        ecomm::insertGetId([
+            'title' => $request->title,
+            'logo' => $path,
+            'province' => $request->province,
+            'city' => $request->city,
+            'address' => $request->address,
+            'social_media' => $social_medias,
+            'user_id' => $user->id,
+            'email' => $request->email,
+            'description' => $request->description,
+            'banner' => $bannerPath
+        ]);
+        return to_route('ecomm.ecomms', [Auth::user()]);
+    }
+
+    public function user_ecomms(User $user=null )
+    {
+        if ($user) {
+            return view('admin.ecomms.userecomms', ['user' => $user]);
+        }else{
+
+           // dd(Auth::user()->ecomms);
+            return view('admin.ecomms.userecomms', ['user' => Auth::user()]);
+        }
+    }
+
+    public function edit(ecomm $ecomm, User $user = null)
+    {
+        if (!$user) {
+            $user = Auth::user();
+        }
+        $ecomm->social_media = json_decode($ecomm->social_media);
+        return view('admin.ecomms.edit', ['ecomm' => $ecomm, 'user' => $user]);
+    }
+
+    public function update(Request $request)
+    {
+        $ecomm = ecomm::find($request->id);
+        if ($request->logo) {
+            Storage::disk('public')->delete($ecomm->logo);
+            $logoName = $request->logo->getClientOriginalName();
+            $fullLogoName = Str::uuid() . '_' . $logoName;
+            $logoPath = $request->file('logo')->storeAs('files', $fullLogoName, 'public');
+            $ecomm->logo = $logoPath;
+        }
+        if ($request->banner) {
+            if ($ecomm->banner) {
+                Storage::disk('public')->delete($ecomm->banner);
+            }
+            $bannerName = $request->banner->getClientOriginalName();
+            $fullBannerName = Str::uuid() . '_' . $bannerName;
+            $bannerPath = $request->file('banner')->storeAs('files', $fullBannerName, 'public');
+            $ecomm->banner = $bannerPath;
+        }
+        $ecomm->social_media = json_encode($request->social_medias);
+        $ecomm->province = $request->province;
+        $ecomm->city = $request->city;
+        $ecomm->title = $request->title;
+        $ecomm->address = $request->address;
+        $ecomm->description = $request->description;
+        $ecomm->email = $request->email;
+        $ecomm->save();
+        // $user= Auth::user();
+        // return view('admin.ecomms.userecomms', ['user' =>Auth::user()]);
+        return to_route('ecomm.ecomms',[Auth::user()]);
+    }
+
+    public function delete(ecomm $ecomm)
+    {
+        // $ecomm_category=$ecomm->ecomm_category;
+        // dd($ecomm_category[0]->ecomm_products);
+        
+        
+        if ($ecomm->menu) {
+            if ($ecomm->menu->qr_codes) {
+                foreach ($ecomm->menu->qr_codes as $menu) {
+                    // $menu->delete();
+                }
+            }
+            // $ecomm->menu->delete();
+        }
+        if($ecomm->ecomm_category){
+
+            foreach($ecomm->ecomm_category as $ecomm_category){
+                if($ecomm_category->ecomm_products){
+                    foreach($ecomm_category->ecomm_products as $ecomm_product){
+                                 $ecomm_product->delete();
+                    }
+                }
+                $ecomm_category->delete();
+            }
+        }
+        $ecomm->delete();
+        
+    $user= Auth::user();
+        return view('admin.ecomms.userecomms', ['user' =>$user]);    }
+
+    public function index()
+    {
+        $ecomms = ecomm::all();
+        return view('admin.ecomms.index', ['ecomms' => $ecomms]);
+    }
+
+    public function single(ecomm $ecomm)
+    {
+        return view('admin.ecomms.single', ['ecomm' => $ecomm]);
+    }
+    }
+
+

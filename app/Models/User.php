@@ -51,8 +51,18 @@ class User extends Authenticatable
     public function careers(){
         return $this->hasMany(career::class)->chaperOne();
     }
+    public function ecomms(){
+        return $this->hasMany(ecomm::class)->chaperOne();
+    }
+    // public function ecomm_categories(){
+    //     return $this->hasMany(ecomm_category::class)->chaperOne();
+    // }
     public function role(){
       return $this->belongsToMany(role::class,'role_users');
 
+    }
+     public function ecomm_categories()
+    {
+        return $this->hasManyThrough(ecomm_category::class, ecomm::class,'user_id','ecomm_id');
     }
 }
