@@ -144,7 +144,6 @@
                             <path
                                 d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
                         </svg>
-                        <input type="hidden" name="covers_id" id="covers_id" value="{{ $cover->id }}">
                         <div class="flex items-start justify-center">
                             <div class="bg-white rounded-2xl shadow-md p-3 w-full md:w-9/12">
                                 <!-- هدر -->
@@ -192,7 +191,6 @@
                             <path
                                 d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
                         </svg>
-                        <input type="hidden" name="covers_id" value="{{ $cover->id }}">
                         <div class="flex items-start justify-center">
                             <div class="bg-white rounded-2xl shadow-md p-3 w-full md:w-9/12">
                                 <!-- هدر -->
@@ -286,7 +284,6 @@
                             class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out editSMF">
                             @csrf
                             <input type="hidden" name="id" class="socialAddressId">
-                            <input type="hidden" name="cover_id" id="cover_id_update" value="{{ $cover->id }}">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-5 lg:gap-10 socialDiv">
                                 <!-- عنوان شبکه اجتماعی -->
                                 @if (isset($item))
@@ -359,7 +356,6 @@
                             class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out editSLF"
                             id="editSiteLinkForm">
                             @csrf
-                            <input type="hidden" name="link_cover_id" id="link_cover_id" value="{{ $cover->id }}">
                             <input type="hidden" name="siteLinkId" id="siteLinkId">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-5 lg:gap-10">
                                 <div class="w-full flex flex-col">
@@ -405,12 +401,10 @@
         let socialLink = document.querySelector('.socialLink')
         let editSocialSection = document.querySelectorAll('.editSocial')
         let userNameUpdate = document.getElementById('userNameUpdate')
-        let cover_id_update = document.getElementById('cover_id_update')
 
         let userNameCreate = document.getElementById('username')
         let socialMedia_id_create = document.getElementById('socialMedia_id')
         let storeSocialForm = document.getElementById('socialMediaForm')
-        let covers_id = document.getElementById('covers_id')
         let socialLinks = document.getElementById('socialLinks') // append what sociala media create
 
 
@@ -420,7 +414,6 @@
         let linkAddress = document.querySelector('.linkAddress')
         let link_title_input = document.getElementById('title')
         let link_address_input = document.getElementById('address')
-        let link_cover_id = document.getElementById('link_cover_id')
         let siteLinkId = document.getElementById('siteLinkId')
         let icon_path = document.getElementById('icon_path')
 
@@ -562,7 +555,7 @@
                     'title': link_title_input.value,
                     'address': link_address_input.value,
                     'icon_path': icon_path.value,
-                    'cover_id': link_cover_id.value
+                    'cover_id': "{{ $cover->id }}"
                 },
                 success: function(data) {
                     linkTitle.innerText = data.title
@@ -662,7 +655,7 @@
                     'id': socialAddressId.value,
                     'socialMedia_id': socialMedia_id.value,
                     'username': userNameUpdate.value,
-                    'cover_id': cover_id_update.value
+                    'cover_id': "{{ $cover->id }}"
                 },
                 success: function(data) {
                     // console.log(data)
@@ -706,7 +699,7 @@
                 dataType: 'json',
                 data: {
                     'socialMedia_id': socialMedia_id_create.value,
-                    'cover_id': covers_id.value,
+                    'cover_id': "{{ $cover->id }}",
                     'userName': userNameCreate.value
                 },
                 success: function(datas) {
