@@ -26,6 +26,54 @@
                        خانه
                     </a>
                 </div>
+
+                <div class="flex justify-start">
+
+                    <span class=" text-[white] flex justify-start font-bold"> فروشگاه</span>
+                </div>
+                <div class="flex justify-center flex-row-reverse">
+                    <ul class="mt-2.5 mb-2.5 pr-2 transition-all duration-500 overflow-hidden">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-1">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a class="text-sky-700" href="{{ route('ecomm.create') }}" class=" text-white py-1">ایجاد
+                                 فروشگاه
+                                جدید</a>
+                        </li>
+                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-1">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a class="text-sky-700" href="{{route('ecomm.ecomms')}}" class=" text-white py-1"> 
+                                فروشگاه های
+                                من</a>
+                        </li>
+                        
+                           <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-1">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                           <a href="{{ route('ecomm_category.create') }}" class="text-sky-700">ایجاد دسته  </a>
+                                         
+                               </a>
+                           </li>
+                           <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-1">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                           <a href="{{ route('ecomm_category.index') }}" class="text-sky-700"> دسته ها  </a>
+                                         
+                               </a>
+                           </li>
+                           <div class=""></div>
+                           <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-1">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                           <a href="{{ route('ecomm_product.create') }}" class="text-sky-700"> ایجاد محصول    </a>
+                                         
+                               </a>
+                           </li>
+                           <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-1">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                           <a href="{{ route('ecomm_product.index') }}" class="text-sky-700">محصولات </a>
+                                         
+                               </a>
+                           </li>
+                       </ul>
+                </div>
+
                 <div class="dashboard">
                     <div class="flex justify-between flex-row-reverse">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -41,6 +89,8 @@
                             </svg>
                         </div>
                     </div>
+                         
+                     
                     <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden">
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
@@ -48,12 +98,14 @@
                                 لیست کسب و کار های من
                             </a>
                         </li>
+                       
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('career.create') }}" class=" text-white py-1">ایجاد
                                 کسب و کار
                                 جدید</a>
                         </li>
+                        
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('menu.createMenu') }}" class=" text-white py-1">
@@ -82,6 +134,12 @@
                         </li>
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{route('ecomm.list') }}" class=" text-white py-1">
+                                مشاهده همه  فروشگاه  ها
+                            </a>
+                        </li>
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('cc.create') }}" class=" text-white py-1">
                                 ایجاد دسته کسب و کار
                             </a>
@@ -105,6 +163,7 @@
                             </a>
                         </li>
                     </ul>
+                  
                 </div>
                 <div class="dashboard">
                     <div class="flex flex-row-reverse justify-between">
@@ -422,6 +481,119 @@
     </div>
     </div>
     <script src="{{ asset('assets/js/userPanel.js') }}"></script>
+  <!-- <script src="{{ asset('assets/js/ecomm_product_create.js') }}"></script> -->
+
+   @yield('ajax')
+
+  <script>
+
+
+
+
+
+    function getEcommCategories(el,type){
+   
+    $.ajaxSetup({
+        headers:{
+            'X-CSRF-TOKEN':"{{csrf_token()}}"
+        }
+    }); 
+
+    $.ajax({
+       url:"{{route('ecomm_category.getEcommCategories')}}",
+       type:'POST',
+       dataType:"json",
+       data:{'key':el.value},
+        success:function(categories){
+        // console.log(categories)
+        
+     let mySelect = document.getElementById("ecomCategories")
+         mySelect.innerHTML=``
+               
+         categories.forEach((category)=>{
+             
+           if(type=="product"||type=="category"||type=="edit"){
+
+               letmyOption=document.createElement('option')
+               
+               myOption.innerHTML=`${category.title}`
+               myOption.value=`${category.id}`
+               mySelect.append(myOption)
+           }
+ 
+               if(type=="filter"){
+                let myElement = document.createElement('div')
+                let categoryId = category.id
+                  
+             myElement.innerHTML=`<div class="bg-white divide-y divide-[#f1f1f4]">
+                                    <div  class='w-full flex flex-row lg:grid lg:grid-cols-4 items-center divide-x divide-[#f1f1f4]'>          
+                                                <div
+                                                 class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
+                                                 <span class="block w-20 lg:w-full">${category.title}</span>
+                                                </div>
+                                                <div
+                                                 class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
+                                                 <span class="block w-20 lg:w-full">${category.description}</span>
+                                             </div>
+                                               <div
+                                                 class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
+                                                 <div class="w-20 lg:w-full">
+                                                     <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover"
+                                                         src="{{ asset('storage/${category.image_path}')}}">
+                                                 </div>
+                                             </div>
+                                            
+                                             <div class="flex justify-center items-center gap-1 w-full "
+                                             >
+                                              <div
+                                                         class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center">
+                                                         <a href="{{url('ecomm_product/category_product/${category.id}')}}" 
+                                                             class="hover:text-sky-400  text-sky-700">مشاهده محصولات</a>
+                                                     </div>
+                                              <div
+                                                         class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center">
+                                                         <a href="{{url('/ecomm_category/show/${category.id}') }}" 
+                                                             class="hover:text-sky-400   
+                                                     </div>
+                                              <div
+                                                         class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center">
+                                                         <a href="{{url('/ecomm_category/edit_ecomm_categories/${category.id}')}}" 
+                                                             class="hover:text-sky-400  text-sky-700">ویرایش</a>
+                                                     </div>
+                                              <div
+                                                         class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center">
+                                                         <a href="{{url('/ecomm_category/delete/${category.id}') }}" 
+                                                             class="hover:text-sky-400  text-sky-700">حذف</a>
+                                                     </div>
+                                             </div>
+                                             </div>
+                                             </div>`
+
+             
+             mySelect.appendChild(myElement)
+
+             }
+             
+             // console.log(category.title)
+            })
+            if(type=="category"){
+            let myOption2 = document.createElement('option')
+            myOption2.innerHTML="بدون والد"
+            myOption2.value="0"
+             mySelect.append(myOption2)
+             
+   
+            }
+    
+       
+        
+      }
+
+    });
+
+}
+  </script>
+
 </body>
 
 </html>

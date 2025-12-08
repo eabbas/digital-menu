@@ -28,6 +28,12 @@ use App\Http\Controllers\CoversController;
 use App\Http\Controllers\CustomProductMaterialController;
 use App\Http\Controllers\CustomCategoryController;
 
+use App\Http\Controllers\EcommController;
+use App\Http\Controllers\EcommCategoryController;
+use App\Http\Controllers\EcommProductController;
+use App\Models\career;
+
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('search' , [HomeController::class, 'search'])->name('search');
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware([LoginMiddleware::class]);
@@ -290,9 +296,7 @@ Route::group([
     });
 });
 
-Route::fallback(function () {
-    return view('client.login');
-});
+
 
 
 ////admin
@@ -454,4 +458,57 @@ Route::group([
     Route::get('/edit/{customCategory?}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{customCategory?}', 'delete')->name('delete');
+});
+
+Route::group([
+    'prefix' => 'ecomms',
+    'controller' => EcommController::class,
+    'as' => 'ecomm.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create/{user?}', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/list/{user?}', 'user_ecomms')->name('ecomms')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/edit/{ecomm}/{user?}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{ecomm}', 'delete')->name('delete');
+    Route::get('/ecomms', 'index')->name('list');
+    Route::get('/show/{ecomm}', 'single')->name('single')->withoutMiddleware([UserMiddleware::class]);
+});
+
+Route::group(['prefix'=>'ecomm_category',
+'controller'=>EcommCategoryController::class,
+'as'=>'ecomm_category.'
+],function(){
+
+    Route::get('/create','create')->name('create');
+    Route::post('/store','store')->name('store');
+    Route::get('/index','index')->name('index');
+    Route::get('/show/{ecomm_category}','show')->name('show');
+    Route::get('/edit/{ecomm_category}/','edit')->name('edit');
+    Route::get('/edit_ecomm_categories/{ecomm_category}/','edit_ecomm_categories')->name('edit_ecomm_categories');
+    Route::get('/ecomm_categories/{ecomm}','ecomm_categories')->name('ecomm_categories');
+    Route::post('/update','update')->name('update');
+    Route::post('/update_ecomm_categories','update_ecomm_categories')->name('update_ecomm_categories');
+    Route::get('/delete/{ecomm_category}','delete')->name('delete');
+    Route::post('/getEcomm','getEcommCategories')->name('getEcommCategories');
+
+});
+Route::group(['prefix'=>'ecomm_product',
+'controller'=>EcommProductController::class,
+'as'=>'ecomm_product.'
+],function(){
+
+    Route::get('/create','create')->name('create');
+    Route::post('/store','store')->name('store');
+    Route::get('/index','index')->name('index');
+    Route::get('/show/{ecomm_product}','show')->name('show');
+    Route::get('/edit/{ecomm_product}','edit')->name('edit');
+    Route::post('/update','update')->name('update');
+    Route::get('/delete/{ecomm_product}','delete')->name('delete');
+    Route::get('/category_product/{ecomm_category}','category_product')->name('category_product');
+});
+
+Route::fallback(function () {
+    return view('client.login');
 });

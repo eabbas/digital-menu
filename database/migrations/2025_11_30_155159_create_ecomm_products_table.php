@@ -11,10 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('role_users', function (Blueprint $table) {
+        Schema::create('ecomm_products', function (Blueprint $table) {
             $table->id();
-            $table->integer('role_id');
-            $table->integer('user_id');
+             $table->string('title');
+            $table->string('description');
+            $table->string('price');
+            $table->string('discount');
+            $table->tinyInteger('show_in_home')->nullable();
+            $table->string('ecomm_id');
+            $table->string('image_path');
             $table->timestamps();
         });
     }
@@ -24,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('role_users');
+        Schema::dropIfExists('ecomm_products');
     }
 };
