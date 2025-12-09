@@ -9,9 +9,6 @@
     
 </head>
 <body>
-    <?php
-        // dd($user -> name);
-    ?>
     <section class="2xl:container mx-auto">
         <div class="w-11/12 mx-auto">
             <div class="my-10">

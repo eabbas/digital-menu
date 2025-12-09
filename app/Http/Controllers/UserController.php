@@ -166,4 +166,9 @@ class UserController extends Controller
     {
         return view('admin.user.setting');
     }
+
+    public function checkAuth(Request $request){
+        $user = User::where('phoneNumber', $request->phoneNumber)->first();
+        return response()->json($user);
+    }
 }

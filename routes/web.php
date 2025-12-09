@@ -38,6 +38,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('search' , [HomeController::class, 'search'])->name('search');
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware([LoginMiddleware::class]);
 Route::get('/signup', [UserController::class, "create"])->name('signup')->middleware([LoginMiddleware::class]);
+Route::post('/check', [UserController::class, "checkAuth"])->name('checkAuth');
+
 Route::group([
     'prefix' => 'users',
     'controller' => UserController::class,
@@ -78,6 +80,7 @@ Route::group([
     Route::get('/careers', 'index')->name('list');
     Route::get('/show/{career}', 'single')->name('single')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/qrcodes/{career}', 'qr_codes')->name('qr_codes');
+    Route::get('/menuList/{career}', 'menus')->name('menus');
 });
 
 Route::group([
@@ -111,7 +114,6 @@ Route::group([
     Route::post('/store', 'store')->name('store');
     Route::get('/show/{menu}', 'single')->name('single');
     Route::get('/customProList/{career}', 'customProMenu')->name('customProList');
-    Route::get('/qrcodes/{menu}', 'qrcodes')->name('qrcodes');
     Route::get('/edit/{menu}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{menu}', 'delete')->name('delete');
