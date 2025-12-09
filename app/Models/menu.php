@@ -10,7 +10,6 @@ class menu extends Model
         'title',
         'subtitle',
         'banner',
-        'qr_num',
         'career_id',
     ];
 
@@ -19,11 +18,6 @@ class menu extends Model
     public function career()
     {
         return $this->belongsTo(career::class);
-    }
-
-    public function qr_codes()
-    {
-        return $this->hasMany(qr_code::class)->chaperone();
     }
 
     public function menu_categories(){

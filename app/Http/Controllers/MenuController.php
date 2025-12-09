@@ -30,39 +30,21 @@ class MenuController extends Controller
             $fullBannerName = time() . '_' . $bannerName;
             $bannerPath = $request->file('banner')->storeAs('files', $fullBannerName, 'public');
         }
-        $menu_id = menu::insertGetId([
+        menu::create([
             'title' => $request->title,
             'subtitle' => $request->subtitle,
             'banner' => $bannerPath,
-            'qr_num' => $request->qrcode_count,
             'career_id' => $request->career_id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        for ($i = 0; $i < $request->qrcode_count; $i++) {
-            $random = Str::random(10);
-            $link = "famenu.ir/qrcode/$menu_id/" . $random;
-            $qr_svg = QrCode::size(100)->generate($link);
-            $fileName = 'qrcodes/' . $menu_id . '_' . $random . '.svg';
-            Storage::disk('public')->put($fileName, $qr_svg);
-            qr_code::create([
-                'qr_path' => $fileName,
-                'career_id' => $request->career_id,
-                'menu_id' => $menu_id,
-                'slug' => 'qrcode/' . $menu_id . '/' . $random
-            ]);
-        }
-        return to_route('menu.single', [$menu_id]);
+        
+        return to_route('career.menus', [$request->career_id]);
     }
 
     public function single(menu $menu)
     {
         return view('admin.menu.single', ['menu' => $menu]);
-    }
-
-    public function qrcodes(menu $menu)
-    {
-        return view('admin.menu.qrcodes', ['menu' => $menu]);
     }
 
     public function edit(menu $menu)
@@ -85,38 +67,11 @@ class MenuController extends Controller
             $bannerPath = $request->file('banner')->storeAs('files', $fullBannerName, 'public');
             $menu->banner = $bannerPath;
         }
-        if ($request->qrcode_count) {
-            if ((int) $request->qrcode_count > $menu->qr_num) {
-                $qr_num = (int) $request->qrcode_count - $menu->qr_num;
-                while ($qr_num) {
-                    $random = Str::random(10);
-                    $link = "famenu.ir/qrcodes/$menu->id/" . $random;
-                    $qr_svg = QrCode::size(100)->generate($link);
-                    $fileName = 'qrcodes/' . $menu->id . '_' . $random . '.svg';
-                    Storage::disk('public')->put($fileName, $qr_svg);
-                    qr_code::create([
-                        'qr_path' => $fileName,
-                        'career_id' => $request->career_id,
-                        'menu_id' => $menu->id,
-                        'slug' => 'qrcode/' . $menu->id . '/' . $random
-                    ]);
-                    $qr_num--;
-                }
-            }
-            // if ($request->qr_num<=$menu->qr_num) {
-            //     # code...
-            // }
-        }
-        $menu->qr_num = $request->qrcode_count;
-        $menu->save();
         return to_route('menu.single', [$menu]);
     }
 
     public function delete(menu $menu)
     {
-        foreach ($menu->qr_codes as $qr_code) {
-            $qr_code->delete();
-        }
         if (count($menu->menu_categories)) {
             foreach ($menu->menu_categories as $category) {
                 if (count($category->menu_items)) {
