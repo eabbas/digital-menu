@@ -1,12 +1,12 @@
     @extends('admin.app.panel')
     @section('title', 'ثبت نام کسب و کار')
     @section('content')
+    <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">فرم اطلاعات کسب وکار</h1>
         <form action="{{ route('career.store') }}" method="post" enctype='multipart/form-data'>
             @csrf
             <div class="min-h-screen flex items-start justify-center">
                 <div class="bg-white rounded-2xl shadow-md p-3 w-full lg:w-3/4">
                     <div class="text-center mb-4">
-                        <h1 class="text-2xl font-bold text-gray-800">فرم اطلاعات کسب وکار</h1>
                         <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">لوگو کسب وکار</label>
@@ -92,15 +92,6 @@
                             </div>
 
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                <label class="w-30 text-sm mb-1 mt-2.5 flex">توضیحات</label>
-                                <div
-                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                    <textarea rows="5" class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text" name='description'
-                                        placeholder="توضیحات کسب وکار" class="w-full px-3 py-1 md:px-2 outline-none text-gray-500"required></textarea>
-                                </div>
-                            </div>
-
-                            <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">اینستاگرام</label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
@@ -122,6 +113,14 @@
                                     class="w-full p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] flex">
                                     <input class="w-full focus:outline-none text-sm font-bold mr-2" type="text"
                                         name='social_medias[whatsapp]' placeholder="آدرس واتساپ">
+                                </div>
+                            </div>
+                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1 lg:col-span-2">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">توضیحات</label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <textarea rows="5" class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text" name='description'
+                                        placeholder="توضیحات کسب وکار" class="w-full px-3 py-1 md:px-2 outline-none text-gray-500"required></textarea>
                                 </div>
                             </div>
                         </div>

@@ -13,8 +13,8 @@
                 <div class="min-h-screen flex items-start justify-center">
                     <div class="bg-white rounded-2xl shadow-md p-3 w-full">
                         <div class="text-center mb-4">
-                            <div class="w-full flex flex-col gap-3 my-4">
-                                <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                            <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
+                                <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
                                     <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان</label>
                                     <div
                                         class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
@@ -22,7 +22,7 @@
                                             name='title' placeholder="عنوان" value="{{ $menu->title }}">
                                     </div>
                                 </div>
-                                <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
                                     <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان فرعی</label>
                                     <div
                                         class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
@@ -30,7 +30,7 @@
                                             name='subtitle' placeholder="عنوان فرعی" value="{{ $menu->subtitle }}">
                                     </div>
                                 </div>
-                                <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
                                     <label class="w-30 text-sm mb-1 mt-2.5 flex">بنر</label>
                                     <div
                                         class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">

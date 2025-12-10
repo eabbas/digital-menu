@@ -1,12 +1,15 @@
-@extends('admin.app.panel') @section('title', 'صفحه تک کسب و کار')
+@extends('admin.app.panel')
+@section('title')
+{{ $career->title }}
+@endsection
 @section('content')
     <div class="w-full">
         <div class="pb-5 w-full">
             <h1 class="text-xl text-center lg:text-start">{{ $career->title }}</h1>
             <div
                 class="flex flex-row justify-center lg:justify-start items-center gap-2 text-[#99A1B7] text-[11px] lg:text-sm">
-                <a href="{{ route('home') }}" class="p-2">خانه</a>
-                <span>/</span>
+                {{-- <a href="{{ route('home') }}" class="p-2">خانه</a>
+                <span>/</span> --}}
                 <a href="{{ route('user.profile', [Auth::user()]) }}">اکانت من</a>
             </div>
         </div>
@@ -45,10 +48,10 @@
         </div>
     </div> --}}
 
-        <div class="pt-3 mt-4 lg:mt-8">
+        <div class="mt-4 lg:mt-8 bg-white">
             <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5">
-                <div class="flex flex-row justify-between items-center">
-                    <h1 class="lg:text-xl mt-5 font-bold pb-3 border-b border-gray-200">
+                <div class="flex flex-row justify-between items-center border-b border-gray-200">
+                    <h1 class="lg:text-xl mt-5 font-bold pb-3">
                         جزئیات کسب و کار
                     </h1>
                     <div
