@@ -41,8 +41,8 @@ class MenuController extends Controller
                 } else {
                     $value['gallery'] = null;
                 }
-                $menu_data[$key]['values'][$gKey]['id']=$valueCount;
-                $valueCount ++;
+                $menu_data[$key]['values'][$gKey]['id'] = $valueCount;
+                $valueCount++;
             }
         }
         $career_id = $request->career_id;
@@ -75,8 +75,7 @@ class MenuController extends Controller
     public function update(Request $request)
     {
         $menu_data = $request->menu_data;
-        foreach ($menu_data as $key => $data) 
-        {
+        foreach ($menu_data as $key => $data) {
             $name = $data['menu_image']->getClientOriginalName();
             $fullName = time() . '_' . $name;
             $path = $data['menu_image']->storeAs('images', $fullName, 'public');

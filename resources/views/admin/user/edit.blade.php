@@ -13,13 +13,17 @@
                         <input type="text" name="name" id="first_name" value="{{$user -> name}}" class="w-full px-2 py-1 lg:px-2 outline-none border-b" required>
                     </div>
                     <div class="w-full flex flex-col">
+                        <label class="text-sm md:text-base" for="family"> نام خانوادگی :</label>
+                        <input type="text" name="family"  value="{{$user -> family}}" id="family" class="w-full px-2 py-1 lg:px-2 outline-none border-b" required>
+                    </div>
+                    <div class="w-full flex flex-col">
                         <label class="text-sm md:text-base" for="phoneNumber">شماره تلفن :</label>
                         <input type="phoneNumber" name="phoneNumber"  value="{{$user -> phoneNumber}}" id="email" class="w-full px-2 py-1 lg:px-2 outline-none border-b" required>
                     </div>
-                    <div class="w-full flex flex-col">
+                    {{-- <div class="w-full flex flex-col">
                         <label class="text-sm md:text-base" for="type"> نوع کاربر :</label>
-                        <input type="type" name="type"  value="{{$user->roel->tile}}" id="email" class="w-full px-2 py-1 lg:px-2 outline-none border-b" required>
-                    </div>
+                        <input type="text" name="role" value="{{$user->role[0]->title}}" id="text" class="w-full px-2 py-1 lg:px-2 outline-none border-b" required>
+                    </div> --}}
                     <div class="w-full flex flex-col">
                         <label class="text-sm md:text-base" for="password">تغییر رمز عبور :</label>
                         <input type="password" name="password" id="password" class="w-full px-2 py-1 lg:px-2 outline-none border-b">

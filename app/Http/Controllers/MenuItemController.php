@@ -82,7 +82,6 @@ class MenuItemController extends Controller
 
     public function update(Request $request){
         $item = menu_item::find($request->id);
-        // dd($request->all(), $item->ingredients);
         $item->title = $request->title;
         $item->description = $request->description;
         $item->customizable = $request->customizable ? $request->customizable : 0;
@@ -100,9 +99,7 @@ class MenuItemController extends Controller
         }
         if (isset($request->ingredients)) {
             foreach($item->ingredients as $ingredients){
-                if ($ingredients->image) {
-                    Storage::disk('public')->delete($ingredients->image);
-                }
+                $ingredients->image && Storage::disk('public')->delete($ingredients->image);
                 $ingredients->delete();
             }
             foreach($request->ingredients as $ingre){
@@ -126,15 +123,20 @@ class MenuItemController extends Controller
     }
 
     public function single(menu_item $menu_item){
-        // dd($menu_item);
         return view('admin.menu.item.single', ['item'=>$menu_item]);
     }
 
     public function delete(menu_item $menu_item){
         $id = $menu_item->menu_category->id;
-        if ($menu_item->ingredients) {
-            foreach($menu_item->ingredients as $ingredients){
-                $ingredients->delete();
+        if (count($menu_item->ingredients)) {
+            foreach($menu_item->ingredients as $ingredient){
+                $ingredient->delete();
+            }
+        }
+        if (count($menu_item->menu_custom_ingredients)) {
+            foreach($menu_item->menu_custom_ingredients as $menu_custom_ingredient){
+                $menu_custom_ingredient->delete();
+                
             }
         }
         $menu_item->delete();

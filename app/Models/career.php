@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class career extends Model
 {
-  protected $fillable = ['logo', 'banner', 'title', 'province', 'city', 'address', 'email', 'description', 'user_id', 'career_category_id'];
+  protected $fillable = ['logo', 'banner', 'title', 'province', 'city', 'address', 'email', 'description', 'user_id', 'career_category_id', 'qr_count'];
 
   public $timestamps = true;
 
@@ -15,9 +15,9 @@ class career extends Model
     return $this->belongsTo(User::class);
   }
 
-  public function menu()
+  public function menus()
   {
-    return $this->hasOne(menu::class)->chaperOne();
+    return $this->hasMany(menu::class)->chaperOne();
   }
 
   public function orders()

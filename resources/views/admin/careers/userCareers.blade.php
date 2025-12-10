@@ -7,33 +7,43 @@
     <div class="w-full flex flex-col pb-4">
         <div class="bg-white rounded-lg">
             <div class="pb-4">
-                <h2 class="text-lg font-bold text-gray-800">اطلاعات کسب و کار</h2>
+                <h2 class="text-lg font-bold text-gray-800">لیست کسب و کار های من</h2>
             </div>
             <div class="flex flex-col gap-5">
                 <div class="w-full mx-auto bg-gray-100 shadow-md rounded">
-                    <div class="w-full flex flex-row lg:grid lg:grid-cols-5 items-center divide-x divide-[#f1f1f4]">
+                    <div class="w-full flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4]">
                         <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
-                            <span class="block w-20 lg:w-full">عنوان</span>
-                        </div>
-                        <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
-                            <span class="block w-24 lg:w-full">توضیحات</span>
+                            <span class="block w-20 lg:w-full">ردیف</span>
                         </div>
                         <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
                             <span class="block w-20 lg:w-full">لوگو</span>
                         </div>
+                        <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-2">
+                            <span class="block w-20 lg:w-full">عنوان</span>
+                        </div>
+                        <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
+                            <span class="block w-20 lg:w-full">دسته</span>
+                        </div>
+                        <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-3">
+                            <span class="block w-24 lg:w-full">توضیحات</span>
+                        </div>
+                        <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-4">
+                            <span class="block w-24 lg:w-full">عملیات</span>
+                        </div>
+                        
                     </div>
                     <div class="bg-white divide-y divide-[#f1f1f4]">
+                        @php
+                            $i=1;
+                        @endphp
+                        @if($user->careers)
                         @foreach ($user->careers as $career)
                             @if ($career)
                                 <div
-                                    class="w-full flex flex-row lg:grid lg:grid-cols-5 items-center divide-x divide-[#f1f1f4]">
+                                    class="w-full flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4]">
                                     <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
-                                        <span class="block w-20 lg:w-full">{{ $career->title }}</span>
-                                    </div>
-                                    <div
-                                        class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center">
-                                        <span class="block w-24 lg:w-full">{{ $career->description }}</span>
+                                        <span class="block w-20 lg:w-full">{{ $i }}</span>
                                     </div>
                                     <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
@@ -42,7 +52,20 @@
                                                 src="<?= asset('storage/' . $career->logo) ?>">
                                         </div>
                                     </div>
-                                    <div class="col-span-2 grid grid-cols-2 divide-x divide-[#f1f1f4] items-center">
+                                    <div
+                                        class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
+                                        <span class="block w-20 lg:w-full">{{ $career->title }}</span>
+                                    </div>
+                                    <div
+                                        class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center">
+                                        <span class="block w-24 lg:w-full">{{ $career->careerCategory->title }}</span>
+                                    </div>
+                                    <div
+                                        class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center col-span-3">
+                                        <span class="block w-24 lg:w-full">{{ $career->description }}</span>
+                                    </div>
+                                    
+                                    <div class="col-span-4 grid grid-cols-3 divide-x divide-[#f1f1f4] items-center">
                                         <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3">
                                             <li class="flex justify-center">
                                                 <a href="{{ route('career.single', [$career]) }}"
@@ -69,13 +92,12 @@
                                                 </a>
                                             </li>
                                         </ul>
-                                        @if (isset($career->menu))
-                                        <div class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                            <a href="{{ route('menu.single', [$career->menu]) }}" class="text-sky-700">مشاهده منو</a>
-                                        </div>
-                                        @else
                                         <div class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
                                             <a href="{{ route('menu.create', [$career]) }}" class="text-sky-700">ایجاد منو</a>
+                                        </div>
+                                        @if (count($career->menus))
+                                        <div class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
+                                            <a href="{{ route('career.menus', [$career]) }}" class="text-sky-700">لیست منو</a>
                                         </div>
                                         @endif
                                     </div>
@@ -87,8 +109,11 @@
                                     </div>
                                 </div>
                             @endif
+                            @php
+                                $i++;
+                            @endphp
                         @endforeach
-
+                            @endif
                         
                           {{-- <div class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
                                         <a href="{{ route('cpm.create', [$career])}}" class="text-sky-700">ایجاد منوی شخصی سازی شده </a>
