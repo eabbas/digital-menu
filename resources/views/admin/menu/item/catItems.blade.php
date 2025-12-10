@@ -9,13 +9,13 @@
             <div>
                 <h1 class="text-xm font-bold"> لیست آیتم های منو {{ $category->title }} </h1>
             </div>
-        </div>
-        <div class="flex flex-col p-6 gap-3 shadow__profaill__list_products rounded-[7px]">
-            <div class="flex flex-row justify-end">
-                <div class="cursor-pointer w-38 h-10 rounded-[7px] flex justify-center items-center bg-blue-500 text-white">
-                    <a href="{{ route('menuItem.create', [$category->id]) }}">افزودن آیتم جدید</a>
-                </div>
+    
+            <div class="cursor-pointer w-38 h-10 rounded-[7px] flex justify-center items-center bg-blue-500 hover:bg-blue-600 text-white">
+                <a href="{{ route('menuItem.create', [$category->id]) }}">افزودن آیتم جدید</a>
             </div>
+            </div>
+        <div class="flex flex-col p-6 gap-3 shadow__profaill__list_products rounded-[7px] bg-white">
+            
             <div class="p-3">
                 <table class="w-2/3 m-auto">
                     <thead>

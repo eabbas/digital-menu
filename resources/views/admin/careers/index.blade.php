@@ -3,12 +3,12 @@
 @section('content')
      <div class="w-full flex flex-col pb-4">
         <div class="bg-white rounded-lg">
-            <div class="pb-4">
-                <h2 class="text-lg font-bold text-gray-800">لیست کسب و کار های من</h2>
-            </div>
+            
+                <h2 class="text-lg font-bold text-gray-800 p-4 text-center">لیست کسب و کار ها</h2>
+           
             <div class="flex flex-col gap-5">
-                <div class="w-full mx-auto bg-gray-100 shadow-md rounded">
-                    <div class="w-full flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4]">
+                <div class="w-10/12 mx-auto shadow-md rounded mb-5">
+                    <div class="w-full flex flex-row lg:grid lg:grid-cols-10 items-center divide-x divide-[#f1f1f4] sticky -top-5">
                         <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
                             <span class="block w-20 lg:w-full">ردیف</span>
                         </div>
@@ -24,9 +24,9 @@
                         <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
                             <span class="block w-20 lg:w-full">دسته</span>
                         </div>
-                        <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-2">
+                        {{-- <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-2">
                             <span class="block w-24 lg:w-full">توضیحات</span>
-                        </div>
+                        </div> --}}
                         <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-3">
                             <span class="block w-24 lg:w-full">عملیات</span>
                         </div>
@@ -40,7 +40,7 @@
                         @foreach ($careers as $career)
                             @if ($career)
                                 <div
-                                    class="w-full flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4]">
+                                    class="w-full flex flex-row lg:grid lg:grid-cols-10 items-center divide-x divide-[#f1f1f4]">
                                     <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
                                         <span class="block w-20 lg:w-full">{{ $i }}</span>
@@ -49,7 +49,7 @@
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
                                         <div class="w-20 lg:w-full">
                                             <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
-                                                src="<?= asset('storage/' . $career->logo) ?>">
+                                                src={{ asset('storage/' . $career->logo) }}>
                                         </div>
                                     </div>
                                     <div
@@ -64,10 +64,10 @@
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center">
                                         <span class="block w-24 lg:w-full">{{ $career->careerCategory->title }}</span>
                                     </div>
-                                    <div
+                                    {{-- <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center col-span-2">
                                         <span class="block w-24 lg:w-full">{{ $career->description }}</span>
-                                    </div>
+                                    </div> --}}
                                     
                                     <div class="col-span-3 grid grid-cols-3 divide-x divide-[#f1f1f4] items-center">
                                         <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3">

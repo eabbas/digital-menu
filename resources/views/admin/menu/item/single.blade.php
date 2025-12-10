@@ -18,7 +18,7 @@
                         <div class="flex flex-col justify-end">
                             <div class="div1 text-center lg:text-start">
                                 @if ($item->customizable)
-                                    <a class="p-2.5 text-gary-600 bg-gray-100 rounded-lg hover:bg-gray-200" href="#">{{ $item->title }} خودتو بساز</a>
+                                    <a class="p-2.5 text-gary-600 bg-blue-500 text-white rounded-lg hover:bg-blue-600" href="#">{{ $item->title }} خودتو بساز</a>
                                 @endif
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                 <div class="w-full flex flex-row justify-end pb-3">
                     <a href="{{ route('menuItem.items', [$item->menu_category->id]) }}" class="px-5 py-1 rounded-md bg-sky-500 hover:bg-sky-600 text-sm text-white">بازگشت</a>
                 </div>
-                <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5">
+                <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5 bg-white">
                     <h1 class="lg:text-xl mt-5 font-bold mx-2">
                         جزئیات {{ $item->title }} 
                     </h1>

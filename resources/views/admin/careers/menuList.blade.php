@@ -5,16 +5,17 @@
 @section('content')
     <div class="w-full flex flex-col pb-4">
         <div class="bg-white rounded-lg">
-            <div class="flex flex-row justify-between items-center">
+            <div class="w-4/5 mx-auto flex flex-row justify-between items-center p-2.5">
                 <div class="pb-4">
                     <h2 class="text-lg font-bold text-gray-800">لیست منو های {{ $career->title }}</h2>
                 </div>
                 <div>
-                    <a href="{{ route('menu.create', [$career]) }}" class="px-5 py-1 rounded-sm bg-blue-500 hover:bg-blue-600 text-white">ایجاد منو</a>
+                    <a href="{{ route('menu.create', [$career]) }}"
+                        class="px-5 py-1 rounded-sm bg-blue-500 hover:bg-blue-600 text-white">ایجاد منو</a>
                 </div>
             </div>
-            <div class="flex flex-col gap-5">
-                <div class="w-full mx-auto bg-gray-100 shadow-md rounded">
+            <div class="flex flex-col gap-5 mb-5">
+                <div class="w-4/5 mx-auto bg-gray-100 shadow-md rounded">
                     <div class="w-full flex flex-row lg:grid lg:grid-cols-7 items-center divide-x divide-[#f1f1f4]">
                         <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
                             <span class="block w-20 lg:w-full">ردیف</span>
@@ -98,12 +99,12 @@
                                                 دسته</a>
                                         </div>
                                         @if (count($menu->menu_categories))
-                                        <div
-                                            class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                            <a href="{{ route('menuCat.list', [$menu]) }}" class="text-sky-700">
-                                                مشاهده دسته ها    
-                                            </a>
-                                        </div>
+                                            <div
+                                                class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
+                                                <a href="{{ route('menuCat.list', [$menu]) }}" class="text-sky-700">
+                                                    دسته ها
+                                                </a>
+                                            </div>
                                         @endif
                                     </div>
                                 </div>

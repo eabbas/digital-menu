@@ -5,7 +5,7 @@
 @section('content')
     <div class="w-full h-full bg-cover bg-no-repeat pb-10">
         <h2 class="text-xl lg:text-3xl text-center font-bold py-5 text-[#425A8B]"> ایجاد منو {{ $career->title }}</h2>
-        <div class="w-full mx-auto border border-[#D5DFE4] rounded-[10px] text-[#425A8B] p-5 bg-white text-sm">
+        <div class="w-full mx-auto border border-[#D5DFE4] rounded-[10px] text-[#425A8B] p-5 text-sm">
             <form action="{{ route('menu.store') }}" method="post" enctype='multipart/form-data'>
                 @csrf
                 <input type="hidden" name="career_id" value="{{ $career->id }}">

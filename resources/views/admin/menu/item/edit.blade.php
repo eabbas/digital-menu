@@ -4,19 +4,20 @@
 @endsection
 
 @section('content')
+ <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">
+                        ویرایش {{ $menu->title }}
+                    </h1>
     <form action="{{ route('menuItem.update') }}" method="post" enctype='multipart/form-data'>
         @csrf
         <div class="min-h-screen flex items-start justify-center">
             <div class="bg-white rounded-2xl shadow-md p-3 w-full md:w-9/12">
                 <div class="text-center mb-4">
-                    <h1 class="text-2xl font-bold text-gray-800">
-                        ویرایش {{ $menu->title }}
-                    </h1>
-                    <div class="w-full flex flex-col gap-3 my-4">
+                   
+                    <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
                         <input type="hidden" name="id" value="{{ $menu->id }}">
                         <input type="hidden" name="menu_categories_id" value="{{ $menu->menu_category->id }}">
                         <input type="hidden" name="parent_id" value="{{ $menu->parent_id }}">
-                        <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                        <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
                             <label class="w-32 text-sm mb-1 mt-2.5 flex">عنوان آیتم:</label>
                             <div
                                 class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
@@ -24,7 +25,7 @@
                                     name='title' placeholder="عنوان" value="{{ $menu->title }}">
                             </div>
                         </div>
-                        <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                        <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
                             <label class="w-32 text-sm mb-1 mt-2.5 flex">تصویر آیتم:</label>
                             <div
                                 class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
@@ -32,15 +33,8 @@
                                     name='image'>
                             </div>
                         </div>
-                        <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="w-32 text-sm mb-1 mt-2.5 flex">توضیحات:</label>
-                            <div
-                                class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                <input class="w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                    name='description' placeholder="توضیحات" value="{{ $menu->description }}">
-                            </div>
-                        </div>
-                        <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                        
+                        <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
                             <label class="w-32 text-sm mb-1 mt-2.5 flex">قیمت:</label>
                             <div
                                 class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
@@ -48,7 +42,7 @@
                                     name='price' placeholder="10000" value="{{ $menu->price }}">
                             </div>
                         </div>
-                        <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                        <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
                             <label class="w-32 text-sm mb-1 mt-2.5 flex">تخفیف:</label>
                             <div
                                 class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
@@ -56,19 +50,27 @@
                                     name='discount' placeholder="2000" value="{{ $menu->discount }}">
                             </div>
                         </div>
-                        <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                        <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
                             <label class="w-32 text-sm mb-1 mt-2.5 flex">زمان تقریبی پخت:</label>
                             <div class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="w-full focus:outline-none text-sm font-bold mr-2" type="number" name='duration' placeholder="دقیقه" value="{{ $menu->duration }}">
                             </div>
                         </div>
-                        <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <div class="w-32 flex items-center justify-center">
+                        <div class="w-full flex flex-row items-center gap-3 max-md:flex-col max-md:gap-1">
+                        
                                 <input class="size-4 focus:outline-none text-sm font-bold cursor-pointer" type="checkbox"
                                     name='customizable' value="1"
                                     @if ($menu->customizable) {{ 'checked' }} @endif>
-                            </div>
+                            
                             <label class="text-sm mb-1 mt-2.5 flex">قابلیت شخصی سازی دارد:</label>
+                        </div>
+                        <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1 lg:col-span-2">
+                            <label class="w-32 text-sm mb-1 mt-2.5 flex">توضیحات:</label>
+                            <div
+                                class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                <textarea class="w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                    name='description' placeholder="توضیحات">{{ $menu->description }}</textarea>
+                            </div>
                         </div>
                     </div>
                     <div class="w-full p-3 bg-gray-100 rounded-lg">
