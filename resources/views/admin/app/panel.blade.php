@@ -20,7 +20,7 @@
                     famenu.ir
                 </a>
             </div>
-            <div class="py-5 h-[80%] overflow-y-auto flex flex-col gap-5" style="scrollbar-width: none;">
+            <div class="py-5 h-[90%] overflow-y-auto flex flex-col gap-5" style="scrollbar-width: none;">
                 <div class="flex flex-row items-start gap-2.5">
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 576 512">
                         <path fill="white"
@@ -39,9 +39,7 @@
                         داشبورد
                     </a>
                 </div>
-
                 <div class="flex justify-start">
-
                     <span class=" text-[white] flex justify-start font-bold"> فروشگاه</span>
                 </div>
                 <div class="flex justify-center flex-row-reverse">
@@ -86,7 +84,6 @@
                         </li>
                     </ul>
                 </div>
-
                 <div class="dashboard">
                     <div class="flex justify-between flex-row-reverse">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -103,8 +100,6 @@
                             </svg>
                         </div>
                     </div>
-
-
                     <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden">
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
@@ -112,7 +107,6 @@
                                 لیست کسب و کار های من
                             </a>
                         </li>
-
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('career.create') }}" class=" text-white py-1">ایجاد
@@ -180,7 +174,6 @@
                                 </a>
                             </li>
                     </ul>
-
                 </div>
                 <div class="dashboard">
                     <div class="flex flex-row-reverse justify-between">
@@ -284,8 +277,6 @@
                     @endforeach
                 </div>
                 {{-- end customPro_list --}}
-
-
                 <div class="dashboard">
                     <div class="flex flex-row-reverse justify-between">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -360,21 +351,16 @@
                                     @endif
 
                                 </ul>
-
                                 <div class="w-full h-px bg-gray-300 my-2 "></div>
                                 <div class="rtl text-right ">
                                     <div
                                         class="hover:text-[#1B84FF] hover:bg-[#F1F1F4] flex flex-row justify-between mt-1 w-11/12 ml-auto mr-auto rounded-lg">
-
                                         <a href="{{ route('user.setting') }}" class="block w-full p-2">تنظیمات
                                             اکانت</a>
-
                                     </div>
                                     <div
                                         class="hover:text-[#1B84FF] hover:bg-[#F1F1F4] flex flex-row justify-between mt-1 w-11/12 ml-auto mr-auto rounded-lg">
-
                                         <a href="{{ route('user.logout') }}" class="p-2 block w-full">خروج</a>
-
                                     </div>
                                 </div>
                             </div>
@@ -503,7 +489,7 @@
             </div>
             <!-- hamburger menu end -->
         </header>
-        <div class="w-full h-dvh lg:w-[calc(100%-265px)] float-end pt-20 lg:px-5 overflow-y-auto px-5 relative"
+        <div class="w-full h-dvh lg:w-[calc(100%-265px)] float-end pt-20 lg:px-5 overflow-y-auto px-5 relative bg-[#fcfcfc]"
             style="scrollbar-width:none;">
             @yield('content')
         </div>

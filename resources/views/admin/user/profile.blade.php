@@ -14,12 +14,12 @@
 
             <div class="flex flex-col border-none rounded-[7px]">
                 <div class="block lg:flex flex-row justify-between gap-8">
-                    <div class="flex flex-col xm:flex-row lg:flex-row gap-5 py-3">
+                    <div class="flex flex-col xm:flex-row lg:flex-row gap-5 py-3 rounded-full">
                         @if (!$user->main_image)
-                            <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0"
+                            <img class="size-27 lg:size-41 mx-auto lg:m-0 rounded-full"
                                 src="{{ asset('assets/img/user.png') }}" alt="user__avatar">
                         @else
-                            <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0"
+                            <img class="size-27 lg:size-41 mx-auto lg:m-0 rounded-full"
                                 src="{{ asset('storage/' . $user->main_image) }}" alt="user__picture">
                         @endif
                         <div class="flex flex-col justify-end">
@@ -64,7 +64,7 @@
 
             <div class="pt-3 mt-4 lg:mt-8">
                 {{-- @dd($user); --}}
-                <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5">
+                <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5 bg-white">
                     <h1 class="lg:text-xl mt-5 font-bold mx-2">جزییات پروفایل </h1>
 
                     <div class="w-full h-px bg-gray-200 my-5 "></div>
