@@ -4,7 +4,7 @@
         <form action="{{ route('career.store') }}" method="post" enctype='multipart/form-data'>
             @csrf
             <div class="min-h-screen flex items-start justify-center">
-                <div class="bg-white rounded-2xl shadow-md p-3 w-full w-3/4">
+                <div class="bg-white rounded-2xl shadow-md p-3 w-full lg:w-3/4">
                     <div class="text-center mb-4">
                         <h1 class="text-2xl font-bold text-gray-800">فرم اطلاعات کسب وکار</h1>
                         <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
