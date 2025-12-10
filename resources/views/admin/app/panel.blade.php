@@ -510,7 +510,7 @@
     </div>
 
     <script src="{{ asset('assets/js/userPanel.js') }}"></script>
-    <!-- <script src="{{ asset('assets/js/ecomm_product_create.js') }}"></script> -->
+    {{-- <script src="{{ asset('assets/js/ecomm_product_create.js') }}"></script> --}}
 
     @yield('ajax')
 

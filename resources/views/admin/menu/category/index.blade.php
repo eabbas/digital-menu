@@ -61,7 +61,7 @@
                                     </ul>
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('menuItem.create', [$category->id]) }}" class="inline-block w-full hover:text-blue-800 p-1 rounded-sm text-gray-700">ایجاد منو</a>
+                                    <a href="{{ route('menuItem.create', [$category->id]) }}" class="inline-block w-full hover:text-blue-800 p-1 rounded-sm text-gray-700">ایجاد آیتم</a>
                                         
                                 </td>
                                 @if (count($category->menu_items))

@@ -48,7 +48,7 @@
                                     <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
                                         <div class="w-20 lg:w-full">
-                                            <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover"
+                                            <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
                                                 src="<?= asset('storage/' . $career->logo) ?>">
                                         </div>
                                     </div>
