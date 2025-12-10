@@ -15,18 +15,8 @@
 
             <!-- Stats and Actions -->
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
-                <div class="flex items-center gap-3 bg-white px-4 py-2 rounded-lg shadow-sm">
-                    <span class="text-sm text-gray-700 font-bold">تعداد QR کد ها:</span>
-                    <span class="text-sm bg-blue-50 text-blue-600 px-3 py-1 rounded-md font-bold">
-                        {{ $menu->qr_num }}
-                    </span>
-                </div>
                 
                 <div class="flex flex-wrap items-center justify-end gap-3">
-                    <a href="{{ route('menu.qrcodes', [$menu]) }}"
-                        class="text-sm px-5 py-2 bg-sky-500 text-white hover:bg-sky-600 transition-all duration-150 rounded-lg shadow-sm hover:shadow-md">
-                        مشاهده QR کد ها
-                    </a>
                     <a href="{{ route('menuCat.create', [$menu]) }}"
                         class="text-sm px-5 py-2 bg-green-500 text-white hover:bg-green-600 transition-all duration-150 rounded-lg shadow-sm hover:shadow-md">
                         ایجاد دسته
@@ -126,7 +116,7 @@
                             @else
                                 <div class="text-center py-8">
                                     <p class="text-gray-500">هیچ آیتمی در این دسته وجود ندارد</p>
-                                    <a href="#"
+                                    <a href="{{ route('menuItem.create', [$category->id]) }}"
                                         class="inline-block mt-3 text-sm text-blue-600 hover:text-blue-700 font-medium">
                                         افزودن آیتم جدید
                                     </a>

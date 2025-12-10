@@ -54,7 +54,7 @@
                                     </div>
                                     <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center">
-                                        <span class="block w-24 lg:w-full">{{ count($menu->qr_codes) }}</span>
+                                        <span class="block w-24 lg:w-full">{{ count($career->qr_codes) }}</span>
                                     </div>
                                     <div class="col-span-3 grid grid-cols-3 divide-x divide-[#f1f1f4] items-center">
                                         <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3">
