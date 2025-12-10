@@ -1,6 +1,8 @@
 @extends('admin.app.panel')
 @section('title', 'محصولات شخصی سازی شده کسب وکار')
 @section('content')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 
 <div class="w-full min-h-screen pb-10 pt-6 bg-gradient-to-b from-blue-50 to-white">
     <div class="w-11/12 mx-auto">
@@ -19,20 +21,117 @@
                         </svg>
                         <span class="text-sm font-medium">{{ count($career->custom_product ?? []) }} محصول</span>
                     </div>
-                    {{--   --}}
-                    <a href="{{ route('cp.create', [$career]) }}"
-                       class="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg">
+                    {{--  href="{{ route('cp.create', [$career]) }}" --}}
+                    <div onclick="openCPform()" 
+                       class="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer" >
                         <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                         </svg>
                         <span class="text-sm font-medium">محصول جدید</span>
-                    </a>
+                    </div>
                 </div>
             </div>
             <div class="h-1 w-24 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full"></div>
         </div>
+            <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300" id="createCPform">
+                <div class="w-[calc(100%-265px)] float-end flex justify-center items-center bg-white h-dvh relative" id="closeCreateCPform">
+                    <span class="cursor-pointer absolute top-4 right-4 text-4xl text-gray-500 hover:text-gray-700 transition-colors duration-200" onclick="closeCreateCPform()">×</span>
+                    <form action="{{ route('cp.store') }}" method="post" enctype="multipart/form-data" class="space-y-6 w-full max-w-2xl">
+                        @csrf
+                        <div class="flex flex-col md:flex-row gap-6 mt-10">
+                            <input type="hidden" name="career_id" value="{{$career -> id}}">
+                            
+                            <!-- Title Field -->
+                            <div class="form-group flex-1 mt-10">
+                                <label for="title" class="block text-sm font-medium text-gray-700 mb-2">
+                                    <i class="fas fa-heading ml-2 text-gray-500"></i>
+                                    عنوان محصول
+                                </label>
+                                <input 
+                                    type="text" 
+                                    name="title" 
+                                    id="title"
+                                    required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                    placeholder="عنوان محصول را وارد کنید"
+                                >
+                            </div>
 
-       
+                            <!-- Description Field -->
+                            <div class="form-group flex-1">
+                                <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
+                                    <i class="fas fa-align-left ml-2 text-gray-500 mr-4"></i>
+                                    توضیحات
+                                </label>
+                                <textarea 
+                                    name="description" 
+                                    id="description" 
+                                    rows="4"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200 resize-none"
+                                    placeholder="توضیحات محصول را وارد کنید"
+                                ></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Image Upload Field -->
+                        <div class="form-group">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                <i class="fas fa-image ml-2 text-gray-500"></i>
+                                تصویر محصول
+                            </label>
+                            <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-xl hover:border-blue-400 transition duration-200">
+                                <div class="space-y-1 text-center">
+                                    <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mx-auto"></i>
+                                    <div class="flex text-sm text-gray-600">
+                                        <label for="customProductImage" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none">
+                                            <span>آپلود فایل</span>
+                                            <input 
+                                                id="customProductImage" 
+                                                name="customProductImage" 
+                                                type="file" 
+                                                accept="image/*"
+                                                class="sr-only"
+                                            >
+                                        </label>
+                                        <p class="pr-1">یا کشیدن و رها کردن</p>
+                                    </div>
+                                    <p class="text-xs text-gray-500">PNG, JPG, GIF تا 2MB</p>
+                                </div>
+                            </div>
+                            <div id="imagePreview" class="mt-4 hidden">
+                                <img id="previewImage" class="max-h-48 rounded-lg shadow-md mx-auto">
+                            </div>
+                        </div>
+
+                        <!-- Material Limit Field -->
+                        <div class="form-group">
+                            <label for="material_limit" class="block text-sm font-medium text-gray-700 mb-2">
+                                <i class="fas fa-ruler-combined ml-2 text-gray-500"></i>
+                                محدودیت متریال
+                            </label>
+                            <input 
+                                type="number" 
+                                name="material_limit" 
+                                id="material_limit"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                placeholder="محدودیت متریال را وارد کنید"
+                                required
+                            >
+                        </div>
+
+                        <div class="pt-4 border-t border-gray-200">
+                            <div class="flex justify-center">
+                                <button 
+                                    type="submit" onclick="storeCP(event)"
+                                    class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium py-2.5 px-8 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 w-auto">
+                                    <i class="fas fa-check ml-2"></i>
+                                    ثبت محصول
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+        </div>
 
         </div>
 
@@ -87,108 +186,110 @@
 
             <!-- Table Content -->
             <div class="divide-y divide-blue-50">
-                @foreach($career->custom_product as $index => $custom_product)
-                <div class="grid grid-cols-12 items-center hover:bg-blue-50/30 transition-all duration-200 {{ $index % 2 == 0 ? 'bg-white' : 'bg-blue-50/20' }}">
-                    <!-- نام محصول -->
-                    <div class="px-4 py-4 text-center border-l border-blue-100 col-span-2">
-                        <span class="text-sm font-medium text-gray-800 break-words">{{ $custom_product->title }}</span>
-                    </div>
-                    
-                    <!-- توضیحات -->
-                    <div class="px-4 py-4 text-center border-l border-blue-100">
-                        <span class="text-sm text-gray-600 line-clamp-2">{{ $custom_product->description }}</span>
-                    </div>
-                    
-                    <!-- عکس محصول -->
-                    <div class="px-4 py-4 text-center border-l border-blue-100 col-span-2">
-                        <div class="flex justify-center">
-                            <div class="relative">
-                                <img class="size-16 object-cover rounded-lg border-2 border-blue-100 shadow-sm" 
-                                     src="{{ asset('storage/' . $custom_product->image) }}"
-                                     alt="{{ $custom_product->title }}">
-                                <div class="absolute -bottom-1 -right-1 bg-blue-500 text-white text-xs rounded-full size-6 flex items-center justify-center">
-                                    <svg class="size-3" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4z" clip-rule="evenodd"/>
-                                    </svg>
+                <div class="flex flex-col gap-5" id="custom_product_section">
+                    @foreach($career->custom_product as $index => $custom_product)
+                    {{-- @dd($custom_product) --}}
+                    <div class="grid grid-cols-12 items-center hover:bg-blue-50/30 transition-all duration-200 {{ $index % 2 == 0 ? 'bg-white' : 'bg-blue-50/20' }} newParameters"  data-cp-id="{{ $custom_product->id }}">
+                        <!-- نام محصول -->
+                        <div class="px-4 py-4 text-center border-l border-blue-100 col-span-2">
+                            <span class="text-sm font-medium text-gray-800 break-words">{{ $custom_product->title }}</span>
+                        </div>
+                        
+                        <!-- توضیحات -->
+                        <div class="px-4 py-4 text-center border-l border-blue-100">
+                            <span class="text-sm text-gray-600 line-clamp-2">{{ $custom_product->description }}</span>
+                        </div>
+                        
+                        <!-- عکس محصول -->
+                        <div class="px-4 py-4 text-center border-l border-blue-100 col-span-2">
+                            <div class="flex justify-center">
+                                <div class="relative">
+                                    <img class="size-16 object-cover rounded-lg border-2 border-blue-100 shadow-sm" 
+                                         src="{{ asset('storage/' . $custom_product->image) }}"
+                                         alt="{{ $custom_product->title }}">
+                                    <div class="absolute -bottom-1 -right-1 bg-blue-500 text-white text-xs rounded-full size-6 flex items-center justify-center">
+                                        <svg class="size-3" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- حد مواد -->
-                    <div class="px-4 py-4 text-center border-l border-blue-100">
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-blue-100 to-blue-50 text-blue-600 border border-blue-200">
-                            {{ $custom_product->material_limit }}
-                        </span>
-                    </div>
-                    
-                    <!-- عملیات -->
-                    <div class="col-span-5 border-l border-blue-100">
-                        <div class="grid grid-cols-5 divide-x divide-blue-100 h-full">
-                           <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3 gap-4">
-                            <li class="flex justify-center">
-                                <a href="{{ route('cp.single', [$custom_product]) }}"
-                                    class="w-fit flex flex-row items-center justify-center bg-sky-500 hover:bg-sky-600 p-1 rounded-sm" title="مشاهده">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 576 512">
-                                        <path fill="white" d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z"/>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li class="flex justify-center">
-                                <a href="{{ route('cp.edit', [$custom_product]) }}"
-                                    class="w-fit flex flex-row items-center justify-center bg-green-500 hover:bg-green-600 p-1 rounded-sm" title="ویرایش">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
-                                        <path fill="white" d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li class="flex justify-center">
-                                <a href="{{ route('cp.delete', [$custom_product]) }}"
-                                    class="w-fit flex flex-row items-center justify-center bg-red-500 hover:bg-red-600 p-1 rounded-sm" title="حذف">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
-                                        <path fill="white" d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
-                                    </svg>
-                                </a>
-                            </li>
-                        </ul>
-                            
-                            <!-- ایجاد نوع محصول -->
-                            <div class="py-4 flex items-center justify-center">
-                                <a href="{{ route('cpv.create', [$custom_product]) }}" 
-                                   class="flex flex-col items-center gap-1 text-blue-600 hover:text-blue-700 transition-colors group">
-                                    <div class="size-8 rounded-lg bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                                        <svg class="size-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        
+                        <!-- حد مواد -->
+                        <div class="px-4 py-4 text-center border-l border-blue-100">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-blue-100 to-blue-50 text-blue-600 border border-blue-200">
+                                {{ $custom_product->material_limit }}
+                            </span>
+                        </div>
+                        
+                        <!-- عملیات -->
+                        <div class="col-span-5 border-l border-blue-100">
+                            <div class="grid grid-cols-5 divide-x divide-blue-100 h-full">
+                               <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3 gap-4">
+                                <li class="flex justify-center">
+                                    <a href="{{ route('cp.single', [$custom_product]) }}"
+                                        class="w-fit flex flex-row items-center justify-center bg-sky-500 hover:bg-sky-600 p-1 rounded-sm" title="مشاهده">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 576 512">
+                                            <path fill="white" d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z"/>
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li class="flex justify-center" onclick='editCP("{{ $custom_product->id }}")'>
+                                    {{-- href="{{ route('cp.edit', [$custom_product]) }}" --}}
+                                    <div class="w-fit flex flex-row items-center justify-center bg-green-500 hover:bg-green-600 p-1 rounded-sm" title="ویرایش">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
+                                            <path fill="white" d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
                                         </svg>
                                     </div>
-                                    <span class="text-xs font-medium mt-1">ایجاد نوع</span>
-                                </a>
-                            </div>
-                            
-                            <!-- لیست انواع محصولات -->
-                            <div class="py-4 flex items-center justify-center">
-                                <a href="{{ route('cpv.list', [$custom_product]) }}" 
-                                   class="flex flex-col items-center gap-1 text-blue-600 hover:text-blue-700 transition-colors group">
-                                    <div class="size-8 rounded-lg bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                                        <svg class="size-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                                </li>
+                                <li class="flex justify-center">
+                                    <a href="{{ route('cp.delete', [$custom_product]) }}"
+                                        class="w-fit flex flex-row items-center justify-center bg-red-500 hover:bg-red-600 p-1 rounded-sm" title="حذف">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
+                                            <path fill="white" d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
                                         </svg>
+                                    </a>
+                                </li>
+                            </ul>
+                                
+                                <!-- ایجاد نوع محصول -->
+                                {{-- href="{{ route('cpv.create', [$custom_product]) }}" --}}
+                                <div class="py-4 flex items-center justify-center cursor-pointer">
+                                    <div onclick='openCPVform("{{ $custom_product->id }}")'
+                                    class="flex flex-col items-center gap-1 text-blue-600 hover:text-blue-700 transition-colors group cursor-pointer">
+                                        <span class="text-xs font-medium mt-1">ایجاد نوع</span>
                                     </div>
-                                    <span class="text-xs font-medium mt-1">لیست انواع</span>
+                                </div>
+                                
+                                <!-- لیست انواع محصولات -->
+                                <div class="py-4 flex items-center justify-center">
+                                    <a href="{{ route('cpv.list', [$custom_product]) }}" 
+                                       class="flex flex-col items-center gap-1 text-blue-600 hover:text-blue-700 transition-colors group">
+                                        <div class="size-8 rounded-lg bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+                                            <svg class="size-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                                            </svg>
+                                        </div>
+                                        <span class="text-xs font-medium mt-1">لیست انواع</span>
+                                    </a>
+                                </div>
+                                {{--  href="{{ route('custmCategory.create' , [$custom_product]) }}"  --}}
+                                <div onclick='openCform("{{ $custom_product->id }}")' 
+                                class="flex items-center gap-2 text-blue px-4 py-2 rounded-lg transition-all duration-200 cursor-pointer">
+                                    <span class="text-sm font-medium"> ایجاد دسته</span>
+                                </div>
+                               
+                                <a href="{{ route('cp.category_list' , [$custom_product]) }}" 
+                                   class="text-indigo-600 hover:text-indigo-800 text-sm font-medium transition-colors">
+                                     لیست دسته 
                                 </a>
                             </div>
-                            <a href="{{ route('custmCategory.create' , [$custom_product]) }}" 
-                               class="text-indigo-600 hover:text-indigo-800 text-sm font-medium transition-colors">
-                                ایجاد دسته
-                            </a>
-                            <a href="{{ route('cp.category_list' , [$custom_product]) }}" 
-                               class="text-indigo-600 hover:text-indigo-800 text-sm font-medium transition-colors">
-                                 لیست دسته 
-                            </a>
                         </div>
                     </div>
+                    @endforeach
+
                 </div>
-                @endforeach
                 
                 @if(count($career->custom_product ?? []) == 0)
                 <div class="py-16 text-center">
@@ -211,6 +312,551 @@
             </div>
         </div>
     </div>
+    <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300" id="createCform">
+        <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative" id="closeCreateCform">
+        <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeCreateCform()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
+                <path fill="gray" d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
+            </svg>
+        </div>
+        <form action="{{ route('custmCategory.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-1/2 p-5 rounded-lg">
+            @csrf
+                                            
+            <div class="mb-4">
+                <label for="title" class="block text-sm font-medium mb-2">
+                    عنوان دسته بندی
+                </label>
+                <input type="text" 
+                    name="titleCategory" 
+                    id="titleCustomCategory"
+                    required
+                    class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+            </div>
+            <div class="mb-4 flex flex-row gap-5">
+                <input type="checkbox"
+                    name="requiredCategory" 
+                    id="requiredCustomCategory"
+                    value="1"
+                    class="p-1 border rounded focus:border-blue-500">
+                    <label for="required" class="text-sm font-medium">
+                    الزامی بودن یا نبودن 
+                    </label>
+                </div>
+                                                
+                <div class="mb-6">
+                    <label for="max_item_amount" class="block text-sm font-medium mb-2">
+                    حداکثر تعداد آیتم
+                </label>
+                <input type="number" 
+                    name="max_item_amount" 
+                    id="max_item_amount_customCategory"
+                    required
+                    min="1"
+                    class="w-full p-2 rounded border-1 border-gray-300 rounded focus:border-blue-500 focus:outline-none">
+                </div>
+
+                <div class="flex justify-end gap-3" >
+                    <button type="submit" onclick="Categorystore(event)" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 cursor-pointer">
+                        ثبت
+                    </button>
+                </div>
+                <input type="hidden" name="custom_pro_id"  id="custom_pro_id_customCategory">
+        </form>
+        </div>
+    </div>
+    <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300" id="createCPVform">
+        <div class="w-[calc(100%-265px)] float-end flex justify-center items-center bg-white h-dvh relative" id="closeCreateCPVform">
+        <span class="cursor-pointer absolute top-4 right-4 text-4xl text-gray-500 hover:text-gray-700 transition-colors duration-200" onclick="closeCreateCPVform()">×</span>
+            <form action="{{ route('cpv.store') }}" method="post" enctype="multipart/form-data" class="space-y-6">
+                @csrf
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+                    <!-- عنوان -->
+                    <div>
+                        <label for="title" class="block text-sm font-medium text-gray-700">
+                            عنوان <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" 
+                            name="title" 
+                            id="titleCPV"
+                            required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                    </div>
+                    <!-- حداقل واحد مقدار -->
+                    <div>
+                        <label for="min_amount_unit" class="block text-sm font-medium text-gray-700 mb-2">
+                            حداقل واحد مقدار
+                        </label>
+                        <input type="number" 
+                            name="min_amount_unit" 
+                            id="min_amount_unit_cpv"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                    </div>
+                    <!-- مدت زمان -->
+                    <div>
+                        <label for="duration" class="block text-sm font-medium text-gray-700 mb-2">
+                            مدت زمان آماده سازی (دقیقه)
+                        </label>
+                        <input type="number" 
+                            name="duration" 
+                            id="durationCPV"
+                            min="1"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                    </div>
+                    <!-- محصول اصلی -->
+                    {{-- @dd($custom_product->career->id) --}}
+                        <input type="hidden" name="custom_product_id" id="custom_product_id_variant" value="{{ $custom_product->id }}">
+                        <input type="hidden" name="career_id" value="{{ $custom_product->career->id }}">
+
+                    <!-- تصویر -->
+                    {{-- <div class="md:col-span-2">
+                        <label for="image" class="block text-sm font-medium text-gray-700 mb-2">
+                            تصویر
+                        </label>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-1">
+                                <input type="file" 
+                                    name="image" 
+                                    id="image"
+                                    accept="image/*"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                            </div>
+                            <div class="image-preview hidden">
+                                <img id="preview" class="w-20 h-20 object-cover rounded-lg border">
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">فرمت‌های مجاز: JPG, PNG, GIF. حداکثر سایز: 2MB</p>
+                    </div> --}}
+
+                    <!-- توضیحات -->
+                    <div class="md:col-span-2">
+                        <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
+                            توضیحات
+                        </label>
+                        <textarea name="description" 
+                                id="descriptionCPV"
+                                rows="4"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"></textarea>
+                    </div>
+                </div>
+
+                <!-- دکمه‌های فرم -->
+                <div class="flex justify-end space-x-4 pt-4 border-t">
+                    <button type="submit" onclick="cpvStore(event)"
+                    class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200 flex items-center">
+                        ثبت نوع محصول
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300" id="editCPform">
+        <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative bg-white" id="closeEditCform">
+            <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeCreateCform()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
+                    <path fill="gray" d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
+                </svg>
+            </div>
+            <form action="{{ route('cp.update')}}" method="post" enctype='multipart/form-data'
+                class="w-11/12 lg:w-3/4 mx-auto py-5 rounded-lg">
+                @csrf
+                <input type="hidden" name="id" id="custom_product_id">
+                {{-- <input type="hidden" name="career_id" value="{{ $custom_product->career->id }}"> --}}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 lg:gap-4">
+                    <div class="w-full flex flex-col">
+                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
+                            for="title">
+                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">عنوان
+                            </legend>
+                            <input type="title" name="editTitleCP" id="editTitleCP" value="{{$custom_product -> title}}"
+                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
+                        </fieldset>
+                    </div>
+                    <div class="w-full flex flex-col">
+                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
+                            for="description">
+                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">
+                                توضیحات</legend>
+                            <input type="description" name="description" id="editDescriptionCP" value="{{$custom_product -> description}}"
+                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
+                        </fieldset>
+                    </div>
+                    
+                    <div class="w-full flex flex-col">
+                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
+                            for="material_limit">
+                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">
+                                حد مواد  </legend>
+                            <input type="material_limit" name="material_limit" id="material_limit_CP" value="{{$custom_product -> material_limit}}"
+                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
+                        </fieldset>
+                    </div>
+                    {{-- <div class="w-full flex flex-col">
+                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
+                            for="customProductImage">
+                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">عکس
+                            </legend>
+                            <input type="file" name="customProductImage" class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500" value={{ $customProduct->image }}>
+                        </fieldset>
+                    </div> --}}
+                </div>
+                <div class="text-center md:px-12 mt-5 lg:mt-10">
+                    <button onclick='updateCP(event, "{{ $custom_product->id }}")'
+                        class="w-5/12 max-sm:bg-blue-500 max-sm:text-white px-5 py-2 lg:px-10 lg:py-3 rounded-[8px] transition-all duration-250 bg-blue-400 text-white hover:bg-blue-600 hover:border-gray-400 hover:text-white text-gray-500 cursor-pointer">ویرایش</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    
 </div>
+
+
+<script>
+    let createCPform = document.getElementById('createCPform')  
+    let closeForm = document.getElementById('closeCreateCPform')  
+    let closeFormC = document.getElementById('closeCreateCform')  
+    let createCategoryform = document.getElementById('createCform')
+    let createCustomVariantform = document.getElementById('createCPVform')
+    let closeCPV = document.getElementById('closeCreateCPVform')
+    let custom_pro_id_customCategory = document.getElementById('custom_pro_id_customCategory')
+    let custom_product_id_variant = document.getElementById('custom_product_id_variant')
+    let cpFormEdit = document.getElementById('editCPform')
+
+
+    let cpTitleEdit = document.getElementById('editTitleCP')
+    let CPeditDescription = document.getElementById('editDescriptionCP')
+    let CPmaterialLimit = document.getElementById('material_limit_CP')
+    let custom_product_id = document.getElementById('custom_product_id')
+
+    function editCP(id){
+        cpFormEdit.classList.remove('invisible')
+        cpFormEdit.classList.remove('opacity-0')
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            }
+        })
+        $.ajax({
+            url: "{{ route('cp.edit') }}",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                'id': id
+            },
+            success: function(data){
+                console.log(data)
+                custom_product_id.value = data.id
+                cpTitleEdit.value = data.title
+                CPeditDescription.value = data.description
+                CPmaterialLimit.value = data.material_limit
+            },
+            error: function(){
+                alert('خطا در دریافت داده ها')
+            }
+        })
+    }
+    
+    function updateCP(ev){
+       
+        let newParameters = document.querySelectorAll('.newParameters')
+        ev.preventDefault()
+        $.ajaxSetup({
+            headers : {
+                'X-CSRF-TOKEN' : "{{ csrf_token() }}"
+            }
+        })
+        $.ajax({
+            url : "{{ route('cp.update') }}" ,
+            type : "POST" ,
+            dataType : "json" ,
+            data : {
+                'id': custom_product_id.value,
+                'career_id' : "{{ $career->id }}",
+                'title' : cpTitleEdit.value,
+                'description' : CPeditDescription.value,
+                // 'customProductImage' : customProductImage.value,
+                'material_limit' : CPmaterialLimit.value,
+            },
+            success: function(data){
+                newParameters.forEach((element)=>{
+                    if(element.getAttribute('data-cp-id') == data.id){
+                        element.children[0].children[0].innerText = data.title 
+                        element.children[1].children[0].innerText = data.description 
+                        element.children[3].children[0].innerText = data.material_limit 
+                    }
+                })
+                closeCreateCPform()
+                console.log(data)
+            },
+            error: function(){
+                alert('خطا در ارسال داده')
+            }
+    
+        })
+    } 
+    function deleteCP(){
+        let newParameters = document.querySelectorAll('.newParameters')
+        $.ajaxSetup({
+            headers : {
+                'X-CSRF-TOKEN' : "{{ csrf_token() }}"
+            }
+        })
+        $.ajax({
+            url : "{{ route('cp.update') }}" ,
+            type : "POST" ,
+            dataType : "json" ,
+            data : {
+                'id': custom_product_id.value,
+                'career_id' : "{{ $career->id }}",
+                'title' : cpTitleEdit.value,
+                'description' : CPeditDescription.value,
+                // 'customProductImage' : customProductImage.value,
+                'material_limit' : CPmaterialLimit.value,
+            },
+            success: function(data){
+                newParameters.forEach((element)=>{
+                    if(element.getAttribute('data-cp-id') == data.id){
+                       element.remove()
+                    }
+                })
+                closeCreateCPform()
+                console.log(data)
+            },
+            error: function(){
+                alert('خطا در ارسال داده')
+            }
+    
+        })
+    } 
+
+    function openCPform(){
+        createCPform.classList.remove('invisible')
+        createCPform.classList.remove('opacity-0')
+    }
+    function closeCreateCPform(){
+        createCPform.classList.add('invisible')
+        createCPform.classList.add('opacity-0')
+    }
+    function openCform(cpId){
+        createCategoryform.classList.remove('invisible')
+        createCategoryform.classList.remove('opacity-0')
+        custom_pro_id_customCategory.value = cpId
+    }
+    function closeCreateCform(){
+        createCategoryform.classList.add('invisible')
+        createCategoryform.classList.add('opacity-0')
+    }
+    function openCPVform(cpId){
+        createCustomVariantform.classList.remove('invisible')
+        createCustomVariantform.classList.remove('opacity-0')
+    }
+    function closeCreateCPVform(){
+        createCustomVariantform.classList.add('invisible')
+        createCustomVariantform.classList.add('opacity-0')
+        custom_product_id_variant.value = cpId
+    }
+
+    let title = document.getElementById('title')
+    let description = document.getElementById('description')
+    let customProductImage = document.getElementById('customProductImage')
+    let material_limit = document.getElementById('material_limit')
+
+    let custom_product_section = document.getElementById('custom_product_section')
+
+    function storeCP(ev){
+        ev.preventDefault()
+        $.ajaxSetup({
+            headers : {
+                'X-CSRF-TOKEN' : "{{ csrf_token() }}"
+            }
+        })
+        $.ajax({
+            url : "{{ route('cp.store') }}" ,
+            type : "POST" ,
+            dataType : "json" ,
+            data : {
+                'career_id' : "{{ $career->id }}",
+                'title' : title.value,
+                'description' : description.value,
+                // 'customProductImage' : customProductImage.value,
+                'material_limit' : material_limit.value,
+            },
+            success: function(data){
+                title.value= ""
+                description.value= ""
+                material_limit.value= ""
+                let div = document.createElement('div')
+                let element = `
+                 <div class="grid grid-cols-12 items-center hover:bg-blue-50/30 transition-all duration-200 newParameters" data-cp-id="${data.id}">
+                        <!-- نام محصول -->
+                        <div class="px-4 py-4 text-center border-l border-blue-100 col-span-2">
+                            <span class="text-sm font-medium text-gray-800 break-words">${ data.title }</span>
+                        </div>
+                        
+                        <!-- توضیحات -->
+                        <div class="px-4 py-4 text-center border-l border-blue-100">
+                            <span class="text-sm text-gray-600 line-clamp-2">${ data.description }</span>
+                        </div>
+                        
+                        
+                        <!-- حد مواد -->
+                        <div class="px-4 py-4 text-center border-l border-blue-100">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-blue-100 to-blue-50 text-blue-600 border border-blue-200">
+                                ${ data.material_limit }
+                            </span>
+                        </div>
+                        
+                        <!-- عملیات -->
+                        <div class="col-span-5 border-l border-blue-100">
+                            <div class="grid grid-cols-5 divide-x divide-blue-100 h-full">
+                               <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3 gap-4">
+                                <li class="flex justify-center">
+                                    <a href="{{ url('customProducts.show/${data}') }}"
+                                        class="w-fit flex flex-row items-center justify-center bg-sky-500 hover:bg-sky-600 p-1 rounded-sm" title="مشاهده">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 576 512">
+                                            <path fill="white" d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z"/>
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li class="flex justify-center">
+                                    <div onclick='editCP(${data.id})'
+                                        class="w-fit flex flex-row items-center justify-center bg-green-500 hover:bg-green-600 p-1 rounded-sm" title="ویرایش">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
+                                            <path fill="white" d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
+                                        </svg>
+                                    </div>
+                                </li>
+                                <li class="flex justify-center">
+                                    <a href="{{ url ('customProducts.delete/${data}') }}"
+                                        class="w-fit flex flex-row items-center justify-center bg-red-500 hover:bg-red-600 p-1 rounded-sm" title="حذف">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
+                                            <path fill="white" d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
+                                        </svg>
+                                    </a>
+                                </li>
+                            </ul>
+                                
+                                <!-- ایجاد نوع محصول -->
+                                <div class="py-4 flex items-center justify-center">
+                                    <a href="{{ url ('customProductVariants.create/${data}') }}" 
+                                       class="flex flex-col items-center gap-1 text-blue-600 hover:text-blue-700 transition-colors group">
+                                        <div class="size-8 rounded-lg bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+                                            <svg class="size-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                            </svg>
+                                        </div>
+                                        <span class="text-xs font-medium mt-1">ایجاد نوع</span>
+                                    </a>
+                                </div>
+                                
+                                <!-- لیست انواع محصولات -->
+                                <div class="py-4 flex items-center justify-center">
+                                    <a href="{{ url('customProductVariants.variantList/${data}') }}" 
+                                       class="flex flex-col items-center gap-1 text-blue-600 hover:text-blue-700 transition-colors group">
+                                        <div class="size-8 rounded-lg bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+                                            <svg class="size-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                                            </svg>
+                                        </div>
+                                        <span class="text-xs font-medium mt-1">لیست انواع</span>
+                                    </a>
+                                </div>
+                                <a href="{{ url('customCategories.create/${data}') }}" 
+                                   class="text-indigo-600 hover:text-indigo-800 text-sm font-medium transition-colors">
+                                    ایجاد دسته
+                                </a>
+                                <a href="{{ url('customProducts.category_list/${data}') }}" 
+                                   class="text-indigo-600 hover:text-indigo-800 text-sm font-medium transition-colors">
+                                     لیست دسته 
+                                </a>
+                            </div>
+                        </div>
+                    </div> `
+                div.innerHTML = element
+                custom_product_section.appendChild(div)
+                closeCreateCPform()
+                console.log(data)
+            },
+            error: function(){
+                alert('خطا در ارسال داده')
+            }
+    
+        })
+
+
+    }
+    
+    // let titleCustomCategory = document.getElementById('titleCustomCategory')
+    // let category = document.getElementById('requiredCustomCategory')
+    // let max_item_amount_customCategory = document.getElementById('max_item_amount_customCategory')
+    // let custom_pro_id_customCategory = document.getElementById('custom_pro_id_customCategory')
+
+    function Categorystore(ev){
+        ev.preventDefault()
+        $.ajaxSetup({
+            headers : {
+                'X-CSRF-TOKEN' : "{{ csrf_token() }}"
+            }
+        })
+        $.ajax({
+            url : "{{ route('custmCategory.store') }}" ,
+            type : "POST" ,
+            dataType : "json" ,
+            data : {
+                'title' : titleCustomCategory.value,
+                'required' : category.value,
+                'max_item_amount' : max_item_amount_customCategory.value,
+                'custom_pro_id' : custom_pro_id_customCategory.value,
+            },
+            success: function(data){
+                custom_pro_id_customCategory.value = ""
+                max_item_amount_customCategory.value =""
+                category.checked = 0
+                titleCustomCategory.value =""
+                alert('دسته ' + data.title + 'با موفقیت ذخیره شد')
+                closeCreateCform()
+            },
+            error: function(){
+                alert('خطا در ارسال داده')
+            }
+
+        })
+    }
+
+    let cpvTitle = document.getElementById('titleCPV')
+    let cpvMinAmount = document.getElementById('min_amount_unit_cpv')
+    let cpvDuration = document.getElementById('durationCPV')
+    let cpvDescription = document.getElementById('descriptionCPV')
+
+    function cpvStore(ev){
+        ev.preventDefault()
+        $.ajaxSetup({
+            headers : {
+                'X-CSRF-TOKEN' : "{{ csrf_token() }}"
+            }
+        })
+        $.ajax({
+            url : "{{ route('cpv.store') }}" ,
+            type : "POST" ,
+            dataType : "json" ,
+            data : {
+                'title' : cpvTitle.value,
+                'min_amount_unit' : cpvMinAmount.value,
+                'duration' : cpvDuration.value,
+                'description' : cpvDescription.value,
+                'custom_pro_id' : custom_product_id_variant.value,
+            },
+            success: function(data){
+                console.log(data)
+            },
+            error: function(){
+                alert('خطا در ارسال داده')
+            }
+
+        })
+    }
+
+</script>
 
 @endsection

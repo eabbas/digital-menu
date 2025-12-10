@@ -356,7 +356,7 @@ Route::group([
     Route::get('/customProductList', 'index')->name('list');
     Route::get('/category_list/{custom_product?}', 'category_list')->name('category_list');
     Route::get('/show/{customProduct}', 'show')->name('single');
-    Route::get('/edit/{customProduct}', 'edit')->name('edit');
+    Route::post('/edit', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{customProduct?}', 'delete')->name('delete');
 });

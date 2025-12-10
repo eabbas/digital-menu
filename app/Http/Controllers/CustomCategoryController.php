@@ -18,13 +18,15 @@ class CustomCategoryController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        customCategory::create([
-            'title'=>$request->title ,
-            'required' => $request->required ? $request->required : 0 , 
-            'max_item_amount' => $request->max_item_amount ,
-            'custom_pro_id' => $request->custom_pro_id 
-        ]);
-        return to_route('custmCategory.list' , [$request->custom_pro_id]);
+        // $customCategory_id = customCategory::insertGetId([
+        //     'title'=>$request->titleCategory ,
+        //     'required' => $request->required ? $request->required : 0 , 
+        //     'max_item_amount' => $request->max_item_amount ,
+        //     'custom_pro_id' => $request->custom_pro_id 
+        // ]);
+        // $data = customCategory::find($customCategory_id);
+        return response()->json($request->all());
+        // return to_route('custmCategory.list' , [$request->custom_pro_id]);
     }
     public function index(career $career , custom_product $customProduct)
     {

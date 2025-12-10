@@ -18,17 +18,12 @@ class CustomProductController extends Controller
     }
     public function store(Request $request)
     {
-        // dd($request->all());
-        // return $career->custom_product;
         $path = null;
-        if(isset($request->customProductImage)){
-
-            $name = $request->customProductImage->getClientOriginalName();
-            $fullName = time()."_".$name;
-            $path = $request->file('customProductImage')->storeAs('images', $fullName, 'public');
-
-        }
-        // dd($path);
+        // if(isset($request->customProductImage)){
+        //     $name = $request->customProductImage->getClientOriginalName();
+        //     $fullName = time()."_".$name;
+        //     $path = $request->file('customProductImage')->storeAs('images', $fullName, 'public');
+        // }
         $customPro_id = custom_product::insertGetId([
             'title'=>$request->title ,
             'description' => $request->description ,
@@ -36,7 +31,8 @@ class CustomProductController extends Controller
             'material_limit' => $request->material_limit ,
             'image'=>$path
         ]);
-        return to_route('menu.customProList' , [$request->career_id]);
+        $data = custom_product::find($customPro_id);
+        return response()->json($data);
     }
     public function index()
     {
@@ -49,28 +45,32 @@ class CustomProductController extends Controller
     {
         return view('admin.customProducts.single' , ['customProduct'=>$customProduct]);
     }
-    public function edit(custom_product $customProduct)
+    public function edit(Request $request)
     {
-        return view('admin.customProducts.edit' , ['customProduct'=>$customProduct]);
+        $custom_product = custom_product::find($request->id);
+        return response()->json($custom_product);
+        // return view('admin.customProducts.edit' , ['customProduct'=>$customProduct]);
     }
     public function update(Request $request)
     {
         // dd($request->all());
+        // return response()->json($request->all());
         $customProduct =  custom_product::find($request->id);
         $customProduct->title = $request->title;
         $customProduct->description = $request->description;
         $customProduct->material_limit = $request->material_limit;
-        if(isset($request->customProductImage)){
-            if($customProduct->image){
-                Storage::disk('public')->delete($customProduct->image);
-            }
-            $name = $request->customProductImage->getClientOriginalName();
-            $fullName = time()."_".$name;
-            $path = $request->file('customProductImage')->storeAs('images', $fullName, 'public');
-            $customProduct->image = $path;
-        }
+        // if(isset($request->customProductImage)){
+        //     if($customProduct->image){
+        //         Storage::disk('public')->delete($customProduct->image);
+        //     }
+        //     $name = $request->customProductImage->getClientOriginalName();
+        //     $fullName = time()."_".$name;
+        //     $path = $request->file('customProductImage')->storeAs('images', $fullName, 'public');
+        //     $customProduct->image = $path;
+        // }
         $customProduct->save();
-        return to_route('menu.customProList' , [$customProduct->career_id]);
+        return response()->json($customProduct);
+        // return to_route('menu.customProList' , [$customProduct->career_id]);
     }
     public function delete(custom_product $customProduct)
     {
