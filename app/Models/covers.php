@@ -12,7 +12,7 @@ class covers extends Model
         'cover_path' ,
         'title',
         'subTitle',
-        'description' 
+        'description',
     ];
      public function socialMedia(){
       return $this->belongsToMany(socialMedia::class,'social_addresses','covers_id','socialMedia_id');
@@ -24,5 +24,13 @@ class covers extends Model
 
     public function siteLinks(){
       return $this->hasMany(site_link::class);
+    }
+      public function social_qr_codes()
+    {
+        return $this->hasOne(social_qr_codes::class);
+    }
+     public function user()
+    {
+    return $this->belongsTo(User::class);
     }
 }

@@ -1,11 +1,11 @@
 @extends('admin.app.panel')
 @section('title', ' همه صفحه شبکه های اجتماعی ')
 @section('content')
-<div class="pb-4">
-    <h2 class="text-lg font-bold text-gray-800">اطلاعات صفحه های اجتماعی</h2>
-</div>
     <div class="w-full flex flex-col pb-4">
         <div class="bg-white rounded-lg">
+            <div class="pb-4">
+                <h2 class="text-lg font-bold text-gray-800">اطلاعات صفحه های اجتماعی</h2>
+            </div>
             <div class="flex flex-col gap-5">
                 <div class="overflow-x-auto shadow-sm" style="scrollbar-width: none;">
                     <div class="min-w-full bg-gray-200">
@@ -29,7 +29,7 @@
                         </div> -->
                         <!-- بدنه جدول -->
                         <div class="bg-white divide-y divide-[#f1f1f4]">
-                            @foreach ($covers as $cover)
+                            @foreach ($user->covers as $cover)
                                 @if ($cover)
                                     <div class="w-full flex flex-row justify-between shadow-sm items-center px-3">
                                         <div class="w-9/12">

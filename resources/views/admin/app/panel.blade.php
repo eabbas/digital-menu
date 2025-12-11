@@ -142,14 +142,15 @@
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('favoriteCareer.list') }}" class="text-white py-1">لیست علاقه مندی ها</a>
                         </li> --}}
-                       
-                        @if (Auth::user()->role[0]->title == 'admin')
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
-                                <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('career.list') }}" class="text-white py-1">
-                                    مشاهده همه کسب و کار ها
-                                </a>
-                            </li>
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('covers.create') }}" class=" text-white py-1">ایجادصفحه شبکه های اجتماعی</a>
+                        </li>
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('covers.social_list') }}" class=" text-white py-1"> لیست صفحه شبکه های اجتماعی</a>
+                        </li>
+                        @if(Auth::user()->role[0]->title == 'admin')
 
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
@@ -198,7 +199,10 @@
                             <a href="{{ route('covers.list') }}" class="text-white py-1"> لیست صفحه شبکه های
                                 اجتماعی</a>
                         </li>
-
+                          <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('covers.list') }}" class=" text-white py-1"> مشاهده لیست همه شبکه های اجتماعی کاربران</a>
+                        </li>
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('socialMedia.create') }}" class="text-white py-1">
@@ -565,7 +569,6 @@
 
                             letmyOption = document.createElement('option')
 
-<<<<<<< HEAD
                let myOption=document.createElement('option')
                
                myOption.innerHTML=`${category.title}`
@@ -578,7 +581,6 @@
                 let categoryId = category.id
                   
              myElement.innerHTML=`<div class="bg-white divide-y divide-[#f1f1f4]">
-=======
                             myOption.innerHTML = `${category.title}`
                             myOption.value = `${category.id}`
                             mySelect.append(myOption)
@@ -589,7 +591,6 @@
                             let categoryId = category.id
 
                             myElement.innerHTML = `<div class="bg-white divide-y divide-[#f1f1f4]">
->>>>>>> 3d491f909e0831c954e8b88fce7520f37dc0ceac
                                     <div  class='w-full flex flex-row lg:grid lg:grid-cols-4 items-center divide-x divide-[#f1f1f4]'>          
                                                 <div
                                                  class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
@@ -633,11 +634,8 @@
                                              </div>
                                              </div>`
 
-<<<<<<< HEAD
              
              mySelect.append(myElement)
-=======
->>>>>>> 3d491f909e0831c954e8b88fce7520f37dc0ceac
 
                             mySelect.appendChild(myElement)
 
