@@ -76,6 +76,7 @@
                                                          <a href="{{route('ecomm_product.category_product',[$ecomm_category])}}" class="transition-all duration-150 hover:text-sky-400   hover:border-teal-500"
                                                             >مشاهده محصولات</a>
                                                      </div>
+                                                     @if($ecomm_category->id!==1)
                                                      <div
                                                          class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
                                                          <a href="{{ route('ecomm_category.edit', [$ecomm_category]) }}" class="transition-all duration-150 hover:text-sky-400   hover:border-teal-500"
@@ -86,6 +87,7 @@
                                                          <a href="{{ route('ecomm_category.delete', [$ecomm_category]) }}" class="transition-all duration-150 hover:text-sky-400   hover:border-teal-500"
                                                             >حذف</a>
                                                      </div>
+                                                     @endif
                                                      
                                                      @if ($ecomm_category->menu)
                                                          <div

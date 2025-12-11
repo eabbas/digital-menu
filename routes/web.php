@@ -493,7 +493,7 @@ Route::group(['prefix'=>'ecomm_category',
     Route::post('/update','update')->name('update');
     Route::post('/update_ecomm_categories','update_ecomm_categories')->name('update_ecomm_categories');
     Route::get('/delete/{ecomm_category}','delete')->name('delete');
-    Route::post('/getEcomm','getEcommCategories')->name('getEcommCategories');
+    Route::post('/getEcommCategories','getEcommCategories')->name('getEcommCategories');
 
 });
 Route::group(['prefix'=>'ecomm_product',

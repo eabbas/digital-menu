@@ -65,10 +65,14 @@
                             </legend>
                              <select class="bg-grey-500" name="parent_id" id="ecomCategories">
                                     @foreach($ecomm->ecomm_category as $ecomm_categore)
+                                    @if($ecomm_category!==$ecomm_categore)
+                                    @if($ecomm_categore->id!==1)
                                        <option value="<?php echo $ecomm_categore->id;?>"  @if($ecomm_category->parent_id==$ecomm_categore->id)
                                           {{"selected"}}
+                                          
                                          @endif><?php echo $ecomm_categore->title ?></option>
-          
+                                                  @endif
+                                                  @endif
                                     @endforeach
                                     <option value="0" @if(!$ecomm_category->parent_id) {{"selected"}}
                                         @endif>    

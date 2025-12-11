@@ -565,6 +565,20 @@
 
                             letmyOption = document.createElement('option')
 
+<<<<<<< HEAD
+               let myOption=document.createElement('option')
+               
+               myOption.innerHTML=`${category.title}`
+               myOption.value=`${category.id}`
+               mySelect.append(myOption)
+           }
+ 
+               if(type=="filter"){
+                let myElement = document.createElement('div')
+                let categoryId = category.id
+                  
+             myElement.innerHTML=`<div class="bg-white divide-y divide-[#f1f1f4]">
+=======
                             myOption.innerHTML = `${category.title}`
                             myOption.value = `${category.id}`
                             mySelect.append(myOption)
@@ -575,6 +589,7 @@
                             let categoryId = category.id
 
                             myElement.innerHTML = `<div class="bg-white divide-y divide-[#f1f1f4]">
+>>>>>>> 3d491f909e0831c954e8b88fce7520f37dc0ceac
                                     <div  class='w-full flex flex-row lg:grid lg:grid-cols-4 items-center divide-x divide-[#f1f1f4]'>          
                                                 <div
                                                  class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
@@ -618,6 +633,11 @@
                                              </div>
                                              </div>`
 
+<<<<<<< HEAD
+             
+             mySelect.append(myElement)
+=======
+>>>>>>> 3d491f909e0831c954e8b88fce7520f37dc0ceac
 
                             mySelect.appendChild(myElement)
 

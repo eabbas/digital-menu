@@ -60,21 +60,23 @@
                                                          <a href="{{ route('ecomm_category.show', [$ecomm_category]) }}"
                                                              class="text-sky-700 hover:text-sky-400 ">مشاهده</a>
                                                      </div>
-                                                     <div
-                                                         class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium hover:text-sky-400 ">
-                                                         <a href="{{route('ecomm_product.category_product',[$ecomm_category])}}"
-                                                             class="text-sky-700 hover:text-sky-400 ">مشاهده محصولات</a>
-                                                     </div>
-                                                     <div
-                                                         class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium hover:text-sky-400 ">
-                                                         <a href="{{ route('ecomm_category.edit_ecomm_categories', [$ecomm_category]) }}"
-                                                             class="text-sky-700 hover:text-sky-400 ">ویرایش</a>
-                                                     </div>
-                                                     <div
-                                                         class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium hover:text-sky-400 ">
-                                                         <a href="{{ route('ecomm_category.delete', [$ecomm_category]) }}"
-                                                             class="text-sky-700 hover:text-sky-400 ">حذف</a>
-                                                     </div>
+                                                            
+
+                                                             <div
+                                                                 class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium hover:text-sky-400 ">
+                                                                 <a href="{{route('ecomm_product.category_product',[$ecomm_category])}}"
+                                                                     class="text-sky-700 hover:text-sky-400 ">مشاهده محصولات</a>
+                                                             </div>
+                                                          <div
+                                                          class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium hover:text-sky-400 ">
+                                                          <a href="{{ route('ecomm_category.edit_ecomm_categories', [$ecomm_category]) }}"
+                                                          class="text-sky-700 hover:text-sky-400 ">ویرایش</a>
+                                                        </div>
+                                                        <div
+                                                        class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium hover:text-sky-400 ">
+                                                        <a href="{{ route('ecomm_category.delete', [$ecomm_category]) }}"
+                                                        class="text-sky-700 hover:text-sky-400 ">حذف</a>
+                                                    </div>
                                                      
                                                      @if ($ecomm_category->menu)
                                                          <div

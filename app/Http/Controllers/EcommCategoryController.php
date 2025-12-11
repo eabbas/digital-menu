@@ -11,11 +11,19 @@ use Illuminate\Support\Str;
 
 class EcommCategoryController extends Controller
 {
+<<<<<<< HEAD
+       public function create(){
+        $user= Auth::user();    
+        // $ecomm_categories=ecomm_category::where("ecomm_id",$user->ecomms[0]->id)->get();
+       
+        return view("admin.ecomm_categories.create",["user"=>Auth::user()]);
+=======
     public function create()
     {
         $user = Auth::user();
         $ecomm_categories = ecomm_category::where('ecomm_id', $user->ecomms[0]->id)->get();
         return view('admin.ecomm_categories.create', ['user' => Auth::user(), 'ecomm_categories' => $ecomm_categories]);
+>>>>>>> 3d491f909e0831c954e8b88fce7520f37dc0ceac
     }
 
     public function store(Request $request)
@@ -29,6 +37,15 @@ class EcommCategoryController extends Controller
         } else {
             ecomm_category::create(['title' => $request->title, 'description' => $request->description, 'parent_id' => $request->parent_id, 'show_in_home' => 0, 'image_path' => $path, 'ecomm_id' => $request->ecomm_id, 'user_id' => $user->id]);
         }
+<<<<<<< HEAD
+          $ecomm_categories=ecomm_category::with('parent')->get();
+        
+         return to_route("ecomm_category.index",['ecomm_categories'=>$ecomm_categories]);
+    }
+
+    public function index(){
+=======
+>>>>>>> 3d491f909e0831c954e8b88fce7520f37dc0ceac
         $ecomm_categories = ecomm_category::with('parent')->get();
         return to_route('ecomm_category.index', ['ecomm_categories' => $ecomm_categories]);
     }
@@ -114,6 +131,28 @@ class EcommCategoryController extends Controller
         //                          $ecomm_product->delete();
         //             }
         //         }
+<<<<<<< HEAD
+           
+        // return to_route('ecomm_category.index',['ecomm_categories'=>$ecomm_categories]);
+        return back();
+    }
+
+     public function getEcommCategories(Request $request){
+        // dd($request->all);
+          if($request->key=="all"){
+              $categories=Auth::user()->ecomm_categories;
+
+          }else{
+              $categories=ecomm_category::where('ecomm_id',$request->key)->get();
+
+          }
+         return response()->json(['categories' =>$categories]);
+    }
+
+    public function ecomm_categories(ecomm $ecomm){
+          $user= Auth::user();
+        return view('admin.ecomm_categories.ecomm_categories',['ecomm'=>$ecomm,'user'=>$user]);
+=======
 
         return to_route('ecomm_category.index', ['ecomm_categories' => $ecomm_categories]);
     }
@@ -132,5 +171,6 @@ class EcommCategoryController extends Controller
     {
         $user = Auth::user();
         return view('admin.ecomm_categories.ecomm_categories', ['ecomm' => $ecomm, 'user' => $user]);
+>>>>>>> 3d491f909e0831c954e8b88fce7520f37dc0ceac
     }
 }
