@@ -20,8 +20,6 @@ class CustomProductVariantController extends Controller
     {
         $path = null;
         // if(isset($request->image)){
-        //     // dd($request->all());
-
         //     $name = $request->image->getClientOriginalName();
         //     $fullName = time()."_".$name;
         //     $path = $request->file('image')->storeAs('images', $fullName, 'public');
@@ -30,14 +28,12 @@ class CustomProductVariantController extends Controller
             'title'=>$request->title ,
             'min_amount_unit' => $request->min_amount_unit ,
             'duration' => $request->duration ,
-            'custom_product_id' => $request->custom_product_id ,
+            'custom_product_id' => $request->custom_pro_id ,
             'description' => $request->description ,
             'image' => $path
         ]);
         $data = custom_product_variant::find($customProVariant);
         return response()->json($data);
-        // return response()->json($request->all());
-        // return to_route('cpv.list' , [$request->custom_product_id]);
     }
 
     public function index(custom_product $customProduct)
@@ -50,9 +46,10 @@ class CustomProductVariantController extends Controller
         return view('admin.customProductVariants.single', ['cpVariants' => $cpVariants]);
     }
 
-    public function edit(custom_product_variant $cpVariant)
+    public function edit(Request $request)
     {
-        return view('admin.customProductVariants.edit', ['cpVariant' => $cpVariant]);
+        $custom_product_variant = custom_product_variant::find($request->id);
+        return response()->json($custom_product_variant);
     }
 
     public function update(Request $request)
@@ -63,27 +60,31 @@ class CustomProductVariantController extends Controller
         $cpv->min_amount_unit = $request->min_amount_unit;
         $cpv->duration = $request->duration;
         $cpv->custom_product_id = $request->custom_product_id;
-
-        if (isset($request->image)) {
-            if ($cpv->image) {
-                Storage::disk('public')->delete($cpv->image);
-            }
-            $name = $request->image->getClientOriginalName();
-            $fullName = time() . '_' . $name;
-            $path = $request->file('image')->storeAs('images', $fullName, 'public');
-            $cpv->image = $path;
-        }
-
+        
+        // if (isset($request->image)) {
+            //     if ($cpv->image) {
+                //         Storage::disk('public')->delete($cpv->image);
+                //     }
+                //     $name = $request->image->getClientOriginalName();
+                //     $fullName = time() . '_' . $name;
+                //     $path = $request->file('image')->storeAs('images', $fullName, 'public');
+        //     $cpv->image = $path;
+        // }
+        
         $cpv->save();
-        return to_route('cpv.list', [$request->custom_product_id]);
+        return response()->json($cpv);
+
     }
 
-    public function delete(custom_product_variant $cpVariants)
+    public function delete(Request $request)
     {
+        $cpVariants = custom_product_variant::find($request->id);
+
         if ($cpVariants->image) {
             Storage::disk('public')->delete($cpVariants->image);
         }
         $cpVariants->delete();
-        return to_route('cpv.list', [$cpVariants->custom_product->id]);
+        return response()->json('ok');
+
     }
 }

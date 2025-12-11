@@ -19,14 +19,14 @@ class CustomCategoryController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        // $customCategory_id = customCategory::insertGetId([
-        //     'title'=>$request->titleCategory ,
-        //     'required' => $request->required ? $request->required : 0 , 
-        //     'max_item_amount' => $request->max_item_amount ,
-        //     'custom_pro_id' => $request->custom_pro_id 
-        // ]);
-        // $data = customCategory::find($customCategory_id);
-        return response()->json($request->all());
+        $customCategory_id = customCategory::insertGetId([
+            'title'=>$request->title ,
+            'required' => $request->required ? $request->required : 0 , 
+            'max_item_amount' => $request->max_item_amount ,
+            'custom_pro_id' => $request->custom_pro_id 
+        ]);
+        $data = customCategory::find($customCategory_id);
+        return response()->json($data);
         // return to_route('custmCategory.list' , [$request->custom_pro_id]);
     }
 
@@ -40,9 +40,10 @@ class CustomCategoryController extends Controller
         return view('admin.customCategory.single', ['customCategory' => $customCategory]);
     }
 
-    public function edit(customCategory $customCategory)
+    public function edit(Request $request)
     {
-        return view('admin.customCategory.edit', ['customCategory' => $customCategory]);
+        $customCategory = customCategory::find($request->id);
+        return response()->json($customCategory);
     }
 
     public function update(Request $request)
@@ -52,7 +53,10 @@ class CustomCategoryController extends Controller
         $customCategory->required = $request->required;
         $customCategory->max_item_amount = $request->max_item_amount;
         $customCategory->save();
-        return to_route('custmCategory.list', [$request->custom_pro_id]);
+
+        return response()->json($customCategory);
+
+        // return to_route('custmCategory.list', [$request->custom_pro_id]);
     }
 
     public function delete(customCategory $customCategory)

@@ -244,12 +244,12 @@
                                     </div>
                                 </li>
                                 <li class="flex justify-center">
-                                    <a href="{{ route('cp.delete', [$custom_product]) }}"
+                                    <div onclick='deleteCP("{{ $custom_product->id }}")'
                                         class="w-fit flex flex-row items-center justify-center bg-red-500 hover:bg-red-600 p-1 rounded-sm" title="حذف">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
                                             <path fill="white" d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
                                         </svg>
-                                    </a>
+                                    </div>
                                 </li>
                             </ul>
                                 
@@ -312,9 +312,9 @@
             </div>
         </div>
     </div>
-    <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300" id="createCform">
+    <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCform">
         <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative" id="closeCreateCform">
-        <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeCreateCform()">
+        <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeForm()">
             <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
                 <path fill="gray" d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
             </svg>
@@ -364,9 +364,9 @@
         </form>
         </div>
     </div>
-    <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300" id="createCPVform">
+    <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCPVform">
         <div class="w-[calc(100%-265px)] float-end flex justify-center items-center bg-white h-dvh relative" id="closeCreateCPVform">
-        <span class="cursor-pointer absolute top-4 right-4 text-4xl text-gray-500 hover:text-gray-700 transition-colors duration-200" onclick="closeCreateCPVform()">×</span>
+        <span class="cursor-pointer absolute top-4 right-4 text-4xl text-gray-500 hover:text-gray-700 transition-colors duration-200" onclick="closeForm()">×</span>
             <form action="{{ route('cpv.store') }}" method="post" enctype="multipart/form-data" class="space-y-6">
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
@@ -404,8 +404,10 @@
                     </div>
                     <!-- محصول اصلی -->
                     {{-- @dd($custom_product->career->id) --}}
-                        <input type="hidden" name="custom_product_id" id="custom_product_id_variant" value="{{ $custom_product->id }}">
-                        <input type="hidden" name="career_id" value="{{ $custom_product->career->id }}">
+                    @if (isset($custom_product))
+                    <input type="hidden" name="custom_product_id" id="custom_product_id_variant" value="{{ $custom_product->id }}">
+                    <input type="hidden" name="career_id" value="{{ $custom_product->career->id }}">
+                    @endif
 
                     <!-- تصویر -->
                     {{-- <div class="md:col-span-2">
@@ -449,9 +451,10 @@
             </form>
         </div>
     </div>
-    <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300" id="editCPform">
+    @if (isset($custom_product))
+    <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="editCPform">
         <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative bg-white" id="closeEditCform">
-            <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeCreateCform()">
+            <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeForm()">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
                     <path fill="gray" d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
                 </svg>
@@ -506,6 +509,7 @@
             </form>
         </div>
     </div>
+    @endif
 
 
     
@@ -513,21 +517,33 @@
 
 
 <script>
-    let createCPform = document.getElementById('createCPform')  
-    let closeForm = document.getElementById('closeCreateCPform')  
-    let closeFormC = document.getElementById('closeCreateCform')  
+    let createCPform = document.getElementById('createCPform')   
     let createCategoryform = document.getElementById('createCform')
     let createCustomVariantform = document.getElementById('createCPVform')
-    let closeCPV = document.getElementById('closeCreateCPVform')
     let custom_pro_id_customCategory = document.getElementById('custom_pro_id_customCategory')
-    let custom_product_id_variant = document.getElementById('custom_product_id_variant')
     let cpFormEdit = document.getElementById('editCPform')
-
-
+    
+    let forms = document.querySelectorAll(".form")
     let cpTitleEdit = document.getElementById('editTitleCP')
     let CPeditDescription = document.getElementById('editDescriptionCP')
     let CPmaterialLimit = document.getElementById('material_limit_CP')
     let custom_product_id = document.getElementById('custom_product_id')
+
+    let title = document.getElementById('title')
+    let description = document.getElementById('description')
+    let customProductImage = document.getElementById('customProductImage')
+    let material_limit = document.getElementById('material_limit')
+    let custom_product_section = document.getElementById('custom_product_section')
+    
+    let titleCustomCategory = document.getElementById('titleCustomCategory')
+    let category = document.getElementById('requiredCustomCategory')
+    let max_item_amount_customCategory = document.getElementById('max_item_amount_customCategory')
+    
+    let cpvTitle = document.getElementById('titleCPV')
+    let cpvMinAmount = document.getElementById('min_amount_unit_cpv')
+    let cpvDuration = document.getElementById('durationCPV')
+    let cpvDescription = document.getElementById('descriptionCPV')
+    let custom_product_id_variant = document.getElementById('custom_product_id_variant')
 
     function editCP(id){
         cpFormEdit.classList.remove('invisible')
@@ -586,7 +602,7 @@
                         element.children[3].children[0].innerText = data.material_limit 
                     }
                 })
-                closeCreateCPform()
+                closeForm()
                 console.log(data)
             },
             error: function(){
@@ -595,7 +611,7 @@
     
         })
     } 
-    function deleteCP(){
+    function deleteCP(id){
         let newParameters = document.querySelectorAll('.newParameters')
         $.ajaxSetup({
             headers : {
@@ -603,25 +619,18 @@
             }
         })
         $.ajax({
-            url : "{{ route('cp.update') }}" ,
+            url : "{{ route('cp.delete') }}" ,
             type : "POST" ,
             dataType : "json" ,
             data : {
-                'id': custom_product_id.value,
-                'career_id' : "{{ $career->id }}",
-                'title' : cpTitleEdit.value,
-                'description' : CPeditDescription.value,
-                // 'customProductImage' : customProductImage.value,
-                'material_limit' : CPmaterialLimit.value,
+                'id': id,
             },
             success: function(data){
                 newParameters.forEach((element)=>{
-                    if(element.getAttribute('data-cp-id') == data.id){
-                       element.remove()
+                    if(element.getAttribute('data-cp-id') == id){
+                        element.remove()
                     }
                 })
-                closeCreateCPform()
-                console.log(data)
             },
             error: function(){
                 alert('خطا در ارسال داده')
@@ -634,35 +643,24 @@
         createCPform.classList.remove('invisible')
         createCPform.classList.remove('opacity-0')
     }
-    function closeCreateCPform(){
-        createCPform.classList.add('invisible')
-        createCPform.classList.add('opacity-0')
-    }
     function openCform(cpId){
         createCategoryform.classList.remove('invisible')
         createCategoryform.classList.remove('opacity-0')
         custom_pro_id_customCategory.value = cpId
     }
-    function closeCreateCform(){
-        createCategoryform.classList.add('invisible')
-        createCategoryform.classList.add('opacity-0')
-    }
+
     function openCPVform(cpId){
         createCustomVariantform.classList.remove('invisible')
         createCustomVariantform.classList.remove('opacity-0')
     }
-    function closeCreateCPVform(){
-        createCustomVariantform.classList.add('invisible')
-        createCustomVariantform.classList.add('opacity-0')
-        custom_product_id_variant.value = cpId
+    
+    function closeForm(){
+        forms.forEach((form)=>{
+            form.classList.add('invisible')
+            form.classList.add('opacity-0')
+        })
     }
 
-    let title = document.getElementById('title')
-    let description = document.getElementById('description')
-    let customProductImage = document.getElementById('customProductImage')
-    let material_limit = document.getElementById('material_limit')
-
-    let custom_product_section = document.getElementById('custom_product_section')
 
     function storeCP(ev){
         ev.preventDefault()
@@ -728,12 +726,12 @@
                                     </div>
                                 </li>
                                 <li class="flex justify-center">
-                                    <a href="{{ url ('customProducts.delete/${data}') }}"
+                                    <div onclick="deleteCP(${data.id})"
                                         class="w-fit flex flex-row items-center justify-center bg-red-500 hover:bg-red-600 p-1 rounded-sm" title="حذف">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
                                             <path fill="white" d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
                                         </svg>
-                                    </a>
+                                    </div>
                                 </li>
                             </ul>
                                 
@@ -775,7 +773,7 @@
                     </div> `
                 div.innerHTML = element
                 custom_product_section.appendChild(div)
-                closeCreateCPform()
+                closeForm()
                 console.log(data)
             },
             error: function(){
@@ -787,11 +785,6 @@
 
     }
     
-    // let titleCustomCategory = document.getElementById('titleCustomCategory')
-    // let category = document.getElementById('requiredCustomCategory')
-    // let max_item_amount_customCategory = document.getElementById('max_item_amount_customCategory')
-    // let custom_pro_id_customCategory = document.getElementById('custom_pro_id_customCategory')
-
     function Categorystore(ev){
         ev.preventDefault()
         $.ajaxSetup({
@@ -810,12 +803,13 @@
                 'custom_pro_id' : custom_pro_id_customCategory.value,
             },
             success: function(data){
+                console.log(data)
                 custom_pro_id_customCategory.value = ""
                 max_item_amount_customCategory.value =""
                 category.checked = 0
                 titleCustomCategory.value =""
-                alert('دسته ' + data.title + 'با موفقیت ذخیره شد')
-                closeCreateCform()
+                // alert('دسته ' + data.title + 'با موفقیت ذخیره شد')
+                closeForm()
             },
             error: function(){
                 alert('خطا در ارسال داده')
@@ -823,11 +817,6 @@
 
         })
     }
-
-    let cpvTitle = document.getElementById('titleCPV')
-    let cpvMinAmount = document.getElementById('min_amount_unit_cpv')
-    let cpvDuration = document.getElementById('durationCPV')
-    let cpvDescription = document.getElementById('descriptionCPV')
 
     function cpvStore(ev){
         ev.preventDefault()
@@ -837,9 +826,9 @@
             }
         })
         $.ajax({
-            url : "{{ route('cpv.store') }}" ,
-            type : "POST" ,
-            dataType : "json" ,
+            url : "{{ route('cpv.store') }}",
+            type : "POST",
+            dataType : "json",
             data : {
                 'title' : cpvTitle.value,
                 'min_amount_unit' : cpvMinAmount.value,
@@ -848,7 +837,11 @@
                 'custom_pro_id' : custom_product_id_variant.value,
             },
             success: function(data){
-                console.log(data)
+                cpvTitle.value =""
+                cpvMinAmount.value =""
+                cpvDuration.value =""
+                cpvDescription.value =""
+                closeForm()
             },
             error: function(){
                 alert('خطا در ارسال داده')
