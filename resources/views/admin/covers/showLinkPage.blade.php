@@ -1,13 +1,11 @@
 @extends('admin.app.panel')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 @section('title')
-    {{ $cover->title }}
 @endsection
 @section('content')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    @csrf
     <div class="w-2/3 mx-auto">
-        <div class="w-full flex flex-row justify-between items-center gap-3">
+        {{-- <div class="w-full flex flex-row justify-between items-center gap-3">
             <div class="w-full flex flex-row  items-center gap-3">
                 <div>
                     <img class="size-12 rounded-lg" src="{{ asset('storage/' . $cover->logo_path) }}" alt="لوگو">
@@ -17,46 +15,31 @@
                 </h2>
             </div>
             <div>
-                {{-- cover qr code --}}
-                <div class="w-full h-dvh fixed top-0 right-0 z-999 bg-black/50 invisible opacity-0 transition-all duration-300" id="qrcode_card">
-                    <div class="relative w-[calc(100%-265px)] h-full float-end flex items-center justify-center">
-                        <div class="absolute top-10 right-10 bg-white rounded-full p-2 cursor-pointer" onclick="qrCard('close')">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
-                                <path
-                                    d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
-                            </svg>
-                        </div>
-
-                        <div class="w-1/4 mx-auto bg-white rounded-lg p-5">
-                            <img src="{{ asset('storage/'.$cover->social_qr_codes->qr_path) }}" class="w-full" alt="">
-                        </div>
-                    </div>
-                </div>
-                {{-- cover qr code end --}}
-                    <div class="inline-block p-2 rounded-md bg-gray-200 cursor-pointer" onclick="qrCard('open')">
+                    <a href="#" class="inline-block p-2 rounded-md bg-gray-100 cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
                             <path d="M352 224c53 0 96-43 96-96s-43-96-96-96s-96 43-96 96c0 4 .2 8 .7 11.9l-94.1 47C145.4 170.2 121.9 160 96 160c-53 0-96 43-96 96s43 96 96 96c25.9 0 49.4-10.2 66.6-26.9l94.1 47c-.5 3.9-.7 7.8-.7 11.9c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-25.9 0-49.4 10.2-66.6 26.9l-94.1-47c.5-3.9 .7-7.8 .7-11.9s-.2-8-.7-11.9l94.1-47C302.6 213.8 326.1 224 352 224z"/>
                         </svg>
-                    </div>
+                     </a>
             </div>
             <div>
-                    <a href="{{route('client.show_socialPage',[$cover])}}" class="inline-block p-2 rounded-md bg-gray-200 cursor-pointer">
+                    <a href="#" class="inline-block p-2 rounded-md bg-gray-100 cursor-pointer">
                       <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 576 512">
                         <path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/>
                     </svg>
                      </a>
             </div>
-        </div>
-        <div class="w-full mt-5 p-5 bg-white flex flex-col pb-40 relative">
-            <div class="p-5 rounded-full bg-black bottom-10 -right-10 absolute cursor-pointer" onclick="addBlock('open')">
+        </div> --}}
+        {{-- @dd($cover) --}}
+        <div class="w-full mt-5 p-5 bg-gray-100 flex flex-col pb-40 relative">
+            {{-- <div class="p-5 rounded-full bg-black bottom-10 -right-10 absolute cursor-pointer" onclick="addBlock('open')">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-10" viewBox="0 0 448 512">
                     <path fill="white"
                         d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
                 </svg>
-            </div>
+            </div> --}}
             <div class="relative">
                 <div>
-                    <img class="w-full h-[200px]" src="{{ asset('storage/' . $cover->cover_path) }}" alt="">
+                    <img class="w-full h-[200px]" src="{{ asset('storage/'. $cover->cover_path) }}" alt="">
                 </div>
                 <div class="flex flex-col items-center justify-end w-full h-[100px]">
                     <h2 class="text-center text-lg font-bold text-gray-800">
@@ -71,27 +54,26 @@
             </div>
             <div class="w-full mt-10 flex flex-col gap-5">
 
-                <div class="w-full flex flex-col gap-5" id="socialLinks">
+                 <div class="w-full flex flex-col gap-5" id="socialLinks">
                     @if (count($cover->socialAddresses))
                         @foreach ($cover->socialAddresses as $item)
                             <div class="py-2">
                                 <h3 class="text-lg font-bold text-gray-800 text-center">
                                     ورود به {{ $item->socialMedia->title }}
                                 </h3>
-                                <div class="mt-3">
-                                    <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-blue-100 rounded-full cursor-pointer editSocial"
-                                        data-social-id="{{ $item->id }}"
-                                        onclick='editSocial("{{ $item->id }}", "{{ $item->socialMedia->id }}")'>
+                                 <div class="mt-3">
+                                    {{-- @dd($item->socialMedia->link . $item->username) --}}
+                                    <a  href="{{$item->socialMedia->link . $item->username}}" class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-blue-100 rounded-full cursor-pointer ">
                                         <img src="{{ asset('storage/' . $item->socialMedia->icon_path) }}"
                                             class="size-5 rounded-md" alt="">
                                         <span class="font-bold text-gray-800">{{ $item->socialMedia->title }}</span>
-                                    </div>
-                                </div>
+                                 </a>
+                                </div> 
                             </div>
                         @endforeach
                     @endif
-                </div>
-                <div class="w-full flex flex-col gap-5" id="siteLinks">
+                </div> 
+                 <div class="w-full flex flex-col gap-5" id="siteLinks">
                     @if (count($cover->siteLinks))
                         @foreach ($cover->siteLinks as $siteLink)
                             <div class="py-2">
@@ -100,8 +82,7 @@
                                     ورود به {{ $siteLink->title }}
                                 </h3>
                                 <div class="mt-3">
-                                    <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-blue-100 rounded-full cursor-pointer editLink"
-                                        onclick='editLink("{{ $siteLink->id }}")' data-site-id="{{ $siteLink->id }}">
+                                    <a href="{{$siteLink->address}}" class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-blue-100 rounded-full cursor-pointer ">
                                         @if ($siteLink->icon_path)
                                             <img src="{{ asset('storage/' . $siteLink->icon_path) }}"
                                                 class="size-5 rounded-md" alt="">
@@ -111,18 +92,18 @@
                                         @endif
                                         <span class="font-bold text-gray-800 viewLinkTitle"
                                             data-view-link-id="{{ $siteLink->id }}">{{ $siteLink->title }}</span>
-                                    </div>
+                                </a>
                                 </div>
                             </div>
                         @endforeach
                     @endif
-                </div>
+                </div> 
             </div>
         </div>
 
 
 
-        <div class="w-full h-dvh bg-black/50 fixed top-0 right-0 z-9999 transition-all duration-300 invisible opacity-0"
+        {{-- <div class="w-full h-dvh bg-black/50 fixed top-0 right-0 z-9999 transition-all duration-300 invisible opacity-0"
             id="block">
             <div class="lg:w-[calc(100%-265px)] float-left h-dvh flex justify-center items-center">
                 <div class="w-2/3 px-3 relative">
@@ -196,14 +177,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flex flex-row justify-end items-center py-2.5">
+                                {{-- <div class="flex flex-row justify-end items-center py-2.5">
                                     <label for="socialMedia_id">شبکه اجتماعی:</label>
                                     <select name="socialMedia_id" id="socialMedia_id">
                                         @foreach ($socialMedias as $socialMedia)
                                             <option value="{{ $socialMedia->id }}">{{ $socialMedia->title }}</option>
                                         @endforeach
                                     </select>
-                                </div>
+                                </div> --}}
                                 <button type="submit" onclick="storeSocialmedia(event)"
                                     class="active:bg-[#0080e5] mt-2 w-full bg-[#03A9F4] text-white py-3 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
                                     ارسال اطلاعات
@@ -419,11 +400,10 @@
                         </form>
                     </div>
                     {{-- edit site link end --}}
-                    
 
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
     <script>
         let socialMedia_id = document.querySelector('.socialMedia_id')

@@ -192,6 +192,7 @@ Route::group([
     Route::get('/qr-code', 'index')->name('list');
     Route::get('/delete/{qr_code}', 'delete')->name('delete');
     Route::get('/{career}/{slug}', 'load')->name('load');
+    Route::get('/links/{covers}/{slug}', 'loadLink')->name('loadLink');
 });
 
 // client

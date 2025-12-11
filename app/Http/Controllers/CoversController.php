@@ -38,7 +38,7 @@ class CoversController extends Controller
             'cover_path' => $coverPath,
         ]);
            $random = Str::random(10);
-            $link = "famenu.ir/qrcode/$cover_id/" . $random;
+            $link = "famenu.ir/qrcode/links/$cover_id/" . $random;
             $qr_svg = QrCode::size(100)->generate($link);
             $fileName = 'qrcodes/' . $cover_id . '_' . $random . '.svg';
             Storage::disk('public')->put($fileName, $qr_svg);
@@ -103,8 +103,9 @@ class CoversController extends Controller
         foreach ($site_links as $site_link) {
             $site_link->delete();
         }
+        $covers->social_qr_codes->delete();
         $covers->delete();
-        return to_route('covers.list');
+        return to_route('covers.social_list');
     }
 
     public function single(covers $covers)
