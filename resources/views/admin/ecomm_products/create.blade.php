@@ -78,13 +78,12 @@
         </select>
         <label class="w-30 text-sm mb-1 mt-2.5 flex"> دسته بندی  </label>
         <select      class="w-full px-4 py-3 bg-gradient-to-r from-gray-50 to-white border border-gray-200 rounded-2xl shadow-sm focus:shadow-lg focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition-all duration-300"  name="ecomm_category_id" id="ecomCategories">
-              @if($ecomm_categories)
-
-          @foreach($ecomm_categories as $ecomm_category) 
-                  <option value="{{$ecomm_category->id}}">{{$ecomm_category->title}}</option>
-                  @endforeach
-                  <option value="0">بدون والد</option>
+              @if($user->ecomms)<0)
+          @foreach($user->ecomms[0]->ecomm_category as $ecomm_category) 
+          <option value="{{$ecomm_category->id}}">{{$ecomm_category->title}}</option>
+          @endforeach
           @endif
+          <option value="0">بدون والد</option>
         </select>
 
     <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">

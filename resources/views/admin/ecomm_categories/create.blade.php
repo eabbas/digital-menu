@@ -51,7 +51,7 @@ select {
   
 
      <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                <label class="w-30 text-sm mb-1 mt-2.5 flex">  title </label>
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">  عنوان </label>
 
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
@@ -60,16 +60,16 @@ select {
                                 </div>
                             </div>
      <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                <label class="w-30 text-sm mb-1 mt-2.5 flex">  image_path </label>
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">  عکس دسته  </label>
 
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="file"
-                                        name="image_path" title="image_path  ">
+                                        name="image_path" title="image_path" placholder="عکس خود را وارد کنید">
                                 </div>
                             </div>
      <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                <label class="w-30 text-sm mb-1 mt-2.5 flex">description   </label>
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">توضیحات</label>
 
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
@@ -81,7 +81,7 @@ select {
                             <label class="w-30 text-sm mb-1 mt-2.5 flex"> فروشگاه : </label>
       <div class="">
 
-          <select  class="w-full px-4 py-3 bg-gradient-to-r from-gray-50 to-white border border-gray-200 rounded-2xl shadow-sm focus:shadow-lg focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition-all duration-300"      onchange="getEcommCategories(this,'category')" class="bg-grey-500" name="ecomm_id" id="ecomm_id">
+          <select  class="w-full px-4 py-3 bg-gradient-to-r from-gray-50 to-white border border-gray-200 rounded-2xl shadow-sm focus:shadow-lg focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition-all duration-300"      onchange="getEcommCategories(this,'category')"  name="ecomm_id" id="ecomm_id">
               @foreach($user->ecomms as $user_ecomm)
               <option value="<?php echo $user_ecomm->id;?>"><?php echo $user_ecomm->title ?></option>
               
@@ -91,22 +91,18 @@ select {
         
       <label class="w-30 text-sm mb-1 mt-2.5 flex">  والددسته ها  </label>
       <div class="selectbox">
-
           <select  class="w-full px-4 py-3 bg-gradient-to-r from-gray-50 to-white border border-gray-200 rounded-2xl shadow-sm focus:shadow-lg focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition-all duration-300"  name="parent_id" id="ecomCategories">
                   
-          @if($ecomm_categories)
-
-          @foreach($ecomm_categories as $ecomm_category) 
+          @foreach($user->ecomms[0]->ecomm_category as $ecomm_category)
           <option value="{{$ecomm_category->id}}">{{$ecomm_category->title}}</option>
           @endforeach
           <option value="0">بدون والد</option>
-          @endif
           </select>
       </div>
 
     <div class="w-full flex flex-row gap-3 itmes-center max-md:flex-col max-md:gap-1">
 
-        <lable class="w-30 text-sm mb-1 mt-2.5 flex">این محصول جز صفخه اول هست</lable>
+        <lable class="w-30 text-sm mb-1 mt-2.5 flex">این محصول جز صفحه اول هست</lable>
         <input class="" type="checkbox" name="show_in_home" value="1">
     </div>
                  </div>       

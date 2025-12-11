@@ -15,8 +15,9 @@ class EcommCategoryController extends Controller
 {
        public function create(){
         $user= Auth::user();    
-        $ecomm_categories=ecomm_category::where("ecomm_id",$user->ecomms[0]->id)->get();
-        return view("admin.ecomm_categories.create",["user"=>Auth::user(),"ecomm_categories"=>$ecomm_categories]);
+        // $ecomm_categories=ecomm_category::where("ecomm_id",$user->ecomms[0]->id)->get();
+       
+        return view("admin.ecomm_categories.create",["user"=>Auth::user()]);
     }
     public function store(Request $request){
     $user=Auth::user();
@@ -29,6 +30,7 @@ class EcommCategoryController extends Controller
             ecomm_category::create(['title'=>$request->title,'description'=>$request->description,'parent_id'=>$request->parent_id,'show_in_home'=>0,'image_path'=>$path,'ecomm_id'=>$request->ecomm_id,"user_id"=>$user->id]);
         }
           $ecomm_categories=ecomm_category::with('parent')->get();
+        
          return to_route("ecomm_category.index",['ecomm_categories'=>$ecomm_categories]);
     }
 
@@ -109,7 +111,8 @@ class EcommCategoryController extends Controller
         //             }
         //         }
            
-        return to_route('ecomm_category.index',['ecomm_categories'=>$ecomm_categories]);
+        // return to_route('ecomm_category.index',['ecomm_categories'=>$ecomm_categories]);
+        return back();
     }
 
      public function getEcommCategories(Request $request){
@@ -121,14 +124,11 @@ class EcommCategoryController extends Controller
               $categories=ecomm_category::where('ecomm_id',$request->key)->get();
 
           }
-        return $categories;
+         return response()->json(['categories' =>$categories]);
     }
 
     public function ecomm_categories(ecomm $ecomm){
-
-                $user= Auth::user();
-
-        // dd($ecomm->ecomm_category);
+          $user= Auth::user();
         return view('admin.ecomm_categories.ecomm_categories',['ecomm'=>$ecomm,'user'=>$user]);
     }
 }

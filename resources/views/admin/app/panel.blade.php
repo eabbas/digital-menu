@@ -449,7 +449,7 @@
              
            if(type=="product"||type=="category"||type=="edit"){
 
-               letmyOption=document.createElement('option')
+               let myOption=document.createElement('option')
                
                myOption.innerHTML=`${category.title}`
                myOption.value=`${category.id}`
@@ -505,7 +505,7 @@
                                              </div>`
 
              
-             mySelect.appendChild(myElement)
+             mySelect.append(myElement)
 
              }
              
