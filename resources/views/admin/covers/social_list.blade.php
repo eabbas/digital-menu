@@ -29,7 +29,7 @@
                         </div> -->
                         <!-- بدنه جدول -->
                         <div class="bg-white divide-y divide-[#f1f1f4]">
-                            @foreach ($covers as $cover)
+                            @foreach ($user->covers as $cover)
                                 @if ($cover)
                                     <div class="w-full flex flex-row justify-between shadow-sm items-center px-3">
                                         <div class="w-9/12">

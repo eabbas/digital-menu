@@ -198,11 +198,13 @@ Route::group([
     'controller' => ClientController::class,
     'as' => 'client.'
 ], function () {
+    Route::get('/socialpage/{covers}','show_socialPage')->name('show_socialPage');
     Route::get('/{career}/{slug?}', 'show_menu')->name('menu');
     Route::get('/{career}', 'career_menu')->name('careerMenu');
     // Route::get('/career/{$career}', 'show_career')->name('show_career');
 });
 Route::get('/career/{career}', [ClientController::class, 'show_career'])->name('show_career');
+// Route::get('/socialPage/{covers}', [ClientController::class, 'show_socialPage'])->name('show_socialPage');
 
 
 Route::group([
@@ -426,6 +428,7 @@ Route::group([
 ], function () {
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
+    Route::get('/social_list', 'social_list')->name('social_list');
     Route::get('/covers', 'index')->name('list');
     Route::get('/edit/{covers}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');

@@ -122,7 +122,7 @@
                         </li>
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('covers.list') }}" class=" text-white py-1"> لیست صفحه شبکه های اجتماعی</a>
+                            <a href="{{ route('covers.social_list') }}" class=" text-white py-1"> لیست صفحه شبکه های اجتماعی</a>
                         </li>
                         @if(Auth::user()->role[0]->title == 'admin')
 
@@ -149,6 +149,10 @@
                             <a href="{{ route('cc.list') }}" class=" text-white py-1">
                                 همه دسته های کسب و کارها
                             </a>
+                        </li>
+                          <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('covers.list') }}" class=" text-white py-1"> مشاهده لیست همه شبکه های اجتماعی کاربران</a>
                         </li>
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>

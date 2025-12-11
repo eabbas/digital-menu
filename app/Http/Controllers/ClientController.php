@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\career;
+use App\Models\covers;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -20,5 +21,11 @@ class ClientController extends Controller
     public function show_career(career $career)
     {
         return view('client.career.single', ['career' => $career]);
+    }
+    public function show_socialPage(covers $covers)
+    {
+        // dd($covers);
+        $cover=$covers;
+        return view('client.link.single', ['cover' => $cover]);
     }
 }
