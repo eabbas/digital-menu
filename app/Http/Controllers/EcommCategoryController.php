@@ -12,7 +12,6 @@ use Illuminate\Support\Str;
 class EcommCategoryController extends Controller
 {
        public function create(){
-        $user= Auth::user();    
         // $ecomm_categories=ecomm_category::where("ecomm_id",$user->ecomms[0]->id)->get();
        
         return view("admin.ecomm_categories.create",["user"=>Auth::user()]);
@@ -134,7 +133,7 @@ class EcommCategoryController extends Controller
               $categories=ecomm_category::where('ecomm_id',$request->key)->get();
 
           }
-         return response()->json(['categories' =>$categories]);
+         return response()->json($categories);
     }
 
     public function ecomm_categories(ecomm $ecomm){
