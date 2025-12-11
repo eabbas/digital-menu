@@ -364,7 +364,7 @@ Route::group([
     Route::get('/show/{customProduct}', 'show')->name('single');
     Route::post('/edit', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
-    Route::get('/delete/{customProduct?}', 'delete')->name('delete');
+    Route::post('/delete/{customProduct?}', 'delete')->name('delete');
 });
 
 Route::group([
@@ -376,9 +376,9 @@ Route::group([
     Route::post('/store', 'store')->name('store');
     Route::get('/variantList/{customProduct?}', 'index')->name('list');
     Route::get('/show/{cpVariants}', 'show')->name('single');
-    Route::get('/edit/{cpVariant}', 'edit')->name('edit');
+    Route::post('/edit', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
-    Route::get('/delete/{cpVariants}', 'delete')->name('delete');
+    Route::post('/delete', 'delete')->name('delete');
 });
 
 /////socialMedia
@@ -457,7 +457,7 @@ Route::group([
     Route::get('/custmoCategoryList/{customProduct?}', 'index')->name('list');
     Route::get('/item_list/{customCategory?}', 'item_list')->name('item_list');
     Route::get('/show/{customCategory}', 'show')->name('single');
-    Route::get('/edit/{customCategory?}', 'edit')->name('edit');
+    Route::post('/edit/{customCategory?}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{customCategory?}', 'delete')->name('delete');
 });

@@ -74,8 +74,9 @@ class CustomProductController extends Controller
         // return to_route('menu.customProList' , [$customProduct->career_id]);
     }
 
-    public function delete(custom_product $customProduct)
+    public function delete(Request $request)
     {
+        $customProduct = custom_product::find($request->id);
         if (count($customProduct->custom_product_variants)) {
             foreach ($customProduct->custom_product_variants as $variants) {
                 $variants->delete();
@@ -95,7 +96,8 @@ class CustomProductController extends Controller
             Storage::disk('public')->delete($customProduct->image);
         }
         $customProduct->delete();
-        return to_route('menu.customProList', [$customProduct->career_id]);
+        return response()->json('ok');
+        // return to_route('menu.customProList', [$customProduct->career_id]);
     }
 
     public function createFromDashboard(User $user)
