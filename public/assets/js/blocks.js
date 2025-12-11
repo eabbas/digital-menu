@@ -17,6 +17,8 @@ let siteLinkForm = document.querySelector('.createSiteLink')
 // edit socialmedia div
 let editSocialM = document.querySelector('.editsocialMediaForm')
 
+//qrcode
+let qrcode=document.getElementById('qrcode_card')
 
 function addBlock(state) {
     if (state == 'open') {
@@ -99,3 +101,14 @@ function openDropdown(page){
         }
     }
 }
+function qrCard(state){
+    if (state == 'open') {
+       qrcode.classList.remove('invisible')
+       qrcode.classList.remove('opacity-0')
+    }
+    if (state == 'close') {
+        qrcode.classList.add('invisible')
+       qrcode.classList.add('opacity-0')
+    }
+    }
+
