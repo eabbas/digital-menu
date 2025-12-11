@@ -123,18 +123,11 @@ class EcommController extends Controller
             }
         }
         $ecomm->delete();
-<<<<<<< HEAD
         
     $user= Auth::user();
         // return view('admin.ecomms.userecomms', ['user' =>$user]); 
         return back();
        }
-=======
-
-        $user = Auth::user();
-        return view('admin.ecomms.userecomms', ['user' => $user]);
-    }
->>>>>>> 3d491f909e0831c954e8b88fce7520f37dc0ceac
 
     public function index()
     {
