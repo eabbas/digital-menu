@@ -558,63 +558,52 @@
                     'key': el.value
                 },
                 success: function(categories) {
-                    // console.log(categories)
-
                     let mySelect = document.getElementById("ecomCategories")
                     mySelect.innerHTML = ``
-
                     categories.forEach((category) => {
-
+                        let myOption=document.createElement('option')
                         if (type == "product" || type == "category" || type == "edit") {
-
-                            letmyOption = document.createElement('option')
-
-               let myOption=document.createElement('option')
-               
-               myOption.innerHTML=`${category.title}`
-               myOption.value=`${category.id}`
-               mySelect.append(myOption)
-           }
+                            myOption.innerHTML=`${category.title}`
+                            myOption.value=`${category.id}`
+                            mySelect.append(myOption)
+                        }
  
-               if(type=="filter"){
-                let myElement = document.createElement('div')
-                let categoryId = category.id
-                  
-             myElement.innerHTML=`<div class="bg-white divide-y divide-[#f1f1f4]">
+                        if(type=="filter"){
+                            let myElement = document.createElement('div')
+                            let categoryId = category.id
                             myOption.innerHTML = `${category.title}`
                             myOption.value = `${category.id}`
                             mySelect.append(myOption)
                         }
-
+                                
                         if (type == "filter") {
                             let myElement = document.createElement('div')
                             let categoryId = category.id
-
-                            myElement.innerHTML = `<div class="bg-white divide-y divide-[#f1f1f4]">
+                            myElement.innerHTML = `
+                            <div class="bg-white divide-y divide-[#f1f1f4]">
                                     <div  class='w-full flex flex-row lg:grid lg:grid-cols-4 items-center divide-x divide-[#f1f1f4]'>          
                                                 <div
-                                                 class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
-                                                 <span class="block w-20 lg:w-full">${category.title}</span>
+                                                    class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
+                                                    <span class="block w-20 lg:w-full">${category.title}</span>
                                                 </div>
                                                 <div
-                                                 class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
-                                                 <span class="block w-20 lg:w-full">${category.description}</span>
-                                             </div>
-                                               <div
-                                                 class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
-                                                 <div class="w-20 lg:w-full">
-                                                     <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover"
-                                                         src="{{ asset('storage/${category.image_path}') }}">
-                                                 </div>
-                                             </div>
+                                                    class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
+                                                    <span class="block w-20 lg:w-full">${category.description}</span>
+                                                </div>
+                                                <div
+                                                    class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
+                                                    <div class="w-20 lg:w-full">
+                                                        <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover"
+                                                            src="{{ asset('storage/${category.image_path}') }}">
+                                                    </div>
+                                                </div>
                                             
-                                             <div class="flex justify-center items-center gap-1 w-full "
-                                             >
+                                             <div class="flex justify-center items-center gap-1 w-full">
                                               <div
-                                                         class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center">
-                                                         <a href="{{ url('ecomm_product/category_product/${category.id}') }}" 
-                                                             class="hover:text-sky-400  text-white">مشاهده محصولات</a>
-                                                     </div>
+                                                class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center">
+                                                    <a href="{{ url('ecomm_product/category_product/${category.id}') }}" 
+                                                        class="hover:text-sky-400  text-white">مشاهده محصولات</a>
+                                                </div>
                                               <div
                                                          class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center">
                                                          <a href="{{ url('/ecomm_category/show/${category.id}') }}" 
@@ -635,13 +624,13 @@
                                              </div>`
 
              
-             mySelect.append(myElement)
+                    mySelect.append(myElement)
 
                             mySelect.appendChild(myElement)
 
                         }
 
-                        // console.log(category.title)
+                        
                     })
                     if (type == "category") {
                         let myOption2 = document.createElement('option')
