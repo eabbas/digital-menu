@@ -117,8 +117,8 @@
                         </div>
                         <div class="w-full text-left ">
                             <button type="submit"
-                                class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium">
-                                ارسال اطلاعات
+                                class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
+                               ثبت
                             </button>
                         </div>
                     </div>
