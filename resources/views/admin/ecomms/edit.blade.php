@@ -1,124 +1,134 @@
 @extends('admin.app.panel')
-@section('title', 'ویرایش فروشگاو ')
-@section('content')
-<section class="2xl:container mx-auto">
-    <div class="w-full mx-auto pb-5">
-        <fieldset class="border-2 rounded-[10px] border-gray-400 shadow">
-            <legend class="lg:text-3xl md:text-2xl text-md font-semibold text-end text-gray-500 p-5 rounded-full">
-     ویرایش اطلاعات فروشگاه
-            </legend>
-            <form action="{{ route('ecomm.update')}}" method="post" enctype='multipart/form-data'
-                class="w-11/12 lg:w-3/4 mx-auto py-5 rounded-lg">
-                @csrf
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 lg:gap-4">
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="title">
-                            <legend class="p-1 w-20 sm:bg-slate-700 sm:text-white rounded-full flex flex-row justify-center text-sm">عنوان
-                            </legend>
-                            <input type="title" name="title" value="{{$ecomm -> title}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <input type="hidden" name="id" value="{{$ecomm -> id}}">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="logo">
-                            <legend class="p-1 w-20 sm:bg-slate-700 sm:text-white rounded-full flex flex-row justify-center text-sm">لوگو
-                            </legend>
-                            <input type="file" name="logo" class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3">
-                            <legend class="p-1 w-20 sm:bg-slate-700 sm:text-white rounded-full flex flex-row justify-center text-sm">بنر
-                            </legend>
-                            <input type="file" name="banner" class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                   
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="province">
-                            <legend class="p-1 w-20 sm:bg-slate-700 sm:text-white rounded-full flex flex-row justify-center text-sm">استان
-                            </legend>
-                            <input type="province" name="province" value="{{$ecomm -> province}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="city">
-                            <legend class="p-1 w-20 sm:bg-slate-700 sm:text-white rounded-full flex flex-row justify-center text-sm">شهر
-                            </legend>
-                            <input type="city" name="city" value="{{$ecomm -> city}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="address">
-                            <legend class="p-1 w-20 sm:bg-slate-700 sm:text-white rounded-full flex flex-row justify-center text-sm">ادرس
-                            </legend>
-                            <input type="address" name="address" value="{{$ecomm -> address}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="description">
-                            <legend class="p-1 w-20 sm:bg-slate-700 sm:text-white rounded-full flex flex-row justify-center text-sm">
-                                توضیحات</legend>
-                            <input type="description" name="description" value="{{$ecomm -> description}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="email">
-                            <legend class="p-1 w-20 sm:bg-slate-700 sm:text-white rounded-full flex flex-row justify-center text-sm">ایمیل
-                            </legend>
-                            <input type="email" name="email" value="{{$ecomm -> email}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="instagram">
-                            <legend class="p-1 w-20 sm:bg-slate-700 sm:text-white rounded-full flex flex-row justify-center text-sm">
-                                اینستاگرام</legend>
-                            <input type="text" name="social_medias[instagram]"
-                                value="{{$ecomm ->social_media->instagram}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="telegram">
-                            <legend class="p-1 w-20 sm:bg-slate-700 sm:text-white rounded-full flex flex-row justify-center text-sm">
-                                تلگرام</legend>
-                            <input type="text" name="social_medias[telegram]"
-                                value="{{$ecomm ->social_media->telegram}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="whatsapp">
-                            <legend class="p-1 w-20 sm:bg-slate-700 sm:text-white rounded-full flex flex-row justify-center text-sm">
-                                واتساپ</legend>
-                            <input type="text" name="social_medias[whatsapp]"
-                                value="{{$ecomm ->social_media->whatsapp}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                </div>
-                <div class="text-center md:px-12 mt-5 lg:mt-10">
-                    <button
-                        class="w-5/12 max-sm:bg-blue-500 max-sm:text-white px-5 py-2 lg:px-10 lg:py-3 rounded-[8px] transition-all duration-250 bg-blue-400 text-white hover:bg-blue-600 hover:border-gray-400 hover:text-white text-gray-500 cursor-pointer">ثبت</button>
-                </div>
-            </form>
-        </fieldset>
-    </div>
-</section>
+@section('title')
+    ویرایش {{ $ecomm->title }}
 @endsection
+@section('content')
+    <section class="2xl:container mx-auto">
+
+        <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">ویرایش فروشگاه</h1>
+        <form action="{{ route('ecomm.update') }}" method="post" enctype='multipart/form-data'>
+            @csrf
+            <input type="hidden" name="id" value="{{ $ecomm->id }}">
+            <div class="min-h-screen flex items-start justify-center">
+                <div class="bg-white rounded-2xl shadow-md p-3 w-full md:w-9/12">
+                    <div class="text-center mb-4">
+                        <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
+                            <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">نام فروشگاه </label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                        name='title' placeholder="نام  فروشگاه خود را وارد کنید"
+                                        value="{{ $ecomm->title }}">
+                                </div>
+                            </div>
+
+
+                            <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">لوگو فروشگاه</label>
+
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="file"
+                                        name='logo' placeholder=" لوگو  فروشگاه خود را وارد کنید"
+                                        title="لوگو فروشگاهو کار">
+                                </div>
+                            </div>
+
+
+
+                            <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">بنر فروشگاه </label>
+
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="file"
+                                        name="banner" title="بنر فروشگاهو کار">
+                                </div>
+                            </div>
+                            <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">استان</label>
+
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                        name='province' placeholder="استان خود را وارد کنید"
+                                        value="{{ $ecomm->province }}">
+                                </div>
+                            </div>
+                            <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">شهر</label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                        name='city' placeholder=" شهرخود را وارد کنید" value="{{ $ecomm->city }}">
+                                </div>
+                            </div>
+                            <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">آدرس</label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                        name='address' placeholder=" ادرس  فروشگاه خود را وارد کنید"
+                                        value="{{ $ecomm->address }}">
+                                </div>
+                            </div>
+
+
+                            <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">ایمیل</label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="email"
+                                        name='email' placeholder="email@example.com" value="{{ $ecomm->email }}">
+                                </div>
+                            </div>
+
+                            <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">اینستاگرام</label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                        name='social_medias[instagram]' placeholder="آدرس شبکه های اجتماعی"
+                                        value="{{ $ecomm->social_media->instagram }}">
+                                </div>
+                            </div>
+                            <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">تلگرام</label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                        name='social_medias[telegram]' placeholder="آدرس شبکه های اجتماعی"
+                                        value="{{ $ecomm->social_media->telegram }}">
+                                </div>
+                            </div>
+                            <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">واتساپ</label>
+                                <div
+                                    class="w-full p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] flex">
+                                    <input class="w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                        name='social_medias[whatsapp]' placeholder="آدرس شبکه های اجتماعی"
+                                        value="{{ $ecomm->social_media->whatsapp }}">
+                                </div>
+                            </div>
+                            <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1 lg:col-span-2">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">توضیحات</label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <textarea class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text" name='description'
+                                        placeholder="توضیحات فروشگاه " class="w-full px-3 py-1 md:px-2 outline-none text-gray-500">{{ $ecomm->description }}</textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="w-full text-left ">
+                            <button type="submit"
+                                class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
+                                ثبت
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    @endsection

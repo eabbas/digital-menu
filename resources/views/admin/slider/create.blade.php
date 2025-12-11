@@ -1,27 +1,43 @@
     @extends('admin.app.panel')
     @section('title', 'ایجاد اسلایدر')
     @section('content')
-    <form action="{{ route('slider.store') }}" method="post" enctype='multipart/form-data'>
-        @csrf
-        <div class="min-h-screen flex items-start justify-center">
-            <div class="bg-white rounded-2xl shadow-md p-3 w-full md:w-9/12">
-                <div class="md:flex md:flex-col md:w-full">
-                        <fieldset class="mt-2 text-sm md:text-base border border-gray-400 rounded-[15px] py-1 pr-3">
-                            <legend class="kelass p-1 w-30 bg-[#1cb7fd] text-white rounded-full flex flex-row justify-center text-sm">عکس اسلایدر</legend>
-                            <input type="file" name='slider_img' class="w-full px-2 py-1 md:px-5 outline-none text-gray-500"required>
-                        </fieldset>
-                         <fieldset class="mt-2 text-sm md:text-base border border-gray-400 rounded-[15px] py-1 pr-3">
-                            <legend class="p-1 w-30 bg-[#1cb7fd] text-white rounded-full flex flex-row justify-center text-sm">نام اسلایدر</legend>
-                            <input type="text" name='title' class="w-full px-2 py-1 md:px-5 outline-none text-gray-500"required>
-                        </fieldset>
-                </div>
-                <button type="submit"
-                    class="active:bg-[#0080e5] mt-2 w-full bg-[#03A9F4] text-white py-3 rounded-md hover:bg-blue-700 transition duration-200 font-medium">
-                     ایجاد
-                </button>
-            </div>
-        </div>
-         </fieldset>
 
-    </form>
+        <div class="text-center mb-4">
+            <h1 class="text-lg font-bold text-gray-800">
+                ایجاد اسلایدر
+            </h1>
+        </div>
+        <form action="{{ route('slider.store') }}" method="post" enctype='multipart/form-data'>
+            @csrf
+            <div class="min-h-screen flex items-start justify-center">
+                <div class="bg-white rounded-2xl shadow-md p-3 w-full lg:w-3/4">
+                    <div class="text-center mb-4">
+                        <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
+                            <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان</label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                        name='title' placeholder="عنوان">
+                                </div>
+                            </div>
+                            <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">آیکون شبکه اجتماعی</label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2 cursor-pointer"
+                                        type="file" name='slider_img' title="آیکون شبکه اجتماعی">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full text-left ">
+                            <button type="submit"
+                                class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
+                                ثبت
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     @endsection
