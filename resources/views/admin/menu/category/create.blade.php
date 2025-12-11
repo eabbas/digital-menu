@@ -1,12 +1,13 @@
 @extends('admin.app.panel')
 @section('title', 'ایجاد دسته منو')
 @section('content')
+<h1 class="text-2xl font-bold text-gray-800 text-center mb-5">ایجاد دسته های منو</h1>
     <form action="{{ route('menuCat.store') }}" method="post" enctype='multipart/form-data'>
             @csrf
             <div class="min-h-screen flex items-start justify-center">
                 <div class="bg-white rounded-2xl shadow-md p-3 w-full md:w-9/12">
                     <div class="text-center mb-4">
-                        <h1 class="text-2xl font-bold text-gray-800">ایجاد دسته های منو</h1>
+                        
                         <div id="menuCat">
                             <div class="w-full flex flex-row gap-3 my-4">
                                 <input type="hidden" name="menu_id" value="{{ $menu->id }}">

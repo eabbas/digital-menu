@@ -13,6 +13,12 @@ use Illuminate\Support\Str;
 
 class EcommProductController extends Controller
 {
+<<<<<<< HEAD
+         public function create(){
+        $ecomm_categories=ecomm_category::all();
+        $user= Auth::user();
+        return view("admin.ecomm_products.create",['user'=>$user]);
+=======
     public function create()
     {
         $ecomm_categories = ecomm_category::all();
@@ -20,6 +26,7 @@ class EcommProductController extends Controller
         // $user_ecomms=$user->ecomms;
         $ecomm_categories = ecomm_category::where('ecomm_id', $user->ecomms[0]->id)->get();
         return view('admin.ecomm_products.create', ['ecomm_categories' => $ecomm_categories, 'user' => $user]);
+>>>>>>> 3d491f909e0831c954e8b88fce7520f37dc0ceac
     }
 
     public function store(Request $request)
@@ -83,6 +90,11 @@ class EcommProductController extends Controller
         $ecomm_products = ecomm_product::all();
         // return view("admin.ecomm_products.index",['ecomm_products'=>$ecomm_products]);
         return to_route('ecomm_product.index');
+<<<<<<< HEAD
+        return to_route('ecomm_product.index');
+
+=======
+>>>>>>> 3d491f909e0831c954e8b88fce7520f37dc0ceac
     }
 
     public function delete(ecomm_product $ecomm_product)

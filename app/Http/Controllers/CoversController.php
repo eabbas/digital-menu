@@ -70,17 +70,21 @@ class CoversController extends Controller
     public function update(Request $request)
     {
         $covers = covers::find($request->id);
-        if ($request->logo_path) {
-            Storage::disk('public')->delete($covers->logo_path);
+        if (isset($request->logo_path)) {
+            if ($covers->logo_path) {
+                Storage::disk('public')->delete($covers->logo_path);
+            }
             $logoName = $request->logo_path->getClientOriginalName();
             $logoPath = $request->logo_path->storeAs('logo_cover', $logoName, 'public');
             $covers->logo_path = $logoPath;
         }
-        if ($request->cover_path) {
-            Storage::disk('public')->delete($covers->icon_path);
-            $coverName = $request->icon_path->getClientOriginalName();
-            $coverPath = $request->icon_path->storeAs('logo_cover', $coverName, 'public');
-            $covers->icon_path = $coverPath;
+        if (isset($request->cover_path)) {
+            if ($covers->cover_path) {
+                Storage::disk('public')->delete($covers->cover_path);
+            }
+            $coverName = $request->cover_path->getClientOriginalName();
+            $coverPath = $request->cover_path->storeAs('logo_cover', $coverName, 'public');
+            $covers->cover_path = $coverPath;
         }
         $covers->title = $request->title;
         $covers->subTitle = $request->subTitle;

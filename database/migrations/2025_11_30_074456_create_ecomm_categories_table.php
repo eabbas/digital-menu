@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('parent_id');
             $table->string('show_in_home');
-            $table->string('image_path');
+            $table->string('image_path')->nullable();
             $table->timestamps();
         });
     }

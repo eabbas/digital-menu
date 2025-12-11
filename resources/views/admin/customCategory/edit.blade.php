@@ -40,7 +40,6 @@
                                 class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
                         </fieldset>
                     </div>
-                    
                 </div>
                 <div class="text-center md:px-12 mt-5 lg:mt-10">
                     <button

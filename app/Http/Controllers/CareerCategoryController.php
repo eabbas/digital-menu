@@ -46,11 +46,17 @@ class CareerCategoryController extends Controller
 
     public function update(Request $request)
     {
-        $name = $request->main_image->getClientOriginalName();
-        $fullName = Str::uuid() . '_' . $name;
-        $path = $request->file('main_image')->storeAs('images', $fullName, 'public');
-
         $careerCategory = careerCategory::find($request->id);
+
+        if (isset($request->main_image)) {
+            if ($careerCategory->main_image) {
+               Str::disk('public')->delete($careerCategory->main_image);
+            }
+            $name = $request->main_image->getClientOriginalName();
+            $fullName = Str::uuid() . '_' . $name;
+            $path = $request->file('main_image')->storeAs('images', $fullName, 'public');
+        }
+
         $careerCategory->title = $request->title;
         $careerCategory->description = $request->description;
         $careerCategory->main_image = $path;

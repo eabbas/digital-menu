@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ecomm;
+use App\Models\ecomm_category;
 use App\Models\role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -36,7 +37,7 @@ class EcommController extends Controller
         $fullBannerName = Str::uuid() . '_' . $bannerName;
         $bannerPath = $request->file('banner')->storeAs('files', $fullBannerName, 'public');
         $social_medias = json_encode($request->social_medias);
-        ecomm::insertGetId([
+          $ecomm_id=ecomm::insertGetId([
             'title' => $request->title,
             'logo' => $path,
             'province' => $request->province,
@@ -48,6 +49,8 @@ class EcommController extends Controller
             'description' => $request->description,
             'banner' => $bannerPath
         ]);
+        ecomm_category::create(['title'=>'بدون دسته بندی','description'=>'محصولات فاقد دسته بندی','show_in_home'=>0,'ecomm_id'=>$ecomm_id,'parent_id'=>0]);
+        
         return to_route('ecomm.ecomms', [Auth::user()]);
     }
 
@@ -120,10 +123,18 @@ class EcommController extends Controller
             }
         }
         $ecomm->delete();
+<<<<<<< HEAD
+        
+    $user= Auth::user();
+        // return view('admin.ecomms.userecomms', ['user' =>$user]); 
+        return back();
+       }
+=======
 
         $user = Auth::user();
         return view('admin.ecomms.userecomms', ['user' => $user]);
     }
+>>>>>>> 3d491f909e0831c954e8b88fce7520f37dc0ceac
 
     public function index()
     {

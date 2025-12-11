@@ -319,3 +319,10 @@ td {
     height: 10px;
   }
 }
+
+.close_icon>svg>path{
+    transition: all 300ms;
+}
+.close_icon:hover svg path{
+    fill: white;
+}

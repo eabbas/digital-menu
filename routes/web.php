@@ -38,6 +38,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('search' , [HomeController::class, 'search'])->name('search');
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware([LoginMiddleware::class]);
 Route::get('/signup', [UserController::class, "create"])->name('signup')->middleware([LoginMiddleware::class]);
+Route::post('/check', [UserController::class, "checkAuth"])->name('checkAuth');
+
 Route::group([
     'prefix' => 'users',
     'controller' => UserController::class,
@@ -78,6 +80,7 @@ Route::group([
     Route::get('/careers', 'index')->name('list');
     Route::get('/show/{career}', 'single')->name('single')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/qrcodes/{career}', 'qr_codes')->name('qr_codes');
+    Route::get('/menuList/{career}', 'menus')->name('menus');
 });
 
 Route::group([
@@ -111,7 +114,6 @@ Route::group([
     Route::post('/store', 'store')->name('store');
     Route::get('/show/{menu}', 'single')->name('single');
     Route::get('/customProList/{career}', 'customProMenu')->name('customProList');
-    Route::get('/qrcodes/{menu}', 'qrcodes')->name('qrcodes');
     Route::get('/edit/{menu}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{menu}', 'delete')->name('delete');
@@ -362,9 +364,9 @@ Route::group([
     Route::get('/customProductList', 'index')->name('list');
     Route::get('/category_list/{custom_product?}', 'category_list')->name('category_list');
     Route::get('/show/{customProduct}', 'show')->name('single');
-    Route::get('/edit/{customProduct}', 'edit')->name('edit');
+    Route::post('/edit', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
-    Route::get('/delete/{customProduct?}', 'delete')->name('delete');
+    Route::post('/delete/{customProduct?}', 'delete')->name('delete');
 });
 
 Route::group([
@@ -376,9 +378,9 @@ Route::group([
     Route::post('/store', 'store')->name('store');
     Route::get('/variantList/{customProduct?}', 'index')->name('list');
     Route::get('/show/{cpVariants}', 'show')->name('single');
-    Route::get('/edit/{cpVariant}', 'edit')->name('edit');
+    Route::post('/edit', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
-    Route::get('/delete/{cpVariants}', 'delete')->name('delete');
+    Route::post('/delete', 'delete')->name('delete');
 });
 
 /////socialMedia
@@ -458,7 +460,7 @@ Route::group([
     Route::get('/custmoCategoryList/{customProduct?}', 'index')->name('list');
     Route::get('/item_list/{customCategory?}', 'item_list')->name('item_list');
     Route::get('/show/{customCategory}', 'show')->name('single');
-    Route::get('/edit/{customCategory?}', 'edit')->name('edit');
+    Route::post('/edit/{customCategory?}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{customCategory?}', 'delete')->name('delete');
 });
@@ -494,7 +496,7 @@ Route::group(['prefix'=>'ecomm_category',
     Route::post('/update','update')->name('update');
     Route::post('/update_ecomm_categories','update_ecomm_categories')->name('update_ecomm_categories');
     Route::get('/delete/{ecomm_category}','delete')->name('delete');
-    Route::post('/getEcomm','getEcommCategories')->name('getEcommCategories');
+    Route::post('/getEcommCategories','getEcommCategories')->name('getEcommCategories');
 
 });
 Route::group(['prefix'=>'ecomm_product',

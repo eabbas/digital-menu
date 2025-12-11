@@ -49,8 +49,13 @@
                        اطلاعات صفحه اول
                     </div>
                     @if($careerCategory->show_in_home == 1)
-                    {{ "در صفحه اول هم وجود دارد" }}
-                    @else {{ "در صفحه اول وجود ندارد" }}
+                    <span class="text-lg">
+                        ✅
+                    </span>
+                    @else
+                    <span class="text-lg">
+                        ❌
+                    </span>
                     @endif
                 </div>
             </div>

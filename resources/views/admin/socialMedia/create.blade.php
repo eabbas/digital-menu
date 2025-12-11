@@ -1,47 +1,57 @@
     <style>
-        input:focus{
-            color:#2196F3;
+        input:focus {
+            color: #2196F3;
         }
     </style>
     @extends('admin.app.panel')
-    @section('title', 'ایجاد شبکه اجتماعی'  )
+    @section('title', 'ایجاد شبکه اجتماعی')
     @section('content')
-    <form action="{{ route('socialMedia.store') }}" method="post" enctype='multipart/form-data'>
-        @csrf
-        <div class="min-h-screen flex items-start justify-center">
-            <div class="bg-white rounded-2xl shadow-md p-3 w-full md:w-9/12">
-                <!-- هدر -->
-                <div class="text-center mb-4">
-                    <h1 class="text-lg font-bold text-gray-800">ایجاد  شبکه اجتماعی</h1>
-                </div class="w-full">
-            <div class="md:flex md:flex-col md:w-full md:items-center md:gap-5">
-                <div class="md:flex md:flex-col md:w-full">
-                         <div class="mt-2 text-sm md:text-base border border-gray-400 rounded-[15px] py-1 pr-3">
-                            <lable class="p-1 w-30 bg-[#1cb7fd] text-white rounded-full flex flex-row justify-center text-sm">  شبکه اجتماعی</lable>
-                            <input type="text" name='title' placeholder=" عنوان " class="w-full px-2 py-1 md:px-2 outline-none text-gray-500"required>
-                        </div>
-                </div>
-                <div class="md:flex md:flex-col md:w-full">
-                         <div class="mt-2 text-sm md:text-base border border-gray-400 rounded-[15px] py-1 pr-3">
-                            <lable class="p-1 w-40 bg-[#1cb7fd] text-white rounded-full flex flex-row justify-center text-sm"> آدرس شبکه اجتماعی</lable>
-                            <input type="text" name='link' placeholder="لینک"  class="w-full px-2 py-1 md:px-2 outline-none text-gray-500"required>
-                        </div>
-                </div>
-                <div class="md:flex md:flex-col md:w-full">
-                         <div class="flex flex-row items-center mt-2 text-sm md:text-base border border-gray-400 rounded-[15px] py-1 pr-3">
-                             <lable class="p-1 w-40 text-gray-600 rounded-full flex flex-row justify-center text-sm"required> آیکون شبکه اجتماعی</lable>
-                            <input type="file" name='icon_path'>
-                        </div>
-                </div>
-            </div>
 
-                <button type="submit"
-                    class="active:bg-[#0080e5] mt-2 w-full bg-[#03A9F4] text-white py-3 rounded-md hover:bg-blue-700 transition duration-200 font-medium">
-                    ارسال اطلاعات
-                </button>
-            </div>
+        <div class="text-center mb-4">
+            <h1 class="text-lg font-bold text-gray-800">
+                ایجاد شبکه اجتماعی
+            </h1>
         </div>
-         </fieldset>
+        <form action="{{ route('socialMedia.store') }}" method="post" enctype='multipart/form-data'>
+            @csrf
+            <div class="min-h-screen flex items-start justify-center">
+                <div class="bg-white rounded-2xl shadow-md p-3 w-full lg:w-3/4">
+                    <div class="text-center mb-4">
+                        <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
 
-    </form>
+                            <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان</label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                        name='title' placeholder="عنوان">
+                                </div>
+                            </div>
+                            <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">لینک</label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                        name='link' dir="ltr" placeholder="لینک">
+                                </div>
+                            </div>
+                            <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">آیکون شبکه اجتماعی</label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2 cursor-pointer"
+                                        type="file" name='icon_path' title="آیکون شبکه اجتماعی">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full text-left ">
+                            <button type="submit"
+                                class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
+                                ثبت
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     @endsection
