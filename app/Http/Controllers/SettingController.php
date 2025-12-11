@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\setting;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class SettingController extends Controller
@@ -21,7 +21,7 @@ class SettingController extends Controller
             $finalData[] = ['meta_key' => $key, 'meta_value' => $data];
         }
         setting::upsert($finalData, ['meta_key'], ['meta_value']);
-        // return to_route('home');
+        return to_route('home');
     }
 
     public function showColors()
@@ -33,23 +33,24 @@ class SettingController extends Controller
     {
         return view('settings.logo.createLogo');
     }
+
     public function upsertLogo(Request $request)
     {
         $type = request()->logoImage->getClientOriginalExtension();
         $name = $request->logoImage->getClientOriginalName();
-        $fullName = Str::uuid()."_".$name;
+        $fullName = Str::uuid() . '_' . $name;
         $path = $request->file('logoImage')->storeAs('logo', $fullName, 'public');
-        $logo[]=['meta_key'=>'logo', 'meta_value'=>$path];
+        $logo[] = ['meta_key' => 'logo', 'meta_value' => $path];
 
-        setting::upsert($logo , ['meta_key'] , ['meta_value']);
-        return "با موفقیت ثبت شد";
+        setting::upsert($logo, ['meta_key'], ['meta_value']);
+        return 'با موفقیت ثبت شد';
     }
+
     public function showLogo()
     {
         // $homes = home::all();
-        $logo = setting::where('meta_key' , 'logo')->first();
-        // dd($logo->meta_key);
-        return view('settings.logo.singleLogo' , ['logo'=>$logo]);
+        $logo = setting::where('meta_key', 'logo')->first();
+        return view('settings.logo.singleLogo', ['logo' => $logo]);
     }
 
     public function createMainAds()
@@ -61,19 +62,19 @@ class SettingController extends Controller
     {
         $type = request()->mainAdsImage->getClientOriginalExtension();
         $name = $request->mainAdsImage->getClientOriginalName();
-        $fullName = Str::uuid()."_".$name;
+        $fullName = Str::uuid() . '_' . $name;
         $path = $request->file('mainAdsImage')->storeAs('mainAds', $fullName, 'public');
-        $mainAds[]=['meta_key'=>'mainAds', 'meta_value'=>$path];
+        $mainAds[] = ['meta_key' => 'mainAds', 'meta_value' => $path];
 
-        setting::upsert($mainAds , ['meta_key'] , ['meta_value']);
-        return "با موفقیت ثبت شد";
+        setting::upsert($mainAds, ['meta_key'], ['meta_value']);
+        return 'با موفقیت ثبت شد';
     }
 
     public function showMainAds()
     {
-        $mainAds = setting::where('meta_key' , 'mainAds')->first();
-        
-        return view('settings.mainAds.singleMainAds' , ['mainAds'=>$mainAds]);
+        $mainAds = setting::where('meta_key', 'mainAds')->first();
+
+        return view('settings.mainAds.singleMainAds', ['mainAds' => $mainAds]);
     }
 
     public function createMainBanner()
@@ -85,18 +86,19 @@ class SettingController extends Controller
     {
         $type = request()->mainBannerImage->getClientOriginalExtension();
         $name = $request->mainBannerImage->getClientOriginalName();
-        $fullName = Str::uuid()."_".$name;
+        $fullName = Str::uuid() . '_' . $name;
         $path = $request->file('mainBannerImage')->storeAs('mainBanner', $fullName, 'public');
-        $mainBanner[]=['meta_key'=>'mainBanner', 'meta_value'=>$path];
+        $mainBanner[] = ['meta_key' => 'mainBanner', 'meta_value' => $path];
 
-        setting::upsert($mainBanner , ['meta_key'] , ['meta_value']);
-        return "با موفقیت ثبت شد";
+        setting::upsert($mainBanner, ['meta_key'], ['meta_value']);
+        return 'با موفقیت ثبت شد';
     }
+
     public function showMainBanner()
     {
-        $mainBanner = setting::where('meta_key' , 'mainBanner')->first();
-        
-        return view('settings.mainBanner.singleMainBanner' , ['mainBanner'=>$mainBanner]);
+        $mainBanner = setting::where('meta_key', 'mainBanner')->first();
+
+        return view('settings.mainBanner.singleMainBanner', ['mainBanner' => $mainBanner]);
     }
 
     public function createSingleAds()
@@ -108,19 +110,19 @@ class SettingController extends Controller
     {
         $type = request()->singleAdsImage->getClientOriginalExtension();
         $name = $request->singleAdsImage->getClientOriginalName();
-        $fullName = Str::uuid()."_".$name;
+        $fullName = Str::uuid() . '_' . $name;
         $path = $request->file('singleAdsImage')->storeAs('singleAds', $fullName, 'public');
-        $singleAds[]=['meta_key'=>'singleAds', 'meta_value'=>$path];
+        $singleAds[] = ['meta_key' => 'singleAds', 'meta_value' => $path];
 
-        setting::upsert($singleAds , ['meta_key'] , ['meta_value']);
-        return "با موفقیت ثبت شد";
+        setting::upsert($singleAds, ['meta_key'], ['meta_value']);
+        return 'با موفقیت ثبت شد';
     }
 
     public function showSingleAds()
     {
-        $singleAds = setting::where('meta_key' , 'singleAds')->first();
-        
-        return view('settings.singleAds.singleAdsImage' , ['singleAds'=>$singleAds]);
+        $singleAds = setting::where('meta_key', 'singleAds')->first();
+
+        return view('settings.singleAds.singleAdsImage', ['singleAds' => $singleAds]);
     }
 
     public function createCategoryAds()
@@ -132,19 +134,18 @@ class SettingController extends Controller
     {
         $type = request()->categoryAdsImage->getClientOriginalExtension();
         $name = $request->categoryAdsImage->getClientOriginalName();
-        $fullName = Str::uuid()."_".$name;
+        $fullName = Str::uuid() . '_' . $name;
         $path = $request->file('categoryAdsImage')->storeAs('categoryAds', $fullName, 'public');
-        $categoryAds[]=['meta_key'=>'categoryAds', 'meta_value'=>$path];
+        $categoryAds[] = ['meta_key' => 'categoryAds', 'meta_value' => $path];
 
-        setting::upsert($categoryAds , ['meta_key'] , ['meta_value']);
-        return "با موفقیت ثبت شد";
+        setting::upsert($categoryAds, ['meta_key'], ['meta_value']);
+        return 'با موفقیت ثبت شد';
     }
 
     public function showCategoryAds()
     {
-        $categoryAds = setting::where('meta_key' , 'categoryAds')->first();
-        
-        return view('settings.categoryAds.singleCategoyAdsImage' , ['categoryAds'=>$categoryAds]);
-    }
+        $categoryAds = setting::where('meta_key', 'categoryAds')->first();
 
+        return view('settings.categoryAds.singleCategoyAdsImage', ['categoryAds' => $categoryAds]);
+    }
 }

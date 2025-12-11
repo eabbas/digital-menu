@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class menu extends Model
 {
-    protected $fillable = ['page_data', 'qr_num', 'career_id'];
+    protected $fillable = [
+        'title',
+        'subtitle',
+        'banner',
+        'career_id',
+    ];
 
     public $timestamps = true;
 
@@ -15,8 +20,8 @@ class menu extends Model
         return $this->belongsTo(career::class);
     }
 
-    public function qr_codes()
-    {
-        return $this->hasMany(qr_code::class)->chaperone();
+    public function menu_categories(){
+        return $this->hasMany(menu_category::class);
     }
+
 }

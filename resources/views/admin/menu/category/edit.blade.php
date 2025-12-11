@@ -1,16 +1,17 @@
 @extends('admin.app.panel')
 @section('title', 'ویرایش دسته منو')
 @section('content')
+ <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">ویرایش دسته منو</h1>
     <form action="{{ route('menuCat.update') }}" method="post" enctype='multipart/form-data'>
             @csrf
             <div class="min-h-screen flex items-start justify-center">
                 <div class="bg-white rounded-2xl shadow-md p-3 w-full md:w-9/12">
                     <div class="text-center mb-4">
-                        <h1 class="text-2xl font-bold text-gray-800">ایجاد دسته های منو</h1>
+                       
                         <div id="menuCat">
                             <div class="w-full flex flex-row gap-3 my-4">
                                 <input type="hidden" name="id" value="{{ $category->id }}">
-                                <input type="hidden" name="career_id" value="{{ $category->career_id }}">
+                                <input type="hidden" name="menu_id" value="{{ $category->menu_id }}">
                                 <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                     <label class="w-30 text-sm mb-1 mt-2.5 flex flex-row">
                                         <span>عنوان دسته:</span>

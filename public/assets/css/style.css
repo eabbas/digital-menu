@@ -11,6 +11,19 @@
 .yekan {
     font-family: 'Yekan';
 }
+/* 
+input[class*="border"],
+input, select, textarea {
+    border: 1px solid #DBDFE9 !important;
+    border-radius: 7px !important;
+    padding: 8px !important;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #3B82F6 !important;  /* یا #1D4ED8 برای آبی تیره‌تر 
+    outline: none !important;
+    /* box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3) !important;
+} */
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -262,4 +275,54 @@ td {
 }
 .shadow__fhoto__insetting__profaill {
     box-shadow: 0px 0px 15px -1px gray;
+}
+
+.loading-wave {
+  width: 300px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.loading-bar {
+  width: 20px;
+  height: 10px;
+  margin: 0 5px;
+  background-color: #3498db;
+  border-radius: 5px;
+  animation: loading-wave-animation 1s ease-in-out infinite;
+}
+
+.loading-bar:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.loading-bar:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.loading-bar:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+@keyframes loading-wave-animation {
+  0% {
+    height: 10px;
+  }
+
+  50% {
+    height: 50px;
+  }
+
+  100% {
+    height: 10px;
+  }
+}
+
+.close_icon>svg>path{
+    transition: all 300ms;
+}
+.close_icon:hover svg path{
+    fill: white;
 }

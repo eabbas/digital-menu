@@ -1,50 +1,57 @@
 @extends('admin.app.panel')
 @section('title', 'ویرایش کسب و کار')
 @section('content')
-<section class="2xl:container mx-auto">
-    <div class="w-full mx-auto pb-5">
-        <fieldset class="border-2 rounded-[10px] border-gray-400 shadow">
-            <legend class="lg:text-3xl md:text-2xl text-md font-semibold text-end text-gray-500 p-5 rounded-full">
-                ویرایش اطلاعات  دسته بندی
-            </legend>
-            <form action="{{ route('cc.update')}}" method="post" enctype='multipart/form-data'
-                class="w-11/12 lg:w-3/4 mx-auto py-5 rounded-lg">
-                @csrf
-                <input type="hidden" name="id" value="{{$careerCategory -> id}}">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 lg:gap-4">
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="title">
-                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">عنوان
-                            </legend>
-                            <input type="title" name="title" value="{{$careerCategory -> title}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="main_image">
-                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">عکس
-                            </legend>
-                            <input type="file" name="main_image" class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500" value={{ $careerCategory->main_image }}>
-                        </fieldset>
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="description">
-                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">
-                                توضیحات</legend>
-                            <input type="description" name="description" value="{{$careerCategory -> description}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                        </fieldset>
-                    </div>
-                </div>
-                <div class="text-center md:px-12 mt-5 lg:mt-10">
-                    <button
-                        class="w-5/12 max-sm:bg-blue-500 max-sm:text-white px-5 py-2 lg:px-10 lg:py-3 rounded-[8px] transition-all duration-250 bg-blue-400 text-white hover:bg-blue-600 hover:border-gray-400 hover:text-white text-gray-500 cursor-pointer">ثبت</button>
-                </div>
-            </form>
-        </fieldset>
+
+    <div class="text-center mb-4">
+        <h1 class="text-lg font-bold text-gray-800">
+            ویرایش اطلاعات دسته بندی
+        </h1>
     </div>
-</section>
+    <form action="{{ route('cc.update') }}" method="post" enctype='multipart/form-data'>
+        @csrf
+        <input type="hidden" name="id" value="{{ $careerCategory->id }}">
+        <div class="min-h-screen flex items-start justify-center">
+            <div class="bg-white rounded-2xl shadow-md p-3 w-full lg:w-3/4">
+                <div class="text-center mb-4">
+                    <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
+
+                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                            <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان</label>
+                            <div
+                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                    name='title' placeholder="عنوان" value="{{ $careerCategory->title }}">
+                            </div>
+                        </div>
+                        <div class="w-full flex flex-row items-center gap-3 itmes-center max-md:flex-row max-md:gap-1">
+                            <input type="checkbox" name='show_home' value="1">
+                            <label class="w-30 text-sm mb-1 mt-2.5 flex">نمایش در صفحه اول</label>
+                        </div>
+                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                            <label class="w-30 text-sm mb-1 mt-2.5 flex">تصویر دسته</label>
+                            <div
+                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2 cursor-pointer"
+                                    type="file" name='main_image' title="تصویر دسته">
+                            </div>
+                        </div>
+                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1 lg:col-span-2">
+                            <label class="w-30 text-sm mb-1 mt-2.5 flex">توضیحات</label>
+                            <div
+                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                <textarea class="p-4 w-full focus:outline-none text-sm font-bold mr-2" rows="6" type="text" name='description'
+                                    placeholder="توضیحات">{{ $careerCategory->description }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full text-left ">
+                        <button type="submit"
+                            class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
+                            ثبت
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 @endsection

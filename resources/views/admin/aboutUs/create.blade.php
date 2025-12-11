@@ -11,11 +11,11 @@
                     @endif
                          <fieldset class="mt-2 text-sm md:text-base border-1 border-gray-400 rounded-[15px] py-1 pr-3">
                             <legend class="p-1 w-30 bg-[#1cb7fd] text-white rounded-full flex flex-row justify-center text-sm">عنوان </legend>
-                            <input type="text" name='title' class="w-full px-2 py-1 md:px-5 md:px-2 outline-none text-gray-500">
+                            <input type="text" name='title' class="w-full px-2 py-1 md:px-5 md:px-2 outline-none text-gray-500" required>
                         </fieldset>
                          <fieldset class="mt-2 text-sm md:text-base border-1 border-gray-400 rounded-[15px] py-1 pr-3">
                             <legend class="p-1 w-30 bg-[#1cb7fd] text-white rounded-full flex flex-row justify-center text-sm"> توضیحات</legend>
-                            <input type="text" name='description' class="w-full px-2 py-1 md:px-5 md:px-2 outline-none text-gray-500">
+                            <input type="text" name='description' class="w-full px-2 py-1 md:px-5 md:px-2 outline-none text-gray-500" required>
                         </fieldset>
                 </div>
                 <button type="submit"

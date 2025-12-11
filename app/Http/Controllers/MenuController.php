@@ -3,132 +3,109 @@
 namespace App\Http\Controllers;
 
 use App\Models\career;
+use App\Models\custom_product;
 use App\Models\menu;
 use App\Models\qr_code;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
+use function Symfony\Component\Clock\now;
+
 class MenuController extends Controller
 {
     public function create(career $career)
     {
-        $user = Auth::user();
-        return view('admin.menu.create', ['user' => $user, 'career' => $career]);
+        return view('admin.menu.create', ['career' => $career]);
     }
 
     public function store(Request $request)
     {
-        $valueCount = 1;
-        $menu_data = $request->menu_data;
-        foreach ($menu_data as $key => $data) {
-            if (isset($data['menu_image'])) {
-                $name = $data['menu_image']->getClientOriginalName();
-                $fullName = time() . '_' . $name;
-                $path = $data['menu_image']->storeAs('images', $fullName, 'public');
-                $menu_data[$key]['menu_image'] = $path;
-            } else {
-                $data['menu_image'] = null;
-            }
-            foreach ($data['values'] as $gKey => $value) {
-                if (isset($value['gallery'])) {
-                    $itemName = $value['gallery']->getClientOriginalName();
-                    $itemFullName = time() . '_' . $itemName;
-                    $itemPath = $value['gallery']->storeAs('images', $itemFullName, 'public');
-                    $menu_data[$key]['values'][$gKey]['gallery'] = $itemPath;
-                } else {
-                    $value['gallery'] = null;
-                }
-                $menu_data[$key]['values'][$gKey]['id']=$valueCount;
-                $valueCount ++;
-            }
+        $bannerPath = null;
+        if (isset($request->banner)) {
+            $bannerName = $request->banner->getClientOriginalName();
+            $fullBannerName = time() . '_' . $bannerName;
+            $bannerPath = $request->file('banner')->storeAs('files', $fullBannerName, 'public');
         }
-        $career_id = $request->career_id;
-        $menu_data = json_encode($menu_data);
-        $menu_id = menu::insertGetId(['menu_data' => $menu_data, 'qr_num' => $request->qr_num, 'career_id' => $career_id]);
-        for ($i = 0; $i < $request->qr_num; $i++) {
-            $random = Str::random(10);
-            $link = "famenu.ir/qrcode/$career_id/" . $random;
-            $qr_svg = QrCode::size(100)->generate($link);
-            $fileName = 'qrcodes/' . $career_id . '_' . $random . '.svg';
-            Storage::disk('public')->put($fileName, $qr_svg);
-            qr_code::create(['qr_path' => $fileName, 'career_id' => $career_id, 'menu_id' => $menu_id, 'slug' => 'qrcode/' . $career_id . '/' . $random]);
-        }
-        return to_route('career.careers', [Auth::user()]);
+        menu::create([
+            'title' => $request->title,
+            'subtitle' => $request->subtitle,
+            'banner' => $bannerPath,
+            'career_id' => $request->career_id,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        
+        return to_route('career.menus', [$request->career_id]);
     }
 
-    public function index(career $career)
+    public function single(menu $menu)
     {
-        $user = Auth::user();
-        $career->menu->menu_data;
-        return view('admin.menu.menu', ['career' => $career, 'user' => $user]);
+        return view('admin.menu.single', ['menu' => $menu]);
     }
 
     public function edit(menu $menu)
     {
-        $user = Auth::user();
-        return view('admin.menu.edit', ['menu' => $menu, 'user' => $user]);
+        return view('admin.menu.edit', ['menu' => $menu]);
     }
 
     public function update(Request $request)
     {
-        $menu_data = $request->menu_data;
-        foreach ($menu_data as $key => $data) 
-        {
-            $name = $data['menu_image']->getClientOriginalName();
-            $fullName = time() . '_' . $name;
-            $path = $data['menu_image']->storeAs('images', $fullName, 'public');
-            $menu_data[$key]['menu_image'] = $path;
-            foreach ($data['values'] as $gKey => $value) {
-                $itemName = $value['gallery']->getClientOriginalName();
-                $itemFullName = time() . '_' . $itemName;
-                $itemPath = $value['gallery']->storeAs('images', $itemFullName, 'public');
-                $menu_data[$key]['values'][$gKey]['gallery'] = $itemPath;
-            }
-        }
-        $menu = menu::find($request->menu_id);
-        $menu->menu_data = json_encode($menu_data);
+        $menu = menu::find($request->id);
+        $menu->title = $request->title;
+        $menu->subtitle = $request->subtitle;
         $menu->career_id = $request->career_id;
-        $qr_count = 0;
-        $career_id = $menu->career_id;
-        if ($request->qr_num) {
-            if ($request->qr_num > $menu->qr_num) {
-                $qr_count = $request->qr_num - $menu->qr_num;
-                while ($qr_count) {
-                    $random = Str::random(10);
-                    $link = "famenu.ir/qrcodes/$career_id/" . $random;
-                    $qr_svg = QrCode::size(100)->generate($link);
-                    $fileName = 'qrcodes/' . $career_id . '_' . $random . '.svg';
-                    Storage::disk('public')->put($fileName, $qr_svg);
-                    qr_code::create(['qr_path' => $fileName, 'career_id' => $career_id, 'menu_id' => $request->menu_id, 'slug' => 'qrcode/' . $career_id . '/' . $random]);
-                    $qr_count--;
-                }
+        if (isset($request->banner)) {
+            if ($menu->banner) {
+                Storage::disk('public')->delete($menu->banner);
             }
-            // if ($request->qr_num<=$menu->qr_num) {
-            //     # code...
-            // }
+            $bannerName = $request->banner->getClientOriginalName();
+            $fullBannerName = Str::uuid() . '_' . $bannerName;
+            $bannerPath = $request->file('banner')->storeAs('files', $fullBannerName, 'public');
+            $menu->banner = $bannerPath;
         }
-        $menu->qr_num = $request->qr_num;
-        $menu->save();
-        return to_route('career.careers', [Auth::user()]);
+        return to_route('menu.single', [$menu]);
     }
 
     public function delete(menu $menu)
     {
-        $user = Auth::user();
-        foreach ($menu->qr_codes as $qr_code) {
-            Storage::disk('public')->delete($qr_code->qr_path);
-            $qr_code->delete();
+        if (count($menu->menu_categories)) {
+            foreach ($menu->menu_categories as $category) {
+                if (count($category->menu_items)) {
+                    foreach ($category->menu_items as $item) {
+                        if (count($item->ingredients)) {
+                            foreach ($item->ingredients as $ingredients) {
+                                $ingredients->delete();
+                            }
+                        }
+                        $item->delete();
+                    }
+                }
+                $category->delete();
+            }
         }
         $menu->delete();
-        return to_route('user.profile', [$user]);
+        if (Auth::user()->role[0]->title == 'admin') {
+            return to_route('career.careers');
+        }
+        return to_route('career.careers', [Auth::user()]);
     }
 
-    public function qr_codes(menu $menu)
+    public function showMenu(menu $menu)
     {
-        $user = Auth::user();
-        return view('admin.menu.qrcodes', ['menu' => $menu, 'user' => $user]);
+        return view('admin.menu.menu', ['menu' => $menu]);
+    }
+
+    public function createMenu()
+    {
+        return view('admin.menu.createMenu');
+    }
+
+    public function customProMenu(career $career)
+    {
+        return view('admin.menu.customProList', ['career' => $career]);
     }
 }

@@ -18,4 +18,9 @@ class custom_product_variant extends Model
     {
         return $this->belongsTo(custom_product::class);
     }
+    public function career()
+    {
+        return $this->belongsTo(career::class);
+    }
+    
 }

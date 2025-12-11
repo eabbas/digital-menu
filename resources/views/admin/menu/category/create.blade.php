@@ -1,15 +1,16 @@
 @extends('admin.app.panel')
 @section('title', 'ایجاد دسته منو')
 @section('content')
+<h1 class="text-2xl font-bold text-gray-800 text-center mb-5">ایجاد دسته های منو</h1>
     <form action="{{ route('menuCat.store') }}" method="post" enctype='multipart/form-data'>
             @csrf
             <div class="min-h-screen flex items-start justify-center">
                 <div class="bg-white rounded-2xl shadow-md p-3 w-full md:w-9/12">
                     <div class="text-center mb-4">
-                        <h1 class="text-2xl font-bold text-gray-800">ایجاد دسته های منو</h1>
+                        
                         <div id="menuCat">
                             <div class="w-full flex flex-row gap-3 my-4">
-                                <input type="hidden" name="career_id" value="{{ $career->id }}">
+                                <input type="hidden" name="menu_id" value="{{ $menu->id }}">
                                 <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                     <label class="w-30 text-sm mb-1 mt-2.5 flex flex-row">
                                         <span>عنوان دسته:</span>
@@ -48,7 +49,7 @@
                         <div class="w-full text-center">
                             <button type="submit"
                                 class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
-                                ارسال اطلاعات
+                               ثبت
                             </button>
                         </div>
                     </div>
