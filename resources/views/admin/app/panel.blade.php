@@ -142,14 +142,15 @@
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('favoriteCareer.list') }}" class="text-white py-1">لیست علاقه مندی ها</a>
                         </li> --}}
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+
+                        {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('covers.create') }}" class=" text-white py-1">ایجادصفحه شبکه های اجتماعی</a>
                         </li>
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('covers.social_list') }}" class=" text-white py-1"> لیست صفحه شبکه های اجتماعی</a>
-                        </li>
+                        </li> --}}
                         @if(Auth::user()->role[0]->title == 'admin')
 
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
@@ -162,6 +163,12 @@
                                 <span class="size-1 bg-white rounded-sm"></span>
                                 <a href="{{ route('cc.list') }}" class="text-white py-1">
                                     همه دسته های کسب و کارها
+                                </a>
+                            </li>
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('career.list') }}" class="text-white py-1">
+                                    همه کسب و کارها
                                 </a>
                             </li>
                            
@@ -199,10 +206,10 @@
                             <a href="{{ route('covers.list') }}" class="text-white py-1"> لیست صفحه شبکه های
                                 اجتماعی</a>
                         </li>
-                          <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                          {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('covers.list') }}" class=" text-white py-1"> مشاهده لیست همه شبکه های اجتماعی کاربران</a>
-                        </li>
+                        </li> --}}
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('socialMedia.create') }}" class="text-white py-1">

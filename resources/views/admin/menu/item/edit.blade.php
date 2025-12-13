@@ -56,7 +56,7 @@
                                 <input class="w-full focus:outline-none text-sm font-bold mr-2" type="number" name='duration' placeholder="دقیقه" value="{{ $menu->duration }}">
                             </div>
                         </div>
-                        <div class="w-full flex flex-row items-center gap-3 max-md:flex-col max-md:gap-1">
+                        <div class="w-full flex flex-row items-center gap-3 max-md:gap-1">
                         
                                 <input class="size-4 focus:outline-none text-sm font-bold cursor-pointer" type="checkbox"
                                     name='customizable' value="1"
@@ -85,7 +85,7 @@
                                         <button type="button" onclick="removeIngre(this)"
                                             class="p-1 rounded-md bg-red-300 hover:bg-red-500 text-sm cursor-pointer hover:text-white">حذف</button>
                                     </div>
-                                    <div class="flex flex-row gap-3">
+                                    <div class="flex lg:flex-row flex-col gap-3">
                                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                             <label class="w-32 text-sm mb-1 mt-2.5 flex flex-row">
                                                 <span>عنوان :</span>
@@ -111,7 +111,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="flex flex-row gap-3">
+                                    <div class="flex lg:flex-row flex-col gap-3">
                                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                             <label class="w-32 text-sm mb-1 mt-2.5 flex">قیمت واحد</label>
                                             <div

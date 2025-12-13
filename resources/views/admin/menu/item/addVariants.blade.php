@@ -45,7 +45,7 @@
                                 <input class="w-full focus:outline-none text-sm font-bold mr-2" type="number" name='duration' placeholder="دقیقه">
                             </div>
                         </div>
-                        <div class="w-full flex flex-row items-center gap-3 max-md:flex-col max-md:gap-1">
+                        <div class="w-full flex flex-row items-center gap-3 max-md:gap-1">
                            
                                 <input class="size-4 focus:outline-none text-sm font-bold cursor-pointer" type="checkbox" name='customizable' value="1">
                          
