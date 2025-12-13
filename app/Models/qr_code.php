@@ -19,4 +19,7 @@ class qr_code extends Model
     public function career(){
         return $this->belongsTo(career::class);
     }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

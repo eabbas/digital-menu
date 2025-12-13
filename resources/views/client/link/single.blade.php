@@ -8,26 +8,26 @@
          
             <div class="relative">
                 <div>
-                    <img class="w-full h-[200px]" src="{{ asset('storage/'. $cover->cover_path) }}" alt="">
+                    <img class="w-full h-[130px] object-cover lg:h-[200px]" src="{{ asset('storage/'. $cover->cover_path) }}" alt="">
                 </div>
                 <div class="flex flex-col items-center justify-end w-full h-[100px]">
-                    <h2 class="text-center text-lg font-bold text-gray-800">
+                    <h2 class="text-center text-base lg:text-lg font-bold text-gray-800">
                         {{ $cover->title }}
                     </h2>
-                    <span class="block text-cetner text-md text-gray-500">
+                    <span class="block text-cetner text-sm lg:text-md text-gray-500">
                         {{ $cover->subTitle }}
                     </span>
                 </div>
                 <img src="{{ asset('storage/' . $cover->logo_path) }}"
-                    class="size-30 rounded-full absolute inset-1/2 translate-x-1/2 -translate-y-1/5" alt="">
+                    class="size-20 lg:size-30 rounded-full absolute inset-1/2 translate-x-1/2 -translate-y-1/5" alt="">
             </div>
-            <div class="w-full mt-10 flex flex-col gap-5">
+            <div class="w-full mt-5 lg:mt-10 flex flex-col gap-5">
 
-                 <div class="w-full flex flex-col gap-5" id="socialLinks">
+                 <div class="w-full flex flex-col gap-3 lg:gap-5" id="socialLinks">
                     @if (count($cover->socialAddresses))
                         @foreach ($cover->socialAddresses as $item)
-                            <div class="py-2">
-                                <h3 class="text-lg font-bold text-gray-800 text-center">
+                            <div class="lg:py-2">
+                                <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center">
                                     ورود به {{ $item->socialMedia->title }}
                                 </h3>
                                  <div class="mt-3">
@@ -41,11 +41,11 @@
                         @endforeach
                     @endif
                 </div> 
-                 <div class="w-full flex flex-col gap-5" id="siteLinks">
+                 <div class="w-full flex flex-col gap-3 lg:gap-5" id="siteLinks">
                     @if (count($cover->siteLinks))
                         @foreach ($cover->siteLinks as $siteLink)
-                            <div class="py-2">
-                                <h3 class="text-lg font-bold text-gray-800 text-center viewLinkTitle"
+                            <div class="lg:py-2">
+                                <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center viewLinkTitle"
                                     data-view-link-id="{{ $siteLink->id }}">
                                     ورود به {{ $siteLink->title }}
                                 </h3>

@@ -58,8 +58,8 @@ Route::group([
     Route::get("/delete/{user}", "delete")->name('delete');
     Route::get('/compelete', 'compelete_form')->name('compelete_form');
     Route::post('/save', 'save')->name('save');
-    Route::get('/admin/create', 'adminCreate')->name('adminCreate');
-    Route::post('/admin/store', 'adminStore')->name('adminStore')->withoutMiddleware([UserMiddleware::class]);
+    // Route::get('/admin/create', 'adminCreate')->name('adminCreate');
+    // Route::post('/admin/store', 'adminStore')->name('adminStore')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/setting', 'setting')->name('setting');
     Route::post('/set', 'set')->name('set');
     route::post('/set_order', 'set_order')->name('set_order');

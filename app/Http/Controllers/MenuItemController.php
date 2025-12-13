@@ -43,7 +43,8 @@ class MenuItemController extends Controller
             'customizable'=>$customizable,
             'image'=>$path,
             'parent_id'=>$parent_id,
-            'menu_category_id'=>$request->menu_categories_id
+            'menu_category_id'=>$request->menu_categories_id,
+            'duration'=>$request->duration
         ]);
 
         if(isset($request->ingredients)){
@@ -86,6 +87,7 @@ class MenuItemController extends Controller
         $item->description = $request->description;
         $item->customizable = $request->customizable ? $request->customizable : 0;
         $item->price = $request->price;
+        $item->duration = $request->duration;
         $imagePath = null;
         if (isset($request->discount)) {
             $item->discount = $request->discount;
