@@ -56,13 +56,17 @@ class CustomCategoryController extends Controller
 
         return response()->json($customCategory);
 
-        // return to_route('custmCategory.list', [$request->custom_pro_id]);
     }
 
-    public function delete(customCategory $customCategory)
+    public function delete(request $request)
     {
-        $customCategory->delete();
-        return to_route('custmCategory.list', [$customCategory->custom_products->id]);
+        $category = customCategory::find($request->id);
+        $category->delete();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'دسته‌بندی با موفقیت حذف شد'
+        ]);
     }
 
     public function item_list(customCategory $customCategory)

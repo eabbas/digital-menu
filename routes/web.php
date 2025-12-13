@@ -51,7 +51,7 @@ Route::group([
     Route::get("/logout", "logout")->name('logout');
     Route::get("/", "index")->name('list');
     Route::get("/panel/{user}", "panel")->name('panel');
-    Route::get('/profile/{user}', 'profile')->name('profile');
+    Route::get('/profile/{user?}', 'profile')->name('profile');
     Route::get('/show/{user}', 'show')->name('show');
     Route::get("/edit/{user}", "edit")->name('edit');
     Route::post("/update", "update")->name('update');
@@ -446,9 +446,9 @@ Route::group([
     Route::post('/store', 'store')->name('store');
     Route::get('/materialList/{customProduct?}', 'index')->name('list');
     Route::get('/show/{cpm}', 'show')->name('single');
-    Route::get('/edit/{cpm}', 'edit')->name('edit');
+    Route::post('/edit', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
-    Route::get('/delete/{cpm}', 'delete')->name('delete');
+    Route::post('/delete', 'delete')->name('delete');
 });
 Route::group([
     'prefix' => 'customCategories',
@@ -462,7 +462,7 @@ Route::group([
     Route::get('/show/{customCategory}', 'show')->name('single');
     Route::post('/edit/{customCategory?}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
-    Route::get('/delete/{customCategory?}', 'delete')->name('delete');
+    Route::post('/delete', 'delete')->name('delete');
 });
 
 Route::group([

@@ -33,9 +33,9 @@
             </div>
             <div class="h-1 w-24 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full"></div>
         </div>
-            <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300" id="createCPform">
+            <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCPform">
                 <div class="w-[calc(100%-265px)] float-end flex justify-center items-center bg-white h-dvh relative" id="closeCreateCPform">
-                    <span class="cursor-pointer absolute top-4 right-4 text-4xl text-gray-500 hover:text-gray-700 transition-colors duration-200" onclick="closeCreateCPform()">×</span>
+                    <span class="cursor-pointer absolute top-4 right-4 text-4xl text-gray-500 hover:text-gray-700 transition-colors duration-200" onclick="closeForm()">×</span>
                     <form action="{{ route('cp.store') }}" method="post" enctype="multipart/form-data" class="space-y-6 w-full max-w-2xl">
                         @csrf
                         <div class="flex flex-col md:flex-row gap-6 mt-10">
@@ -364,6 +364,7 @@
         </form>
         </div>
     </div>
+
     <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCPVform">
         <div class="w-[calc(100%-265px)] float-end flex justify-center items-center bg-white h-dvh relative" id="closeCreateCPVform">
         <span class="cursor-pointer absolute top-4 right-4 text-4xl text-gray-500 hover:text-gray-700 transition-colors duration-200" onclick="closeForm()">×</span>
@@ -403,10 +404,10 @@
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
                     </div>
                     <!-- محصول اصلی -->
-                    {{-- @dd($custom_product->career->id) --}}
+                    {{-- @dd($career->custom_product[0]->id) --}}
                     @if (isset($custom_product))
-                    <input type="hidden" name="custom_product_id" id="custom_product_id_variant" value="{{ $custom_product->id }}">
-                    <input type="hidden" name="career_id" value="{{ $custom_product->career->id }}">
+                    <input type="hidden" name="custom_product_id" id="custom_product_id_variant">
+                    {{-- <input type="hidden" name="career_id" value="{{ $custom_product->career->id }}"> --}}
                     @endif
 
                     <!-- تصویر -->
@@ -652,6 +653,7 @@
     function openCPVform(cpId){
         createCustomVariantform.classList.remove('invisible')
         createCustomVariantform.classList.remove('opacity-0')
+        custom_product_id_variant.value = cpId
     }
     
     function closeForm(){
@@ -737,7 +739,7 @@
                                 
                                 <!-- ایجاد نوع محصول -->
                                 <div class="py-4 flex items-center justify-center">
-                                    <a href="{{ url ('customProductVariants.create/${data}') }}" 
+                                    <div onclick='openCPVform("{{ $custom_product->id }}")'
                                        class="flex flex-col items-center gap-1 text-blue-600 hover:text-blue-700 transition-colors group">
                                         <div class="size-8 rounded-lg bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
                                             <svg class="size-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -745,7 +747,7 @@
                                             </svg>
                                         </div>
                                         <span class="text-xs font-medium mt-1">ایجاد نوع</span>
-                                    </a>
+                                    </div>
                                 </div>
                                 
                                 <!-- لیست انواع محصولات -->
@@ -760,10 +762,10 @@
                                         <span class="text-xs font-medium mt-1">لیست انواع</span>
                                     </a>
                                 </div>
-                                <a href="{{ url('customCategories.create/${data}') }}" 
+                                <div onclick='openCform("{{ $custom_product->id }}")'
                                    class="text-indigo-600 hover:text-indigo-800 text-sm font-medium transition-colors">
                                     ایجاد دسته
-                                </a>
+                                </div>
                                 <a href="{{ url('customProducts.category_list/${data}') }}" 
                                    class="text-indigo-600 hover:text-indigo-800 text-sm font-medium transition-colors">
                                      لیست دسته 
@@ -837,6 +839,7 @@
                 'custom_pro_id' : custom_product_id_variant.value,
             },
             success: function(data){
+                custom_product_id_variant =""
                 cpvTitle.value =""
                 cpvMinAmount.value =""
                 cpvDuration.value =""
