@@ -32,7 +32,7 @@
                             </div>
                  </div>
                         <div class="bg-white divide-y divide-[#f1f1f4]">
-                            @foreach ($ecomm_products as $ecomm_product)
+                            @foreach ($user->ecomm as $ecomm_product)
                                 @if ($ecomm_product)
                                     <div
                                         class="w-full flex flex-row lg:grid lg:grid-cols-6 items-center divide-x divide-[#f1f1f4]">

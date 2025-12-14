@@ -598,26 +598,28 @@
                                                     </div>
                                                 </div>
                                             
-                                             <div class="flex justify-center items-center gap-1 w-full">
-                                              <div
-                                                class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center">
-                                                    <a href="{{ url('ecomm_product/category_product/${category.id}') }}" 
-                                                        class="hover:text-sky-400  text-white">مشاهده محصولات</a>
-                                                </div>
+                                                <div class="flex justify-center items-center gap-1 w-full ">   
+
+                                             
                                               <div
                                                          class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center">
                                                          <a href="{{ url('/ecomm_category/show/${category.id}') }}" 
-                                                             class="hover:text-sky-400   
+                                                             class="hover:text-sky-400  ">مشاهده </a>
+                                                     </div>
+                                              <div
+                                                         class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center">
+                                                         <a href="{{ url('ecomm_product/category_product/${category.id}') }}" 
+                                                             class="hover:text-sky-400  ">مشاهده محصولات</a>
                                                      </div>
                                               <div
                                                          class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center">
                                                          <a href="{{ url('/ecomm_category/edit_ecomm_categories/${category.id}') }}" 
-                                                             class="hover:text-sky-400  text-white">ویرایش</a>
+                                                             class="hover:text-sky-400  ">ویرایش</a>
                                                      </div>
                                               <div
                                                          class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center">
                                                          <a href="{{ url('/ecomm_category/delete/${category.id}') }}" 
-                                                             class="hover:text-sky-400  text-white">حذف</a>
+                                                             class="hover:text-sky-400  ">حذف</a>
                                                      </div>
                                              </div>
                                              </div>
@@ -626,7 +628,6 @@
              
                     mySelect.append(myElement)
 
-                            mySelect.appendChild(myElement)
 
                         }
 

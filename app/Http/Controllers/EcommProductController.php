@@ -35,8 +35,12 @@ class EcommProductController extends Controller
 
     public function index()
     {
-        $ecomm_products = ecomm_product::all();
-        return view('admin.ecomm_products.index', ['ecomm_products' => $ecomm_products]);
+
+        $user=Auth::user();
+        $s=$user->ecomm_categories::with('ecomm_products')->get();
+        dd($s);
+
+        return view('admin.ecomm_products.index', ['user' =>Auth::user()]);
     }
 
     public function show(ecomm_product $ecomm_product)
