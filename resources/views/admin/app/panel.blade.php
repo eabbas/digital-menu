@@ -39,7 +39,7 @@
                         داشبورد
                     </a>
                 </div>
-                <div>
+                <div class="dashboard">
                     <div class="flex justify-between flex-row-reverse">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             class="size-6 fill-white w-[15px]">
@@ -151,8 +151,7 @@
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('covers.social_list') }}" class=" text-white py-1"> لیست صفحه شبکه های اجتماعی</a>
                         </li> --}}
-                        @if(Auth::user()->role[0]->title == 'admin')
-
+                        @if (Auth::user()->role[0]->title == 'admin')
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
                                 <a href="{{ route('cc.create') }}" class="text-white py-1">
@@ -171,7 +170,7 @@
                                     همه کسب و کارها
                                 </a>
                             </li>
-                           
+
                     </ul>
                 </div>
                 <div class="dashboard">
@@ -206,7 +205,7 @@
                             <a href="{{ route('covers.list') }}" class="text-white py-1"> لیست صفحه شبکه های
                                 اجتماعی</a>
                         </li>
-                          {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                        {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('covers.list') }}" class=" text-white py-1"> مشاهده لیست همه شبکه های اجتماعی کاربران</a>
                         </li> --}}
@@ -465,73 +464,247 @@
                                     {{ Auth::user()?->family }}</span>
                             </div>
                         </div>
-                        <div class="pt-2">
-                            <h3 class="text-md font-semibold text-gray-800 mb-1.5">کسب و کار ها</h3>
-                            <ul class="pr-3.5">
-                                <li>
+                        <div class="overflow-y-auto [&::-webkit-scrollbar]:hidden h-[calc(100vh-134px)]">
+                            <div class="pt-2 flex flex-col">
+                                <div>
                                     <a href="{{ route('home') }}" class="block text-gray-700 py-2 text-md">
                                         بازدید از سایت
                                     </a>
-                                </li>
+                                </div>
                                 @if (!Auth::user()->email)
-                                    <li>
+                                    <div>
                                         <a href="{{ route('user.compelete_form') }}"
                                             class="block text-gray-700 py-2 text-md">
                                             تکمیل پروفایل
                                         </a>
-                                    </li>
+                                    </div>
                                 @endif
-                                <li>
+                                <div>
                                     <a href="{{ route('user.setting') }}" class="block text-gray-700 py-2 text-md">
                                         تنظیمات اکانت
                                     </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('career.careers') }}" class="block text-gray-700 py-2 text-md">
-                                        لیست کسب و کار های من
+                                </div>
+                            </div>
+
+
+                            <div class="pt-3">
+                                <h3 class="text-md font-semibold text-gray-800 mb-1.5">فروشگاه</h3>
+                                <ul class="pr-3.5">
+                                    <li>
+                                        <a href="{{ route('ecomm.create') }}"
+                                            class="block text-gray-700 py-2 text-md">
+                                           فروشگاه جدید
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('ecomm.ecomms') }}"
+                                            class="block text-gray-700 py-2 text-md">
+                                           فروشگاه های من
+                                        </a>
+                                    </li>
+
+                                    @if (Auth::user()->role[0]->title == 'admin')
+                                    <li>
+                                        <span class="size-1 rounded-sm"></span>
+                                        <a href="{{ route('ecomm.list') }}"
+                                            class="block text-gray-700 py-2 text-md">
+                                           همه فروشگاه ها
+                                        </a>
+                                    </li>
+                                    @endif
+
+                                    <li>
+                                        <span class="size-1 rounded-sm"></span>
+                                        <a href="{{ route('ecomm_category.index') }}"
+                                            class="block text-gray-700 py-2 text-md">
+                                           دسته ها
+                                        </a>
+                                    </li>
+                                    @if (count(Auth::user()->ecomms))
+                                    <li>
+                                        <span class="size-1 rounded-sm"></span>
+                                        <a href="{{ route('ecomm_category.create') }}"
+                                            class="block text-gray-700 py-2 text-md">
+                                           ایجاد دسته
+                                        </a>
+                                    </li>
+                                    @endif
+                                    <li>
+                                        <span class="size-1 rounded-sm"></span>
+                                        <a href="{{ route('ecomm_product.index') }}"
+                                        class="block text-gray-700 py-2 text-md">
+                                        محصولات
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="{{ route('career.create') }}"
-                                        class="block text-gray-700 py-2 text-md">ایجاد کسب و کار
-                                        جدید</a>
-                                </li>
-
+                                @if (count(Auth::user()->ecomms))
                                 <li>
                                     <span class="size-1 rounded-sm"></span>
-                                    <a href="{{ route('career.list') }}" class="block text-gray-700 py-2 text-md">
-                                        مشاهده همه کسب و کار ها
+                                    <a href="{{ route('ecomm_product.create') }}"
+                                        class="block text-gray-700 py-2 text-md">
+                                      ایجاد محصول
                                     </a>
                                 </li>
-
-                                @if (Auth::user()->role[0]->title == 'admin')
-                                    <li>
-                                        <span class="size-1 rounded-sm"></span>
-                                        <a href="{{ route('user.list') }}" class="block text-gray-700 py-2 text-md">
-                                            مشاهده همه کاربران
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <span class="size-1 rounded-sm"></span>
-                                        <a href="{{ route('cc.create') }}" class="block text-gray-700 py-2 text-md">
-                                            ایجاد دسته کسب و کار
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="size-1 rounded-sm"></span>
-                                        <a href="{{ route('cc.list') }}" class="block text-gray-700 py-2 text-md">
-                                            همه دسته های کسب و کارها
-                                        </a>
-                                    </li>
                                 @endif
-                            </ul>
+                                </ul>
+                            </div>
+
+
+                            <div class="pt-3">
+                                <h3 class="text-md font-semibold text-gray-800 mb-1.5">کسب و کار ها</h3>
+                                <ul class="pr-3.5">
+                                    <li>
+                                        <a href="{{ route('career.careers') }}"
+                                            class="block text-gray-700 py-2 text-md">
+                                            لیست کسب و کار های من
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('career.create') }}"
+                                            class="block text-gray-700 py-2 text-md">ایجاد کسب و کار
+                                            جدید</a>
+                                    </li>
+
+                                    <li>
+                                        <span class="size-1 rounded-sm"></span>
+                                        <a href="{{ route('career.list') }}"
+                                            class="block text-gray-700 py-2 text-md">
+                                            مشاهده همه کسب و کار ها
+                                        </a>
+                                    </li>
+
+                                    @if (Auth::user()->role[0]->title == 'admin')
+                                        <li>
+                                            <span class="size-1 rounded-sm"></span>
+                                            <a href="{{ route('cc.create') }}"
+                                                class="block text-gray-700 py-2 text-md">
+                                                ایجاد دسته کسب و کار
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <span class="size-1 rounded-sm"></span>
+                                            <a href="{{ route('cc.list') }}"
+                                                class="block text-gray-700 py-2 text-md">
+                                                همه دسته های کسب و کارها
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+                            <div class="pt-3">
+                                <h3 class="text-md font-semibold text-gray-800 mb-1.5">شبکه های اجتماعی</h3>
+                                <ul class="pr-3.5">
+                                    <li>
+                                        <a href="{{ route('covers.create') }}"
+                                            class="block text-gray-700 py-2 text-md">
+                                            ایجاد صفحه شبکه اجتماعی
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('covers.list') }}"
+                                            class="block text-gray-700 py-2 text-md">
+                                            لیست صفحه شبکه های اجتماعی
+                                        </a>
+                                    </li>
+                                    @if (Auth::user()->role[0]->title == 'admin')
+                                        <li>
+                                            <span class="size-1 rounded-sm"></span>
+                                            <a href="{{ route('socialMedia.create') }}"
+                                                class="block text-gray-700 py-2 text-md">
+                                                ایجاد شبکه اجتماعی
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <span class="size-1 rounded-sm"></span>
+                                            <a href="{{ route('socialMedia.list') }}"
+                                                class="block text-gray-700 py-2 text-md">
+                                                لیست شبکه های اجتماعی
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+                            @if (Auth::user()->role[0]->title == 'admin')
+                                <div class="pt-3">
+                                    <h3 class="text-md font-semibold text-gray-800 mb-1.5">کاربران</h3>
+                                    <ul class="pr-3.5">
+                                        <li>
+                                            <a href="{{ route('user.list') }}"
+                                                class="block text-gray-700 py-2 text-md">
+                                                مشاهده همه کاربران
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endif
+
+                            @if (Auth::user()->role[0]->title == 'admin')
+                                <div class="pt-3">
+                                    <h3 class="text-md font-semibold text-gray-800 mb-1.5">اسلایدر</h3>
+                                    <ul class="pr-3.5">
+                                        <li>
+                                            <a href="{{ route('slider.create') }}"
+                                                class="block text-gray-700 py-2 text-md">
+                                               ایجاد اسلایدر
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('slider.list') }}"
+                                                class="block text-gray-700 py-2 text-md">
+                                               لیست اسلایدر ها
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endif
+
+                            {{-- @if (Auth::user()->role[0]->title == 'admin') --}}
+                                <div class="pt-3">
+                                    <h3 class="text-md font-semibold text-gray-800 mb-1.5">
+                                        محصولات شخصی سازی شده
+                                    </h3>
+                                    <ul class="pr-3.5">
+                                        <li>
+                                            <a href="{{ route('cp.list') }} }}"
+                                                class="block text-gray-700 py-2 text-md">
+                                              همه محصولات
+                                            </a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            {{-- @endif --}}
+                            @if (Auth::user()->role[0]->title == 'admin')
+                                <div class="pt-3">
+                                    <h3 class="text-md font-semibold text-gray-800 mb-1.5">
+                                       درباره ما
+                                    </h3>
+                                    <ul class="pr-3.5">
+                                        <li>
+                                            <a href="{{ route('aboutUs.create_edit') }} }}"
+                                                class="block text-gray-700 py-2 text-md">
+                                             ایجاد درباره  ما
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('aboutUs.list') }} }}"
+                                                class="block text-gray-700 py-2 text-md">
+                                             لیست درباره  ما
+                                            </a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            @endif
+
+
+
                         </div>
-                    </div>
-                    <div class="mb-3">
-                        <a href="{{ route('user.logout') }}"
-                            class="block text-rose-700 py-1 font-medium text-sm text-center">خروج از حساب
-                            کاربری</a>
+                        <div class="mb-3 sticky bottom-0 right-0 py-3 bg-white border-t border-gray-300">
+                            <a href="{{ route('user.logout') }}"
+                                class="block text-rose-700 py-1 font-medium text-sm text-center">خروج از حساب
+                                کاربری</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -568,21 +741,21 @@
                     let mySelect = document.getElementById("ecomCategories")
                     mySelect.innerHTML = ``
                     categories.forEach((category) => {
-                        let myOption=document.createElement('option')
+                        let myOption = document.createElement('option')
                         if (type == "product" || type == "category" || type == "edit") {
-                            myOption.innerHTML=`${category.title}`
-                            myOption.value=`${category.id}`
+                            myOption.innerHTML = `${category.title}`
+                            myOption.value = `${category.id}`
                             mySelect.append(myOption)
                         }
- 
-                        if(type=="filter"){
+
+                        if (type == "filter") {
                             let myElement = document.createElement('div')
                             let categoryId = category.id
                             myOption.innerHTML = `${category.title}`
                             myOption.value = `${category.id}`
                             mySelect.append(myOption)
                         }
-                                
+
                         if (type == "filter") {
                             let myElement = document.createElement('div')
                             let categoryId = category.id
@@ -630,14 +803,14 @@
                                              </div>
                                              </div>`
 
-             
-                    mySelect.append(myElement)
+
+                            mySelect.append(myElement)
 
                             mySelect.appendChild(myElement)
 
                         }
 
-                        
+
                     })
                     if (type == "category") {
                         let myOption2 = document.createElement('option')
