@@ -49,7 +49,7 @@
                                     class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
                                     <span class="block w-20 lg:w-full">{{ $ecomm->title }}</span>
                                 </div>
-                                <div class="col-span-4 grid grid-cols-3 divide-x divide-[#f1f1f4] items-center">
+                                <div class="col-span-4 grid grid-cols-4 divide-x divide-[#f1f1f4] items-center">
                                     <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3">
                                         <li class="flex justify-center">
                                             <a href="{{ route('ecomm.single', [$ecomm]) }}"
@@ -98,7 +98,12 @@
                                             <a href="{{ route('menuCat.create', [$ecomm]) }}"
                                                 class="transition-all duration-150 hover:text-sky-400">ایجاد دسته منو</a>
                                         </div>
-                                    @endif
+                                        @endif
+                                        <div
+                                            class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
+                                            <a href="{{ route('ecomm_category.create') }}"
+                                                class="transition-all duration-150 hover:text-sky-400">ایجاد دسته </a>
+                                        </div>
                                 </div>
                             </div>
 

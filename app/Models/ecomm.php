@@ -23,9 +23,9 @@ class ecomm extends Model
     return $this->hasMany(ecomm_product::class)->chaperOne();
   }
  
-//   public function menu()
-//   {
-//     return $this->hasOne(menu::class)->chaperOne();
-//   }
+  public function ecomm_qrCode()
+  {
+    return $this->hasOne(ecomm_qrCode::class);
+  }
  
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ecomm;
 use App\Models\ecomm_category;
 use App\Models\role;
+use App\Models\ecomm_qrCode;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,6 +51,17 @@ class EcommController extends Controller
             'description' => $request->description,
             'banner' => $bannerPath
         ]);
+
+         $random = Str::random(10);
+            $link = "famenu.ir/qrcode/$ecomm_id/" . $random;
+            $qr_svg = QrCode::size(100)->generate($link);
+            $fileName = 'qrcodes/' . $ecomm_id . '_' . $random . '.svg';
+            Storage::disk('public')->put($fileName, $qr_svg);
+            ecomm_qrCode::create([
+                'qr_path' => $fileName,
+                'ecomm_id' => $ecomm_id,
+                'slug' => 'qrcode/' . $ecomm_id . '/' . $random,
+                'user_id'=> Auth::id()]);
         ecomm_category::create(['title'=>'بدون دسته بندی','description'=>'محصولات فاقد دسته بندی','show_in_home'=>0,'ecomm_id'=>$ecomm_id,'parent_id'=>0]);
         
         return to_route('ecomm.ecomms', [Auth::user()]);
