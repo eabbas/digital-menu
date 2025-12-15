@@ -13,7 +13,6 @@
 
         <div class="flex flex-col border-none rounded-[7px]">
             <div class="block lg:flex flex-row justify-between gap-8">
-                <div class="flex flex-col xm:flex-row lg:flex-row gap-5 py-3">
                     @if (!$ecomm->logo)
                         <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0" src="{{ asset('assets/img/user.png') }}"
                             alt="ecomm logo" />
@@ -21,7 +20,8 @@
                         <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0" src="{{ asset('storage/' . $ecomm->logo) }}"
                             alt="ecomm logo" />
                     @endif
-                </div>
+                            <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0" src="{{ asset('/storage/'.$ecomm->ecomm_qrCode->qr_path) }}" alt="">
+
             </div>
         </div>
         <div class="pt-3 mt-4 lg:mt-8">

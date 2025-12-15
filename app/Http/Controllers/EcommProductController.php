@@ -37,8 +37,8 @@ class EcommProductController extends Controller
     {
 
         $user=Auth::user();
-        $s=$user->ecomm_categories::with('ecomm_products')->get();
-        dd($s);
+        $ecomm_categories=$user->ecomm_categories;
+       
 
         return view('admin.ecomm_products.index', ['user' =>Auth::user()]);
     }

@@ -10,7 +10,10 @@
             <div class="flex flex-col gap-5">
                 <div class="overflow-x-auto shadow-md" style="scrollbar-width: none;">
                     <div class="min-w-full bg-gray-200">
-                        <div class="w-full flex flex-row lg:grid lg:grid-cols-6 items-center divide-x divide-[#f1f1f4]">
+                        <div class="w-full flex flex-row lg:grid lg:grid-cols-7 items-center divide-x divide-[#f1f1f4]">
+                            <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
+                                  <span class="block w-20 lg:w-full">عنوان دسته</span>
+                            </div>
                             <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
                                   <span class="block w-20 lg:w-full">عنوان</span>
                             </div>
@@ -32,10 +35,15 @@
                             </div>
                  </div>
                         <div class="bg-white divide-y divide-[#f1f1f4]">
-                            @foreach ($user->ecomm as $ecomm_product)
+                            @foreach ($user->ecomm_categories as $ecomm_category)
+                                @foreach($ecomm_category->ecomm_products as $ecomm_product)
                                 @if ($ecomm_product)
                                     <div
-                                        class="w-full flex flex-row lg:grid lg:grid-cols-6 items-center divide-x divide-[#f1f1f4]">
+                                        class="w-full flex flex-row lg:grid lg:grid-cols-7 items-center divide-x divide-[#f1f1f4]">
+                                        <div
+                                            class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
+                                            <span class="block w-20 lg:w-full">{{ $ecomm_category->title }}</span>
+                                        </div>
                                         <div
                                             class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
                                             <span class="block w-20 lg:w-full">{{ $ecomm_product->title }}</span>
@@ -101,6 +109,7 @@
                                         </div>
                                     </div>
                                 @endif
+                            @endforeach
                             @endforeach
                         </div>
                     </div>

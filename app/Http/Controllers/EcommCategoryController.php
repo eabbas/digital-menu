@@ -67,7 +67,10 @@ class EcommCategoryController extends Controller
     {
         $ecomm_category = ecomm_category::find($request->id);
         if ($request->image_path) {
-            storage::disk('public')->delete($ecomm_category->image_path);
+            if($ecomm_category->image_path){
+
+                storage::disk('public')->delete($ecomm_category->image_path);
+            }
             $name = $request->image_path->getClientOriginalName();
             $path = $request->image_path->storeAs('files', $name, 'public');
             $ecomm_category->image_path = $path;
