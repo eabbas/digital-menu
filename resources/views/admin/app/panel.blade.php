@@ -246,6 +246,12 @@
                                 مشاهده همه کاربران
                             </a>
                         </li>
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('user.create_user') }}" class="text-white py-1">
+                               ایجاد کاربر جدید
+                            </a>
+                        </li>
 
                     </ul>
                 </div>
@@ -632,6 +638,12 @@
                                             <a href="{{ route('user.list') }}"
                                                 class="block text-gray-700 py-2 text-md">
                                                 مشاهده همه کاربران
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('user.create_user') }}"
+                                                class="block text-gray-700 py-2 text-md">
+                                               ایجاد کاربر جدید
                                             </a>
                                         </li>
                                     </ul>

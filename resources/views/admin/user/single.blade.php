@@ -1,16 +1,19 @@
     @extends('admin.app.panel')
-    @section('title', 'پروفایل کاربر')
+    @section('title')
+        {{ $user->name }} {{ $user->family }}
+    @endsection
     @section('content')
         <div class="w-full">
             <div class="pb-5 w-full">
-                <h1 class="text-xl text-center lg:text-start">کاربر {{ $user->name }}{{ $user->family }}</h1>
+                <h1 class="text-xl text-center lg:text-start">اکانت من</h1>
                 <div
                     class="flex flex-row justify-center lg:justify-start items-center gap-2 text-[#99A1B7] text-[11px] lg:text-sm">
                     {{-- <a href="{{ route('home') }}" class="p-2">خانه</a>
                     <span>/</span> --}}
-                    <a href="{{ route('user.profile', [$user]) }}">داشبورد</a>
+                    <a href="{{ route('user.profile', [$user]) }}">اکانت من</a>
                 </div>
             </div>
+
             <div class="flex flex-col border-none rounded-[7px]">
                 <div class="block lg:flex flex-row justify-between gap-8">
                     <div class="flex flex-col xm:flex-row lg:flex-row gap-5 py-3 rounded-full">
@@ -46,7 +49,7 @@
                                 </div>
                                 <div
                                     class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px]">
-                                    <span class="font-bold text-blue-500">{{ count($user->qr_codes) }}</span>
+                                    <span class="font-bold text-blue-500">{{  count($user->qr_codes)  }}</span>
                                     <span class="text-[#4B5675]"> تعداد QR کد ها </span>
                                 </div>
                                 <div
