@@ -2,8 +2,11 @@ let menuCat = document.getElementById('menuCat')
 let num = 1
 function newMenuCat(){
     let div = document.createElement('div')
-    div.classList = 'w-full flex flex-row gap-3 my-4'
+    div.classList = 'w-full flex lg:flex-row flex-col gap-3 my-4 border-t border-gray-300 lg:border-none'
     let element = `
+            <div class="lg:hidden flex flex-row justify-end items-end pt-4">
+                <button type="button" onclick="removeCat(this)" class="p-1 rounded-md bg-red-300 hover:bg-red-500 text-sm cursor-pointer hover:text-white">حذف</button>
+            </div>
             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                 <label class="w-30 text-sm mb-1 mt-2.5 flex flex-row">
                     <span>عنوان دسته:</span>
@@ -35,7 +38,7 @@ function newMenuCat(){
                         name="menuCat[${num}][image]" title="تصویر دسته">
                 </div>
             </div>
-            <div class="flex items-end pb-4">
+            <div class="hidden lg:flex items-end pb-4">
                 <button type="button" onclick="removeCat(this)" class="p-1 rounded-md bg-red-300 hover:bg-red-500 text-sm cursor-pointer hover:text-white">حذف</button>
             </div>
     `

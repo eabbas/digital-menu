@@ -54,7 +54,9 @@ class CustomProductVariantController extends Controller
 
     public function update(Request $request)
     {
-        $cpv = custom_product_variant::find($request->cpvId);
+        $cpv = custom_product_variant::find($request->id);
+      
+        
         $cpv->title = $request->title;
         $cpv->description = $request->description;
         $cpv->min_amount_unit = $request->min_amount_unit;
@@ -70,7 +72,6 @@ class CustomProductVariantController extends Controller
                 //     $path = $request->file('image')->storeAs('images', $fullName, 'public');
         //     $cpv->image = $path;
         // }
-        
         $cpv->save();
         return response()->json($cpv);
 

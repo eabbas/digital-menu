@@ -20,38 +20,27 @@ class CustomProductMaterialController extends Controller
     public function store(Request $request)
     {
         $path = null;
-        if (isset($request->image)) {
-            $name = $request->image->getClientOriginalName();
-            $fullName = time() . '_' . $name;
-            $path = $request->file('image')->storeAs('images', $fullName, 'public');
+        // if (isset($request->image)) {
+            //     $name = $request->image->getClientOriginalName();
+        //     $fullName = time() . '_' . $name;
+        //     $path = $request->file('image')->storeAs('images', $fullName, 'public');
+        // }
+        
+        $cpm_id = custom_product_material::insertGetId([
+            'title' => $request->title,
+            'description' => $request->description,
+            'price_per_unit' => $request->price_per_unit,
+            'order' => $request->order,
+            'max_unit_amount' => $request->max_unit_amount,
+            'category_id' => $request->category_id,
+            'custom_product_id' => $request->custom_pro_id,
+            'required' => $request->required ? $request->required : 0 , 
+            'image' => $path
+        ]);
+        $data = custom_product_material::find($cpm_id);
+        return response()->json($data);
         }
-        if ($request->required) {
-            custom_product_material::create([
-                'title' => $request->title,
-                'description' => $request->description,
-                'price_per_unit' => $request->price_per_unit,
-                'order' => $request->order,
-                'max_unit_amount' => $request->max_unit_amount,
-                'category_id' => $request->category_id,
-                'custom_product_id' => $request->custom_pro_id,
-                'required' => $request->required,
-                'image' => $path
-            ]);
-        } else {
-            custom_product_material::create([
-                'title' => $request->title,
-                'description' => $request->description,
-                'price_per_unit' => $request->price_per_unit,
-                'order' => $request->order,
-                'max_unit_amount' => $request->max_unit_amount,
-                'custom_product_id' => $request->custom_pro_id,
-                'category_id' => $request->category_id,
-                'required' => 0,
-                'image' => $path
-            ]);
-        }
-        return to_route('cpm.list', [$request->custom_pro_id]);
-    }
+    
 
     public function index(custom_product $customProduct)
     {
@@ -64,15 +53,15 @@ class CustomProductMaterialController extends Controller
         return view('admin.customProductMaterials.single', ['cpm' => $cpm, 'cpmWithCustomproduct' => $cpmWithCustomproduct]);
     }
 
-    public function edit(custom_product_material $cpm)
+    public function edit(Request $request)
     {
-        $customProducts = custom_product::all();
-        $customCategories = customCategory::all();
-        return view('admin.customProductMaterials.edit', ['cpm' => $cpm, 'customProducts' => $customProducts, 'customCategories' => $customCategories]);
+        $cpm = custom_product_material::find($request->id);
+        return response()->json($cpm);
     }
 
     public function update(Request $request)
     {
+        return response()->json($request->all());
         $path = null;
 
         $customProductMaterial = custom_product_material::find($request->id);
@@ -83,29 +72,31 @@ class CustomProductMaterialController extends Controller
         $customProductMaterial->order = $request->order;
         $customProductMaterial->max_unit_amount = $request->max_unit_amount;
         $customProductMaterial->custom_product_id = $request->custom_product_id;
-        $customProductMaterial->category_id = $request->custom_category_id;
+        $customProductMaterial->category_id = $request->category_id;
 
-        if (isset($request->image)) {
-            if ($customProductMaterial->image) {
-                Storage::disk('public')->delete($customProductMaterial->image);
-            }
-            $name = $request->image->getClientOriginalName();
-            $fullName = time() . '_' . $name;
-            $path = $request->file('image')->storeAs('images', $fullName, 'public');
-        }
+        // if (isset($request->image)) {
+        //     if ($customProductMaterial->image) {
+        //         Storage::disk('public')->delete($customProductMaterial->image);
+        //     }
+        //     $name = $request->image->getClientOriginalName();
+        //     $fullName = time() . '_' . $name;
+        //     $path = $request->file('image')->storeAs('images', $fullName, 'public');
+        // }
         $customProductMaterial->image = $path;
         $customProductMaterial->save();
+
 
         return to_route('cpm.list', [$request->custom_product_id]);
         // return to_route('cpm.list');
     }
 
-    public function delete(custom_product_material $cpm)
+    public function delete(Request $request)
     {
+        $cpm = custom_product_material::find($request->id);
         if ($cpm->image) {
             Storage::disk('public')->delete($cpm->image);
         }
         $cpm->delete();
-        return to_route('cpm.list', [$cpm->custom_product->id]);
+        return response()->json('ok');
     }
 }

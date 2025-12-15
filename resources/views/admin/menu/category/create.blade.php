@@ -9,7 +9,7 @@
                     <div class="text-center mb-4">
                         
                         <div id="menuCat">
-                            <div class="w-full flex flex-row gap-3 my-4">
+                            <div class="w-full flex flex-col lg:flex-row gap-1.5 lg:gap-3 my-4">
                                 <input type="hidden" name="menu_id" value="{{ $menu->id }}">
                                 <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                     <label class="w-30 text-sm mb-1 mt-2.5 flex flex-row">

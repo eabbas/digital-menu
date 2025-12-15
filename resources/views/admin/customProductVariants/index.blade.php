@@ -19,13 +19,14 @@
                         </span> --}}
                     </div>
                 </div>
-                <a href="{{ route('cpv.create', [$customProduct]) }}" 
+                {{-- href="{{ route('cpv.create', [$customProduct]) }}"  --}}
+                <div onclick='openCPVform("{{ $customProduct->id }}")'
                    class="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors text-sm">
                     <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                     </svg>
                     <span>نوع جدید</span>
-                </a>
+                </div>
             </div>
         </div>
 
@@ -45,9 +46,9 @@
             </div>
 
             <!-- Table Content -->
-            <div class="divide-y divide-gray-100">
+            <div class="divide-y divide-gray-100" id="custom_product_section">
                 @foreach($customProduct->custom_product_variants as $index => $cpVariant)
-                <div class="grid grid-cols-12 items-center hover:bg-gray-50 transition-colors newParameters" data-cp-id="{{ $customProduct->id }}">
+                <div class="grid grid-cols-12 items-center hover:bg-gray-50 transition-colors newParameters" data-cp-id="{{ $cpVariant->id }}">
                     <!-- نام نوع -->
                     <div class="px-4 py-3 text-right">
                         <span class="text-sm text-gray-800 font-medium">{{ $cpVariant->title }}</span>
@@ -126,6 +127,102 @@
             </div>
         </div>
 
+
+
+
+          <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCPVform">
+        <div class="w-[calc(100%-265px)] float-end flex justify-center items-center bg-white h-dvh relative" id="closeCreateCPVform">
+        <span class="cursor-pointer absolute top-4 right-4 text-4xl text-gray-500 hover:text-gray-700 transition-colors duration-200" onclick="closeForm()">×</span>
+            <form action="{{ route('cpv.store') }}" method="post" enctype="multipart/form-data" class="space-y-6">
+                @csrf
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+                    <!-- عنوان -->
+                    <div>
+                        <label for="title" class="block text-sm font-medium text-gray-700">
+                            عنوان <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" 
+                            name="title" 
+                            id="titleCPV"
+                            required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                    </div>
+                    <!-- حداقل واحد مقدار -->
+                    <div>
+                        <label for="min_amount_unit" class="block text-sm font-medium text-gray-700 mb-2">
+                            حداقل واحد مقدار
+                        </label>
+                        <input type="number" 
+                            name="min_amount_unit" 
+                            id="min_amount_unit_cpv"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                    </div>
+                    <!-- مدت زمان -->
+                    <div>
+                        <label for="duration" class="block text-sm font-medium text-gray-700 mb-2">
+                            مدت زمان آماده سازی (دقیقه)
+                        </label>
+                        <input type="number" 
+                            name="duration" 
+                            id="durationCPV"
+                            min="1"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                    </div>
+                    <!-- محصول اصلی -->
+                    {{-- @dd($custom_product->career->id) --}}
+                    @if (isset($customProduct))
+                    <input type="hidden" name="custom_product_id" id="custom_product_id_variant" value="{{ $customProduct->id }}">
+                    <input type="hidden" name="career_id" value="{{ $customProduct->career->id }}">
+                    @endif
+
+                    <!-- تصویر -->
+                    {{-- <div class="md:col-span-2">
+                        <label for="image" class="block text-sm font-medium text-gray-700 mb-2">
+                            تصویر
+                        </label>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-1">
+                                <input type="file" 
+                                    name="image" 
+                                    id="image"
+                                    accept="image/*"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                            </div>
+                            <div class="image-preview hidden">
+                                <img id="preview" class="w-20 h-20 object-cover rounded-lg border">
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">فرمت‌های مجاز: JPG, PNG, GIF. حداکثر سایز: 2MB</p>
+                    </div> --}}
+
+                    <!-- توضیحات -->
+                    <div class="md:col-span-2">
+                        <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
+                            توضیحات
+                        </label>
+                        <textarea name="description" 
+                                id="descriptionCPV"
+                                rows="4"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"></textarea>
+                    </div>
+                </div>
+
+                <!-- دکمه‌های فرم -->
+                <div class="flex justify-end space-x-4 pt-4 border-t">
+                    <button type="submit" onclick="cpvStore(event)"
+                    class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200 flex items-center">
+                        ثبت نوع محصول
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+        
         <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="editCPVform">
             <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative bg-white" id="closeEditCform">
                 <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeForm()">
@@ -138,8 +235,7 @@
                     @csrf
             
                     {{-- @dd($cpVariant->title)/ --}}
-                    <input type="hidden" name="cpvId" value="{{$cpVariant->id}}">
-                    <input type="hidden" name="id" id="custom_pro_id_cpv_edit" value="{{$cpVariant->custom_product->id}}">
+                    <input type="hidden" name="cpvId" id="cpvId">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 lg:gap-4">
                         <div class="w-full flex flex-col">
                             <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
@@ -213,12 +309,20 @@
     <script>
 
     let cpvEdit = document.getElementById('editCPVform')
-    let cpvproId = document.getElementById('custom_pro_id_cpv_edit')
+    // let cpvproId = document.getElementById('custom_pro_id_cpv_edit')
     let cpvEdittitle = document.getElementById('titleCpvedit')
     let cpvDescription = document.getElementById('descriptionCPVedit')
     let cpvMinamountunit = document.getElementById('min_amount_unit_cpv_edit')
     let cpvDuration = document.getElementById('curationCPVedit')
-    
+    let createCustomVariantform = document.getElementById('createCPVform')
+
+    let titleCPV = document.getElementById('titleCPV')
+    let min_amount_unit_cpv = document.getElementById('min_amount_unit_cpv')
+    let durationCPV = document.getElementById('durationCPV')
+    let custom_product_id_variant = document.getElementById('custom_product_id_variant')
+    let descriptionCPV = document.getElementById('descriptionCPV')
+
+    let cpvId = document.getElementById('cpvId')
     let forms = document.querySelectorAll(".form")
 
      function closeForm(){
@@ -228,6 +332,115 @@
         })
     }
 
+
+    function openCPVform(cpId){
+        createCustomVariantform.classList.remove('invisible')
+        createCustomVariantform.classList.remove('opacity-0')
+    }
+    
+
+    function cpvStore(ev){
+        ev.preventDefault()
+        $.ajaxSetup({
+            headers : {
+                'X-CSRF-TOKEN' : "{{ csrf_token() }}"
+            }
+        })
+        $.ajax({
+            url : "{{ route('cpv.store') }}",
+            type : "POST",
+            dataType : "json",
+            data : {
+                'title' : titleCPV.value,
+                'min_amount_unit' : min_amount_unit_cpv.value,
+                'duration' : durationCPV.value,
+                'description' : descriptionCPV.value,
+                'custom_pro_id' : custom_product_id_variant.value,
+            },
+            success: function(data){
+                titleCPV.value =""
+                min_amount_unit_cpv.value =""
+                durationCPV.value =""
+                descriptionCPV.value =""
+                let div = document.createElement('div')
+
+                let element = `
+                    <div class="divide-y divide-gray-100">
+                @foreach($customProduct->custom_product_variants as $index => $cpVariant)
+                <div class="grid grid-cols-12 items-center hover:bg-gray-50 transition-colors newParameters" data-cp-id="${ data.id }}">
+                    <!-- نام نوع -->
+                    <div class="px-4 py-3 text-right">
+                        <span class="text-sm text-gray-800 font-medium">${ data.title }</span>
+                    </div>
+                    
+                    <!-- توضیحات -->
+                    <div class="px-4 py-3 text-right">
+                        <span class="text-sm text-gray-600 line-clamp-1">${ data.description }</span>
+                    </div>
+                    
+                    <!-- حداقل مقدار واحد -->
+                    <div class="px-4 py-3 text-right">
+                        <span class="text-sm text-gray-700">${ data.min_amount_unit }</span>
+                    </div>
+                    
+                    
+                    <!-- زمان -->
+                    <div class="px-4 py-3 text-right">
+                        <span class="text-sm text-gray-600">${ data.duration }</span>
+                    </div>
+                    
+                   
+                    </div>
+                    
+                    <!-- عملیات -->
+                    <div class="px-4 py-3 flex justify-start col-span-4">
+                        <div class="flex items-center justify-end gap-4">
+                          <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3 gap-4">
+                            <li class="flex justify-center">
+                                <a href="{{ route('cpv.single', [$cpVariant]) }}"
+                                    class="w-fit flex flex-row items-center justify-center bg-sky-500 hover:bg-sky-600 p-1 rounded-sm" title="مشاهده">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 576 512">
+                                        <path fill="white" d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="flex justify-center">
+                                {{-- href="{{ route('cpv.edit', [$cpVariant]) }}" --}}
+                                <div onclick='editCPV(this ,"{{ $cpVariant->id }}")'
+                                    class="w-fit flex flex-row items-center justify-center bg-green-500 hover:bg-green-600 p-1 rounded-sm" title="ویرایش">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
+                                        <path fill="white" d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
+                                    </svg>
+                                </div>
+                            </li>
+                            <li class="flex justify-center">
+                                {{--  href="{{ route('cpv.delete', [$cpVariant]) }}"--}}
+                             
+                                <div onclick='deleteCPV(this,"{{ $cpVariant->id }}")'
+                                    class="w-fit flex flex-row items-center justify-center bg-red-500 hover:bg-red-600 p-1 rounded-sm" title="حذف">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
+                                        <path fill="white" d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
+                                    </svg>
+                                </div>
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+         
+            </div>
+                `
+                div.innerHTML = element
+                custom_product_section.appendChild(div)
+                closeForm()
+            },
+            error: function(){
+                alert('خطا در ارسال داده')
+            }
+
+        })
+    }
 
 
     function editCPV(element , id){
@@ -248,11 +461,13 @@
             },
             success: function(data){
                 console.log(data)
-                cpvproId.value = data.id
+                // cpvproId.value = data.id
+                cpvId.value = data.id
                 cpvEdittitle.value = data.title
                 cpvDescription.value = data.description
                 cpvMinamountunit.value = data.min_amount_unit
                 cpvDuration.value = data.duration
+              
             },
             error: function(){
                 alert('خطا در دریافت داده ها')
@@ -272,22 +487,23 @@
             type : "POST" ,
             dataType : "json" ,
             data : {
-                'id': custom_pro_id_cpv_edit.value,
+                'id': cpvId.value,
                 'title' : cpvEdittitle.value,
                 'description' : cpvDescription.value,
                 // 'customProductImage' : customProductImage.value,
                 'min_amount_unit' : cpvMinamountunit.value,
                 'duration' : cpvDuration.value,
+                'custom_product_id': "{{ $customProduct->id }}",
             },
             success: function(data){
-                // newParameters.forEach((element)=>{
-                //     if(element.getAttribute('data-cp-id') == data.id){
-                //         element.children[0].children[0].innerText = data.title 
-                //         element.children[1].children[0].innerText = data.description 
-                //         element.children[1].children[0].innerText = data.description 
-                //         element.children[3].children[0].innerText = data.duration 
-                //     }
-                // })
+                newParameters.forEach((element)=>{
+                    if(element.getAttribute('data-cp-id') == data.id){
+                        element.children[0].children[0].innerText = data.title 
+                        element.children[1].children[0].innerText = data.description 
+                        element.children[1].children[0].innerText = data.description 
+                        element.children[3].children[0].innerText = data.duration 
+                    }
+                })
                 closeForm()
                 console.log(data)
             },
@@ -299,7 +515,7 @@
 
     }
     function deleteCPV(element , cpvId){
-        // let newParameters = document.querySelectorAll('.newParameters')
+        let newParameters = document.querySelectorAll('.newParameters')
         $.ajaxSetup({
             headers : {
                 'X-CSRF-TOKEN' : "{{ csrf_token() }}"
@@ -310,15 +526,16 @@
             type : "POST" ,
             dataType : "json" ,
             data : {
-                'id': id,
+                'id': cpvId,
             },
             success: function(data){
+                console.log(data)
                 let row = element.parentElement.parentElement.parentElement.parentElement.parentElement;
                 if (row) {
                 row.remove();
             }
                 // newParameters.forEach((element)=>{
-                //     if(element.getAttribute('data-cp-id') == id){
+                //     if(element.getAttribute('data-cp-id') == data.id){
                 //         element.remove()
                 //     }
                 // })

@@ -3,17 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\covers;
-use App\Models\user;
 use App\Models\site_link;
 use App\Models\social_address;
-use App\Models\socialMedia;
 use App\Models\social_qr_codes;
+use App\Models\socialMedia;
+use App\Models\user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class CoversController extends Controller
@@ -25,11 +24,20 @@ class CoversController extends Controller
 
     public function store(Request $request)
     {
-        $logoName = $request->logo_path->getClientOriginalName();
-        $logoPath = $request->logo_path->storeAs('logo_cover', $logoName, 'public');
-        $coverName = $request->cover_path->getClientOriginalName();
-        $coverPath = $request->cover_path->storeAs('logo_cover', $coverName, 'public');
-        $cover_id=covers::insertGetId([
+
+        $logoPath = null;
+        $coverPath = null;
+        if (isset($request->logo_path)) {
+            $logoName = $request->logo_path->getClientOriginalName();
+            $fullLogoName = time() . '_' . $logoName;
+            $logoPath = $request->logo_path->storeAs('logo_cover', $fullLogoName, 'public');
+        }
+        if (isset($request->cover_path)) {
+            $coverName = $request->cover_path->getClientOriginalName();
+            $fullCoverName = time() . '_' . $coverName;
+            $coverPath = $request->cover_path->storeAs('logo_cover', $fullCoverName, 'public');
+        }
+        $cover_id = covers::insertGetId([
             'title' => $request->title,
             'subTitle' => $request->subTitle,
             'description' => $request->description,
@@ -37,28 +45,29 @@ class CoversController extends Controller
             'logo_path' => $logoPath,
             'cover_path' => $coverPath,
         ]);
-           $random = Str::random(10);
-            $link = "famenu.ir/qrcode/$cover_id/" . $random;
-            $qr_svg = QrCode::size(100)->generate($link);
-            $fileName = 'qrcodes/' . $cover_id . '_' . $random . '.svg';
-            Storage::disk('public')->put($fileName, $qr_svg);
-            social_qr_codes::create([
-                'qr_path' => $fileName,
-                'covers_id' => $cover_id,
-                'slug' => 'qrcode/' . $cover_id . '/' . $random
-            ]);
+        $random = Str::random(10);
+        $link = "famenu.ir/qrcode/links/$cover_id/" . $random;
+        $qr_svg = QrCode::size(100)->generate($link);
+        $fileName = 'qrcodes/' . $cover_id . '_' . $random . '.svg';
+        Storage::disk('public')->put($fileName, $qr_svg);
+        social_qr_codes::create([
+            'qr_path' => $fileName,
+            'covers_id' => $cover_id,
+            'slug' => 'qrcode/' . $cover_id . '/' . $random
+        ]);
         return to_route('covers.social_list');
     }
 
     public function social_list()
     {
-        $user=Auth::user();
+        $user = Auth::user();
         $user->covers;
-            return view('admin.covers.social_list', ['user' => $user]);
+        return view('admin.covers.social_list', ['user' => $user]);
     }
+
     public function index()
     {
-        $covers=covers::all();
+        $covers = covers::all();
         return view('admin.covers.index', ['covers' => $covers]);
     }
 
@@ -103,8 +112,9 @@ class CoversController extends Controller
         foreach ($site_links as $site_link) {
             $site_link->delete();
         }
+        $covers->social_qr_codes->delete();
         $covers->delete();
-        return to_route('covers.list');
+        return to_route('covers.social_list');
     }
 
     public function single(covers $covers)

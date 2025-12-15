@@ -17,6 +17,8 @@ let siteLinkForm = document.querySelector('.createSiteLink')
 // edit socialmedia div
 let editSocialM = document.querySelector('.editsocialMediaForm')
 
+//qrcode
+let qrcode=document.getElementById('qrcode_card')
 
 function addBlock(state) {
     if (state == 'open') {
@@ -43,7 +45,7 @@ function addSocialMedia() {
     socialMediaForm.classList.remove('opacity-0')
     socialMediaForm.classList.remove('top-full')
     socialMediaForm.classList.add('top-0')
-    socialMediaForm.classList.add('-translate-y-1/7')
+    socialMediaForm.classList.add('lg:-translate-y-1/7')
 }
 
 function addLink() {
@@ -55,7 +57,7 @@ function addLink() {
     siteLinkForm.classList.remove('opacity-0')
     siteLinkForm.classList.remove('top-full')
     siteLinkForm.classList.add('top-0')
-    siteLinkForm.classList.add('-translate-y-1/7')
+    siteLinkForm.classList.add('lg:-translate-y-1/7')
 }
 
 
@@ -66,7 +68,7 @@ function closeForm(){
     forms.forEach((form)=>{
         form.classList.add('invisible')
         form.classList.add('opacity-0')
-        form.classList.remove('-translate-y-1/7')
+        form.classList.remove('lg:-translate-y-1/7')
     })
     editSMF.classList.remove('max-h-[500px]')
     editSMF.classList.add('max-h-0')
@@ -99,3 +101,14 @@ function openDropdown(page){
         }
     }
 }
+function qrCard(state){
+    if (state == 'open') {
+       qrcode.classList.remove('invisible')
+       qrcode.classList.remove('opacity-0')
+    }
+    if (state == 'close') {
+        qrcode.classList.add('invisible')
+       qrcode.classList.add('opacity-0')
+    }
+    }
+

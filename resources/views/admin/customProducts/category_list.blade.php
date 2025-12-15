@@ -1,6 +1,7 @@
 @extends('admin.app.panel')
 @section('title', 'دسته‌بندی‌های محصول')
 @section('content')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <div class="w-full min-h-screen pb-10 pt-6 bg-gray-50">
     <div class="w-11/12 mx-auto">
@@ -43,7 +44,7 @@
                 </div>
             </div>
             <!-- Table Rows -->
-            <div class="divide-y divide-gray-100">
+            <div class="divide-y divide-gray-100" id="custom_category_section">
                 @foreach($custom_product->customCategories as $category)
                     {{-- @if($custom_product_id == $category->custom_pro_id) --}}
                 <div class="grid grid-cols-12 gap-4 px-6 py-4 hover:bg-gray-50/50 transition-colors newParameters" data-cp-id="{{ $category->id }}">
@@ -88,12 +89,12 @@
                                class="text-green-600 hover:text-green-800 text-xs font-medium transition-colors">
                                 ویرایش
                             </div>
-                            <a href="{{ route('custmCategory.delete', [$category]) }}" 
+                            <a onclick='deleteC(this,"{{ $category->id }}")'
                                class="text-red-600 hover:text-red-800 text-xs font-medium transition-colors">
                                 حذف
                             </a>
                             {{-- href="{{ route('cpm.create' , [$category]) }}" --}}
-                            <div onclick='deleteC(this,"{{ $category->id }}")'
+                            <div onclick='openCPMform("{{ $category->id }}")'
                             class="inline-flex items-center justify-center gap-2 text-indigo-500  py-2.5 rounded-lg text-sm transition-colors">
                                 <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
@@ -182,6 +183,114 @@
                 </div>
             </form>
         </div>
+    </div> 
+
+     <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCPMform">
+        <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative bg-white" id="closeEditCform">
+            <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeForm()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
+                    <path fill="gray" d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
+                </svg>
+            </div>
+            <form action="{{ route('cpm.store') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- ستون اول -->
+                    <div class="space-y-4">
+                        <div>
+                            <label for="title" class="block text-sm font-medium mb-1">
+                                عنوان *
+                            </label>
+                            <input type="text" 
+                                name="title" 
+                                id="cpmtitle"
+                                required
+                                class="w-full p-2 border rounded focus:border-blue-500 focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label for="description" class="block text-sm font-medium mb-1">
+                                توضیحات
+                            </label>
+                            <textarea name="description" 
+                                    id="cpmdescription"
+                                    rows="3"
+                                    class="w-full p-2 border rounded focus:border-blue-500 focus:outline-none"></textarea>
+                        </div>
+
+                        <div>
+                            <label for="price_per_unit" class="block text-sm font-medium mb-1">
+                                قیمت هر واحد *
+                            </label>
+                            <input type="number" 
+                                name="price_per_unit" 
+                                id="cpm_price_per_unit"
+                                required
+                                min="0"
+                                class="w-full p-2 border rounded focus:border-blue-500 focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label for="order" class="block text-sm font-medium mb-1">
+                                ترتیب
+                            </label>
+                            <input type="number" 
+                                name="order" 
+                                id="cpmorder"
+                                min="0"
+                                required
+                                class="w-full p-2 border rounded focus:border-blue-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <!-- ستون دوم -->
+                    <div class="space-y-4">
+                        <div>
+                            {{-- <label for="image" class="block text-sm font-medium mb-1">
+                                تصویر
+                            </label>
+                            <input type="file" 
+                                name="image" 
+                                id="image"
+                                accept="image/*"
+                                class="w-full p-2 border rounded focus:border-blue-500 focus:outline-none">
+                        </div> --}}
+
+                        <div>
+                            <label for="max_unit_amount" class="block text-sm font-medium mb-1">
+                                حداکثر تعداد واحد
+                            </label>
+                            <input type="number" 
+                                name="max_unit_amount" 
+                                id="cpm_max_unit_amount"
+                                min="1"
+                                required
+                                class="w-full p-2 border rounded focus:border-blue-500 focus:outline-none">
+                        </div>
+                        {{-- @dd($customCategory->id); --}}
+                        <input type="hidden" name="custom_pro_id" id="custom_pro_id_field" value="{{ $category->custom_products->id }}">
+                        <input type="hidden" name="category_id" id="category_id_field" value="{{ $category->id }}">
+                        <div class="flex items-center">
+                            <input type="checkbox" 
+                                name="required" 
+                                id="cpmrequired"
+                                value="1"
+                                class="ml-2">
+                            <label for="required" class="text-sm">
+                                اجباری
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex gap-3">
+                    <button type="submit" onclick="cpmStore(event)" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+                        ثبت محصول
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>  
 </div>
 
@@ -193,12 +302,73 @@
     let category_max_item_amount = document.getElementById('max_item_amount_category')
     let category_custom_pro_id = document.getElementById('custom_pro_id_cat')
     let forms = document.querySelectorAll(".form")
+    let custom_category_section = document.getElementById('custom_category_section')
+    
+    let cpmformCreate = document.getElementById('createCPMform')
 
+    let cpmtitle = document.getElementById('cpmtitle')
+    let cpmdescription = document.getElementById('cpmdescription')
+    let cpm_price_per_unit = document.getElementById('cpm_price_per_unit')
+    let cpmorder = document.getElementById('cpmorder')
+    let cpm_max_unit_amount = document.getElementById('cpm_max_unit_amount')
+    let cpmrequired = document.getElementById('cpmrequired')
+
+    let cpm_custom_pro_id = document.getElementById('custom_pro_id_field');
+    let cpm_category_id = document.getElementById('category_id_field');
 
     function closeForm(){
         forms.forEach((form)=>{
             form.classList.add('invisible')
             form.classList.add('opacity-0')
+        })
+    }
+
+    function openCPMform(catId){
+        cpmformCreate.classList.remove('invisible')
+        cpmformCreate.classList.remove('opacity-0')
+        cpm_category_id.value = catId;
+        cpm_custom_pro_id.value = "{{ $custom_product->id }}";
+    }
+
+    function cpmStore(ev){
+        ev.preventDefault()
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            }
+        })
+        $.ajax({
+            url : "{{ route('cpm.store') }}" ,
+            type : "POST" ,
+            dataType : "json" ,
+            data : {
+                'title' : cpmtitle.value,
+                'description' : cpmdescription.value,
+                'price_per_unit' : cpm_price_per_unit.value,
+                'requierd' : cpmrequired.value,
+                'order' : cpmorder.value,
+                'max_unit_amount' : cpm_max_unit_amount.value,
+                'custom_pro_id': cpm_custom_pro_id.value,
+                'category_id': cpm_category_id.value
+                // 'customProductImage' : customProductImage.value,
+            },
+            success: function(data){
+                console.log(data)
+                cpmtitle.value = ""
+                cpmdescription.value = ""
+                cpm_price_per_unit.value = ""
+                cpmorder.value = ""
+                cpm_max_unit_amount.value = ""
+                cpmrequired.checked = 0
+                cpm_custom_pro_id.value = ""
+                cpm_category_id.value = ""
+               
+                closeForm()
+            },
+            error: function(){
+                alert('خطا در ارسال داده')
+            }
+    
         })
     }
 
@@ -252,11 +422,12 @@
                 'max_item_amount' : category_max_item_amount.value,
             },
             success: function(data){
+                // let div = document.createElement('div')
                 newParameters.forEach((element)=>{
                     if(element.getAttribute('data-cp-id') == data.id){
                         element.children[0].children[0].innerText = data.title 
                         element.children[1].children[0].innerText = data.required 
-                        element.children[3].children[0].innerText = data.max_item_amount 
+                        element.children[2].children[0].innerText = data.max_item_amount 
                     }
                 })
                 closeForm()
@@ -268,30 +439,25 @@
     
         })
     }
-    function deleteCPV(element , cpvId){
-        // let newParameters = document.querySelectorAll('.newParameters')
+
+    function deleteC(element , catId){
         $.ajaxSetup({
             headers : {
                 'X-CSRF-TOKEN' : "{{ csrf_token() }}"
             }
         })
         $.ajax({
-            url : "{{ route('cpv.delete') }}" ,
+            url : "{{ route('custmCategory.delete') }}" ,
             type : "POST" ,
             dataType : "json" ,
             data : {
-                'id': id,
+                'id': catId,
             },
             success: function(data){
-                let row = element.parentElement.parentElement.parentElement.parentElement.parentElement;
+                let row = element.parentElement.parentElement.parentElement;
                 if (row) {
                 row.remove();
             }
-                // newParameters.forEach((element)=>{
-                //     if(element.getAttribute('data-cp-id') == id){
-                //         element.remove()
-                //     }
-                // })
             },
             error: function(){
                 alert('خطا در ارسال داده')
@@ -299,5 +465,7 @@
     
         })
     } 
+
+    
 </script>
 @endsection

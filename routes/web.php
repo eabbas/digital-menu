@@ -51,15 +51,15 @@ Route::group([
     Route::get("/logout", "logout")->name('logout');
     Route::get("/", "index")->name('list');
     Route::get("/panel/{user}", "panel")->name('panel');
-    Route::get('/profile/{user}', 'profile')->name('profile');
+    Route::get('/profile/{user?}', 'profile')->name('profile');
     Route::get('/show/{user}', 'show')->name('show');
     Route::get("/edit/{user}", "edit")->name('edit');
     Route::post("/update", "update")->name('update');
     Route::get("/delete/{user}", "delete")->name('delete');
     Route::get('/compelete', 'compelete_form')->name('compelete_form');
     Route::post('/save', 'save')->name('save');
-    Route::get('/admin/create', 'adminCreate')->name('adminCreate');
-    Route::post('/admin/store', 'adminStore')->name('adminStore')->withoutMiddleware([UserMiddleware::class]);
+    // Route::get('/admin/create', 'adminCreate')->name('adminCreate');
+    // Route::post('/admin/store', 'adminStore')->name('adminStore')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/setting', 'setting')->name('setting');
     Route::post('/set', 'set')->name('set');
     route::post('/set_order', 'set_order')->name('set_order');
@@ -192,6 +192,7 @@ Route::group([
     Route::get('/qr-code', 'index')->name('list');
     Route::get('/delete/{qr_code}', 'delete')->name('delete');
     Route::get('/{career}/{slug}', 'load')->name('load');
+    Route::get('/links/{covers}/{slug}', 'loadLink')->name('loadLink');
 });
 
 // client
@@ -446,9 +447,9 @@ Route::group([
     Route::post('/store', 'store')->name('store');
     Route::get('/materialList/{customProduct?}', 'index')->name('list');
     Route::get('/show/{cpm}', 'show')->name('single');
-    Route::get('/edit/{cpm}', 'edit')->name('edit');
+    Route::post('/edit', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
-    Route::get('/delete/{cpm}', 'delete')->name('delete');
+    Route::post('/delete', 'delete')->name('delete');
 });
 Route::group([
     'prefix' => 'customCategories',
@@ -462,7 +463,7 @@ Route::group([
     Route::get('/show/{customCategory}', 'show')->name('single');
     Route::post('/edit/{customCategory?}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
-    Route::get('/delete/{customCategory?}', 'delete')->name('delete');
+    Route::post('/delete', 'delete')->name('delete');
 });
 
 Route::group([

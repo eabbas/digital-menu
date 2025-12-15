@@ -69,4 +69,7 @@ class User extends Authenticatable
      public function covers(){
         return $this->hasMany(covers::class)->chaperOne();
     }
+    public function qr_codes(){
+        return $this->hasMany(qr_code::class);
+    }
 }
