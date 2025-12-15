@@ -21,7 +21,7 @@
                     {{-- cover qr code --}}
                     <div class="w-full h-dvh fixed top-0 right-0 z-999 bg-black/50 invisible opacity-0 transition-all duration-300"
                         id="qrcode_card">
-                        <div class="relative w-[calc(100%-265px)] h-full float-end flex items-center justify-center">
+                        <div class="relative w-full lg:w-[calc(100%-265px)] h-full float-end flex items-center justify-center">
                             <div class="absolute top-10 right-10 bg-white rounded-full p-2 cursor-pointer"
                                 onclick="qrCard('close')">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
@@ -30,7 +30,7 @@
                                 </svg>
                             </div>
                             @if (isset($cover->social_qr_codes->qr_path))
-                                <div class="w-1/4 mx-auto bg-white rounded-lg p-5">
+                                <div class="w-11/12 lg:w-1/4 mx-auto bg-white rounded-lg p-5">
                                     <img src="{{ asset('storage/' . $cover->social_qr_codes->qr_path) }}" class="w-full"
                                         alt="">
                                 </div>
@@ -38,14 +38,12 @@
                         </div>
                     </div>
                     {{-- cover qr code end --}}
-                    @if (isset($cover->social_qr_codes->qr_path))
-                        <div class="inline-block p-2 rounded-md bg-gray-200 cursor-pointer" onclick="qrCard('open')">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
-                                <path
-                                    d="M352 224c53 0 96-43 96-96s-43-96-96-96s-96 43-96 96c0 4 .2 8 .7 11.9l-94.1 47C145.4 170.2 121.9 160 96 160c-53 0-96 43-96 96s43 96 96 96c25.9 0 49.4-10.2 66.6-26.9l94.1 47c-.5 3.9-.7 7.8-.7 11.9c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-25.9 0-49.4 10.2-66.6 26.9l-94.1-47c.5-3.9 .7-7.8 .7-11.9s-.2-8-.7-11.9l94.1-47C302.6 213.8 326.1 224 352 224z" />
-                            </svg>
-                        </div>
-                    @endif
+                    <div class="inline-block p-2 rounded-md bg-gray-200 cursor-pointer" onclick="qrCard('open')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
+                            <path
+                                d="M352 224c53 0 96-43 96-96s-43-96-96-96s-96 43-96 96c0 4 .2 8 .7 11.9l-94.1 47C145.4 170.2 121.9 160 96 160c-53 0-96 43-96 96s43 96 96 96c25.9 0 49.4-10.2 66.6-26.9l94.1 47c-.5 3.9-.7 7.8-.7 11.9c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-25.9 0-49.4 10.2-66.6 26.9l-94.1-47c.5-3.9 .7-7.8 .7-11.9s-.2-8-.7-11.9l94.1-47C302.6 213.8 326.1 224 352 224z" />
+                        </svg>
+                    </div>
                 </div>
                 <div>
                     <a href="{{ route('client.show_socialPage', [$cover]) }}"
@@ -134,8 +132,8 @@
 
         <div class="w-full h-dvh bg-black/50 fixed top-0 right-0 z-9999 transition-all duration-300 invisible opacity-0"
             id="block">
-            <div class="lg:w-[calc(100%-265px)] float-left h-dvh flex justify-center items-center">
-                <div class="w-2/3 px-3 relative">
+            <div class="w-full lg:w-[calc(100%-265px)] float-left h-dvh flex justify-center items-center">
+                <div class="w-11/12 lg:w-2/3 px-3 relative">
 
                     <div class="w-full bg-white py-5 rounded-lg transition-all duration-300 scale-95 opacity-0"
                         id="group">
@@ -291,12 +289,12 @@
 
                     {{-- edit social media --}}
                     <div
-                        class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute top-full form px-5 editsocialMediaForm">
+                        class="w-full bg-white p-1.5 lg:p-5 rounded-lg transition-all duration-300 invisible right-0 opacity-0 absolute top-full form editsocialMediaForm">
                         <div
                             class="w-full absolute h-full top-0 right-0 bg-white flex items-center justify-center rounded-lg">
                         </div>
                         <div onclick="closeForm()"
-                            class="p-3 cursor-pointer absolute -top-5 -right-5 rounded-full bg-rose-100 hover:bg-rose-300">
+                            class="p-3 cursor-pointer absolute -top-14 right-0 lg:-top-5 lg:-right-5 rounded-full bg-rose-100 hover:bg-rose-300">
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
                                 <path
                                     d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
@@ -337,14 +335,14 @@
                                     <div class="w-full flex flex-col">
                                         <label class="text-sm md:text-base mb-2" for="username">آدرس شبکه اجتماعی:</label>
                                         <input type="text" name="username" id="userNameUpdate"
-                                            class="w-full px-3 py-2 outline-none border rounded-lg userName" required>
+                                            class="w-full px-3 py-2 outline-none border-1 border-sky-400 rounded-lg userName" required>
                                     </div>
                                     <!-- انتخاب شبکه اجتماعی -->
                                     <div class="w-full flex flex-col">
                                         <label class="text-sm md:text-base mb-2" for="socialMedia_id">شبکه
                                             اجتماعی:</label>
                                         <select name="socialMedia_id"
-                                            class="w-full px-3 py-2 outline-none border rounded-lg socialMedia_id"></select>
+                                            class="w-full px-3 py-2 outline-none border-1 border-sky-400 rounded-lg socialMedia_id"></select>
                                     </div>
                                 @endif
                             </div>
@@ -363,12 +361,12 @@
 
                     {{-- edit site link  --}}
                     <div
-                        class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute top-full form px-5 editSiteLinkForm">
+                        class="w-full bg-white p-1.5 right-0 lg:p-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute top-full form editSiteLinkForm">
                         <div
                             class="w-full absolute h-full top-0 right-0 bg-white hidden items-center justify-center rounded-lg">
                         </div>
                         <div onclick="closeForm()"
-                            class="p-3 cursor-pointer absolute -top-5 -right-5 rounded-full bg-rose-100 hover:bg-rose-300">
+                            class="p-3 cursor-pointer absolute -top-14 right-0 lg:-top-5 lg:-right-5 rounded-full bg-rose-100 hover:bg-rose-300">
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
                                 <path
                                     d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
@@ -406,14 +404,14 @@
                             <input type="hidden" name="siteLinkId" id="siteLinkId">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-5 lg:gap-10">
                                 <div class="w-full flex flex-col">
-                                    <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] py-1 pr-3">
-                                        <legend
-                                            class="p-1 w-20 bg-gray-200 rounded-full flex flex-row justify-center text-sm">
+                                    <div class="text-sm md:text-base border border-gray-400 rounded-[20px] py-1">
+                                        <label
+                                            class="p-1 w-20 flex flex-row justify-center text-sm">
                                             آیکون لینک
-                                        </legend>
+                                        </label>
                                         <input type="file" name="icon_path" id="icon_path"
                                             class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500 border-1 border-blue-300 rounded-md">
-                                    </fieldset>
+                                    </div>
                                 </div>
                                 <div class="w-full flex flex-col">
                                     <label class="text-sm md:text-base" for="title">عنوان لینک :</label>

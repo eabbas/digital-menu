@@ -47,7 +47,7 @@
                                 </div>
                                 <div
                                     class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px]">
-                                    <span class="font-bold text-blue-500">0</span>
+                                    <span class="font-bold text-blue-500">{{  count($user->qr_codes)  }}</span>
                                     <span class="text-[#4B5675]"> تعداد QR کد ها </span>
                                 </div>
                                 <div

@@ -24,7 +24,6 @@ class CoversController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
         $logoPath = null;
         $coverPath = null;
         if (isset($request->logo_path)) {
