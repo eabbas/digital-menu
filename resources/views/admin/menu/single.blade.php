@@ -40,10 +40,15 @@
                         محصولات شخصی‌سازی شده
                     </a>
                     {{-- @dd($menu->career->custom_product) --}}
-                    <a href="{{ route('cp.create', [$menu->career])}}"
+                    {{-- <a href="{{ route('cp.create', [$menu->career])}}"
                         class="text-sm px-5 py-2 bg-indigo-500 text-white hover:bg-indigo-600 transition-all duration-150 rounded-lg shadow-sm hover:shadow-md">
                         ایجاد محصول شخصی‌سازی
-                    </a>
+                    </a> --}}
+                    <div onclick="openCPform()" 
+                       class="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer" >
+                        
+                        <span class="text-sm font-medium"> ایجاد محصول شخصی‌سازی</span>
+                    </div>
                 </div>
             </div>
 
@@ -127,5 +132,157 @@
                 @endforeach
             </div>
         </div>
+      
+        <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCPform">
+                <div class="w-[calc(100%-265px)] float-end flex justify-center items-center bg-white h-dvh relative" id="closeCreateCPform">
+                    <span class="cursor-pointer absolute top-4 right-4 text-4xl text-gray-500 hover:text-gray-700 transition-colors duration-200" onclick="closeForm()">×</span>
+                    <form action="{{ route('cp.store') }}" method="post" enctype="multipart/form-data" class="space-y-6 w-full max-w-2xl">
+                        @csrf
+                        <div class="flex flex-col md:flex-row gap-6 mt-10">
+                            <input type="hidden" name="career_id" value="{{$menu->career->id}}">
+                            
+                            <!-- Title Field -->
+                            <div class="form-group flex-1 mt-10">
+                                <label for="title" class="block text-sm font-medium text-gray-700 mb-2">
+                                    <i class="fas fa-heading ml-2 text-gray-500"></i>
+                                    عنوان محصول
+                                </label>
+                                <input 
+                                    type="text" 
+                                    name="title" 
+                                    id="title"
+                                    required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                    placeholder="عنوان محصول را وارد کنید"
+                                >
+                            </div>
+
+                            <!-- Description Field -->
+                            <div class="form-group flex-1">
+                                <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
+                                    <i class="fas fa-align-left ml-2 text-gray-500 mr-4"></i>
+                                    توضیحات
+                                </label>
+                                <textarea 
+                                    name="description" 
+                                    id="description" 
+                                    rows="4"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200 resize-none"
+                                    placeholder="توضیحات محصول را وارد کنید"
+                                ></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Image Upload Field -->
+                        <div class="form-group">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                <i class="fas fa-image ml-2 text-gray-500"></i>
+                                تصویر محصول
+                            </label>
+                            <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-xl hover:border-blue-400 transition duration-200">
+                                <div class="space-y-1 text-center">
+                                    <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mx-auto"></i>
+                                    <div class="flex text-sm text-gray-600">
+                                        <label for="customProductImage" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none">
+                                            <span>آپلود فایل</span>
+                                            <input 
+                                                id="customProductImage" 
+                                                name="customProductImage" 
+                                                type="file" 
+                                                accept="image/*"
+                                                class="sr-only"
+                                            >
+                                        </label>
+                                        <p class="pr-1">یا کشیدن و رها کردن</p>
+                                    </div>
+                                    <p class="text-xs text-gray-500">PNG, JPG, GIF تا 2MB</p>
+                                </div>
+                            </div>
+                            <div id="imagePreview" class="mt-4 hidden">
+                                <img id="previewImage" class="max-h-48 rounded-lg shadow-md mx-auto">
+                            </div>
+                        </div>
+
+                        <!-- Material Limit Field -->
+                        <div class="form-group">
+                            <label for="material_limit" class="block text-sm font-medium text-gray-700 mb-2">
+                                <i class="fas fa-ruler-combined ml-2 text-gray-500"></i>
+                                محدودیت متریال
+                            </label>
+                            <input 
+                                type="number" 
+                                name="material_limit" 
+                                id="material_limit"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                placeholder="محدودیت متریال را وارد کنید"
+                                required
+                            >
+                        </div>
+
+                        <div class="pt-4 border-t border-gray-200">
+                            <div class="flex justify-center">
+                                <button 
+                                    type="submit" onclick="storeCP(event)"
+                                    class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium py-2.5 px-8 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 w-auto">
+                                    <i class="fas fa-check ml-2"></i>
+                                    ثبت محصول
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+        </div>
     </div>
+    <script> 
+        let forms = document.querySelectorAll(".form")
+        let createCPform = document.getElementById('createCPform')   
+
+
+        function closeForm(){
+            forms.forEach((form)=>{
+                form.classList.add('invisible')
+                form.classList.add('opacity-0')
+            })
+        }
+        function openCPform(){
+            createCPform.classList.remove('invisible')
+            createCPform.classList.remove('opacity-0')
+        }
+        function storeCP(ev){
+        ev.preventDefault()
+        $.ajaxSetup({
+            headers : {
+                'X-CSRF-TOKEN' : "{{ csrf_token() }}"
+            }
+        })
+        $.ajax({
+            url : "{{ route('cp.store') }}" ,
+            type : "POST" ,
+            dataType : "json" ,
+            data : {
+                'career_id' : "{{ $menu->career->id }}",
+                'title' : title.value,
+                'description' : description.value,
+                // 'customProductImage' : customProductImage.value,
+                'material_limit' : material_limit.value,
+            },
+            success: function(data){
+                title.value= ""
+                description.value= ""
+                material_limit.value= ""
+             
+                closeForm()
+                console.log(data)
+            },
+            error: function(){
+                alert('خطا در ارسال داده')
+            }
+    
+        })
+
+
+    }
+
+
+    </script>
 @endsection

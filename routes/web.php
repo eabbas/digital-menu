@@ -462,7 +462,7 @@ Route::group([
     Route::post('/store', 'store')->name('store');
     Route::get('/custmoCategoryList/{customProduct?}', 'index')->name('list');
     Route::get('/item_list/{customCategory?}', 'item_list')->name('item_list');
-    Route::get('/show/{customCategory}', 'show')->name('single');
+    Route::get('/show/{customCategory?}', 'show')->name('single');
     Route::post('/edit/{customCategory?}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::post('/delete', 'delete')->name('delete');
