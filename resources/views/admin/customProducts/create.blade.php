@@ -131,9 +131,9 @@
                     isValid = false;
                     
                     // Remove error class after 2 seconds
-                    setTimeout(() => {
-                        field.classList.remove('border-red-500', 'ring-2', 'ring-red-200');
-                    }, 2000);
+                    // setTimeout(() => {
+                    //     field.classList.remove('border-red-500', 'ring-2', 'ring-red-200');
+                    // }, 2000);
                 }
             });
             

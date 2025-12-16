@@ -47,7 +47,9 @@
 
             <!-- Table Content -->
             <div class="divide-y divide-gray-100" id="custom_product_section">
+                @php $hasVariants = false; @endphp
                 @foreach($customProduct->custom_product_variants as $index => $cpVariant)
+                @php $hasVariants=true; @endphp
                 <div class="grid grid-cols-12 items-center hover:bg-gray-50 transition-colors newParameters" data-cp-id="{{ $cpVariant->id }}">
                     <!-- نام نوع -->
                     <div class="px-4 py-3 text-right">
@@ -123,7 +125,13 @@
                     </div>
                 </div>
                 @endforeach
-         
+                @if(!$hasVariants)
+                    <div class="py-12 text-center" id="no_variant_message">
+                        <h3 class="text-lg font-medium text-gray-600 mb-2">هیچ نوع محصولی یافت نشد</h3>
+                        <p class="text-gray-500 text-sm mb-6">هنوز هیچ  نوع محصولی ایجاد نکرده‌اید</p>
+                        {{-- href="{{ route('cpm.create' , [$customCategory]) }}"  --}}
+                    </div>
+                @endif
             </div>
         </div>
 
@@ -222,7 +230,8 @@
 
 
 
-        
+        @foreach($customProduct->custom_product_variants as $index => $cpVariant)
+        @if(isset($cpVariant))
         <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="editCPVform">
             <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative bg-white" id="closeEditCform">
                 <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeForm()">
@@ -290,19 +299,9 @@
             </form>
             </div>
         </div>
-        
-        <!-- List Categories Button -->
-        @if(count($customProduct->custom_product_variants ?? []) > 0)
-        <div class="mt-4 flex justify-end">
-            <a href="{{ route('custmCategory.list' , [$customProduct]) }}" 
-               class="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition-colors text-sm">
-                <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
-                </svg>
-                <span>مشاهده لیست دسته‌بندی‌ها</span>
-            </a>
-        </div>
         @endif
+        @endforeach
+
     </div>
 </div>
 
@@ -362,7 +361,12 @@
                 min_amount_unit_cpv.value =""
                 durationCPV.value =""
                 descriptionCPV.value =""
+                custom_product_id_variant.value=""
                 let div = document.createElement('div')
+                let empty = document.getElementById('no_variant_message')
+                if(empty){
+                    empty.remove()
+                }
 
                 let element = `
                     <div class="divide-y divide-gray-100">
@@ -444,8 +448,8 @@
 
 
     function editCPV(element , id){
-        editCPVform.classList.remove('invisible')
-        editCPVform.classList.remove('opacity-0')
+        cpvEdit.classList.remove('invisible')
+        cpvEdit.classList.remove('opacity-0')
 
         $.ajaxSetup({
             headers: {
@@ -539,6 +543,14 @@
                 //         element.remove()
                 //     }
                 // })
+                if (custom_product_section.children.length === 0) {
+                    custom_product_section.innerHTML = `
+                        <div class="py-12 text-center" id="no_variant_message">
+                            <h3 class="text-lg font-medium text-gray-600 mb-2">هیچ نوع محصولی یافت نشد</h3>
+                            <p class="text-gray-500 text-sm mb-6">هنوز هیچ نوع محصولی ایجاد نکرده‌اید</p>
+                        </div>
+                    `;
+                }
             },
             error: function(){
                 alert('خطا در ارسال داده')
