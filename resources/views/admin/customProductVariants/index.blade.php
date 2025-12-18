@@ -369,8 +369,6 @@
                 }
 
                 let element = `
-                    <div class="divide-y divide-gray-100">
-                @foreach($customProduct->custom_product_variants as $index => $cpVariant)
                 <div class="grid grid-cols-12 items-center hover:bg-gray-50 transition-colors newParameters" data-cp-id="${ data.id }}">
                     <!-- نام نوع -->
                     <div class="px-4 py-3 text-right">
@@ -431,9 +429,6 @@
                         </div>
                     </div>
                 </div>
-                @endforeach
-         
-            </div>
                 `
                 div.innerHTML = element
                 custom_product_section.appendChild(div)
