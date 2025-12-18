@@ -32,7 +32,7 @@
         </select>
                 <button type="submit"
                     class="active:bg-[#0080e5] mt-2 w-full bg-[#03A9F4] text-white py-3 rounded-md hover:bg-blue-700 transition duration-200 font-medium">
-                    ارسال اطلاعات
+                    ثبت
                 </button>
             </div>
         </div>

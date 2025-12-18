@@ -1,15 +1,15 @@
 @import url("fontiran.css");
 
 * {
-    font-family: 'IRANSansX';
+    font-family: "IRANSansX";
 }
 
 .samim {
-    font-family: 'Samim';
+    font-family: "Samim";
 }
 
 .yekan {
-    font-family: 'Yekan';
+    font-family: "Yekan";
 }
 /* 
 input[class*="border"],
@@ -33,7 +33,7 @@ input::-webkit-inner-spin-button {
     /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-input[type=number] {
+input[type="number"] {
     -moz-appearance: textfield;
     /* Firefox */
 }
@@ -45,7 +45,6 @@ input[type=number] {
 .active-circle {
     animation: mmd 1s infinite;
 }
-
 
 @keyframes mmd {
     0% {
@@ -62,7 +61,7 @@ input[type=number] {
 }
 
 .color__a:hover {
-    color: #1B84FF;
+    color: #1b84ff;
 }
 
 .shadow__prosheh {
@@ -78,7 +77,7 @@ input[type=number] {
     box-shadow: 0px 0px 25px -8px black;
 }
 
-.img__parent:hover+.profaill {
+.img__parent:hover + .profaill {
     visibility: visible;
 }
 
@@ -186,7 +185,6 @@ input[type=number] {
 @keyframes moon {
     0% {
         transform: translateX(0px);
-
     }
 
     30% {
@@ -203,7 +201,6 @@ input[type=number] {
         transform: translateX(-25px);
         box-shadow: 0px 0px 15px -1px white;
     }
-
 }
 
 .shadow__mobail__karbary {
@@ -239,18 +236,18 @@ input[type=number] {
     box-shadow: 0px 0px 25px -8px black;
 }
 
-.hover_profile:hover div{
+.hover_profile:hover div {
     visibility: visible;
     opacity: 1;
 }
 
-.closeButtonXmark>svg>path{
+.closeButtonXmark > svg > path {
     transition: all 300ms;
 }
-.closeButtonXmark:hover{
+.closeButtonXmark:hover {
     border-color: black;
 }
-.closeButtonXmark:hover svg>path{
+.closeButtonXmark:hover svg > path {
     fill: black;
 }
 
@@ -268,8 +265,6 @@ td {
     margin-bottom: 10px;
 }
 
-
-
 .shadow__profaill__list_products {
     box-shadow: 0 0 6px -1px rgb(162, 159, 159);
 }
@@ -278,51 +273,107 @@ td {
 }
 
 .loading-wave {
-  width: 300px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
+    width: 300px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
 
 .loading-bar {
-  width: 20px;
-  height: 10px;
-  margin: 0 5px;
-  background-color: #3498db;
-  border-radius: 5px;
-  animation: loading-wave-animation 1s ease-in-out infinite;
+    width: 20px;
+    height: 10px;
+    margin: 0 5px;
+    background-color: #3498db;
+    border-radius: 5px;
+    animation: loading-wave-animation 1s ease-in-out infinite;
 }
 
 .loading-bar:nth-child(2) {
-  animation-delay: 0.1s;
+    animation-delay: 0.1s;
 }
 
 .loading-bar:nth-child(3) {
-  animation-delay: 0.2s;
+    animation-delay: 0.2s;
 }
 
 .loading-bar:nth-child(4) {
-  animation-delay: 0.3s;
+    animation-delay: 0.3s;
 }
 
 @keyframes loading-wave-animation {
-  0% {
-    height: 10px;
-  }
+    0% {
+        height: 10px;
+    }
 
-  50% {
-    height: 50px;
-  }
+    50% {
+        height: 50px;
+    }
 
-  100% {
-    height: 10px;
-  }
+    100% {
+        height: 10px;
+    }
 }
 
-.close_icon>svg>path{
+.close_icon > svg > path {
     transition: all 300ms;
 }
-.close_icon:hover svg path{
+.close_icon:hover svg path {
     fill: white;
+}
+
+/* ------ */
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    border: 3px solid;
+    border-color: #fff #fff transparent transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+.loader::after,
+.loader::before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border: 3px solid;
+    border-color: transparent transparent #ff3d00 #ff3d00;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    animation: rotationBack 0.5s linear infinite;
+    transform-origin: center center;
+}
+.loader::before {
+    width: 32px;
+    height: 32px;
+    border-color: #fff #fff transparent transparent;
+    animation: rotation 1.5s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@keyframes rotationBack {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
 }

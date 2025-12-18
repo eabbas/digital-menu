@@ -35,6 +35,7 @@ class MenuController extends Controller
             'subtitle' => $request->subtitle,
             'banner' => $bannerPath,
             'career_id' => $request->career_id,
+            'user_id'=>Auth::id(),
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -107,5 +108,9 @@ class MenuController extends Controller
     public function customProMenu(career $career)
     {
         return view('admin.menu.customProList', ['career' => $career]);
+    }
+
+    public function user_menu(User $user){
+        return view('admin.menu.userMenu', ['user'=>$user]);
     }
 }

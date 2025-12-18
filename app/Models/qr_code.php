@@ -9,6 +9,7 @@ class qr_code extends Model
     protected $fillable=[
         'qr_path',
         'user_id',
+        'description',
         'career_id',
         'slug'
     ];

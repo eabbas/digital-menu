@@ -138,18 +138,17 @@
                                 </a>
                             </li>
                         @endif
+                        @if (count(Auth::user()->menus))
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('menu.user_menus', [Auth::user()]) }}" class="text-white py-1">
+                                    لیست منو های من
+                                </a>
+                            </li>
+                        @endif
                         {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('favoriteCareer.list') }}" class="text-white py-1">لیست علاقه مندی ها</a>
-                        </li> --}}
-
-                        {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
-                            <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('covers.create') }}" class=" text-white py-1">ایجادصفحه شبکه های اجتماعی</a>
-                        </li>
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
-                            <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('covers.social_list') }}" class=" text-white py-1"> لیست صفحه شبکه های اجتماعی</a>
                         </li> --}}
                         @if (Auth::user()->role[0]->title == 'admin')
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
@@ -249,7 +248,7 @@
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('user.create_user') }}" class="text-white py-1">
-                               ایجاد کاربر جدید
+                                ایجاد کاربر جدید
                             </a>
                         </li>
 
@@ -499,58 +498,58 @@
                                     <li>
                                         <a href="{{ route('ecomm.create') }}"
                                             class="block text-gray-700 py-2 text-md">
-                                           فروشگاه جدید
+                                            فروشگاه جدید
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{ route('ecomm.ecomms') }}"
                                             class="block text-gray-700 py-2 text-md">
-                                           فروشگاه های من
+                                            فروشگاه های من
                                         </a>
                                     </li>
 
                                     @if (Auth::user()->role[0]->title == 'admin')
-                                    <li>
-                                        <span class="size-1 rounded-sm"></span>
-                                        <a href="{{ route('ecomm.list') }}"
-                                            class="block text-gray-700 py-2 text-md">
-                                           همه فروشگاه ها
-                                        </a>
-                                    </li>
+                                        <li>
+                                            <span class="size-1 rounded-sm"></span>
+                                            <a href="{{ route('ecomm.list') }}"
+                                                class="block text-gray-700 py-2 text-md">
+                                                همه فروشگاه ها
+                                            </a>
+                                        </li>
                                     @endif
 
                                     <li>
                                         <span class="size-1 rounded-sm"></span>
                                         <a href="{{ route('ecomm_category.index') }}"
                                             class="block text-gray-700 py-2 text-md">
-                                           دسته ها
+                                            دسته ها
                                         </a>
                                     </li>
                                     @if (count(Auth::user()->ecomms))
-                                    <li>
-                                        <span class="size-1 rounded-sm"></span>
-                                        <a href="{{ route('ecomm_category.create') }}"
-                                            class="block text-gray-700 py-2 text-md">
-                                           ایجاد دسته
-                                        </a>
-                                    </li>
+                                        <li>
+                                            <span class="size-1 rounded-sm"></span>
+                                            <a href="{{ route('ecomm_category.create') }}"
+                                                class="block text-gray-700 py-2 text-md">
+                                                ایجاد دسته
+                                            </a>
+                                        </li>
                                     @endif
                                     <li>
                                         <span class="size-1 rounded-sm"></span>
                                         <a href="{{ route('ecomm_product.index') }}"
-                                        class="block text-gray-700 py-2 text-md">
-                                        محصولات
-                                    </a>
-                                </li>
-                                @if (count(Auth::user()->ecomms))
-                                <li>
-                                    <span class="size-1 rounded-sm"></span>
-                                    <a href="{{ route('ecomm_product.create') }}"
-                                        class="block text-gray-700 py-2 text-md">
-                                      ایجاد محصول
-                                    </a>
-                                </li>
-                                @endif
+                                            class="block text-gray-700 py-2 text-md">
+                                            محصولات
+                                        </a>
+                                    </li>
+                                    @if (count(Auth::user()->ecomms))
+                                        <li>
+                                            <span class="size-1 rounded-sm"></span>
+                                            <a href="{{ route('ecomm_product.create') }}"
+                                                class="block text-gray-700 py-2 text-md">
+                                                ایجاد محصول
+                                            </a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
 
@@ -569,16 +568,15 @@
                                             class="block text-gray-700 py-2 text-md">ایجاد کسب و کار
                                             جدید</a>
                                     </li>
-
-                                    <li>
-                                        <span class="size-1 rounded-sm"></span>
-                                        <a href="{{ route('career.list') }}"
-                                            class="block text-gray-700 py-2 text-md">
-                                            مشاهده همه کسب و کار ها
-                                        </a>
-                                    </li>
-
                                     @if (Auth::user()->role[0]->title == 'admin')
+                                        <li>
+                                            <span class="size-1 rounded-sm"></span>
+                                            <a href="{{ route('career.list') }}"
+                                                class="block text-gray-700 py-2 text-md">
+                                                مشاهده همه کسب و کار ها
+                                            </a>
+                                        </li>
+
                                         <li>
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('cc.create') }}"
@@ -593,6 +591,16 @@
                                                 همه دسته های کسب و کارها
                                             </a>
                                         </li>
+                                        @endif
+                                        @if (count(Auth::user()->menus))
+                                        <li>
+                                            <span class="size-1 rounded-sm"></span>
+                                            <a href="{{ route('menu.user_menus', [Auth::user()]) }}"
+                                                class="block text-gray-700 py-2 text-md">
+                                               لیست منو های من
+                                            </a>
+                                        </li>
+                                        
                                     @endif
                                 </ul>
                             </div>
@@ -643,7 +651,7 @@
                                         <li>
                                             <a href="{{ route('user.create_user') }}"
                                                 class="block text-gray-700 py-2 text-md">
-                                               ایجاد کاربر جدید
+                                                ایجاد کاربر جدید
                                             </a>
                                         </li>
                                     </ul>
@@ -657,13 +665,13 @@
                                         <li>
                                             <a href="{{ route('slider.create') }}"
                                                 class="block text-gray-700 py-2 text-md">
-                                               ایجاد اسلایدر
+                                                ایجاد اسلایدر
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('slider.list') }}"
                                                 class="block text-gray-700 py-2 text-md">
-                                               لیست اسلایدر ها
+                                                لیست اسلایدر ها
                                             </a>
                                         </li>
                                     </ul>
@@ -671,40 +679,39 @@
                             @endif
 
                             {{-- @if (Auth::user()->role[0]->title == 'admin') --}}
-                                <div class="pt-3">
-                                    <h3 class="text-md font-semibold text-gray-800 mb-1.5">
-                                        محصولات شخصی سازی شده
-                                    </h3>
-                                    <ul class="pr-3.5">
-                                        <li>
-                                            <a href="{{ route('cp.list') }} }}"
-                                                class="block text-gray-700 py-2 text-md">
-                                              همه محصولات
-                                            </a>
-                                        </li>
-                                        
-                                    </ul>
-                                </div>
+                            <div class="pt-3">
+                                <h3 class="text-md font-semibold text-gray-800 mb-1.5">
+                                    محصولات شخصی سازی شده
+                                </h3>
+                                <ul class="pr-3.5">
+                                    <li>
+                                        <a href="{{ route('cp.list') }} }}" class="block text-gray-700 py-2 text-md">
+                                            همه محصولات
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
                             {{-- @endif --}}
                             @if (Auth::user()->role[0]->title == 'admin')
                                 <div class="pt-3">
                                     <h3 class="text-md font-semibold text-gray-800 mb-1.5">
-                                       درباره ما
+                                        درباره ما
                                     </h3>
                                     <ul class="pr-3.5">
                                         <li>
                                             <a href="{{ route('aboutUs.create_edit') }} }}"
                                                 class="block text-gray-700 py-2 text-md">
-                                             ایجاد درباره  ما
+                                                ایجاد درباره ما
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('aboutUs.list') }} }}"
                                                 class="block text-gray-700 py-2 text-md">
-                                             لیست درباره  ما
+                                                لیست درباره ما
                                             </a>
                                         </li>
-                                        
+
                                     </ul>
                                 </div>
                             @endif

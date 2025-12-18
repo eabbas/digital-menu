@@ -72,4 +72,7 @@ class User extends Authenticatable
     public function qr_codes(){
         return $this->hasMany(qr_code::class);
     }
+    public function menus(){
+        return $this->hasMany(menu::class);
+    }
 }
