@@ -1,5 +1,5 @@
 @extends('admin.app.panel')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 @section('title')
     {{ $cover->title }}
 @endsection
@@ -214,7 +214,7 @@
                                 </div>
                                 <button type="submit" onclick="storeSocialmedia(event)"
                                     class="active:bg-[#0080e5] mt-2 w-full bg-[#03A9F4] text-white py-3 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
-                                    ارسال اطلاعات
+                                   ثبت
                                 </button>
                             </div>
                         </div>

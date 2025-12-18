@@ -10,6 +10,7 @@ class menu extends Model
         'title',
         'subtitle',
         'banner',
+        'user_id',
         'career_id',
     ];
 
@@ -22,6 +23,10 @@ class menu extends Model
 
     public function menu_categories(){
         return $this->hasMany(menu_category::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
 }
