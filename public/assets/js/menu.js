@@ -1,6 +1,5 @@
 let parentMenu = document.querySelectorAll('.parent_menu')
-function showMenu(ev, index) {
-    ev.preventDefault();
+function showMenu(index) {
     parentMenu.forEach((element) => {
         element.classList.add('hidden')
         element.classList.remove('flex')
@@ -10,6 +9,19 @@ function showMenu(ev, index) {
         }
     });
 }
+
+let menuCategory = document.querySelectorAll('.menu_category')
+function showItems(index) {
+    menuCategory.forEach((element) => {
+        element.classList.add('hidden')
+        element.classList.remove('flex')
+        if (index == element.getAttribute('data-item-menu')) {
+            element.classList.remove('hidden')
+            element.classList.add('flex')
+        }
+    });
+}
+
 
 function calc(el, state) {
     console.log(5555)

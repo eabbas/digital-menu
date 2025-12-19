@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\ecomm;
 use App\Models\ecomm_category;
-use App\Models\role;
 use App\Models\ecomm_qrCode;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Models\role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class EcommController extends Controller
 {
@@ -27,19 +27,22 @@ class EcommController extends Controller
     {
         $roles = role::all();
         $user = Auth::user();
+        $path = null;
         if ($user->role[0]->title != 'admin') {
             $user->role[0] = $roles[2];
             $user->save();
         }
-        $name = $request->logo->getClientOriginalName();
-        $fullName = Str::uuid() . '_' . $name;
-        $path = $request->file('logo')->storeAs('files', $fullName, 'public');
+        if (isset($request->logo)) {
+            $name = $request->logo->getClientOriginalName();
+            $fullName = Str::uuid() . '_' . $name;
+            $path = $request->file('logo')->storeAs('files', $fullName, 'public');
+        }
 
         $bannerName = $request->banner->getClientOriginalName();
         $fullBannerName = Str::uuid() . '_' . $bannerName;
         $bannerPath = $request->file('banner')->storeAs('files', $fullBannerName, 'public');
         $social_medias = json_encode($request->social_medias);
-          $ecomm_id=ecomm::insertGetId([
+        $ecomm_id = ecomm::insertGetId([
             'title' => $request->title,
             'logo' => $path,
             'province' => $request->province,
@@ -52,18 +55,19 @@ class EcommController extends Controller
             'banner' => $bannerPath
         ]);
 
-         $random = Str::random(10);
-            $link = "famenu.ir/qrcode/$ecomm_id/" . $random;
-            $qr_svg = QrCode::size(100)->generate($link);
-            $fileName = 'qrcodes/' . $ecomm_id . '_' . $random . '.svg';
-            Storage::disk('public')->put($fileName, $qr_svg);
-            ecomm_qrCode::create([
-                'qr_path' => $fileName,
-                'ecomm_id' => $ecomm_id,
-                'slug' => 'qrcode/' . $ecomm_id . '/' . $random,
-                'user_id'=> Auth::id()]);
-        ecomm_category::create(['title'=>'بدون دسته بندی','description'=>'محصولات فاقد دسته بندی','show_in_home'=>0,'ecomm_id'=>$ecomm_id,'parent_id'=>0]);
-        
+        $random = Str::random(10);
+        $link = "famenu.ir/qrcode/$ecomm_id/" . $random;
+        $qr_svg = QrCode::size(100)->generate($link);
+        $fileName = 'qrcodes/' . $ecomm_id . '_' . $random . '.svg';
+        Storage::disk('public')->put($fileName, $qr_svg);
+        ecomm_qrCode::create([
+            'qr_path' => $fileName,
+            'ecomm_id' => $ecomm_id,
+            'slug' => 'qrcode/' . $ecomm_id . '/' . $random,
+            'user_id' => Auth::id()
+        ]);
+        ecomm_category::create(['title' => 'بدون دسته بندی', 'description' => 'محصولات فاقد دسته بندی', 'show_in_home' => 0, 'ecomm_id' => $ecomm_id, 'parent_id' => 0]);
+
         return to_route('ecomm.ecomms', [Auth::user()]);
     }
 
@@ -88,8 +92,10 @@ class EcommController extends Controller
     public function update(Request $request)
     {
         $ecomm = ecomm::find($request->id);
-        if ($request->logo) {
-            Storage::disk('public')->delete($ecomm->logo);
+        if (isset($request->logo)) {
+            if ($ecomm->logo) {
+                Storage::disk('public')->delete($ecomm->logo);
+            }
             $logoName = $request->logo->getClientOriginalName();
             $fullLogoName = Str::uuid() . '_' . $logoName;
             $logoPath = $request->file('logo')->storeAs('files', $fullLogoName, 'public');
@@ -136,11 +142,11 @@ class EcommController extends Controller
             }
         }
         $ecomm->delete();
-        
-    $user= Auth::user();
-        // return view('admin.ecomms.userecomms', ['user' =>$user]); 
+
+        $user = Auth::user();
+        // return view('admin.ecomms.userecomms', ['user' =>$user]);
         return back();
-       }
+    }
 
     public function index()
     {
