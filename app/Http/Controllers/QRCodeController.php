@@ -32,7 +32,7 @@ class QrCodeController extends Controller
         return to_route('client.menu', [$career, $slug]);
     }
     public function loadLink(covers $covers, string $slug){
-        return to_route('client.link.single', [$covers, $slug]);
+        return view('client.link.single', [$covers, $slug]);
     }
     public function edit(Request $request){
         $qrcode = qr_code::find($request->id);
