@@ -17,7 +17,7 @@
                         <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
                             <label class="w-32 text-sm mb-1 mt-2.5 flex">عنوان آیتم:</label>
                             <div class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                <input class="w-full focus:outline-none text-sm font-bold mr-2" type="text" name='title' placeholder="عنوان" value="{{ $item->title }}">
+                                <input class="w-full focus:outline-none text-sm font-bold mr-2" type="text" name='title' placeholder="عنوان" value="{{ $item->title }}" required>
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
@@ -30,13 +30,13 @@
                         <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
                             <label class="w-32 text-sm mb-1 mt-2.5 flex">قیمت:</label>
                             <div class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                <input class="w-full focus:outline-none text-sm font-bold mr-2" type="number" name='price' placeholder="10000">
+                                <input class="w-full focus:outline-none text-sm font-bold mr-2" type="number" name='price' placeholder="10000" required>
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
                             <label class="w-32 text-sm mb-1 mt-2.5 flex">تخفیف:</label>
                             <div class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                <input class="w-full focus:outline-none text-sm font-bold mr-2" type="number" name='discount' placeholder="2000">
+                                <input class="w-full focus:outline-none text-sm font-bold mr-2" type="number" name='discount' placeholder="2000" required>
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">

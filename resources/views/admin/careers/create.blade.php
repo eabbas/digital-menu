@@ -120,7 +120,7 @@
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <textarea rows="5" class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text" name='description'
-                                        placeholder="توضیحات کسب وکار" class="w-full px-3 py-1 md:px-2 outline-none text-gray-500"required></textarea>
+                                        placeholder="توضیحات کسب وکار" class="w-full px-3 py-1 md:px-2 outline-none text-gray-500"></textarea>
                                 </div>
                             </div>
                         </div>

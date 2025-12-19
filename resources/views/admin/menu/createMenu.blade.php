@@ -37,7 +37,7 @@
                             <div
                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                    name='title' placeholder="عنوان">
+                                    name='title' placeholder="عنوان" required>
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -57,7 +57,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="w-full text-left ">
+                    <div class="w-full text-left">
                         <button type="submit"
                             class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
                             ثبت

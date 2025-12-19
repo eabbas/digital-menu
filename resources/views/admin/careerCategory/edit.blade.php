@@ -1,7 +1,6 @@
 @extends('admin.app.panel')
 @section('title', 'ویرایش کسب و کار')
 @section('content')
-
     <div class="text-center mb-4">
         <h1 class="text-lg font-bold text-gray-800">
             ویرایش اطلاعات دسته بندی
@@ -24,7 +23,7 @@
                             </div>
                         </div>
                         <div class="w-full flex flex-row items-center gap-3 itmes-center max-md:flex-row max-md:gap-1">
-                            <input type="checkbox" name='show_home' value="1">
+                            <input type="checkbox" name='show_home' value="1" @if($careerCategory->show_in_home){{ 'checked' }}@endif>
                             <label class="w-30 text-sm mb-1 mt-2.5 flex">نمایش در صفحه اول</label>
                         </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">

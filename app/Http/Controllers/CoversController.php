@@ -39,7 +39,7 @@ class CoversController extends Controller
         }
         $cover_id = covers::insertGetId([
             'title' => $request->title,
-            'subTitle' => $request->subTitle,
+            'subTitle' => $request->subTitle ? $request->subTitle : null,
             'description' => $request->description,
             'user_id' => Auth::id(),
             'logo_path' => $logoPath,

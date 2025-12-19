@@ -16,13 +16,17 @@ class CareerCategoryController extends Controller
 
     public function store(Request $request)
     {
-        $name = $request->main_image->getClientOriginalName();
-        $fullName = Str::uuid() . '_' . $name;
-        $path = $request->file('main_image')->storeAs('images', $fullName, 'public');
+        // dd($request->all());
+        $path = null;
+        if (isset($request->main_image)) {
+            $name = $request->main_image->getClientOriginalName();
+            $fullName = Str::uuid() . '_' . $name;
+            $path = $request->file('main_image')->storeAs('images', $fullName, 'public');
+        }
         careerCategory::create([
             'title' => $request->title,
             'description' => $request->description,
-            'show_in_home' => $request->show_home,
+            'show_in_home' => $request->show_home ? $request->main_image : 0,
             'main_image' => $path
         ]);
         return to_route('cc.list');
@@ -47,7 +51,6 @@ class CareerCategoryController extends Controller
     public function update(Request $request)
     {
         $careerCategory = careerCategory::find($request->id);
-
         if (isset($request->main_image)) {
             if ($careerCategory->main_image) {
                Str::disk('public')->delete($careerCategory->main_image);
@@ -55,11 +58,12 @@ class CareerCategoryController extends Controller
             $name = $request->main_image->getClientOriginalName();
             $fullName = Str::uuid() . '_' . $name;
             $path = $request->file('main_image')->storeAs('images', $fullName, 'public');
+            $careerCategory->main_image = $path;
         }
-
+        if ($request->description) {
+            $careerCategory->description = $request->description;
+        }
         $careerCategory->title = $request->title;
-        $careerCategory->description = $request->description;
-        $careerCategory->main_image = $path;
 
         $careerCategory->save();
         return to_route('cc.list');
