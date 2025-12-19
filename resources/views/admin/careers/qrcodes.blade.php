@@ -59,7 +59,7 @@
 
                 {{-- invisible opacity-0 --}}
                 <form action="{{ route('qr.update') }}" method="post" enctype='multipart/form-data'
-                    class="w-full bg-white py-5 rounded-lg transition-all duration-300 absolute top-full invisible opacity-0 scale-95 form px-5 -translate-y-1/2"
+                    class="w-full bg-white py-5 rounded-lg transition-all duration-300 absolute top-full right-0 invisible opacity-0 scale-95 form px-5 -translate-y-1/2"
                     id="editQr">
                     <div
                         class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
