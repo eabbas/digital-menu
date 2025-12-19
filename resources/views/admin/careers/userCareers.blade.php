@@ -66,7 +66,7 @@
                                     </div> --}}
                                     
                                     <div class="col-span-4">
-                                        <div class="w-full grid grid-cols-3 divide-x divide-[#f1f1f4] items-center w-[320px]">
+                                        <div class="grid grid-cols-3 divide-x divide-[#f1f1f4] items-center w-[320px]">
 
                                             <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3">
                                                 <li class="flex justify-center">
