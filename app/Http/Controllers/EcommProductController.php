@@ -13,16 +13,21 @@ use Illuminate\Support\Str;
 
 class EcommProductController extends Controller
 {
-         public function create(){
-        $ecomm_categories=ecomm_category::all();
-        $user= Auth::user();
-        return view("admin.ecomm_products.create",['user'=>$user]);
+    public function create()
+    {
+        $ecomm_categories = ecomm_category::all();
+        $user = Auth::user();
+        return view('admin.ecomm_products.create', ['user' => $user]);
     }
 
     public function store(Request $request)
     {
-        $name = $request->image_path->getClientOriginalName();
-        $path = $request->image_path->storeAs('files', $name, 'public');
+        $path = null;
+        if (isset($request->image_path)) {
+            $name = $request->image_path->getClientOriginalName();
+            $fullName = time()."_".$name;
+            $path = $request->image_path->storeAs('files', $fullName, 'public');
+        }
         if ($request->show_in_home) {
             $ecomm_product_id = ecomm_product::insertGetId(['title' => $request->title, 'description' => $request->description, 'show_in_home' => $request->show_in_home, 'image_path' => $path, 'ecomm_id' => $request->ecomm_id, 'price' => $request->price, 'discount' => $request->discount]);
         } else {
@@ -35,12 +40,10 @@ class EcommProductController extends Controller
 
     public function index()
     {
+        $user = Auth::user();
+        $ecomm_categories = $user->ecomm_categories;
 
-        $user=Auth::user();
-        $ecomm_categories=$user->ecomm_categories;
-       
-
-        return view('admin.ecomm_products.index', ['user' =>Auth::user()]);
+        return view('admin.ecomm_products.index', ['user' => Auth::user()]);
     }
 
     public function show(ecomm_product $ecomm_product)
@@ -58,11 +61,12 @@ class EcommProductController extends Controller
     public function update(Request $request)
     {
         $ecomm_product = ecomm_product::find($request->id);
-        if ($request->image_path) {
-            storage::disk('public')->delete($ecomm_product->image_path);
+        if (isset($request->image_path)) {
+            if ($ecomm_product->image_path) {
+                storage::disk('public')->delete($ecomm_product->image_path);
+            }
             $name = $request->image_path->getClientOriginalName();
             $path = $request->image_path->storeAs('files', $name, 'public');
-
             $ecomm_product->image_path = $path;
         }
 
@@ -84,7 +88,6 @@ class EcommProductController extends Controller
         $ecomm_products = ecomm_product::all();
         // return view("admin.ecomm_products.index",['ecomm_products'=>$ecomm_products]);
         return to_route('ecomm_product.index');
-
     }
 
     public function delete(ecomm_product $ecomm_product)
@@ -93,7 +96,6 @@ class EcommProductController extends Controller
         foreach ($product_categories as $product_category) {
             $product_category->delete();
         }
-
         $ecomm_product->delete();
         $ecomm_products = ecomm_product::all();
         return view('admin.ecomm_products.index', ['ecomm_products' => $ecomm_products]);

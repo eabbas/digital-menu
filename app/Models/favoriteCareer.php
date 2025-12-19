@@ -6,5 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class favoriteCareer extends Model
 {
-    protected $fillable=['user_id','career_id'];
+    protected $fillable=[
+        'user_id',
+        'career_id'
+    ];
 }

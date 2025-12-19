@@ -11,10 +11,11 @@ use Illuminate\Support\Str;
 
 class EcommCategoryController extends Controller
 {
-       public function create(){
+    public function create()
+    {
         // $ecomm_categories=ecomm_category::where("ecomm_id",$user->ecomms[0]->id)->get();
-       
-        return view("admin.ecomm_categories.create",["user"=>Auth::user()]);
+
+        return view('admin.ecomm_categories.create', ['user' => Auth::user()]);
     }
 
     public function store(Request $request)
@@ -28,9 +29,9 @@ class EcommCategoryController extends Controller
         } else {
             ecomm_category::create(['title' => $request->title, 'description' => $request->description, 'parent_id' => $request->parent_id, 'show_in_home' => 0, 'image_path' => $path, 'ecomm_id' => $request->ecomm_id, 'user_id' => $user->id]);
         }
-          $ecomm_categories=ecomm_category::with('parent')->get();
-        
-         return to_route("ecomm_category.index",['ecomm_categories'=>$ecomm_categories]);
+        $ecomm_categories = ecomm_category::with('parent')->get();
+
+        return to_route('ecomm_category.index', ['ecomm_categories' => $ecomm_categories]);
     }
 
     // public function index(){
@@ -67,8 +68,7 @@ class EcommCategoryController extends Controller
     {
         $ecomm_category = ecomm_category::find($request->id);
         if ($request->image_path) {
-            if($ecomm_category->image_path){
-
+            if ($ecomm_category->image_path) {
                 storage::disk('public')->delete($ecomm_category->image_path);
             }
             $name = $request->image_path->getClientOriginalName();
@@ -122,25 +122,25 @@ class EcommCategoryController extends Controller
         //                          $ecomm_product->delete();
         //             }
         //         }
-           
+
         // return to_route('ecomm_category.index',['ecomm_categories'=>$ecomm_categories]);
         return back();
     }
 
-     public function getEcommCategories(Request $request){
+    public function getEcommCategories(Request $request)
+    {
         // dd($request->all);
-          if($request->key=="all"){
-              $categories=Auth::user()->ecomm_categories;
-
-          }else{
-              $categories=ecomm_category::where('ecomm_id',$request->key)->get();
-
-          }
-         return response()->json($categories);
+        if ($request->key == 'all') {
+            $categories = Auth::user()->ecomm_categories;
+        } else {
+            $categories = ecomm_category::where('ecomm_id', $request->key)->get();
+        }
+        return response()->json($categories);
     }
 
-    public function ecomm_categories(ecomm $ecomm){
-          $user= Auth::user();
-        return view('admin.ecomm_categories.ecomm_categories',['ecomm'=>$ecomm,'user'=>$user]);
+    public function ecomm_categories(ecomm $ecomm)
+    {
+        $user = Auth::user();
+        return view('admin.ecomm_categories.ecomm_categories', ['ecomm' => $ecomm, 'user' => $user]);
     }
 }

@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class ecomm_qrCode extends Model
 {
-    protected $fillable=[
+    protected $fillable = [
         'qr_path',
         'user_id',
         'ecomm_id',
         'slug'
     ];
-    public function ecomm(){
+
+    public function ecomm()
+    {
         return $this->belongsTo(ecomm::class);
     }
 }

@@ -6,9 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class ecomm extends Model
 {
-     protected $fillable = ['logo', 'banner','description', 'title', 'province', 'city', 'address','user_id','email','social_media'];
+  protected $fillable = [
+    'logo',
+    'banner', 
+    'description',
+    'title',
+    'province',
+    'city',
+    'address', 
+    'user_id',
+    'email',
+    'social_media'
+  ];
 
   public $timestamps = true;
+
   public function user()
   {
     return $this->belongsTo(User::class);
@@ -18,14 +30,14 @@ class ecomm extends Model
   {
     return $this->hasMany(ecomm_category::class)->chaperOne();
   }
+
   public function ecomm_product()
   {
     return $this->hasMany(ecomm_product::class)->chaperOne();
   }
- 
+
   public function ecomm_qrCode()
   {
     return $this->hasOne(ecomm_qrCode::class);
   }
- 
 }
