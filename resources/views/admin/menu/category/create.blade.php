@@ -22,6 +22,15 @@
                                             name='menuCat[0][title]' placeholder="نوشیدنی" title="عنوان دسته منو" required>
                                     </div>
                                 </div>
+                                
+                                <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">تصویر دسته:</label>
+                                    <div
+                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                        <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="file"
+                                            name="menuCat[0][image]" title="تصویر دسته">
+                                    </div>
+                                </div>
                                 <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                     <label class="w-30 text-sm mb-1 mt-2.5 flex">توضیحات</label>
                                     <div
@@ -29,14 +38,6 @@
                                         <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
                                             name='menuCat[0][description]' placeholder="توضیحات دسته"
                                             class="w-full px-3 py-1 md:px-2 outline-none text-gray-500">
-                                    </div>
-                                </div>
-                                <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">تصویر دسته:</label>
-                                    <div
-                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                        <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="file"
-                                            name="menuCat[0][image]" title="تصویر دسته">
                                     </div>
                                 </div>
                             </div>

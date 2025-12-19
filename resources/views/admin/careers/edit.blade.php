@@ -130,8 +130,7 @@
                             <div
                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <textarea rows="5" class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                    name='description' placeholder="توضیحات کسب وکار"
-                                    class="w-full px-3 py-1 md:px-2 outline-none text-gray-500"required>{{ $career->description }}</textarea>
+                                    name='description' placeholder="توضیحات کسب وکار" class="w-full px-3 py-1 md:px-2 outline-none text-gray-500">{{ $career->description }}</textarea>
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 lg:col-span-2">
@@ -146,7 +145,8 @@
                                             <img class="size-20" src="{{ asset('storage/' . $qr_code->qr_path) }}"
                                                 alt="QRCode">
                                         </div>
-                                        <p class="text-sm lg:text-base description" data-id="{{ $qr_code->id }}">{{ $qr_code->description }}</p>
+                                        <p class="text-sm lg:text-base description" data-id="{{ $qr_code->id }}">
+                                            {{ $qr_code->description }}</p>
                                     </div>
                                     <div class="flex flex-row justify-end items-center gap-3">
                                         <div class="flex justify-center cursor-pointer"
@@ -172,8 +172,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <a href="{{ route('qr.delete', [$qr_code]) }}"
-                                        class="p-3 bg-rose-500 rounded-lg text-white font-semibold text-sm cursor-pointer">حذف</a> --}}
                                 </div>
                                 @php
                                     $k++;
@@ -183,7 +181,7 @@
                     </div>
                     <div class="w-full text-left ">
                         <button type="submit"
-                            class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium">
+                            class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
                             ثبت
                         </button>
                     </div>

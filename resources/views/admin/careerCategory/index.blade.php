@@ -34,8 +34,9 @@
                                         {{ $careerCategory->title }}</div>
                                     {{-- <div class="p-3 text-sm h-full flex items-center justify-center text-gray-900">{{ $careerCategory->description}}</div> --}}
                                     @if ($careerCategory->show_in_home == 1)
-                                        <div class="p-3 text-lg h-full flex items-center justify-center text-gray-900">✅
-                                        </div>
+                                        <div class="p-3 text-lg h-full flex items-center justify-center text-gray-900">✅</div>
+                                    @else
+                                        <div class="p-3 text-lg h-full flex items-center justify-center text-gray-900">❌</div>
                                     @endif
                                     <div class="w-full grid grid-cols-3 col-span-2 h-full divide-x divide-[#f1f1f4]">
                                         <div class="flex justify-center items-center">
