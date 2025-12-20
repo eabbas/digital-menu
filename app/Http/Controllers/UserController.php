@@ -98,11 +98,13 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user = User::find($request->id);
-        $role = role_user::where('user_id', $user->id)->delete();
-        role_user::create([
-            'user_id'=>$user->id,
-            'role_id'=>$request->role
-        ]);
+        if(isset($request->role)){
+            $role = role_user::where('user_id', $user->id)->delete();
+            role_user::create([
+                'user_id'=>$user->id,
+                'role_id'=>$request->role
+            ]);
+        }
         $user->name = $request->name;
         $user->family = $request->family;
         if (isset($request->phoneNumber)) {
