@@ -3,7 +3,6 @@
 @section('title', 'کسب و کارهای من')
 
 @section('content')
-
     <div class="w-full flex flex-col pb-4">
         <div class="bg-white rounded-lg">
            

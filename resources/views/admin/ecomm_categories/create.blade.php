@@ -76,7 +76,7 @@
                      <div class="w-full flex flex-row items-center gap-3 max-md:flex-row max-md:gap-1">
 
                          <input class="" type="checkbox" name="show_in_home" value="1">
-                         <lable class="text-sm mb-1 mt-2.5 flex">این محصول جز صفحه اول هست</lable>
+                         <lable class="text-sm mb-1 mt-2.5 flex">این دسته جز صفحه اول هست</lable>
                      </div>
 
 
