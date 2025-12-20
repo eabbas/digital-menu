@@ -338,7 +338,7 @@
                         @foreach ($career->custom_product as $index => $custom_product)
                             @php $hasProduct=true; @endphp
                                 <div
-                                    class="w-full flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4]">
+                                    class="w-full flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4] newParameters"  data-cp-id="{{ $custom_product->id }}">
                                     <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
                                         <span class="block w-10 lg:w-full">{{ $i }}</span>

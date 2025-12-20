@@ -19,11 +19,11 @@ class CustomProductController extends Controller
     public function store(Request $request)
     {
         $path = null;
-        if (isset($request->customProductImage)) {
-            $name = $request->customProductImage->getClientOriginalName();
-            $fullName = time() . '_' . $name;
-            $path = $request->file('customProductImage')->storeAs('images', $fullName, 'public');
-        }
+        // if (isset($request->customProductImage)) {
+        //     $name = $request->customProductImage->getClientOriginalName();
+        //     $fullName = time() . '_' . $name;
+        //     $path = $request->file('customProductImage')->storeAs('images', $fullName, 'public');
+        // }
         $customPro_id = custom_product::insertGetId([
             'title' => $request->title,
             'description' => $request->description,
