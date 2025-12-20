@@ -330,7 +330,7 @@
                         </div>
                         
                     </div>
-                    <div class="bg-white divide-y divide-[#f1f1f4]">
+                    <div class="bg-white divide-y divide-[#f1f1f4]" id="custom_product_section">
                         @php
                             $i=1;
                             $hasProduct=false;

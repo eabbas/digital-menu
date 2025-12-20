@@ -34,7 +34,7 @@ class CustomProductMaterialController extends Controller
             'max_unit_amount' => $request->max_unit_amount,
             'category_id' => $request->category_id,
             'custom_product_id' => $request->custom_pro_id,
-            'required' => $request->required ? $request->required : 0 , 
+            'required' => isset($request->required) ? $request->required : 0 , 
             'image' => $path
         ]);
         $data = custom_product_material::find($cpm_id);

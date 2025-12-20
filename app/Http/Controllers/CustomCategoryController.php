@@ -21,7 +21,7 @@ class CustomCategoryController extends Controller
         // dd($request->all());
         $customCategory_id = customCategory::insertGetId([
             'title'=>$request->title ,
-            'required' => $request->required ? $request->required : 0 , 
+            'required' => isset($request->required) ? $request->required : 0 , 
             'max_item_amount' => $request->max_item_amount ,
             'custom_pro_id' => $request->custom_pro_id 
         ]);
