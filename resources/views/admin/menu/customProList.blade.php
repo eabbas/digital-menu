@@ -397,6 +397,7 @@
                                             </div>
                                             
                                             <!-- لیست انواع محصولات -->
+                                            
                                             <div class=" py-4 flex items-center justify-center">
                                                 <a href="{{ route('cpv.list', [$custom_product]) }}" 
                                                 class="flex flex-col items-center gap-1 text-blue-600 hover:text-blue-700 transition-colors group">
@@ -899,7 +900,7 @@
                                 
                                 <!-- لیست انواع محصولات -->
                                 <div class="py-4 flex items-center justify-center">
-                                    <a href="{{ url('customProductVariants.variantList/${data}') }}" 
+                                    <a href="{{ url('customProductVariants/variantList/${data}') }}" 
                                        class="flex flex-col items-center gap-1 text-blue-600 hover:text-blue-700 transition-colors group">
                                         <div class="size-8 rounded-lg bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
                                             <svg class="size-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
