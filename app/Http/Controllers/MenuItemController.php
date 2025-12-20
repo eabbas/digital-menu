@@ -77,7 +77,7 @@ class MenuItemController extends Controller
     }
 
     public function edit(menu_item $menu_item){
-        
+        // dd($menu_item);
         return view('admin.menu.item.edit', ['menu'=>$menu_item]);
     }
 
@@ -99,11 +99,13 @@ class MenuItemController extends Controller
             $path = $request->file('image')->storeAs('images', $fullName, 'public');
             $item->image = $path;
         }
-        if (isset($request->ingredients)) {
+        if(count($item->ingredients)){
             foreach($item->ingredients as $ingredients){
                 $ingredients->image && Storage::disk('public')->delete($ingredients->image);
                 $ingredients->delete();
             }
+        }
+        if(isset($request->ingredients)){
             foreach($request->ingredients as $ingre){
                 if(isset($ingre['image'])){
                     $ingreImage = $ingre['image']->getClientOriginalName();
