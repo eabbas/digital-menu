@@ -15,17 +15,18 @@
     <div class="flex flex-col border-none rounded-[7px]">
         <div class="block lg:flex flex-row justify-between gap-8">
             <div class="flex flex-col xm:flex-row lg:flex-row gap-5 py-3">
-                @if(!$ecomm_product->logo)
+                @if(!$ecomm_product->image_path)
                 <img
                     class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0"
                     src="{{asset('assets/img/user.png')}}"
                     alt="ecomm_product logo"
                 />
                 @else
-                <img
+               
+                 <img
                     class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0"
                     src="{{asset('storage/'.$ecomm_product->image_path)}}"
-                    alt="ecomm_product logo"
+                    alt="ecomm_category image_path"
                 />
                 @endif
             </div>

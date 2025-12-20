@@ -774,19 +774,11 @@
                     'key': el.value
                 },
                 success: function(categories) {
+                    let myOption = document.createElement('option')
                     let mySelect = document.getElementById("ecomCategories")
                     mySelect.innerHTML = ``
                     categories.forEach((category) => {
-                        let myOption = document.createElement('option')
                         if (type == "product" || type == "category" || type == "edit") {
-                            myOption.innerHTML = `${category.title}`
-                            myOption.value = `${category.id}`
-                            mySelect.append(myOption)
-                        }
-
-                        if (type == "filter") {
-                            let myElement = document.createElement('div')
-                            let categoryId = category.id
                             myOption.innerHTML = `${category.title}`
                             myOption.value = `${category.id}`
                             mySelect.append(myOption)

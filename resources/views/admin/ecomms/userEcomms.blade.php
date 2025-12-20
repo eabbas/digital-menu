@@ -101,6 +101,11 @@
                                         @endif
                                         <div
                                             class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
+                                            <a href="{{ route('ecomm_category.ecomm_categories', [$ecomm]) }}"
+                                                class="transition-all duration-150 hover:text-sky-400">  مشاهده دسته ها </a>
+                                        </div>
+                                        <div
+                                            class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
                                             <a href="{{ route('ecomm_category.create') }}"
                                                 class="transition-all duration-150 hover:text-sky-400">ایجاد دسته </a>
                                         </div>
