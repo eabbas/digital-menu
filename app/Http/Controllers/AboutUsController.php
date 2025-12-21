@@ -17,7 +17,7 @@ class AboutUsController extends Controller
                 'id' => $request->id,
                 'title' => $request->title,
                 'description' => $request->description],
-                ['id'],
+                ['id'], // unique
                 ['title','description']);
         }else{
             aboutUs::upsert([
