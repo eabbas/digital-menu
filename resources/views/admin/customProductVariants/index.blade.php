@@ -34,7 +34,7 @@
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
             <!-- Table Header -->
             <div class="bg-gray-50 border-b border-gray-200">
-                <div class="grid grid-cols-12 items-center">
+                <div class="grid grid-cols-12 items-center bg-white">
                     <div class="px-4 py-3 text-right text-xs font-medium text-gray-600">نام نوع</div>
                     <div class="px-4 py-3 text-right text-xs font-medium text-gray-600">توضیحات</div>
                     <div class="px-4 py-3 text-right text-xs font-medium text-gray-600">حداقل واحد</div>

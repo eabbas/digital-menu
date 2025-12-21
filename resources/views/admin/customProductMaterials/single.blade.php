@@ -18,7 +18,7 @@
         
     </div>
     <div class="pt-3 mt-4 lg:mt-8">
-        <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5">
+        <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5 bg-white">
             <h1 class="lg:text-xl mt-5 font-bold pb-3 border-b border-gray-200">جزییات محصول </h1>
            
             <div class="w-full lg:w-1/2 flex flex-col gap-y-3 lg:gap-y-5 mt-5">
@@ -67,7 +67,7 @@
                        لزوم    
                     </div>
                     <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                        @if ($cpm->required == 1)
+                        @if (isset($cpm->required))
                         {{ "بودن آن الزامی است" }}
                         @else
                         {{ "بودن آن الزامی نیست" }} 
