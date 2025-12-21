@@ -35,6 +35,8 @@ class CustomProductController extends Controller
         return response()->json($data);
     }
 
+    
+
     public function index()
     {
         $allCustomProduct = custom_product::all();
