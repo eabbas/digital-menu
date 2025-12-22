@@ -18,7 +18,6 @@ class MenuCategoryController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $menuCats = $request->menuCat;
         foreach ($menuCats as $key => $menuCat) {
             if (isset($menuCat['image'])) {

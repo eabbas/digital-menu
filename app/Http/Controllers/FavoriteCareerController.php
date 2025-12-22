@@ -13,10 +13,8 @@ class FavoriteCareerController extends Controller
     {
         $favoriteCareer = favoriteCareer::where('career_id', $request->id)->first();
         if (!$favoriteCareer) {
-            $user_id = Auth::id();
-            favoriteCareer::create(['user_id' => $user_id, 'career_id' => $request->id]);
+            favoriteCareer::create(['user_id' => Auth::id(), 'career_id' => $request->id]);
         }
-        // return to_route('favoriteCareer.list');
     }
 
     public function index()
@@ -29,7 +27,7 @@ class FavoriteCareerController extends Controller
         if ($careers) {
             return view('admin.favoriteCareer.index', ['careers' => $careers]);
         }
-        return to_route('user.profile', [Auth::user()]);
+        return to_route('user.profile');
     }
 
     public function delete(career $career)
