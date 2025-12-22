@@ -128,7 +128,7 @@ class UserController extends Controller
             $user->main_image = $path;
         }
         $user->save();
-        return to_route('user.profile', [Auth::user()]);
+        return redirect()->back();
     }
 
     public function delete(user $user)

@@ -66,7 +66,7 @@ class CareerCategoryController extends Controller
         }
         $careerCategory->title = $request->title;
         $careerCategory->show_in_home = isset($request->show_home) ? $request->show_home : 0;
-
+        
         $careerCategory->save();
         return to_route('cc.list');
     }
