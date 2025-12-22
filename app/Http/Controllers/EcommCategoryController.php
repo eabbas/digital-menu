@@ -42,7 +42,6 @@ class EcommCategoryController extends Controller
     public function index()
     {
         $ecomm_categories = ecomm_category::with('parent')->get();
-        $user = Auth::user();
         return view('admin.ecomm_categories.index', ['user' =>Auth::user()]);
     }
 
@@ -87,7 +86,8 @@ class EcommCategoryController extends Controller
         $ecomm_category->description = $request->description;
         $ecomm_category->save();
         $ecomm = ecomm::find($ecomm_category->ecomm_id);
-        return view('admin.ecomm_categories.index', ['user' => Auth::user()]);
+        // return view('admin.ecomm_categories.index', ['user' => Auth::user()]);
+        return back();
     }
 
     public function update_ecomm_categories(Request $request)
@@ -110,7 +110,7 @@ class EcommCategoryController extends Controller
         $ecomm_category->description = $request->description;
         $ecomm_category->save();
         $ecomm = ecomm::find($ecomm_category->ecomm_id);
-        return to_route('ecomm_category.ecomm_categories', [$ecomm]);
+                return back();
     }
 
     public function delete(ecomm_category $ecomm_category)
@@ -129,7 +129,6 @@ class EcommCategoryController extends Controller
 
     public function getEcommCategories(Request $request)
     {
-        // dd($request->all);
         if ($request->key == 'all') {
             $categories = Auth::user()->ecomm_categories;
         } else {
