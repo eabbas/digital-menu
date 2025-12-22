@@ -24,8 +24,6 @@ class ClientController extends Controller
     }
     public function show_socialPage(covers $covers)
     {
-        // dd($covers);
-        $cover=$covers;
-        return view('client.link.single', ['cover' => $cover]);
+        return view('client.link.single', ['cover' => $covers]);
     }
 }

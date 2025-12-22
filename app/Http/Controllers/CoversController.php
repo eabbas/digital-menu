@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class CoversController extends Controller
 {
@@ -24,7 +23,6 @@ class CoversController extends Controller
 
     public function store(Request $request)
     {
-
         $logoPath = null;
         $coverPath = null;
         if (isset($request->logo_path)) {
@@ -60,9 +58,7 @@ class CoversController extends Controller
 
     public function social_list()
     {
-        $user = Auth::user();
-        $user->covers;
-        return view('admin.covers.social_list', ['user' => $user]);
+        return view('admin.covers.social_list');
     }
 
     public function index()

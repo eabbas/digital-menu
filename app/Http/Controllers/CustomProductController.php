@@ -51,13 +51,10 @@ class CustomProductController extends Controller
     {
         $custom_product = custom_product::find($request->id);
         return response()->json($custom_product);
-        // return view('admin.customProducts.edit' , ['customProduct'=>$customProduct]);
     }
 
     public function update(Request $request)
     {
-        // dd($request->all());
-        // return response()->json($request->all());
         $customProduct =  custom_product::find($request->id);
         $customProduct->title = $request->title;
         $customProduct->description = $request->description;
@@ -73,7 +70,6 @@ class CustomProductController extends Controller
         // }
         $customProduct->save();
         return response()->json($customProduct);
-        // return to_route('menu.customProList' , [$customProduct->career_id]);
     }
 
     public function delete(Request $request)
@@ -99,7 +95,6 @@ class CustomProductController extends Controller
         }
         $customProduct->delete();
         return response()->json('ok');
-        // return to_route('menu.customProList', [$customProduct->career_id]);
     }
 
     public function createFromDashboard(User $user)

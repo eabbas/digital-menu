@@ -31,7 +31,6 @@ use App\Http\Controllers\CustomCategoryController;
 use App\Http\Controllers\EcommController;
 use App\Http\Controllers\EcommCategoryController;
 use App\Http\Controllers\EcommProductController;
-use App\Models\career;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -75,7 +74,7 @@ Route::group([
 ], function () {
     Route::get('/create/{user?}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/user/{user?}', 'user_careers')->name('careers')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/userCareers', 'user_careers')->name('careers')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/edit/{career}/{user?}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{career}', 'delete')->name('delete');
