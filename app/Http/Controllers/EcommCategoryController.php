@@ -43,7 +43,7 @@ class EcommCategoryController extends Controller
     {
         $ecomm_categories = ecomm_category::with('parent')->get();
         $user = Auth::user();
-        return view('admin.ecomm_categories.index', ['user' => $user]);
+        return view('admin.ecomm_categories.index', ['user' =>Auth::user()]);
     }
 
     public function show(ecomm_category $ecomm_category)
@@ -140,7 +140,6 @@ class EcommCategoryController extends Controller
 
     public function ecomm_categories(ecomm $ecomm)
     {
-        $user = Auth::user();
-        return view('admin.ecomm_categories.ecomm_categories', ['ecomm' => $ecomm, 'user' => $user]);
+        return view('admin.ecomm_categories.ecomm_categories', ['ecomm' => $ecomm]);
     }
 }

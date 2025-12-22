@@ -33,7 +33,7 @@
                     </div>
                     <div class="bg-white divide-y divide-[#f1f1f4]">
                         @php
-                            $i=1;
+                        $i=1;
                         @endphp
                         @if($user->careers)
                         @foreach ($user->careers as $career)

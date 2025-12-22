@@ -68,25 +68,21 @@ class EcommController extends Controller
         ]);
         ecomm_category::create(['title' => 'بدون دسته بندی', 'description' => 'محصولات فاقد دسته بندی', 'show_in_home' => 0, 'ecomm_id' => $ecomm_id, 'parent_id' => 0]);
 
-        return to_route('ecomm.ecomms', [Auth::user()]);
+        return to_route('ecomm.ecomms');
     }
 
-    public function user_ecomms(User $user = null)
+    public function user_ecomms()
     {
-        if ($user) {
-            return view('admin.ecomms.userecomms', ['user' => $user]);
-        } else {
-            return view('admin.ecomms.userecomms', ['user' => Auth::user()]);
+            return view('admin.ecomms.userEcomms', ['user' => Auth::user()]);
         }
-    }
 
-    public function edit(ecomm $ecomm, User $user = null)
+    public function edit(ecomm $ecomm)
     {
-        if (!$user) {
-            $user = Auth::user();
-        }
+        // if (!$user) {
+        //     $user = Auth::user();
+        // }
         $ecomm->social_media = json_decode($ecomm->social_media);
-        return view('admin.ecomms.edit', ['ecomm' => $ecomm, 'user' => $user]);
+        return view('admin.ecomms.edit', ['ecomm' => $ecomm, 'user' => Auth::user()]);
     }
 
     public function update(Request $request)
@@ -118,7 +114,14 @@ class EcommController extends Controller
         $ecomm->description = $request->description;
         $ecomm->email = $request->email;
         $ecomm->save();
-        return to_route('ecomm.ecomms', [Auth::user()]);
+        $user=Auth::user();
+        if($user->role[0]->title=="admin"){
+
+            return to_route('ecomm.list');
+        }else{
+
+            return to_route('ecomm.ecomms', [Auth::user()]);
+        }
     }
 
     public function delete(ecomm $ecomm)

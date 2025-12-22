@@ -15,7 +15,6 @@ class EcommProductController extends Controller
 {
     public function create()
     {
-        $ecomm_categories = ecomm_category::all();
         $user = Auth::user();
         return view('admin.ecomm_products.create', ['user' => $user]);
     }
@@ -40,9 +39,6 @@ class EcommProductController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
-        $ecomm_categories = $user->ecomm_categories;
-
         return view('admin.ecomm_products.index', ['user' => Auth::user()]);
     }
 
@@ -97,8 +93,9 @@ class EcommProductController extends Controller
             $product_category->delete();
         }
         $ecomm_product->delete();
-        $ecomm_products = ecomm_product::all();
-        return view('admin.ecomm_products.index', ['ecomm_products' => $ecomm_products]);
+        // $ecomm_products = ecomm_product::all();
+        // return view('admin.ecomm_products.index', ['ecomm_products' => $ecomm_products]);
+        return back();
     }
 
     public function category_product(ecomm_category $ecomm_category)
