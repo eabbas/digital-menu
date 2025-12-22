@@ -26,7 +26,7 @@ class CareerCategoryController extends Controller
         careerCategory::create([
             'title' => $request->title,
             'description' => $request->description,
-            'show_in_home' => $request->show_home ? $request->main_image : 0,
+            'show_in_home' => isset($request->show_home) ? $request->show_home : 0,
             'main_image' => $path
         ]);
         return to_route('cc.list');

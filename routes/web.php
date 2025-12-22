@@ -477,10 +477,10 @@ Route::group([
     'as' => 'ecomm.',
     'middleware' => [UserMiddleware::class]
 ], function () {
-    Route::get('/create/{user?}', 'create')->name('create');
+    Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/list/{user?}', 'user_ecomms')->name('ecomms')->withoutMiddleware([UserMiddleware::class]);
-    Route::get('/edit/{ecomm}/{user?}', 'edit')->name('edit');
+    Route::get('/list', 'user_ecomms')->name('ecomms')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/edit/{ecomm}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{ecomm}', 'delete')->name('delete');
     Route::get('/ecomms', 'index')->name('list');
