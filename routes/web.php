@@ -119,7 +119,7 @@ Route::group([
     Route::get('/edit/{menu}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{menu}', 'delete')->name('delete');
-    Route::get('/showMenu/{menu}', 'showMenu')->name('showMenu');
+    // Route::get('/showMenu/{menu}', 'showMenu')->name('showMenu');
     Route::get('/createMenu', 'createMenu')->name('createMenu');
     Route::get('/myMenu/{user}', 'user_menu')->name('user_menus');
 });
@@ -408,7 +408,7 @@ Route::group([
     'controller' => SiteLinkController::class,
     'as' => 'siteLink.'
 ], function () {
-    Route::get('/create/{covers?}', 'create')->name('create');
+    Route::get('/create/{covers}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::get('/medias', 'index')->name('list');
     Route::post('/edit', 'edit')->name('edit');
@@ -421,7 +421,7 @@ Route::group([
     'controller' => SocialAddressController::class,
     'as' => 'socialAddress.'
 ], function () {
-    Route::get('/create/{covers?}', 'create')->name('create');
+    Route::get('/create/{covers}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::get('/socialAddress', 'index')->name('list');
     Route::post('/edit/{social_address}', 'edit')->name('edit');

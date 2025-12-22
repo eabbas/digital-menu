@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class SiteLinkController extends Controller
 {
-    public function create(covers $covers = null)
+    public function create(covers $covers)
     {
         return view('admin.siteLink.create', ['covers' => $covers]);
     }
@@ -32,7 +32,6 @@ class SiteLinkController extends Controller
         ]);
         $data = site_link::find($id);
         return response()->json($data);
-        // return to_route('covers.single', [$request->covers_id]);
     }
 
     public function index()
@@ -46,7 +45,6 @@ class SiteLinkController extends Controller
         $id = $request->input('id');
         $link = site_link::find($id);
         return response()->json($link);
-        // return view('admin.siteLink.edit', ['siteLink' => $siteLink]);
     }
 
     public function update(Request $request)
@@ -73,6 +71,5 @@ class SiteLinkController extends Controller
         $siteLink = site_link::find($id);
         $siteLink->delete();
         return response()->json('ok');
-        // return to_route('siteLink.list');
     }
 }
