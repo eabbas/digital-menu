@@ -53,7 +53,7 @@ class CoversController extends Controller
         social_qr_codes::create([
             'qr_path' => $fileName,
             'covers_id' => $cover_id,
-            'slug' => 'qrcode/' . $cover_id . '/' . $random
+            'slug' => $random
         ]);
         return to_route('covers.social_list');
     }
