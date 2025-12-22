@@ -68,6 +68,7 @@ class MenuController extends Controller
             $bannerPath = $request->file('banner')->storeAs('files', $fullBannerName, 'public');
             $menu->banner = $bannerPath;
         }
+        $menu->save();
         return to_route('menu.single', [$menu]);
     }
 
