@@ -15,8 +15,7 @@ class EcommProductController extends Controller
 {
     public function create()
     {
-        $user = Auth::user();
-        return view('admin.ecomm_products.create', ['user' => $user]);
+        return view('admin.ecomm_products.create', ['user' =>Auth::user()]);
     }
 
     public function store(Request $request)
@@ -83,7 +82,8 @@ class EcommProductController extends Controller
         $ecomm_product_ecomm_category->save();
         $ecomm_products = ecomm_product::all();
         // return view("admin.ecomm_products.index",['ecomm_products'=>$ecomm_products]);
-        return to_route('ecomm_product.index');
+        // return to_route('ecomm_product.index');
+        return back();
     }
 
     public function delete(ecomm_product $ecomm_product)

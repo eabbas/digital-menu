@@ -114,14 +114,8 @@ class EcommController extends Controller
         $ecomm->description = $request->description;
         $ecomm->email = $request->email;
         $ecomm->save();
-        $user=Auth::user();
-        if($user->role[0]->title=="admin"){
-
-            return to_route('ecomm.list');
-        }else{
-
-            return to_route('ecomm.ecomms', [Auth::user()]);
-        }
+       
+                return back();
     }
 
     public function delete(ecomm $ecomm)
