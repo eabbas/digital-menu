@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ecomm;
 use App\Models\ecomm_category;
+use App\Models\ecomm_product_ecomm_category;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -115,8 +117,14 @@ class EcommCategoryController extends Controller
 
     public function delete(ecomm_category $ecomm_category)
     {
-        $ecomm_category->delete($ecomm_category);
-        $ecomm_categories = ecomm_category::with('parent')->get();
+        $ecomm_category->ecomm_products;
+        $proCats=ecomm_product_ecomm_category::where('ecomm_category_id',$ecomm_category->id)->get();
+foreach($proCats as $proCat){
+    $proCat->ecomm_category_id=$ecomm_category->ecomm->ecomm_category[0]->id;
+    $proCat->save();
+}
+        $ecomm_category->delete();
+        // $ecomm_categories = ecomm_category::with('parent')->get();
         //  if($ecomm_category->ecomm_products){
         //             foreach($ecomm_category->ecomm_products as $ecomm_product){
         //                          $ecomm_product->delete();
