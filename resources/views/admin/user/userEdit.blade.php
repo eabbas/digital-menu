@@ -66,7 +66,7 @@
                 <form action="{{ route('user.update') }}" method="post"
                     class="shadow__profaill__list_products rounded-lg pb-4 bg-white" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="id" value="{{ Auth::id() }}">
+                    <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                     <div class="border-b border-gray-300">
                         <h2 class="text-xl mr-5 text-center lg:text-right py-4">جزییات پروفایل</h2>
                     </div>

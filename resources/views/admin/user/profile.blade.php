@@ -8,23 +8,23 @@
                     class="flex flex-row justify-center lg:justify-start items-center gap-2 text-[#99A1B7] text-[11px] lg:text-sm">
                     {{-- <a href="{{ route('home') }}" class="p-2">خانه</a>
                     <span>/</span> --}}
-                    <a href="{{ route('user.profile', [$user]) }}">اکانت من</a>
+                    <a href="{{ route('user.profile', [Auth::user()]) }}">اکانت من</a>
                 </div>
             </div>
 
             <div class="flex flex-col border-none rounded-[7px]">
                 <div class="block lg:flex flex-row justify-between gap-8">
                     <div class="flex flex-col xm:flex-row lg:flex-row gap-5 py-3 rounded-full">
-                        @if (!$user->main_image)
+                        @if (!Auth::user()->main_image)
                             <img class="size-27 lg:size-41 mx-auto lg:m-0 rounded-full"
                                 src="{{ asset('assets/img/user.png') }}" alt="user__avatar">
                         @else
                             <img class="size-27 lg:size-41 mx-auto lg:m-0 rounded-full"
-                                src="{{ asset('storage/' . $user->main_image) }}" alt="user__picture">
+                                src="{{ asset('storage/' . Auth::user()->main_image) }}" alt="user__picture">
                         @endif
                         <div class="flex flex-col justify-end">
                             <div class="div1 text-center lg:text-start">
-                                <strong class="text-gray-700">{{ $user->name }} {{ $user?->family }}</strong>
+                                <strong class="text-gray-700">{{ Auth::user()->name }} {{ Auth::user()?->family }}</strong>
                             </div>
                             <div class="div2 hidden">
                                 <ul class="flex flex-col lg:flex-row gap-3 text-[#99A1B7]">
@@ -47,12 +47,12 @@
                                 </div>
                                 <div
                                     class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px]">
-                                    <span class="font-bold text-blue-500">{{  count($user->qr_codes)  }}</span>
+                                    <span class="font-bold text-blue-500">{{  count(Auth::user()->qr_codes)  }}</span>
                                     <span class="text-[#4B5675]"> تعداد QR کد ها </span>
                                 </div>
                                 <div
                                     class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border max-sm:border-[1.5px] rounded-[5px]">
-                                    <span class="font-bold text-blue-500">{{ count($user->careers) }}</span>
+                                    <span class="font-bold text-blue-500">{{ count(Auth::user()->careers) }}</span>
                                     <span class="text-[#4B5675]">تعداد کسب و کارها</span>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
             </div>
 
             <div class="pt-3 mt-4 lg:mt-8">
-                {{-- @dd($user); --}}
+                {{-- @dd(Auth::user()); --}}
                 <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5 bg-white">
                     <h1 class="lg:text-xl mt-5 font-bold mx-2">جزییات پروفایل </h1>
 
@@ -71,17 +71,17 @@
                     <div class="flex gap-7 sm:hidden">
                         <div class="flex w-full flex-col">
                             <label class="p-2.5 text-gray-400">نام کامل</label>
-                            <span class="p-2.5 text-gary-600"><strong>{{ $user->name }}
-                                    {{ $user?->family }}</strong></span>
+                            <span class="p-2.5 text-gary-600"><strong>{{ Auth::user()->name }}
+                                    {{ Auth::user()?->family }}</strong></span>
                             <span class="p-2.5 text-gary-600">فائوس</span>
                             <label class="p-2.5 text-gray-400">شماره تلفن</label>
-                            <span class="p-2.5 text-gary-600">{{ $user->phoneNumber }}<mark
+                            <span class="p-2.5 text-gary-600">{{ Auth::user()->phoneNumber }}<mark
                                     class="mx-2 text-green-700 bg-green-300 px-1 rounded-md">تایید
                                     شده</mark></span>
                             <label class="p-2.5 text-gray-400">ایمیل</label>
-                            <span class="p-2.5 text-gary-600">{{ $user->email }}</span>
+                            <span class="p-2.5 text-gary-600">{{ Auth::user()->email }}</span>
                             <label class="p-2.5 text-gray-400">نقش</label>
-                            <span class="p-2.5 text-gary-600">{{ $user->role[0]->title }}</span>
+                            <span class="p-2.5 text-gary-600">{{ Auth::user()->role[0]->title }}</span>
                             {{-- <label class="p-2.5 text-gray-400">سایت کمپانی</label>
                     <a href="#" class="p-2.5 text-gary-600">famenu.ie</a>
                     <label class="p-2.5 text-gray-400">کشور </label>
@@ -101,14 +101,14 @@
                     <label class="p-2.5 text-gray-400">ارتباط</label> --}}
                         </div>
                         <div class="flex w-full flex-col">
-                            <span class="p-2.5 text-gary-600"><strong>{{ $user->name }}
-                                    {{ $user?->family }}</strong></span>
+                            <span class="p-2.5 text-gary-600"><strong>{{ Auth::user()->name }}
+                                    {{ Auth::user()?->family }}</strong></span>
                             {{-- <span class="p-2.5 text-gary-600">فائوس</span> --}}
-                            <span class="p-2.5 text-gary-600">{{ $user->phoneNumber }}<mark
+                            <span class="p-2.5 text-gary-600">{{ Auth::user()->phoneNumber }}<mark
                                     class="mx-2 text-green-700 bg-green-300 px-1 rounded-md">تایید
                                     شده</mark></span>
-                            <span class="p-2.5 text-gary-600">{{ $user->role[0]->title}}</span>
-                            <span class="p-2.5 text-gary-600">{{ $user->email }}</span>
+                            <span class="p-2.5 text-gary-600">{{ Auth::user()->role[0]->title}}</span>
+                            <span class="p-2.5 text-gary-600">{{ Auth::user()->email }}</span>
                             {{-- <a href="#" class="p-2.5 text-gary-600">famenu.ie</a>
                     <span class="p-2.5 text-gary-600">ایران</span>
                     <span class="p-2.5 text-gary-600">ایمیل, تلفن</span> --}}

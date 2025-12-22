@@ -51,7 +51,7 @@ Route::group([
     Route::get("/logout", "logout")->name('logout');
     Route::get("/", "index")->name('list');
     Route::get("/panel/{user}", "panel")->name('panel');
-    Route::get('/profile/{user?}', 'profile')->name('profile');
+    Route::get('/profile', 'profile')->name('profile');
     Route::get('/show/{user}', 'show')->name('show');
     Route::get("/edit/{user}", "edit")->name('edit');
     Route::post("/update", "update")->name('update');

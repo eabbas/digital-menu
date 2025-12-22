@@ -58,7 +58,7 @@
                                     </div>
                                     <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
-                                        <a href="{{ route('user.show', [$career->user->id]) }}" class="block w-30 lg:w-full">{{ $career->user->name }}{{ $career->user->family }}</a>
+                                        <a href="{{ route('user.show', [$career->user->id]) }}" class="block w-30 lg:w-full">{{ $career->user->name }} {{ $career->user->family }}</a>
                                     </div>
                                     <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center">

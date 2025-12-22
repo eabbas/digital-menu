@@ -87,7 +87,7 @@
                                     ورود به {{ $item->socialMedia->title }}
                                 </h3>
                                 <div class="mt-3">
-                                    <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-blue-100 rounded-full cursor-pointer editSocial"
+                                    <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-[{{ $item->socialMedia->color }}] rounded-full cursor-pointer editSocial"
                                         data-social-id="{{ $item->id }}"
                                         onclick='editSocial("{{ $item->id }}", "{{ $item->socialMedia->id }}")'>
                                         <img src="{{ asset('storage/' . $item->socialMedia->icon_path) }}"
@@ -329,7 +329,7 @@
                             class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out editSMF">
                             @csrf
                             <input type="hidden" name="id" class="socialAddressId">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-5 lg:gap-10 socialDiv">
+                            <div class="w-full socialDiv">
                                 <!-- عنوان شبکه اجتماعی -->
                                 @if (isset($item))
                                     <div class="w-full flex flex-col">
@@ -338,12 +338,12 @@
                                             class="w-full px-3 py-2 outline-none border-1 border-sky-400 rounded-lg userName" required>
                                     </div>
                                     <!-- انتخاب شبکه اجتماعی -->
-                                    <div class="w-full flex flex-col">
+                                    {{-- <div class="w-full flex flex-col">
                                         <label class="text-sm md:text-base mb-2" for="socialMedia_id">شبکه
                                             اجتماعی:</label>
                                         <select name="socialMedia_id"
                                             class="w-full px-3 py-2 outline-none border-1 border-sky-400 rounded-lg socialMedia_id"></select>
-                                    </div>
+                                    </div> --}}
                                 @endif
                             </div>
 
@@ -699,18 +699,10 @@
                 dataType: 'json',
                 data: {
                     'id': socialAddressId.value,
-                    'socialMedia_id': socialMedia_id.value,
                     'username': userNameUpdate.value,
                     'cover_id': "{{ $cover->id }}"
                 },
                 success: function(data) {
-                    // console.log(data)
-                    for (let i = 0; i < socialMedia_id.children.length; i++) {
-                        if (socialMedia_id.children[i].value == data.socialMedia_id) {
-                            socialMedia_id.children[i].setAttribute('selected', true)
-                            console.log(socialMedia_id.children[i])
-                        }
-                    }
                     editsocialMediaForm.children[0].classList.remove('flex')
                     editsocialMediaForm.children[0].classList.add('hidden')
                     closeForm()
@@ -749,7 +741,6 @@
                     'userName': userNameCreate.value
                 },
                 success: function(datas) {
-
                     storeSocialForm.children[0].classList.remove('flex')
                     storeSocialForm.children[0].classList.add('hidden')
                     socialMedia_id_create.value = 1
@@ -765,7 +756,7 @@
                     ${datas.socialMedia.title}
                     </h3>
                     <div class="mt-3">
-                        <div  class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-blue-100 rounded-full cursor-pointer editSocial" data-social-id="${datas.address.id}"  onclick='editSocial(${datas.address.id}, ${datas.socialMedia.id})'>
+                        <div  class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-[${datas.socialMedia.color}] rounded-full cursor-pointer editSocial" data-social-id="${datas.address.id}"  onclick='editSocial(${datas.address.id}, ${datas.socialMedia.id})'>
                             <img src="${link}" class="size-5 rounded-md" alt="">
                             <span class="font-bold text-gray-800">${datas.socialMedia.title}</span>
                         </div>
@@ -782,7 +773,6 @@
         }
 
         function editSocial(id, socialId) {
-            socialMedia_id.innerHTML = "";
             editsocialMediaForm.children[0].classList.remove('hidden')
             editsocialMediaForm.children[0].classList.add('flex')
             editsocialMediaForm.children[0].innerHTML = `
@@ -809,20 +799,9 @@
 
                     editsocialMediaForm.children[0].classList.add('hidden')
                     editsocialMediaForm.children[0].classList.remove('flex')
-
-                    datas.socialMedias.forEach((socialMedia) => {
-                        let option = document.createElement('option')
-                        option.value = socialMedia.id
-                        option.innerText = socialMedia.title
-                        if (socialId == socialMedia.id) {
-                            option.setAttribute('selected', true)
-                            socialTitle.innerText = socialMedia.title
-                        }
-                        socialMedia_id.appendChild(option)
                         userName.value = datas.data.username
                         socialAddressId.value = datas.data.id
                         socialLink.innerText = datas.data.username
-                    })
                 },
                 error: function() {
                     alert('خطا در بارگیری اطلاعات')

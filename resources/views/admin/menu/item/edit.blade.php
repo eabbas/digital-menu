@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
-                            <label class="w-32 text-sm mb-1 mt-2.5 flex">زمان تقریبی پخت:</label>
+                            <label class="w-full text-sm mb-1 mt-2.5 flex">زمان تقریبی آماده شدن:</label>
                             <div class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="w-full focus:outline-none text-sm font-bold mr-2" type="number" name='duration' placeholder="دقیقه" value="{{ $menu->duration }}">
                             </div>

@@ -47,7 +47,7 @@ class UserController extends Controller
             if ($checkHash) {
                 $user->role;
                 Auth::login($user);
-                return to_route('user.profile', [$user]);
+                return to_route('user.profile');
             }
             return to_route('login');
         }
@@ -68,20 +68,16 @@ class UserController extends Controller
 
     public function panel()
     {
-        $user = Auth::user();
-        $user->role;
-
         if (!Auth::check()) {
             return to_route('login');
         }
-        return view('admin.app.panel', ['user' => $user]);
+        return view('admin.app.panel');
     }
 
     public function profile()
     {
-        $user = Auth::user();
-        $user->role;
-        return view('admin.user.profile', ['user' => $user]);
+        
+        return view('admin.user.profile');
     }
 
     public function show(user $user)
@@ -92,12 +88,12 @@ class UserController extends Controller
     public function edit(user $user)
     {
         $roles = role::all();
-        return view('admin.user.edit', ['user' => $user, 'roles'=>$roles]);
+        return view('admin.user.adminUserEdit', ['user' => $user, 'roles'=>$roles]);
     }
 
     public function update(Request $request)
     {
-        $user = User::find($request->id);
+        $user = User::find($request->user_id);
         if(isset($request->role)){
             $role = role_user::where('user_id', $user->id)->delete();
             role_user::create([
@@ -154,14 +150,15 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $user->role;
-
-        $name = $request->main_image->getClientOriginalName();
-        $fullName = time() . '_' . $name;
-        $path = $request->file('main_image')->storeAs('images', $fullName, 'public');
-        $user->main_image = $path;
+        if(isset($request->main_image)){
+            $name = $request->main_image->getClientOriginalName();
+            $fullName = time() . '_' . $name;
+            $path = $request->file('main_image')->storeAs('images', $fullName, 'public');
+            $user->main_image = $path;
+        }
         $user->email = $request->email;
         $user->save();
-        return to_route('user.profile', [Auth::user()]);
+        return to_route('user.profile');
     }
 
     public function set_order(Request $request)
@@ -179,7 +176,7 @@ class UserController extends Controller
 
     public function setting()
     {
-        return view('admin.user.setting');
+        return view('admin.user.userEdit');
     }
 
     public function checkAuth(Request $request){
