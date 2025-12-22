@@ -22,6 +22,7 @@ class SocialMediaController extends Controller
             'title' => $request->title,
             'icon_path' => $path,
             'link' => $request->link,
+            'color'=>$request->color
         ]);
         return to_route('socialMedia.list');
     }
@@ -48,6 +49,7 @@ class SocialMediaController extends Controller
         }
         $socialMedia->title = $request->title;
         $socialMedia->link = $request->link;
+        $socialMedia->color = $request->color;
         $socialMedia->save();
         return to_route('socialMedia.list');
     }

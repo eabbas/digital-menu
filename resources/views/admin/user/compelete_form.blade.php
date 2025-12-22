@@ -7,7 +7,7 @@
         <label>عکس پروفایل</label>
         <input type="file"
             class="w-full p-[9px] mb-1 rounded-[7px] border border-[#DBDFE9] outline-none"
-            name="main_image" required>
+            name="main_image">
     </div>
     <div class="w-full flex flex-col gap-3">
         <label>ایمیل</label>

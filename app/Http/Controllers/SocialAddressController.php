@@ -46,7 +46,7 @@ class SocialAddressController extends Controller
     public function update(Request $request)
     {
         $social_address = social_address::find($request->id);
-        $social_address->socialMedia_id = $request->socialMedia_id;
+        // $social_address->socialMedia_id = $request->socialMedia_id;
         $social_address->username = $request->username;
         $social_address->covers_id = $request->cover_id;
         $social_address->save();
