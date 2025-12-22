@@ -72,16 +72,13 @@ class CareerController extends Controller
                 'user_id'=> Auth::id()
             ]);
         }
-        return to_route('career.careers', [Auth::user()]);
+        return to_route('career.careers');
     }
 
-    public function user_careers(User $user = null)
+    public function user_careers()
     {
-        if ($user) {
-            $user->role;
-            return view('admin.careers.userCareers', ['user' => $user]);
-        }
-        return view('admin.careers.userCareers', ['user' => Auth::user()]);
+       
+        return view('admin.careers.userCareers');
     }
 
     public function edit(career $career, User $user = null)
@@ -150,8 +147,7 @@ class CareerController extends Controller
         }
         $career->qr_count = $request->qr_count;
         $career->save();
-        $user = user::find($request->user_id);
-        return to_route('career.careers', ['user' => $user]);
+        return to_route('career.careers');
     }
 
     public function delete(career $career)
@@ -182,7 +178,7 @@ class CareerController extends Controller
             }
         }
         $career->delete();
-        return to_route('user.profile', [Auth::user()]);
+        return to_route('user.profile');
     }
 
     public function index()

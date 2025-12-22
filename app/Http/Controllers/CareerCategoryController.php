@@ -16,7 +16,6 @@ class CareerCategoryController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $path = null;
         if (isset($request->main_image)) {
             $name = $request->main_image->getClientOriginalName();
@@ -50,7 +49,6 @@ class CareerCategoryController extends Controller
 
     public function update(Request $request)
     {
-        // dd($request->all());
         $careerCategory = careerCategory::find($request->id);
         if (isset($request->main_image)) {
             if ($careerCategory->main_image) {
