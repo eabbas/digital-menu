@@ -17,10 +17,10 @@ class EcommController extends Controller
 {
     public function create(User $user = null)
     {
-        if ($user) {
-            return view('admin.ecomms.create', ['user' => $user]);
+        if (!$user) {
+            $user = Auth::user();
         }
-        return view('admin.ecomms.create', ['user' => Auth::user()]);
+        return view('admin.ecomms.create', ['user' => $user]);
     }
 
     public function store(Request $request)
