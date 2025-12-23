@@ -95,7 +95,10 @@ class CoversController extends Controller
         $covers->subTitle = $request->subTitle;
         $covers->description = $request->description;
         $covers->save();
-        return to_route('covers.list');
+        if(Auth::user()->role[0]->title == 'admin'){
+            return to_route('covers.list');
+        }
+        return to_route('covers.social_list');
     }
 
     public function delete(covers $covers)
@@ -110,6 +113,9 @@ class CoversController extends Controller
         }
         $covers->social_qr_codes->delete();
         $covers->delete();
+         if(Auth::user()->role[0]->title == 'admin'){
+            return to_route('covers.list');
+        }
         return to_route('covers.social_list');
     }
 
