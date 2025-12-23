@@ -56,7 +56,7 @@ class EcommController extends Controller
         ]);
 
         $random = Str::random(10);
-        $link = "famenu.ir/show/$ecomm_id/" . $random;
+        $link = "famenu.ir/ecomms/show/$ecomm_id/" . $random;
         $qr_svg = QrCode::size(100)->generate($link);
         $fileName = 'ecomm_qrCodes/' . $ecomm_id . '_' . $random . '.svg';
         Storage::disk('public')->put($fileName, $qr_svg);
@@ -154,5 +154,9 @@ class EcommController extends Controller
     public function single(ecomm $ecomm)
     {
         return view('admin.ecomms.single', ['ecomm' => $ecomm]);
+    }
+
+    public function ecomm_menu(ecomm $ecomm){
+        return view('admin.ecomms.ecomm_menu',['ecomm'=>$ecomm]);
     }
 }

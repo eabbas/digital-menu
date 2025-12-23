@@ -113,7 +113,7 @@ Route::group([
 ], function(){
     Route::get('/create/{career?}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/show/{menu}', 'single')->name('single');
+    Route::get('/show/{menu}','single')->name('single');
     Route::get('/customProList/{career}', 'customProMenu')->name('customProList');
     Route::get('/edit/{menu}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
@@ -484,6 +484,7 @@ Route::group([
     Route::get('/delete/{ecomm}', 'delete')->name('delete');
     Route::get('/ecomms', 'index')->name('list');
     Route::get('/show/{ecomm}', 'single')->name('single')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/ecomm_menu/{ecomm}', 'ecomm_menu')->name('ecomm_menu')->withoutMiddleware([UserMiddleware::class]);
 });
 
 Route::group(['prefix'=>'ecomm_category',

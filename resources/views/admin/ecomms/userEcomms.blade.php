@@ -95,8 +95,8 @@
                                     @else
                                         <div
                                             class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                            <a href="{{ route('menuCat.create', [$ecomm]) }}"
-                                                class="transition-all duration-150 hover:text-sky-400">ایجاد دسته منو</a>
+                                            <a href="{{ route('ecomm.ecomm_menu', [$ecomm])}}"
+                                                class="transition-all duration-150 hover:text-sky-400"> مشاهده منو</a>
                                         </div>
                                         @endif
                                         <div
