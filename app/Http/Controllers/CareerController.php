@@ -125,6 +125,7 @@ class CareerController extends Controller
         $career->description = $request->description;
         $career->email = $request->email;
         $career->user_id = $request->user_id;
+        $career->career_category_id = $request->careerCategory;
         if ($request->qr_count) {
             if ((int) $request->qr_count > $career->qr_count) {
                 $qr_count = (int) $request->qr_count - $career->qr_count;
@@ -180,7 +181,8 @@ class CareerController extends Controller
             }
         }
         $career->delete();
-        return to_route('user.profile');
+        return to_route('career.careers');
+
     }
 
     public function index()

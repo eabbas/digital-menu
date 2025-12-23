@@ -26,6 +26,7 @@
             </div>
             <div class="flex flex-row gap-3 my-4 overflow-x-auto overflow-y-clip" style="scrollbar-width: none;">
                 @foreach ($careerCategories as $careerCategory)
+                @if ($careerCategory->show_in_home==1)
                 <div class="flex flex-col gap-3 justify-center items-center cursor-pointer" onclick='showCareer({{ $careerCategory->id }}, this)'>
                     <div class="size-20 rounded-md border border-gray-300 p-2 overflow-hidden careerCat">
                         @if ($careerCategory->main_image)
@@ -38,8 +39,8 @@
                     </div>
                     <span class="text-xs font-medium text-center">{{ $careerCategory->title }}</span>
                 </div>
+                @endif
                 @endforeach
-
             </div>
             <div class="flex flex-row justify-between items-center mt-5 mb-3">
                 <h1 class="text-xl" id="careerCatTitle">

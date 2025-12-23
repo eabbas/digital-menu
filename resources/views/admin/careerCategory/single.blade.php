@@ -50,11 +50,11 @@
                     </div>
                     @if($careerCategory->show_in_home == 1)
                     <span class="text-lg">
-                        ✅
+                        درصفحه اول موجود می باشد
                     </span>
                     @else
                     <span class="text-lg">
-                        ❌
+                      در صفحه اول موجود نمی باشد
                     </span>
                     @endif
                 </div>
