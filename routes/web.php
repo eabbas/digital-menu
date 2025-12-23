@@ -519,16 +519,16 @@ Route::group(['prefix'=>'ecomm_product',
     Route::get('/delete/{ecomm_product}','delete')->name('delete');
     Route::get('/category_product/{ecomm_category}','category_product')->name('category_product');
 });
-// Route::group([
-//     'prefix' => 'ecomm_qrCode',
-//     'controller' => EcommQrCodeController::class,
-//     'as' => 'ecomm_qr.'
-// ], function () {
-//     Route::get('/{ecomm}', 'load')->name('load');
-//     Route::get('/links/{covers}/{slug}', 'loadLink')->name('loadLink');
-//     Route::post('/edit', 'edit')->name('edit');
-//     Route::post('/update', 'update')->name('update');
-// });
+Route::group([
+    'prefix' => 'ecomm_qrCode',
+    'controller' => EcommQrCodeController::class,
+    'as' => 'ecomm_qr.'
+], function () {
+    Route::get('/{ecomm}', 'load')->name('load');
+    Route::get('/links/{covers}/{slug}', 'loadLink')->name('loadLink');
+    Route::post('/edit', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+});
 
 Route::fallback(function () {
     return view('client.login');
