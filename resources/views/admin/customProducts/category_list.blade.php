@@ -57,8 +57,8 @@
 
 
 
-         <div class="flex flex-col gap-5">
-            <div class="w-10/12 mx-auto shadow-md rounded mb-5 overflow-x-auto [&::-webkit-scrollbar]:hidden lg:overflow-visible">
+        <div class="flex flex-col gap-5">
+            <div class="w-11/12 mx-auto shadow-md rounded mb-5 overflow-x-auto [&::-webkit-scrollbar]:hidden lg:overflow-visible">
                 <div class="w-full flex flex-row lg:grid lg:grid-cols-9 items-center divide-x divide-[#f1f1f4] sticky -top-5">
                     <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
                         <span class="block w-10 lg:w-full text-center">ردیف</span>
@@ -72,9 +72,6 @@
                     <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-2">
                         <span class="block w-[120px] lg:w-full">حداکثر مواد</span>
                     </div>
-                    {{-- <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-3">
-                        <span class="block w-24 lg:w-full">توضیحات</span>
-                    </div> --}}
                     <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-4">
                         <span class="block w-[320px] lg:w-full">عملیات</span>
                     </div>
@@ -109,7 +106,7 @@
                 
                                 
                                 <div class="col-span-4">
-                                    <div class="w-full grid grid-cols-3 divide-x divide-[#f1f1f4] items-center w-[320px]">
+                                    <div class="lg:w-full grid grid-cols-3 divide-x divide-[#f1f1f4] items-center w-[320px]">
 
                                         <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3">
                                             <li class="flex justify-center">
@@ -137,10 +134,10 @@
                                                 </div>
                                             </li>
                                         </ul>
-                                        <div onclick='openCPMform("{{ $category->id }}")' class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium cursor-pointer">
+                                        <div onclick='openCPMform("{{ $category->id }}")' class="p-1 lg:p-3 text-xs text-center text-blue-600 h-full flex items-center justify-center font-medium cursor-pointer">
                                              ایجاد آیتم جدید
                                         </div>
-                                        <div class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
+                                        <div class="p-1 lg:p-3 text-xs text-center text-blue-600 h-full flex items-center justify-center font-medium">
                                              <a href="{{ route('custmCategory.item_list' , [$category]) }}">
                                             لیست آیتم ها
                                              </a>

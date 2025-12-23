@@ -220,7 +220,7 @@
                                                     </a>
                                                 </div>
                                                 <div onclick='openCform("{{ $custom_product->id }}")'
-                                                    class=" flex items-center gap-2 text-blue px-4 py-2 rounded-lg text-blue-600 transition-all duration-200 cursor-pointer">
+                                                    class=" flex items-center gap-2 px-4 py-2 rounded-lg text-blue-600 transition-all duration-200 cursor-pointer">
                                                     <span class="block w-full text-center text-xs font-medium"> ایجاد
                                                         دسته</span>
                                                 </div>
