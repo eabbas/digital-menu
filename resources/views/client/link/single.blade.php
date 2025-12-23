@@ -31,7 +31,7 @@
                                     ورود به {{ $item->socialMedia->title }}
                                 </h3>
                                  <div class="mt-3">
-                                    <a  href="{{$item->socialMedia->link . $item->username}}" class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-blue-100 rounded-full cursor-pointer ">
+                                    <a  href="{{$item->socialMedia->link . $item->username}}" class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-[{{ $item->socialMedia->color }}] rounded-full cursor-pointer ">
                                         <img src="{{ asset('storage/' . $item->socialMedia->icon_path) }}"
                                             class="size-5 rounded-md" alt="">
                                         <span class="font-bold text-gray-800">{{ $item->socialMedia->title }}</span>
@@ -50,7 +50,7 @@
                                     ورود به {{ $siteLink->title }}
                                 </h3>
                                 <div class="mt-3">
-                                    <a href="{{$siteLink->address}}" class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-blue-100 rounded-full cursor-pointer ">
+                                    <a href="{{$siteLink->address}}" class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-[{{ $item->socialMedia->color }}] rounded-full cursor-pointer ">
                                         @if ($siteLink->icon_path)
                                             <img src="{{ asset('storage/' . $siteLink->icon_path) }}"
                                                 class="size-5 rounded-md" alt="">
