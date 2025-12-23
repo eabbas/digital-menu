@@ -56,14 +56,14 @@ class EcommController extends Controller
         ]);
 
         $random = Str::random(10);
-        $link = "famenu.ir/qrcode/$ecomm_id/" . $random;
+        $link = "famenu.ir/show/$ecomm_id/" . $random;
         $qr_svg = QrCode::size(100)->generate($link);
-        $fileName = 'qrcodes/' . $ecomm_id . '_' . $random . '.svg';
+        $fileName = 'ecomm_qrCodes/' . $ecomm_id . '_' . $random . '.svg';
         Storage::disk('public')->put($fileName, $qr_svg);
         ecomm_qrCode::create([
             'qr_path' => $fileName,
             'ecomm_id' => $ecomm_id,
-            'slug' => 'qrcode/' . $ecomm_id . '/' . $random,
+            'slug' => 'ecomm_qrCode/' . $ecomm_id . '/' . $random,
             'user_id' => Auth::id()
         ]);
         ecomm_category::create(['title' => 'بدون دسته بندی', 'description' => 'محصولات فاقد دسته بندی', 'show_in_home' => 0, 'ecomm_id' => $ecomm_id, 'parent_id' => 0]);
