@@ -35,8 +35,8 @@
                         @php
                         $i=1;
                         @endphp
-                        @if(Auth::user()->careers)
-                        @foreach (Auth::user()->careers as $career)
+                        @if($user->careers)
+                        @foreach ($user->careers as $career)
                             @if ($career)
                                 <div
                                     class="w-full flex flex-row lg:grid lg:grid-cols-9 items-center divide-x divide-[#f1f1f4]">
