@@ -26,7 +26,7 @@
                             class="text-sm px-5 py-2 bg-emerald-500 text-white hover:bg-emerald-600 transition-all duration-150 rounded-lg shadow-sm hover:shadow-md">
                             مشاهده دسته ها
                         </a>
-                    @endif
+                     @endif
                     <a href="{{ route('menu.edit', [$menu]) }}"
                         class="text-sm px-5 py-2 bg-blue-500 text-white hover:bg-blue-600 transition-all duration-150 rounded-lg shadow-sm hover:shadow-md">
                         ویرایش منو
