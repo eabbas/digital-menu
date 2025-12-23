@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\career;
 use App\Models\careerCategory;
+use App\Models\province_cities;
 use App\Models\role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,11 +18,12 @@ class CareerController extends Controller
     public function create(User $user = null)
     {
         $careerCategories = careerCategory::all();
+        $provinces = province_cities::where('parent', 0)->get();
         if ($user) {
             $user->role[0];
-            return view('admin.careers.create', ['user' => $user, 'careerCategories' => $careerCategories]);
+            return view('admin.careers.create', ['user' => $user, 'careerCategories' => $careerCategories, 'provinces'=>$provinces]);
         }
-        return view('admin.careers.create', ['user' => Auth::user()->role, 'careerCategories' => $careerCategories]);
+        return view('admin.careers.create', ['user' => Auth::user()->role, 'careerCategories' => $careerCategories, 'provinces'=>$provinces]);
     }
 
     public function store(Request $request)
@@ -48,8 +50,7 @@ class CareerController extends Controller
         $career_id = career::insertGetId([
             'title' => $request->title,
             'logo' => $path,
-            'province' => $request->province,
-            'city' => $request->city,
+            'city_id' => $request->city,
             'address' => $request->address,
             'social_media' => $social_medias,
             'user_id' => $user->id,
@@ -85,13 +86,14 @@ class CareerController extends Controller
 
     public function edit(career $career, User $user = null)
     {
+        $provinces = province_cities::where('parent', 0)->get();
+        $cities = province_cities::where('parent', $career->province_city->province->id)->get();
         if (!$user) {
             $user = Auth::user();
-            $user->role;
         }
         $careerCategories = careerCategory::all();
         $career->social_media = json_decode($career->social_media);
-        return view('admin.careers.edit', ['career' => $career, 'user' => $user, 'careerCategories' => $careerCategories]);
+        return view('admin.careers.edit', ['career' => $career, 'user' => $user, 'careerCategories' => $careerCategories, 'provinces'=>$provinces, 'cities'=>$cities]);
     }
 
     public function update(Request $request)
@@ -118,8 +120,7 @@ class CareerController extends Controller
             $career->banner = $bannerPath;
         }
         $career->social_media = json_encode($request->social_medias);
-        $career->province = $request->province;
-        $career->city = $request->city;
+        $career->city_id = $request->city;
         $career->title = $request->title;
         $career->address = $request->address;
         $career->description = $request->description;

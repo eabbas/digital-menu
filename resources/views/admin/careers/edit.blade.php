@@ -1,6 +1,7 @@
 @extends('admin.app.panel')
 @section('title', 'ویرایش کسب و کار')
 @section('content')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">فرم ویرایش کسب وکار</h1>
     <form action="{{ route('career.update') }}" method="post" enctype='multipart/form-data'>
         @csrf
@@ -62,23 +63,30 @@
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="text-sm mb-1 mt-2.5 flex">استان</label>
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">استان</label>
 
-                            <div
-                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                    name='province' placeholder="استان خود را وارد کنید" required
-                                    value="{{ $career->province }}">
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                        name='province' placeholder="استان خود را وارد کنید" onchange="changeCity(this)" required>
+                                        @foreach ($provinces as $province)
+                                            <option value="{{ $province->id }}" @if($province->id == $career->province_city->province->id){{ 'selected' }}@endif>{{ $province->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="text-sm mb-1 mt-2.5 flex">شهر</label>
-                            <div
-                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                    name='city' placeholder=" شهرخود را وارد کنید" required value="{{ $career->city }}">
+                            <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">شهر</label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                        name='city' id="city" placeholder=" شهرخود را وارد کنید"required>
+                                        @foreach ($cities as $city)
+                                            <option value="{{ $city->id }}" @if($city->id == $career->city_id){{ 'selected' }}@endif>{{ $city->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                        </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                             <label class="text-sm mb-1 mt-2.5 flex">آدرس</label>
                             <div
@@ -189,8 +197,6 @@
             </div>
         </div>
     </form>
-
-
     <div class="w-full h-dvh bg-black/70 fixed top-0 right-0 z-9999 transition-all duration-300 invisible opacity-0"
         id="loading">
         <div class="w-full lg:w-[calc(100%-265px)] float-left h-dvh flex justify-center items-center">
@@ -212,7 +218,6 @@
 
             <div class="w-11/12 lg:w-2/3 px-3 relative">
 
-                {{-- invisible opacity-0 --}}
                 <form action="{{ route('qr.update') }}" method="post" enctype='multipart/form-data'
                     class="w-full bg-white py-5 rounded-lg transition-all duration-300 absolute top-full invisible opacity-0 scale-95 form px-5 -translate-y-1/2"
                     id="editQr">
@@ -368,6 +373,35 @@
                 }
             })
         }
+
+        let city = document.getElementById('city')
+            function changeCity(el){
+                city.innerHTML = ""
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+                $.ajax({
+                    url: "{{ route('pc.city') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'id': el.value
+                    },
+                    success: function(datas){
+                        datas.forEach(data => {
+                            let option = document.createElement('option')
+                            option.value = data.id
+                            option.innerText = data.title
+                            city.appendChild(option)
+                        });
+                    },
+                    error: function(){
+                        alert('خطا در دریافت داده')
+                    }
+                })
+            }
     </script>
     <script src="{{ asset('assets/js/qrcode.js') }}"></script>
 @endsection
