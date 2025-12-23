@@ -1,9 +1,13 @@
 @extends('admin.app.panel')
-@section('title', 'صفحه تک انواع محصول ')
+@section('title')
+     {{ $cpVariants->title }}
+@endsection
 @section('content')
 <div class="w-full">
             <div class="pb-5 w-full">
-                <h1 class="text-xl text-center lg:text-start">صفحه تک  نوع محصول</h1>
+                <h1 class="text-xl text-center lg:text-start">
+                     نوع : {{ $cpVariants->title }}
+                </h1>
             </div>
     <div class="pt-3 mt-4 lg:mt-8">
         <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5 bg-white">

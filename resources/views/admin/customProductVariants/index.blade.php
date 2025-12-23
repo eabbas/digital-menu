@@ -19,7 +19,6 @@
                         </span> --}}
                     </div>
                 </div>
-                {{-- href="{{ route('cpv.create', [$customProduct]) }}"  --}}
                 <div onclick='openCPVform("{{ $customProduct->id }}")'
                    class="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors text-sm">
                     <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -102,7 +101,6 @@
                                 </a>
                             </li>
                             <li class="flex justify-center">
-                                {{-- href="{{ route('cpv.edit', [$cpVariant]) }}" --}}
                                 <div onclick='editCPV(this ,"{{ $cpVariant->id }}")'
                                     class="w-fit flex flex-row items-center justify-center bg-green-500 hover:bg-green-600 p-1 rounded-sm" title="ویرایش">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
@@ -111,8 +109,6 @@
                                 </div>
                             </li>
                             <li class="flex justify-center">
-                                {{--  href="{{ route('cpv.delete', [$cpVariant]) }}"--}}
-                             
                                 <div onclick='deleteCPV(this,"{{ $cpVariant->id }}")'
                                     class="w-fit flex flex-row items-center justify-center bg-red-500 hover:bg-red-600 p-1 rounded-sm" title="حذف">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
@@ -129,7 +125,6 @@
                     <div class="py-12 text-center" id="no_variant_message">
                         <h3 class="text-lg font-medium text-gray-600 mb-2">هیچ نوع محصولی یافت نشد</h3>
                         <p class="text-gray-500 text-sm mb-6">هنوز هیچ  نوع محصولی ایجاد نکرده‌اید</p>
-                        {{-- href="{{ route('cpm.create' , [$customCategory]) }}"  --}}
                     </div>
                 @endif
             </div>
@@ -138,88 +133,60 @@
 
 
 
-          <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCPVform">
-        <div class="w-[calc(100%-265px)] float-end flex justify-center items-center bg-white h-dvh relative" id="closeCreateCPVform">
-        <span class="cursor-pointer absolute top-4 right-4 text-4xl text-gray-500 hover:text-gray-700 transition-colors duration-200" onclick="closeForm()">×</span>
-            <form action="{{ route('cpv.store') }}" method="post" enctype="multipart/form-data" class="space-y-6">
+        <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCPVform">
+        <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative" id="closeCreateCPVform">
+            <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200"
+                    onclick="closeForm()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
+                        <path fill="gray"
+                            d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                    </svg>
+                </div>
+              <form action="{{ route('cpv.store') }}" method="post" enctype="multipart/form-data"
+                class="bg-white w-1/2 p-5 rounded-lg">
                 @csrf
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
-                    <!-- عنوان -->
-                    <div>
-                        <label for="title" class="block text-sm font-medium text-gray-700">
-                            عنوان <span class="text-red-500">*</span>
-                        </label>
-                        <input type="text" 
-                            name="title" 
-                            id="titleCPV"
-                            required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
-                    </div>
-                    <!-- حداقل واحد مقدار -->
-                    <div>
-                        <label for="min_amount_unit" class="block text-sm font-medium text-gray-700 mb-2">
-                            حداقل واحد مقدار
-                        </label>
-                        <input type="number" 
-                            name="min_amount_unit" 
-                            id="min_amount_unit_cpv"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
-                    </div>
-                    <!-- مدت زمان -->
-                    <div>
-                        <label for="duration" class="block text-sm font-medium text-gray-700 mb-2">
-                            مدت زمان آماده سازی (دقیقه)
-                        </label>
-                        <input type="number" 
-                            name="duration" 
-                            id="durationCPV"
-                            min="1"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
-                    </div>
-                    <!-- محصول اصلی -->
-                    {{-- @dd($custom_product->career->id) --}}
-                    @if (isset($customProduct))
+
+                <div class="mb-4">
+                    <label for="title" class="block text-sm font-medium mb-2">
+                        عنوان دسته بندی
+                    </label>
+                    <input type="text" name="title" id="titleCPV" required
+                        class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+                </div>
+                 <!-- حداقل واحد مقدار -->
+                <div>
+                    <label for="min_amount_unit_cpv" class="block text-sm font-medium text-gray-700 mb-2">
+                        حداقل واحد مقدار
+                    </label>
+                    <input type="number" name="min_amount_unit" id="min_amount_unit_cpv"
+                    class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+                </div>
+                <!-- مدت زمان -->
+                <div>
+                    <label for="durationCPV" class="block text-sm font-medium text-gray-700 mb-2 mt-2">
+                        مدت زمان آماده سازی (دقیقه)
+                    </label>
+                    <input type="number" name="duration" id="durationCPV" min="1"
+                        class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+                </div>
+                <!-- محصول اصلی -->
+                @if (isset($customProduct))
                     <input type="hidden" name="custom_product_id" id="custom_product_id_variant" value="{{ $customProduct->id }}">
                     <input type="hidden" name="career_id" value="{{ $customProduct->career->id }}">
-                    @endif
-
-                    <!-- تصویر -->
-                    {{-- <div class="md:col-span-2">
-                        <label for="image" class="block text-sm font-medium text-gray-700 mb-2">
-                            تصویر
-                        </label>
-                        <div class="flex items-center space-x-4">
-                            <div class="flex-1">
-                                <input type="file" 
-                                    name="image" 
-                                    id="image"
-                                    accept="image/*"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-                            </div>
-                            <div class="image-preview hidden">
-                                <img id="preview" class="w-20 h-20 object-cover rounded-lg border">
-                            </div>
-                        </div>
-                        <p class="text-xs text-gray-500 mt-2">فرمت‌های مجاز: JPG, PNG, GIF. حداکثر سایز: 2MB</p>
-                    </div> --}}
-
-                    <!-- توضیحات -->
-                    <div class="md:col-span-2">
-                        <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
-                            توضیحات
-                        </label>
-                        <textarea name="description" 
-                                id="descriptionCPV"
-                                rows="4"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"></textarea>
-                    </div>
+                @endif
+                <!-- توضیحات -->
+                <div class="md:col-span-2">
+                    <label for="descriptionCPV" class="block text-sm font-medium text-gray-700 mb-2 mt-2">
+                        توضیحات
+                    </label>
+                    <textarea name="description" id="descriptionCPV" rows="4"
+                        class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none"></textarea>
                 </div>
-
                 <!-- دکمه‌های فرم -->
-                <div class="flex justify-end space-x-4 pt-4 border-t">
+                <div class="flex justify-end space-x-2 pt-4">
                     <button type="submit" onclick="cpvStore(event)"
-                    class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200 flex items-center">
-                        ثبت نوع محصول
+                        class="px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200 flex items-center">
+                        ثبت      
                     </button>
                 </div>
             </form>
@@ -233,70 +200,78 @@
         @foreach($customProduct->custom_product_variants as $index => $cpVariant)
         @if(isset($cpVariant))
         <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="editCPVform">
-            <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative bg-white" id="closeEditCform">
+            <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative " id="closeEditCform">
                 <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeForm()">
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
                         <path fill="gray" d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
                     </svg>
                 </div>
-                <form action="{{ route('cpv.update')}}" method="post" enctype='multipart/form-data'
-                class="w-11/12 lg:w-3/4 mx-auto py-5 rounded-lg">
-                    @csrf
-            
-                    {{-- @dd($cpVariant->title)/ --}}
-                    <input type="hidden" name="cpvId" id="cpvId">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 lg:gap-4">
-                        <div class="w-full flex flex-col">
-                            <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="title">
-                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">عنوان
-                            </legend>
-                            <input type="text" name="title" id="titleCpvedit" value="{{ $cpVariant->title }}"
-                            class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                            </fieldset>
+                <form action="{{ route('cpv.update')}}" method="post" enctype="multipart/form-data" class="bg-white w-1/2 p-5 rounded-lg relative">
+                        <div id="editCPVloading"
+                            class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
                         </div>
-                        <div class="w-full flex flex-col">
-                            <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="description">
-                            <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">
-                                توضیحات</legend>
-                                <input type="text" name="description" id="descriptionCPVedit" value="{{$cpVariant ->description }}"
-                                    class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                            </fieldset>
+                        @csrf
+                        <input type="hidden" name="cpvId" id="cpvId">
+                        <div class="mb-4">
+                            <label for="titleCpvedit" class="block text-sm font-medium mb-2">
+                                عنوان
+                            </label>
+                            <input type="text" 
+                                name="title" 
+                                id="titleCpvedit"
+                                required
+                                class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
                         </div>
-                        <div class="w-full flex flex-col">
-                            <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="min_amount_unit">
-                            <legend class="p-1 w-30 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">
-                                حداقل مقدار واحد </legend>
-                                <input type="text" name="min_amount_unit" id="min_amount_unit_cpv_edit" value="{{$cpVariant -> min_amount_unit}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                            </fieldset>
+                        <div class="mb-4">
+                            <label for="title" class="block text-sm font-medium mb-2">
+                                تصویر محصول
+                            </label>
+                            <input type="file" 
+                                name="customProductImage" 
+                                id="customProductImage"
+                                class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
                         </div>
-                        <div class="w-full flex flex-col">
-                            <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                            for="duration">
-                            <legend class="p-1 w-30 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">
-                                زمان آماده سازی</legend>
-                                <input type="text" name="duration" id="curationCPVedit" value="{{$cpVariant -> duration}}"
-                                class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                            </fieldset>
+                        <div class="mb-4">
+                            <label for="min_amount_unit_cpv_edit" class="block text-sm font-medium mb-2">
+                                حداقل مقدار واحد 
+                            </label>
+                            <input type="number" 
+                                name="min_amount_unit" 
+                                id="min_amount_unit_cpv_edit"
+                                required
+                                placeholder="محدودیت متریال را وارد کنید"
+                                class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
                         </div>
-                        {{-- <div class="w-full flex flex-col">
-                            <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                                for="image">
-                                <legend class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">عکس
-                                </legend>
-                                <input type="file" name="image" class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500" value={{ $cpVariant->image }}>
-                            </fieldset>
-                        </div> --}}
-                    </div>
-                    <input type="hidden" name="cpvId" id="cpvIdInput" value="">
-                    <div class="text-center md:px-12 mt-5 lg:mt-10">
+                        <div class="mb-4">
+                            <label for="curationCPVedit" class="block text-sm font-medium mb-2">
+                                زمان آماده سازی
+                            </label>
+                            <input type="number" 
+                                name="duration" 
+                                id="curationCPVedit"
+                                required
+                                placeholder="محدودیت متریال را وارد کنید"
+                                class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+                        </div>
+
+
+                        <div class="mb-4">
+                            <label for="descriptionCPVedit" class="block text-sm font-medium mb-2">
+                                توضیحات
+                            </label>
+                            <textarea type="text" 
+                                name="description" 
+                                id="descriptionCPVedit"
+                                rows="4"
+                                class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none"></textarea>
+                        </div>
+                        <input type="hidden" name="cpvId" id="cpvIdInput" value="">
+
+                         <div class="text-center md:px-12 mt-5 lg:mt-10">
                         <button onclick='updateCPV(event, "{{ $cpVariant->id }}")'
                         class="w-5/12 max-sm:bg-blue-500 max-sm:text-white px-5 py-2 lg:px-10 lg:py-3 rounded-[8px] transition-all duration-250 bg-blue-400 text-white hover:bg-blue-600 hover:border-gray-400 hover:text-white text-gray-500 cursor-pointer">ویرایش</button>
                     </div>
-            </form>
+                    </form>     
             </div>
         </div>
         @endif
@@ -320,6 +295,8 @@
     let durationCPV = document.getElementById('durationCPV')
     let custom_product_id_variant = document.getElementById('custom_product_id_variant')
     let descriptionCPV = document.getElementById('descriptionCPV')
+    
+    let editloadingcpv = document.getElementById('editCPVloading')
 
     let cpvId = document.getElementById('cpvId')
     let forms = document.querySelectorAll(".form")
@@ -408,7 +385,7 @@
                         <div class="flex items-center justify-end gap-4">
                             <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3 gap-4">
                                 <li class="flex justify-center">
-                                    <a href="{{ url('customProductVariants') }}/${data.id}"
+                                    <a href="{{ url('customProductVariants/show/${data.id}') }}"
                                         class="w-fit flex flex-row items-center justify-center bg-sky-500 hover:bg-sky-600 p-1 rounded-sm" title="مشاهده">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 576 512">
                                             <path fill="white" d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z"/>
@@ -450,6 +427,16 @@
     function editCPV(element , id){
         cpvEdit.classList.remove('invisible')
         cpvEdit.classList.remove('opacity-0')
+        editloadingcpv.classList.remove('hidden')
+        editloadingcpv.classList.add('flex')
+        editloadingcpv.innerHTML = `
+        <div class="loading-wave">
+            <div class="loading-bar"></div>
+            <div class="loading-bar"></div>
+            <div class="loading-bar"></div>
+            <div class="loading-bar"></div>
+        </div>
+        `
 
         $.ajaxSetup({
             headers: {
@@ -464,6 +451,8 @@
                 'id': id
             },
             success: function(data){
+                editloadingcpv.classList.remove('flex')
+                editloadingcpv.classList.add('hidden')
                 console.log(data)
                 // cpvproId.value = data.id
                 cpvId.value = data.id
@@ -481,6 +470,16 @@
     function updateCPV(ev){
         let newParameters = document.querySelectorAll('.newParameters')
         ev.preventDefault()
+        editloadingcpv.classList.remove('hidden')
+        editloadingcpv.classList.add('flex')
+        editloadingcpv.innerHTML = `
+        <div class="loading-wave">
+            <div class="loading-bar"></div>
+            <div class="loading-bar"></div>
+            <div class="loading-bar"></div>
+            <div class="loading-bar"></div>
+        </div>
+        `
         $.ajaxSetup({
             headers : {
                 'X-CSRF-TOKEN' : "{{ csrf_token() }}"
