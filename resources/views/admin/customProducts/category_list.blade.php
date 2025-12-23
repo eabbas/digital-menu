@@ -188,7 +188,7 @@
         </div>
     </div> 
     @endforeach
-     @foreach($custom_product->customCategories as $category)
+     {{-- @foreach($custom_product->customCategories as $category) --}}
      <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCPMform">
         <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative bg-white" id="closeEditCform">
             <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeForm()">
@@ -289,14 +289,14 @@
                 </div>
 
                 <div class="mt-6 flex gap-3">
-                    <button type="submit" onclick="cpmStore(event)" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+                    <button onclick="cpmStore(event)" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
                         ثبت محصول
                     </button>
                 </div>
             </form>
         </div>
     </div>  
-    @endforeach
+    {{-- @endforeach --}}
 </div>
 <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCform">
     <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative" id="closeCreateCform">
@@ -348,6 +348,8 @@
             </div>
             <input type="hidden" name="custom_pro_id"  id="custom_pro_id_customCategory">
     </form>
+
+    
     </div>
 </div>
 
@@ -401,48 +403,48 @@
         createCategoryform.classList.remove('opacity-0')
         custom_pro_id_customCategory.value = cpId
     }
-    function cpmStore(ev){
-        ev.preventDefault()
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': "{{ csrf_token() }}"
-            }
-        })
-        $.ajax({
-            url : "{{ route('cpm.store') }}" ,
-            type : "POST" ,
-            dataType : "json" ,
-            data : {
-                'title' : cpmtitle.value,
-                'description' : cpmdescription.value,
-                'price_per_unit' : cpm_price_per_unit.value,
-                'requierd' : cpmrequired.value,
-                'order' : cpmorder.value,
-                'max_unit_amount' : cpm_max_unit_amount.value,
-                'custom_pro_id': cpm_custom_pro_id.value,
-                'category_id': cpm_category_id.value
-                // 'customProductImage' : customProductImage.value,
-            },
-            success: function(data){
-                console.log(data)
-                cpmtitle.value = ""
-                cpmdescription.value = ""
-                cpm_price_per_unit.value = ""
-                cpmorder.value = ""
-                cpm_max_unit_amount.value = ""
-                cpmrequired.checked = 0
-                cpm_custom_pro_id.value = ""
-                cpm_category_id.value = ""
-               
-                closeForm()
-            },
-            error: function(){
-                alert('خطا در ارسال داده')
-            }
+   function cpmStore(ev){
+    ev.preventDefault()
+    let isRequired = cpmrequired.checked ? 1 : 0;
     
-        })
-    }
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        }
+    })
+    $.ajax({
+        url : "{{ route('cpm.store') }}" ,
+        type : "POST" ,
+        dataType : "json" ,
+        data : {
+            'title' : cpmtitle.value,
+            'description' : cpmdescription.value,
+            'price_per_unit' : cpm_price_per_unit.value,
+            'required' : isRequired,
+            'order' : cpmorder.value,
+            'max_unit_amount' : cpm_max_unit_amount.value,
+            'custom_pro_id': cpm_custom_pro_id.value,
+            'category_id': cpm_category_id.value
+        },
+        success: function(data){
+            console.log(data)
+            cpmtitle.value = ""
+            cpmdescription.value = ""
+            cpm_price_per_unit.value = ""
+            cpmorder.value = ""
+            cpm_max_unit_amount.value = ""
+            cpmrequired.checked = false
+            cpm_custom_pro_id.value = ""
+            cpm_category_id.value = ""
+           
+            closeForm()
+        },
+        error: function(){
+            alert('خطا در ارسال داده')
+        }
 
+    })
+}
     function Categorystore(ev){
     ev.preventDefault()
     let checkBoxStatus = category.checked
@@ -565,7 +567,12 @@
                 console.log(data)
                 category_custom_pro_id.value = data.id
                 titleCategory.value = data.title
-                requierdCategory.value = data.required
+                  if (data.required) {
+                        requierdCategory.setAttribute('checked', true)
+                    } 
+                    if(!data.required){
+                        requierdCategory.removeAttribute('checked')
+                    }
                 category_max_item_amount.value = data.max_item_amount
             },
             error: function(){
@@ -613,7 +620,7 @@
                         element.children[0].children[0].innerText = data.title 
                         if(data.required == 1){
                             element.children[1].children[0].classList.remove('bg-green-50')
-                            element.children[1].children[0].classList.remove('text-green-600')
+                            element.children[1].children[0].classList.remove('text-green-100')
                             element.children[1].children[0].classList.add('bg-red-50')
                             element.children[1].children[0].innerText = 'الزامی'
                             element.children[1].children[0].classList.add('text-red-600')
@@ -623,7 +630,7 @@
                             element.children[1].children[0].classList.remove('bg-red-50')
                             element.children[1].children[0].classList.remove('text-red-600')
                             element.children[1].children[0].classList.add('bg-green-50')
-                            element.children[1].children[0].classList.add('text-green-600')
+                            element.children[1].children[0].classList.add('text-green-100')
                         }
                         // element.children[1].children[0].innerText = data.required 
                         element.children[2].children[0].innerText = data.max_item_amount 
