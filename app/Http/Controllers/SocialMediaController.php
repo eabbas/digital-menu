@@ -16,6 +16,7 @@ class SocialMediaController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $name = $request->icon_path->getClientOriginalName();
         $path = $request->icon_path->storeAs('socialMedia', $name, 'public');
         socialMedia::create([
