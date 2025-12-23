@@ -75,10 +75,9 @@ class CareerController extends Controller
         return to_route('career.careers');
     }
 
-    public function user_careers()
+    public function user_careers(user $user=null)
     {
-       
-        return view('admin.careers.userCareers');
+        return view('admin.careers.userCareers',['user'=>$user]);
     }
 
     public function edit(career $career, User $user = null)
