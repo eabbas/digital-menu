@@ -31,6 +31,7 @@ use App\Http\Controllers\CustomCategoryController;
 use App\Http\Controllers\EcommController;
 use App\Http\Controllers\EcommCategoryController;
 use App\Http\Controllers\EcommProductController;
+use App\Http\Controllers\EcommQrCodeController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
