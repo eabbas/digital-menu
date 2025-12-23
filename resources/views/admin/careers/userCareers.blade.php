@@ -35,7 +35,7 @@
                         @php
                         $i=1;
                         @endphp
-                        @if($user->careers)
+                        @if(isset($user->careers))
                         @foreach ($user->careers as $career)
                             @if ($career)
                                 <div

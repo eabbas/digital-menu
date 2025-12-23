@@ -77,6 +77,9 @@ class CareerController extends Controller
 
     public function user_careers(user $user=null)
     {
+        if(!$user){
+            $user=Auth::user();
+        }
         return view('admin.careers.userCareers',['user'=>$user]);
     }
 
