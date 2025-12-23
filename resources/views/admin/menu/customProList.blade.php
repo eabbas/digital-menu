@@ -300,73 +300,73 @@
             </form>
         </div>
     </div>
-
+    
     <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form"
         id="createCPVform">
-        <div class="w-[calc(100%-265px)] float-end flex justify-center items-center bg-white h-dvh relative"
+        <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative"
             id="closeCreateCPVform">
-            <span
-                class="cursor-pointer absolute top-4 right-4 text-4xl text-gray-500 hover:text-gray-700 transition-colors duration-200"
-                onclick="closeForm()">×</span>
-            <form action="{{ route('cpv.store') }}" method="post" enctype="multipart/form-data" class="space-y-6">
-                @csrf
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
-                    <!-- عنوان -->
-                    <div>
-                        <label for="title" class="block text-sm font-medium text-gray-700">
-                            عنوان <span class="text-red-500">*</span>
-                        </label>
-                        <input type="text" name="title" id="titleCPV" required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
-                    </div>
-                    <!-- حداقل واحد مقدار -->
-                    <div>
-                        <label for="min_amount_unit" class="block text-sm font-medium text-gray-700 mb-2">
-                            حداقل واحد مقدار
-                        </label>
-                        <input type="number" name="min_amount_unit" id="min_amount_unit_cpv"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
-                    </div>
-                    <!-- مدت زمان -->
-                    <div>
-                        <label for="duration" class="block text-sm font-medium text-gray-700 mb-2">
-                            مدت زمان آماده سازی (دقیقه)
-                        </label>
-                        <input type="number" name="duration" id="durationCPV" min="1"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
-                    </div>
-                    <!-- محصول اصلی -->
-                    @if (isset($custom_product))
-                        <input type="hidden" name="custom_product_id" id="custom_product_id_variant">
-                    @endif
-
-                    <!-- تصویر -->
-
-
-                    <!-- توضیحات -->
-                    <div class="md:col-span-2">
-                        <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
-                            توضیحات
-                        </label>
-                        <textarea name="description" id="descriptionCPV" rows="4"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"></textarea>
-                    </div>
+               <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200"
+                    onclick="closeForm()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
+                        <path fill="gray"
+                            d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                    </svg>
                 </div>
 
+            <form action="{{ route('cpv.store') }}" method="post" enctype="multipart/form-data"
+                class="bg-white w-1/2 p-5 rounded-lg">
+                @csrf
+
+                <div class="mb-4">
+                    <label for="title" class="block text-sm font-medium mb-2">
+                        عنوان دسته بندی
+                    </label>
+                    <input type="text" name="title" id="titleCPV" required
+                        class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+                </div>
+                 <!-- حداقل واحد مقدار -->
+                <div>
+                    <label for="min_amount_unit" class="block text-sm font-medium text-gray-700 mb-2">
+                        حداقل واحد مقدار
+                    </label>
+                    <input type="number" name="min_amount_unit" id="min_amount_unit_cpv"
+                    class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+                </div>
+                <!-- مدت زمان -->
+                <div>
+                    <label for="duration" class="block text-sm font-medium text-gray-700 mb-2 mt-2">
+                        مدت زمان آماده سازی (دقیقه)
+                    </label>
+                    <input type="number" name="duration" id="durationCPV" min="1"
+                        class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+                </div>
+                <!-- محصول اصلی -->
+                @if (isset($custom_product))
+                    <input type="hidden" name="custom_product_id" id="custom_product_id_variant">
+                @endif
+                <!-- توضیحات -->
+                <div class="md:col-span-2">
+                    <label for="description" class="block text-sm font-medium text-gray-700 mb-2 mt-2">
+                        توضیحات
+                    </label>
+                    <textarea name="description" id="descriptionCPV" rows="4"
+                        class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none"></textarea>
+                </div>
                 <!-- دکمه‌های فرم -->
-                <div class="flex justify-end space-x-4 pt-4 border-t">
+                <div class="flex justify-end space-x-2 pt-4">
                     <button type="submit" onclick="cpvStore(event)"
-                        class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200 flex items-center">
-                        ثبت نوع محصول
+                        class="px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200 flex items-center">
+                        ثبت      
                     </button>
                 </div>
             </form>
+
         </div>
     </div>
     @if (isset($custom_product))
         <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form"
             id="editCPform">
-            <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative bg-white"
+            <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative"
                 id="closeEditCform">
                 <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200"
                     onclick="closeForm()">
@@ -375,53 +375,6 @@
                             d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
                     </svg>
                 </div>
-                {{-- <form action="{{ route('cp.update') }}" method="post" enctype='multipart/form-data'
-                    class="w-11/12 lg:w-3/4 mx-auto py-5 rounded-lg">
-                    @csrf
-                    <input type="hidden" name="id" id="custom_product_id">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 lg:gap-4">
-                        <div class="w-full flex flex-col">
-                            <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                                for="title">
-                                <legend
-                                    class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">
-                                    عنوان
-                                </legend>
-                                <input type="title" name="editTitleCP" id="editTitleCP"
-                                    value="{{ $custom_product->title }}"
-                                    class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                            </fieldset>
-                        </div>
-                        <div class="w-full flex flex-col">
-                            <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                                for="description">
-                                <legend
-                                    class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">
-                                    توضیحات</legend>
-                                <input type="description" name="description" id="editDescriptionCP"
-                                    value="{{ $custom_product->description }}"
-                                    class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                            </fieldset>
-                        </div>
-
-                        <div class="w-full flex flex-col">
-                            <fieldset class="text-sm md:text-base border border-gray-400 rounded-[20px] sm:py-1 pr-3"
-                                for="material_limit">
-                                <legend
-                                    class="p-1 w-20 sm:bg-blue-400 sm:text-white rounded-full flex flex-row justify-center text-sm">
-                                    حد مواد </legend>
-                                <input type="material_limit" name="material_limit" id="material_limit_CP"
-                                    value="{{ $custom_product->material_limit }}"
-                                    class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500">
-                            </fieldset>
-                        </div>
-                    </div>
-                    <div class="text-center md:px-12 mt-5 lg:mt-10">
-                        <button onclick='updateCP(event, "{{ $custom_product->id }}")'
-                            class="w-5/12 max-sm:bg-blue-500 max-sm:text-white px-5 py-2 lg:px-10 lg:py-3 rounded-[8px] transition-all duration-250 bg-blue-400 text-white hover:bg-blue-600 hover:border-gray-400 hover:text-white text-gray-500 cursor-pointer">ویرایش</button>
-                    </div>
-                </form> --}}
-
                 <form action="{{ route('cp.update') }}" method="post" enctype="multipart/form-data" class="bg-white w-1/2 p-5 rounded-lg relative">
                         <div id="editCPloading"
                             class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
@@ -438,7 +391,7 @@
                                 required
                                 class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
                         </div>
-                        {{-- <div class="mb-4">
+                        <div class="mb-4">
                             <label for="title" class="block text-sm font-medium mb-2">
                                 تصویر محصول
                             </label>
@@ -446,14 +399,14 @@
                                 name="customProductImage" 
                                 id="customProductImage"
                                 class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
-                        </div> --}}
+                        </div>
                         <div class="mb-4">
                             <label for="title" class="block text-sm font-medium mb-2">
                                 محدودیت متریال
                             </label>
                             <input type="number" 
                                 name="material_limit" 
-                                id="material_limit"
+                                id="material_limit_CP"
                                 required
                                 placeholder="محدودیت متریال را وارد کنید"
                                 class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
@@ -473,7 +426,7 @@
                        
 
                             <div class="flex justify-end gap-3" >
-                                <button type="submit" onclick="storeCP(event)" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 cursor-pointer">
+                                <button onclick='updateCP(event, "{{ $custom_product->id }}")' class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 cursor-pointer">
                                     ثبت
                                 </button>
                             </div>
@@ -482,9 +435,6 @@
             </div>
         </div>
     @endif
-
-
-
     </div>
 
 
@@ -518,9 +468,22 @@
         let cpvDescription = document.getElementById('descriptionCPV')
         let custom_product_id_variant = document.getElementById('custom_product_id_variant')
 
+        let editloading = document.getElementById('editCPloading')
+
+
         function editCP(id) {
             cpFormEdit.classList.remove('invisible')
             cpFormEdit.classList.remove('opacity-0')
+            editloading.classList.remove('hidden')
+            editloading.classList.add('flex')
+            editloading.innerHTML = `
+            <div class="loading-wave">
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+            </div>
+            `
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -534,6 +497,8 @@
                     'id': id
                 },
                 success: function(data) {
+                    editloading.classList.remove('flex')
+                    editloading.classList.add('hidden')
                     console.log(data)
                     custom_product_id.value = data.id
                     cpTitleEdit.value = data.title
@@ -550,6 +515,16 @@
 
             let newParameters = document.querySelectorAll('.newParameters')
             ev.preventDefault()
+            editloading.classList.remove('hidden')
+            editloading.classList.add('flex')
+            editloading.innerHTML = `
+            <div class="loading-wave">
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+            </div>
+            `
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -681,8 +656,7 @@
                     title.value = ""
                     description.value = ""
                     material_limit.value = ""
-
-                    // حذف پیام "محصولی یافت نشد" اگر وجود دارد
+                    
                     let emptyMessage = document.getElementById('no_products_message')
                     if (emptyMessage) {
                         emptyMessage.remove()
@@ -691,25 +665,22 @@
                     // شماره ردیف جدید
                     let rowNumber = custom_product_section.children.length + 1
 
-                    // ایجاد ردیف جدید
                     let newRow = document.createElement('div')
                     newRow.className =
                         'w-full flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4] newParameters'
                     newRow.setAttribute('data-cp-id', data.id)
-                    //   <div class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
-                    //         <div class="w-20 lg:w-full">
-                    //             <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
-                    //                  src="${data.image ? '{{ asset('storage/') }}/' + data.image : '/images/default-product.png'}"
-                    //                  alt="${data.title}">
-                    //         </div>
-                    //     </div>
+                    
                     newRow.innerHTML = `
                 <div class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
                     <span class="block w-10 lg:w-full">${rowNumber}</span>
                 </div>
-              
-
-
+                  <div class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
+                    <div class="w-20 lg:w-full">
+                        <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
+                                src="${data.image ? '{{ asset('storage/') }}/' + data.image : '/images/default-product.png'}"
+                                alt="${data.title}">
+                    </div>
+                </div>
 
 
                 <div class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
@@ -723,7 +694,7 @@
                     <div class="w-[320px] lg:w-full grid grid-cols-5 divide-x divide-[#f1f1f4] items-center">
                         <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3 gap-4">
                             <li class="flex justify-center">
-                                <a href="/admin/custom-products/${data.id}"
+                                <a href="{{ url('customProducts/show/${data.id}') }}"
                                     class="w-fit flex flex-row items-center justify-center bg-sky-500 hover:bg-sky-600 p-1 rounded-sm" title="مشاهده">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 576 512">
                                         <path fill="white" d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z"/>
@@ -731,7 +702,7 @@
                                 </a>
                             </li>
                             <li class="flex justify-center">
-                                <div onclick="editCP(${data.id})"
+                                <div onclick='editCP("${ data.id }")'
                                     class="w-fit flex flex-row items-center justify-center bg-green-500 hover:bg-green-600 p-1 rounded-sm" title="ویرایش">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
                                         <path fill="white" d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
@@ -739,7 +710,7 @@
                                 </div>
                             </li>
                             <li class="flex justify-center">
-                                <div onclick="deleteCP(${data.id})"
+                                <div onclick='deleteCP("${data.id}")'
                                     class="w-fit flex flex-row items-center justify-center bg-red-500 hover:bg-red-600 p-1 rounded-sm" title="حذف">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
                                         <path fill="white" d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
@@ -756,7 +727,7 @@
                         </div>
                         
                         <div class="py-4 flex items-center justify-center">
-                            <a href="/admin/custom-products/${data.id}/variants"
+                            <a href="{{ url('customProductVariants/variantList/${data.id}') }}"
                                class="flex flex-col items-center gap-1 text-blue-600 hover:text-blue-700 transition-colors group">
                                 <span class="text-xs font-medium mt-1">لیست انواع</span>
                             </a>
@@ -765,8 +736,7 @@
                            class="flex items-center justify-center text-blue-600 px-4 py-2 rounded-lg transition-all duration-200 cursor-pointer">
                             <span class="block w-full text-center text-xs font-medium">ایجاد دسته</span>
                         </div>
-                    
-                        <a href="/admin/custom-products/${data.id}/categories"
+                        <a href="{{ url('customCategories/custmoCategoryList/${data.id}') }}"
                            class="flex items-center justify-center text-indigo-600 hover:text-indigo-800 text-sm font-medium transition-colors">
                             لیست دسته
                         </a>
@@ -775,9 +745,7 @@
             `
 
                     // اضافه کردن ردیف به جدول
-                    custom_product_section.appendChild(newRow)
-
-                    // بستن فرم
+                    custom_product_section.appendChild(newRow) 
                     closeForm()
 
                 },

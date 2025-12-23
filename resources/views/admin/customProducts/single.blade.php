@@ -1,9 +1,13 @@
 @extends('admin.app.panel')
-@section('title', 'صفحه تک  محصول ')
+@section('title')
+    {{ $customProduct->title }}
+@endsection
 @section('content')
 <div class="w-full">
             <div class="pb-5 w-full">
-                <h1 class="text-xl text-center lg:text-start">صفحه تک محصول</h1>
+                <h1 class="text-xl text-center lg:text-start">
+                    {{ $customProduct->title }}
+                </h1>
             </div>
         <div class="flex flex-col border-none rounded-[7px]">
             <div class="block lg:flex flex-row justify-between gap-8">
