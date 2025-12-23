@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Testing\Fluent\Concerns\Has;
 
 class UserController extends Controller
 {
@@ -45,7 +44,6 @@ class UserController extends Controller
         if ($user) {
             $checkHash = Hash::check($request->password, $user->password);
             if ($checkHash) {
-                $user->role;
                 Auth::login($user);
                 return to_route('user.profile');
             }
@@ -76,7 +74,6 @@ class UserController extends Controller
 
     public function profile()
     {
-        
         return view('admin.user.profile');
     }
 
@@ -95,7 +92,7 @@ class UserController extends Controller
     {
         $user = User::find($request->user_id);
         if(isset($request->role)){
-            $role = role_user::where('user_id', $user->id)->delete();
+            role_user::where('user_id', $user->id)->delete();
             role_user::create([
                 'user_id'=>$user->id,
                 'role_id'=>$request->role
@@ -109,7 +106,6 @@ class UserController extends Controller
         if (isset($request->email)) {
             $user->email = $request->email;
         }
-
         if ($request->password) {
             $password = Hash::make($request->password);
             $user->password = $password;
@@ -143,7 +139,7 @@ class UserController extends Controller
 
     public function compelete_form()
     {
-        return view('admin.user.compelete_form', ['user' => Auth::user()->role]);
+        return view('admin.user.compelete_form');
     }
 
     public function save(Request $request)

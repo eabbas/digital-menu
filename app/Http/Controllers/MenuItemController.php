@@ -22,34 +22,20 @@ class MenuItemController extends Controller
             $fullName = time().'_'.$name;
             $path = $request->file('image')->storeAs('images', $fullName, 'public');
         }
-        $parent_id = 0;
-        $customizable = 0;
-        $discount = 0;
-        $imagePath = null;
-        if (isset($request->parent_id)) {
-            $parent_id = $request->parent_id;
-        }
-        if (isset($request->customizable)) {
-            $customizable = $request->customizable;
-        }
-        if (isset($request->discount)) {
-            $discount = $request->discount;
-        }
         $menu_id = menu_item::insertGetId([
             'title'=>$request->title,
             'description'=>$request->description,
             'price'=>$request->price,
-            'discount'=>$discount,
-            'customizable'=>$customizable,
+            'discount'=>isset($request->discount) ? $request->discount : 0,
+            'customizable'=>isset($request->customizable) ? $request->customizable : 0,
             'image'=>$path,
-            'parent_id'=>$parent_id,
+            'parent_id'=>isset($request->parent_id) ? $request->parent_id : 0,
             'menu_category_id'=>$request->menu_categories_id,
             'duration'=>$request->duration
         ]);
-
+        $imagePath = null;
         if(isset($request->ingredients)){
             foreach($request->ingredients as $ingre){
-               
                 if(isset($ingre['image'])){
                     $ingreImage = $ingre['image']->getClientOriginalName();
                     $fullIngreImageName = Str::uuid().'_'.$ingreImage;
@@ -77,7 +63,6 @@ class MenuItemController extends Controller
     }
 
     public function edit(menu_item $menu_item){
-        // dd($menu_item);
         return view('admin.menu.item.edit', ['menu'=>$menu_item]);
     }
 

@@ -11,10 +11,6 @@ use App\Models\covers;
 
 class QrCodeController extends Controller
 {
-    // public function create(){
-    //     return view('admin.menus.create');
-    // }
-
     public function delete(Request $request){
         $qr_code = qr_code::find($request->id);
         $count = $qr_code->career->qr_count;
@@ -25,7 +21,6 @@ class QrCodeController extends Controller
         $qr_code->delete();
         return response()->json('ok');
         return response()->json($qr_code);
-        // return to_route('career.edit', [$qr_code->career]);
     }
 
     public function load(career $career, string $slug){

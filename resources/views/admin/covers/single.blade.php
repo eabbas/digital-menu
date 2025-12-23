@@ -30,9 +30,13 @@
                                 </svg>
                             </div>
                             @if (isset($cover->social_qr_codes->qr_path))
+                        
                                 <div class="w-11/12 lg:w-1/4 mx-auto bg-white rounded-lg p-5">
                                     <img src="{{ asset('storage/' . $cover->social_qr_codes->qr_path) }}" class="w-full"
                                         alt="">
+                                        <div class="lg:w-full mx-auto bg-gray-300 rounded-lg p-2 mt-2 flex items-center justify-center cursor-pointer" onclick='copyText({{$cover->id}} , "{{$cover->social_qr_codes->slug}}")'>
+                                            کپی لینک
+                                    </div>
                                 </div>
                             @endif
                         </div>
@@ -858,6 +862,15 @@
                 }
             })
         }
-    </script>
+        </script>
+        @isset($cover)
+        <script>
+            function copyText(coverId,slug){
+                let url =  "{{url('qrcode/links')}}"  + "{{'/'}}" + coverId + "{{'/'}}" + slug
+                navigator.clipboard.writeText(url)
+                alert("لینک کپی شد")
+            }
+        </script>
+        @endisset
     <script src="{{ asset('assets/js/blocks.js') }}"></script>
 @endsection

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class SocialAddressController extends Controller
 {
-    public function create(covers $covers = null)
+    public function create(covers $covers)
     {
         $socialMedias = socialMedia::all();
         return view('admin.socialAddress.create', ['socialMedias' => $socialMedias, 'covers' => $covers]);
@@ -46,12 +46,10 @@ class SocialAddressController extends Controller
     public function update(Request $request)
     {
         $social_address = social_address::find($request->id);
-        // $social_address->socialMedia_id = $request->socialMedia_id;
         $social_address->username = $request->username;
         $social_address->covers_id = $request->cover_id;
         $social_address->save();
         return response()->json($social_address);
-        // return to_route('covers.single', [$request->cover_id]);
     }
 
     public function delete(Request $request)
@@ -60,6 +58,5 @@ class SocialAddressController extends Controller
         $social_address = social_address::find($id);
         $social_address->delete();
         return response()->json('ok');
-        // return to_route('socialAddress.list');
     }
 }

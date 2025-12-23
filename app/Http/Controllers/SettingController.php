@@ -11,7 +11,7 @@ class SettingController extends Controller
     public function createColor()
     {
         $settings = setting::all();
-        return view('settings.colors.createColor', ['settings' => $settings]);
+        return view('admin.settings.colors.createColor', ['settings' => $settings]);
     }
 
     public function upsertColor(Request $request)
@@ -31,7 +31,7 @@ class SettingController extends Controller
 
     public function createLogo()
     {
-        return view('settings.logo.createLogo');
+        return view('admin.settings.logo.createLogo');
     }
 
     public function upsertLogo(Request $request)
@@ -48,14 +48,13 @@ class SettingController extends Controller
 
     public function showLogo()
     {
-        // $homes = home::all();
         $logo = setting::where('meta_key', 'logo')->first();
-        return view('settings.logo.singleLogo', ['logo' => $logo]);
+        return view('admin.settings.logo.singleLogo', ['logo' => $logo]);
     }
 
     public function createMainAds()
     {
-        return view('settings.mainAds.createMainAds');
+        return view('admin.settings.mainAds.createMainAds');
     }
 
     public function upsertMainAds(Request $request)
@@ -74,12 +73,12 @@ class SettingController extends Controller
     {
         $mainAds = setting::where('meta_key', 'mainAds')->first();
 
-        return view('settings.mainAds.singleMainAds', ['mainAds' => $mainAds]);
+        return view('admin.settings.mainAds.singleMainAds', ['mainAds' => $mainAds]);
     }
 
     public function createMainBanner()
     {
-        return view('settings.mainBanner.createMainBanner');
+        return view('admin.settings.mainBanner.createMainBanner');
     }
 
     public function upsertMainBanner(Request $request)
@@ -98,17 +97,16 @@ class SettingController extends Controller
     {
         $mainBanner = setting::where('meta_key', 'mainBanner')->first();
 
-        return view('settings.mainBanner.singleMainBanner', ['mainBanner' => $mainBanner]);
+        return view('admin.settings.mainBanner.singleMainBanner', ['mainBanner' => $mainBanner]);
     }
 
     public function createSingleAds()
     {
-        return view('settings.singleAds.createSingleAds');
+        return view('admin.settings.singleAds.createSingleAds');
     }
 
     public function upsertSingleAds(Request $request)
     {
-        $type = request()->singleAdsImage->getClientOriginalExtension();
         $name = $request->singleAdsImage->getClientOriginalName();
         $fullName = Str::uuid() . '_' . $name;
         $path = $request->file('singleAdsImage')->storeAs('singleAds', $fullName, 'public');
@@ -122,17 +120,16 @@ class SettingController extends Controller
     {
         $singleAds = setting::where('meta_key', 'singleAds')->first();
 
-        return view('settings.singleAds.singleAdsImage', ['singleAds' => $singleAds]);
+        return view('admin.settings.singleAds.singleAdsImage', ['singleAds' => $singleAds]);
     }
 
     public function createCategoryAds()
     {
-        return view('settings.categoryAds.createCategoryAds');
+        return view('admin.settings.categoryAds.createCategoryAds');
     }
 
     public function upsertCategoryAds(Request $request)
     {
-        $type = request()->categoryAdsImage->getClientOriginalExtension();
         $name = $request->categoryAdsImage->getClientOriginalName();
         $fullName = Str::uuid() . '_' . $name;
         $path = $request->file('categoryAdsImage')->storeAs('categoryAds', $fullName, 'public');
@@ -145,7 +142,6 @@ class SettingController extends Controller
     public function showCategoryAds()
     {
         $categoryAds = setting::where('meta_key', 'categoryAds')->first();
-
-        return view('settings.categoryAds.singleCategoyAdsImage', ['categoryAds' => $categoryAds]);
+        return view('admin.settings.categoryAds.singleCategoyAdsImage', ['categoryAds' => $categoryAds]);
     }
 }

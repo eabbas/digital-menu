@@ -18,7 +18,6 @@ class CustomCategoryController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $customCategory_id = customCategory::insertGetId([
             'title'=>$request->title ,
             'required' => isset($request->required) ? $request->required : 0 , 
@@ -27,7 +26,6 @@ class CustomCategoryController extends Controller
         ]);
         $data = customCategory::find($customCategory_id);
         return response()->json($data);
-        // return to_route('custmCategory.list' , [$request->custom_pro_id]);
     }
 
     public function index(career $career, custom_product $customProduct)

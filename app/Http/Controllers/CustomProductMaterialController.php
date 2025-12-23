@@ -61,9 +61,7 @@ class CustomProductMaterialController extends Controller
 
     public function update(Request $request)
     {
-        // return response()->json($request->all());
         $path = null;
-
         $customProductMaterial = custom_product_material::find($request->id);
         $customProductMaterial->title = $request->title;
         $customProductMaterial->description = $request->description;
@@ -85,9 +83,6 @@ class CustomProductMaterialController extends Controller
         $customProductMaterial->image = $path;
         $customProductMaterial->save();
         return response()->json($customProductMaterial);
-
-        // return to_route('cpm.list', [$request->custom_product_id]);
-        // return to_route('cpm.list');
     }
 
     public function delete(Request $request)
