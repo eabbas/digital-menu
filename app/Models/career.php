@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class career extends Model
 {
-  protected $fillable = ['logo', 'banner', 'title', 'province', 'city', 'address', 'email', 'description', 'user_id', 'career_category_id', 'qr_count'];
+  protected $fillable = ['logo', 'banner', 'title', 'city_id', 'address', 'email', 'description', 'user_id', 'career_category_id', 'qr_count'];
 
   public $timestamps = true;
 
@@ -53,5 +53,8 @@ class career extends Model
   }
   public function qr_codes(){
     return $this->hasMany(qr_code::class);
+  }
+  public function province_city(){
+    return $this->belongsTo(province_cities::class, 'city_id');
   }
 }

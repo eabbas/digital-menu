@@ -32,7 +32,7 @@ use App\Http\Controllers\EcommController;
 use App\Http\Controllers\EcommCategoryController;
 use App\Http\Controllers\EcommProductController;
 use App\Http\Controllers\EcommQrCodeController;
-
+use App\Http\Controllers\ProvinceCityController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('search' , [HomeController::class, 'search'])->name('search');
@@ -84,7 +84,13 @@ Route::group([
     Route::get('/qrcodes/{career}', 'qr_codes')->name('qr_codes');
     Route::get('/menuList/{career}', 'menus')->name('menus');
 });
-
+Route::group([
+    'prefix'=>'province',
+    'controller'=>ProvinceCityController::class,
+    'as'=>'pc.'
+], function (){
+    Route::post('/city', 'city')->name('city');
+});
 Route::group([
     'prefix' => 'careerCategory',
     'controller' => CareerCategoryController::class,
