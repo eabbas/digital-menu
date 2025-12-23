@@ -3,7 +3,7 @@
 @section('content')
 <div class="w-full flex flex-col pb-4">
         <div class="pb-4">
-            <h2 class="lg:text-lg font-bold text-gray-800 text-center">اطلاعات صفحه های اجتماعی</h2>
+            <h2 class="lg:text-lg font-bold text-gray-800 text-center">  صفحه های اجتماعی کاربران</h2>
         </div>
         <div class="bg-white rounded-lg">
             <div class="flex flex-col gap-5">
