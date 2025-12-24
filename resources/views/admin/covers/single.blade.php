@@ -112,7 +112,7 @@
                                     ورود به  {{ $siteLink->title }}
                                 </h3>
                                 <div class="mt-3">
-                                    <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-blue-100 rounded-full cursor-pointer editLink"
+                                    <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-gray-200 rounded-full cursor-pointer editLink"
                                         onclick='editLink("{{ $siteLink->id }}")' data-site-id="{{ $siteLink->id }}">
                                         {{-- @if ($siteLink->icon_path)
                                             <img src="{{ asset('storage/' . $siteLink->icon_path) }}"
