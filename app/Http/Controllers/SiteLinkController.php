@@ -17,18 +17,18 @@ class SiteLinkController extends Controller
 
     public function store(Request $request)
     {
-        $path = null;
-        if (isset($reqeust->icon_path)) {
-            $name = $request->icon_path->getClientOriginalName();
-            $fullName = time() . '_' . $name;
-            $path = $request->icon_path->storeAs('socialMedia', $fullName, 'public');
-        }
+        // $path = null;
+        // if (isset($reqeust->icon_path)) {
+        //     $name = $request->icon_path->getClientOriginalName();
+        //     $fullName = time() . '_' . $name;
+        //     $path = $request->icon_path->storeAs('socialMedia', $fullName, 'public');
+        // }
         $id = site_link::insertGetId([
             'address' => 'https://' . $request->address,
             'user_id' => Auth::id(),
             'title' => $request->title,
             'covers_id' => $request->cover_id,
-            'icon_path' => $path
+            // 'icon_path' => $path
         ]);
         $data = site_link::find($id);
         return response()->json($data);
@@ -50,15 +50,15 @@ class SiteLinkController extends Controller
     public function update(Request $request)
     {
         $siteLink = site_link::find($request->id);
-        if ($request->icon_path) {
-            if ($siteLink->icon_path) {
-                Storage::disk('public')->delete($siteLink->icon_path);
-            }
-            $name = $request->icon_path->getClientOriginalName();
-            $fullName = time() . '_' . $name;
-            $path = $request->icon_path->storeAs('socialMedia', $fullName, 'public');
-            $siteLink->icon_path = $path;
-        }
+        // if ($request->icon_path) {
+        //     if ($siteLink->icon_path) {
+        //         Storage::disk('public')->delete($siteLink->icon_path);
+        //     }
+        //     $name = $request->icon_path->getClientOriginalName();
+        //     $fullName = time() . '_' . $name;
+        //     $path = $request->icon_path->storeAs('socialMedia', $fullName, 'public');
+        //     $siteLink->icon_path = $path;
+        // }
         $siteLink->address = $request->address;
         $siteLink->title = $request->title;
         $siteLink->save();
