@@ -240,6 +240,16 @@
                     class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
             </div>
             <div class="mb-4">
+                <label for="title" class="block text-sm font-medium mb-2">
+                   تصویر
+                </label>
+                <input type="file" 
+                    name="cpmImage" 
+                    id="cpmImage"
+                    required
+                    class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+            </div>
+            <div class="mb-4">
                 <label for="cpmdescription" class="block text-sm font-medium mb-2">
                     توضیحات
                 </label>
@@ -390,6 +400,7 @@
 
 
     let editloadingcategory = document.getElementById('editcategoryloading')
+    let imageCPM = document.getElementById('cpmImage')
 
 
 
@@ -417,7 +428,19 @@
    function cpmStore(ev){
     ev.preventDefault()
     let isRequired = cpmrequired.checked ? 1 : 0;
+
+    let formData = new FormData()
     
+    formData.append('title' , cpmtitle.value)
+    formData.append('description' , cpmdescription.value)
+    formData.append('price_per_unit' , cpm_price_per_unit.value)
+    formData.append('required' , isRequired)
+    formData.append('order' , cpmorder.value)
+    formData.append('max_unit_amount' , cpm_max_unit_amount.value)
+    formData.append('custom_pro_id' , cpm_custom_pro_id.value)
+    formData.append('category_id' , cpm_category_id.value)
+    formData.append('imageCPM' ,imageCPM.files[0])
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -426,17 +449,11 @@
     $.ajax({
         url : "{{ route('cpm.store') }}" ,
         type : "POST" ,
-        dataType : "json" ,
-        data : {
-            'title' : cpmtitle.value,
-            'description' : cpmdescription.value,
-            'price_per_unit' : cpm_price_per_unit.value,
-            'required' : isRequired,
-            'order' : cpmorder.value,
-            'max_unit_amount' : cpm_max_unit_amount.value,
-            'custom_pro_id': cpm_custom_pro_id.value,
-            'category_id': cpm_category_id.value
-        },
+        data : formData ,
+        contentType : false ,
+        processData : false ,
+      
+        
         success: function(data){
             console.log(data)
             cpmtitle.value = ""
@@ -447,6 +464,7 @@
             cpmrequired.checked = false
             cpm_custom_pro_id.value = ""
             cpm_category_id.value = ""
+            imageCPM.value = ""
            
             closeForm()
         },
@@ -550,7 +568,7 @@
                                 ایجاد آیتم جدید
                         </div>
                         <div class="p-1 lg:p-3 text-xs text-center text-blue-600 h-full flex items-center justify-center font-medium">
-                                <a href="{{ url('customProductMaterial/materialList/${data.id}') }}">
+                                <a href="{{ url('customCategories/item_list/${data.id}') }}">
                             لیست آیتم ها
                                 </a>
                         </div>

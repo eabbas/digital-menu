@@ -19,11 +19,11 @@ class CustomProductVariantController extends Controller
     public function store(Request $request)
     {
         $path = null;
-        // if(isset($request->image)){
-        //     $name = $request->image->getClientOriginalName();
-        //     $fullName = time()."_".$name;
-        //     $path = $request->file('image')->storeAs('images', $fullName, 'public');
-        // }
+        if(isset($request->imageCPV)){
+            $name = $request->imageCPV->getClientOriginalName();
+            $fullName = time()."_".$name;
+            $path = $request->file('imageCPV')->storeAs('images', $fullName, 'public');
+        }
         $customProVariant = custom_product_variant::insertGetId([
             'title'=>$request->title ,
             'min_amount_unit' => $request->min_amount_unit ,

@@ -20,11 +20,11 @@ class CustomProductMaterialController extends Controller
     public function store(Request $request)
     {
         $path = null;
-        // if (isset($request->image)) {
-            //     $name = $request->image->getClientOriginalName();
-        //     $fullName = time() . '_' . $name;
-        //     $path = $request->file('image')->storeAs('images', $fullName, 'public');
-        // }
+        if (isset($request->imageCPM)) {
+                $name = $request->imageCPM->getClientOriginalName();
+            $fullName = time() . '_' . $name;
+            $path = $request->file('imageCPM')->storeAs('images', $fullName, 'public');
+        }
         
         $cpm_id = custom_product_material::insertGetId([
             'title' => $request->title,

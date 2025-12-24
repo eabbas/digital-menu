@@ -213,6 +213,7 @@
             createCPform.classList.remove('opacity-0')
         }
         function storeCP(ev){
+        ev.preventDefault()
         loading.classList.remove('hidden')
         loading.classList.add('flex')
         loading.innerHTML = `
@@ -223,7 +224,14 @@
             <div class="loading-bar"></div>
         </div>
         `
-        ev.preventDefault()
+        let formData = new FormData()
+
+        formData.append('career_id' ,"{{ $menu->career->id }}")
+        formData.append('title' ,title.value)
+        formData.append('customProductImage' ,customProductImage.files[0])
+        formData.append('material_limit' ,material_limit.value)
+        formData.append('description' ,description.value)
+        
         $.ajaxSetup({
             headers : {
                 'X-CSRF-TOKEN' : "{{ csrf_token() }}"
@@ -232,14 +240,9 @@
         $.ajax({
             url : "{{ route('cp.store') }}" ,
             type : "POST" ,
-            dataType : "json" ,
-            data : {
-                'career_id' : "{{ $menu->career->id }}",
-                'title' : title.value,
-                'description' : description.value,
-                // 'customProductImage' : customProductImage.value,
-                'material_limit' : material_limit.value,
-            },
+            data : formData ,
+            contentType : false ,
+            processData : false , 
             success: function(data){
                 loading.classList.remove('flex')
                 loading.classList.add('hidden')
@@ -247,6 +250,7 @@
                 title.value= ""
                 description.value= ""
                 material_limit.value= ""
+                customProductImage.value= ""
             },
             error: function(){
                 alert('خطا در ارسال داده')
