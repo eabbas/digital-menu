@@ -546,10 +546,10 @@
                                 </div>
                             </li>
                         </ul>
-                        <div onclick='openCPMform(${data.id})' class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium cursor-pointer">
+                        <div onclick='openCPMform(${data.id})' class="p-1 lg:p-3 text-xs text-center text-blue-600 h-full flex items-center justify-center font-medium cursor-pointer">
                                 ایجاد آیتم جدید
                         </div>
-                        <div class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
+                        <div class="p-1 lg:p-3 text-xs text-center text-blue-600 h-full flex items-center justify-center font-medium">
                                 <a href="{{ url('customProductMaterial/materialList/${data.id}') }}">
                             لیست آیتم ها
                                 </a>
@@ -667,12 +667,12 @@
                             element.children[2].children[0].classList.remove('bg-green-100')
                             element.children[2].children[0].classList.remove('text-green-700')
                             element.children[2].children[0].classList.add('bg-red-100')
-                            element.children[2].children[0].classList.add('text-red-600')
+                            element.children[2].children[0].classList.add('text-red-700')
                         }
                         if(data.required == 0){
                             element.children[2].children[0].innerText = 'اختیاری' 
                             element.children[2].children[0].classList.remove('bg-red-100')
-                            element.children[2].children[0].classList.remove('text-red-600')
+                            element.children[2].children[0].classList.remove('text-red-700')
                             element.children[2].children[0].classList.add('bg-green-100')
                             element.children[2].children[0].classList.add('text-green-700')
                         }

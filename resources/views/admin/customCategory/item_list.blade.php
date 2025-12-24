@@ -184,16 +184,6 @@
                                 class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
                         </div>
                         <div class="mb-4">
-                            <label for="descriptioncpm" class="block text-sm font-medium mb-2">
-                                عنوان
-                            </label>
-                            <input type="text" 
-                                name="description" 
-                                id="descriptioncpm"
-                                required
-                                class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
-                        </div>
-                        <div class="mb-4">
                             <label for="price_per_unit_cpm" class="block text-sm font-medium mb-2">
                              قیمت بر اساس هر واحد 
                             </label>
@@ -232,6 +222,16 @@
                                 required
                                 placeholder="محدودیت متریال را وارد کنید"
                                 class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+                        </div>
+                         <div class="mb-4">
+                            <label for="descriptioncpm" class="block text-sm font-medium mb-2">
+                                توضیحات
+                            </label>
+                            <textarea type="text" 
+                                name="description" 
+                                id="descriptioncpm"
+                                required
+                                class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none"></textarea>
                         </div>
                         <input type="hidden" name="custom_product_id" id="custom_product_id_cpm" value="{{ $material->custom_product->id }}"> 
                 <input type="hidden" name="custom_category_id" id="custom_category_id_cpm" value="{{ $material->customCategory->id }}"> 
@@ -412,7 +412,7 @@
                             class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
                             <div class="w-20 lg:w-full">
                                 <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover"
-                                    src="{{ asset('storage/' . $material->image) }}">
+                                    src="#">
                             </div>
                         </div>
                         <div
@@ -445,7 +445,7 @@
 
                                 <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3">
                                     <li class="flex justify-center">
-                                        <a href="{{ url('customPorductMaterial/show/${data.id}') }}" 
+                                        <a href="{{ url('customProductMaterial/show/${data.id}') }}" 
                                             class="w-fit flex flex-row items-center justify-center bg-sky-500 hover:bg-sky-600 p-1 rounded-sm" title="مشاهده">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 576 512">
                                                 <path fill="white" d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z"/>
