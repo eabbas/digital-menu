@@ -95,7 +95,7 @@
                                     ثبت
                                 </button>
                             </div>
-                            <input type="hidden" name="custom_pro_id"  id="custom_pro_id_customCategory">
+                           
                     </form>
                 </div>
             </div>
@@ -142,6 +142,7 @@
                                 @endphp
                                 @foreach ($career->custom_product as $index => $custom_product)
                                     @php $hasProduct=true; @endphp
+                                    {{-- @dd($custom_product) --}}
                                     <div class="w-full flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4] newParameters"
                                         data-cp-id="{{ $custom_product->id }}">
                                         <div
@@ -152,7 +153,7 @@
                                             class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
                                             <div class="w-20 lg:w-full">
                                                 <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
-                                                    src={{ asset('storage/' . $custom_product->image) }}>
+                                                    src="{{ asset('storage/' . $custom_product->image) }}">
                                             </div>
                                         </div>
                                         <div
@@ -324,6 +325,14 @@
                     <input type="text" name="title" id="titleCPV" required
                         class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
                 </div>
+
+                <div class="mb-4">
+                    <label for="title" class="block text-sm font-medium mb-2">
+                         تصویر 
+                    </label>
+                    <input type="file" name="cpvImage" id="cpvImage" required
+                        class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+                </div>
                  <!-- حداقل واحد مقدار -->
                 <div>
                     <label for="min_amount_unit" class="block text-sm font-medium text-gray-700 mb-2">
@@ -381,6 +390,7 @@
                         </div>
                         @csrf
                         <input type="hidden" name="id" id="custom_product_id">
+                        <input type="hidden" name="career_id" id="careerId" value="{{ $career->id }}">
                         <div class="mb-4">
                             <label for="editTitleCP" class="block text-sm font-medium mb-2">
                                 عنوان
@@ -396,8 +406,8 @@
                                 تصویر محصول
                             </label>
                             <input type="file" 
-                                name="customProductImage" 
-                                id="customProductImage"
+                                name="customProductImageUpdate" 
+                                id="customProductImageUpdate"
                                 class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
                         </div>
                         <div class="mb-4">
@@ -451,6 +461,7 @@
         let CPeditDescription = document.getElementById('editDescriptionCP')
         let CPmaterialLimit = document.getElementById('material_limit_CP')
         let custom_product_id = document.getElementById('custom_product_id')
+        let careerId = document.getElementById('careerId')
 
         let title = document.getElementById('title')
         let description = document.getElementById('description')
@@ -467,8 +478,11 @@
         let cpvDuration = document.getElementById('durationCPV')
         let cpvDescription = document.getElementById('descriptionCPV')
         let custom_product_id_variant = document.getElementById('custom_product_id_variant')
+        let customProductImageUpdate = document.getElementById('customProductImageUpdate')
 
         let editloading = document.getElementById('editCPloading')
+        let idCareer = document.getElementById('careerId')
+        let imageCPV = document.getElementById('cpvImage')
 
 
         function editCP(id) {
@@ -499,7 +513,6 @@
                 success: function(data) {
                     editloading.classList.remove('flex')
                     editloading.classList.add('hidden')
-                    console.log(data)
                     custom_product_id.value = data.id
                     cpTitleEdit.value = data.title
                     CPeditDescription.value = data.description
@@ -525,6 +538,15 @@
                 <div class="loading-bar"></div>
             </div>
             `
+
+            let formData = new FormData()
+            formData.append('id' , custom_product_id.value)
+            formData.append('career_id' , careerId.value)
+            formData.append('title' , cpTitleEdit.value)
+            formData.append('description' , description.value)
+            formData.append('material_limit' , CPmaterialLimit.value)
+            formData.append('customProductImageUpdate' , customProductImageUpdate.files[0])
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -533,19 +555,17 @@
             $.ajax({
                 url: "{{ route('cp.update') }}",
                 type: "POST",
-                dataType: "json",
-                data: {
-                    'id': custom_product_id.value,
-                    'career_id': "{{ $career->id }}",
-                    'title': cpTitleEdit.value,
-                    'description': CPeditDescription.value,
-                    // 'customProductImage' : customProductImage.value,
-                    'material_limit': CPmaterialLimit.value,
-                },
+                data : formData,
+                contentType : false,
+                processData : false,
+                
                 success: function(data) {
                     newParameters.forEach((element) => {
                         if (element.getAttribute('data-cp-id') == data.id) {
-                            // element.children[1].children[0].innerText = data.customProductImage 
+                            element.children[1].children[0].innerHTML = `
+                                <img src="${data.image ? '{{ asset("storage/") }}/' + data.image : '/images/default-product.png'}"
+                                alt="${data.title}" class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md">
+                            `
                             element.children[2].children[0].innerText = data.title
                             element.children[3].children[0].innerText = data.material_limit
                         }
@@ -634,6 +654,15 @@
                 <div class="loading-bar"></div>
             </div>
             `
+
+            let formData = new FormData()
+
+            formData.append('career_id' ,"{{ $career->id }}")
+            formData.append('title' ,title.value)
+            formData.append('customProductImage' ,customProductImage.files[0])
+            formData.append('material_limit' ,material_limit.value)
+            formData.append('description' ,description.value)
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -642,14 +671,11 @@
             $.ajax({
                 url: "{{ route('cp.store') }}",
                 type: "POST",
-                dataType: "json",
-                data: {
-                    'career_id': "{{ $career->id }}",
-                    'title': title.value,
-                    'description': description.value,
-                    'material_limit': material_limit.value,
-                },
+                data: formData,
+                contentType: false ,
+                processData : false,
                 success: function(data) {
+                    console.log(data)
                     loading.classList.remove('flex')
                     loading.classList.add('hidden')
                     // ریست فرم
@@ -677,7 +703,7 @@
                   <div class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
                     <div class="w-20 lg:w-full">
                         <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
-                                src="${data.image ? '{{ asset('storage/') }}/' + data.image : '/images/default-product.png'}"
+                                src="${data.image ? '{{ asset("storage/") }}/' + data.image : '/images/default-product.png'}"
                                 alt="${data.title}">
                     </div>
                 </div>
@@ -787,7 +813,7 @@
                     max_item_amount_customCategory.value = ""
                     category.checked = 0
                     titleCustomCategory.value = ""
-                    // alert('دسته ' + data.title + 'با موفقیت ذخیره شد')
+                    customProductImage.value = ""
                     closeForm()
                 },
                 error: function() {
@@ -799,6 +825,14 @@
 
         function cpvStore(ev) {
             ev.preventDefault()
+            let formData = new FormData()
+            formData.append('title' , cpvTitle.value)
+            formData.append('description' , cpvDescription.value)
+            formData.append('min_amount_unit' , cpvMinAmount.value)
+            formData.append('duration' , cpvDuration.value)
+            formData.append('custom_pro_id' , custom_product_id_variant.value)
+            formData.append('imageCPV' ,imageCPV.files[0])
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -807,20 +841,17 @@
             $.ajax({
                 url: "{{ route('cpv.store') }}",
                 type: "POST",
-                dataType: "json",
-                data: {
-                    'title': cpvTitle.value,
-                    'min_amount_unit': cpvMinAmount.value,
-                    'duration': cpvDuration.value,
-                    'description': cpvDescription.value,
-                    'custom_pro_id': custom_product_id_variant.value,
-                },
+                data: formData,
+                contentType : false ,
+                processData : false ,
                 success: function(data) {
+                    console.log(data)
                     custom_product_id_variant = ""
                     cpvTitle.value = ""
                     cpvMinAmount.value = ""
                     cpvDuration.value = ""
                     cpvDescription.value = ""
+                    imageCPV.value = ""
                     closeForm()
                 },
                 error: function() {

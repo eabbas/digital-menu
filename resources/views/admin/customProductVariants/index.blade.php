@@ -171,6 +171,13 @@
                     <input type="text" name="title" id="titleCPV" required
                         class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
                 </div>
+                <div class="mb-4">
+                    <label for="title" class="block text-sm font-medium mb-2">
+                          تصویر
+                    </label>
+                    <input type="file" name="imageCPV" id="imageCPV"
+                        class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+                </div>
                  <!-- حداقل واحد مقدار -->
                 <div>
                     <label for="min_amount_unit_cpv" class="block text-sm font-medium text-gray-700 mb-2">
@@ -318,6 +325,7 @@
 
     let cpvId = document.getElementById('cpvId')
     let forms = document.querySelectorAll(".form")
+    let imageCPV = document.getElementById('imageCPV')
 
      function closeForm(){
         forms.forEach((form)=>{
@@ -335,6 +343,14 @@
 
    function cpvStore(ev) {
     ev.preventDefault();
+
+    let formData = new FormData()
+    formData.append('title' , titleCPV.value)
+    formData.append('description' , descriptionCPV.value)
+    formData.append('min_amount_unit' , min_amount_unit_cpv.value)
+    formData.append('duration' , durationCPV.value)
+    formData.append('custom_pro_id' , custom_product_id_variant.value)
+    formData.append('imageCPV' ,imageCPV.files[0])
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -343,20 +359,17 @@
     $.ajax({
         url: "{{ route('cpv.store') }}",
         type: "POST",
-        dataType: "json",
-        data: {
-            'title': titleCPV.value,
-            'min_amount_unit': min_amount_unit_cpv.value,
-            'duration': durationCPV.value,
-            'description': descriptionCPV.value,
-            'custom_pro_id': custom_product_id_variant.value,
-        },
+        data : formData, 
+        contentType : false,
+        processData : false ,
+
         success: function(data) {
             // پاک کردن مقادیر فرم
-            titleCPV.value = "";
-            min_amount_unit_cpv.value = "";
-            durationCPV.value = "";
-            descriptionCPV.value = "";
+            titleCPV.value = ""
+            min_amount_unit_cpv.value = ""
+            durationCPV.value = ""
+            descriptionCPV.value = ""
+            imageCPV.value = ""
             
             // حذف پیام "هیچ نوع محصولی یافت نشد"
             let empty = document.getElementById('no_variant_message');
@@ -374,16 +387,16 @@
                         <span class="block w-10 lg:w-full">${i}</span>
                     </div>
                     <div
-                        class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
-                        <div class="w-20 lg:w-full">
-                            <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover"
-                                src="#">
-                        </div>
+                        class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
+                        <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover"
+                            src="${data.image ? '{{ asset("storage/") }}/' + data.image : '/images/default-product.png'}"
+                            alt="${data.title}">
                     </div>
                     <div
                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
                         <span class="block w-20 lg:w-full">${data.title}</span>
                     </div>
+                    
                     <div
                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
                         <span class="block w-20 lg:w-full">${data.min_amount_unit}</span>

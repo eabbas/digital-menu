@@ -19,16 +19,16 @@ class CustomProductController extends Controller
     public function store(Request $request)
     {
         $path = null;
-        // if (isset($request->customProductImage)) {
-        //     $name = $request->customProductImage->getClientOriginalName();
-        //     $fullName = time() . '_' . $name;
-        //     $path = $request->file('customProductImage')->storeAs('images', $fullName, 'public');
-        // }
+        if (isset($request->customProductImage)) {
+            $name = $request->customProductImage->getClientOriginalName();
+            $fullName = time() . '_' . $name;
+            $path = $request->file('customProductImage')->storeAs('images', $fullName, 'public');
+        }
         $customPro_id = custom_product::insertGetId([
             'title' => $request->title,
+            'material_limit' => $request->material_limit,
             'description' => $request->description,
             'career_id' => $request->career_id,
-            'material_limit' => $request->material_limit,
             'image' => $path
         ]);
         $data = custom_product::find($customPro_id);
@@ -59,15 +59,15 @@ class CustomProductController extends Controller
         $customProduct->title = $request->title;
         $customProduct->description = $request->description;
         $customProduct->material_limit = $request->material_limit;
-        // if(isset($request->customProductImage)){
-        //     if($customProduct->image){
-        //         Storage::disk('public')->delete($customProduct->image);
-        //     }
-        //     $name = $request->customProductImage->getClientOriginalName();
-        //     $fullName = time()."_".$name;
-        //     $path = $request->file('customProductImage')->storeAs('images', $fullName, 'public');
-        //     $customProduct->image = $path;
-        // }
+        if(isset($request->customProductImageUpdate)){
+            if($customProduct->image){
+                Storage::disk('public')->delete($customProduct->image);
+            }
+            $name = $request->customProductImageUpdate->getClientOriginalName();
+            $fullName = time()."_".$name;
+            $path = $request->file('customProductImageUpdate')->storeAs('images', $fullName, 'public');
+            $customProduct->image = $path;
+        }
         $customProduct->save();
         return response()->json($customProduct);
     }

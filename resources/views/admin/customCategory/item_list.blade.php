@@ -12,6 +12,7 @@
                 <div>
                     <h1 class="text-xl font-semibold text-gray-800">لیست آیتم‌ها</h1>
                     <p class="text-gray-600 text-sm mt-1">محصول: {{ $customCategory->custom_products->title }}</p>
+                    <p class="text-gray-600 text-sm mt-1">دسته بندی: {{ $customCategory->title }}</p>
                 </div>
                 <div onclick='openCPMform("{{ $customCategory->id }}")'
                     class="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer" >
@@ -266,6 +267,16 @@
                     required
                     class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
             </div>
+            <div class="mb-4">
+                <label for="title" class="block text-sm font-medium mb-2">
+                   تصویر
+                </label>
+                <input type="file" 
+                    name="cpmImage" 
+                    id="cpmImage"
+                    required
+                    class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+            </div>
             
             <div>
                 <label for="price_per_unit" class="block text-sm font-medium mb-1">
@@ -362,6 +373,7 @@
         let cpm_category_id = document.getElementById('category_id_field');
 
         let itemListLoading = document.getElementById('itemListLoading')
+        let imageCPM = document.getElementById('cpmImage')
         
         function closeForm(){
             forms.forEach((form)=>{
@@ -376,6 +388,19 @@
         }
         function cpmStore(ev){
             ev.preventDefault()
+            let isRequired = cpmrequired.checked ? 1 : 0;
+             let formData = new FormData()
+    
+            formData.append('title' , cpmtitle.value)
+            formData.append('description' , cpmdescription.value)
+            formData.append('price_per_unit' , cpm_price_per_unit.value)
+            formData.append('required' , isRequired)
+            formData.append('order' , cpmorder.value)
+            formData.append('max_unit_amount' , cpm_max_unit_amount.value)
+            formData.append('custom_pro_id' , cpm_custom_pro_id.value)
+            formData.append('category_id' , cpm_category_id.value)
+            formData.append('imageCPM' ,imageCPM.files[0])
+
             const categoryTitle = "{{ $customCategory->title }}";
             $.ajaxSetup({
                 headers: {
@@ -385,18 +410,10 @@
             $.ajax({
                 url : "{{ route('cpm.store') }}" ,
                 type : "POST" ,
-                dataType : "json" ,
-                data : {
-                    'title' : cpmtitle.value,
-                    'description' : cpmdescription.value,
-                    'price_per_unit' : cpm_price_per_unit.value,
-                    'required' : cpmrequired.checked ? 1 : 0,
-                    'order' : cpmorder.value,
-                    'max_unit_amount' : cpm_max_unit_amount.value,
-                    'custom_pro_id': cpm_custom_pro_id.value,
-                    'category_id': "{{ $customCategory->id }}"
-                    // 'customProductImage' : customProductImage.value,
-                },
+                data : formData ,
+                contentType : false ,
+                processData : false ,
+      
                 success: function(data){
                     console.log(data)
                
@@ -412,7 +429,8 @@
                             class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
                             <div class="w-20 lg:w-full">
                                 <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover"
-                                    src="#">
+                                    src="${data.image ? '{{ asset("storage/") }}/' + data.image : '/images/default-product.png'}"
+                                     alt="${data.title}">
                             </div>
                         </div>
                         <div
@@ -486,6 +504,8 @@
                     cpmorder.value = ""
                     cpm_max_unit_amount.value = ""
                     cpmrequired.checked = false
+                    imageCPM.value = ""
+
                     closeForm()
                     i++
                 },
