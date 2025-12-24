@@ -45,28 +45,37 @@
                                 </div>
                             </div>
                             <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
+                               
+
+                                <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">استان</label>
 
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='province' placeholder="استان خود را وارد کنید">
+                                    <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                        name='province' placeholder="استان خود را وارد کنید" onchange="changeCity(this)" required>
+                                        @foreach ($provinces as $province)
+                                            <option value="{{ $province->id }}">{{ $province->title }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
-                            <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
+                            </div>
+                           
+                            <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">شهر</label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='city' placeholder=" شهرخود را وارد کنید">
+                                    <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                        name='city' id="city" placeholder=" شهرخود را وارد کنید"required></select>
                                 </div>
                             </div>
-                            <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
+                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">آدرس</label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='address' placeholder=" ادرس  فروشگاه خود را وارد کنید">
+                                        name='address' placeholder=" ادرس کسب وکار خود را وارد کنید"required>
                                 </div>
                             </div>
                             
@@ -125,4 +134,34 @@
                 </div>
             </div>
         </form>
+           <script>
+            let city = document.getElementById('city')
+            function changeCity(el){
+                city.innerHTML = ""
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+                $.ajax({
+                    url: "{{ route('pc.city') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'id': el.value
+                    },
+                    success: function(datas){
+                        datas.forEach(data => {
+                            let option = document.createElement('option')
+                            option.value = data.id
+                            option.innerText = data.title
+                            city.appendChild(option)
+                        });
+                    },
+                    error: function(){
+                        alert('خطا در دریافت داده')
+                    }
+                })
+            }
+        </script>
     @endsection

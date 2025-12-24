@@ -14,6 +14,9 @@ class province_cities extends Model
     public function career(){
         return $this->hasMany(career::class, 'city_id');
     }
+    public function ecomm(){
+        return $this->hasMany(career::class, 'city_id');
+    }
 
     public function province(){
         return $this->belongsTo(province_cities::class, 'parent');

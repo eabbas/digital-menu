@@ -11,12 +11,12 @@ class ecomm extends Model
     'banner', 
     'description',
     'title',
-    'province',
-    'city',
     'address', 
     'user_id',
     'email',
-    'social_media'
+    'social_media',
+    'city_id'
+
   ];
 
   public $timestamps = true;
@@ -39,5 +39,8 @@ class ecomm extends Model
   public function ecomm_qrCode()
   {
     return $this->hasOne(ecomm_qrCode::class);
+  }
+    public function province_city(){
+    return $this->belongsTo(province_cities::class, 'city_id');
   }
 }
