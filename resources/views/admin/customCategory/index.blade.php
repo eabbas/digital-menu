@@ -2,7 +2,7 @@
 @section('title', 'دسته‌بندی‌های محصول')
 @section('content')
 
-<div class="w-full min-h-screen pb-10 pt-6 bg-gray-50">
+<div class="w-full pb-10 pt-6 bg-gray-50">
     <div class="w-11/12 mx-auto">
         
         <!-- Header -->

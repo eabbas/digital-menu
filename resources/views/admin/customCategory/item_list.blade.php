@@ -43,19 +43,19 @@
                         <span class="block w-20 lg:w-full">قیمت</span>
                     </div>
                     <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
-                        <span class="block w-20 lg:w-full">لزوم</span>
+                        <span class="block w-11 lg:w-full">لزوم</span>
                     </div>
                     <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
                         <span class="block w-20 lg:w-full">ترتیب</span>
                     </div>
                     <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
-                        <span class="block w-[120px] lg:w-full">حداکثر</span>
+                        <span class="block w-20 lg:w-full">حداکثر</span>
                     </div>
                     <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
-                        <span class="block w-[120px] lg:w-full">دسته</span>
+                        <span class="block w-20 lg:w-full">دسته</span>
                     </div>
                     <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-2">
-                        <span class="block w-[320px] lg:w-full">عملیات</span>
+                        <span class="block w-[135px] lg:w-full">عملیات</span>
                     </div>
                     
                 </div>
@@ -89,7 +89,7 @@
                                     <span class="block w-20 lg:w-full">{{ $material->price_per_unit }} تومان</span>
                                 </div>
                                 <div class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 lg:w-full text-center">
-                                    <span class="text-xs px-2 py-1 rounded {{ $material->required ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700' }}">
+                                    <span class="block w-11 lg:w-full text-xs px-2 py-1 rounded {{ $material->required ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700' }}">
                                         {{ $material->required ? 'الزامی' : 'اختیاری' }}
                                     </span>
                                 </div>
@@ -108,7 +108,7 @@
                 
                                 
                                 <div class="col-span-2">
-                                    <div class="lg:w-full w-[320px]">
+                                    <div class="lg:w-full w-[135px]">
 
                                         <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3">
                                             <li class="flex justify-center">
@@ -161,13 +161,13 @@
     
     @foreach ($customCategory->custom_product_material as $material)
     <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="editCPMform">
-        <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative " id="closeEditCPMform">
+        <div class="w-full lg:w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative " id="closeEditCPMform">
             <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeForm()">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
                     <path fill="gray" d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
                 </svg>
             </div>
-             <form action="{{ route('cpm.update')}}" method="post" enctype="multipart/form-data" class="bg-white w-1/2 p-5 rounded-lg relative">
+             <form action="{{ route('cpm.update')}}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 max-h-[calc(100vh-100px)] overflow-y-auto [&::-webkit-scrollbar]:hidden lg:w-1/2 p-5 rounded-lg relative">
                 <div id="itemListLoading"
                     class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
                 </div>
@@ -259,13 +259,13 @@
     @endforeach
     @foreach([$customCategory] as $category)
     <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCPMform">
-        <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative" id="closeEditCform">
+        <div class="w-full lg:w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative" id="closeEditCform">
             <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeForm()">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
                     <path fill="gray" d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
                 </svg>
             </div>
-            <form action="{{ route('cpm.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-1/2 p-5 rounded-lg">
+            <form action="{{ route('cpm.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 max-h-[calc(100vh-100px)] overflow-y-auto [&::-webkit-scrollbar]:hidden lg:w-1/2 p-5 rounded-lg">
             @csrf
             <div class="w-full grid grid-cols-1 lg:grid-cols-2 lg:gap-3">
                 <div class="mb-4">
