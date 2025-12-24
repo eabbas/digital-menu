@@ -3,7 +3,7 @@
 @section('content')
     <div class="w-full flex flex-row justify-between gap-3 pt-8 pb-8 rounded-2xl">
         <div class="w-1/2  p-1 lg:p-3 text-xs  lg:text-sm h-full font-medium">
-            <a href="{{route('ecomm.show', [$career]) }}" class="text-sky-700">مشاهده جزئیات  فروشگاه</a>
+            <a href="{{route('ecomm.single', [$ecomm]) }}" class="text-sky-700">مشاهده جزئیات  فروشگاه</a>
         </div>
     </div>
     <div class="w-full pt-16 bg-[#F4F8F9]">
@@ -12,10 +12,10 @@
         </div>
         @if (!$ecomm->banner)
             <img src="{{ asset('storage/images/banner01.jpg') }}"
-                class="w-11/12 h-[120px] sm:h-[180px] mx-auto rounded-md object-cover" alt="career banner">
+                class="w-11/12 h-[120px] sm:h-[180px] mx-auto rounded-md object-cover" alt="ecomm banner">
         @else
-            <img src="{{ asset('storage/' . $ecomm->banner) }}"
-                class="w-11/12 h-[120px] sm:h-[180px] mx-auto rounded-md object-cover" alt="career banner">
+            <img src="{{asset('storage/'.$ecomm->banner) }}"
+                class="w-11/12 h-[120px] sm:h-[180px] mx-auto rounded-md object-cover" alt="ecomm banner">
         @endif
     </div>
     <div class="w-full bg-[#F4F8F9] py-3">
@@ -35,7 +35,7 @@
                                 onclick='showItems("{{ $ecomm_category->id }}")'>
                                 <div class="w-full">
                                     <img class="size-10 mx-auto object-cover"
-                                        src="{{ asset('storage/' . $ecomm_category->image) }}" alt="ecomm category image">
+                                        src="{{ asset('storage/' . $ecomm_category->image_path) }}" alt="ecomm category image">
                                 </div>
                                 <div class="w-full">
                                     <h3 class="text-sm text-center font-semibold">{{ $ecomm_category->title }}</h3>
@@ -51,7 +51,7 @@
         <div class="w-11/12 mx-auto">
             <div class="my-5">
                 <h2 class="text-lg font-bold">
-                    آیتم ها
+                     محصول
                 </h2>
             </div>
             <div class="flex flex-col gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
@@ -59,19 +59,19 @@
                     @foreach ($ecomm->ecomm_category as $ecomm_category)
                         @foreach ($ecomm_category->ecomm_product as $ecomm_product)
                             <div class="w-full gap-2 bg-white rounded-lg p-2 flex flex-row items-center justify-between cursor-pointer menu_category"
-                                data-item-menu="{{ $ecomm_category->id }}">
+                                data-product-menu="{{ $ecomm_category->id }}">
                                 <div class="flex flex-row items-center gap-3">
                                     <div class="w-full">
                                         <div class="w-10">
-                                            <img class="size-10 object-cover" src="{{ asset('storage/' . $ecomm_product->image) }}"
-                                                alt="menu item image">
+                                            <img class="size-10 object-cover" src="{{ asset('storage/' . $ecomm_product->image_path) }}"
+                                                alt="menu product image">
                                         </div>
                                     </div>
                                     <div class="w-full flex flex-col gap-2 items-start">
                                         <h3 class="text-sm text-center font-semibold">{{ $ecomm_product->title }}</h3>
                                         <div class="flex flex-row items-end gap-2">
                                             <span
-                                                class="font-bold text-xs @if ($item->discount) {{ 'line-through font-normal text-gray-400' }} @endif">{{ $ecomm_product->price }}</span>
+                                                class="font-bold text-xs @if ($ecomm_product->discount) {{ 'line-through font-normal text-gray-400' }} @endif">{{ $ecomm_product->price }}</span>
                                             @if ($ecomm_product->discount)
                                                 <span class="font-bold text-xs">{{ $ecomm_product->discount }}</span>
                                             @endif
