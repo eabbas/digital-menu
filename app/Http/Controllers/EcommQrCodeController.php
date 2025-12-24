@@ -13,6 +13,7 @@ class EcommQrCodeController extends Controller
 {
    
       public function load(ecomm $ecomm, string $slug){
-        return to_route('client.ecomm.ecomm_menu', [$ecomm, $slug]);
-    } 
+        return view('client.ecomm.ecomm_menu', ['career' => $career, 'slug' => $slug]);
+
+      }
 }
