@@ -9,7 +9,6 @@
  @extends('admin.app.panel')
  @section('title', ' محصولات فروشگاه')
  @section('content')
-
  <h1 class="text-2xl font-bold text-gray-800 text-center mb-5"> ایجاد محصولات فروشگاه </h1>
      <form action ="{{ route('ecomm_product.store') }}" method="POST" enctype="multipart/form-data">
          @csrf
@@ -67,11 +66,9 @@
                              <select
                                  class="w-full px-4 py-3 bg-linear-to-r from-gray-50 to-white border border-gray-200 rounded-2xl shadow-sm focus:shadow-lg focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition-all duration-300 cursor-pointer"
                                  name="ecomm_category_id" id="ecomCategories">
-                                 @if (count($user->ecomms) < 0)
                                      @foreach ($user->ecomms[0]->ecomm_category as $ecomm_category)
                                          <option value="{{ $ecomm_category->id }}">{{ $ecomm_category->title }}</option>
                                      @endforeach
-                                 @endif
                                  <option value="0">بدون والد</option>
                              </select>
                          </div>
