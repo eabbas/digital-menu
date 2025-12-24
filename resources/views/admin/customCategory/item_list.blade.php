@@ -257,8 +257,8 @@
         </div>
     </div> 
     @endforeach
-     @foreach([$customCategory] as $category)
-     <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCPMform">
+    @foreach([$customCategory] as $category)
+    <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCPMform">
         <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative" id="closeEditCform">
             <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeForm()">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
@@ -288,7 +288,6 @@
                         required
                         class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
                 </div>
-                
                 <div>
                     <label for="price_per_unit" class="block text-sm font-medium mb-1">
                         قیمت هر واحد *
@@ -321,7 +320,6 @@
                         required
                         class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
                 </div>
-                
                 <div class="space-y-4">
                     <label for="cpm_max_unit_amount" class="block text-sm font-medium mb-1 mt-3">
                         حداکثر تعداد واحد
@@ -346,8 +344,6 @@
             </div>                         
             <input type="hidden" name="custom_pro_id" id="custom_pro_id_field" value="{{ $customCategory->custom_products->id }}">
             <input type="hidden" name="category_id" id="category_id_field" value="{{ $customCategory->id }}">
-            
-            
             <div class="flex justify-end gap-3" >
                     <button onclick="cpmStore(event)" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 cursor-pointer">
                         ثبت
