@@ -57,6 +57,7 @@
             <div class="flex flex-col gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
                 
                     @foreach ($ecomm->ecomm_category as $ecomm_category)
+                        @if($ecomm_category->ecomm_product)
                         @foreach ($ecomm_category->ecomm_product as $ecomm_product)
                             <div class="w-full gap-2 bg-white rounded-lg p-2 flex flex-row items-center justify-between cursor-pointer menu_category"
                                 data-product-menu="{{ $ecomm_category->id }}">
@@ -79,9 +80,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div>دکمه ثبت سفارش</div>
                             </div>
-                        @endforeach
+                            @endforeach
+                            @else
+                            <div>  محصولی موجود نیست</div>
+                            @endif
+                             
                     @endforeach
                 
             </div>
