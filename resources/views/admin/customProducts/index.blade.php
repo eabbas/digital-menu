@@ -150,7 +150,7 @@
     <!-- فرم‌های مختلف -->
     <!-- فرم ایجاد محصول -->
     <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCPform">
-        <div class="w-[calc(100%-265px)] float-end flex justify-center items-center bg-white h-dvh relative" id="closeCreateCPform">
+        <div class="w-full lg:w-[calc(100%-265px)] float-end flex justify-center items-center bg-white h-dvh relative" id="closeCreateCPform">
             <span class="cursor-pointer absolute top-4 right-4 text-4xl text-gray-500 hover:text-gray-700 transition-colors duration-200" onclick="closeForm()">×</span>
             <form action="{{ route('cp.store') }}" method="post" enctype="multipart/form-data" class="space-y-6 w-full max-w-2xl">
                 @csrf
@@ -253,7 +253,7 @@
 
     <!-- فرم ایجاد نوع محصول -->
     <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCPVform">
-        <div class="w-[calc(100%-265px)] float-end flex justify-center items-center bg-white h-dvh relative" id="closeCreateCPVform">
+        <div class="w-full lg:w-[calc(100%-265px)] float-end flex justify-center items-center bg-white h-dvh relative" id="closeCreateCPVform">
             <span class="cursor-pointer absolute top-4 right-4 text-4xl text-gray-500 hover:text-gray-700 transition-colors duration-200" onclick="closeForm()">×</span>
             <form action="{{ route('cpv.store') }}" method="post" enctype="multipart/form-data" class="space-y-6">
                 @csrf
