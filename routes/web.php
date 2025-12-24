@@ -525,7 +525,7 @@ Route::group([
     'controller' => EcommQrCodeController::class,
     'as' => 'ecomm_qr.'
 ], function () {
-    Route::get('/{ecomm}', 'load')->name('load');
+    Route::get('/{ecomm}/{slug}','load')->name('load');
     Route::get('/links/{covers}/{slug}', 'loadLink')->name('loadLink');
     Route::post('/edit', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');

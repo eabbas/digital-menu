@@ -11,7 +11,8 @@ use App\Models\ecomm_qrCode;
 
 class EcommQrCodeController extends Controller
 {
-    public function load(ecomm $ecomm,string $slug = null){
-        return view('client.ecomm.ecomm_menu', ['ecomm' => $ecomm, 'slug' => $slug]);
-    }  
+   
+      public function load(ecomm $ecomm, string $slug){
+        return to_route('client.ecomm.ecomm_menu', [$ecomm, $slug]);
+    } 
 }
