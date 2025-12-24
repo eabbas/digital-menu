@@ -34,9 +34,6 @@
                                         @foreach ($careerCategories as $careerCategory)
                                             <option value="{{ $careerCategory->id }}">{{ $careerCategory->title }}</option>
                                         @endforeach
-                                        <option value="0">
-                                            سایر
-                                        </option>
                                     </select>
                                 </div>
                             </div>

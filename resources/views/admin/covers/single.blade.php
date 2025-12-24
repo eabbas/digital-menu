@@ -109,18 +109,18 @@
                             <div class="lg:py-2">
                                 <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center viewLinkTitle"
                                     data-view-link-id="{{ $siteLink->id }}">
-                                    ورود به {{ $siteLink->title }}
+                                    ورود به  {{ $siteLink->title }}
                                 </h3>
                                 <div class="mt-3">
                                     <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-blue-100 rounded-full cursor-pointer editLink"
                                         onclick='editLink("{{ $siteLink->id }}")' data-site-id="{{ $siteLink->id }}">
-                                        @if ($siteLink->icon_path)
+                                        {{-- @if ($siteLink->icon_path)
                                             <img src="{{ asset('storage/' . $siteLink->icon_path) }}"
                                                 class="size-5 rounded-md" alt="">
-                                        @else
+                                        @else --}}
                                             <img src="{{ asset('assets/img/link-simple.svg') }}" class="size-5 rounded-md"
                                                 alt="">
-                                        @endif
+                                        {{-- @endif --}}
                                         <span class="font-bold text-gray-800 viewLinkTitle"
                                             data-view-link-id="{{ $siteLink->id }}">{{ $siteLink->title }}</span>
                                     </div>
@@ -270,13 +270,13 @@
                                         </div>
                                     </div>
                                     <div class="md:flex md:flex-col md:w-full">
-                                        <div
+                                        {{-- <div
                                             class="flex flex-row items-center mt-2 text-sm md:text-base border border-gray-400 rounded-[15px] py-1 pr-3">
                                             <lable
                                                 class="p-1 w-40 text-gray-600 rounded-full flex flex-row justify-center text-sm">
                                                 آیکون لینک</lable>
                                             <input type="file" name='icon_path' id="link_icon_path_create">
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
 
@@ -407,7 +407,7 @@
                             @csrf
                             <input type="hidden" name="siteLinkId" id="siteLinkId">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-5 lg:gap-10">
-                                <div class="w-full flex flex-col">
+                                {{-- <div class="w-full flex flex-col">
                                     <div class="text-sm md:text-base border border-gray-400 rounded-[20px] py-1">
                                         <label
                                             class="p-1 w-20 flex flex-row justify-center text-sm">
@@ -416,7 +416,7 @@
                                         <input type="file" name="icon_path" id="icon_path"
                                             class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500 border-1 border-blue-300 rounded-md">
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="w-full flex flex-col">
                                     <label class="text-sm md:text-base" for="title">عنوان لینک :</label>
                                     <input type="text" name="title" id="title"
@@ -465,11 +465,11 @@
         let link_title_input = document.getElementById('title')
         let link_address_input = document.getElementById('address')
         let siteLinkId = document.getElementById('siteLinkId')
-        let icon_path = document.getElementById('icon_path')
+        // let icon_path = document.getElementById('icon_path')
 
         let link_title_create = document.getElementById('link_title_create')
         let link_address_create = document.getElementById('link_address_create')
-        let link_icon_path_create = document.getElementById('link_icon_path_create')
+        // let link_icon_path_create = document.getElementById('link_icon_path_create')
         let siteLinks = document.getElementById('siteLinks')
         let createSiteLink = document.querySelector('.createSiteLink')
 
@@ -538,7 +538,7 @@
                     'address': link_address_create.value,
                     'title': link_title_create.value,
                     'cover_id': "{{ $cover->id }}",
-                    'icon_path': link_icon_path_create.value
+                    // 'icon_path': link_icon_path_create.value
                 },
                 success: function(data) {
                     createSiteLink.children[0].classList.remove('flex')
@@ -550,7 +550,7 @@
                     <div class="w-full flex flex-col gap-5" id="linkSection">
                             <div class="py-2">
                                 <h3 class="text-lg font-bold text-gray-800 text-center viewLinkTitle" data-view-link-id="${data.id}">
-                                 ورود به ${data.title}
+                                 ورود به  ${data.title}
                                 </h3>
                                 <div class="mt-3">
                                     <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-blue-100 rounded-full cursor-pointer editLink"
@@ -604,7 +604,7 @@
                     'id': siteLinkId.value,
                     'title': link_title_input.value,
                     'address': link_address_input.value,
-                    'icon_path': icon_path.value,
+                    // 'icon_path': icon_path.value,
                     'cover_id': "{{ $cover->id }}"
                 },
                 success: function(data) {
@@ -617,7 +617,7 @@
                     closeForm()
                     viewLinkTitle.forEach((element) => {
                         if (element.getAttribute('data-view-link-id') == data.id) {
-                            element.innerText = ' ورود به' + data.title
+                            element.innerText = '  ورود به  '+ data.title
                         }
                     })
                 },
