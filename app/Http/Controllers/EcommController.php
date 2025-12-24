@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ecomm;
 use App\Models\ecomm_category;
+use App\Models\province_cities;
 use App\Models\ecomm_qrCode;
 use App\Models\role;
 use App\Models\User;
@@ -16,11 +17,13 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class EcommController extends Controller
 {
     public function create(User $user = null)
-    {
+    {       
+         $provinces = province_cities::where('parent', 0)->get();
+
         if (!$user) {
             $user = Auth::user();
         }
-        return view('admin.ecomms.create', ['user' => $user]);
+        return view('admin.ecomms.create', ['user' => $user,'provinces'=>$provinces]);
     }
 
     public function store(Request $request)
@@ -45,10 +48,9 @@ class EcommController extends Controller
         $ecomm_id = ecomm::insertGetId([
             'title' => $request->title,
             'logo' => $path,
-            'province' => $request->province,
-            'city' => $request->city,
             'address' => $request->address,
             'social_media' => $social_medias,
+            'city_id' => $request->city,
             'user_id' => $user->id,
             'email' => $request->email,
             'description' => $request->description,
@@ -81,12 +83,15 @@ class EcommController extends Controller
         // if (!$user) {
         //     $user = Auth::user();
         // }
+         $provinces = province_cities::where('parent', 0)->get();
+        $cities = province_cities::where('parent', $ecomm->province_city->province->id)->get();
         $ecomm->social_media = json_decode($ecomm->social_media);
-        return view('admin.ecomms.edit', ['ecomm' => $ecomm, 'user' => Auth::user()]);
+        return view('admin.ecomms.edit', ['ecomm' => $ecomm, 'user' => Auth::user(),'provinces'=>$provinces,'cities'=>$cities]);
     }
 
     public function update(Request $request)
     {
+        // dd($request->all());
         $ecomm = ecomm::find($request->id);
         if (isset($request->logo)) {
             if ($ecomm->logo) {
@@ -107,8 +112,7 @@ class EcommController extends Controller
             $ecomm->banner = $bannerPath;
         }
         $ecomm->social_media = json_encode($request->social_medias);
-        $ecomm->province = $request->province;
-        $ecomm->city = $request->city;
+        $ecomm->city_id = $request->city;
         $ecomm->title = $request->title;
         $ecomm->address = $request->address;
         $ecomm->description = $request->description;

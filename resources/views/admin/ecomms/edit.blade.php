@@ -51,17 +51,24 @@
 
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='province' placeholder="استان خود را وارد کنید"
-                                        value="{{ $ecomm->province }}">
+                                    <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                        name='province' placeholder="استان خود را وارد کنید" onchange="changeCity(this)" required>
+                                        @foreach ($provinces as $province)
+                                            <option value="{{ $province->id }}" @if($province->id == $ecomm->province_city->province->id){{ 'selected' }}@endif>{{ $province->title }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
-                                <label class="w-30 text-sm mb-1 mt-2.5 flex">شهر</label>
+                               <label class="w-30 text-sm mb-1 mt-2.5 flex">شهر</label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                    <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='city' placeholder=" شهرخود را وارد کنید" value="{{ $ecomm->city }}">
+                                    <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                        name='city' id="city" placeholder=" شهرخود را وارد کنید"required>
+                                        @foreach ($cities as $city)
+                                            <option value="{{ $city->id }}" @if($city->id == $ecomm->city_id){{ 'selected' }}@endif>{{ $city->title }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
@@ -131,4 +138,157 @@
                 </div>
             </div>
         </form>
+           <script>
+        let block = document.getElementById('block')
+        let editQr = document.getElementById('editQr')
+        let qrId = document.getElementById('id')
+        let description = document.getElementById('description')
+        let descriptionElement = document.querySelectorAll('.description')
+
+        function addBlock(id) {
+            editQr.children[0].classList.remove('hidden')
+            editQr.children[0].classList.add('flex')
+            editQr.children[0].innerHTML = `
+            <div class="loading-wave">
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+            </div>
+            `
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                }
+            })
+
+            $.ajax({
+                url: "{{ route('qr.edit') }}",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    'id': id
+                },
+                success: function(data) {
+                    editQr.children[0].classList.remove('flex')
+                    editQr.children[0].classList.add('hidden')
+                    qrId.value = data.id
+                    description.value = data.description
+                },
+                error: function() {
+                    alert('خطا در دریافت داده')
+                }
+            })
+
+            block.classList.remove('invisible')
+            block.classList.remove('opacity-0')
+            editQr.classList.remove('scale-95')
+            editQr.classList.remove('opacity-0')
+            editQr.classList.remove('invisible')
+        }
+
+        function storeQr(e) {
+            e.preventDefault();
+            editQr.children[0].classList.remove('hidden')
+            editQr.children[0].classList.add('flex')
+            editQr.children[0].innerHTML = `
+            <div class="loading-wave">
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+            </div>
+            `
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                }
+            })
+            $.ajax({
+                url: "{{ route('qr.update') }}",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    'id': qrId.value,
+                    'description': description.value
+                },
+                success: function(data) {
+                    descriptionElement.forEach(element => {
+                        if (data.id == element.getAttribute('data-id')) {
+                            element.innerText = data.description
+                        }
+                    });
+                    closeForm()
+                    console.log(data);
+                },
+                error: function() {
+                    alert('خطا در ارسال داده')
+                }
+            })
+
+        }
+
+        function removeQr(el, id) {
+
+            loading.classList.remove('invisible')
+            loading.classList.remove('opacity-0')
+            loading.children[0].children[0].classList.remove('hidden')
+            loading.children[0].children[0].classList.add('flex')
+            loading.children[0].children[0].innerHTML = `
+            <span class="loader"></span>
+            `
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                }
+            })
+            $.ajax({
+                url: "{{ route('qr.delete') }}",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    'id': id
+                },
+                success: function(data) {
+                    closeForm()
+                    el.parentElement.parentElement.parentElement.remove()
+                    console.log(data)
+                },
+                error: function() {
+                    alert('خطا در ارسال داده')
+                }
+            })
+        }
+
+        let city = document.getElementById('city')
+            function changeCity(el){
+                city.innerHTML = ""
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+                $.ajax({
+                    url: "{{ route('pc.city') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'id': el.value
+                    },
+                    success: function(datas){
+                        datas.forEach(data => {
+                            let option = document.createElement('option')
+                            option.value = data.id
+                            option.innerText = data.title
+                            city.appendChild(option)
+                        });
+                    },
+                    error: function(){
+                        alert('خطا در دریافت داده')
+                    }
+                })
+            }
+    </script>
+    <script src="{{ asset('assets/js/qrcode.js') }}"></script>
     @endsection
