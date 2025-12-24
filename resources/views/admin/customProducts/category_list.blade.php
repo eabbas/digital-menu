@@ -3,7 +3,7 @@
 @section('content')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<div class="w-full min-h-screen pb-10 pt-6 bg-gray-50">
+<div class="w-full pb-10 pt-6 bg-white">
     <div class="w-11/12 mx-auto">
         
 
@@ -21,41 +21,12 @@
                     </p>
                 </div>
                 <div onclick='openCform("{{ $custom_product->id }}")' 
-                class="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer" >
+                class="w-fit flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer" >
                     <span class="text-sm font-medium"> ایجاد دسته بندی</span>
                 </div>
              
             </div>
         </div>
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         <div class="flex flex-col gap-5">
             <div class="w-11/12 mx-auto shadow-md rounded mb-5 overflow-x-auto [&::-webkit-scrollbar]:hidden lg:overflow-visible">
@@ -67,10 +38,10 @@
                         <span class="block w-20 lg:w-full">عنوان</span>
                     </div>
                     <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
-                        <span class="block w-20 lg:w-full">لزوم</span>
+                        <span class="block w-11 lg:w-full">لزوم</span>
                     </div>
                     <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-2">
-                        <span class="block w-[120px] lg:w-full">حداکثر مواد</span>
+                        <span class="block w-16 lg:w-full">حداکثر مواد</span>
                     </div>
                     <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-4">
                         <span class="block w-[320px] lg:w-full">عملیات</span>
@@ -95,13 +66,13 @@
                                     <span class="block w-20 lg:w-full">{{ $category->title }}</span>
                                 </div>
                                 <div class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 lg:w-full text-center">
-                                    <span class="text-xs px-2 py-1 rounded {{ $category->required ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700' }}">
+                                    <span class="block w-11 lg:w-full text-xs px-2 py-1 rounded {{ $category->required ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700' }}">
                                         {{ $category->required ? 'الزامی' : 'اختیاری' }}
                                     </span>
                                 </div>
                                 <div
                                     class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
-                                    <span class="block w-20 lg:w-full">{{ $category->max_item_amount }}</span>
+                                    <span class="block w-16 lg:w-full">{{ $category->max_item_amount }}</span>
                                 </div>
                 
                                 
@@ -160,14 +131,14 @@
     </div>
      @foreach($custom_product->customCategories as $category)
     <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="editCategoryform">
-        <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative " id="closeEditCform">
+        <div class="w-full lg:w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative " id="closeEditCform">
             <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeForm()">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
                     <path fill="gray" d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
                 </svg>
             </div>
 
-            <form action="{{ route('custmCategory.update')}}" method="post" enctype="multipart/form-data" class="bg-white w-1/2 p-5 rounded-lg relative">
+            <form action="{{ route('custmCategory.update')}}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg relative">
                         <div id="editcategoryloading"
                             class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
                         </div>
@@ -219,14 +190,14 @@
     @endforeach
      {{-- @foreach($custom_product->customCategories as $category) --}}
      <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCPMform">
-        <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative" id="closeEditCform">
+        <div class="w-full lg:w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative" id="closeEditCform">
             <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeForm()">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
                     <path fill="gray" d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
                 </svg>
             </div>
 
-        <form action="{{ route('cpm.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-1/2 p-5 rounded-lg">
+        <form action="{{ route('cpm.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg">
             @csrf
                                             
             <div class="mb-4">
@@ -316,13 +287,13 @@
     {{-- @endforeach --}}
 </div>
 <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCform">
-    <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative" id="closeCreateCform">
+    <div class="w-full lg:w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative" id="closeCreateCform">
     <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeForm()">
         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
             <path fill="gray" d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
         </svg>
     </div>
-    <form action="{{ route('custmCategory.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-1/2 p-5 rounded-lg">
+    <form action="{{ route('custmCategory.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg">
         @csrf
                                         
         <div class="mb-4">

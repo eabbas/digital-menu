@@ -10,7 +10,7 @@
            
             <div class="flex flex-col gap-5">
                 <div class="w-10/12 mx-auto shadow-md rounded mb-5 overflow-x-auto [&::-webkit-scrollbar]:hidden lg:overflow-visible">
-                    <div class="w-full flex flex-row lg:grid lg:grid-cols-9 items-center divide-x divide-[#f1f1f4] sticky -top-5">
+                    <div class="w-full flex flex-row lg:grid lg:grid-cols-8 items-center divide-x divide-[#f1f1f4] sticky -top-5">
                         <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
                             <span class="block w-10 lg:w-full text-center">ردیف</span>
                         </div>
@@ -26,7 +26,7 @@
                         {{-- <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-3">
                             <span class="block w-24 lg:w-full">توضیحات</span>
                         </div> --}}
-                        <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-4">
+                        <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-3">
                             <span class="block w-[320px] lg:w-full">عملیات</span>
                         </div>
                         
@@ -39,7 +39,7 @@
                         @foreach ($user->careers as $career)
                             @if ($career)
                                 <div
-                                    class="w-full flex flex-row lg:grid lg:grid-cols-9 items-center divide-x divide-[#f1f1f4]">
+                                    class="w-full flex flex-row lg:grid lg:grid-cols-8 items-center divide-x divide-[#f1f1f4]">
                                     <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
                                         <span class="block w-10 lg:w-full">{{ $i }}</span>
@@ -64,7 +64,7 @@
                                         <span class="block w-24 lg:w-full">{{ $career->description }}</span>
                                     </div> --}}
                                     
-                                    <div class="col-span-4">
+                                    <div class="col-span-3">
                                         <div class="grid grid-cols-3 divide-x divide-[#f1f1f4] items-center w-[320px]">
 
                                             <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3">

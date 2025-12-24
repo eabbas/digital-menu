@@ -3,7 +3,7 @@
 @section('content')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<div class="w-full min-h-screen pb-10 pt-6 bg-gray-50">
+<div class="w-full min-h-screen pb-10 pt-6 bg-white">
     <div class="w-11/12 mx-auto">
         <!-- Header -->
         <div class="mb-6">
@@ -55,7 +55,7 @@
                     </div>
                    
                     <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-2">
-                        <span class="block w-[320px] lg:w-full">عملیات</span>
+                        <span class="block w-[150px] lg:w-full">عملیات</span>
                     </div>
                     
                 </div>
@@ -100,7 +100,7 @@
         
                         
                         <div class="col-span-2">
-                            <div class="lg:w-full w-[320px]">
+                            <div class="lg:w-full w-[150px]">
 
                                 <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3">
                                     <li class="flex justify-center">
@@ -152,7 +152,7 @@
 
 
         <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCPVform">
-        <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative" id="closeCreateCPVform">
+        <div class="w-full lg:w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative" id="closeCreateCPVform">
             <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200"
                     onclick="closeForm()">
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
@@ -161,7 +161,7 @@
                     </svg>
                 </div>
               <form action="{{ route('cpv.store') }}" method="post" enctype="multipart/form-data"
-                class="bg-white w-1/2 p-5 rounded-lg">
+                class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg">
                 @csrf
 
                 <div class="mb-4">
@@ -225,13 +225,13 @@
         @foreach($customProduct->custom_product_variants as $index => $cpVariant)
         @if(isset($cpVariant))
         <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="editCPVform">
-            <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative " id="closeEditCform">
-                <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeForm()">
+            <div class="w-full lg:w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative " id="closeEditCform">
+                <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon z-999 hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeForm()">
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
                         <path fill="gray" d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
                     </svg>
                 </div>
-                <form action="{{ route('cpv.update')}}" method="post" enctype="multipart/form-data" class="bg-white w-1/2 p-5 rounded-lg relative">
+                <form action="{{ route('cpv.update')}}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg relative">
                         <div id="editCPVloading"
                             class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
                         </div>
