@@ -63,15 +63,15 @@ class CustomProductVariantController extends Controller
         $cpv->duration = $request->duration;
         $cpv->custom_product_id = $request->custom_product_id;
         
-        // if (isset($request->image)) {
-            //     if ($cpv->image) {
-                //         Storage::disk('public')->delete($cpv->image);
-                //     }
-                //     $name = $request->image->getClientOriginalName();
-                //     $fullName = time() . '_' . $name;
-                //     $path = $request->file('image')->storeAs('images', $fullName, 'public');
-        //     $cpv->image = $path;
-        // }
+        if (isset($request->customProductImage)) {
+                if ($cpv->image) {
+                        Storage::disk('public')->delete($cpv->image);
+                    }
+                    $name = $request->customProductImage->getClientOriginalName();
+                    $fullName = time() . '_' . $name;
+                    $path = $request->file('customProductImage')->storeAs('images', $fullName, 'public');
+                    $cpv->image = $path;
+        }
         $cpv->save();
         return response()->json($cpv);
 

@@ -72,14 +72,14 @@ class CustomProductMaterialController extends Controller
         $customProductMaterial->custom_product_id = $request->custom_product_id;
         $customProductMaterial->category_id = $request->category_id;
 
-        // if (isset($request->image)) {
-        //     if ($customProductMaterial->image) {
-        //         Storage::disk('public')->delete($customProductMaterial->image);
-        //     }
-        //     $name = $request->image->getClientOriginalName();
-        //     $fullName = time() . '_' . $name;
-        //     $path = $request->file('image')->storeAs('images', $fullName, 'public');
-        // }
+        if (isset($request->customProductImage)) {
+            if ($customProductMaterial->image) {
+                Storage::disk('public')->delete($customProductMaterial->image);
+            }
+            $name = $request->customProductImage->getClientOriginalName();
+            $fullName = time() . '_' . $name;
+            $path = $request->file('customProductImage')->storeAs('images', $fullName, 'public');
+        }
         $customProductMaterial->image = $path;
         $customProductMaterial->save();
         return response()->json($customProductMaterial);

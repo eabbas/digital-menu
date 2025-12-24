@@ -173,7 +173,7 @@
                 </div>
                 @csrf
                 <input type="hidden" name="id" id="cpmId">
-                    
+                    <div class="w-full grid grid-cols-1 lg:grid-cols-2 lg:gap-3">
                         <div class="mb-4">
                             <label for="titlecpm" class="block text-sm font-medium mb-2">
                                 عنوان
@@ -181,6 +181,16 @@
                             <input type="text" 
                                 name="title" 
                                 id="titlecpm"
+                                required
+                                class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+                        </div>
+                        <div class="mb-4">
+                            <label for="titlecpm" class="block text-sm font-medium mb-2">
+                                تصویر
+                            </label>
+                            <input type="file" 
+                                name="customProductImage" 
+                                id="customProductImage"
                                 required
                                 class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
                         </div>
@@ -224,7 +234,7 @@
                                 placeholder="محدودیت متریال را وارد کنید"
                                 class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
                         </div>
-                         <div class="mb-4">
+                        <div class="mb-4 lg:col-span-2">
                             <label for="descriptioncpm" class="block text-sm font-medium mb-2">
                                 توضیحات
                             </label>
@@ -234,6 +244,7 @@
                                 required
                                 class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none"></textarea>
                         </div>
+                    </div>
                         <input type="hidden" name="custom_product_id" id="custom_product_id_cpm" value="{{ $material->custom_product->id }}"> 
                 <input type="hidden" name="custom_category_id" id="custom_category_id_cpm" value="{{ $material->customCategory->id }}"> 
 
@@ -256,85 +267,87 @@
             </div>
             <form action="{{ route('cpm.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-1/2 p-5 rounded-lg">
             @csrf
-                                            
-            <div class="mb-4">
-                <label for="title" class="block text-sm font-medium mb-2">
-                   عنوان
-                </label>
-                <input type="text" 
-                    name="title" 
-                    id="cpmtitle"
-                    required
-                    class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
-            </div>
-            <div class="mb-4">
-                <label for="title" class="block text-sm font-medium mb-2">
-                   تصویر
-                </label>
-                <input type="file" 
-                    name="cpmImage" 
-                    id="cpmImage"
-                    required
-                    class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
-            </div>
-            
-            <div>
-                <label for="price_per_unit" class="block text-sm font-medium mb-1">
-                    قیمت هر واحد *
-                </label>
-                <input type="number" 
-                    name="price_per_unit" 
-                    id="cpm_price_per_unit"
-                    required
-                    min="0"
-                    class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
-            </div>
-            <div>
-                <label for="order" class="block text-sm font-medium mb-1 mt-3">
-                    ترتیب
-                </label>
-                <input type="number" 
-                    name="order" 
-                    id="cpmorder"
-                    min="0"
-                    required
-                    class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
-            </div>
-            <div class="flex items-center mt-3">
-                <input type="checkbox" 
-                    name="required" 
-                    id="cpmrequired"
-                    value="1"
-                    class="ml-2">
-                <label for="required" class="text-sm">
-                    اجباری
-                </label>
-            </div>
-            <div class="space-y-4">
-                <label for="cpm_max_unit_amount" class="block text-sm font-medium mb-1 mt-3">
-                    حداکثر تعداد واحد
-                </label>
-                <input type="number" 
-                    name="max_unit_amount" 
-                    id="cpm_max_unit_amount"
-                    min="1"
-                    required
-                    class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
-            </div>
-
+            <div class="w-full grid grid-cols-1 lg:grid-cols-2 lg:gap-3">
+                <div class="mb-4">
+                    <label for="title" class="block text-sm font-medium mb-2">
+                       عنوان
+                    </label>
+                    <input type="text" 
+                        name="title" 
+                        id="cpmtitle"
+                        required
+                        class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+                </div>
+                <div class="mb-4">
+                    <label for="title" class="block text-sm font-medium mb-2">
+                       تصویر
+                    </label>
+                    <input type="file" 
+                        name="cpmImage" 
+                        id="cpmImage"
+                        required
+                        class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+                </div>
+                
+                <div>
+                    <label for="price_per_unit" class="block text-sm font-medium mb-1">
+                        قیمت هر واحد *
+                    </label>
+                    <input type="number" 
+                        name="price_per_unit" 
+                        id="cpm_price_per_unit"
+                        required
+                        min="0"
+                        class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+                </div>
+                <div class="flex items-center mt-3">
+                    <input type="checkbox" 
+                        name="required" 
+                        id="cpmrequired"
+                        value="1"
+                        class="ml-2">
+                    <label for="required" class="text-sm">
+                        اجباری
+                    </label>
+                </div>
+                <div>
+                    <label for="order" class="block text-sm font-medium mb-1 mt-3">
+                        ترتیب
+                    </label>
+                    <input type="number" 
+                        name="order" 
+                        id="cpmorder"
+                        min="0"
+                        required
+                        class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+                </div>
+                
+                <div class="space-y-4">
+                    <label for="cpm_max_unit_amount" class="block text-sm font-medium mb-1 mt-3">
+                        حداکثر تعداد واحد
+                    </label>
+                    <input type="number" 
+                        name="max_unit_amount" 
+                        id="cpm_max_unit_amount"
+                        min="1"
+                        required
+                        class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+                </div>
+                <div class="mb-4 lg:col-span-2">
+                    <label for="cpmdescription" class="block text-sm font-medium mb-2">
+                        توضیحات
+                    </label>
+                    <textarea type="text" 
+                        name="description" 
+                        id="cpmdescription"
+                        required
+                        class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none"></textarea>
+                </div>
+            </div>                         
             <input type="hidden" name="custom_pro_id" id="custom_pro_id_field" value="{{ $customCategory->custom_products->id }}">
             <input type="hidden" name="category_id" id="category_id_field" value="{{ $customCategory->id }}">
             
-            <div class="mb-4">
-                <label for="cpmdescription" class="block text-sm font-medium mb-2">
-                    توضیحات
-                </label>
-                <textarea type="text" 
-                    name="description" 
-                    id="cpmdescription"
-                    required
-                    class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none"></textarea>
-            </div>
+            
             <div class="flex justify-end gap-3" >
                     <button onclick="cpmStore(event)" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 cursor-pointer">
                         ثبت
@@ -374,6 +387,7 @@
 
         let itemListLoading = document.getElementById('itemListLoading')
         let imageCPM = document.getElementById('cpmImage')
+        let customProductImage = document.getElementById('customProductImage')
         
         function closeForm(){
             forms.forEach((form)=>{
@@ -585,6 +599,17 @@
             <div class="loading-bar"></div>
         </div>
         `
+        let formData = new FormData()
+        formData.append('id',cpmIdInp.value)
+        formData.append('custom_product_id',custom_product_id_cpm.value)
+        formData.append('title',titlecpm.value)
+        formData.append('description',descriptioncpm.value)
+        formData.append('price_per_unit',price_per_unit_cpm.value)
+        formData.append('required',requiredcpm.value)
+        formData.append('order',ordercpm.value)
+        formData.append('max_unit_amount',max_unit_amount_cpm.value)
+        formData.append('category_id',custom_category_id_cpm.value)
+        formData.append('customProductImage',customProductImage.files[0])
 
         let checkBoxStatus = requiredcpm.checked
 
@@ -602,19 +627,10 @@
          $.ajax({
             url : "{{ route('cpm.update') }}" ,
             type : "POST" ,
-            dataType : "json" ,
-            data : {
-                'id': cpmIdInp.value,
-                'custom_product_id': custom_product_id_cpm.value,
-                'title' : titlecpm.value,
-                'description' : descriptioncpm.value,
-                'price_per_unit' : price_per_unit_cpm.value,
-                'required' : requiredcpm.value,
-                'order' : ordercpm.value,
-                'max_unit_amount' : max_unit_amount_cpm.value,
-                'category_id' : custom_category_id_cpm.value
-                // 'customProductImage' : customProductImage.value,
-            },
+            data : formData,
+            contentType : false,
+            processData : false,
+           
             success: function(data){
                 console.log(data)
                 itemListLoading.classList.remove('flex')
@@ -623,6 +639,10 @@
                 // let div = document.createElement('div')
                 newParameters.forEach((element)=>{
                     if(element.getAttribute('data-cp-id') == data.id){
+                        element.children[1].children[0].innerHTML = `
+                                <img src="${data.image ? '{{ asset("storage/") }}/' + data.image : '/images/default-product.png'}"
+                                alt="${data.title}" class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md">
+                            `
                         element.children[2].children[0].innerText = data.title
                         element.children[3].children[0].innerText = data.price_per_unit
                         if(data.required == 1){

@@ -236,6 +236,7 @@
                             class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
                         </div>
                         @csrf
+                    <input type="hidden" name="custom_product_id" id="custom_product_id_vUpdate" value="{{ $customProduct->id }}">
                         <input type="hidden" name="cpvId" id="cpvId">
                         <div class="mb-4">
                             <label for="titleCpvedit" class="block text-sm font-medium mb-2">
@@ -319,9 +320,11 @@
     let min_amount_unit_cpv = document.getElementById('min_amount_unit_cpv')
     let durationCPV = document.getElementById('durationCPV')
     let custom_product_id_variant = document.getElementById('custom_product_id_variant')
+    let custom_product_id_vUpdate = document.getElementById('custom_product_id_vUpdate')
     let descriptionCPV = document.getElementById('descriptionCPV')
     
     let editloadingcpv = document.getElementById('editCPVloading')
+    let customProductImage = document.getElementById('customProductImage')
 
     let cpvId = document.getElementById('cpvId')
     let forms = document.querySelectorAll(".form")
@@ -514,6 +517,15 @@
             <div class="loading-bar"></div>
         </div>
         `
+
+        let formData = new FormData()
+        formData.append('id' ,cpvId.value)
+        formData.append('title' ,cpvEdittitle.value)
+        formData.append('description' ,cpvDescription.value)
+        formData.append('min_amount_unit' ,cpvMinamountunit.value)
+        formData.append('duration' ,cpvDuration.value)
+        formData.append('custom_product_id' ,custom_product_id_vUpdate.value)
+        formData.append('customProductImage' ,customProductImage.files[0])
         $.ajaxSetup({
             headers : {
                 'X-CSRF-TOKEN' : "{{ csrf_token() }}"
@@ -522,19 +534,16 @@
         $.ajax({
             url : "{{ route('cpv.update') }}" ,
             type : "POST" ,
-            dataType : "json" ,
-            data : {
-                'id': cpvId.value,
-                'title' : cpvEdittitle.value,
-                'description' : cpvDescription.value,
-                // 'customProductImage' : customProductImage.value,
-                'min_amount_unit' : cpvMinamountunit.value,
-                'duration' : cpvDuration.value,
-                'custom_product_id': "{{ $customProduct->id }}",
-            },
+            data : formData,
+            contentType : false,
+            processData : false ,
             success: function(data){
                 newParameters.forEach((element)=>{
                     if(element.getAttribute('data-cp-id') == data.id){
+                        element.children[1].children[0].innerHTML = `
+                                <img src="${data.image ? '{{ asset("storage/") }}/' + data.image : '/images/default-product.png'}"
+                                alt="${data.title}" class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md">
+                            `
                         element.children[2].children[0].innerText = data.title 
                         element.children[3].children[0].innerText = data.min_amount_unit 
                         element.children[5].children[0].innerText = data.duration 
