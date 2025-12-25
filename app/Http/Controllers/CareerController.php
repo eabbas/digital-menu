@@ -28,11 +28,12 @@ class CareerController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $roles = role::all();
-        $user = Auth::user();
+        $user = $request->user_id;
         $path = null;
         $bannerPath = null;
-        if ($user->role[0]->title != 'admin') {
+        if (Auth::user()->role[0]->title != 'admin') {
             $user->role[0] = $roles[1];
             $user->save();
         }
@@ -53,7 +54,7 @@ class CareerController extends Controller
             'city_id' => $request->city,
             'address' => $request->address,
             'social_media' => $social_medias,
-            'user_id' => $user->id,
+            'user_id' => $user,
             'email' => $request->email,
             'description' => $request->description,
             'career_category_id' => $request->careerCategory,
@@ -73,7 +74,7 @@ class CareerController extends Controller
                 'user_id'=> Auth::id()
             ]);
         }
-        return to_route('career.careers');
+        return to_route('career.careers' , ['user'=>$user]);
     }
 
     public function user_careers(user $user=null)
