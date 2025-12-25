@@ -373,6 +373,7 @@ Route::group([
 ], function () {
     Route::get('/create/{career?}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
+    Route::post('/save', 'save')->name('save');
     Route::get('/customProductList', 'index')->name('list');
     Route::get('/category_list/{custom_product?}', 'category_list')->name('category_list');
     Route::get('/show/{customProduct}', 'show')->name('single');

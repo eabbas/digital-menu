@@ -9,9 +9,9 @@
             ثبت محصول شخصی‌سازی شده جدید
         </h2>
 
-        <form action="{{ route('cp.store') }}" method="post" enctype="multipart/form-data" class="space-y-6">
+        <form action="{{ route('cp.save') }}" method="post" enctype="multipart/form-data" class="space-y-6">
             @csrf
-        <input type="hidden" name="career_id" value="{{$career -> id}}">
+        <input type="hidden" name="career_id" value="{{ $career->id }}">
             <!-- Title Field -->
             <div class="form-group">
                 <label for="title" class="block text-sm font-medium text-gray-700 mb-2">

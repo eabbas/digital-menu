@@ -36,6 +36,24 @@ class CustomProductController extends Controller
     }
 
     
+    public function save(Request $request)
+    {
+        // dd($request->all());
+        $path = null;
+        if(isset($request->customProductImage)){
+            $name = $request->customProductImage->getClientOriginalName();
+            $fullName = time() . '_' . $name;
+            $path = $request->file('customProductImage')->storeAs('images', $fullName, 'public');
+        }
+        custom_product::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'material_limit' => $request->material_limit,
+            'career_id' => $request->career_id,
+            'image' => $path
+        ]);
+        return to_route('menu.customProList',['career'=>$request->career_id]);
+    }
 
     public function index()
     {
