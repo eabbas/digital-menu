@@ -102,4 +102,8 @@ class EcommProductController extends Controller
     {
         return view('admin.ecomm_products.category_product', ['ecomm_category' => $ecomm_category]);
     }
+    public function menu_ecomm_category_product(Request $request){
+        $ecomm_category=ecomm_category::find($request->key);
+                return response()->json($ecomm_category->ecomm_products);
+    }
 }
