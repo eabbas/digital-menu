@@ -99,7 +99,6 @@
                                                 <a href="{{ route('menuCat.create', [$menu]) }}" class="text-sky-700">ایجاد
                                                     دسته</a>
                                             </div>
-                                         
                                             @if (count($menu->menu_categories))
                                                 <div
                                                     class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
@@ -108,7 +107,7 @@
                                                     </a>
                                                 </div>
                                             @endif
-                                            <div
+                                                 <div
                                                 class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
                                                 <a href="{{ route('cp.create', [$menu->career]) }}" class="text-sky-700">
                                                     ایجاد محصول شخصی‌سازی
@@ -122,7 +121,7 @@
                                                     </a>
                                                 </div>
                                             @endif
-                                        
+
                                         </div>
                                     </div>
                                 </div>

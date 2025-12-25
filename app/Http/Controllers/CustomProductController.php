@@ -54,6 +54,7 @@ class CustomProductController extends Controller
         ]);
         return to_route('menu.customProList',['career'=>$request->career_id]);
     }
+
     public function index()
     {
         $allCustomProduct = custom_product::all();
