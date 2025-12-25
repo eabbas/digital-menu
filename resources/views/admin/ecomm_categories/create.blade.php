@@ -67,8 +67,10 @@
                              name="parent_id" id="ecomCategories">
 
                              @foreach ($user->ecomms[0]->ecomm_category as $ecomm_category)
+                             @if($ecomm_category->title!=="بدون دسته بندی")
                                  <option value="{{ $ecomm_category->id }}">{{ $ecomm_category->title }}</option>
-                             @endforeach
+                                 @endif
+                                 @endforeach
                              <option value="0">بدون والد</option>
                          </select>
                      </div>

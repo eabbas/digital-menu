@@ -31,6 +31,7 @@
                     {{-- @dd($menu->menu_categories) --}}
                     <div class="flex flex-row gap-3 parent_menu" data-index-menu="{{ $ecomm->id }}">
                         @foreach ($ecomm->ecomm_category as $ecomm_category)
+                        @if($ecomm_category->title!=='بدون دسته بندی')
                             <div class="w-20 gap-2 bg-white rounded-lg p-2 flex flex-col items-center cursor-pointer"
                                 onclick='get_ecomm_category_id("{{ $ecomm_category->id }}")'>
                                 <div class="w-full">
@@ -41,7 +42,15 @@
                                     <h3 class="text-sm text-center font-semibold">{{ $ecomm_category->title }}</h3>
                                 </div>
                             </div>
+                            @endif
                         @endforeach
+                        <div class="w-20 gap-2 bg-white rounded-lg p-2 flex flex-col items-center cursor-pointer"
+                                onclick='get_ecomm_category_id("all")'>
+                               
+                                <div class="justify-self-start w-full">
+                                    <h3 class="text-sm text-center font-semibold">کل دسته ها</h3>
+                                </div>
+                            </div>
                     </div>
                
             </div>
