@@ -493,6 +493,7 @@ Route::group([
     Route::get('/ecomms', 'index')->name('list');
     Route::get('/show/{ecomm}', 'single')->name('single')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/ecomm_menu/{ecomm}', 'ecomm_menu')->name('ecomm_menu')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/ecomm_single_menu/{ecomm}', 'ecomm_single_menu')->name('ecomm_single_menu')->withoutMiddleware([UserMiddleware::class]);
 });
 
 Route::group(['prefix'=>'ecomm_category',

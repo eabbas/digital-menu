@@ -163,4 +163,7 @@ class EcommController extends Controller
     public function ecomm_menu(ecomm $ecomm){
         return view('admin.ecomms.ecomm_menu',['ecomm'=>$ecomm]);
     }
+    public function ecomm_single_menu(ecomm $ecomm){
+        return view('client.ecomm.single',['ecomm'=>$ecomm]);
+    }
 }
