@@ -40,6 +40,9 @@ class CustomProductController extends Controller
     public function index()
     {
         $allCustomProduct = custom_product::all();
+        // foreach($allCustomProduct as $custom_product){
+        //     // dd($custom_product->career->user);
+        // }
         return view('admin.customProducts.index', ['allCustomProduct' => $allCustomProduct]);
     }
 

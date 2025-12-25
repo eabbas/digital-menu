@@ -9,28 +9,14 @@
             <!-- Header -->
             <div class="mb-8">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-4">
-                    {{-- <div>
+                    <div>
                         <h1 class="text-2xl font-bold text-gray-800">محصولات شخصی‌سازی شده</h1>
                         @foreach ($allCustomProduct as $customProduct)
                             
                         <p class="text-blue-600 font-medium mt-1">{{ $customProduct->title ?? 'کسب و کار' }}</p>
                         @endforeach
-                    </div> --}}
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-                        <div class="flex items-center gap-2 text-blue-600 bg-blue-50 px-4 py-2 rounded-lg">
-                            {{-- <svg class="size-5" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
-                                <path fill-rule="evenodd"
-                                    d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
-                                    clip-rule="evenodd" />
-                            </svg> --}}
-                            {{-- <span class="text-sm font-medium">{{ count($customProduct->career->title ?? []) }} محصول</span> --}}
-                        </div>
-                        <div onclick="openCPform()"
-                            class="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer">
-                            <span class="text-sm font-medium">محصول جدید</span>
-                        </div>
                     </div>
+                   
                 </div>
                 {{-- <div class="h-1 w-24 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full"></div> --}}
             </div>
@@ -93,7 +79,6 @@
                                 rows="4"
                                 class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none"></textarea>
                         </div>
-                       
 
                             <div class="flex justify-end gap-3" >
                                 <button type="submit" onclick="storeCP(event)" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 cursor-pointer">
