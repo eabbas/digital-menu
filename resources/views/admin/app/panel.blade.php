@@ -300,7 +300,7 @@
                     </ul>
                 </div>
                 {{-- customPro_list --}}
-                <div class="dashboard">
+                {{-- <div class="dashboard">
                     <div class="flex flex-row-reverse justify-between">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             class="size-6 fill-white w-[15px]">
@@ -318,15 +318,8 @@
                             </svg>
                         </div>
                     </div>
-                    {{-- @foreach (Auth::user()->careers as $career) --}}
-                    {{-- @dd($career) --}}
+                   
                     <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden">
-                        {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
-                                <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('cp.create', [$career->id]) }}" class="text-white py-1">
-                                    ایجاد محصولات شخصی سازی شده
-                                </a>
-                            </li> --}}
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('cp.list') }}" class="text-white py-1">
@@ -334,8 +327,7 @@
                             </a>
                         </li>
                     </ul>
-                    {{-- @endforeach --}}
-                </div>
+                </div> --}}
                 {{-- end customPro_list --}}
                 <div class="dashboard">
                     <div class="flex flex-row-reverse justify-between">
