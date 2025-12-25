@@ -585,6 +585,13 @@
     function updatecpm(ev){
         let newParameters = document.querySelectorAll('.newParameters')
         ev.preventDefault()
+        let checkBoxStatus = requiredcpm.checked
+
+        requiredcpm.value = 0
+
+        if(checkBoxStatus){
+            requiredcpm.value = 1
+        }
         itemListLoading.classList.remove('hidden')
         itemListLoading.classList.add('flex')
         itemListLoading.innerHTML = `
@@ -607,13 +614,7 @@
         formData.append('category_id',custom_category_id_cpm.value)
         formData.append('customProductImage',customProductImage.files[0])
 
-        let checkBoxStatus = requiredcpm.checked
-
-        requiredcpm.value = 0
-
-        if(checkBoxStatus){
-            requiredcpm.value = 1
-        }
+        
 
         $.ajaxSetup({
             headers : {

@@ -66,7 +66,7 @@ class CustomProductMaterialController extends Controller
         $customProductMaterial->title = $request->title;
         $customProductMaterial->description = $request->description;
         $customProductMaterial->price_per_unit = $request->price_per_unit;
-        $customProductMaterial->required = $request->required;
+        $customProductMaterial->required = isset($request->required) ? $request->required : 0;
         $customProductMaterial->order = $request->order;
         $customProductMaterial->max_unit_amount = $request->max_unit_amount;
         $customProductMaterial->custom_product_id = $request->custom_product_id;

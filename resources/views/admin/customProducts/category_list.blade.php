@@ -220,18 +220,18 @@
                     required
                     class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
             </div>
-            <div class="mb-4">
-                <label for="cpmdescription" class="block text-sm font-medium mb-2">
-                    توضیحات
+             <div class="flex items-center mt-3">
+                <input type="checkbox" 
+                    name="required" 
+                    id="cpmrequired"
+                    value="1"
+                    class="ml-2">
+                <label for="required" class="text-sm">
+                    اجباری
                 </label>
-                <input type="text" 
-                    name="description" 
-                    id="cpmdescription"
-                    required
-                    class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
             </div>
             <div>
-                <label for="price_per_unit" class="block text-sm font-medium mb-1">
+                <label for="price_per_unit" class="block text-sm font-medium mb-1 mt-2">
                     قیمت هر واحد *
                 </label>
                 <input type="number" 
@@ -265,15 +265,16 @@
             </div>
             <input type="hidden" name="custom_pro_id" id="custom_pro_id_field">
             <input type="hidden" name="category_id" id="category_id_field">
-            <div class="flex items-center mt-3">
-                <input type="checkbox" 
-                    name="required" 
-                    id="cpmrequired"
-                    value="1"
-                    class="ml-2">
-                <label for="required" class="text-sm">
-                    اجباری
+
+            <div class="mb-4">
+                <label for="cpmdescription" class="block text-sm font-medium mb-2">
+                    توضیحات
                 </label>
+                <textarea type="text" 
+                    name="description" 
+                    id="cpmdescription"
+                    required
+                    class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none"></textarea>
             </div>
             <div class="flex justify-end gap-3" >
                     <button onclick="cpmStore(event)" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 cursor-pointer">

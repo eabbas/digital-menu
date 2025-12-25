@@ -15,13 +15,13 @@
                     </div>
                     <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3">
                         <div class="flex items-center gap-2 text-blue-600 bg-blue-50 px-4 py-2 rounded-lg">
-                            <svg class="size-5" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
-                                <path fill-rule="evenodd"
-                                    d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-sm font-medium">{{ count($career->custom_product ?? []) }} محصول</span>
+                                {{-- <svg class="size-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+                                    <path fill-rule="evenodd"
+                                        d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
+                                        clip-rule="evenodd" />
+                                </svg> --}}
+                            {{-- <span class="text-sm font-medium">{{ count($career->custom_product ?? []) }} محصول</span> --}}
                         </div>
                         <div onclick="openCPform()"
                             class="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer">
@@ -576,8 +576,8 @@
                             element.children[3].children[0].innerText = data.material_limit
                         }
                     })
-                    closeForm()
                     console.log(data)
+                    closeForm()
                 },
                 error: function() {
                     alert('خطا در ارسال داده')
