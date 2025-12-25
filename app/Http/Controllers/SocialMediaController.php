@@ -45,7 +45,7 @@ class SocialMediaController extends Controller
     public function update(Request $request)
     {
         $socialMedia = socialMedia::find($request->id);
-        if ($request->icon_path) {
+        if (isset($request->icon_path)) {
             Storage::disk('public')->delete($socialMedia->icon_path);
             $name = $request->icon_path->getClientOriginalName();
             $path = $request->icon_path->storeAs('socialMedia', $name, 'public');
