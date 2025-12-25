@@ -525,6 +525,7 @@ Route::group(['prefix'=>'ecomm_product',
     Route::post('/update','update')->name('update');
     Route::get('/delete/{ecomm_product}','delete')->name('delete');
     Route::get('/category_product/{ecomm_category}','category_product')->name('category_product');
+    Route::post('/menu_ecomm_category_product','menu_ecomm_category_product')->name('menu_ecomm_category_product');
 });
 Route::group([
     'prefix' => 'ecomm_qrCode',
