@@ -3,7 +3,7 @@
 @section('content')
     <div class="w-full flex flex-row justify-between gap-3 pt-8 pb-8 rounded-2xl">
         <div class="w-1/2  p-1 lg:p-3 text-xs  lg:text-sm h-full font-medium">
-            <a href="{{route('ecomm.single', [$ecomm]) }}" class="text-sky-700">مشاهده جزئیات  فروشگاه</a>
+            <a href="{{ route('ecomm.single', [$ecomm]) }}" class="text-sky-700">مشاهده جزئیات  فروشگاه</a>
         </div>
     </div>
     <div class="w-full pt-16 bg-[#F4F8F9]">
