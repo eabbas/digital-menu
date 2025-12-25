@@ -18,8 +18,6 @@ return new class extends Migration
              $table->string('banner')->nullable();
             $table->string('description');
             $table->string('title');
-            $table->string('province');
-            $table->string('city');
             $table->string('address');
             $table->string('user_id');
             $table->string('email')->nullable();
