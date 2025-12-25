@@ -16,6 +16,7 @@
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="file"
                                         name='logo' placeholder=" لوگو کسب وکار خود را وارد کنید" title="لوگو کسب و کار">
                                 </div>
+                                <input type="hidden" name="user_id" value="{{ $user->id }}">
                             </div>
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">نام کسب وکار</label>

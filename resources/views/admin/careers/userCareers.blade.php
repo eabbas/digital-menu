@@ -9,6 +9,10 @@
                 <h2 class="text-lg font-bold text-gray-800 p-4 text-center">لیست کسب و کار های من</h2>
            
             <div class="flex flex-col gap-5">
+                 <div class="flex justify-end ml-20">
+                <a href="{{ route('career.create',[$user]) }}"
+                    class="px-5 py-1 rounded-sm bg-blue-500 hover:bg-blue-600 text-white text-xs lg:text-base">ایجاد کسب وکار </a>
+              </div>
                 <div class="w-10/12 mx-auto shadow-md rounded mb-5 overflow-x-auto [&::-webkit-scrollbar]:hidden lg:overflow-visible">
                     <div class="w-full flex flex-row lg:grid lg:grid-cols-8 items-center divide-x divide-[#f1f1f4] sticky -top-5">
                         <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
