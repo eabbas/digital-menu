@@ -140,7 +140,7 @@ foreach($proCats as $proCat){
         if ($request->key == 'all') {
             $categories = Auth::user()->ecomm_categories;
         } else {
-            $categories = ecomm_category::where('ecomm_id', $request->key)->get();
+            $categories = ecomm_category::where('ecomm_id',$request->key)->where('title','!=','بدون دسته بندی')->get();
         }
         return response()->json($categories);
     }
