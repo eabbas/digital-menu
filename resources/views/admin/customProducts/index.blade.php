@@ -1,4 +1,4 @@
-@extends('admin.app.panel')
+{{-- @extends('admin.app.panel')
 @section('title', 'محصولات شخصی سازی شده کسب وکار')
 @section('content')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -18,7 +18,6 @@
                     </div>
                    
                 </div>
-                {{-- <div class="h-1 w-24 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full"></div> --}}
             </div>
             @foreach ($allCustomProduct as $customProduct)
                 
@@ -79,7 +78,7 @@
                                 rows="4"
                                 class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none"></textarea>
                         </div>
-
+                            
                             <div class="flex justify-end gap-3" >
                                 <button type="submit" onclick="storeCP(event)" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 cursor-pointer">
                                     ثبت
@@ -132,7 +131,6 @@
                                 @endphp
                                 @foreach ($allCustomProduct as $index => $custom_product)
                                     @php $hasProduct=true; @endphp
-                                    {{-- @dd($custom_product) --}}
                                     <div class="w-full flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4] newParameters"
                                         data-cp-id="{{ $custom_product->id }}">
                                         <div
@@ -866,4 +864,4 @@
         }
     </script>
 
-@endsection
+@endsection --}}
