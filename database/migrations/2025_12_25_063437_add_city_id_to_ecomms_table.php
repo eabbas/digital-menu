@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('menus', function (Blueprint $table) {
-            $table->string('career_id');
+        Schema::table('ecomms', function (Blueprint $table) {
+            $table->integer('city_id');
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('menus', function (Blueprint $table) {
+        Schema::table('ecomms', function (Blueprint $table) {
             //
         });
     }
