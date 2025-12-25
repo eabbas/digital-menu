@@ -36,14 +36,6 @@
                 </div>
                 <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
                     <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
-                       توضیحات
-                    </div>
-                    <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                       {{ $cpm->description }}
-                    </div>
-                </div>
-                <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
-                    <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
                        قیمت بر اساس واحد  
                     </div>
                     <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
@@ -63,26 +55,35 @@
                        محدودیت  واحد   
                     </div>
                     <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                       {{ $cpm->max_unit_limit }}
+                       {{ $cpm->max_unit_amount }}
                     </div>
                 </div>
                 <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
                     <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
                        لزوم    
                     </div>
+                </div>
                     <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                        @if (isset($cpm->required))
+                        @if (isset($cpm->required))  
                         {{ "بودن آن الزامی است" }}
                         @else
                         {{ "بودن آن الزامی نیست" }} 
                         @endif
                     </div>
-                <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
+                     <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
                     <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
                        نام دسته بندی    
                     </div>
                     <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
                           {{ $cpm->customCategory->title }}
+                    </div>
+                </div>
+                    <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
+                    <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
+                       توضیحات
+                    </div>
+                    <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
+                       {{ $cpm->description }}
                     </div>
                 </div>
             </div>

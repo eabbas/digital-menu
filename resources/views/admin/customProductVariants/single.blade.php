@@ -24,14 +24,6 @@
                 </div>
                 <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
                     <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
-                       توضیحات
-                    </div>
-                    <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                       {{ $cpVariants->description }}
-                    </div>
-                </div>
-                <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
-                    <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
                        حداقل مقدار واحد   
                     </div>
                     <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
@@ -63,6 +55,14 @@
                        <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0" src="{{ asset('storage/'.$cpVariants->image) }}" alt="custopmProductVariants logo">
                        @else {{ "عکس ندارد" }}
                        @endif
+                    </div>
+                </div>
+                 <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
+                    <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
+                       توضیحات
+                    </div>
+                    <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
+                       {{ $cpVariants->description }}
                     </div>
                 </div>
             </div>
