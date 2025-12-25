@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\socialMedia;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class SocialMediaController extends Controller
@@ -53,7 +52,7 @@ class SocialMediaController extends Controller
         }
         $socialMedia->title = $request->title;
         $socialMedia->link = $request->link;
-        $socialMedia->color = $request->color;
+        isset($request->color) && $socialMedia->color = $request->color;
         $socialMedia->save();
         return to_route('socialMedia.list');
     }
