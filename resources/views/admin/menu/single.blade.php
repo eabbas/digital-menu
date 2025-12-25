@@ -35,20 +35,18 @@
                         class="text-sm px-5 py-2 bg-red-500 text-white hover:bg-red-600 transition-all duration-150 rounded-lg shadow-sm hover:shadow-md">
                         حذف منو
                     </a>
-                    <a href="{{ route('menu.customProList' , [$menu->career])}}"
-                        class="text-sm px-5 py-2 bg-violet-500 text-white hover:bg-violet-600 transition-all duration-150 rounded-lg shadow-sm hover:shadow-md">
-                        محصولات شخصی‌سازی شده
-                    </a>
+                   
                     {{-- @dd($menu->career->custom_product) --}}
-                    {{-- <a href="{{ route('cp.create', [$menu->career])}}"
+                    <a href="{{ route('cp.create', [$menu->career])}}"
                         class="text-sm px-5 py-2 bg-indigo-500 text-white hover:bg-indigo-600 transition-all duration-150 rounded-lg shadow-sm hover:shadow-md">
                         ایجاد محصول شخصی‌سازی
-                    </a> --}}
-                    <div onclick="openCPform()" 
-                       class="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer" >
-                        
-                        <span class="text-sm font-medium"> ایجاد محصول شخصی‌سازی</span>
-                    </div>
+                    </a>
+                    @if(count($menu->career->custom_product))
+                    <a href="{{ route('menu.customProList', [$menu->career]) }}"
+                        class="text-sm px-5 py-2 bg-indigo-500 text-white hover:bg-indigo-600 transition-all duration-150 rounded-lg shadow-sm hover:shadow-md">
+                      لیست محصولات
+                    </a>
+                    @endif
                 </div>
             </div>
 
@@ -133,134 +131,8 @@
             </div>
         </div>
       
-        <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="createCPform">
-                <div class="w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative" id="closeCreateCPform">
-                    <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeForm()">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
-                            <path fill="gray" d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
-                        </svg>
-                    </div>
-
-
-                    <form action="{{ route('cp.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-1/2 p-5 rounded-lg relative">
-                        <div id="loading"
-                            class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
-                        </div>
-                        @csrf
-                        <input type="hidden" name="career_id" value="{{$menu->career->id}}">                       
-                        <div class="mb-4">
-                            <label for="title" class="block text-sm font-medium mb-2">
-                                عنوان محصول
-                            </label>
-                            <input type="text" 
-                                name="title" 
-                                id="title"
-                                required
-                                class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
-                        </div>
-                        <div class="mb-4">
-                            <label for="title" class="block text-sm font-medium mb-2">
-                                تصویر محصول
-                            </label>
-                            <input type="file" 
-                                name="customProductImage" 
-                                id="customProductImage"
-                                class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
-                        </div>
-                        <div class="mb-4">
-                            <label for="title" class="block text-sm font-medium mb-2">
-                                محدودیت متریال
-                            </label>
-                            <input type="number" 
-                                name="material_limit" 
-                                id="material_limit"
-                                required
-                                placeholder="محدودیت متریال را وارد کنید"
-                                class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
-                        </div>
-
-
-                        <div class="mb-4">
-                            <label for="title" class="block text-sm font-medium mb-2">
-                                توضیحات
-                            </label>
-                            <textarea type="text" 
-                                name="description" 
-                                id="description"
-                                rows="4"
-                                class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none"></textarea>
-                        </div>
-                       
-
-                            <div class="flex justify-end gap-3" >
-                                <button type="submit" onclick="storeCP(event)" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 cursor-pointer">
-                                    ثبت
-                                </button>
-                            </div>
-                            <input type="hidden" name="custom_pro_id"  id="custom_pro_id_customCategory">
-                    </form>
-
-                </div>
-        </div>
+         
     </div>
-    <script> 
-        let createCPform = document.getElementById('createCPform')   
-        let loading = document.getElementById('loading')
-
-        
-        function openCPform(){
-            createCPform.classList.remove('invisible')
-            createCPform.classList.remove('opacity-0')
-        }
-        function storeCP(ev){
-        ev.preventDefault()
-        loading.classList.remove('hidden')
-        loading.classList.add('flex')
-        loading.innerHTML = `
-        <div class="loading-wave">
-            <div class="loading-bar"></div>
-            <div class="loading-bar"></div>
-            <div class="loading-bar"></div>
-            <div class="loading-bar"></div>
-        </div>
-        `
-        let formData = new FormData()
-
-        formData.append('career_id' ,"{{ $menu->career->id }}")
-        formData.append('title' ,title.value)
-        formData.append('customProductImage' ,customProductImage.files[0])
-        formData.append('material_limit' ,material_limit.value)
-        formData.append('description' ,description.value)
-        
-        $.ajaxSetup({
-            headers : {
-                'X-CSRF-TOKEN' : "{{ csrf_token() }}"
-            }
-        })
-        $.ajax({
-            url : "{{ route('cp.store') }}" ,
-            type : "POST" ,
-            data : formData ,
-            contentType : false ,
-            processData : false , 
-            success: function(data){
-                loading.classList.remove('flex')
-                loading.classList.add('hidden')
-                closeForm()
-                title.value= ""
-                description.value= ""
-                material_limit.value= ""
-                customProductImage.value= ""
-            },
-            error: function(){
-                alert('خطا در ارسال داده')
-            }
     
-        })
-
-
-    }
-
-    </script>
     <script src="{{ asset('assets/js/customProducts.js') }}"></script>
 @endsection
