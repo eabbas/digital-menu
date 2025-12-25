@@ -65,28 +65,13 @@
                             {{ $career->description }}
                         </div>
                     </div>
-                    <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
-                        <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
-                            استان
-                        </div>
-                        <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                            {{ $career->province }}
-                        </div>
-                    </div>
-                    <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
-                        <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
-                            شهر
-                        </div>
-                        <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                            {{ $career->city }}
-                        </div>
-                    </div>
+                    
                     <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
                         <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
                             آدرس
                         </div>
                         <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                            {{ $career->address }}
+                            {{ $career->province_city->province->title }} , {{ $career->province_city->title }} , {{ $career->address }}
                         </div>
                     </div>
                     <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
