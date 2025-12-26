@@ -45,7 +45,7 @@
                             @endif
                         @endforeach
                         <div class="w-20 gap-2 bg-white rounded-lg p-2 flex flex-col items-center cursor-pointer"
-                                onclick='get_ecomm_category_id("{{ $ecomm->id }}","all")'>
+                               onclick='get_ecomm_category_id("{{ $ecomm->id }}","all")'>
                                
                                 <div class="justify-end w-full">
                                     <h3 class="text-sm text-center font-semibold">کل  محصولات</h3>
