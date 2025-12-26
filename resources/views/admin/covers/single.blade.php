@@ -205,7 +205,7 @@
                                             <div
                                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                                 <select name="socialMedia_id" id="socialMedia_id"
-                                                    class="p-4 w-full focus:outline-none text-sm font-bold mr-2">
+                                                    class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createSocialRequire">
                                                     @foreach ($socialMedias as $socialMedia)
                                                         <option value="{{ $socialMedia->id }}">{{ $socialMedia->title }}
                                                         </option>
@@ -217,7 +217,7 @@
                                             <label class="w-30 text-sm mb-1 mt-2.5 flex">نام کاربری</label>
                                             <div
                                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
+                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createSocialRequire"
                                                     type="text" name='username' id="username"
                                                     placeholder="نام کاربری">
                                             </div>
@@ -520,67 +520,77 @@
 
         function storeLink(e) {
             e.preventDefault()
-            createSiteLink.children[0].classList.remove('hidden')
-            createSiteLink.children[0].classList.add('flex')
-            createSiteLink.children[0].innerHTML = `
-            <div class="loading-wave">
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-            </div>
-            `
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
+            let createLinkRequire = document.querySelectorAll('.createLinkRequire')
+            createLinkRequire.forEach((item)=>{
+                console.log(item)
+                // if (item.value == "") {
+                //     alert("لطفا " + item.parentElement.parentElement.innerText + " را پر کنید")
+                // }else{
+                //     createSiteLink.children[0].classList.remove('hidden')
+                //     createSiteLink.children[0].classList.add('flex')
+                //     createSiteLink.children[0].innerHTML = `
+                //     <div class="loading-wave">
+                //         <div class="loading-bar"></div>
+                //         <div class="loading-bar"></div>
+                //         <div class="loading-bar"></div>
+                //         <div class="loading-bar"></div>
+                //     </div>
+                //     `
+                //     $.ajaxSetup({
+                //         headers: {
+                //             'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                //         }
+                //     })
+                //     $.ajax({
+                //         url: "{{ route('siteLink.store') }}",
+                //         type: "POST",
+                //         dataType: "json",
+                //         data: {
+                //             'address': link_address_create.value,
+                //             'title': link_title_create.value,
+                //             'cover_id': "{{ $cover->id }}",
+                //             // 'icon_path': link_icon_path_create.value
+                //         },
+                //         success: function(data) {
+                //             createSiteLink.children[0].classList.remove('flex')
+                //             createSiteLink.children[0].classList.add('hidden')
+                //             link_address_create.value = ""
+                //             link_title_create.value = ""
+                //             let div = document.createElement('div')
+                //             let element = `
+                //             <div class="w-full flex flex-col gap-5" id="linkSection">
+                //                     <div class="py-2">
+                //                         <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center viewLinkTitle" data-view-link-id="${data.id}">
+                //                          ورود به  ${data.title}
+                //                         </h3>
+                //                         <div class="mt-3">
+                //                             <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-gray-200 rounded-full cursor-pointer editLink"
+                //                                 onclick='editLink(${data.id})' data-site-id="${data.id}">
+                //                                 @if (isset($siteLink->icon_path))
+                //                                     <img src="{{ asset('storage/' . $siteLink->icon_path) }}"
+                //                                         class="size-5 rounded-md" alt="">
+                //                                 @else
+                //                                     <img src="{{ asset('assets/img/link-simple.svg') }}" class="size-5 rounded-md"
+                //                                         alt="">
+                //                                 @endif
+                //                                 <span class="font-bold text-gray-800 viewLinkTitle" data-view-link-id="${data.id}">${data.title}</span>
+                //                             </div>
+                //                         </div>
+                //                     </div>
+                //                 </div>
+                //             `
+                //             div.innerHTML = element
+                //             siteLinks.appendChild(div)
+                //             closeForm()
+                //         },
+                //         error: function() {
+                //             alert('خطا در ارسال داده ها')
+                //         }
+                //     })
+       
+                // }
             })
-            $.ajax({
-                url: "{{ route('siteLink.store') }}",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    'address': link_address_create.value,
-                    'title': link_title_create.value,
-                    'cover_id': "{{ $cover->id }}",
-                    // 'icon_path': link_icon_path_create.value
-                },
-                success: function(data) {
-                    createSiteLink.children[0].classList.remove('flex')
-                    createSiteLink.children[0].classList.add('hidden')
-                    link_address_create.value = ""
-                    link_title_create.value = ""
-                    let div = document.createElement('div')
-                    let element = `
-                    <div class="w-full flex flex-col gap-5" id="linkSection">
-                            <div class="py-2">
-                                <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center viewLinkTitle" data-view-link-id="${data.id}">
-                                 ورود به  ${data.title}
-                                </h3>
-                                <div class="mt-3">
-                                    <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-gray-200 rounded-full cursor-pointer editLink"
-                                        onclick='editLink(${data.id})' data-site-id="${data.id}">
-                                        @if (isset($siteLink->icon_path))
-                                            <img src="{{ asset('storage/' . $siteLink->icon_path) }}"
-                                                class="size-5 rounded-md" alt="">
-                                        @else
-                                            <img src="{{ asset('assets/img/link-simple.svg') }}" class="size-5 rounded-md"
-                                                alt="">
-                                        @endif
-                                        <span class="font-bold text-gray-800 viewLinkTitle" data-view-link-id="${data.id}">${data.title}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `
-                    div.innerHTML = element
-                    siteLinks.appendChild(div)
-                    closeForm()
-                },
-                error: function() {
-                    alert('خطا در ارسال داده ها')
-                }
-            })
+
         }
 
         function updateLink(e) {
@@ -724,7 +734,12 @@
 
         function storeSocialmedia(ev) {
             ev.preventDefault();
-            storeSocialForm.children[0].classList.remove('hidden')
+            let createSocialRequire = document.querySelectorAll('.createSocialRequire')
+            createSocialRequire.forEach((item)=>{
+                if (item.value == "") {
+                    alert('لطفا '+item.parentElement.parentElement.innerText + " را پر کنید!")
+                } else {
+                     storeSocialForm.children[0].classList.remove('hidden')
             storeSocialForm.children[0].classList.add('flex')
             storeSocialForm.children[0].innerHTML = `
             <div class="loading-wave">
@@ -783,6 +798,10 @@
                     alert('خطا در ارسال داده ها')
                 }
             })
+                }
+            })
+           
+           
 
         }
 
