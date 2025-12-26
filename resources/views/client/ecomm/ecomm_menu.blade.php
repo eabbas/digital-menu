@@ -45,10 +45,10 @@
                             @endif
                         @endforeach
                         <div class="w-20 gap-2 bg-white rounded-lg p-2 flex flex-col items-center cursor-pointer"
-                                onclick='get_ecomm_category_id("all")'>
+                                onclick='get_ecomm_category_id("{{ $ecomm->id }}","all")'>
                                
-                                <div class="justify-self-start w-full">
-                                    <h3 class="text-sm text-center font-semibold">کل دسته ها</h3>
+                                <div class="justify-end w-full">
+                                    <h3 class="text-sm text-center font-semibold">کل  محصولات</h3>
                                 </div>
                             </div>
                     </div>
@@ -107,7 +107,7 @@
     <br><br><br><br><br><br><br>
     
     <script>
-        function get_ecomm_category_id(el) {
+        function get_ecomm_category_id(el,all_cat=null) {
             let ecomm_product= document.getElementById('ecomm_products')
             $.ajaxSetup({
                 headers: {
@@ -120,7 +120,8 @@
                 type:'POST',
                 dataType: "json",
                 data: {
-                    'key': el
+                    'key': el,
+                    'type':all_cat
                 },
                 success: function(ecomm_products) {
                   ecomm_product.innerHTML = ""
