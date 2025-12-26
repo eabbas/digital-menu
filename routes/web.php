@@ -1,44 +1,43 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CareerController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\MenuController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\QRCodeController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\adminController;
-use App\Http\Controllers\SliderController;
 use App\Http\Controllers\AboutUsController;
-use App\Http\Controllers\favoriteCareerController;
-use App\Http\Middleware\LoginMiddleware;
-use App\Http\Middleware\UserMiddleware;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CareerCategoryController;
-use App\Http\Controllers\MenuCategoryController;
-use App\Http\Controllers\CustomProductController;
-use App\Http\Controllers\MenuItemController;
-use App\Http\Controllers\CustomProductVariantController;
-use App\Http\Controllers\SocialMediaController;
-use App\Http\Controllers\SiteLinkController;
-use App\Http\Controllers\SocialAddressController;
 use App\Http\Controllers\CoversController;
-use App\Http\Controllers\CustomProductMaterialController;
 use App\Http\Controllers\CustomCategoryController;
-
-use App\Http\Controllers\EcommController;
+use App\Http\Controllers\CustomProductController;
+use App\Http\Controllers\CustomProductMaterialController;
+use App\Http\Controllers\CustomProductVariantController;
 use App\Http\Controllers\EcommCategoryController;
+use App\Http\Controllers\EcommController;
 use App\Http\Controllers\EcommProductController;
 use App\Http\Controllers\EcommQrCodeController;
+use App\Http\Controllers\favoriteCareerController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MenuCategoryController;
+use App\Http\Controllers\MenuItemController;
 use App\Http\Controllers\ProvinceCityController;
+use App\Http\Controllers\SiteLinkController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\SocialAddressController;
+use App\Http\Controllers\SocialMediaController;
+use App\Http\Middleware\LoginMiddleware;
+use App\Http\Middleware\UserMiddleware;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::post('search' , [HomeController::class, 'search'])->name('search');
+Route::post('search', [HomeController::class, 'search'])->name('search');
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware([LoginMiddleware::class]);
-Route::get('/signup', [UserController::class, "create"])->name('signup')->middleware([LoginMiddleware::class]);
-Route::post('/check', [UserController::class, "checkAuth"])->name('checkAuth');
+Route::get('/signup', [UserController::class, 'create'])->name('signup')->middleware([LoginMiddleware::class]);
+Route::post('/check', [UserController::class, 'checkAuth'])->name('checkAuth');
 
 Route::group([
     'prefix' => 'users',
@@ -46,16 +45,16 @@ Route::group([
     'as' => 'user.',
     'middleware' => [UserMiddleware::class]
 ], function () {
-    Route::post("/store", "store")->name('store')->withoutMiddleware([UserMiddleware::class]);
-    Route::post("/check", "check")->name('check')->withoutMiddleware([UserMiddleware::class]);
-    Route::get("/logout", "logout")->name('logout');
-    Route::get("/", "index")->name('list');
-    Route::get("/panel/{user}", "panel")->name('panel');
+    Route::post('/store', 'store')->name('store')->withoutMiddleware([UserMiddleware::class]);
+    Route::post('/check', 'check')->name('check')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/logout', 'logout')->name('logout');
+    Route::get('/', 'index')->name('list');
+    Route::get('/panel/{user}', 'panel')->name('panel');
     Route::get('/profile', 'profile')->name('profile');
     Route::get('/show/{user}', 'show')->name('show');
-    Route::get("/edit/{user}", "edit")->name('edit');
-    Route::post("/update", "update")->name('update');
-    Route::get("/delete/{user}", "delete")->name('delete');
+    Route::get('/edit/{user}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{user}', 'delete')->name('delete');
     Route::get('/compelete', 'compelete_form')->name('compelete_form');
     Route::post('/save', 'save')->name('save');
     // Route::get('/admin/create', 'adminCreate')->name('adminCreate');
@@ -85,16 +84,18 @@ Route::group([
     Route::get('/menuList/{career}', 'menus')->name('menus');
 });
 Route::group([
-    'prefix'=>'province',
-    'controller'=>ProvinceCityController::class,
-    'as'=>'pc.'
-], function (){
+    'prefix' => 'province',
+    'controller' => ProvinceCityController::class,
+    'as' => 'pc.',
+    'middleware' => [UserMiddleware::class]
+], function () {
     Route::post('/city', 'city')->name('city');
 });
 Route::group([
     'prefix' => 'careerCategory',
     'controller' => CareerCategoryController::class,
-    'as' => 'cc.'
+    'as' => 'cc.',
+    'middleware' => [UserMiddleware::class]
 ], function () {
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
@@ -102,25 +103,18 @@ Route::group([
     Route::get('/show/{careerCategory}', 'show')->name('single');
     Route::get('/edit/{careerCategory}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
-    Route::get('/delete/{careerCategory}' , 'delete')->name('delete');
+    Route::get('/delete/{careerCategory}', 'delete')->name('delete');
 });
 
-
-
-
-
-
-
-
 Route::group([
-    'prefix'=>'menu',
-    'controller'=>MenuController::class,
-    'middleware'=>[UserMiddleware::class],
-    'as'=>'menu.'
-], function(){
+    'prefix' => 'menu',
+    'controller' => MenuController::class,
+    'middleware' => [UserMiddleware::class],
+    'as' => 'menu.'
+], function () {
     Route::get('/create/{career?}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/show/{menu}','single')->name('single');
+    Route::get('/show/{menu}', 'single')->name('single');
     Route::get('/customProList/{career}', 'customProMenu')->name('customProList');
     Route::get('/edit/{menu}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
@@ -131,11 +125,11 @@ Route::group([
 });
 
 Route::group([
-    'prefix'=>'menuCategory',
-    'controller'=>MenuCategoryController::class,
-    'middleware'=>[UserMiddleware::class],
-    'as'=>'menuCat.'
-], function(){
+    'prefix' => 'menuCategory',
+    'controller' => MenuCategoryController::class,
+    'middleware' => [UserMiddleware::class],
+    'as' => 'menuCat.'
+], function () {
     Route::get('/create/{menu}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::get('/list/{menu}', 'index')->name('list');
@@ -163,15 +157,7 @@ Route::group([
     Route::get('/{menu_item}', 'single')->name('single');
 });
 
-
-
-
-
-
-
-
-
-//category.......................................................................
+// category.......................................................................
 Route::get('category/create', [CategoryController::class, 'create']);
 Route::post('category/store', [CategoryController::class, 'store']);
 Route::get('categories', [CategoryController::class, 'index']);
@@ -180,9 +166,7 @@ Route::get('category/edit/{category}', [CategoryController::class, 'edit']);
 Route::post('category/update', [CategoryController::class, 'update']);
 Route::get('category/delete/{category}', [CategoryController::class, 'delete']);
 
-
-
-//product.................................................................................
+// product.................................................................................
 Route::get('product/create', [ProductController::class, 'create']);
 Route::post('product/store', [ProductController::class, 'store']);
 Route::get('products', [ProductController::class, 'index']);
@@ -191,17 +175,17 @@ Route::get('product/edit/{product}', [ProductController::class, 'edit']);
 Route::post('product/update', [ProductController::class, 'update']);
 Route::get('product/delete/{product}', [ProductController::class, 'delete']);
 
-
 // qr-code
 Route::group([
     'prefix' => 'qrcode',
     'controller' => QRCodeController::class,
-    'as' => 'qr.'
+    'as' => 'qr.',
+    'middleware' => [UserMiddleware::class]
 ], function () {
     Route::get('/qr-code', 'index')->name('list');
     Route::post('/delete', 'delete')->name('delete');
-    Route::get('/{career}/{slug}', 'load')->name('load');
-    Route::get('/links/{covers}/{slug}', 'loadLink')->name('loadLink');
+    Route::get('/{career}/{slug}', 'load')->name('load')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/links/{covers}/{slug}', 'loadLink')->name('loadLink')->withoutMiddleware([UserMiddleware::class]);
     Route::post('/edit', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
 });
@@ -212,7 +196,7 @@ Route::group([
     'controller' => ClientController::class,
     'as' => 'client.'
 ], function () {
-    Route::get('/socialpage/{covers}','show_socialPage')->name('show_socialPage');
+    Route::get('/socialpage/{covers}', 'show_socialPage')->name('show_socialPage');
     Route::get('/{career}/{slug?}', 'show_menu')->name('menu');
     Route::get('/{career}', 'career_menu')->name('careerMenu');
     // Route::get('/career/{$career}', 'show_career')->name('show_career');
@@ -220,11 +204,11 @@ Route::group([
 Route::get('/career/{career}', [ClientController::class, 'show_career'])->name('show_career');
 // Route::get('/socialPage/{covers}', [ClientController::class, 'show_socialPage'])->name('show_socialPage');
 
-
 Route::group([
     'prefix' => 'settings',
     'controller' => SettingController::class,
-    'as' => 'settings.'
+    'as' => 'settings.',
+    'middleware' => [UserMiddleware::class]
 ], function () {
     Route::group([
         'prefix' => 'colors',
@@ -240,7 +224,8 @@ Route::group([
 Route::group([
     'prefix' => 'settings',
     'controller' => SettingController::class,
-    'as' => 'settings.'
+    'as' => 'settings.',
+    'middleware' => [UserMiddleware::class]
 ], function () {
     Route::group([
         'prefix' => 'logo',
@@ -255,7 +240,8 @@ Route::group([
 Route::group([
     'prefix' => 'settings',
     'controller' => SettingController::class,
-    'as' => 'settings.'
+    'as' => 'settings.',
+    'middleware' => [UserMiddleware::class]
 ], function () {
     Route::group([
         'prefix' => 'main_ads',
@@ -270,7 +256,8 @@ Route::group([
 Route::group([
     'prefix' => 'settings',
     'controller' => SettingController::class,
-    'as' => 'settings.'
+    'as' => 'settings.',
+    'middleware' => [UserMiddleware::class]
 ], function () {
     Route::group([
         'prefix' => 'main_banner_home',
@@ -285,7 +272,8 @@ Route::group([
 Route::group([
     'prefix' => 'settings',
     'controller' => SettingController::class,
-    'as' => 'settings.'
+    'as' => 'settings.',
+    'middleware' => [UserMiddleware::class]
 ], function () {
     Route::group([
         'prefix' => 'single_ads',
@@ -300,7 +288,8 @@ Route::group([
 Route::group([
     'prefix' => 'settings',
     'controller' => SettingController::class,
-    'as' => 'settings.'
+    'as' => 'settings.',
+    'middleware' => [UserMiddleware::class]
 ], function () {
     Route::group([
         'prefix' => 'category_ads',
@@ -312,10 +301,7 @@ Route::group([
     });
 });
 
-
-
-
-////admin
+// //admin
 // Route::get('/adminProfile', [adminController::class, 'adminPanel'])->name('adminPanel');
 // Route::group([
 //     'prefix'=>'admin',
@@ -325,13 +311,12 @@ Route::group([
 //     Route::get('/profile', 'adminProfile')->name('adminProfile');
 // });
 
-
-
-/////slider
+// slider
 Route::group([
     'prefix' => 'slider',
     'controller' => SliderController::class,
-    'as' => 'slider.'
+    'as' => 'slider.',
+    'middleware' => [UserMiddleware::class]
 ], function () {
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
@@ -341,12 +326,12 @@ Route::group([
     Route::get('/delete/{slider}', 'delete')->name('delete');
 });
 
-
-//////aboutUs
+// aboutUs
 Route::group([
     'prefix' => 'aboutUs',
     'controller' => AboutUsController::class,
-    'as' => 'aboutUs.'
+    'as' => 'aboutUs.',
+    'middleware' => [UserMiddleware::class]
 ], function () {
     Route::get('/create_edit/{id?}', 'create_edit')->name('create_edit');
     Route::post('/updateOrcreate', 'updateOrcreate')->name('updateOrcreate');
@@ -354,22 +339,23 @@ Route::group([
     Route::get('/delete/{aboutUs}', 'delete')->name('delete');
 });
 
-//////favoriteCareer
+// favoriteCareer
 Route::group([
     'prefix' => 'favoriteCareer',
     'controller' => favoriteCareerController::class,
-    'as' => 'favoriteCareer.'
+    'as' => 'favoriteCareer.',
+    'middleware' => [UserMiddleware::class]
 ], function () {
     Route::post('/create', 'create')->name('create')->middleware([UserMiddleware::class]);
     Route::get('/favoriteCareers', 'index')->name('list');
     Route::get('/delete/{career}', 'delete')->name('delete');
 });
 
-
 Route::group([
     'prefix' => 'customProducts',
     'controller' => CustomProductController::class,
-    'as' => 'cp.'
+    'as' => 'cp.',
+    'middleware' => [UserMiddleware::class]
 ], function () {
     Route::get('/create/{career?}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
@@ -385,7 +371,8 @@ Route::group([
 Route::group([
     'prefix' => 'customProductVariants',
     'controller' => CustomProductVariantController::class,
-    'as' => 'cpv.'
+    'as' => 'cpv.',
+    'middleware' => [UserMiddleware::class]
 ], function () {
     Route::get('/create/{custom_product?}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
@@ -396,11 +383,12 @@ Route::group([
     Route::post('/delete', 'delete')->name('delete');
 });
 
-/////socialMedia
+// socialMedia
 Route::group([
     'prefix' => 'socialMedia',
     'controller' => SocialMediaController::class,
-    'as' => 'socialMedia.'
+    'as' => 'socialMedia.',
+    'middleware' => [UserMiddleware::class]
 ], function () {
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
@@ -409,11 +397,12 @@ Route::group([
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{socialMedia}', 'delete')->name('delete');
 });
-////siteLink
+// siteLink
 Route::group([
     'prefix' => 'siteLink',
     'controller' => SiteLinkController::class,
-    'as' => 'siteLink.'
+    'as' => 'siteLink.',
+    'middleware' => [UserMiddleware::class]
 ], function () {
     Route::get('/create/{covers}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
@@ -422,11 +411,12 @@ Route::group([
     Route::post('/update', 'update')->name('update');
     Route::post('/delete', 'delete')->name('delete');
 });
-/////socialAddress
+// socialAddress
 Route::group([
     'prefix' => 'socialAddress',
     'controller' => SocialAddressController::class,
-    'as' => 'socialAddress.'
+    'as' => 'socialAddress.',
+    'middleware' => [UserMiddleware::class]
 ], function () {
     Route::get('/create/{covers}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
@@ -435,11 +425,12 @@ Route::group([
     Route::post('/update', 'update')->name('update');
     Route::post('/delete', 'delete')->name('delete');
 });
-//////covers
+// ////covers
 Route::group([
     'prefix' => 'covers',
     'controller' => CoversController::class,
-    'as' => 'covers.'
+    'as' => 'covers.',
+    'middleware' => [UserMiddleware::class]
 ], function () {
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
@@ -453,7 +444,8 @@ Route::group([
 Route::group([
     'prefix' => 'customProductMaterial',
     'controller' => CustomProductMaterialController::class,
-    'as' => 'cpm.'
+    'as' => 'cpm.',
+    'middleware' => [UserMiddleware::class]
 ], function () {
     Route::get('/create/{customCategory?}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
@@ -466,7 +458,8 @@ Route::group([
 Route::group([
     'prefix' => 'customCategories',
     'controller' => CustomCategoryController::class,
-    'as' => 'custmCategory.'
+    'as' => 'custmCategory.',
+    'middleware' => [UserMiddleware::class]
 ], function () {
     Route::get('/create/{custom_product?}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
@@ -496,45 +489,44 @@ Route::group([
     Route::get('/ecomm_single_menu/{ecomm}', 'ecomm_single_menu')->name('ecomm_single_menu')->withoutMiddleware([UserMiddleware::class]);
 });
 
-Route::group(['prefix'=>'ecomm_category',
-'controller'=>EcommCategoryController::class,
-'as'=>'ecomm_category.'
-],function(){
-
-    Route::get('/create','create')->name('create');
-    Route::post('/store','store')->name('store');
-    Route::get('/index','index')->name('index');
-    Route::get('/show/{ecomm_category}','show')->name('show');
-    Route::get('/edit/{ecomm_category}/','edit')->name('edit');
-    Route::get('/edit_ecomm_categories/{ecomm_category}/','edit_ecomm_categories')->name('edit_ecomm_categories');
-    Route::get('/ecomm_categories/{ecomm}','ecomm_categories')->name('ecomm_categories');
-    Route::post('/update','update')->name('update');
-    Route::post('/update_ecomm_categories','update_ecomm_categories')->name('update_ecomm_categories');
-    Route::get('/delete/{ecomm_category}','delete')->name('delete');
-    Route::post('/getEcommCategories','getEcommCategories')->name('getEcommCategories');
-
+Route::group(['prefix' => 'ecomm_category',
+        'controller' => EcommCategoryController::class,
+        'as' => 'ecomm_category.',
+        'middleware' => [UserMiddleware::class]], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/index', 'index')->name('index');
+    Route::get('/show/{ecomm_category}', 'show')->name('show');
+    Route::get('/edit/{ecomm_category}/', 'edit')->name('edit');
+    Route::get('/edit_ecomm_categories/{ecomm_category}/', 'edit_ecomm_categories')->name('edit_ecomm_categories');
+    Route::get('/ecomm_categories/{ecomm}', 'ecomm_categories')->name('ecomm_categories');
+    Route::post('/update', 'update')->name('update');
+    Route::post('/update_ecomm_categories', 'update_ecomm_categories')->name('update_ecomm_categories');
+    Route::get('/delete/{ecomm_category}', 'delete')->name('delete');
+    Route::post('/getEcommCategories', 'getEcommCategories')->name('getEcommCategories');
 });
-Route::group(['prefix'=>'ecomm_product',
-'controller'=>EcommProductController::class,
-'as'=>'ecomm_product.'
-],function(){
-
-    Route::get('/create','create')->name('create');
-    Route::post('/store','store')->name('store');
-    Route::get('/index','index')->name('index');
-    Route::get('/show/{ecomm_product}','show')->name('show');
-    Route::get('/edit/{ecomm_product}','edit')->name('edit');
-    Route::post('/update','update')->name('update');
-    Route::get('/delete/{ecomm_product}','delete')->name('delete');
-    Route::get('/category_product/{ecomm_category}','category_product')->name('category_product');
-    Route::post('/menu_ecomm_category_product','menu_ecomm_category_product')->name('menu_ecomm_category_product');
+Route::group([
+    'prefix' => 'ecomm_product',
+    'controller' => EcommProductController::class,
+    'as' => 'ecomm_product.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/index', 'index')->name('index');
+    Route::get('/show/{ecomm_product}', 'show')->name('show');
+    Route::get('/edit/{ecomm_product}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{ecomm_product}', 'delete')->name('delete');
+    Route::get('/category_product/{ecomm_category}', 'category_product')->name('category_product');
+    Route::post('/menu_ecomm_category_product', 'menu_ecomm_category_product')->name('menu_ecomm_category_product');
 });
 Route::group([
     'prefix' => 'ecomm_qrCode',
     'controller' => EcommQrCodeController::class,
     'as' => 'ecomm_qr.'
 ], function () {
-    Route::get('/{ecomm}/{slug}','load')->name('load');
+    Route::get('/{ecomm}/{slug}', 'load')->name('load');
     Route::get('/links/{covers}/{slug}', 'loadLink')->name('loadLink');
     Route::post('/edit', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
