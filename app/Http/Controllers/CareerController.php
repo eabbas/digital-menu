@@ -19,21 +19,23 @@ class CareerController extends Controller
     {
         $careerCategories = careerCategory::all();
         $provinces = province_cities::where('parent', 0)->get();
-        if ($user) {
-            $user->role[0];
-            return view('admin.careers.create', ['user' => $user, 'careerCategories' => $careerCategories, 'provinces'=>$provinces]);
+        if (!$user) {
+            $user = Auth::user();
         }
-        return view('admin.careers.create', ['user' => Auth::user()->role, 'careerCategories' => $careerCategories, 'provinces'=>$provinces]);
+        return view('admin.careers.create', ['user' => $user, 'careerCategories' => $careerCategories, 'provinces'=>$provinces]);
     }
 
     public function store(Request $request)
     {
         // dd($request->all());
         $roles = role::all();
-        $user = $request->user_id;
+        if($request->user_id){
+        $user = user::find($request->user_id);
+        }
         $path = null;
         $bannerPath = null;
         if (Auth::user()->role[0]->title != 'admin') {
+            $user =  Auth::user();
             $user->role[0] = $roles[1];
             $user->save();
         }
@@ -54,7 +56,7 @@ class CareerController extends Controller
             'city_id' => $request->city,
             'address' => $request->address,
             'social_media' => $social_medias,
-            'user_id' => $user,
+            'user_id' => $user->id,
             'email' => $request->email,
             'description' => $request->description,
             'career_category_id' => $request->careerCategory,
