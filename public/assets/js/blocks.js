@@ -18,7 +18,7 @@ let siteLinkForm = document.querySelector('.createSiteLink')
 let editSocialM = document.querySelector('.editsocialMediaForm')
 
 //qrcode
-let qrcode=document.getElementById('qrcode_card')
+let qrcode = document.getElementById('qrcode_card')
 
 function addBlock(state) {
     if (state == 'open') {
@@ -45,7 +45,7 @@ function addSocialMedia() {
     socialMediaForm.classList.remove('opacity-0')
     socialMediaForm.classList.remove('top-full')
     socialMediaForm.classList.add('top-0')
-    socialMediaForm.classList.add('-translate-y-1/7')
+    socialMediaForm.classList.add('-translate-y-1/4')
 }
 
 function addLink() {
@@ -57,18 +57,18 @@ function addLink() {
     siteLinkForm.classList.remove('opacity-0')
     siteLinkForm.classList.remove('top-full')
     siteLinkForm.classList.add('top-0')
-    siteLinkForm.classList.add('-translate-y-1/7')
+    siteLinkForm.classList.add('-translate-y-1/4')
 }
 
 
 let forms = document.querySelectorAll('.form')
 let editSMF = document.querySelector('.editSMF')
 let editSLF = document.querySelector('.editSLF')
-function closeForm(){
-    forms.forEach((form)=>{
+function closeForm() {
+    forms.forEach((form) => {
         form.classList.add('invisible')
         form.classList.add('opacity-0')
-        form.classList.remove('-translate-y-1/7')
+        form.classList.remove('-translate-y-1/4')
     })
     editSMF.classList.remove('max-h-[500px]')
     editSMF.classList.add('max-h-0')
@@ -81,9 +81,9 @@ function closeForm(){
     group.classList.add('invisible')
 }
 
-function openDropdown(page){
+function openDropdown(page) {
     if (page == 'media') {
-        if(editSMF.classList.contains('max-h-0')){
+        if (editSMF.classList.contains('max-h-0')) {
             editSMF.classList.remove('max-h-0')
             editSMF.classList.add('max-h-[500px]')
         } else {
@@ -92,7 +92,7 @@ function openDropdown(page){
         }
     }
     if (page == 'link') {
-        if(editSLF.classList.contains('max-h-0')){
+        if (editSLF.classList.contains('max-h-0')) {
             editSLF.classList.remove('max-h-0')
             editSLF.classList.add('max-h-[500px]')
         } else {
@@ -101,14 +101,14 @@ function openDropdown(page){
         }
     }
 }
-function qrCard(state){
+function qrCard(state) {
     if (state == 'open') {
-       qrcode.classList.remove('invisible')
-       qrcode.classList.remove('opacity-0')
+        qrcode.classList.remove('invisible')
+        qrcode.classList.remove('opacity-0')
     }
     if (state == 'close') {
         qrcode.classList.add('invisible')
-       qrcode.classList.add('opacity-0')
+        qrcode.classList.add('opacity-0')
     }
-    }
+}
 

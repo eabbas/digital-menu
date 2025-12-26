@@ -201,8 +201,7 @@
                         </li>
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('covers.social_list') }}" class="text-white py-1">  لیست صفحات 
-                                 </a>
+                            <a href="{{ route('covers.social_list') }}" class="text-white py-1">  لیست صفحات </a>
                             </li>
                             @if (Auth::user()->role[0]->title == 'admin')
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
@@ -617,7 +616,7 @@
                                     <li>
                                         <a href="{{ route('covers.list') }}"
                                             class="block text-gray-700 py-2 text-md">
-                                            لیست صفحات
+                                            لیست همه صفحات
                                         </a>
                                     </li>
                                     @endif
