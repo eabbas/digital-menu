@@ -1,5 +1,5 @@
 @extends('admin.app.panel')
-@section('title', ' همه صفحه شبکه های اجتماعی ')
+@section('title', '  صفحه شبکه های اجتماعی ')
 @section('content')
 <div class="w-full flex flex-col pb-4">
         <div class="pb-4">

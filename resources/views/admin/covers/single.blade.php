@@ -21,8 +21,7 @@
                     {{-- cover qr code --}}
                     <div class="w-full h-dvh fixed top-0 right-0 z-999 bg-black/50 invisible opacity-0 transition-all duration-300"
                         id="qrcode_card">
-                        <div
-                            class="relative w-full lg:w-[calc(100%-265px)] h-full float-end flex items-center justify-center">
+                        <div class="relative w-full lg:w-[calc(100%-265px)] h-full float-end flex items-center justify-center">
                             <div class="absolute top-10 right-10 bg-white rounded-full p-2 cursor-pointer"
                                 onclick="qrCard('close')">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
@@ -31,12 +30,12 @@
                                 </svg>
                             </div>
                             @if (isset($cover->social_qr_codes->qr_path))
-                                <div class="w-48 lg:w-1/4 mx-auto bg-white rounded-lg p-5">
+                        
+                                <div class="w-11/12 lg:w-1/4 mx-auto bg-white rounded-lg p-5">
                                     <img src="{{ asset('storage/' . $cover->social_qr_codes->qr_path) }}" class="w-full"
                                         alt="">
-                                    <div class="lg:w-full mx-auto bg-gray-300 rounded-lg p-2 mt-2 flex items-center justify-center cursor-pointer"
-                                        onclick='copyText({{ $cover->id }} , "{{ $cover->social_qr_codes->slug }}")'>
-                                        کپی لینک
+                                        <div class="lg:w-full mx-auto bg-gray-300 rounded-lg p-2 mt-2 flex items-center justify-center cursor-pointer" onclick='copyText({{$cover->id}} , "{{$cover->social_qr_codes->slug}}")'>
+                                            کپی لینک
                                     </div>
                                 </div>
                             @endif
@@ -60,8 +59,7 @@
                     </a>
                 </div>
             </div>
-            <div class="p-3 lg:p-5 rounded-full bg-black bottom-10 right-3 lg:-right-10 fixed lg:absolute cursor-pointer"
-                onclick="addBlock('open')">
+            <div class="p-3 lg:p-5 rounded-full bg-black bottom-10 right-3 lg:-right-10 fixed lg:absolute cursor-pointer" onclick="addBlock('open')">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-6 lg:size-10" viewBox="0 0 448 512">
                     <path fill="white"
                         d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
@@ -69,8 +67,8 @@
             </div>
             <div class="relative">
                 <div>
-                    <img class="w-full h-[130px] object-cover lg:h-[200px] rounded-md"
-                        src="{{ asset('storage/' . $cover->cover_path) }}" alt="">
+                    <img class="w-full h-[130px] object-cover lg:h-[200px] rounded-md" src="{{ asset('storage/' . $cover->cover_path) }}"
+                        alt="">
                 </div>
                 <div class="flex flex-col items-center justify-end w-full h-[100px]">
                     <h2 class="text-center text-base lg:text-lg font-bold text-gray-800">
@@ -81,8 +79,7 @@
                     </span>
                 </div>
                 <img src="{{ asset('storage/' . $cover->logo_path) }}"
-                    class="size-20 lg:size-30 rounded-full absolute inset-1/2 translate-x-1/2 -translate-y-1/5"
-                    alt="">
+                    class="size-20 lg:size-30 rounded-full absolute inset-1/2 translate-x-1/2 -translate-y-1/5" alt="">
             </div>
             <div class="w-full mt-5 lg:mt-10 flex flex-col gap-3">
 
@@ -112,7 +109,7 @@
                             <div class="lg:py-2">
                                 <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center viewLinkTitle"
                                     data-view-link-id="{{ $siteLink->id }}">
-                                    ورود به {{ $siteLink->title }}
+                                    ورود به  {{ $siteLink->title }}
                                 </h3>
                                 <div class="mt-3">
                                     <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-gray-200 rounded-full cursor-pointer editLink"
@@ -121,8 +118,8 @@
                                             <img src="{{ asset('storage/' . $siteLink->icon_path) }}"
                                                 class="size-5 rounded-md" alt="">
                                         @else --}}
-                                        <img src="{{ asset('assets/img/link-simple.svg') }}" class="size-5 rounded-md"
-                                            alt="">
+                                            <img src="{{ asset('assets/img/link-simple.svg') }}" class="size-5 rounded-md"
+                                                alt="">
                                         {{-- @endif --}}
                                         <span class="font-bold text-gray-800 viewLinkTitle"
                                             data-view-link-id="{{ $siteLink->id }}">{{ $siteLink->title }}</span>
@@ -401,8 +398,7 @@
                                     <div class="w-full flex flex-col">
                                         <label class="text-sm md:text-base mb-2" for="username">آدرس شبکه اجتماعی:</label>
                                         <input type="text" name="username" id="userNameUpdate"
-                                            class="w-full px-3 py-2 outline-none border-1 border-sky-400 rounded-lg userName"
-                                            required>
+                                            class="w-full px-3 py-2 outline-none border-1 border-sky-400 rounded-lg userName" required>
                                     </div>
                                     <!-- انتخاب شبکه اجتماعی -->
                                     {{-- <div class="w-full flex flex-col">
@@ -680,7 +676,7 @@
                     closeForm()
                     viewLinkTitle.forEach((element) => {
                         if (element.getAttribute('data-view-link-id') == data.id) {
-                            element.innerText = '  ورود به  ' + data.title
+                            element.innerText = '  ورود به  '+ data.title
                         }
                     })
                 },
@@ -866,9 +862,9 @@
 
                     editsocialMediaForm.children[0].classList.add('hidden')
                     editsocialMediaForm.children[0].classList.remove('flex')
-                    userName.value = datas.data.username
-                    socialAddressId.value = datas.data.id
-                    socialLink.innerText = datas.data.username
+                        userName.value = datas.data.username
+                        socialAddressId.value = datas.data.id
+                        socialLink.innerText = datas.data.username
                 },
                 error: function() {
                     alert('خطا در بارگیری اطلاعات')
@@ -925,15 +921,15 @@
                 }
             })
         }
-    </script>
-    @isset($cover)
+        </script>
+        @isset($cover)
         <script>
-            function copyText(coverId, slug) {
-                let url = "{{ url('qrcode/links') }}" + "{{ '/' }}" + coverId + "{{ '/' }}" + slug
+            function copyText(coverId,slug){
+                let url =  "{{url('qrcode/links')}}"  + "{{'/'}}" + coverId + "{{'/'}}" + slug
                 navigator.clipboard.writeText(url)
                 alert("لینک کپی شد")
             }
         </script>
-    @endisset
+        @endisset
     <script src="{{ asset('assets/js/blocks.js') }}"></script>
 @endsection

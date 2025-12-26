@@ -196,19 +196,19 @@
                         </li> --}}
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('covers.create') }}" class="text-white py-1">ایجادصفحه شبکه های
-                                اجتماعی</a>
+                            <a href="{{ route('covers.create') }}" class="text-white py-1">ایجادصفحه  
+                                </a>
                         </li>
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('covers.social_list') }}" class="text-white py-1"> لیست صفحه شبکه های
-                                اجتماعی من</a>
+                            <a href="{{ route('covers.social_list') }}" class="text-white py-1">  لیست صفحات 
+                                 </a>
                             </li>
                             @if (Auth::user()->role[0]->title == 'admin')
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('covers.list') }}" class="text-white py-1"> لیست صفحه شبکه های
-                                    اجتماعی</a>
+                                <a href="{{ route('covers.list') }}" class="text-white py-1"> لیست همه صفحات 
+                                    </a>
                             </li>
                             @endif
                         {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
@@ -610,21 +610,21 @@
                                     <li>
                                         <a href="{{ route('covers.create') }}"
                                             class="block text-gray-700 py-2 text-md">
-                                            ایجاد صفحه شبکه اجتماعی
+                                        ایجاد صفحه  
                                         </a>
                                     </li>
                                     @if (Auth::user()->role[0]->title == 'admin')
                                     <li>
                                         <a href="{{ route('covers.list') }}"
                                             class="block text-gray-700 py-2 text-md">
-                                            لیست صفحه شبکه های اجتماعی
+                                            لیست صفحات
                                         </a>
                                     </li>
                                     @endif
                                     <li>
                                         <a href="{{ route('covers.social_list') }}"
                                             class="block text-gray-700 py-2 text-md">
-                                            لیست صفحه شبکه های اجتماعی من
+                                            لیست صفحات 
                                         </a>
                                     </li>
                         
