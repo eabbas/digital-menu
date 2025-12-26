@@ -150,6 +150,9 @@
                                 ecomm_product.append(myElement)
                                     })
                 }
+                error: function(){
+                        alert('خطا در دریافت داده')
+                    }
 
             });
 

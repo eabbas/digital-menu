@@ -18,7 +18,7 @@
                          <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
                              <label class="text-sm mb-1 mt-2.5 flex"> عنوان </label>
                              <div class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                             <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text" name="title" title="title">
+                             <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text" name="title" title="title" required>
                              </div>
                          </div>
                          <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
@@ -35,7 +35,7 @@
                              <div
                                  class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                  <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                     name="price" title="price">
+                                     name="price" title="price" required>
                              </div>
                          </div>
                          <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
@@ -82,7 +82,7 @@
                              <div
                                  class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                  <textarea class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                     name="description" title="description"></textarea>
+                                     name="description" title="description" required></textarea>
                              </div>
                          </div>
                      </div>

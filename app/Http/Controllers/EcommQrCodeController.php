@@ -17,9 +17,5 @@ class EcommQrCodeController extends Controller
         return view('client.ecomm.ecomm_menu', ['ecomm' => $ecomm, 'slug' => $slug]);
 
       }
-      public function Mload(ecomm $ecomm){
-        
-        return view('client.ecomm.ecomm_menu', ['ecomm' => $ecomm]);
-
-      }
+      
 }
