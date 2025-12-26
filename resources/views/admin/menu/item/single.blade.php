@@ -15,13 +15,13 @@
                             <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0"
                                 src="{{ asset('storage/' . $item->image) }}" alt="user__picture">
                         @endif
-                        <div class="flex flex-col justify-end">
+                        {{-- <div class="flex flex-col justify-end">
                             <div class="div1 text-center lg:text-start">
                                 @if ($item->customizable)
                                     <a class="p-2.5 text-gary-600 bg-blue-500 text-white rounded-lg hover:bg-blue-600" href="#">{{ $item->title }} خودتو بساز</a>
                                 @endif
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

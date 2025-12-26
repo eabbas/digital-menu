@@ -90,7 +90,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div>دکمه ثبت سفارش</div>
+                                {{-- <div>دکمه ثبت سفارش</div> --}}
                             </div>
                         @endforeach
                     @endforeach
