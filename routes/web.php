@@ -521,16 +521,13 @@ Route::group([
     Route::get('/category_product/{ecomm_category}', 'category_product')->name('category_product');
     Route::post('/menu_ecomm_category_product', 'menu_ecomm_category_product')->name('menu_ecomm_category_product');
 });
-// Route::group([
-//     'prefix' => 'ecomm_qrCode',
-//     'controller' => EcommQrCodeController::class,
-//     'as' => 'ecomm_qr.'
-// ], function () {
-//     Route::get('/{ecomm}/{slug}', 'load')->name('load');
-//     Route::get('/links/{covers}/{slug}', 'loadLink')->name('loadLink');
-//     Route::post('/edit', 'edit')->name('edit');
-//     Route::post('/update', 'update')->name('update');
-// });
+Route::group([
+    'prefix' => 'ecomm_qrCode',
+    'controller' => EcommQrCodeController::class,
+    'as' => 'ecomm_qr.'
+], function () {
+    Route::get('/{ecomm}/{slug}', 'load')->name('load');
+});
 
 Route::fallback(function () {
     return view('404');

@@ -144,8 +144,6 @@ class EcommController extends Controller
         }
         $ecomm->delete();
 
-        $user = Auth::user();
-        // return view('admin.ecomms.userecomms', ['user' =>$user]);
         return back();
     }
 

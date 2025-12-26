@@ -18,7 +18,7 @@
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='title' placeholder="نام  فروشگاه خود را وارد کنید">
+                                        name='title' placeholder="نام  فروشگاه خود را وارد کنید" required>
                                 </div>
                             </div>
 
@@ -75,7 +75,7 @@
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='address' placeholder=" ادرس کسب وکار خود را وارد کنید"required>
+                                        name='address' placeholder=" ادرس کسب وکار خود را وارد کنید" required>
                                 </div>
                             </div>
                             
@@ -159,7 +159,7 @@
                         });
                     },
                     error: function(){
-                        alert('خطا در دریافت داده')
+                        alert('خطا در  دریافت داده')
                     }
                 })
             }
