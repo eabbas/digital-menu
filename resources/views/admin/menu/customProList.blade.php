@@ -24,12 +24,12 @@
                             {{-- <span class="text-sm font-medium">{{ count($career->custom_product ?? []) }} محصول</span> --}}
                         </div>
                         <div onclick="openCPform()"
-                            class="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer">
+                            class="flex items-center gap-2 bg-linear-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer">
                             <span class="text-sm font-medium">محصول جدید</span>
                         </div>
                     </div>
                 </div>
-                <div class="h-1 w-24 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full"></div>
+                <div class="h-1 w-24 bg-linear-to-r from-blue-500 to-blue-300 rounded-full"></div>
             </div>
             <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form"
                 id="createCPform">
@@ -230,7 +230,7 @@
                                                 <div class="py-4 flex items-center justify-center cursor-pointer text-blue-600 transition-all duration-200 gap-2 px-4" onclick='openCform("{{ $custom_product->id }}")'
                                                    >
                                                     <a href="{{ route('cp.category_list', [$custom_product]) }}"
-                                                    class="block w-full text-center text-xs text-indigo-600 hover:text-indigo-800 text-sm font-medium transition-colors">
+                                                    class="block w-full text-center text-xs text-indigo-600 hover:text-indigo-800 lg:text-sm font-medium transition-colors">
                                                     لیست دسته
                                                 </a>
                                                 </div>

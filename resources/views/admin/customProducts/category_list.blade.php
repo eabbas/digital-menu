@@ -197,7 +197,7 @@
                 </svg>
             </div>
 
-        <form action="{{ route('cpm.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg">
+        <form action="{{ route('cpm.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 lg:w-1/2 p-5 grid grid-cols-1 lg:grid-cols-2 rounded-lg">
             @csrf
                                             
             <div class="mb-4">
@@ -266,7 +266,7 @@
             <input type="hidden" name="custom_pro_id" id="custom_pro_id_field">
             <input type="hidden" name="category_id" id="category_id_field">
 
-            <div class="mb-4">
+            <div class="mb-4 lg:col-span-2">
                 <label for="cpmdescription" class="block text-sm font-medium mb-2">
                     توضیحات
                 </label>

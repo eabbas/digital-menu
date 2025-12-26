@@ -44,7 +44,7 @@
                             <div
                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="w-10 focus:outline-none text-sm font-bold mr-2 cursor-pointer"
-                                    type="color" name='color' title="کد رنگی را وارد کنید">
+                                    type="color" name='color' value="{{ $socialMedia->color }}" title="کد رنگی را وارد کنید">
                             </div>
                         </div>
                     </div>
