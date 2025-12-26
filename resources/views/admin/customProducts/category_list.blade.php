@@ -66,7 +66,7 @@
                                     <span class="block w-20 lg:w-full">{{ $category->title }}</span>
                                 </div>
                                 <div class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 lg:w-full text-center">
-                                    <span class="block w-11 lg:w-full text-xs px-2 py-1 rounded {{ $category->required ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700' }}">
+                                    <span class="block w-11 lg:w-fit text-xs px-2 py-1 rounded {{ $category->required ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700' }}">
                                         {{ $category->required ? 'الزامی' : 'اختیاری' }}
                                     </span>
                                 </div>
@@ -502,7 +502,7 @@
                                         <span class="block w-20 lg:w-full">${ data.title }</span>
                                     </div>
                                     <div class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 lg:w-full text-center">
-                                        <span class="text-xs px-2 py-1 rounded ${ data.required ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700' }">
+                                        <span class="text-xs px-2 py-1 w-11 lg:w-fit rounded ${ data.required ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700' }">
                                             ${ data.required ? 'الزامی' : 'اختیاری' }
                                         </span>
                                     </div>
@@ -652,11 +652,9 @@
                 'id': category_custom_pro_id.value,
                 'title' : titleCategory.value,
                 'required' : requierdCategory.value,
-                // 'customProductImage' : customProductImage.value,
                 'max_item_amount' : category_max_item_amount.value,
             },
             success: function(data){
-                // let div = document.createElement('div')
                 newParameters.forEach((element)=>{
                     if(element.getAttribute('data-cp-id') == data.id){
                         element.children[1].children[0].innerText = data.title 
@@ -674,7 +672,6 @@
                             element.children[2].children[0].classList.add('bg-green-100')
                             element.children[2].children[0].classList.add('text-green-700')
                         }
-                        // element.children[1].children[0].innerText = data.required 
                         element.children[3].children[0].innerText = data.max_item_amount 
                     }
                 })
@@ -707,14 +704,9 @@
         },
         success: function(data){
             let row = element.parentElement.parentElement.parentElement.parentElement.parentElement;
-            
-            
-            
             if (row) {
                 row.remove();
             }
-            
-        
             let remainingCategories = custom_category_section.querySelectorAll('.newParameters');
             if (remainingCategories.length === 0) {
                 custom_category_section.innerHTML = `
