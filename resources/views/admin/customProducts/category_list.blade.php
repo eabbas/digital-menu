@@ -121,12 +121,7 @@
                             $i++;
                         @endphp
                     @endforeach
-                    @if (!$hasCategory)
-                        <div class="py-12 text-center" id="no_products_message">
-                            <h3 class="text-lg font-medium text-gray-600 mb-2">هیچ دسته ای یافت نشد</h3>
-                            <p class="text-gray-500 text-sm mb-6">هنوز هیچ دسته ای ایجاد نکرده‌اید</p>
-                        </div>
-                    @endif
+                    
                 </div>
             </div>
         </div>
