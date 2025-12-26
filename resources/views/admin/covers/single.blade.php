@@ -21,7 +21,8 @@
                     {{-- cover qr code --}}
                     <div class="w-full h-dvh fixed top-0 right-0 z-999 bg-black/50 invisible opacity-0 transition-all duration-300"
                         id="qrcode_card">
-                        <div class="relative w-full lg:w-[calc(100%-265px)] h-full float-end flex items-center justify-center">
+                        <div
+                            class="relative w-full lg:w-[calc(100%-265px)] h-full float-end flex items-center justify-center">
                             <div class="absolute top-10 right-10 bg-white rounded-full p-2 cursor-pointer"
                                 onclick="qrCard('close')">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
@@ -30,12 +31,12 @@
                                 </svg>
                             </div>
                             @if (isset($cover->social_qr_codes->qr_path))
-                        
                                 <div class="w-11/12 lg:w-1/4 mx-auto bg-white rounded-lg p-5">
                                     <img src="{{ asset('storage/' . $cover->social_qr_codes->qr_path) }}" class="w-full"
                                         alt="">
-                                        <div class="lg:w-full mx-auto bg-gray-300 rounded-lg p-2 mt-2 flex items-center justify-center cursor-pointer" onclick='copyText({{$cover->id}} , "{{$cover->social_qr_codes->slug}}")'>
-                                            کپی لینک
+                                    <div class="lg:w-full mx-auto bg-gray-300 rounded-lg p-2 mt-2 flex items-center justify-center cursor-pointer"
+                                        onclick='copyText({{ $cover->id }} , "{{ $cover->social_qr_codes->slug }}")'>
+                                        کپی لینک
                                     </div>
                                 </div>
                             @endif
@@ -59,7 +60,8 @@
                     </a>
                 </div>
             </div>
-            <div class="p-3 lg:p-5 rounded-full bg-black bottom-10 right-3 lg:-right-10 fixed lg:absolute cursor-pointer" onclick="addBlock('open')">
+            <div class="p-3 lg:p-5 rounded-full bg-black bottom-10 right-3 lg:-right-10 fixed lg:absolute cursor-pointer"
+                onclick="addBlock('open')">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-6 lg:size-10" viewBox="0 0 448 512">
                     <path fill="white"
                         d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
@@ -67,8 +69,8 @@
             </div>
             <div class="relative">
                 <div>
-                    <img class="w-full h-[130px] object-cover lg:h-[200px] rounded-md" src="{{ asset('storage/' . $cover->cover_path) }}"
-                        alt="">
+                    <img class="w-full h-[130px] object-cover lg:h-[200px] rounded-md"
+                        src="{{ asset('storage/' . $cover->cover_path) }}" alt="">
                 </div>
                 <div class="flex flex-col items-center justify-end w-full h-[100px]">
                     <h2 class="text-center text-base lg:text-lg font-bold text-gray-800">
@@ -79,7 +81,8 @@
                     </span>
                 </div>
                 <img src="{{ asset('storage/' . $cover->logo_path) }}"
-                    class="size-20 lg:size-30 rounded-full absolute inset-1/2 translate-x-1/2 -translate-y-1/5" alt="">
+                    class="size-20 lg:size-30 rounded-full absolute inset-1/2 translate-x-1/2 -translate-y-1/5"
+                    alt="">
             </div>
             <div class="w-full mt-5 lg:mt-10 flex flex-col gap-3">
 
@@ -109,7 +112,7 @@
                             <div class="lg:py-2">
                                 <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center viewLinkTitle"
                                     data-view-link-id="{{ $siteLink->id }}">
-                                    ورود به  {{ $siteLink->title }}
+                                    ورود به {{ $siteLink->title }}
                                 </h3>
                                 <div class="mt-3">
                                     <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-gray-200 rounded-full cursor-pointer editLink"
@@ -118,8 +121,8 @@
                                             <img src="{{ asset('storage/' . $siteLink->icon_path) }}"
                                                 class="size-5 rounded-md" alt="">
                                         @else --}}
-                                            <img src="{{ asset('assets/img/link-simple.svg') }}" class="size-5 rounded-md"
-                                                alt="">
+                                        <img src="{{ asset('assets/img/link-simple.svg') }}" class="size-5 rounded-md"
+                                            alt="">
                                         {{-- @endif --}}
                                         <span class="font-bold text-gray-800 viewLinkTitle"
                                             data-view-link-id="{{ $siteLink->id }}">{{ $siteLink->title }}</span>
@@ -236,60 +239,6 @@
 
                     {{-- create link --}}
 
-                    {{-- <form action="{{ route('siteLink.store') }}" method="post" enctype='multipart/form-data'
-                        class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute top-full form px-5 createSiteLink"
-                        id="siteLinkForm">
-                        <div
-                            class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
-                        </div>
-                        @csrf
-                        <svg xmlns="http://www.w3.org/2000/svg" onclick="closeForm()" class="size-5 mr-5 cursor-pointer"
-                            viewBox="0 0 384 512">
-                            <path
-                                d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
-                        </svg>
-                        <div class="flex items-start justify-center">
-                            <div class="bg-white rounded-2xl shadow-md p-3 w-full md:w-9/12">
-                                <!-- هدر -->
-                                <div class="text-center mb-4">
-                                    <h1 class="text-lg font-bold text-gray-800">ایجاد لینک شبکه اجتماعی</h1>
-                                </div class="w-full">
-                                <div class="md:flex md:flex-col md:w-full md:items-center md:gap-5">
-                                    <div class="md:flex md:flex-col md:w-full">
-                                        <div
-                                            class="mt-2 text-sm md:text-base border border-gray-400 rounded-[15px] py-1 pr-3">
-                                            <lable
-                                                class="p-1 w-30 bg-[#1cb7fd] text-white rounded-full flex flex-row justify-center text-sm">
-                                                عنوان لینک </lable>
-                                            <input type="text" name='title' id="link_title_create"
-                                                placeholder=" عنوان لینک"
-                                                class="w-full px-2 py-1 md:px-2 outline-none text-gray-500">
-                                        </div>
-                                    </div>
-                                    <div class="md:flex md:flex-col md:w-full">
-                                        <div
-                                            class="mt-2 text-sm md:text-base border border-gray-400 rounded-[15px] py-1 pr-3">
-                                            <lable
-                                                class="p-1 w-40 bg-[#1cb7fd] text-white rounded-full flex flex-row justify-center text-sm">
-                                                آدرس لینک</lable>
-                                            <input type="text" name='address' id="link_address_create"
-                                                placeholder="آدرس"
-                                                class="w-full px-2 py-1 md:px-2 outline-none text-gray-500">
-                                        </div>
-                                    </div>
-                                
-                                </div>
-
-                                <button type="submit" onclick="storeLink(event)"
-                                    class="active:bg-[#0080e5] mt-2 w-full bg-[#03A9F4] text-white py-3 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
-                                    ثبت
-                                </button>
-                            </div>
-                        </div>
-                    </form> --}}
-
-
-
 
                     <form action="{{ route('siteLink.store') }}" method="post" enctype='multipart/form-data'
                         class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 right-0 absolute top-full form px-5 createSiteLink"
@@ -329,10 +278,6 @@
                                                     id="link_address_create" placeholder="آدرس لینک">
                                             </div>
                                         </div>
-
-
-
-
                                     </div>
                                     <div class="w-full text-left">
                                         <button type="submit" onclick="storeLink(event)"
@@ -366,7 +311,7 @@
                         <div class="flex flex-row justify-between items-center p-5">
                             <div class="flex flex-row items-center gap-5 w-10/12 cursor-pointer"
                                 onclick="openDropdown('media')">
-                                <div class="text-sm text-gray-800 font-bold socialTitle"></div>
+                                {{-- <div class="text-sm text-gray-800 font-bold socialTitle"></div> --}}
                                 <div class="text-xs text-gray-600 socialLink"></div>
                             </div>
                             <div class="flex flex-row items-center gap-5">
@@ -398,7 +343,8 @@
                                     <div class="w-full flex flex-col">
                                         <label class="text-sm md:text-base mb-2" for="username">آدرس شبکه اجتماعی:</label>
                                         <input type="text" name="username" id="userNameUpdate"
-                                            class="w-full px-3 py-2 outline-none border-1 border-sky-400 rounded-lg userName" required>
+                                            class="w-full px-3 py-2 outline-none border-1 border-sky-400 rounded-lg userName"
+                                            required>
                                     </div>
                                     <!-- انتخاب شبکه اجتماعی -->
                                     {{-- <div class="w-full flex flex-col">
@@ -506,7 +452,7 @@
         let editsocialMediaForm = document.querySelector('.editsocialMediaForm')
         let editSiteLinkForm = document.querySelector('.editSiteLinkForm')
         let socialAddressId = document.querySelector('.socialAddressId')
-        let socialTitle = document.querySelector('.socialTitle')
+        // let socialTitle = document.querySelector('.socialTitle')
         let socialLink = document.querySelector('.socialLink')
         let editSocialSection = document.querySelectorAll('.editSocial')
         let userNameUpdate = document.getElementById('userNameUpdate')
@@ -676,7 +622,7 @@
                     closeForm()
                     viewLinkTitle.forEach((element) => {
                         if (element.getAttribute('data-view-link-id') == data.id) {
-                            element.innerText = '  ورود به  '+ data.title
+                            element.innerText = '  ورود به  ' + data.title
                         }
                     })
                 },
@@ -815,13 +761,18 @@
                     let div = document.createElement('div')
                     div.classList = "py-2"
                     let element = `
-                    <h3 class="text-lg font-bold text-gray-800 text-center">
-                    ${datas.socialMedia.title}
-                    </h3>
-                    <div class="mt-3">
-                        <div  class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-[${datas.socialMedia.color}] rounded-full cursor-pointer editSocial" data-social-id="${datas.address.id}"  onclick='editSocial(${datas.address.id}, ${datas.socialMedia.id})'>
-                            <img src="${link}" class="size-5 rounded-md" alt="">
-                            <span class="font-bold text-gray-800">${datas.socialMedia.title}</span>
+                    <div class="lg:py-2">
+                        <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center">
+                           ورود به ${datas.socialMedia.title}
+                        </h3>
+                        <div class="mt-3">
+                            <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-[${datas.socialMedia.color}] rounded-full cursor-pointer editSocial"
+                                data-social-id="${datas.address.id}"
+                                onclick='editSocial(${datas.address.id}, ${datas.socialMedia.id})'>
+                                <img src="${link}"
+                                    class="size-5 rounded-md" alt="">
+                                <span class="font-bold text-gray-800">${datas.socialMedia.title}</span>
+                            </div>
                         </div>
                     </div>
                     `
@@ -862,9 +813,9 @@
 
                     editsocialMediaForm.children[0].classList.add('hidden')
                     editsocialMediaForm.children[0].classList.remove('flex')
-                        userName.value = datas.data.username
-                        socialAddressId.value = datas.data.id
-                        socialLink.innerText = datas.data.username
+                    userName.value = datas.data.username
+                    socialAddressId.value = datas.data.id
+                    socialLink.innerText = datas.data.username
                 },
                 error: function() {
                     alert('خطا در بارگیری اطلاعات')
@@ -921,15 +872,15 @@
                 }
             })
         }
-        </script>
-        @isset($cover)
+    </script>
+    @isset($cover)
         <script>
-            function copyText(coverId,slug){
-                let url =  "{{url('qrcode/links')}}"  + "{{'/'}}" + coverId + "{{'/'}}" + slug
+            function copyText(coverId, slug) {
+                let url = "{{ url('qrcode/links') }}" + "{{ '/' }}" + coverId + "{{ '/' }}" + slug
                 navigator.clipboard.writeText(url)
                 alert("لینک کپی شد")
             }
         </script>
-        @endisset
+    @endisset
     <script src="{{ asset('assets/js/blocks.js') }}"></script>
 @endsection
