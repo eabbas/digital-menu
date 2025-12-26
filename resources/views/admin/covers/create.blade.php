@@ -8,7 +8,7 @@
     @section('content')
         <div class="text-center mb-4">
             <h1 class="text-lg font-bold text-gray-800">
-                صفحه ایجاد شبکه های اجتماعی
+                 ایجاد صفحه شبکه های اجتماعی
             </h1>
         </div>
         <form action="{{ route('covers.store') }}" method="post" enctype='multipart/form-data'>
