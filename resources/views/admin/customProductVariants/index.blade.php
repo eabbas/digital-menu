@@ -9,7 +9,7 @@
         <div class="mb-6">
             <div class="flex items-center justify-between mb-4">
                 <div>
-                    <h1 class="text-xl font-semibold text-gray-800">انواع محصولات</h1>
+                    <h1 class="text-xl font-bold text-gray-800">انواع محصولات</h1>
                     <div class="flex items-center gap-3 mt-2">
                         {{-- <span class="text-sm text-gray-600">
                             محصول: <span class="font-medium">{{ $customProduct->title ?? 'نامشخص' }}</span>

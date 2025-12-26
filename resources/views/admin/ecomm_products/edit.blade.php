@@ -4,7 +4,7 @@
 <section class="2xl:container mx-auto">
     <div class="w-full mx-auto pb-5">
         <fieldset class="border-2 rounded-[10px] border-gray-400 shadow">
-            <legend class="lg:text-3xl md:text-2xl text-md font-semibold text-end text-gray-500 p-5 rounded-full">
+            <legend class="lg:text-3xl md:text-2xl text-md font-bold text-end text-gray-500 p-5 rounded-full">
      ویرایش اطلاعات محصول
             </legend>
             <form action="{{ route('ecomm_product.update')}}" method="post" enctype='multipart/form-data'

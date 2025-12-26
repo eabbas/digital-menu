@@ -29,7 +29,7 @@
                                 <div class="flex flex-row items-end mb-3 gap-5">
                                     <img src="{{ asset('storage/' . $category->image) }}" alt="menu image"
                                         class="size-12 rounded-[5px]">
-                                    <h2 class="text-xl font-semibold text-gray-600">{{ $category->title }}</h2>
+                                    <h2 class="text-xl font-bold text-gray-600">{{ $category->title }}</h2>
                                 </div>
                                 <a href="{{ route('menuCat.edit', [$category->id]) }}"
                                     class="bg-[#03A9F4] text-white border border-gray-300 rounded-md p-2 text-sm">

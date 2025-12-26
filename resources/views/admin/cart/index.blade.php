@@ -18,7 +18,7 @@
                     </svg>
                 </div>
                 <div>
-                    <h3 class="text-md font-semibold text-gray-700">
+                    <h3 class="text-md font-bold text-gray-700">
                         سبد خرید
                     </h3>
                 </div>
@@ -41,7 +41,7 @@
                     </div>
                     <div class="w-3/4 flex flex-col gap-2">
                         <div>
-                            <h3 class="font-semibold text-gray-700">
+                            <h3 class="font-bold text-gray-700">
                                 او باهالی پیتزانین همبرگری
                             </h3>
                             <span class="text-sm inline-block mt-1 text-gray-500">
@@ -50,7 +50,7 @@
                         </div>
                         <div class="flex flex-row justify-between items-center">
                             <div>
-                                <span class="text-sm font-semibold text-gray-700">
+                                <span class="text-sm font-bold text-gray-700">
                                     180000 تومان
                                 </span>
                             </div>
@@ -78,7 +78,7 @@
                     </div>
                     <div class="w-3/4 flex flex-col gap-2">
                         <div>
-                            <h3 class="font-semibold text-gray-700">
+                            <h3 class="font-bold text-gray-700">
                                 او باهالی پیتزانین همبرگری
                             </h3>
                             <span class="text-sm inline-block mt-1 text-gray-500">
@@ -87,7 +87,7 @@
                         </div>
                         <div class="flex flex-row justify-between items-center">
                             <div>
-                                <span class="text-sm font-semibold text-gray-700">
+                                <span class="text-sm font-bold text-gray-700">
                                     180000 تومان
                                 </span>
                             </div>
@@ -115,7 +115,7 @@
                     </div>
                     <div class="w-3/4 flex flex-col gap-2">
                         <div>
-                            <h3 class="font-semibold text-gray-700">
+                            <h3 class="font-bold text-gray-700">
                                 او باهالی پیتزانین همبرگری
                             </h3>
                             <span class="text-sm inline-block mt-1 text-gray-500">
@@ -124,7 +124,7 @@
                         </div>
                         <div class="flex flex-row justify-between items-center">
                             <div>
-                                <span class="text-sm font-semibold text-gray-700">
+                                <span class="text-sm font-bold text-gray-700">
                                     180000 تومان
                                 </span>
                             </div>
@@ -201,7 +201,7 @@
 
         <section class="w-full">
             <div class="w-full my-3">
-                <a href="#" class="block bg-lime-400 text-white p-3 rounded-full text-center font-semibold">
+                <a href="#" class="block bg-lime-400 text-white p-3 rounded-full text-center font-bold">
                     پرداخت
                 </a>
             </div>

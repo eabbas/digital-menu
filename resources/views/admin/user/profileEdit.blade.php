@@ -12,7 +12,7 @@
     <section class="2xl:container mx-auto">
         <div class="w-11/12 mx-auto">
             <div class="my-10">
-                <h1 class="lg:text-3xl md:text-2xl text-md font-semibold text-center text-gray-700">ثبت نام</h1>
+                <h1 class="lg:text-3xl md:text-2xl text-md font-bold text-center text-gray-700">ثبت نام</h1>
             </div>
             <form action="{{ route('user.profileUpdate') }}" method="post" class="w-11/12 lg:w-3/4 mx-auto p-5 rounded-lg border">
                 @csrf

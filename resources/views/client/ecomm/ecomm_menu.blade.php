@@ -39,7 +39,7 @@
                                         src="{{ asset('storage/' . $ecomm_category->image_path) }}" alt="ecomm category image">
                                 </div>
                                 <div class="w-full">
-                                    <h3 class="text-sm text-center font-semibold">{{ $ecomm_category->title }}</h3>
+                                    <h3 class="text-sm text-center font-bold">{{ $ecomm_category->title }}</h3>
                                 </div>
                             </div>
                             @endif
@@ -48,7 +48,7 @@
                                onclick='get_ecomm_category_id("{{ $ecomm->id }}","all")'>
                                
                                 <div class="justify-end w-full">
-                                    <h3 class="text-sm text-center font-semibold">کل  محصولات</h3>
+                                    <h3 class="text-sm text-center font-bold">کل  محصولات</h3>
                                 </div>
                             </div>
                     </div>
@@ -80,7 +80,7 @@
                                             </div>
                                         </div>
                                         <div class="w-full flex flex-col gap-2 items-start">
-                                            <h3 class="text-sm text-center font-semibold">{{ $ecomm_product->title }}</h3>
+                                            <h3 class="text-sm text-center font-bold">{{ $ecomm_product->title }}</h3>
                                             <div class="flex flex-row items-end gap-2">
                                                 <span
                                                     class="font-bold text-xs @if ($ecomm_product->discount) {{ 'line-through font-normal text-gray-400' }} @endif">{{ $ecomm_product->price }}</span>
@@ -138,7 +138,7 @@
                                             </div>
                                         </div>
                                         <div class="w-full flex flex-col gap-2 items-start">
-                                            <h3 class="text-sm text-center font-semibold">${product.title}</h3>
+                                            <h3 class="text-sm text-center font-bold">${product.title}</h3>
                                             <div class="flex flex-row items-end gap-2">
                                                <span class="font-bold text-xs ${product.discount ? 'line-through font-normal text-gray-400' : ''}"> ${product.price}</span>
                                                ${product.discount ? `<span class="font-bold text-xs">${product.discount}</span>` : ''}

@@ -14,7 +14,7 @@
         <div class="mb-8">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                 <div>
-                    <h1 class="text-xl font-semibold text-gray-800">دسته‌بندی‌های محصول</h1>
+                    <h1 class="text-xl font-bold text-gray-800">دسته‌بندی‌های محصول</h1>
                     <p class="text-gray-600 text-sm mt-1">
                         محصول: <span class="font-medium">{{ $custom_product->title ?? 'نامشخص' }}</span> 
                         | {{ count($custom_product->customCategories ?? []) }} دسته‌بندی
