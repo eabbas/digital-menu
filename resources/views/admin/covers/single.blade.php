@@ -191,12 +191,12 @@
                                 d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
                         </svg>
                         <div class="flex items-start justify-center">
-                            <div class="bg-white rounded-2xl shadow-md p-3 w-full lg:w-3/4">
+                            <div class="bg-white rounded-2xl p-3 w-full lg:w-3/4">
                                 <div class="text-center mb-8">
                                     <h3 class="lg:text-lg font-bold text-gray-800"> شبکه اجتماعی</h3>
-                                </div class="w-full ">
+                                </div class="w-full">
                                 <div class="text-center mb-4">
-                                    <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
+                                    <div class="w-full flex flex-col gap-3 my-4">
                                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                             <label class="w-30 text-sm mb-1 mt-2.5 flex">شبکه اجتماعی</label>
                                             <div
