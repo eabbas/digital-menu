@@ -22,7 +22,7 @@
                                 name="title" 
                                 id="title"
                                 required
-                                class="w-full p-2 border-1 rounded border-gray-300">
+                                class="w-full p-2 border-1 rounded border-gray-300 outline-none">
                         </div>
                         <div class="mb-4">
                             <label for="title" class="block text-sm font-medium mb-2">
@@ -31,7 +31,7 @@
                             <input type="file" 
                                 name="customProductImage" 
                                 id="customProductImage"
-                                class="w-full p-2 border-1 rounded border-gray-300">
+                                class="w-full p-2 border-1 rounded border-gray-300 outline-none">
                         </div>
                         <div class="mb-4">
                             <label for="title" class="block text-sm font-medium mb-2">
@@ -42,7 +42,7 @@
                                 id="material_limit"
                                 required
                                 placeholder="محدودیت متریال را وارد کنید"
-                                class="w-full p-2 border-1 rounded border-gray-300">
+                                class="w-full p-2 border-1 rounded border-gray-300 outline-none">
                         </div>
 
 
@@ -54,7 +54,7 @@
                                 name="description" 
                                 id="description"
                                 rows="4"
-                                class="w-full p-2 border-1 rounded border-gray-300"></textarea>
+                                class="w-full p-2 border-1 rounded border-gray-300 outline-none"></textarea>
                         </div>
                        
 
