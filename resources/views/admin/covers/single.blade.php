@@ -216,8 +216,10 @@
                                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                             <label class="w-30 text-sm mb-1 mt-2.5 flex">نام کاربری</label>
                                             <div
-                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createSocialRequire"
+                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                <span class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی است!</span>
+                                                <input
+                                                    class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createSocialRequire rounded-md"
                                                     type="text" name='username' id="username"
                                                     placeholder="نام کاربری">
                                             </div>
@@ -263,8 +265,10 @@
                                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                             <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان لینک</label>
                                             <div
-                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
+                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                <span class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی است!</span>
+                                                <input
+                                                    class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createLinkRequire rounded-md"
                                                     type="text" name='title' id="link_title_create"
                                                     placeholder="عنوان لینک">
                                             </div>
@@ -272,8 +276,10 @@
                                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                             <label class="w-30 text-sm mb-1 mt-2.5 flex">آدرس لینک</label>
                                             <div
-                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
+                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                <span class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی است!</span>
+                                                <input
+                                                    class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createLinkRequire rounded-md"
                                                     type="text" dir="ltr" name='address'
                                                     id="link_address_create" placeholder="آدرس لینک">
                                             </div>
@@ -311,7 +317,6 @@
                         <div class="flex flex-row justify-between items-center p-5">
                             <div class="flex flex-row items-center gap-5 w-10/12 cursor-pointer"
                                 onclick="openDropdown('media')">
-                                {{-- <div class="text-sm text-gray-800 font-bold socialTitle"></div> --}}
                                 <div class="text-xs text-gray-600 socialLink"></div>
                             </div>
                             <div class="flex flex-row items-center gap-5">
@@ -346,13 +351,6 @@
                                             class="w-full px-3 py-2 outline-none border-1 border-sky-400 rounded-lg userName"
                                             required>
                                     </div>
-                                    <!-- انتخاب شبکه اجتماعی -->
-                                    {{-- <div class="w-full flex flex-col">
-                                        <label class="text-sm md:text-base mb-2" for="socialMedia_id">شبکه
-                                            اجتماعی:</label>
-                                        <select name="socialMedia_id"
-                                            class="w-full px-3 py-2 outline-none border-1 border-sky-400 rounded-lg socialMedia_id"></select>
-                                    </div> --}}
                                 @endif
                             </div>
 
@@ -447,12 +445,11 @@
         </div>
     </div>
     <script>
-        let socialMedia_id = document.querySelector('.socialMedia_id')
+        let socialMedia_id = document.querySelector('#socialMedia_id')
         let userName = document.querySelector('.userName')
         let editsocialMediaForm = document.querySelector('.editsocialMediaForm')
         let editSiteLinkForm = document.querySelector('.editSiteLinkForm')
         let socialAddressId = document.querySelector('.socialAddressId')
-        // let socialTitle = document.querySelector('.socialTitle')
         let socialLink = document.querySelector('.socialLink')
         let editSocialSection = document.querySelectorAll('.editSocial')
         let userNameUpdate = document.getElementById('userNameUpdate')
@@ -519,77 +516,82 @@
         }
 
         function storeLink(e) {
+            let errorText = ""
             e.preventDefault()
             let createLinkRequire = document.querySelectorAll('.createLinkRequire')
-            createLinkRequire.forEach((item)=>{
-                console.log(item)
-                // if (item.value == "") {
-                //     alert("لطفا " + item.parentElement.parentElement.innerText + " را پر کنید")
-                // }else{
-                //     createSiteLink.children[0].classList.remove('hidden')
-                //     createSiteLink.children[0].classList.add('flex')
-                //     createSiteLink.children[0].innerHTML = `
-                //     <div class="loading-wave">
-                //         <div class="loading-bar"></div>
-                //         <div class="loading-bar"></div>
-                //         <div class="loading-bar"></div>
-                //         <div class="loading-bar"></div>
-                //     </div>
-                //     `
-                //     $.ajaxSetup({
-                //         headers: {
-                //             'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                //         }
-                //     })
-                //     $.ajax({
-                //         url: "{{ route('siteLink.store') }}",
-                //         type: "POST",
-                //         dataType: "json",
-                //         data: {
-                //             'address': link_address_create.value,
-                //             'title': link_title_create.value,
-                //             'cover_id': "{{ $cover->id }}",
-                //             // 'icon_path': link_icon_path_create.value
-                //         },
-                //         success: function(data) {
-                //             createSiteLink.children[0].classList.remove('flex')
-                //             createSiteLink.children[0].classList.add('hidden')
-                //             link_address_create.value = ""
-                //             link_title_create.value = ""
-                //             let div = document.createElement('div')
-                //             let element = `
-                //             <div class="w-full flex flex-col gap-5" id="linkSection">
-                //                     <div class="py-2">
-                //                         <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center viewLinkTitle" data-view-link-id="${data.id}">
-                //                          ورود به  ${data.title}
-                //                         </h3>
-                //                         <div class="mt-3">
-                //                             <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-gray-200 rounded-full cursor-pointer editLink"
-                //                                 onclick='editLink(${data.id})' data-site-id="${data.id}">
-                //                                 @if (isset($siteLink->icon_path))
-                //                                     <img src="{{ asset('storage/' . $siteLink->icon_path) }}"
-                //                                         class="size-5 rounded-md" alt="">
-                //                                 @else
-                //                                     <img src="{{ asset('assets/img/link-simple.svg') }}" class="size-5 rounded-md"
-                //                                         alt="">
-                //                                 @endif
-                //                                 <span class="font-bold text-gray-800 viewLinkTitle" data-view-link-id="${data.id}">${data.title}</span>
-                //                             </div>
-                //                         </div>
-                //                     </div>
-                //                 </div>
-                //             `
-                //             div.innerHTML = element
-                //             siteLinks.appendChild(div)
-                //             closeForm()
-                //         },
-                //         error: function() {
-                //             alert('خطا در ارسال داده ها')
-                //         }
-                //     })
-       
-                // }
+            let flag = true
+            createLinkRequire.forEach((item) => {
+                if (item.value == "") {
+                    item.classList.add('border-1')
+                    item.classList.add('border-red-500')
+                    item.parentElement.children[0].classList.remove('opacity-0')
+                    flag = false
+                } 
             })
+            if(flag){
+                createSiteLink.children[0].classList.remove('hidden')
+                createSiteLink.children[0].classList.add('flex')
+                createSiteLink.children[0].innerHTML = `
+                <div class="loading-wave">
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                </div>
+                `
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+                $.ajax({
+                    url: "{{ route('siteLink.store') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'address': link_address_create.value,
+                        'title': link_title_create.value,
+                        'cover_id': "{{ $cover->id }}",
+                        // 'icon_path': link_icon_path_create.value
+                    },
+                    success: function(data) {
+                        createSiteLink.children[0].classList.remove('flex')
+                        createSiteLink.children[0].classList.add('hidden')
+                        link_address_create.value = ""
+                        link_title_create.value = ""
+                        let div = document.createElement('div')
+                        let element = `
+                        <div class="w-full flex flex-col gap-5" id="linkSection">
+                                <div class="py-2">
+                                    <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center viewLinkTitle" data-view-link-id="${data.id}">
+                                    ورود به  ${data.title}
+                                    </h3>
+                                    <div class="mt-3">
+                                        <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-gray-200 rounded-full cursor-pointer editLink"
+                                            onclick='editLink(${data.id})' data-site-id="${data.id}">
+                                            @if (isset($siteLink->icon_path))
+                                                <img src="{{ asset('storage/' . $siteLink->icon_path) }}"
+                                                    class="size-5 rounded-md" alt="">
+                                            @else
+                                                <img src="{{ asset('assets/img/link-simple.svg') }}" class="size-5 rounded-md"
+                                                    alt="">
+                                            @endif
+                                            <span class="font-bold text-gray-800 viewLinkTitle" data-view-link-id="${data.id}">${data.title}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                        div.innerHTML = element
+                        siteLinks.appendChild(div)
+                        closeForm()
+                    },
+                    error: function() {
+                        alert('خطا در ارسال داده ها')
+                    }
+                })
+
+            }
 
         }
 
@@ -734,74 +736,73 @@
 
         function storeSocialmedia(ev) {
             ev.preventDefault();
-            let createSocialRequire = document.querySelectorAll('.createSocialRequire')
-            createSocialRequire.forEach((item)=>{
-                if (item.value == "") {
-                    alert('لطفا '+item.parentElement.parentElement.innerText + " را پر کنید!")
-                } else {
-                     storeSocialForm.children[0].classList.remove('hidden')
-            storeSocialForm.children[0].classList.add('flex')
-            storeSocialForm.children[0].innerHTML = `
-            <div class="loading-wave">
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-            </div>
-            `
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
+            if (userNameCreate.value == "") {
+                userNameCreate.classList.add('border-1')
+                userNameCreate.classList.add('border-red-500')
+                userNameCreate.parentElement.children[0].classList.remove('opacity-0')
+            } else {
+                storeSocialForm.children[0].classList.remove('hidden')
+                storeSocialForm.children[0].classList.add('flex')
+                storeSocialForm.children[0].innerHTML = `
+                <div class="loading-wave">
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                </div>
+                `
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
 
-            $.ajax({
-                url: "{{ route('socialAddress.store') }}",
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    'socialMedia_id': socialMedia_id_create.value,
-                    'cover_id': "{{ $cover->id }}",
-                    'userName': userNameCreate.value
-                },
-                success: function(datas) {
-                    storeSocialForm.children[0].classList.remove('flex')
-                    storeSocialForm.children[0].classList.add('hidden')
-                    socialMedia_id_create.value = 1
-                    userNameCreate.value = ""
-                    closeForm()
-                    let link = "<?php echo asset('storage/'); ?>"
-                    link += "/"
-                    link += datas.socialMedia.icon_path
-                    let div = document.createElement('div')
-                    div.classList = "py-2"
-                    let element = `
-                    <div class="lg:py-2">
-                        <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center">
-                           ورود به ${datas.socialMedia.title}
-                        </h3>
-                        <div class="mt-3">
-                            <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-[${datas.socialMedia.color}] rounded-full cursor-pointer editSocial"
-                                data-social-id="${datas.address.id}"
-                                onclick='editSocial(${datas.address.id}, ${datas.socialMedia.id})'>
-                                <img src="${link}"
-                                    class="size-5 rounded-md" alt="">
-                                <span class="font-bold text-gray-800">${datas.socialMedia.title}</span>
+                $.ajax({
+                    url: "{{ route('socialAddress.store') }}",
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        'socialMedia_id': socialMedia_id_create.value,
+                        'cover_id': "{{ $cover->id }}",
+                        'userName': userNameCreate.value
+                    },
+                    success: function(datas) {
+                        storeSocialForm.children[0].classList.remove('flex')
+                        storeSocialForm.children[0].classList.add('hidden')
+                        socialMedia_id_create.value = 1
+                        userNameCreate.value = ""
+                        closeForm()
+                        let link = "<?php echo asset('storage/'); ?>"
+                        link += "/"
+                        link += datas.socialMedia.icon_path
+                        let div = document.createElement('div')
+                        div.classList = "py-2"
+                        let element = `
+                        <div class="lg:py-2">
+                            <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center">
+                            ورود به ${datas.socialMedia.title}
+                            </h3>
+                            <div class="mt-3">
+                                <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-[${datas.socialMedia.color}] rounded-full cursor-pointer editSocial"
+                                    data-social-id="${datas.address.id}"
+                                    onclick='editSocial(${datas.address.id}, ${datas.socialMedia.id})'>
+                                    <img src="${link}"
+                                        class="size-5 rounded-md" alt="">
+                                    <span class="font-bold text-gray-800">${datas.socialMedia.title}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    `
-                    div.innerHTML = element
-                    socialLinks.appendChild(div)
-                },
-                error: function() {
-                    alert('خطا در ارسال داده ها')
-                }
-            })
-                }
-            })
-           
-           
+                        `
+                        div.innerHTML = element
+                        socialLinks.appendChild(div)
+                    },
+                    error: function() {
+                        alert('خطا در ارسال داده ها')
+                    }
+                })
+            }
+
+
 
         }
 
