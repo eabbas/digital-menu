@@ -222,12 +222,12 @@
                                                         <span class="text-xs font-medium mt-1">لیست انواع</span>
                                                     </a>
                                                 </div>
-                                                <div class="py-4 flex items-center justify-center cursor-pointer text-blue-600 transition-all duration-200 gap-2 px-4" onclick='openCform("{{ $custom_product->id }}")'
+                                                <div class="py-4 flex items-center justify-center cursor-pointer text-blue-600 transition-all duration-200 gap-2 px-4"
                                                    >
                                                     <span class="block w-full text-center text-xs font-medium"> ایجاد
                                                         دسته</span>
                                                 </div>
-                                                <div class="py-4 flex items-center justify-center cursor-pointer text-blue-600 transition-all duration-200 gap-2 px-4" onclick='openCform("{{ $custom_product->id }}")'
+                                                <div class="py-4 flex items-center justify-center cursor-pointer text-blue-600 transition-all duration-200 gap-2 px-4"
                                                    >
                                                     <a href="{{ route('cp.category_list', [$custom_product]) }}"
                                                     class="block w-full text-center text-xs text-indigo-600 hover:text-indigo-800 text-sm font-medium transition-colors">
