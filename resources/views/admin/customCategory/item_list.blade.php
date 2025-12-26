@@ -406,7 +406,10 @@
             formData.append('max_unit_amount' , cpm_max_unit_amount.value)
             formData.append('custom_pro_id' , cpm_custom_pro_id.value)
             formData.append('category_id' , cpm_category_id.value)
-            formData.append('imageCPM' ,imageCPM.files[0])
+            if (imageCPM.files[0]) {
+                formData.append('imageCPM', imageCPM.files[0])
+            }
+           
 
             const categoryTitle = "{{ $customCategory->title }}"
             $.ajaxSetup({
@@ -613,7 +616,9 @@
         formData.append('order',ordercpm.value)
         formData.append('max_unit_amount',max_unit_amount_cpm.value)
         formData.append('category_id',custom_category_id_cpm.value)
-        formData.append('customProductImage',customProductImage.files[0])
+        if (customProductImage.files.length > 0) {
+            formData.append('customProductImage',customProductImage.files[0])
+        }
 
         
 

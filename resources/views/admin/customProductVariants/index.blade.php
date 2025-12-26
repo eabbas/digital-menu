@@ -350,7 +350,9 @@
     formData.append('min_amount_unit' , min_amount_unit_cpv.value)
     formData.append('duration' , durationCPV.value)
     formData.append('custom_pro_id' , custom_product_id_variant.value)
-    formData.append('imageCPV' ,imageCPV.files[0])
+    if (imageCPV.files[0]) {
+        formData.append('imageCPV' ,imageCPV.files[0])
+    }
     const customProductTitle = "{{ $customProduct->title }}";
     $.ajaxSetup({
         headers: {
@@ -531,7 +533,9 @@
         formData.append('min_amount_unit' ,cpvMinamountunit.value)
         formData.append('duration' ,cpvDuration.value)
         formData.append('custom_product_id' ,custom_product_id_vUpdate.value)
-        formData.append('customProductImage' ,customProductImage.files[0])
+        if (customProductImage.files.length > 0) {
+            formData.append('customProductImage' ,customProductImage.files[0])
+        }
         $.ajaxSetup({
             headers : {
                 'X-CSRF-TOKEN' : "{{ csrf_token() }}"
