@@ -231,7 +231,7 @@
                                                    >
                                                     <a href="{{ route('cp.category_list', [$custom_product]) }}"
                                                     class="block w-full text-center text-xs text-indigo-600 hover:text-indigo-800 lg:text-sm font-medium transition-colors">
-                                                    لیست دسته
+                                                    دسته ها
                                                 </a>
                                                 </div>
 
@@ -254,9 +254,6 @@
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     </div>
     <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form"
@@ -790,7 +787,7 @@
                                     >
                                     <a href="{{ url('customCategories/custmoCategoryList/${data.id}') }}"
                                     class="block w-full text-center text-xs text-indigo-600 hover:text-indigo-800 lg:text-sm font-medium transition-colors">
-                                    لیست دسته
+                                    دسته ها 
                                 </a>
                                 </div>
 
