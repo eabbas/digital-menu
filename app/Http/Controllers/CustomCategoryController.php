@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\career;
 use App\Models\custom_product;
-use App\Models\custom_product_variant;
 use App\Models\customCategory;
 use Illuminate\Http\Request;
 
