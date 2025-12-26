@@ -533,5 +533,5 @@ Route::group([
 // });
 
 Route::fallback(function () {
-    return view('client.login');
+    return view('404');
 });
