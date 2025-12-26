@@ -8,7 +8,7 @@
                     class="flex flex-row justify-center lg:justify-start items-center gap-2 text-[#99A1B7] text-[11px] lg:text-sm">
                     {{-- <a href="{{ route('home') }}" class="p-2">خانه</a>
                     <span>/</span> --}}
-                    <a href="{{ route('user.profile') }}">اکانت من</a>
+                    <a href="{{ route('user.profile') }}">داشبورد</a>
                 </div>
             </div>
 
@@ -16,30 +16,18 @@
                 <div class="block lg:flex flex-row justify-between gap-8">
                     <div class="flex flex-col xm:flex-row lg:flex-row gap-5 py-3 rounded-full">
                         @if (!Auth::user()->main_image)
-                            <img class="size-27 lg:size-41 mx-auto lg:m-0 rounded-full"
+                            <img class="hidden lg:block size-30 mx-auto lg:m-0 rounded-full"
                                 src="{{ asset('assets/img/user.png') }}" alt="user__avatar">
                         @else
-                            <img class="size-27 lg:size-41 mx-auto lg:m-0 rounded-full"
+                            <img class="hidden lg:block size-30 mx-auto lg:m-0 rounded-full"
                                 src="{{ asset('storage/' . Auth::user()->main_image) }}" alt="user__picture">
                         @endif
                         <div class="flex flex-col justify-end">
-                            <div class="div1 text-center lg:text-start">
+                            <div class="div1 hidden lg:block text-center lg:text-start">
                                 <strong class="text-gray-700">{{ Auth::user()->name }} {{ Auth::user()?->family }}</strong>
                             </div>
-                            <div class="div2 hidden">
-                                <ul class="flex flex-col lg:flex-row gap-3 text-[#99A1B7]">
-                                    <li>
-                                        <a href="">توسعه دهنده</a>
-                                    </li>
-                                    <li>
-                                        <a href="">منطقه زندگی</a>
-                                    </li>
-                                    <li>
-                                        <a href="">max@kt.com</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="flex flex-col lg:flex-row gap-2 mt-8 mx-10 lg:mx-0">
+                            
+                            <div class="flex flex-col lg:flex-row gap-2 mt-4 mx-10 lg:mx-0">
                                 <div
                                     class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px]">
                                     <span class="font-bold text-blue-500">0</span>

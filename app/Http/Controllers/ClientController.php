@@ -13,9 +13,13 @@ class ClientController extends Controller
         return view('client.menu', ['career' => $career, 'slug' => $slug]);
     }
 
-    public function career_menu(career $career)
-    {
-        return view('client.menu', ['career' => $career]);
+    // public function career_menu(career $career)
+    // {
+    //     return view('client.menu', ['career' => $career]);
+    // }
+
+    public function loadLink(covers $covers, string $slug){
+        return view('client.link.single', ['cover'=>$covers, 'slug'=>$slug]);
     }
 
     public function show_career(career $career)

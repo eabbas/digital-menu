@@ -185,7 +185,6 @@ Route::group([
     Route::get('/qr-code', 'index')->name('list');
     Route::post('/delete', 'delete')->name('delete');
     Route::get('/{career}/{slug}', 'load')->name('load')->withoutMiddleware([UserMiddleware::class]);
-    Route::get('/links/{covers}/{slug}', 'loadLink')->name('loadLink')->withoutMiddleware([UserMiddleware::class]);
     Route::post('/edit', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
 });
@@ -197,8 +196,9 @@ Route::group([
     'as' => 'client.'
 ], function () {
     Route::get('/socialpage/{covers}', 'show_socialPage')->name('show_socialPage');
+    Route::get('/links/{covers}/{slug?}', 'loadLink')->name('loadLink')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/{career}/{slug?}', 'show_menu')->name('menu');
-    Route::get('/{career}', 'career_menu')->name('careerMenu');
+    // Route::get('/{career}', 'career_menu')->name('careerMenu');
     // Route::get('/career/{$career}', 'show_career')->name('show_career');
 });
 Route::get('/career/{career}', [ClientController::class, 'show_career'])->name('show_career');
@@ -521,16 +521,16 @@ Route::group([
     Route::get('/category_product/{ecomm_category}', 'category_product')->name('category_product');
     Route::post('/menu_ecomm_category_product', 'menu_ecomm_category_product')->name('menu_ecomm_category_product');
 });
-Route::group([
-    'prefix' => 'ecomm_qrCode',
-    'controller' => EcommQrCodeController::class,
-    'as' => 'ecomm_qr.'
-], function () {
-    Route::get('/{ecomm}/{slug}', 'load')->name('load');
-    Route::get('/links/{covers}/{slug}', 'loadLink')->name('loadLink');
-    Route::post('/edit', 'edit')->name('edit');
-    Route::post('/update', 'update')->name('update');
-});
+// Route::group([
+//     'prefix' => 'ecomm_qrCode',
+//     'controller' => EcommQrCodeController::class,
+//     'as' => 'ecomm_qr.'
+// ], function () {
+//     Route::get('/{ecomm}/{slug}', 'load')->name('load');
+//     Route::get('/links/{covers}/{slug}', 'loadLink')->name('loadLink');
+//     Route::post('/edit', 'edit')->name('edit');
+//     Route::post('/update', 'update')->name('update');
+// });
 
 Route::fallback(function () {
     return view('client.login');

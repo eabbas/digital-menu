@@ -177,58 +177,66 @@
 
 
                     {{-- create social media --}}
-                    <form action="{{ route('socialAddress.store') }}" method="post"
-                        class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute top-full form px-5"
+
+                    <form action="{{ route('socialAddress.store') }}" method="post" enctype='multipart/form-data'
+                        class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute right-0 top-full form px-5"
                         id="socialMediaForm">
                         <div
                             class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
                         </div>
                         @csrf
-                        <svg xmlns="http://www.w3.org/2000/svg" onclick="closeForm()" class="size-5 mr-5 cursor-pointer"
+                        <svg xmlns="http://www.w3.org/2000/svg" onclick="closeForm()" class="size-5 cursor-pointer"
                             viewBox="0 0 384 512">
                             <path
                                 d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
                         </svg>
                         <div class="flex items-start justify-center">
-                            <div class="bg-white rounded-2xl shadow-md p-3 w-full md:w-9/12">
-                                <!-- هدر -->
+                            <div class="bg-white rounded-2xl shadow-md p-3 w-full lg:w-3/4">
                                 <div class="text-center mb-8">
-                                    <h1 class="text-lg font-bold text-gray-800"> شبکه اجتماعی</h1>
+                                    <h3 class="lg:text-lg font-bold text-gray-800"> شبکه اجتماعی</h3>
                                 </div class="w-full ">
-                                <div class="md:flex md:flex-col md:w-full md:items-center md:gap-5">
-                                    <div class="md:flex md:flex-col md:w-full">
-                                        <div
-                                            class="mt-2 text-sm md:text-base border border-gray-400 rounded-[15px] py-1 pr-3 pb-8">
-                                            <lable
-                                                class="p-1 w-40 bg-[#1cb7fd] text-white rounded-full flex flex-row justify-center text-sm"
-                                                for="username"> نام کاربری </lable>
-                                            <input type="text" name='username' id="username"
-                                                placeholder="نام کاربری"
-                                                class="w-full px-2 py-1 md:px-2 outline-none text-gray-500">
+                                <div class="text-center mb-4">
+                                    <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
+                                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                            <label class="w-30 text-sm mb-1 mt-2.5 flex">شبکه اجتماعی</label>
+                                            <div
+                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                                <select name="socialMedia_id" id="socialMedia_id"
+                                                    class="p-4 w-full focus:outline-none text-sm font-bold mr-2">
+                                                    @foreach ($socialMedias as $socialMedia)
+                                                        <option value="{{ $socialMedia->id }}">{{ $socialMedia->title }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                            <label class="w-30 text-sm mb-1 mt-2.5 flex">نام کاربری</label>
+                                            <div
+                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
+                                                    type="text" name='username' id="username"
+                                                    placeholder="نام کاربری">
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="w-full text-left">
+                                        <button type="submit" onclick="storeSocialmedia(event)"
+                                            class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
+                                            ثبت
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="flex flex-row justify-end items-center py-2.5">
-                                    <label for="socialMedia_id">شبکه اجتماعی:</label>
-                                    <select name="socialMedia_id" id="socialMedia_id">
-                                        @foreach ($socialMedias as $socialMedia)
-                                            <option value="{{ $socialMedia->id }}">{{ $socialMedia->title }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <button type="submit" onclick="storeSocialmedia(event)"
-                                    class="active:bg-[#0080e5] mt-2 w-full bg-[#03A9F4] text-white py-3 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
-                                   ثبت
-                                </button>
                             </div>
                         </div>
                     </form>
+
                     {{-- create social media end --}}
 
 
                     {{-- create link --}}
 
-                    <form action="{{ route('siteLink.store') }}" method="post" enctype='multipart/form-data'
+                    {{-- <form action="{{ route('siteLink.store') }}" method="post" enctype='multipart/form-data'
                         class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute top-full form px-5 createSiteLink"
                         id="siteLinkForm">
                         <div
@@ -269,15 +277,7 @@
                                                 class="w-full px-2 py-1 md:px-2 outline-none text-gray-500">
                                         </div>
                                     </div>
-                                    <div class="md:flex md:flex-col md:w-full">
-                                        {{-- <div
-                                            class="flex flex-row items-center mt-2 text-sm md:text-base border border-gray-400 rounded-[15px] py-1 pr-3">
-                                            <lable
-                                                class="p-1 w-40 text-gray-600 rounded-full flex flex-row justify-center text-sm">
-                                                آیکون لینک</lable>
-                                            <input type="file" name='icon_path' id="link_icon_path_create">
-                                        </div> --}}
-                                    </div>
+                                
                                 </div>
 
                                 <button type="submit" onclick="storeLink(event)"
@@ -286,7 +286,66 @@
                                 </button>
                             </div>
                         </div>
+                    </form> --}}
+
+
+
+
+                    <form action="{{ route('siteLink.store') }}" method="post" enctype='multipart/form-data'
+                        class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 right-0 absolute top-full form px-5 createSiteLink"
+                        id="siteLinkForm">
+                        <div
+                            class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg createSiteLink">
+                        </div>
+                        @csrf
+                        <svg xmlns="http://www.w3.org/2000/svg" onclick="closeForm()" class="size-5 cursor-pointer"
+                            viewBox="0 0 384 512">
+                            <path
+                                d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                        </svg>
+                        <div class="flex items-start justify-center">
+                            <div class="bg-white rounded-2xl shadow-md p-3 w-full lg:w-3/4">
+                                <div class="text-center mb-8">
+                                    <h3 class="lg:text-lg font-bold text-gray-800">ایجاد لینک</h3>
+                                </div class="w-full ">
+                                <div class="text-center mb-4">
+                                    <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
+
+                                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                            <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان لینک</label>
+                                            <div
+                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
+                                                    type="text" name='title' id="link_title_create"
+                                                    placeholder="عنوان لینک">
+                                            </div>
+                                        </div>
+                                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                            <label class="w-30 text-sm mb-1 mt-2.5 flex">آدرس لینک</label>
+                                            <div
+                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
+                                                    type="text" dir="ltr" name='address'
+                                                    id="link_address_create" placeholder="آدرس لینک">
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+                                    <div class="w-full text-left">
+                                        <button type="submit" onclick="storeLink(event)"
+                                            class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
+                                            ثبت
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </form>
+
+
 
                     {{-- create link end --}}
 
@@ -549,11 +608,11 @@
                     let element = `
                     <div class="w-full flex flex-col gap-5" id="linkSection">
                             <div class="py-2">
-                                <h3 class="text-lg font-bold text-gray-800 text-center viewLinkTitle" data-view-link-id="${data.id}">
+                                <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center viewLinkTitle" data-view-link-id="${data.id}">
                                  ورود به  ${data.title}
                                 </h3>
                                 <div class="mt-3">
-                                    <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-blue-100 rounded-full cursor-pointer editLink"
+                                    <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-gray-200 rounded-full cursor-pointer editLink"
                                         onclick='editLink(${data.id})' data-site-id="${data.id}">
                                         @if (isset($siteLink->icon_path))
                                             <img src="{{ asset('storage/' . $siteLink->icon_path) }}"
