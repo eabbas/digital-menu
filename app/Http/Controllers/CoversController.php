@@ -44,7 +44,7 @@ class CoversController extends Controller
             'cover_path' => $coverPath,
         ]);
         $random = Str::random(10);
-        $link = "famenu.ir/qrcode/links/$cover_id/" . $random;
+        $link = "famenu.ir/qrcodes/links/$cover_id/" . $random;
         $qr_svg = QrCode::size(100)->generate($link);
         $fileName = 'qrcodes/' . $cover_id . '_' . $random . '.svg';
         Storage::disk('public')->put($fileName, $qr_svg);
