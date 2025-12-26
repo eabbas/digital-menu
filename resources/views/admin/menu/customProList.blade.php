@@ -319,6 +319,9 @@
 
             <form action="{{ route('cpv.store') }}" method="post" enctype="multipart/form-data"
                 class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg">
+                <div id="cpvLoading"
+                    class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
+                </div>
                 @csrf
 
                 <div class="mb-4">
@@ -485,6 +488,7 @@
         let customProductImageUpdate = document.getElementById('customProductImageUpdate')
 
         let editloading = document.getElementById('editCPloading')
+        let cpvLoading = document.getElementById('cpvLoading')
         let idCareer = document.getElementById('careerId')
         let imageCPV = document.getElementById('cpvImage')
 
@@ -549,7 +553,9 @@
             formData.append('title' , cpTitleEdit.value)
             formData.append('description' , description.value)
             formData.append('material_limit' , CPmaterialLimit.value)
-            formData.append('customProductImageUpdate' , customProductImageUpdate.files[0])
+             if (customProductImageUpdate.files.length > 0) {
+                formData.append('customProductImageUpdate' , customProductImageUpdate.files[0])
+             }
 
             $.ajaxSetup({
                 headers: {
@@ -663,7 +669,10 @@
 
             formData.append('career_id' ,"{{ $career->id }}")
             formData.append('title' ,title.value)
-            formData.append('customProductImage' ,customProductImage.files[0])
+            if (customProductImage.files[0]) {
+                formData.append('customProductImage', customProductImage.files[0])
+            }
+            // formData.append('customProductImage' ,customProductImage.files[0])
             formData.append('material_limit' ,material_limit.value)
             formData.append('description' ,description.value)
 
@@ -854,14 +863,26 @@
 
         function cpvStore(ev) {
             ev.preventDefault()
+
+            cpvLoading.classList.remove('hidden')
+            cpvLoading.classList.add('flex')
+            cpvLoading.innerHTML = `
+            <div class="loading-wave">
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+            </div>
+            `
             let formData = new FormData()
             formData.append('title' , cpvTitle.value)
             formData.append('description' , cpvDescription.value)
             formData.append('min_amount_unit' , cpvMinAmount.value)
             formData.append('duration' , cpvDuration.value)
+            if (imageCPV.files[0]) {
+                formData.append('imageCPV', imageCPV.files[0])
+            }
             formData.append('custom_pro_id' , custom_product_id_variant.value)
-            formData.append('imageCPV' ,imageCPV.files[0])
-
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -881,6 +902,7 @@
                     cpvDuration.value = ""
                     cpvDescription.value = ""
                     imageCPV.value = ""
+                   
                     closeForm()
                 },
                 error: function() {
