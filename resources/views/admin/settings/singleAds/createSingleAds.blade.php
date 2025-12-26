@@ -12,7 +12,7 @@
         <div class="mb-3">
             <label class="block text-purple-700 text-2xl mb-10 mt-10 text-center ">ایجاد  بنر تبیلغاتی سینگل سایت </label>
             <div class="relative">
-                <input type="file" name="singleAdsImage" class="w-1/2 flex mx-auto px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-200 bg-gray-50 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100">
+                <input type="file" name="singleAdsImage" class="w-1/2 flex mx-auto px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-200 bg-gray-50 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100">
                 <i class="fas fa-camera absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
             </div>
             <!-- پیش‌نمایش عکس‌ها -->

@@ -2,7 +2,7 @@
 @section('title', 'ویرایش  لینک')
 @section('content')
             <div class="my-10">
-                <h1 class="lg:text-3xl md:text-2xl text-md font-semibold text-center text-gray-700">ویرایش لینک</h1>
+                <h1 class="lg:text-3xl md:text-2xl text-md font-bold text-center text-gray-700">ویرایش لینک</h1>
             </div>
             <form action="{{ route('siteLink.update') }}" method="post" enctype='multipart/form-data' class="w-11/12 lg:w-3/4 mx-auto p-5 rounded-lg border">
                 @csrf

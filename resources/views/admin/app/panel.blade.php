@@ -465,7 +465,7 @@
                                 @endif
                             </div>
                             <div>
-                                <span class="text-lg text-gray-700 font-semibold">{{ Auth::user()->name }}
+                                <span class="text-lg text-gray-700 font-bold">{{ Auth::user()->name }}
                                     {{ Auth::user()?->family }}</span>
                             </div>
                         </div>
@@ -493,7 +493,7 @@
 
 
                             <div class="pt-3">
-                                <h3 class="text-md font-semibold text-gray-800 mb-1.5">فروشگاه</h3>
+                                <h3 class="text-md font-bold text-gray-800 mb-1.5">فروشگاه</h3>
                                 <ul class="pr-3.5">
                                     <li>
                                         <a href="{{ route('ecomm.create') }}"
@@ -555,7 +555,7 @@
 
 
                             <div class="pt-3">
-                                <h3 class="text-md font-semibold text-gray-800 mb-1.5">کسب و کار ها</h3>
+                                <h3 class="text-md font-bold text-gray-800 mb-1.5">کسب و کار ها</h3>
                                 <ul class="pr-3.5">
                                     <li>
                                         <a href="{{ route('career.careers') }}"
@@ -605,7 +605,7 @@
                                 </ul>
                             </div>
                             <div class="pt-3">
-                                <h3 class="text-md font-semibold text-gray-800 mb-1.5">شبکه های اجتماعی</h3>
+                                <h3 class="text-md font-bold text-gray-800 mb-1.5">شبکه های اجتماعی</h3>
                                 <ul class="pr-3.5">
                                     <li>
                                         <a href="{{ route('covers.create') }}"
@@ -649,7 +649,7 @@
                             </div>
                             @if (Auth::user()->role[0]->title == 'admin')
                                 <div class="pt-3">
-                                    <h3 class="text-md font-semibold text-gray-800 mb-1.5">کاربران</h3>
+                                    <h3 class="text-md font-bold text-gray-800 mb-1.5">کاربران</h3>
                                     <ul class="pr-3.5">
                                         <li>
                                             <a href="{{ route('user.list') }}"
@@ -669,7 +669,7 @@
 
                             @if (Auth::user()->role[0]->title == 'admin')
                                 <div class="pt-3">
-                                    <h3 class="text-md font-semibold text-gray-800 mb-1.5">اسلایدر</h3>
+                                    <h3 class="text-md font-bold text-gray-800 mb-1.5">اسلایدر</h3>
                                     <ul class="pr-3.5">
                                         <li>
                                             <a href="{{ route('slider.create') }}"
@@ -689,7 +689,7 @@
 
                             {{-- @if (Auth::user()->role[0]->title == 'admin') --}}
                             <div class="pt-3">
-                                <h3 class="text-md font-semibold text-gray-800 mb-1.5">
+                                <h3 class="text-md font-bold text-gray-800 mb-1.5">
                                     محصولات شخصی سازی شده
                                 </h3>
                                 <ul class="pr-3.5">
@@ -704,7 +704,7 @@
                             {{-- @endif --}}
                             @if (Auth::user()->role[0]->title == 'admin')
                                 <div class="pt-3">
-                                    <h3 class="text-md font-semibold text-gray-800 mb-1.5">
+                                    <h3 class="text-md font-bold text-gray-800 mb-1.5">
                                         درباره ما
                                     </h3>
                                     <ul class="pr-3.5">

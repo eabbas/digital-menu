@@ -9,7 +9,7 @@
             <div class="pb-4 text-3xl text-center font-bold text-gray-800">
                 <h2>{{ $ecomm->title }}</h2>
             </div>
-            <div class="pb-6 text-xl text-gray-600 text-center font-semibold">
+            <div class="pb-6 text-xl text-gray-600 text-center font-bold">
                 <h3></h3>
             </div>
 

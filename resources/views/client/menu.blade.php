@@ -49,7 +49,7 @@
                                         src="{{ asset('storage/' . $category->image) }}" alt="menu category image">
                                 </div>
                                 <div class="w-full">
-                                    <h3 class="text-sm text-center font-semibold">{{ $category->title }}</h3>
+                                    <h3 class="text-sm text-center font-bold">{{ $category->title }}</h3>
                                 </div>
                             </div>
                         @endforeach
@@ -79,7 +79,7 @@
                                         </div>
                                     </div>
                                     <div class="w-full flex flex-col gap-2 items-start">
-                                        <h3 class="text-sm text-center font-semibold">{{ $item->title }}</h3>
+                                        <h3 class="text-sm text-center font-bold">{{ $item->title }}</h3>
                                         <div class="flex flex-row items-end gap-2">
                                             <span
                                                 class="font-bold text-xs @if ($item->discount) {{ 'line-through font-normal text-gray-400' }} @endif">{{ $item->price }}</span>

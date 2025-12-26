@@ -3,11 +3,11 @@
     @section('content')
         <div class="w-full">
             <div class="my-10">
-                <h1 class="lg:text-3xl md:text-2xl text-md font-semibold text-center text-gray-700">لیست درباره ما</h1>
+                <h1 class="lg:text-3xl md:text-2xl text-md font-bold text-center text-gray-700">لیست درباره ما</h1>
             </div>
             <div class="overflow-x-auto">
                 <div class="w-[890px] xl:w-full mx-auto">
-                    <ul class="grid grid-cols-8 gap-3 md:gap-5 lg:gap-10 text-center text-gray-700 font-semibold xl:text-lg border-b-2 border-gray-400 pb-3 mb-3">
+                    <ul class="grid grid-cols-8 gap-3 md:gap-5 lg:gap-10 text-center text-gray-700 font-bold xl:text-lg border-b-2 border-gray-400 pb-3 mb-3">
                         <li class="w-full">آیدی</li>
                         <li class="w-full">نام</li>
                         <li class="w-full col-span-3">توضیحات</li>
