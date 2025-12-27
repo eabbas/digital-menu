@@ -195,7 +195,6 @@ Route::group([
     'controller' => ClientController::class,
     'as' => 'client.'
 ], function () {
-    Route::get('/socialpage/{covers}', 'show_socialPage')->name('show_socialPage');
     Route::get('/links/{covers}/{slug?}', 'loadLink')->name('loadLink')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/{career}/{slug?}', 'show_menu')->name('menu');
     // Route::get('/{career}', 'career_menu')->name('careerMenu');
@@ -440,6 +439,7 @@ Route::group([
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{covers}', 'delete')->name('delete');
     Route::get('/show/{covers}', 'single')->name('single');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
 Route::group([
     'prefix' => 'customProductMaterial',
