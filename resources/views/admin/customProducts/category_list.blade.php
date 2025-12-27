@@ -379,9 +379,10 @@
     <form action="{{ route('custmCategory.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg relative">
         @csrf
         <div id="categoryLoading"
-            class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
+            class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg z-50">
         </div>                      
-        <div class="mb-4">
+        <div class="mb-4 relative">
+            <span class="absolute -bottom-5 right-4 opacity-0 text-xs text-red-500">الزامی است!</span>
             <label for="title" class="block text-sm font-medium mb-2">
                 عنوان دسته بندی
             </label>
@@ -389,9 +390,9 @@
                 name="titleCategory" 
                 id="titleCustomCategory"
                 required
-                class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+                class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none categoryRequired">
         </div>
-        <div class="mb-4 flex flex-row gap-5">
+        <div class="mb-4 flex flex-row gap-5 mt-6">
             <input type="checkbox"
                 name="requiredCategory" 
                 id="requiredCustomCategory"
@@ -402,7 +403,8 @@
                 </label>
             </div>
                                             
-            <div class="mb-6">
+            <div class="mb-6 relative">
+                <span class="absolute -bottom-5 right-4 opacity-0 text-xs text-red-500">الزامی است!</span>
                 <label for="max_item_amount" class="block text-sm font-medium mb-2">
                 حداکثر تعداد آیتم
             </label>
@@ -411,10 +413,11 @@
                 id="max_item_amount_customCategory"
                 required
                 min="1"
-                class="w-full p-2 rounded border-1 border-gray-300 rounded focus:border-blue-500 focus:outline-none">
+                class="w-full p-2 rounded border-1 border-gray-300 rounded focus:border-blue-500 focus:outline-none categoryRequired">
             </div>
 
-
+ </div>
+</div>
     <script>
         let i = "<?php echo $i; ?>";
         let categoryEditForm = document.getElementById('editCategoryform')
@@ -596,6 +599,21 @@
                     //                     <span class="block w-16 lg:w-full">${ data.max_item_amount }</span>
                     //                 </div>
                     
+                    // حذف پیام "هیچ دسته بندی یافت نشد" اگر وجود دارد
+                    let emptyMessage = document.getElementById('no_products_message');
+                    if (emptyMessage) {
+                        emptyMessage.remove();
+                    }
+        
+                    
+                    let div = document.createElement('div')
+                    div.classList = "w-full flex flex-row lg:grid lg:grid-cols-9 items-center divide-x divide-[#f1f1f4] newParameters"
+                    div.setAttribute('data-cp-id', data.id)
+                    let element = `
+                                        <div
+                                            class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
+                                            <span class="block w-10 lg:w-full">${i}</span>
+                                        </div>
                                     
                     //                 <div class="col-span-4">
                     //                     <div class="lg:w-full grid grid-cols-3 divide-x divide-[#f1f1f4] items-center w-[320px]">
