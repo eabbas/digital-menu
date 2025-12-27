@@ -372,10 +372,10 @@
                         <div class="cursor-pointer">
                             @if (!Auth::user()->main_image)
                                 <img src="{{ asset('assets/img/user.png') }}" alt="user__avatar"
-                                    class="size-10 rounded-xl">
+                                    class="size-10 rounded-full">
                             @else
                                 <img src="{{ asset('storage/' . Auth::user()->main_image) }}" alt="user__picture"
-                                    class="size-10 rounded-xl">
+                                    class="size-10 rounded-full">
                             @endif
                         </div>
                         <div class="absolute left-0 pt-5 invisible opacity-0 transition-all duration-300">
@@ -693,7 +693,7 @@
                                 </h3>
                                 <ul class="pr-3.5">
                                     <li>
-                                        <a href="{{ route('cp.list') }} }}" class="block text-gray-700 py-2 text-md">
+                                        <a href="{{ route('cp.list') }}" class="block text-gray-700 py-2 text-md">
                                             همه محصولات
                                         </a>
                                     </li>

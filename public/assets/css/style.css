@@ -377,3 +377,10 @@ td {
         transform: rotate(-360deg);
     }
 }
+
+.parentSocial:hover div:first-child{
+    width: 87%;
+}
+.parentLink:hover div:first-child{
+    width: 87%;
+}

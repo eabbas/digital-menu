@@ -19,9 +19,10 @@ class CustomProductMaterialController extends Controller
 
     public function store(Request $request)
     {
+        return response()->json($request->all());
         $path = null;
         if (isset($request->imageCPM)) {
-                $name = $request->imageCPM->getClientOriginalName();
+            $name = $request->imageCPM->getClientOriginalName();
             $fullName = time() . '_' . $name;
             $path = $request->file('imageCPM')->storeAs('images', $fullName, 'public');
         }
