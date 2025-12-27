@@ -267,7 +267,7 @@
                 </svg>
             </div>
             <form action="{{ route('custmCategory.store') }}" method="post" enctype="multipart/form-data"
-                class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg">
+                class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg relative">
                 @csrf
                  <div id="categoryLoading"
                     class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
@@ -320,7 +320,7 @@
                 </div>
 
             <form action="{{ route('cpv.store') }}" method="post" enctype="multipart/form-data"
-                class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg">
+                class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg relative">
                 <div id="cpvLoading"
                     class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
                 </div>

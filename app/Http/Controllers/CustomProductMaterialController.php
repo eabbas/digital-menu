@@ -79,8 +79,8 @@ class CustomProductMaterialController extends Controller
             $name = $request->customProductImage->getClientOriginalName();
             $fullName = time() . '_' . $name;
             $path = $request->file('customProductImage')->storeAs('images', $fullName, 'public');
+            $customProductMaterial->image = $path;
         }
-        $customProductMaterial->image = $path;
         $customProductMaterial->save();
         return response()->json($customProductMaterial);
     }
