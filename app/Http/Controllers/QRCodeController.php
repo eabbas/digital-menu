@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\qr_code;
-use App\Models\menu;
 use Illuminate\Support\Facades\Storage;
 use App\Models\career;
-use App\Models\covers;
 
 class QrCodeController extends Controller
 {
@@ -19,11 +17,13 @@ class QrCodeController extends Controller
         $qr_code->career->save();
         Storage::disk('public')->delete($qr_code->qr_path);
         $qr_code->delete();
-        return response()->json('ok');
         return response()->json($qr_code);
     }
 
     public function load(career $career, string $slug){
+        $user = $career->user;
+        $user->scan_count += 1;
+        $user->save();
         return to_route('client.menu', [$career, $slug]);
     }
    

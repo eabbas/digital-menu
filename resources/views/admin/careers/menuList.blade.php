@@ -3,20 +3,23 @@
     لیست منو های {{ $career->title }}
 @endsection
 @section('content')
-<div class="pb-4">
-    <h2 class="text-sm lg:text-lg font-bold text-gray-800">لیست منو های {{ $career->title }}</h2>
-</div>
-<div class="w-full flex flex-col pb-4">
-    <div class="bg-white rounded-lg">
-        <div class="w-11/12 lg:w-4/5 mx-auto flex flex-row justify-end items-center py-4">
-            <div>
-                <a href="{{ route('menu.create', [$career]) }}"
-                    class="px-5 py-1 rounded-sm bg-blue-500 hover:bg-blue-600 text-white text-xs lg:text-base">ایجاد منو</a>
+    <div class="pb-4">
+        <h2 class="text-sm lg:text-lg font-bold text-gray-800">لیست منو های {{ $career->title }}</h2>
+    </div>
+    <div class="w-full flex flex-col pb-4">
+        <div class="bg-white rounded-lg">
+            <div class="w-11/12 lg:w-4/5 mx-auto flex flex-row justify-end items-center py-4">
+                <div>
+                    <a href="{{ route('menu.create', [$career]) }}"
+                        class="px-5 py-1 rounded-sm bg-blue-500 hover:bg-blue-600 text-white text-xs lg:text-base">ایجاد
+                        منو</a>
+                </div>
             </div>
-        </div>
-        <div class="flex flex-col gap-5 mb-5">
-                <div class="w-11/12 lg:w-10/12 mx-auto shadow-md rounded mb-5 overflow-x-auto [&::-webkit-scrollbar]:hidden lg:overflow-visible">
-                    <div class="w-full flex flex-row lg:grid lg:grid-cols-7 items-center divide-x divide-[#f1f1f4] sticky -top-5">
+            <div class="flex flex-col gap-5 mb-5">
+                <div
+                    class="w-11/12 lg:w-10/12 mx-auto shadow-md rounded mb-5 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+                    <div
+                        class="w-full flex flex-row lg:grid lg:grid-cols-7 items-center divide-x divide-[#f1f1f4] sticky -top-5">
                         <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
                             <span class="block w-10 lg:w-full">ردیف</span>
                         </div>
@@ -29,8 +32,8 @@
                         <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
                             <span class="block w-24 lg:w-full">تعداد QRcode</span>
                         </div>
-                        <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-3">
-                            <span class="block w-[320px] lg:w-full">عملیات</span>
+                        <div class="px-1 py-3 w-[320px] lg:w-[530px] text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-3">
+                            <span class="block w-[320px] lg:w-[530px]">عملیات</span>
                         </div>
                     </div>
                     <div class="bg-white divide-y divide-[#f1f1f4] py-2">
@@ -58,7 +61,8 @@
                                         <span class="block w-24 lg:w-full">{{ count($career->qr_codes) }}</span>
                                     </div>
                                     <div class="col-span-3">
-                                        <div class="w-[320px] lg:w-full grid grid-cols-3 divide-x divide-[#f1f1f4] items-center">
+                                        <div
+                                            class="w-[320px] lg:w-[530px] grid grid-cols-5 divide-x divide-[#f1f1f4] items-center">
                                             <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3">
                                                 <li class="flex justify-center">
                                                     <a href="{{ route('menu.single', [$menu]) }}"
@@ -107,17 +111,18 @@
                                                     </a>
                                                 </div>
                                             @endif
-                                                 <div
+                                            <div
                                                 class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
                                                 <a href="{{ route('cp.create', [$menu->career]) }}" class="text-sky-700">
-                                                    ایجاد محصول شخصی‌سازی
+                                                    ایجاد محصول 
                                                 </a>
                                             </div>
-                                              @if (count($menu->career->custom_product))
+                                            @if (count($menu->career->custom_product))
                                                 <div
                                                     class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                                    <a href="{{ route('menu.customProList', [$menu->career]) }}" class="text-sky-700">
-                                                         لیست محصولات 
+                                                    <a href="{{ route('menu.customProList', [$menu->career]) }}"
+                                                        class="text-sky-700">
+                                                         محصولات
                                                     </a>
                                                 </div>
                                             @endif

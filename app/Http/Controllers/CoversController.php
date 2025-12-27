@@ -51,7 +51,7 @@ class CoversController extends Controller
         social_qr_codes::create([
             'qr_path' => $fileName,
             'covers_id' => $cover_id,
-            'slug' => $random
+            'slug' => 'qrcodes/links/' . $cover_id . '/' . $random
         ]);
         return to_route('covers.social_list');
     }
@@ -95,7 +95,7 @@ class CoversController extends Controller
         $covers->subTitle = $request->subTitle;
         $covers->description = $request->description;
         $covers->save();
-        if(Auth::user()->role[0]->title == 'admin'){
+        if (Auth::user()->role[0]->title == 'admin') {
             return to_route('covers.list');
         }
         return to_route('covers.social_list');
@@ -113,7 +113,7 @@ class CoversController extends Controller
         }
         $covers->social_qr_codes->delete();
         $covers->delete();
-         if(Auth::user()->role[0]->title == 'admin'){
+        if (Auth::user()->role[0]->title == 'admin') {
             return to_route('covers.list');
         }
         return to_route('covers.social_list');
@@ -123,5 +123,23 @@ class CoversController extends Controller
     {
         $socialMedias = socialMedia::all();
         return view('admin.covers.single', ['cover' => $covers, 'socialMedias' => $socialMedias]);
+    }
+
+    public function deleteAll(Request $request)
+    {
+        foreach ($request->covers as $cover_id) {
+            $cover = covers::find($cover_id);
+            $socialAddresses = social_address::where('covers_id', $cover->id)->get();
+            $site_links = site_link::where('covers_id', $cover->id)->get();
+            foreach ($socialAddresses as $address) {
+                $address->delete();
+            }
+            foreach ($site_links as $site_link) {
+                $site_link->delete();
+            }
+            $cover->social_qr_codes->delete();
+            $cover->delete();
+        }
+        return redirect()->back();
     }
 }

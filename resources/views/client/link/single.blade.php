@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div class="2xl:container w-11/12 mx-auto lg:max-w-xl">
+    <div class="2xl:container w-11/12 mx-auto lg:max-w-xl mb-10">
         <div class="w-full my-5 p-5 bg-gray-100 flex flex-col relative">
             <div class="relative">
                 <div>
@@ -80,11 +80,13 @@
             </div>
         </div>
     </div>
-    <footer class="2xl:container w-full mx-auto lg:max-w-xl bg-gray-800 py-3 lg:py-5">
-        <p class="text-center text-xs lg:text-sm text-white">
-            ساخته شده توسط
-            <a href="{{ route('home') }}" class="px-2 font-bold">Famenu.ir</a>
-        </p>
+    <footer class="w-full fixed bottom-0 flex flex-row justify-center items-center right-0">
+        <div class="2xl:container w-full mx-auto lg:max-w-xl bg-gray-800 py-3 lg:py-5">
+            <p class="text-center text-xs lg:text-sm text-white">
+                ساخته شده توسط
+                <a href="{{ route('home') }}" class="px-2 font-bold">Famenu.ir</a>
+            </p>
+        </div>
     </footer>
     <script src="{{ asset('assets/js/blocks.js') }}"></script>
 </body>
