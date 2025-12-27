@@ -8,6 +8,23 @@
 
 
 
+       
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                <div>
+                    <h1 class="text-xl font-bold text-gray-800">دسته‌بندی‌های محصول</h1>
+                    <p class="text-gray-600 text-sm mt-1">
+                        محصول: <span class="font-medium">{{ $custom_product->title ?? 'نامشخص' }}</span> 
+                    </p>
+                </div>
+                <div onclick='openCform("{{ $custom_product->id }}")' 
+                class="w-fit flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer" >
+                    <span class="text-sm font-medium"> ایجاد دسته بندی</span>
+                </div>
+             
+            </div>
+        </div>
 
 
             <!-- Header -->
@@ -133,17 +150,30 @@
                                     </div>
                                 </div>
                             </div>
-
-                            @php
-                                $i++;
-                            @endphp
-                        @endforeach
-
-                    </div>
+                       
+                        @php
+                            $i++;
+                        @endphp
+                    @endforeach
+                    @if (!$hasCategory)
+                        <div class="py-12 text-center" id="no_products_message">
+                            <h3 class="text-lg font-medium text-gray-600 mb-2">هیچ دسته ای یافت نشد</h3>
+                            <p class="text-gray-500 text-sm mb-6">هنوز هیچ دسته ای ایجاد نکرده‌اید</p>
+                        </div>
+                    @endif
+                    
                 </div>
             </div>
-
-
+        </div>
+    </div>
+     @foreach($custom_product->customCategories as $category)
+    <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="editCategoryform">
+        <div class="w-full lg:w-[calc(100%-265px)] float-end flex justify-center items-center h-dvh relative " id="closeEditCform">
+            <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200" onclick="closeForm()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
+                    <path fill="gray" d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
+                </svg>
+            </div>
 
         </div>
         @foreach ($custom_product->customCategories as $category)
@@ -346,6 +376,43 @@
 
         </div>
     </div>
+    <form action="{{ route('custmCategory.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg relative">
+        @csrf
+        <div id="categoryLoading"
+            class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
+        </div>                      
+        <div class="mb-4">
+            <label for="title" class="block text-sm font-medium mb-2">
+                عنوان دسته بندی
+            </label>
+            <input type="text" 
+                name="titleCategory" 
+                id="titleCustomCategory"
+                required
+                class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none">
+        </div>
+        <div class="mb-4 flex flex-row gap-5">
+            <input type="checkbox"
+                name="requiredCategory" 
+                id="requiredCustomCategory"
+                value="1"
+                class="p-1 border rounded focus:border-blue-500">
+                <label for="required" class="text-sm font-medium">
+                الزامی بودن یا نبودن 
+                </label>
+            </div>
+                                            
+            <div class="mb-6">
+                <label for="max_item_amount" class="block text-sm font-medium mb-2">
+                حداکثر تعداد آیتم
+            </label>
+            <input type="number" 
+                name="max_item_amount" 
+                id="max_item_amount_customCategory"
+                required
+                min="1"
+                class="w-full p-2 rounded border-1 border-gray-300 rounded focus:border-blue-500 focus:outline-none">
+            </div>
 
 
     <script>
@@ -630,11 +697,6 @@
                 }
             })
         }
-
-
-
-
-
 
 
         function updateCategory(ev) {

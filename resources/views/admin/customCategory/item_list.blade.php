@@ -262,8 +262,11 @@
                     <path fill="gray" d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
                 </svg>
             </div>
-            <form action="{{ route('cpm.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 max-h-[calc(100vh-100px)] overflow-y-auto [&::-webkit-scrollbar]:hidden lg:w-1/2 p-5 rounded-lg">
+            <form action="{{ route('cpm.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 max-h-[calc(100vh-100px)] overflow-y-auto [&::-webkit-scrollbar]:hidden lg:w-1/2 p-5 rounded-lg relative">
             @csrf
+            <div id="cpmLoading"
+                class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
+            </div>
             <div class="w-full grid grid-cols-1 lg:grid-cols-2 lg:gap-3">
                 <div class="mb-4">
                     <label for="title" class="block text-sm font-medium mb-2">
@@ -381,6 +384,8 @@
         let itemListLoading = document.getElementById('itemListLoading')
         let imageCPM = document.getElementById('cpmImage')
         let customProductImage = document.getElementById('customProductImage')
+        let cpmLoading = document.getElementById('cpmLoading')
+
         
         function closeForm(){
             forms.forEach((form)=>{
@@ -395,6 +400,16 @@
         }
         function cpmStore(ev){
             ev.preventDefault()
+            cpmLoading.classList.remove('hidden')
+            cpmLoading.classList.add('flex')
+            cpmLoading.innerHTML = `
+            <div class="loading-wave">
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+            </div>
+            `
             let isRequired = cpmrequired.checked ? 1 : 0;
              let formData = new FormData()
     
@@ -426,7 +441,9 @@
       
                 success: function(data){
                     console.log(data)
-               
+                    cpmLoading.classList.remove('flex')
+                    cpmLoading.classList.add('hidden')
+                    cpmLoading.innerHTML = ''
                     let div = document.createElement('div')
                     div.classList = "w-full flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4] newParameters"
                     div.setAttribute('data-cp-id', data.id)
@@ -525,6 +542,9 @@
                 },
                 error: function(){
                     alert('خطا در ارسال داده')
+                    cpmLoading.classList.remove('flex')
+                    cpmLoading.classList.add('hidden')
+                    cpmLoading.innerHTML = ''
                 }
     
             })
@@ -619,9 +639,6 @@
         if (customProductImage.files.length > 0) {
             formData.append('customProductImage',customProductImage.files[0])
         }
-
-        
-
         $.ajaxSetup({
             headers : {
                 'X-CSRF-TOKEN' : "{{ csrf_token() }}"
@@ -638,6 +655,7 @@
                 console.log(data)
                 itemListLoading.classList.remove('flex')
                 itemListLoading.classList.add('hidden')
+                itemListLoading.innerHTML = ''
                 
                 // let div = document.createElement('div')
                 newParameters.forEach((element)=>{
@@ -714,4 +732,4 @@
 }
     </script>
 
-@endsection       
+@endsection  

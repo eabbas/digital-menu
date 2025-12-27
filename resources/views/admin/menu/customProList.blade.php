@@ -2,6 +2,7 @@
 @section('title', 'محصولات شخصی سازی شده کسب وکار')
 @section('content')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
 
 
     <div class="w-full min-h-screen pb-10 pt-6 bg-gradient-to-b from-blue-50 to-white">
@@ -42,9 +43,8 @@
                                 d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
                         </svg>
                     </div>
-                    <form action="{{ route('cp.store') }}" method="post" enctype="multipart/form-data"
-                        class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg relative">
-                        <div id="loading"
+                    <form action="{{ route('cp.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg relative">
+                        <div id="loadingCP"
                             class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
                         </div>
                         @csrf
@@ -81,18 +81,14 @@
                                 class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none"></textarea>
                         </div>
 
-
-                        <div class="flex justify-end gap-3">
-                            <button type="submit" onclick="storeCP(event)"
-                                class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 cursor-pointer">
-                                ثبت
-                            </button>
-                        </div>
-
+ <div class="flex justify-end gap-3" >
+                                <button onclick="storeCP(event)" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 cursor-pointer">
+                                    ثبت
+                                </button>
+                            </div>
                     </form>
                 </div>
             </div>
-
         </div>
 
         <!-- Products Table -->
@@ -266,7 +262,9 @@
                     class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
                 </div>
                 @csrf
-
+                 <div id="categoryLoading"
+                    class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
+                </div>
                 <div class="mb-4">
                     <label for="title" class="block text-sm font-medium mb-2">
                         عنوان دسته بندی
@@ -475,11 +473,17 @@
         let custom_product_id_variant = document.getElementById('custom_product_id_variant')
         let customProductImageUpdate = document.getElementById('customProductImageUpdate')
 
-        let editloading = document.getElementById('editCPloading')
-        let cpvLoading = document.getElementById('cpvLoading')
+        
         let idCareer = document.getElementById('careerId')
         let imageCPV = document.getElementById('cpvImage')
         let createCat = document.getElementById('createCat')
+
+
+        let CPloading = document.getElementById('loadingCP')
+        let cpvLoading = document.getElementById('cpvLoading')
+        let editloading = document.getElementById('editCPloading')
+        let categoryLoading = document.getElementById('categoryLoading')
+
 
 
         function editCP(id) {
@@ -559,6 +563,9 @@
                 processData: false,
 
                 success: function(data) {
+                    editloading.classList.remove('flex')
+                    editloading.classList.add('hidden')
+                    editloading.innerHTML = ''
                     newParameters.forEach((element) => {
                         if (element.getAttribute('data-cp-id') == data.id) {
                             element.children[1].children[0].innerHTML = `
@@ -574,6 +581,9 @@
                 },
                 error: function() {
                     alert('خطا در ارسال داده')
+                    editloading.classList.remove('flex')
+                    editloading.classList.add('hidden')
+                    editloading.innerHTML = ''
                 }
 
             })
@@ -639,13 +649,12 @@
             })
         }
 
-        let loading = document.getElementById('loading')
 
         function storeCP(ev) {
             ev.preventDefault()
-            loading.classList.remove('hidden')
-            loading.classList.add('flex')
-            loading.innerHTML = `
+            CPloading.classList.remove('hidden')
+            CPloading.classList.add('flex')
+            CPloading.innerHTML = `
             <div class="loading-wave">
                 <div class="loading-bar"></div>
                 <div class="loading-bar"></div>
@@ -653,7 +662,6 @@
                 <div class="loading-bar"></div>
             </div>
             `
-
             let formData = new FormData()
 
             formData.append('career_id', "{{ $career->id }}")
@@ -678,9 +686,9 @@
                 processData: false,
                 success: function(data) {
                     console.log(data)
-                    loading.classList.remove('flex')
-                    loading.classList.add('hidden')
-                    // ریست فرم
+                    CPloading.classList.remove('flex')
+                    CPloading.classList.add('hidden')
+                    CPloading.innerHTML = ''
                     title.value = ""
                     description.value = ""
                     material_limit.value = ""
@@ -806,12 +814,25 @@
                 error: function(xhr, status, error) {
                     console.error('Error:', error)
                     alert('خطا در ارسال داده')
+                    CPloading.classList.remove('flex')
+                    CPloading.classList.add('hidden')
+                    CPloading.innerHTML = ''
                 }
             })
         }
 
         function Categorystore(ev) {
             ev.preventDefault()
+            categoryLoading.classList.remove('hidden')
+            categoryLoading.classList.add('flex')
+            categoryLoading.innerHTML = `
+            <div class="loading-wave">
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+            </div>
+            `
             let checkBoxStatus = category.checked
             createCat.classList.remove('hidden')
             createCat.classList.add('flex')
@@ -857,6 +878,9 @@
                 },
                 error: function() {
                     alert('خطا در ارسال داده')
+                    categoryLoading.classList.remove('flex')
+                    categoryLoading.classList.add('hidden')
+                    categoryLoading.innerHTML = ''
                 }
 
             })
@@ -896,7 +920,10 @@
                 contentType: false,
                 processData: false,
                 success: function(data) {
-                    // console.log(data)
+                    cpvLoading.classList.remove('flex')
+                    cpvLoading.classList.add('hidden')
+                    cpvLoading.innerHTML = ''
+                    console.log(data)
                     custom_product_id_variant = ""
                     cpvTitle.value = ""
                     cpvMinAmount.value = ""
@@ -907,6 +934,9 @@
                 },
                 error: function() {
                     alert('خطا در ارسال داده')
+                    cpvLoading.classList.remove('flex')
+                    cpvLoading.classList.add('hidden')
+                    cpvLoading.innerHTML = ''
                 }
 
             })
