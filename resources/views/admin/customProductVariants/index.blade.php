@@ -1,5 +1,7 @@
 @extends('admin.app.panel')
-@section('title', 'انواع محصولات')
+@section('title')
+    {{ $customProduct->title }}
+@endsection
 @section('content')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
@@ -11,10 +13,11 @@
                 <div>
                     <h1 class="text-xl font-bold text-gray-800">انواع محصولات</h1>
                     <div class="flex items-center gap-3 mt-2">
-                        {{-- <span class="text-sm text-gray-600">
+                        <span class="text-sm text-gray-600">
                             محصول: <span class="font-medium">{{ $customProduct->title ?? 'نامشخص' }}</span>
-                        </span> --}}
-                        {{-- <span class="text-sm text-gray-500">
+                        </span>
+                    {{-- </br>
+                        <span class="text-sm text-gray-500">
                             {{ count($customProduct->custom_product_variants ?? []) }} نوع
                         </span> --}}
                     </div>
@@ -156,8 +159,11 @@
                     </svg>
                 </div>
               <form action="{{ route('cpv.store') }}" method="post" enctype="multipart/form-data"
-                class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg">
+                class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg relative">
                 @csrf
+                <div id="cpvLoading"
+                    class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
+                </div>
 
                 <div class="mb-4">
                     <label for="title" class="block text-sm font-medium mb-2">
@@ -319,6 +325,7 @@
     let descriptionCPV = document.getElementById('descriptionCPV')
     
     let editloadingcpv = document.getElementById('editCPVloading')
+    let cpvLoading = document.getElementById('cpvLoading')
     let customProductImage = document.getElementById('customProductImage')
 
     let cpvId = document.getElementById('cpvId')
@@ -341,7 +348,16 @@
 
    function cpvStore(ev) {
     ev.preventDefault();
-
+    cpvLoading.classList.remove('hidden')
+    cpvLoading.classList.add('flex')
+    cpvLoading.innerHTML = `
+    <div class="loading-wave">
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
+    </div>
+    `
     let formData = new FormData()
     formData.append('title' , titleCPV.value)
     formData.append('description' , descriptionCPV.value)
@@ -365,6 +381,9 @@
         processData : false ,
 
         success: function(data) {
+            cpvLoading.classList.remove('flex')
+            cpvLoading.classList.add('hidden')
+            cpvLoading.innerHTML = ''
             // پاک کردن مقادیر فرم
             titleCPV.value = ""
             min_amount_unit_cpv.value = ""
@@ -419,7 +438,7 @@
         
                         
                         <div class="col-span-2">
-                            <div class="lg:w-full w-[150px]">
+                            <div class="w-[150px] mr-10">
 
                                 <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3">
                                     <li class="flex justify-center">
@@ -461,7 +480,10 @@
             i++
         },
         error: function() {
-            alert('خطا در ارسال داده');
+            alert('خطا در ارسال داده')
+            cpvLoading.classList.remove('flex')
+            cpvLoading.classList.add('hidden')
+            cpvLoading.innerHTML = ''
         }
     });
 }
@@ -546,6 +568,9 @@
             contentType : false,
             processData : false ,
             success: function(data){
+                editloadingcpv.classList.remove('flex')
+                editloadingcpv.classList.add('hidden')
+                editloadingcpv.innerHTML = ''
                 newParameters.forEach((element)=>{
                     if(element.getAttribute('data-cp-id') == data.id){
                         element.children[1].children[0].innerHTML = `

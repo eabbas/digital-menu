@@ -17,7 +17,6 @@
                     <h1 class="text-xl font-bold text-gray-800">دسته‌بندی‌های محصول</h1>
                     <p class="text-gray-600 text-sm mt-1">
                         محصول: <span class="font-medium">{{ $custom_product->title ?? 'نامشخص' }}</span> 
-                        | {{ count($custom_product->customCategories ?? []) }} دسته‌بندی
                     </p>
                 </div>
                 <div onclick='openCform("{{ $custom_product->id }}")' 
@@ -121,6 +120,12 @@
                             $i++;
                         @endphp
                     @endforeach
+                    @if (!$hasCategory)
+                        <div class="py-12 text-center" id="no_products_message">
+                            <h3 class="text-lg font-medium text-gray-600 mb-2">هیچ دسته ای یافت نشد</h3>
+                            <p class="text-gray-500 text-sm mb-6">هنوز هیچ دسته ای ایجاد نکرده‌اید</p>
+                        </div>
+                    @endif
                     
                 </div>
             </div>
@@ -194,8 +199,11 @@
                 </svg>
             </div>
 
-        <form action="{{ route('cpm.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 max-h-[calc(100vh-100px)] overflow-y-auto [&::-webkit-scrollbar]:hidden lg:w-1/2 p-5 rounded-lg">
+        <form action="{{ route('cpm.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 max-h-[calc(100vh-100px)] overflow-y-auto [&::-webkit-scrollbar]:hidden lg:w-1/2 p-5 rounded-lg relative">
             @csrf
+             <div id="cpmLoading"
+                class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
+            </div>
             <div class="w-full grid grid-cols-1 lg:grid-cols-2 lg:gap-3">
                 <div class="mb-4">
                     <label for="title" class="block text-sm font-medium mb-2">
@@ -293,9 +301,11 @@
             <path fill="gray" d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
         </svg>
     </div>
-    <form action="{{ route('custmCategory.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg">
+    <form action="{{ route('custmCategory.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg relative">
         @csrf
-                                        
+        <div id="categoryLoading"
+            class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
+        </div>                      
         <div class="mb-4">
             <label for="title" class="block text-sm font-medium mb-2">
                 عنوان دسته بندی
@@ -371,6 +381,8 @@
 
 
     let editloadingcategory = document.getElementById('editcategoryloading')
+    let categoryLoading = document.getElementById('categoryLoading')
+    let cpmLoading = document.getElementById('cpmLoading')
     let imageCPM = document.getElementById('cpmImage')
 
 
@@ -398,6 +410,16 @@
     }
    function cpmStore(ev){
     ev.preventDefault()
+    cpmLoading.classList.remove('hidden')
+    cpmLoading.classList.add('flex')
+    cpmLoading.innerHTML = `
+    <div class="loading-wave">
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
+    </div>
+    `
     let isRequired = cpmrequired.checked ? 1 : 0;
 
     let formData = new FormData()
@@ -429,6 +451,9 @@
         
         success: function(data){
             console.log(data)
+            cpmLoading.classList.remove('flex')
+            cpmLoading.classList.add('hidden')
+            cpmLoading.innerHTML = ''
             cpmtitle.value = ""
             cpmdescription.value = ""
             cpm_price_per_unit.value = ""
@@ -443,12 +468,25 @@
         },
         error: function(){
             alert('خطا در ارسال داده')
+            cpmLoading.classList.remove('flex')
+            cpmLoading.classList.add('hidden')
+            cpmLoading.innerHTML = ''
         }
 
     })
 }
     function Categorystore(ev){
         ev.preventDefault()
+        categoryLoading.classList.remove('hidden')
+        categoryLoading.classList.add('flex')
+        categoryLoading.innerHTML = `
+        <div class="loading-wave">
+            <div class="loading-bar"></div>
+            <div class="loading-bar"></div>
+            <div class="loading-bar"></div>
+            <div class="loading-bar"></div>
+        </div>
+        `
         let checkBoxStatus = category.checked
 
         category.value = 0
@@ -474,16 +512,20 @@
             },
             success: function(data){
                 console.log(data)
+                categoryLoading.classList.remove('flex')
+                categoryLoading.classList.add('hidden')
+                categoryLoading.innerHTML = ''
                 custom_pro_id_customCategory.value = ""
                 max_item_amount_customCategory.value =""
                 category.checked = 0
                 titleCustomCategory.value =""
                 
                 // حذف پیام "هیچ دسته بندی یافت نشد" اگر وجود دارد
-                let emptyMessage = document.getElementById('empty-category-message');
+                let emptyMessage = document.getElementById('no_products_message');
                 if (emptyMessage) {
                     emptyMessage.remove();
                 }
+    
                 
                 let div = document.createElement('div')
                 div.classList = "w-full flex flex-row lg:grid lg:grid-cols-9 items-center divide-x divide-[#f1f1f4] newParameters"
@@ -559,6 +601,9 @@
             },
             error: function(){
                 alert('خطا در ارسال داده')
+                categoryLoading.classList.remove('flex')
+                categoryLoading.classList.add('hidden')
+                categoryLoading.innerHTML = ''
             }
 
         })
@@ -610,11 +655,6 @@
         })
     }
 
- 
-
-
-
-
 
     function updateCategory(ev){
         let newParameters = document.querySelectorAll('.newParameters')
@@ -652,6 +692,9 @@
                 'max_item_amount' : category_max_item_amount.value,
             },
             success: function(data){
+                editloadingcategory.classList.remove('flex')
+                editloadingcategory.classList.add('hidden')
+                editloadingcategory.innerHTML = ''
                 newParameters.forEach((element)=>{
                     if(element.getAttribute('data-cp-id') == data.id){
                         element.children[1].children[0].innerText = data.title 
@@ -682,42 +725,41 @@
         })
     }
 
-    
+
     function deleteC(element , catId){
     
-    
-    $.ajaxSetup({
-        headers : {
-            'X-CSRF-TOKEN' : "{{ csrf_token() }}"
-        }
-    })
-    
-    $.ajax({
-        url : "{{ route('custmCategory.delete') }}" ,
-        type : "POST" ,
-        dataType : "json" ,
-        data : {
-            'id': catId,
-        },
-        success: function(data){
-            let row = element.parentElement.parentElement.parentElement.parentElement.parentElement;
-            if (row) {
-                row.remove();
+        $.ajaxSetup({
+            headers : {
+                'X-CSRF-TOKEN' : "{{ csrf_token() }}"
             }
-            let remainingCategories = custom_category_section.querySelectorAll('.newParameters');
-            if (remainingCategories.length === 0) {
-                custom_category_section.innerHTML = `
-                    <div class="py-12 text-center empty-message" id="empty-category-message">
-                        <h3 class="text-lg font-medium text-gray-600 mb-2">هیچ دسته بندی یافت نشد</h3>
-                        <p class="text-gray-500 text-sm mb-6">هنوز هیچ دسته بندی ای ایجاد نکرده‌اید</p>
-                    </div>
-                `;
+        })
+        
+        $.ajax({
+            url : "{{ route('custmCategory.delete') }}" ,
+            type : "POST" ,
+            dataType : "json" ,
+            data : {
+                'id': catId,
+            },
+            success: function(data){
+                let row = element.parentElement.parentElement.parentElement.parentElement.parentElement;
+                if (row) {
+                    row.remove();
+                }
+                let remainingCategories = custom_category_section.querySelectorAll('.newParameters');
+                if (remainingCategories.length === 0) {
+                    custom_category_section.innerHTML = `
+                        <div class="py-12 text-center" id="no_products_message"> <!-- تغییر اینجا -->
+                            <h3 class="text-lg font-medium text-gray-600 mb-2">هیچ دسته ای یافت نشد</h3>
+                            <p class="text-gray-500 text-sm mb-6">هنوز هیچ دسته ای ایجاد نکرده‌اید</p>
+                        </div>
+                    `;
+                }
+            },
+            error: function(){
+                alert('خطا در حذف داده: ')
             }
-        },
-        error: function(){
-            alert('خطا در حذف داده: ')
-        }
-    })
-}
+        })
+    }
 </script>
 @endsection
