@@ -125,9 +125,6 @@
                 </div>
             </div>
         </div>
-
-
-       
     </div>
      @foreach($custom_product->customCategories as $category)
     <div class="fixed w-full h-dvh z-999 top-0 right-0 bg-black/50 invisible opacity-0 transition-all duration-300 form" id="editCategoryform">

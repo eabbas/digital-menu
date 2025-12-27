@@ -31,7 +31,7 @@
 
         <div class="flex flex-col gap-5">
             <div class="w-full mx-auto shadow-md rounded mb-5 overflow-x-auto [&::-webkit-scrollbar]:hidden lg:overflow-visible">
-                <div class="w-full flex flex-row lg:grid lg:grid-cols-9 items-center divide-x divide-[#f1f1f4] sticky -top-5">
+                <div class="w-full flex flex-row lg:grid lg:grid-cols-8 items-center divide-x divide-[#f1f1f4] sticky -top-5">
                     <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
                         <span class="block w-10 lg:w-full text-center">ردیف</span>
                     </div>
@@ -41,7 +41,7 @@
                     <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
                         <span class="block w-20 lg:w-full">عنوان</span>
                     </div>
-                    <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-2">
+                    <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
                         <span class="block w-20 lg:w-full">حداقل مواد</span>
                     </div>
                     <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
@@ -64,7 +64,7 @@
                 @endphp
                 @foreach($customProduct->custom_product_variants as $index => $cpVariant)
                 @php $hasVariants=true; @endphp
-                    <div class="w-full flex flex-row lg:grid lg:grid-cols-9 items-center divide-x divide-[#f1f1f4] newParameters" data-cp-id="{{ $cpVariant->id }}">
+                    <div class="w-full flex flex-row lg:grid lg:grid-cols-8 items-center divide-x divide-[#f1f1f4] newParameters" data-cp-id="{{ $cpVariant->id }}">
                         <div
                             class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
                             <span class="block w-10 lg:w-full">{{ $i }}</span>
@@ -81,7 +81,7 @@
                             <span class="block w-20 lg:w-full">{{ $cpVariant->title }}</span>
                         </div>
                         <div
-                            class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
+                            class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
                             <span class="block w-20 lg:w-full">{{ $cpVariant->min_amount_unit }}</span>
                         </div>
                         <div
@@ -97,8 +97,7 @@
         
                         
                         <div class="col-span-2">
-                            <div class="lg:w-full w-[150px]">
-
+                            <div class="lg:w-[150px] mr-10">
                                 <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3">
                                     <li class="flex justify-center">
                                         <a href="{{ route('cpv.single', [$cpVariant]) }}"
@@ -129,7 +128,6 @@
                             </div>
                         </div>
                     </div>
-                       
                         @php
                             $i++;
                         @endphp
@@ -382,7 +380,7 @@
 
             // ایجاد المنت جدید
             let div = document.createElement('div');
-            div.classList = "w-full flex flex-row lg:grid lg:grid-cols-9 items-center divide-x divide-[#f1f1f4] newParameters"
+            div.classList = "w-full flex flex-row lg:grid lg:grid-cols-8 items-center divide-x divide-[#f1f1f4] newParameters"
             div.setAttribute('data-cp-id', data.id)
             let element = `
 
@@ -405,7 +403,7 @@
                             <span class="block w-20 lg:w-full">${ data.title }</span>
                         </div>
                         <div
-                            class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
+                            class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
                             <span class="block w-20 lg:w-full">${ data.min_amount_unit }</span>
                         </div>
                         <div
