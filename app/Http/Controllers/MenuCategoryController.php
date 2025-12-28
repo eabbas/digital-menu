@@ -82,6 +82,33 @@ class MenuCategoryController extends Controller
         $menu_category->delete();
         return to_route('menuCat.list', [$menu_id]);
     }
+    public function deleteAll(Request $request)
+    {
+        if (!isset($request->menuCats)) {
+            return redirect()->back();
+        }
+        foreach($request->menuCats as $menuCat_id){
+            $menu_category = menu_category::find($menuCat_id);
+            $menu_id = $menu_category->menu->id;
+            if (count($menu_category->menu_items)) {
+                foreach ($menu_category->menu_items as $menu_item) {
+                    if (count($menu_item->ingredients)) {
+                        foreach ($menu_item->ingredients as $ingredient) {
+                            $ingredient->delete();
+                        }
+                    }
+                    if (count($menu_item->menu_custom_ingredients)) {
+                        foreach ($menu_item->menu_custom_ingredients as $menu_custom_ingredient) {
+                            $menu_custom_ingredient->delete();
+                        }
+                    }
+                    $menu_item->delete();
+                }
+            }
+            $menu_category->delete();
+        }
+        return redirect()->back();
+    }
 
     // public function menu(career $career){
     //     return view('admin.menu.menu', ['career'=>$career]);

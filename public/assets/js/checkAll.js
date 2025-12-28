@@ -1,6 +1,4 @@
 let rows = document.querySelectorAll('.check')
-
-let all = document.getElementById('all')
 function checkAll(){
     let all = document.getElementById('all')
     if (all.checked) {
@@ -14,6 +12,8 @@ function checkAll(){
         })
     }
 }
+
+let all = document.getElementById('all')
 let flag = true
 rows.forEach((row)=>{
     row.addEventListener('click', ()=>{
