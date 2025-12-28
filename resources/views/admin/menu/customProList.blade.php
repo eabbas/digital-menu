@@ -197,9 +197,14 @@
                                                             <div onclick='deleteCP("{{ $custom_product->id }}")'
                                                                 class="w-fit flex flex-row items-center justify-center bg-red-500 hover:bg-red-600 p-1 rounded-sm cursor-pointer"
                                                                 title="حذف">
-                                                                <div id="deletecploading"
-                                                                    class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
-                                                                </div>
+                                                                <div id="deleteCPLoading{{ $category->id }}" 
+                                                                    class="absolute inset-0 bg-red-500 rounded-sm hidden items-center justify-center">
+                                                                    <div class="loading-wave-small">
+                                                                        <div class="loading-bar-small"></div>
+                                                                        <div class="loading-bar-small"></div>
+                                                                        <div class="loading-bar-small"></div>
+                                                                        <div class="loading-bar-small"></div>
+                                                                    </div>
                                                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-4"
                                                                     viewBox="0 0 448 512">
                                                                     <path fill="white"
