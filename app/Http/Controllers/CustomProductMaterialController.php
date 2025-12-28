@@ -19,14 +19,14 @@ class CustomProductMaterialController extends Controller
 
     public function store(Request $request)
     {
-        return response()->json($request->all());
+        // return response()->json($request->all());
         $path = null;
         if (isset($request->imageCPM)) {
             $name = $request->imageCPM->getClientOriginalName();
             $fullName = time() . '_' . $name;
             $path = $request->file('imageCPM')->storeAs('images', $fullName, 'public');
         }
-        
+
         $cpm_id = custom_product_material::insertGetId([
             'title' => $request->title,
             'description' => $request->description,
@@ -35,12 +35,12 @@ class CustomProductMaterialController extends Controller
             'max_unit_amount' => $request->max_unit_amount,
             'category_id' => $request->category_id,
             'custom_product_id' => $request->custom_pro_id,
-            'required' => isset($request->required) ? $request->required : 0 , 
+            'required' => isset($request->required) ? $request->required : 0,
             'image' => $path
         ]);
         $data = custom_product_material::find($cpm_id);
         return response()->json($data);
-        }
+    }
     
 
     public function index(custom_product $customProduct)
