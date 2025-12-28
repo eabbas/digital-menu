@@ -270,7 +270,7 @@
             <div class="w-full grid grid-cols-1 lg:grid-cols-2 lg:gap-3">
                 <div class="mb-4 relative">
                     <span class="absolute -bottom-5 right-4 opacity-0 text-xs text-red-500">الزامی است!</span>
-                    <label for="title" class="block text-sm font-medium mb-2">
+                    <label for="title" class="block text-sm font-medium mb-4">
                        عنوان
                     </label>
                     <input type="text" 
@@ -280,7 +280,7 @@
                         class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none cpmRequired">
                 </div>
                 <div class="mb-4">
-                    <label for="title" class="block text-sm font-medium mb-2">
+                    <label for="title" class="block text-sm font-medium mb-2 mt-2">
                        تصویر
                     </label>
                     <input type="file" 
@@ -301,7 +301,7 @@
                         min="0"
                         class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none cpmRequired">
                 </div>
-                <div class="flex items-center mt-3">
+                <div class="flex items-center mt-5">
                     <input type="checkbox" 
                         name="required" 
                         id="cpmrequired"
@@ -313,7 +313,7 @@
                 </div>
                 <div class="relative">
                 <span class="absolute -bottom-5 right-4 opacity-0 text-xs text-red-500">الزامی است!</span>
-                    <label for="order" class="block text-sm font-medium mb-1 mt-3">
+                    <label for="order" class="block text-sm font-medium mb-5 mt-3">
                         ترتیب
                     </label>
                     <input type="number" 
@@ -323,7 +323,7 @@
                         required
                         class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none cpmRequired">
                 </div>
-                <div class="space-y-4 relative">
+                <div class="relative mt-4">
                 <span class="absolute -bottom-5 right-4 opacity-0 text-xs text-red-500">الزامی است!</span>
                     <label for="cpm_max_unit_amount" class="block text-sm font-medium mb-1 mt-3">
                         حداکثر تعداد واحد
@@ -335,8 +335,8 @@
                         required
                         class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none cpmRequired">
                 </div>
-                <div class="mb-4 lg:col-span-2">
-                    <label for="cpmdescription" class="block text-sm font-medium mb-2">
+                <div class="mb-4 lg:col-span-2 mt-4">
+                    <label for="cpmdescription" class="block text-sm font-medium mb-2 mt-2">
                         توضیحات
                     </label>
                     <textarea type="text" 

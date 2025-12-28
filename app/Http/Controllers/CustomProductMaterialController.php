@@ -21,10 +21,10 @@ class CustomProductMaterialController extends Controller
     {
         // return response()->json($request->all());
         $path = null;
-        if (isset($request->imageCPM)) {
-            $name = $request->imageCPM->getClientOriginalName();
+        if (isset($request->cpmImage)) {
+            $name = $request->cpmImage->getClientOriginalName();
             $fullName = time() . '_' . $name;
-            $path = $request->file('imageCPM')->storeAs('images', $fullName, 'public');
+            $path = $request->file('cpmImage')->storeAs('images', $fullName, 'public');
         }
 
         $cpm_id = custom_product_material::insertGetId([
