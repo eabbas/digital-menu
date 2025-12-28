@@ -114,4 +114,31 @@ class MenuController extends Controller
     public function user_menu(User $user){
         return view('admin.menu.userMenu', ['user'=>$user]);
     }
+
+    public function deleteAll(Request $request){
+        dd($request->all());
+        if (!isset($request->menus)) {
+            return redirect()->back();
+        }
+        foreach($request->menus as $menu_id){
+            $menu = menu::find($menu_id);
+            if (count($menu->menu_categories)) {
+                foreach ($menu->menu_categories as $category) {
+                    if (count($category->menu_items)) {
+                        foreach ($category->menu_items as $item) {
+                            if (count($item->ingredients)) {
+                                foreach ($item->ingredients as $ingredients) {
+                                    $ingredients->delete();
+                                }
+                            }
+                            $item->delete();
+                        }
+                    }
+                    $category->delete();
+                }
+            }
+            $menu->delete();
+        }
+        return redirect()->back();
+    }
 }

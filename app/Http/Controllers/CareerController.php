@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\career;
 use App\Models\careerCategory;
 use App\Models\province_cities;
+use App\Models\qr_code;
 use App\Models\role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use App\Models\qr_code;
+use App\Models\menu;
 
 class CareerController extends Controller
 {
@@ -22,20 +23,20 @@ class CareerController extends Controller
         if (!$user) {
             $user = Auth::user();
         }
-        return view('admin.careers.create', ['user' => $user, 'careerCategories' => $careerCategories, 'provinces'=>$provinces]);
+        return view('admin.careers.create', ['user' => $user, 'careerCategories' => $careerCategories, 'provinces' => $provinces]);
     }
 
     public function store(Request $request)
     {
         // dd($request->all());
         $roles = role::all();
-        if($request->user_id){
-        $user = user::find($request->user_id);
+        if ($request->user_id) {
+            $user = user::find($request->user_id);
         }
         $path = null;
         $bannerPath = null;
         if (Auth::user()->role[0]->title != 'admin') {
-            $user =  Auth::user();
+            $user = Auth::user();
             $user->role[0] = $roles[1];
             $user->save();
         }
@@ -61,7 +62,7 @@ class CareerController extends Controller
             'description' => $request->description,
             'career_category_id' => $request->careerCategory,
             'banner' => $bannerPath,
-            'qr_count'=> $request->qr_count ? $request->qr_count : 0
+            'qr_count' => $request->qr_count ? $request->qr_count : 0
         ]);
         for ($i = 0; $i < $request->qr_count; $i++) {
             $random = Str::random(10);
@@ -73,18 +74,18 @@ class CareerController extends Controller
                 'qr_path' => $fileName,
                 'career_id' => $career_id,
                 'slug' => 'qrcode/' . $career_id . '/' . $random,
-                'user_id'=> Auth::id()
+                'user_id' => Auth::id()
             ]);
         }
-        return to_route('career.careers' , ['user'=>$user]);
+        return to_route('career.careers', ['user' => $user]);
     }
 
-    public function user_careers(user $user=null)
+    public function user_careers(user $user = null)
     {
-        if(!$user){
-            $user=Auth::user();
+        if (!$user) {
+            $user = Auth::user();
         }
-        return view('admin.careers.userCareers',['user'=>$user]);
+        return view('admin.careers.userCareers', ['user' => $user]);
     }
 
     public function edit(career $career, User $user = null)
@@ -96,7 +97,7 @@ class CareerController extends Controller
         }
         $careerCategories = careerCategory::all();
         $career->social_media = json_decode($career->social_media);
-        return view('admin.careers.edit', ['career' => $career, 'user' => $user, 'careerCategories' => $careerCategories, 'provinces'=>$provinces, 'cities'=>$cities]);
+        return view('admin.careers.edit', ['career' => $career, 'user' => $user, 'careerCategories' => $careerCategories, 'provinces' => $provinces, 'cities' => $cities]);
     }
 
     public function update(Request $request)
@@ -143,7 +144,7 @@ class CareerController extends Controller
                         'qr_path' => $fileName,
                         'career_id' => $career->id,
                         'slug' => 'qrcode/' . $career->id . '/' . $random,
-                        'user_id'=>Auth::id()
+                        'user_id' => Auth::id()
                     ]);
                     $qr_count--;
                 }
@@ -160,12 +161,12 @@ class CareerController extends Controller
     public function delete(career $career)
     {
         if (count($career->qr_codes)) {
-            foreach($career->qr_codes as $qr_code){
+            foreach ($career->qr_codes as $qr_code) {
                 $qr_code->delete();
             }
         }
         if (count($career->menus)) {
-            foreach($career->menus as $menu){
+            foreach ($career->menus as $menu) {
                 if (count($menu->menu_categories)) {
                     foreach ($menu->menu_categories as $category) {
                         if (count($category->menu_items)) {
@@ -186,7 +187,6 @@ class CareerController extends Controller
         }
         $career->delete();
         return to_route('career.careers');
-
     }
 
     public function index()
@@ -200,12 +200,50 @@ class CareerController extends Controller
         return view('admin.careers.single', ['career' => $career]);
     }
 
-    public function menus(career $career){
-        return view('admin.careers.menuList', ['career'=>$career]);
+    public function menus(career $career)
+    {
+        return view('admin.careers.menuList', ['career' => $career]);
     }
 
-     public function qr_codes(career $career)
+    public function qr_codes(career $career)
     {
         return view('admin.careers.qrcodes', ['career' => $career]);
+    }
+
+    public function deleteAll(Request $request)
+    {
+        if (!isset($request->careers)) {
+            return redirect()->back();
+        }
+        foreach ($request->careers as $career_id) {
+            $career = career::find($career_id);
+            if (count($career->qr_codes)) {
+                foreach ($career->qr_codes as $qr_code) {
+                    $qr_code->delete();
+                }
+            }
+            if (count($career->menus)) {
+                foreach ($career->menus as $menu) {
+                    if (count($menu->menu_categories)) {
+                        foreach ($menu->menu_categories as $category) {
+                            if (count($category->menu_items)) {
+                                foreach ($category->menu_items as $item) {
+                                    if (count($item->ingredients)) {
+                                        foreach ($item->ingredients as $ingredients) {
+                                            $ingredients->delete();
+                                        }
+                                    }
+                                    $item->delete();
+                                }
+                            }
+                            $category->delete();
+                        }
+                    }
+                    $menu->delete();
+                }
+            }
+            $career->delete();
+        }
+        return redirect()->back();
     }
 }

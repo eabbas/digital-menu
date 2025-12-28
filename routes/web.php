@@ -82,6 +82,7 @@ Route::group([
     Route::get('/show/{career}', 'single')->name('single')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/qrcodes/{career}', 'qr_codes')->name('qr_codes');
     Route::get('/menuList/{career}', 'menus')->name('menus');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
 Route::group([
     'prefix' => 'province',
@@ -122,6 +123,7 @@ Route::group([
     // Route::get('/showMenu/{menu}', 'showMenu')->name('showMenu');
     Route::get('/createMenu', 'createMenu')->name('createMenu');
     Route::get('/myMenu/{user}', 'user_menu')->name('user_menus');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
 
 Route::group([
@@ -137,6 +139,7 @@ Route::group([
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{menu_category}', 'delete')->name('delete');
     Route::get('/{menu}', 'menu')->name('menu');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
 
 Route::group([
@@ -395,6 +398,7 @@ Route::group([
     Route::get('/edit/{socialMedia}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{socialMedia}', 'delete')->name('delete');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
 // siteLink
 Route::group([

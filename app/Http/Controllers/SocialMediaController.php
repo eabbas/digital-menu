@@ -59,10 +59,20 @@ class SocialMediaController extends Controller
 
     public function delete(socialMedia $socialMedia)
     {
-        foreach ($socialMedia->social_addresses as $address) {
-            $address->delete();
-        }
+        // foreach ($socialMedia->social_addresses as $address) {
+        //     $address->delete();
+        // }
         $socialMedia->delete();
+        return to_route('socialMedia.list');
+    }
+    public function deleteAll(Request $request)
+    {
+        if (!isset($request->socialMedias)) {
+            return redirect()->back();
+        }
+        foreach ($request->socialMedias as $socialMedia) {
+            $socialMedia->delete();
+        }
         return to_route('socialMedia.list');
     }
 }
