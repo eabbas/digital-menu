@@ -158,6 +158,7 @@ Route::group([
     Route::get('/items/{menu_category}', 'items')->name('items');
     Route::get('/variants/{menu_item}', 'variants')->name('variants');
     Route::get('/{menu_item}', 'single')->name('single');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
 
 // category.......................................................................
