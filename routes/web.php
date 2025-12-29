@@ -369,6 +369,7 @@ Route::group([
     Route::post('/edit', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::post('/delete/{customProduct?}', 'delete')->name('delete');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
 
 Route::group([
@@ -384,6 +385,7 @@ Route::group([
     Route::post('/edit', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::post('/delete', 'delete')->name('delete');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
 
 // socialMedia
