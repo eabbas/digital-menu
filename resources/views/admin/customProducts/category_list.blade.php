@@ -199,7 +199,7 @@
         <form action="{{ route('cpm.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 max-h-[calc(100vh-100px)] overflow-y-auto [&::-webkit-scrollbar]:hidden lg:w-1/2 p-5 rounded-lg">
             @csrf
             <div class="w-full grid grid-cols-1 lg:grid-cols-2 lg:gap-3">
-                <div class="mb-4 relative">
+                <div class="relative">
                     <span class="absolute -bottom-5 right-4 opacity-0 text-xs text-red-500">الزامی است!</span>
                     <label for="title" class="block text-sm font-medium mb-2">
                        عنوان
@@ -210,7 +210,7 @@
                         required
                         class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none requiredCPM">
                 </div>
-                <div class="mb-4 mt-3">
+                <div>
                     <label for="title" class="block text-sm font-medium mb-2">
                        تصویر
                     </label>
@@ -232,7 +232,7 @@
                         min="0"
                         class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none requiredCPM">
                 </div>
-                <div class="flex items-center mt-5">
+                <div class="flex items-center">
                     <input type="checkbox" 
                         name="required" 
                         id="cpmrequired"
@@ -254,7 +254,7 @@
                         required
                         class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none requiredCPM">
                 </div>
-                <div class="relative mt-3">
+                <div class="relative">
                     <span class="absolute -bottom-5 right-4 opacity-0 text-xs text-red-500">الزامی است!</span>
                     <label for="cpm_max_unit_amount" class="block text-sm font-medium mb-1 mt-3">
                         حداکثر تعداد واحد
@@ -266,8 +266,8 @@
                         required
                         class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none requiredCPM">
                 </div>
-                <div class="mb-4 lg:col-span-2">
-                    <label for="cpmdescription" class="block text-sm font-medium mb-2 mt-6">
+                <div class="lg:col-span-2">
+                    <label for="cpmdescription" class="block text-sm font-medium mb-2">
                         توضیحات
                     </label>
                     <textarea type="text" 

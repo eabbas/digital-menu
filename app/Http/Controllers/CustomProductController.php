@@ -8,6 +8,7 @@ use App\Models\custom_product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use PHPUnit\Framework\MockObject\ReturnValueNotConfiguredException;
 
 class CustomProductController extends Controller
 {
@@ -35,12 +36,11 @@ class CustomProductController extends Controller
         return response()->json($data);
     }
 
-    
     public function save(Request $request)
     {
         // dd($request->all());
         $path = null;
-        if(isset($request->customProductImage)){
+        if (isset($request->customProductImage)) {
             $name = $request->customProductImage->getClientOriginalName();
             $fullName = time() . '_' . $name;
             $path = $request->file('customProductImage')->storeAs('images', $fullName, 'public');
@@ -52,7 +52,7 @@ class CustomProductController extends Controller
             'career_id' => $request->career_id,
             'image' => $path
         ]);
-        return to_route('menu.customProList',['career'=>$request->career_id]);
+        return to_route('menu.customProList', ['career' => $request->career_id]);
     }
 
     public function index()
@@ -68,6 +68,7 @@ class CustomProductController extends Controller
     {
         return view('admin.customProducts.single', ['customProduct' => $customProduct]);
     }
+
     public function edit(Request $request)
     {
         $custom_product = custom_product::find($request->id);
@@ -76,17 +77,17 @@ class CustomProductController extends Controller
 
     public function update(Request $request)
     {
-        // return response()->json($request->all());
-        $customProduct =  custom_product::find($request->id);
+        // $customProduct = custom_product::find($request->id);
+        return response()->json($request->all());
         $customProduct->title = $request->title;
         $customProduct->description = $request->description;
         $customProduct->material_limit = $request->material_limit;
-        if(isset($request->customProductImageUpdate)){
-            if($customProduct->image){
+        if (isset($request->customProductImageUpdate)) {
+            if ($customProduct->image) {
                 Storage::disk('public')->delete($customProduct->image);
             }
             $name = $request->customProductImageUpdate->getClientOriginalName();
-            $fullName = time()."_".$name;
+            $fullName = time() . '_' . $name;
             $path = $request->file('customProductImageUpdate')->storeAs('images', $fullName, 'public');
             $customProduct->image = $path;
         }
@@ -127,5 +128,35 @@ class CustomProductController extends Controller
     public function category_list(custom_product $custom_product)
     {
         return view('admin.customProducts.category_list', ['custom_product' => $custom_product]);
+    }
+
+    function deleteAll(Request $request)
+    {
+        if (!isset($request->custom_products)) {
+            return redirect()->back();
+        }
+        foreach ($request->custom_products as $custom_product_id) {
+            $customProduct = custom_product::find($custom_product_id);
+            if (count($customProduct->custom_product_variants)) {
+                foreach ($customProduct->custom_product_variants as $variants) {
+                    $variants->delete();
+                }
+            }
+            if (count($customProduct->custom_product_materials)) {
+                foreach ($customProduct->custom_product_materials as $materials) {
+                    $materials->delete();
+                }
+            }
+            if (count($customProduct->customCategories)) {
+                foreach ($customProduct->customCategories as $category) {
+                    $category->delete();
+                }
+            }
+            if ($customProduct->image) {
+                Storage::disk('public')->delete($customProduct->image);
+            }
+            $customProduct->delete();
+        }
+        return redirect()->back();
     }
 }

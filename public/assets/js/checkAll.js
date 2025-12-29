@@ -1,5 +1,5 @@
-let rows = document.querySelectorAll('.check')
 function checkAll(){
+    let rows = document.querySelectorAll('.check')
     let all = document.getElementById('all')
     if (all.checked) {
         rows.forEach((row)=>{
@@ -13,6 +13,7 @@ function checkAll(){
     }
 }
 
+let rows = document.querySelectorAll('.check')
 let all = document.getElementById('all')
 let flag = true
 rows.forEach((row)=>{
