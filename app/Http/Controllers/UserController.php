@@ -131,6 +131,20 @@ class UserController extends Controller
         $user->delete();
         return to_route('user.list');
     }
+    public function deleteAll(Request $request)
+    {
+        if(!isset($request->users)){
+            return redirect()->back();
+        }
+        foreach($request->users as $user_id){
+            $user = User::find($user_id);
+            foreach ($user->careers as $career) {
+                $career->delete();
+            }
+            $user->delete();
+        }
+        return redirect()->back();
+    }
 
     public function login()
     {
@@ -207,4 +221,5 @@ class UserController extends Controller
         ]);
         return to_route('user.list');
     }
+
 }

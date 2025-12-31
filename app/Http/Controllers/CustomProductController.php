@@ -77,8 +77,8 @@ class CustomProductController extends Controller
 
     public function update(Request $request)
     {
-        // $customProduct = custom_product::find($request->id);
-        return response()->json($request->all());
+        $customProduct = custom_product::find($request->id);
+        // return response()->json($request->all());
         $customProduct->title = $request->title;
         $customProduct->description = $request->description;
         $customProduct->material_limit = $request->material_limit;

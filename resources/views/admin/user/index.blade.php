@@ -7,9 +7,29 @@
             
                 <h2 class="text-lg font-bold text-gray-800 p-4 text-center">لیست کاربران</h2>
            
-            <div class="flex flex-col gap-5">
+            <form action="{{ route('user.deleteAll') }}" methode="post" class="flex flex-col gap-5">
+                @csrf
+                 <div class="w-10/12 mx-auto flex flex-row justify-between items-center pb-4">
+                <div class="flex flex-row items-center gap-3">
+                    <input type="checkbox" id="all" onchange="checkAll()">
+                    <label for="all" class="text-gray-700 text-xs">انتخاب همه</label>
+                </div>
+                <div class="flex justify-center">
+                    <button
+                        class="w-fit flex flex-row items-center justify-center bg-red-500 hover:bg-red-600 p-1 rounded-sm cursor-pointer"
+                        title="حذف">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
+                            <path fill="white"
+                                d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
                 <div class="w-10/12 mx-auto shadow-md rounded mb-5 overflow-x-auto [&::-webkit-scrollbar]:hidden">
-                    <div class="w-full flex flex-row lg:grid lg:grid-cols-10 items-center divide-x divide-[#f1f1f4] sticky -top-5">
+                    <div class="w-full flex flex-row lg:grid lg:grid-cols-11 items-center divide-x divide-[#f1f1f4] sticky -top-5">
+                          <div class="text-center text-xs font-medium text-gray-600 bg-gray-100 h-full">
+                        <div class="w-10 lg:w-full h-10 text-gray-100"></div>
+                    </div>
                         <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
                             <span class="block w-20 lg:w-full">ردیف</span>
                         </div>
@@ -37,7 +57,13 @@
                        @foreach ($users as $user)
                            
                                 <div
-                                    class="w-full flex flex-row lg:grid lg:grid-cols-10 items-center divide-x divide-[#f1f1f4]">
+                                    class="w-full flex flex-row lg:grid lg:grid-cols-11 items-center divide-x divide-[#f1f1f4]">
+                                    <div
+                                    class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
+                                    <div class="w-10 lg:w-full">
+                                        <input type="checkbox" class="check" name="users[]" value="{{ $user->id }}">
+                                    </div>
+                                </div>
                                     <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
                                         <span class="block w-20 lg:w-full">{{ $i }}</span>
@@ -112,7 +138,8 @@
                         @endforeach
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
+    <script src="{{ asset('assets/js/checkAll.js') }}"></script>
  @endsection
