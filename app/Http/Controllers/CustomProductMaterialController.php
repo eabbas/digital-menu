@@ -95,4 +95,15 @@ class CustomProductMaterialController extends Controller
         $cpm->delete();
         return response()->json('ok');
     }
+    public function deleteAll(Request $request)
+    {
+        dd($request->all());
+        $cpm = custom_product_material::find($request->id);
+        if ($cpm->image) {
+            Storage::disk('public')->delete($cpm->image);
+        }
+        $cpm->delete();
+        return response()->json('ok');
+    }
+    
 }

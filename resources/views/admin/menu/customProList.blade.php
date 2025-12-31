@@ -577,7 +577,7 @@
             formData.append('id', custom_product_id.value)
             formData.append('career_id', careerId.value)
             formData.append('title', cpTitleEdit.value)
-            formData.append('description', description.value)
+            formData.append('description', CPeditDescription.value)
             formData.append('material_limit', CPmaterialLimit.value)
             if (customProductImageUpdate.files.length > 0) {
                 formData.append('customProductImageUpdate', customProductImageUpdate.files[0])
@@ -601,12 +601,12 @@
                     editloading.innerHTML = ''
                     newParameters.forEach((element) => {
                         if (element.getAttribute('data-cp-id') == data.id) {
-                            element.children[1].children[0].innerHTML = `
+                            element.children[2].children[0].innerHTML = `
                                 <img src="${data.image ? '{{ asset('storage/') }}/' + data.image : '/images/default-product.png'}"
                                 alt="${data.title}" class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md">
                             `
-                            element.children[2].children[0].innerText = data.title
-                            element.children[3].children[0].innerText = data.material_limit
+                            element.children[3].children[0].innerText = data.title
+                            element.children[4].children[0].innerText = data.material_limit
                         }
                     })
                     console.log(data)

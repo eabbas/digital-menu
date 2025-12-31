@@ -10,7 +10,7 @@ class site_link extends Model
         'address',
         'user_id' , 
         'title' ,
-        'icon_path',
+        // 'icon_path',
         'covers_id', 
     ];
 
