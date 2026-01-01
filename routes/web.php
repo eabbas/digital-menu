@@ -39,6 +39,9 @@ Route::post('search', [HomeController::class, 'search'])->name('search');
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware([LoginMiddleware::class]);
 Route::get('/signup', [UserController::class, 'create'])->name('signup')->middleware([LoginMiddleware::class]);
 Route::post('/send_code', [UserController::class, 'send_code'])->name('send_code');
+Route::get('/forget_password', [UserController::class, 'forget_password'])->name('forget_password');
+Route::post('/set_password', [UserController::class, 'set_password'])->name('set_password');
+Route::post('/save_password', [UserController::class, 'save_password'])->name('save_password');
 Route::post('/check', [UserController::class, 'checkAuth'])->name('checkAuth');
 
 Route::group([
@@ -60,8 +63,6 @@ Route::group([
     Route::get('/deleteAll', 'deleteAll')->name('deleteAll');
     Route::get('/compelete', 'compelete_form')->name('compelete_form');
     Route::post('/save', 'save')->name('save');
-    // Route::get('/admin/create', 'adminCreate')->name('adminCreate');
-    // Route::post('/admin/store', 'adminStore')->name('adminStore')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/setting', 'setting')->name('setting');
     Route::post('/set', 'set')->name('set');
     route::post('/set_order', 'set_order')->name('set_order');

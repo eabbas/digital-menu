@@ -4,24 +4,14 @@
     @endsection
     @section('content')
         <div class="w-full">
-            <div class="pb-5 w-full">
-                <h1 class="text-xl text-center lg:text-start">اکانت من</h1>
-                <div
-                    class="flex flex-row justify-center lg:justify-start items-center gap-2 text-[#99A1B7] text-[11px] lg:text-sm">
-                    {{-- <a href="{{ route('home') }}" class="p-2">خانه</a>
-                    <span>/</span> --}}
-                    <a href="{{ route('user.profile') }}">اکانت من</a>
-                </div>
-            </div>
-
             <div class="flex flex-col border-none rounded-[7px]">
                 <div class="block lg:flex flex-row justify-between gap-8">
                     <div class="flex flex-col xm:flex-row lg:flex-row gap-5 py-3 rounded-full">
                         @if (!$user->main_image)
-                            <img class="size-27 lg:size-41 mx-auto lg:m-0 rounded-full"
+                            <img class="size-30 mx-auto lg:m-0 rounded-full"
                                 src="{{ asset('assets/img/user.png') }}" alt="user__avatar">
                         @else
-                            <img class="size-27 lg:size-41 mx-auto lg:m-0 rounded-full"
+                            <img class="size-30 mx-auto lg:m-0 rounded-full"
                                 src="{{ asset('storage/' . $user->main_image) }}" alt="user__picture">
                         @endif
                         <div class="flex flex-col justify-end">

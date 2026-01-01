@@ -2,16 +2,6 @@
     @section('title', 'پروفایل کاربری')
     @section('content')
         <div class="w-full">
-            <div class="lg:pb-5 w-full">
-                <h1 class="text-xl text-start">اکانت من</h1>
-                <div
-                    class="flex flex-row justify-start items-center gap-2 text-[#99A1B7] text-[11px] lg:text-sm">
-                    {{-- <a href="{{ route('home') }}" class="p-2">خانه</a>
-                    <span>/</span> --}}
-                    <a href="{{ route('user.profile') }}">داشبورد</a>
-                </div>
-            </div>
-
             <div class="flex flex-col border-none rounded-[7px]">
                 <div class="block lg:flex flex-row justify-between gap-8">
                     <div class="flex flex-col xm:flex-row lg:flex-row gap-5 lg:py-3 rounded-full">
