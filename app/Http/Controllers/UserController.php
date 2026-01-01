@@ -198,7 +198,7 @@ class UserController extends Controller
         if ($code->code == $request->code) {
             $bool = true;
         }
-        $user['checkCode'] = false;
+        $user['checkCode'] = $bool;
         return response()->json($user);
     }
 
@@ -248,5 +248,22 @@ class UserController extends Controller
             $patternValues,  // pattern values
         );
         return response()->json('ok');
+    }
+
+    public function forget_password(){
+        return view('client.forgetPassword');
+    }
+
+    public function set_password(Request $request){
+        $user = User::where('phoneNumber', $request->phoneNumber)->first();
+        return view('client.setPassword', ['user'=>$user]);
+    }
+
+    public function save_password(Request $request){
+        $user = User::find($request->user_id);
+        $password = Hash::make($request->password);
+        $user->password = $password;
+        $user->save();
+        return to_route('login');
     }
 }
