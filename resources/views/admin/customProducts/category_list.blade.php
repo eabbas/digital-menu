@@ -28,9 +28,29 @@
             </div>
         </div>
 
-        <div class="flex flex-col gap-5">
+        <form action="{{ route('custmCategory.deleteAll') }}" method="post" class="flex flex-col gap-5">
+            @csrf
+            <div class="w-11/12 mx-auto flex flex-row justify-between items-center">
+                <div class="flex flex-row items-center gap-3">
+                    <input type="checkbox" id="all" onchange="checkAll()">
+                    <label for="all" class="text-gray-700 text-xs">انتخاب همه</label>
+                </div>
+                <div class="flex justify-center">
+                    <button
+                        class="w-fit flex flex-row items-center justify-center bg-red-500 hover:bg-red-600 p-1 rounded-sm cursor-pointer"
+                        title="حذف">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
+                            <path fill="white"
+                                d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
             <div class="w-11/12 mx-auto shadow-md rounded mb-5 overflow-x-auto [&::-webkit-scrollbar]:hidden lg:overflow-visible">
-                <div class="w-full flex flex-row lg:grid lg:grid-cols-9 items-center divide-x divide-[#f1f1f4] sticky -top-5">
+                <div class="w-full flex flex-row lg:grid lg:grid-cols-10 items-center divide-x divide-[#f1f1f4] sticky -top-5">
+                    <div class="text-center text-xs font-medium text-gray-600 bg-gray-100 h-full">
+                        <div class="w-10 lg:w-full h-10 text-gray-100"></div>
+                    </div>
                     <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
                         <span class="block w-10 lg:w-full text-center">ردیف</span>
                     </div>
@@ -55,7 +75,13 @@
                     @php $hasCategory=false; @endphp
                     @foreach($custom_product->customCategories as $category)
                     @php $hasCategory = true; @endphp
-                            <div class="w-full flex flex-row lg:grid lg:grid-cols-9 items-center divide-x divide-[#f1f1f4] newParameters" data-cp-id="{{ $category->id }}">
+                            <div class="w-full flex flex-row lg:grid lg:grid-cols-10 items-center divide-x divide-[#f1f1f4] newParameters" data-cp-id="{{ $category->id }}">
+                                <div
+                                    class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
+                                    <div class="w-10 lg:w-full">
+                                        <input type="checkbox" class="check" name="categories[]" value="{{ $category->id }}">
+                                    </div>
+                                </div>
                                 <div
                                     class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
                                     <span class="block w-10 lg:w-full">{{ $i }}</span>
@@ -121,10 +147,15 @@
                             $i++;
                         @endphp
                     @endforeach
-                    
+                    @if(!$hasCategory)
+                        <div class="py-12 text-center">
+                            <h3 class="text-lg font-medium text-gray-600 mb-2">هیچ دسته ای یافت نشد</h3>
+                            <p class="text-gray-500 text-sm mb-6">هنوز هیچ  دسته ای ایجاد نکرده‌اید</p>
+                        </div>
+                    @endif
                 </div>
             </div>
-        </div>
+        </form>
 
 
        
@@ -196,12 +227,15 @@
                 </svg>
             </div>
 
-        <form action="{{ route('cpm.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 max-h-[calc(100vh-100px)] overflow-y-auto [&::-webkit-scrollbar]:hidden lg:w-1/2 p-5 rounded-lg">
+        <form action="{{ route('cpm.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 max-h-[calc(100vh-100px)] overflow-y-auto [&::-webkit-scrollbar]:hidden lg:w-1/2 p-5 rounded-lg relative">
             @csrf
+            <div id="storecpmloading"
+                class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg z-50">
+            </div>
             <div class="w-full grid grid-cols-1 lg:grid-cols-2 lg:gap-3">
-                <div class="relative">
+                <div class="mb-4 relative">
                     <span class="absolute -bottom-5 right-4 opacity-0 text-xs text-red-500">الزامی است!</span>
-                    <label for="title" class="block text-sm font-medium mb-2">
+                    <label for="title" class="block text-sm font-medium mb-5">
                        عنوان
                     </label>
                     <input type="text" 
@@ -210,7 +244,7 @@
                         required
                         class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none requiredCPM">
                 </div>
-                <div>
+                <div class="mb-4 mt-3">
                     <label for="title" class="block text-sm font-medium mb-2">
                        تصویر
                     </label>
@@ -232,7 +266,7 @@
                         min="0"
                         class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none requiredCPM">
                 </div>
-                <div class="flex items-center">
+                <div class="flex items-center mt-5">
                     <input type="checkbox" 
                         name="required" 
                         id="cpmrequired"
@@ -244,7 +278,7 @@
                 </div>
                 <div class="relative">
                     <span class="absolute -bottom-5 right-4 opacity-0 text-xs text-red-500">الزامی است!</span>
-                    <label for="order" class="block text-sm font-medium mb-1 mt-3">
+                    <label for="order" class="block text-sm font-medium mb-1 mt-6">
                         ترتیب
                     </label>
                     <input type="number" 
@@ -254,7 +288,7 @@
                         required
                         class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none requiredCPM">
                 </div>
-                <div class="relative">
+                <div class="relative mt-3">
                     <span class="absolute -bottom-5 right-4 opacity-0 text-xs text-red-500">الزامی است!</span>
                     <label for="cpm_max_unit_amount" class="block text-sm font-medium mb-1 mt-3">
                         حداکثر تعداد واحد
@@ -266,8 +300,8 @@
                         required
                         class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none requiredCPM">
                 </div>
-                <div class="lg:col-span-2">
-                    <label for="cpmdescription" class="block text-sm font-medium mb-2">
+                <div class="mb-4 lg:col-span-2">
+                    <label for="cpmdescription" class="block text-sm font-medium mb-2 mt-6">
                         توضیحات
                     </label>
                     <textarea type="text" 
@@ -298,9 +332,11 @@
             <path fill="gray" d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
         </svg>
     </div>
-    <form action="{{ route('custmCategory.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg">
+    <form action="{{ route('custmCategory.store') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 lg:w-1/2 p-5 rounded-lg relative">
         @csrf
-                                        
+        <div id="storeCategoryloading"
+            class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg z-50">
+        </div>                   
         <div class="mb-4 relative">
             <span class="absolute -bottom-5 right-4 opacity-0 text-xs text-red-500">الزامی است!</span>
             <label for="title" class="block text-sm font-medium mb-2">
@@ -350,7 +386,7 @@
 
 
 <script>
-    let i = "<?php echo $i; ?>";
+    let i = "<?php echo $i; ?>"
     let categoryEditForm = document.getElementById('editCategoryform')
     let createCategoryform = document.getElementById('createCform')
 
@@ -361,7 +397,6 @@
     let forms = document.querySelectorAll(".form")
     let custom_category_section = document.getElementById('custom_category_section')
     let custom_pro_id_customCategory = document.getElementById('custom_pro_id_customCategory')
-    
     let cpmformCreate = document.getElementById('createCPMform')
 
     let cpmtitle = document.getElementById('cpmtitle')
@@ -376,14 +411,12 @@
     let category = document.getElementById('requiredCustomCategory')
     let max_item_amount_customCategory = document.getElementById('max_item_amount_customCategory')
 
-
     let editloadingcategory = document.getElementById('editcategoryloading')
+    let storecpmloading = document.getElementById('storecpmloading')
+    let storeCategoryloading = document.getElementById('storeCategoryloading')
     let cpmImage = document.getElementById('cpmImage')
 
 
-
-  
-    
 
     function closeForm(){
         forms.forEach((form)=>{
@@ -398,76 +431,95 @@
         cpm_category_id.value = catId
         cpm_custom_pro_id.value = "{{ $custom_product->id }}";
     }
+
     function openCform(cpId){
         createCategoryform.classList.remove('invisible')
         createCategoryform.classList.remove('opacity-0')
         custom_pro_id_customCategory.value = cpId
     }
-   function cpmStore(ev){
-    ev.preventDefault()
-    let requiredCPM = document.querySelectorAll('.requiredCPM')
-    let flag = true
-    requiredCPM.forEach((item)=>{
-        if(item.value == ""){
-            item.classList.add('border-1')
-            item.classList.add('border-red-500')
-            item.parentElement.children[0].classList.remove('opacity-0')
-            flag = false
-        }
-    })
-    if(flag){
 
-    
-        let isRequired = cpmrequired.checked ? 1 : 0;
-
-        let formData = new FormData()
-        
-        formData.append('title' , cpmtitle.value)
-        formData.append('description' , cpmdescription.value)
-        formData.append('price_per_unit' , cpm_price_per_unit.value)
-        formData.append('required' , isRequired)
-        formData.append('order' , cpmorder.value)
-        formData.append('max_unit_amount' , cpm_max_unit_amount.value)
-        formData.append('custom_pro_id' , cpm_custom_pro_id.value)
-        formData.append('category_id' , cpm_category_id.value)
-        if (cpmImage.files[0]) {
-            formData.append('cpmImage' ,cpmImage.files[0])
-        }
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+    function cpmStore(ev){
+        ev.preventDefault()
+        let requiredCPM = document.querySelectorAll('.requiredCPM')
+        requiredCPM.forEach((item) => {
+            item.classList.remove('border-red-500')
+            item.parentElement.children[0].classList.add('opacity-0')
+        })
+        let flag = true
+        requiredCPM.forEach((item)=>{
+            if(item.value == ""){
+                item.classList.add('border-1')
+                item.classList.add('border-red-500')
+                item.parentElement.children[0].classList.remove('opacity-0')
+                flag = false
             }
         })
-        $.ajax({
-            url : "{{ route('cpm.store') }}" ,
-            type : "POST" ,
-            data : formData ,
-            contentType : false ,
-            processData : false ,
-        
-            
-            success: function(data){
-                console.log(data)
-                cpmtitle.value = ""
-                cpmdescription.value = ""
-                cpm_price_per_unit.value = ""
-                cpmorder.value = ""
-                cpm_max_unit_amount.value = ""
-                cpmrequired.checked = false
-                cpm_custom_pro_id.value = ""
-                cpm_category_id.value = ""
-                cpmImage.value = ""
-            
-                closeForm()
-            },
-            error: function(){
-                alert('خطا در ارسال داده')
-            }
+        if(flag){
 
-        })
+            
+            let isRequired = cpmrequired.checked ? 1 : 0;
+
+            let formData = new FormData()
+            
+            formData.append('title' , cpmtitle.value)
+            formData.append('description' , cpmdescription.value)
+            formData.append('price_per_unit' , cpm_price_per_unit.value)
+            formData.append('required' , isRequired)
+            formData.append('order' , cpmorder.value)
+            formData.append('max_unit_amount' , cpm_max_unit_amount.value)
+            formData.append('custom_pro_id' , cpm_custom_pro_id.value)
+            formData.append('category_id' , cpm_category_id.value)
+            if (cpmImage.files[0]) {
+                formData.append('cpmImage' ,cpmImage.files[0])
+            }
+            storecpmloading.classList.remove('hidden')
+            storecpmloading.classList.add('flex')
+            storecpmloading.innerHTML = `
+            <div class="loading-wave">
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+            </div>
+            `
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                }
+            })
+            $.ajax({
+                url : "{{ route('cpm.store') }}" ,
+                type : "POST" ,
+                data : formData ,
+                contentType : false ,
+                processData : false ,
+            
+                
+                success: function(data){
+                    console.log(data)
+                    storecpmloading.classList.remove('flex')
+                    storecpmloading.classList.add('hidden')
+                    cpmtitle.value = ""
+                    cpmdescription.value = ""
+                    cpm_price_per_unit.value = ""
+                    cpmorder.value = ""
+                    cpm_max_unit_amount.value = ""
+                    cpmrequired.checked = false
+                    cpm_custom_pro_id.value = ""
+                    cpm_category_id.value = ""
+                    cpmImage.value = ""
+                
+                    closeForm()
+                },
+                error: function(){
+                    alert('خطا در ارسال داده')
+                }
+
+            })
+        }
     }
-}
+
     function Categorystore(ev){
         ev.preventDefault()
         let categoryRequired = document.querySelectorAll('.categoryRequired')
@@ -494,7 +546,16 @@
             if(checkBoxStatus){
                 category.value = 1
             }
-
+            storeCategoryloading.classList.remove('hidden')
+            storeCategoryloading.classList.add('flex')
+            storeCategoryloading.innerHTML = `
+            <div class="loading-wave">
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+            </div>
+            `
             $.ajaxSetup({
                 headers : {
                     'X-CSRF-TOKEN' : "{{ csrf_token() }}"
@@ -512,6 +573,8 @@
                 },
                 success: function(data){
                     console.log(data)
+                    storeCategoryloading.classList.remove('flex')
+                    storeCategoryloading.classList.add('hidden')
                     custom_pro_id_customCategory.value = ""
                     max_item_amount_customCategory.value =""
                     category.checked = 0
@@ -524,9 +587,15 @@
                     }
                     
                     let div = document.createElement('div')
-                    div.classList = "w-full flex flex-row lg:grid lg:grid-cols-9 items-center divide-x divide-[#f1f1f4] newParameters"
+                    div.classList = "w-full flex flex-row lg:grid lg:grid-cols-10 items-center divide-x divide-[#f1f1f4] newParameters"
                     div.setAttribute('data-cp-id', data.id)
                     let element = `
+                    <div
+                                            class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
+                                            <div class="w-10 lg:w-full">
+                                                <input type="checkbox" class="check" name="categories[]" value="${ data.id }">
+                                            </div>
+                                        </div>
                                         <div
                                             class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
                                             <span class="block w-10 lg:w-full">${i}</span>
@@ -590,6 +659,11 @@
                         
                         `
                     div.innerHTML = element
+                    if (custom_category_section.children.length > 0 && 
+                            custom_category_section.children[0].classList.contains('py-12')) {
+                            // اگر پیام "هیچ آیتمی یافت نشد" وجود دارد، حذفش کن
+                            custom_category_section.innerHTML = '';
+                        }
                     custom_category_section.appendChild(div)
                     // alert('دسته ' + data.title + 'با موفقیت ذخیره شد')
                     closeForm()
@@ -602,7 +676,6 @@
             })
         }
     }
-
 
     function editCategory(id){
         categoryEditForm.classList.remove('invisible')
@@ -649,12 +722,6 @@
         })
     }
 
- 
-
-
-
-
-
     function updateCategory(ev){
         let newParameters = document.querySelectorAll('.newParameters')
         ev.preventDefault()
@@ -693,22 +760,22 @@
             success: function(data){
                 newParameters.forEach((element)=>{
                     if(element.getAttribute('data-cp-id') == data.id){
-                        element.children[1].children[0].innerText = data.title 
+                        element.children[2].children[0].innerText = data.title 
                         if(data.required == 1){
-                            element.children[2].children[0].innerText = 'الزامی'
-                            element.children[2].children[0].classList.remove('bg-green-100')
-                            element.children[2].children[0].classList.remove('text-green-700')
-                            element.children[2].children[0].classList.add('bg-red-100')
-                            element.children[2].children[0].classList.add('text-red-700')
+                            element.children[3].children[0].innerText = 'الزامی'
+                            element.children[3].children[0].classList.remove('bg-green-100')
+                            element.children[3].children[0].classList.remove('text-green-700')
+                            element.children[3].children[0].classList.add('bg-red-100')
+                            element.children[3].children[0].classList.add('text-red-700')
                         }
                         if(data.required == 0){
-                            element.children[2].children[0].innerText = 'اختیاری' 
-                            element.children[2].children[0].classList.remove('bg-red-100')
-                            element.children[2].children[0].classList.remove('text-red-700')
-                            element.children[2].children[0].classList.add('bg-green-100')
-                            element.children[2].children[0].classList.add('text-green-700')
+                            element.children[3].children[0].innerText = 'اختیاری' 
+                            element.children[3].children[0].classList.remove('bg-red-100')
+                            element.children[3].children[0].classList.remove('text-red-700')
+                            element.children[3].children[0].classList.add('bg-green-100')
+                            element.children[3].children[0].classList.add('text-green-700')
                         }
-                        element.children[3].children[0].innerText = data.max_item_amount 
+                        element.children[4].children[0].innerText = data.max_item_amount 
                     }
                 })
                 closeForm()
@@ -721,42 +788,41 @@
         })
     }
 
-    
     function deleteC(element , catId){
     
-    
-    $.ajaxSetup({
-        headers : {
-            'X-CSRF-TOKEN' : "{{ csrf_token() }}"
-        }
-    })
-    
-    $.ajax({
-        url : "{{ route('custmCategory.delete') }}" ,
-        type : "POST" ,
-        dataType : "json" ,
-        data : {
-            'id': catId,
-        },
-        success: function(data){
-            let row = element.parentElement.parentElement.parentElement.parentElement.parentElement;
-            if (row) {
-                row.remove();
+        $.ajaxSetup({
+            headers : {
+                'X-CSRF-TOKEN' : "{{ csrf_token() }}"
             }
-            let remainingCategories = custom_category_section.querySelectorAll('.newParameters');
-            if (remainingCategories.length === 0) {
-                custom_category_section.innerHTML = `
-                    <div class="py-12 text-center empty-message" id="empty-category-message">
-                        <h3 class="text-lg font-medium text-gray-600 mb-2">هیچ دسته بندی یافت نشد</h3>
-                        <p class="text-gray-500 text-sm mb-6">هنوز هیچ دسته بندی ای ایجاد نکرده‌اید</p>
-                    </div>
-                `;
+        })
+        
+        $.ajax({
+            url : "{{ route('custmCategory.delete') }}" ,
+            type : "POST" ,
+            dataType : "json" ,
+            data : {
+                'id': catId,
+            },
+            success: function(data){
+                let row = element.parentElement.parentElement.parentElement.parentElement.parentElement;
+                if (row) {
+                    row.remove();
+                }
+                let remainingCategories = custom_category_section.querySelectorAll('.newParameters');
+                if (remainingCategories.length === 0) {
+                    custom_category_section.innerHTML = `
+                        <div class="py-12 text-center empty-message" id="empty-category-message">
+                            <h3 class="text-lg font-medium text-gray-600 mb-2">هیچ دسته بندی یافت نشد</h3>
+                            <p class="text-gray-500 text-sm mb-6">هنوز هیچ دسته بندی ای ایجاد نکرده‌اید</p>
+                        </div>
+                    `;
+                }
+            },
+            error: function(){
+                alert('خطا در حذف داده: ')
             }
-        },
-        error: function(){
-            alert('خطا در حذف داده: ')
-        }
-    })
-}
+        })
+    }
 </script>
+<script src="{{ asset('assets/js/checkAll.js') }}"></script>
 @endsection

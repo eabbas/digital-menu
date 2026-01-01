@@ -57,9 +57,19 @@ class CustomCategoryController extends Controller
 
     public function delete(request $request)
     {
+        // return response()->json($request->all());
         $category = customCategory::find($request->id);
+        // if (count($category->custom_product_material)) {
+        //     foreach ($category->custom_product_material as $material) {
+        //         $material->delete();
+        //     }
+        // }
+        // if (count($category->custom_products)) {
+        //     foreach ($category->custom_products as $customProduct) {
+        //         $customProduct->delete();
+        //     }
+        // }
         $category->delete();
-        
         return response()->json([
             'success' => true,
             'message' => 'دسته‌بندی با موفقیت حذف شد'
@@ -69,5 +79,16 @@ class CustomCategoryController extends Controller
     public function item_list(customCategory $customCategory)
     {
         return view('admin.customCategory.item_list', ['customCategory' => $customCategory]);
+    }
+    public function deleteAll(Request $request)
+    {
+        if(!isset($request->categories)){
+            return redirect()->back();
+        }
+        foreach($request->categories as $category_id){
+            $category = customCategory::find($category_id);
+            $category->delete();
+        }
+        return redirect()->back();
     }
 }

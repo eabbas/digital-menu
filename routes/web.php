@@ -57,6 +57,7 @@ Route::group([
     Route::get('/edit/{user}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{user}', 'delete')->name('delete');
+    Route::get('/deleteAll', 'deleteAll')->name('deleteAll');
     Route::get('/compelete', 'compelete_form')->name('compelete_form');
     Route::post('/save', 'save')->name('save');
     // Route::get('/admin/create', 'adminCreate')->name('adminCreate');
@@ -463,6 +464,7 @@ Route::group([
     Route::post('/edit', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::post('/delete', 'delete')->name('delete');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
 Route::group([
     'prefix' => 'customCategories',
@@ -478,6 +480,7 @@ Route::group([
     Route::post('/edit/{customCategory?}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::post('/delete', 'delete')->name('delete');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
 
 Route::group([
