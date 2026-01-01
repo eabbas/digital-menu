@@ -33,10 +33,12 @@ use App\Http\Controllers\SocialMediaController;
 use App\Http\Middleware\LoginMiddleware;
 use App\Http\Middleware\UserMiddleware;
 
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('search', [HomeController::class, 'search'])->name('search');
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware([LoginMiddleware::class]);
 Route::get('/signup', [UserController::class, 'create'])->name('signup')->middleware([LoginMiddleware::class]);
+Route::post('/send_code', [UserController::class, 'send_code'])->name('send_code');
 Route::post('/check', [UserController::class, 'checkAuth'])->name('checkAuth');
 
 Route::group([
