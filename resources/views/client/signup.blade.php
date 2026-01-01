@@ -29,17 +29,25 @@
                         class="w-full flex flex-col items-center my-6 gap-2 md:gap-3" method="post" id="signupForm">
                         @csrf
                         <input type="text"
-                            class="w-full p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border border-[#DBDFE9] outline-none"
+                            class="w-full p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
                             name="name" placeholder="نام" required>
                         <input type="text"
-                            class="w-full p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border border-[#DBDFE9] outline-none"
+                            class="w-full p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
                             name="family" placeholder="نام خانوادگی" required>
                         <input type="number"
-                            class="w-full p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border border-[#DBDFE9] outline-none"
+                            class="w-full p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
                             name="phoneNumber" placeholder="شماره تلفن" required id="phoneNumber">
                         <input type="password"
-                            class="w-full p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border border-[#DBDFE9] outline-none"
+                            class="w-full p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
                             name="password" placeholder="کلمه عبور" required>
+                        <div class="w-full flex flex-row items-center gap-3">
+                            <input type="number"
+                                class="w-3/4 p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
+                                name="code" placeholder="کد" required id="code">
+                            <button type="button"
+                                class="w-1/4 p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] bg-sky-500 hover:bg-sky-600 text-white cursor-pointer"
+                                onclick="sendCode()">ارسال کد </button>
+                        </div>
                         <div class="w-full flex gap-2 items-center ">
                             <input type="checkbox" name="rules" value="1" class="size-5 max-md:my-1"
                                 onchange="checkRule()" id="rule">
@@ -89,11 +97,11 @@
                                         طراحی اساسا مورد استفاده قرار گیرد.
                                     </p>
                                     <span
-                                        class="inline-block float-left mb-5 px-5 py-1 border border-gray-300 rounded-md text-gray-600 cursor-pointer transition-all duration-300 hover:border-black hover:text-black text-xs lg:text-base"
+                                        class="inline-block float-left mb-5 px-5 py-1 border-1 border-gray-300 rounded-md text-gray-600 cursor-pointer transition-all duration-300 hover:border-black hover:text-black text-xs lg:text-base"
                                         onclick="rules('close')">بستن</span>
                                 </div>
                                 <span
-                                    class="absolute p-1 border border-gray-300 rounded-md text-gray-600 cursor-pointer top-2 right-2 transition-all duration-300 closeButtonXmark"
+                                    class="absolute p-1 border-1 border-gray-300 rounded-md text-gray-600 cursor-pointer top-2 right-2 transition-all duration-300 closeButtonXmark"
                                     onclick="rules('close')">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
                                         <path fill="rgb(180, 180, 180)"
@@ -129,6 +137,35 @@
         </div>
     </footer>
     <script>
+        let code = document.getElementById('code')
+
+        function sendCode() {
+            let phoneNumber = document.getElementById('phoneNumber')
+            if (phoneNumber.value == "") {
+                alert('لطفا شماره تلفن را وارد نمایید')
+            } else {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+                $.ajax({
+                    url: "{{ route('send_code') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'phoneNumber': phoneNumber.value,
+                    },
+                    success: function(data) {
+                        console.log(data)
+                    },
+                    error: function() {
+                        alert('خطا در دریافت داده')
+                    }
+                })
+            }
+        }
+
         let signupForm = document.getElementById('signupForm')
 
         function checkAuth(e) {
@@ -144,16 +181,24 @@
                 type: "POST",
                 dataType: "json",
                 data: {
-                    'phoneNumber': phoneNumber.value
+                    'phoneNumber': phoneNumber.value,
+                    'code': code.value
                 },
-                success: function(user){
-                    if (user.id) {
+                success: function(user) {
+                    console.log(user)
+                    if (user.validate) {
                         alert("شما قبلا با این شماره ثبت نام کرده اید")
+                        location.assign("{{ route('login') }}")
                     } else {
-                        signupForm.submit()
+                        if (!user.checkCode) {
+                            alert('کد وارد شده نامعتبر')
+                        }
+                        if (user.checkCode) {
+                            signupForm.submit()
+                        }
                     }
                 },
-                error: function(){
+                error: function() {
                     alert('خطا در بارگیری اطلاعات')
                 }
             })
