@@ -171,37 +171,41 @@
         function checkAuth(e) {
             e.preventDefault()
             let phoneNumber = document.getElementById('phoneNumber')
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-            $.ajax({
-                url: "{{ route('checkAuth') }}",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    'phoneNumber': phoneNumber.value,
-                    'code': code.value
-                },
-                success: function(user) {
-                    console.log(user)
-                    if (user.validate) {
-                        alert("شما قبلا با این شماره ثبت نام کرده اید")
-                        location.assign("{{ route('login') }}")
-                    } else {
-                        if (!user.checkCode) {
-                            alert('کد وارد شده نامعتبر')
-                        }
-                        if (user.checkCode) {
-                            signupForm.submit()
-                        }
+            if (phoneNumber.value == "" && code.value == "") {
+                alert('لطفا همه فیلد هارا پر کنید')
+            } else {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
                     }
-                },
-                error: function() {
-                    alert('خطا در بارگیری اطلاعات')
-                }
-            })
+                })
+                $.ajax({
+                    url: "{{ route('checkAuth') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'phoneNumber': phoneNumber.value,
+                        'code': code.value
+                    },
+                    success: function(user) {
+                        console.log(user)
+                        if (user.validate) {
+                            alert("شما قبلا با این شماره ثبت نام کرده اید")
+                            location.assign("{{ route('login') }}")
+                        } else {
+                            if (!user.checkCode) {
+                                alert('کد وارد شده نامعتبر')
+                            }
+                            if (user.checkCode) {
+                                signupForm.submit()
+                            }
+                        }
+                    },
+                    error: function() {
+                        alert('خطا در بارگیری اطلاعات')
+                    }
+                })
+            }
         }
     </script>
     <script src="{{ asset('assets/js/rules.js') }}"></script>
