@@ -196,7 +196,11 @@
                                             <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
                                                 src="{{ asset('storage/${user.main_image}') }}">
                                             @endif
-                                           
+                                             @if (!$user->main_image)
+                                            <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
+                                                src="{{ asset('assets/img/user.png') }}">
+                                                
+                                            @endif
                                         </div>
                                     </div>
                                     <div
@@ -207,9 +211,6 @@
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
                                         <span class="block w-20 lg:w-full">${user.phoneNumber}</span>
                                     </div>
-                                    
-                              
-                                    
                                     <div class="col-span-3">
                                         <div class="w-[270px] grid grid-cols-2 divide-x divide-[#f1f1f4] items-center">
                                             <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3">
