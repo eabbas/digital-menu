@@ -68,6 +68,7 @@ Route::group([
     route::post('/set_order', 'set_order')->name('set_order');
     Route::get('/create_user', 'create_user')->name('create_user');
     Route::post('/store_user', 'store_user')->name('store_user');
+    Route::post('/search', 'search')->name('search');
 });
 
 Route::group([

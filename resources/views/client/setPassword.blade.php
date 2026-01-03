@@ -40,7 +40,7 @@
                             class="focus:border-1 focus:border-blue-400 p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] focus:outline-none w-full"
                             name="password" placeholder="رمز عبور" required>
                         <button
-                            class="focus:bg-[#2c44cb] hover:bg-[#2c44cb] transition-all duration-400 text-center w-full bg-[#056EE9] p-2 md:p-3 rounded-[10px] text-white cursor-pointer">ورود</button>
+                            class="focus:bg-[#2c44cb] hover:bg-[#2c44cb] transition-all duration-400 text-center w-full bg-[#056EE9] p-2 md:p-3 rounded-[10px] text-white cursor-pointer">ثبت</button>
                     </form>
                 </div>
             </div>

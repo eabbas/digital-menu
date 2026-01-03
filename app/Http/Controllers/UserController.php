@@ -266,4 +266,9 @@ class UserController extends Controller
         $user->save();
         return to_route('login');
     }
+     public function search(Request $request)
+    {
+        $users=User::where('family',$request->key)->get();
+        return response()->json($users);
+    }
 }

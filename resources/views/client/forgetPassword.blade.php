@@ -43,11 +43,11 @@
                                 class="w-3/4 p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
                                 name="code" placeholder="کد" required id="code">
                             <button type="button"
-                                class="w-1/4 p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] bg-sky-500 hover:bg-sky-600 text-white cursor-pointer"
+                                class="w-1/4 text-xs lg:text-base p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] bg-sky-500 hover:bg-sky-600 text-white cursor-pointer"
                                 onclick="sendCode()">ارسال کد </button>
                         </div>
                         <button onclick="check(event)"
-                            class="focus:bg-[#2c44cb] hover:bg-[#2c44cb] transition-all duration-400 text-center w-full bg-[#056EE9] p-2 md:p-3 rounded-[10px] text-white cursor-pointer">ورود</button>
+                            class="focus:bg-[#2c44cb] hover:bg-[#2c44cb] transition-all duration-400 text-center w-full bg-[#056EE9] p-2 md:p-3 rounded-[10px] text-white cursor-pointer">بازیابی رمز عبور</button>
                     </form>
                 </div>
             </div>
