@@ -16,7 +16,7 @@
 
 <body>
     <div class="w-full h-dvh flex flex-col justify-start items-center md:flex-row-reverse">
-        <div class="flex justify-center max-sm:h-30 max-md:h-35 md:h-dvh md:w-4/12 lg:w-5/12 xl:w-6/12 bg-[#056EE9]">
+        <div class="flex justify-center max-sm:h-30 max-md:h-35 md:h-dvh md:w-4/12 lg:w-5/12 xl:w-6/12 bg-[#00897b]">
             <div class="flex flex-col my-12 items-center justify-center">
                 <div class="w-full flex flex-row justify-center items-center">
                     <img class="max-md:w-4/12 w-8/12" src="{{ asset('assets/img/e125edbd-f303-47f3-9dbc-af414f99ccb2.webp') }}" alt="">
@@ -40,14 +40,14 @@
                             class="focus:border-1 focus:border-blue-400 p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] focus:outline-none w-full"
                             name="password" placeholder="کلمه عبور" required>
                         <div class="w-full text-center">
-                            <a href="{{ route('forget_password') }}" class="text-[#1B84FF] inline-block max-md:my-1 my-4 max-md:text-sm">فراموشی رمز عبور</a>
+                            <a href="{{ route('forget_password') }}" class="text-[#00897b] inline-block max-md:my-1 my-4 max-md:text-sm">فراموشی رمز عبور</a>
                         </div>
                         <button
-                            class="focus:bg-[#2c44cb] hover:bg-[#2c44cb] transition-all duration-400 text-center w-full bg-[#056EE9] p-2 md:p-3 rounded-[10px] text-white cursor-pointer">ورود</button>
+                            class="focus:bg-[#119a8c] hover:bg-[#119a8c] transition-all duration-400 text-center w-full bg-[#00897b] p-2 md:p-3 rounded-[10px] text-white cursor-pointer">ورود</button>
                         <div class="w-full text-center">
                             <span class="text-[#4B5675] mt-1 md:mt-5 max-md:text-sm">
                                  هنوز عضو نشدی؟
-                                <a href="{{ route('signup') }}" class="text-[#1B84FF] mr-2">ثبت نام!</a>
+                                <a href="{{ route('signup') }}" class="text-[#00897b] mr-2">ثبت نام!</a>
                             </span>
                         </div>
                     </form>
