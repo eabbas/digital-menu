@@ -4,10 +4,10 @@
 @section('content')
     <div class="w-full h-full pt-5 samim">
         <section>
-            <div class="flex flex-row justify-between items-center">
+            {{-- <div class="flex flex-row justify-between items-center">
                 <h1 class="text-xl">پیشنهادات ویژه</h1>
                 <a class="text-[13px] text-[#00897b]" href="#">مشاهده همه</a>
-            </div>
+            </div> --}}
             <div class="w-full bg-green-300 h-40 overflow-hidden rounded-[15px] my-3">
                 {{-- slider --}}
                 <img class="size-full rounded-inherit object-cover"

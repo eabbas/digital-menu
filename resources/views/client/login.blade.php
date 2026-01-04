@@ -34,10 +34,10 @@
                         method="post">
                         @csrf
                         <input type="number"
-                            class="focus:border-1 focus:border-blue-400 p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] focus:outline-none w-full"
+                            class="placeholder-[#00897b] focus:border-1 focus:border-[#00897b] p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] focus:outline-none w-full"
                             name="phoneNumber" placeholder="شماره تلفن" required>
                         <input type="password"
-                            class="focus:border-1 focus:border-blue-400 p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] focus:outline-none w-full"
+                            class="placeholder-[#00897b] focus:border-1 focus:border-[#00897b] p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] focus:outline-none w-full"
                             name="password" placeholder="کلمه عبور" required>
                         <div class="w-full text-center">
                             <a href="{{ route('forget_password') }}" class="text-[#00897b] inline-block max-md:my-1 my-4 max-md:text-sm">فراموشی رمز عبور</a>
