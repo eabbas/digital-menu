@@ -663,9 +663,7 @@
                         alert('خطا در ارسال داده ها')
                     }
                 })
-
             }
-
         }
 
         function updateLink(e) {
@@ -1004,7 +1002,7 @@
                     'social_address_id': id
                 },
                 success: function(datas) {
-                    el.parentElement.parentElement.remove()
+                    el.parentElement.parentElement.parentElement.remove()
                 },
                 error: function() {
                     alert('خطا در بارگیری اطلاعات')
