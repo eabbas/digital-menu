@@ -188,7 +188,6 @@
                         'code': code.value
                     },
                     success: function(user) {
-                        console.log(user)
                         if (user.validate) {
                             alert("شما قبلا با این شماره ثبت نام کرده اید")
                             location.assign("{{ route('login') }}")

@@ -10,6 +10,9 @@ class ClientController extends Controller
 {
     public function show_menu(career $career, string $slug = null)
     {
+        $user = $career->user;
+        $user->scan_count += 1;
+        $user->save();
         // set qr count in qrcode controller load method
         return view('client.menu', ['career' => $career, 'slug' => $slug]);
     }
