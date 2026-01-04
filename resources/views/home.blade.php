@@ -22,7 +22,7 @@
             </div> --}}
             <div class="flex flex-row justify-between items-center">
                 <h1 class="text-xl">دسته بندی</h1>
-                <a class="text-[13px] text-[#00897b]" href="#">مشاهده همه</a>
+                <a class="text-[13px] text-[#00897b]" href="{{ route('career.careersCategories') }}">مشاهده همه</a>
             </div>
             <div class="flex flex-row gap-3 my-4 overflow-x-auto overflow-y-clip" style="scrollbar-width: none;">
                 @foreach ($careerCategories as $careerCategory)
@@ -46,7 +46,7 @@
                 <h1 class="text-xl" id="careerCatTitle">
                   کسب و کار ها
                 </h1>
-                <a class="text-[13px] text-[#00897b]" href="#">مشاهده همه</a>
+                <a class="text-[13px] text-[#00897b]" href="{{ route('career.careersList') }}">مشاهده همه</a>
             </div>
             <div class="grid grid-cols-2 gap-4">
                 @foreach($careers as $career)

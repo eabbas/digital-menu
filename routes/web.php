@@ -87,6 +87,8 @@ Route::group([
     Route::get('/show/{career}', 'single')->name('single')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/qrcodes/{career}', 'qr_codes')->name('qr_codes');
     Route::get('/menuList/{career}', 'menus')->name('menus');
+    Route::get('/careersCategories', 'careersCategories')->name('careersCategories')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/careersList', 'careersList')->name('careersList')->withoutMiddleware([UserMiddleware::class]);
     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
 Route::group([
