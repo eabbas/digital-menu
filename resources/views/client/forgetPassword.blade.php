@@ -111,14 +111,18 @@
                         'code': code.value
                     },
                     success: function(user) {
-                        console.log(user)
-                        if (!user.checkCode) {
-                            alert('کد وارد شده نامعتبر')
+                        if (!user.validate) {
+                        alert("قبلا ثبت نام نکرده اید")
+                        location.assign("{{ route('signup') }}")
+                        }else{
+                            if (!user.checkCode) {
+                                alert('کد وارد شده نامعتبر')
+                            }
+                            if (user.checkCode) {
+                                checkCodeForm.submit()
+                            }
+
                         }
-                        if (user.checkCode) {
-                            checkCodeForm.submit()
-                        }
-    
                     },
                     error: function() {
                         alert('خطا در بارگیری اطلاعات')
