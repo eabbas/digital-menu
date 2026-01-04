@@ -246,4 +246,15 @@ class CareerController extends Controller
         }
         return redirect()->back();
     }
+    public function careersCategories()
+    {
+        $careerCategories = careerCategory::all();
+        return view('client.career.careersCategories' , ['careerCategories'=> $careerCategories]);
+    }
+    public function careersList()
+    {
+        $careers = career::all();
+        return view('client.career.careersList' , ['careers'=> $careers]);
+        // dd($careers);
+    }
 }
