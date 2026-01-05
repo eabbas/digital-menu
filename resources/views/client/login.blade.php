@@ -56,7 +56,7 @@
         </div>
     </div>
     <footer>
-        <div class="w-full h-17 bg-[#056ee9] absolute bottom-0 flex flex-col justify-center items-center md:hidden">
+        <div class="w-full h-17 bg-[#00897b] absolute bottom-0 flex flex-col justify-center items-center md:hidden">
             <div class="">اکادمی <b class="text-xl">Faos</b></div>
             <a href="tell:"><b class="text-white">09147794595</b></a>
         </div>
