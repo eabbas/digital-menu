@@ -12,7 +12,6 @@
             <div class="pb-6 text-xl text-gray-600 text-center font-bold">
                 <h3>{{ $menu->subtitle }}</h3>
             </div>
-
             <!-- Stats and Actions -->
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
                 
