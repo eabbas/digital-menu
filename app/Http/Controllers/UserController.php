@@ -256,8 +256,13 @@ class UserController extends Controller
 
     public function set_password(Request $request){
         $user = User::where('phoneNumber', $request->phoneNumber)->first();
-        return view('client.setPassword', ['user'=>$user]);
+        return to_route('reset_password', [$user]);
     }
+    
+    public function reset_password(User $user){
+        
+        return view('client.setPassword', ['user'=>$user]);
+    }   
 
     public function save_password(Request $request){
         $user = User::find($request->user_id);
