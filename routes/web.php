@@ -90,6 +90,7 @@ Route::group([
     Route::get('/careersCategories', 'careersCategories')->name('careersCategories')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/careersList', 'careersList')->name('careersList')->withoutMiddleware([UserMiddleware::class]);
     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+    Route::get('/categoryCareers/{careerCategory}', 'categoryCareers')->name('categoryCareers');
 });
 Route::group([
     'prefix' => 'province',

@@ -257,4 +257,10 @@ class CareerController extends Controller
         return view('client.career.careersList' , ['careers'=> $careers]);
         // dd($careers);
     }
+    public function categoryCareers(careerCategory $careerCategory)
+    {
+        // $careerCategory->careers;
+        // dd($careerCategory->careers);
+        return view('client.career.categoryCareers', ['careerCategory' => $careerCategory]);
+    }
 }
