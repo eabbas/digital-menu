@@ -9,7 +9,7 @@
     <title>ورود</title>
         <style>
         input:focus{
-            color:#2196F3;
+            color:#00897b;
         }
     </style>
 </head>
