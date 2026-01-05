@@ -115,7 +115,7 @@
                             class="focus:bg-[#00897b] transition-all duration-400 text-center w-full bg-gray-400 py-2 md:p-3 rounded-[10px] text-white cursor-no-drop"
                             id="signupButton" disabled onclick="checkAuth(event)">ثبت نام</button>
                         <div class="w-full text-center my-1 md:my-4">
-                            <span class="text-sm text-[#00897b] mt-5">
+                            <span class="text-sm mt-5">
                                 از قبل اکانت داری؟
                                 <a href="{{ route('login') }}" class="text-[#00897b]">
                                     ورود
