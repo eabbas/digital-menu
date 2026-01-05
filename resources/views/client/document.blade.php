@@ -11,7 +11,7 @@
 </head>
 
 <body class="bg-[#ffffff]">
-    <header class="w-full px-6 pt-4 pb-4 rounded-b-[15px] bg-[#00a692]">
+    <header class="w-full px-3 pt-4 pb-4 bg-[#00a692]">
         <div class="w-full flex flex-row items-center justify-between gap-3">
             <div class="flex flex-row items-center gap-3">
                 <div class="rounded-md p-2 bg-white/20 cursor-pointer" onclick="home_menu('open')">
@@ -117,9 +117,16 @@
         
     </header>
 
-    <main class="2xl:container mx-auto w-11/12">
+    <main class="2xl:container mx-auto w-11/12 mb-16">
         @yield('content')
     </main>
+     <footer class="fixed w-full bottom-0 right-0">
+        <div
+            class="w-full bg-[#00a693] absolute bottom-0 flex flex-col gap-1 pt-1 justify-center items-center rounded-t-sm">
+            <span>آکادمی فائوس</span>
+            <a href="tel:+989147794595" class="text-white">09147794595</a>
+        </div>
+    </footer>
         <script src="{{ asset('assets/js/home.js') }}"></script>
 </body>
 

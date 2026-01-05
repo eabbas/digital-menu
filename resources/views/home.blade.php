@@ -2,7 +2,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 @section('title', 'خانه')
 @section('content')
-    <div class="w-full h-full pt-5 samim">
+    <div class="w-full pt-5 samim">
         <section>
             {{-- <div class="flex flex-row justify-between items-center">
                 <h1 class="text-xl">پیشنهادات ویژه</h1>
