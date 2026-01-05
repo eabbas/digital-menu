@@ -12,7 +12,7 @@
 
 <body class="bg-[#ffffff]">
     <header class="w-full px-6 pt-4 pb-4 rounded-b-[15px] bg-[#00a692]">
-        <div class="w-full flex flex-row items-center justify-between">
+        <div class="w-full flex flex-row items-center justify-between gap-3">
             <div class="flex flex-row items-center gap-3">
                 <div class="rounded-md p-2 bg-white/20 cursor-pointer" onclick="home_menu('open')">
                     <div class="w-5 h-4 flex flex-col justify-between items-center">
@@ -21,8 +21,26 @@
                         <span class="block w-full h-0.5 bg-white"></span>
                     </div>
                 </div>
-        
             </div>
+            <form action="{{ route('search') }}" method="post" class="w-full">
+                @csrf
+                <div class="w-full flex flex-row items-center samim">
+                   
+                    <div class="w-full bg-white flex flex-row rounded-full items-center gap-2 px-3">
+                        
+                        <input class="outline-none py-2 w-full" type="text" name="search" placeholder="جستجوی کسب و کار">
+                    </div>
+                     <div class="p-2 flex justify-center items-center rounded-full bg-white mr-2 cursor-pointer">
+                        <button class="cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg>
+                    </button>
+                    </div>
+                </div>
+            </form>
          
         </div>
         <!-- hamburger menu -->
@@ -96,22 +114,7 @@
         </div>
 
         <!-- hamburger menu end -->
-        <form action="{{ route('search') }}" method="post">
-            @csrf
-            <div class="flex flex-row-reverse justify-between samim mt-2">
-                <div class="size-10 flex justify-center items-center rounded-[7px] bg-white w-[60px] mr-2">
-                    <button>جستجو</button>
-                </div>
-                <div class="w-[calc(100%-3rem)] bg-white flex flex-row rounded-[7px] items-center gap-2 px-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                    </svg>
-                    <input class="outline-none py-2 w-full" type="text" name="search" placeholder="جستجوی کسب و کار">
-                </div>
-            </div>
-        </form>
+        
     </header>
 
     <main class="2xl:container mx-auto w-11/12">
