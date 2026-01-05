@@ -50,7 +50,7 @@
                                         @endif
                                         @if (!$careerCategory->main_image)
                                             <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
-                                                src={{ asset('assets/img/user.png') }}>
+                                                src={{ asset('assets/img/default.png') }}>
                                         @endif
                                     </div>
                                 </div>
