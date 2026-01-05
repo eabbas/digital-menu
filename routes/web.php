@@ -41,6 +41,7 @@ Route::get('/signup', [UserController::class, 'create'])->name('signup')->middle
 Route::post('/send_code', [UserController::class, 'send_code'])->name('send_code');
 Route::get('/forget_password', [UserController::class, 'forget_password'])->name('forget_password');
 Route::post('/set_password', [UserController::class, 'set_password'])->name('set_password');
+Route::get('/reset_password/{user}', [UserController::class, 'reset_password'])->name('reset_password');
 Route::post('/save_password', [UserController::class, 'save_password'])->name('save_password');
 Route::post('/check', [UserController::class, 'checkAuth'])->name('checkAuth');
 
