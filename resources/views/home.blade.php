@@ -6,7 +6,7 @@
         <section>
             {{-- <div class="flex flex-row justify-between items-center">
                 <h1 class="text-xl">پیشنهادات ویژه</h1>
-                <a class="text-[13px] text-[#00897b]" href="#">مشاهده همه</a>
+                <a class="text-[13px] text-[#00a692]" href="#">مشاهده همه</a>
             </div> --}}
             <div class="w-full bg-green-300 h-40 overflow-hidden rounded-[15px] my-3">
                 {{-- slider --}}
@@ -16,13 +16,13 @@
             </div>
             {{-- <div class="my-3 flex flex-row justify-center items-center gap-2">
                 <span class="size-2 rounded-full bg-gray-300"></span>
-                <span class="size-2 rounded-full bg-[#00897b]"></span>
+                <span class="size-2 rounded-full bg-[#00a692]"></span>
                 <span class="size-2 rounded-full bg-gray-300"></span>
                 <span class="size-2 rounded-full bg-gray-300"></span>
             </div> --}}
             <div class="flex flex-row justify-between items-center">
                 <h1 class="text-xl">دسته بندی</h1>
-                <a class="text-[13px] text-[#00897b]" href="{{ route('career.careersCategories') }}">مشاهده همه</a>
+                <a class="text-[13px] text-[#00a692]" href="{{ route('career.careersCategories') }}">مشاهده همه</a>
             </div>
             <div class="flex flex-row gap-3 my-4 overflow-x-auto overflow-y-clip" style="scrollbar-width: none;">
                 @foreach ($careerCategories as $careerCategory)
@@ -46,7 +46,7 @@
                 <h1 class="text-xl" id="careerCatTitle">
                   کسب و کار ها
                 </h1>
-                <a class="text-[13px] text-[#00897b]" href="{{ route('career.careersList') }}">مشاهده همه</a>
+                <a class="text-[13px] text-[#00a692]" href="{{ route('career.careersList') }}">مشاهده همه</a>
             </div>
             <div class="grid grid-cols-2 gap-4">
                 @foreach($careers as $career)

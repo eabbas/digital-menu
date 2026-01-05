@@ -17,7 +17,7 @@
 
 <body>
     <div class="w-full h-dvh flex flex-col justify-start items-center md:flex-row-reverse">
-        <div class="flex justify-center max-sm:h-30 max-md:h-35 md:h-dvh md:w-4/12 lg:w-5/12 xl:w-6/12 bg-[#00897b]">
+        <div class="flex justify-center max-sm:h-30 max-md:h-35 md:h-dvh md:w-4/12 lg:w-5/12 xl:w-6/12 bg-[#00a692]">
             <div class="flex flex-col my-12 items-center justify-center">
                 <div class="w-full flex flex-row justify-center items-center">
                     <img class="max-md:w-4/12 w-8/12"
@@ -36,24 +36,24 @@
                         method="post" id="checkCodeForm">
                         @csrf
                         <input type="number"
-                            class="placeholder-[#00897b] focus:border-1 focus:border-[#00897b] p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] focus:outline-none w-full"
+                            class="placeholder-[#00a692] focus:border-1 focus:border-[#00a692] p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] focus:outline-none w-full"
                             name="phoneNumber" placeholder="شماره تلفن" id="phoneNumber" required>
                         <div class="w-full flex flex-row items-center gap-3">
                             <input type="number"
-                                class="w-3/4 p-2 placeholder-[#00897b] focus:border-1 focus:border-[#00897b] md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
+                                class="w-3/4 p-2 placeholder-[#00a692] focus:border-1 focus:border-[#00a692] md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
                                 name="code" placeholder="کد" required id="code">
                             <button type="button"
-                                class="w-1/4 text-xs lg:text-base p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] bg-[#00897b] hover:bg-[#119a8c] text-white cursor-pointer"
+                                class="w-1/4 text-xs lg:text-base p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] bg-[#00a692] hover:bg-[#119a8c] text-white cursor-pointer"
                                 onclick="sendCode()">ارسال کد </button>
                         </div>
                         <button onclick="check(event)"
-                            class="focus:bg-[#00897b] hover:bg-[#119a8c] transition-all duration-400 text-center w-full bg-[#00897b] p-2 md:p-3 rounded-[10px] text-white cursor-pointer">بازیابی رمز عبور</button>
+                            class="focus:bg-[#00a692] hover:bg-[#119a8c] transition-all duration-400 text-center w-full bg-[#00a692] p-2 md:p-3 rounded-[10px] text-white cursor-pointer">بازیابی رمز عبور</button>
                              <div class="w-full text-center my-1 md:my-4">
-                                <a href="{{ route('login') }}" class="text-[#00897b]">
+                                <a href="{{ route('login') }}" class="text-[#00a692]">
                                     ورود
                                 </a>
                                 <span> / </span>
-                                <a href="{{ route('signup') }}" class="text-[#00897b]">
+                                <a href="{{ route('signup') }}" class="text-[#00a692]">
                                     ثبت نام
                                 </a>
                         </div>
@@ -63,7 +63,7 @@
         </div>
     </div>
     <footer>
-        <div class="w-full h-17 bg-[#00897b] absolute bottom-0 flex flex-col justify-center items-center md:hidden">
+        <div class="w-full h-17 bg-[#00a692] absolute bottom-0 flex flex-col justify-center items-center md:hidden">
             <div class="">اکادمی <b class="text-xl">Faos</b></div>
             <a href="tell:"><b class="text-white">09147794595</b></a>
         </div>

@@ -12,7 +12,7 @@
 
 <body>
     <div class="w-full h-dvh flex flex-col justify-start items-center md:flex-row-reverse">
-        <div class="flex justify-center max-sm:h-25 max-md:h-30 md:h-dvh md:w-4/12 lg:w-5/12 xl:w-6/12 bg-[#00897b]">
+        <div class="flex justify-center max-sm:h-25 max-md:h-30 md:h-dvh md:w-4/12 lg:w-5/12 xl:w-6/12 bg-[#00a692]">
             <div class="flex flex-col my-12 items-center justify-center">
                 <div class="w-full flex flex-row justify-center items-center">
                     <img class="max-md:w-4/12 w-8/12"
@@ -45,7 +45,7 @@
                                 class="w-3/4 p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
                                 name="code" placeholder="کد" required id="code">
                             <button type="button"
-                                class="w-1/4 text-xs lg:text-base p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] bg-[#00897b] hover:bg-[#119a8c] text-white cursor-pointer"
+                                class="w-1/4 text-xs lg:text-base p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] bg-[#00a693] hover:bg-[#119a8c] text-white cursor-pointer"
                                 onclick="sendCode()">ارسال کد </button>
                         </div>
                         <div class="w-full flex gap-2 items-center ">
@@ -53,7 +53,7 @@
                                 onchange="checkRule()" id="rule">
                             <label for="rules" class="max-md:text-sm text-[#4B5675] cursor-pointer">قوانین را قبول
                                 میکنم
-                                <span class="text-[#00897b] cursor-pointer" onclick="rules('open')">قوانین</span>
+                                <span class="text-[#00a693] cursor-pointer" onclick="rules('open')">قوانین</span>
                             </label>
                         </div>
                         <!-- rules -->
@@ -112,12 +112,12 @@
                         </div>
                         <!-- rules end -->
                         <button
-                            class="focus:bg-[#00897b] transition-all duration-400 text-center w-full bg-gray-400 py-2 md:p-3 rounded-[10px] text-white cursor-no-drop"
+                            class="focus:bg-[#00a693] transition-all duration-400 text-center w-full bg-gray-400 py-2 md:p-3 rounded-[10px] text-white cursor-no-drop"
                             id="signupButton" disabled onclick="checkAuth(event)">ثبت نام</button>
                         <div class="w-full text-center my-1 md:my-4">
                             <span class="text-sm mt-5">
                                 از قبل اکانت داری؟
-                                <a href="{{ route('login') }}" class="text-[#00897b]">
+                                <a href="{{ route('login') }}" class="text-[#00a693]">
                                     ورود
                                 </a>
                             </span>
@@ -131,7 +131,7 @@
     </div>
     <footer>
         <div
-            class="w-full h-10 bg-[#00897b] absolute bottom-0 flex flex-row gap-4 justify-center items-center md:hidden">
+            class="w-full h-10 bg-[#00a693] absolute bottom-0 flex flex-row gap-4 justify-center items-center md:hidden">
             <div class="">اکادمی <b class="text-xl">Faos</b></div>
             <a href="tell:"><b class="text-white">09147794595</b></a>
         </div>
