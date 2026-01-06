@@ -10,7 +10,7 @@
     <title>ذخیره رمز جدید</title>
     <style>
         input:focus {
-            color: #2196F3;
+            color: #00a693;
         }
     </style>
 </head>
@@ -37,7 +37,7 @@
                         @csrf
                         <input type="hidden" name="user_id" value="{{ $user->id }}">
                         <input type="password"
-                            class="placeholder-[#00a692] focus:border-1 focus:border-[#00a692] p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#00a692] focus:outline-none w-full"
+                            class="placeholder-[#00a692] text-[#00a693] focus:border-1 focus:border-[#00a692] p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#00a692] focus:outline-none w-full"
                             name="password" placeholder="رمز عبور" required>
                         <button
                             class="focus:bg-[#00a692] hover:bg-[#119a8c] transition-all duration-400 text-center w-full bg-[#00a692] p-2 md:p-3 rounded-[10px] text-white cursor-pointer">ثبت</button>
