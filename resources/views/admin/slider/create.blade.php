@@ -22,11 +22,11 @@
                                 </div>
                             </div>
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                <label class="w-30 text-sm mb-1 mt-2.5 flex">آیکون شبکه اجتماعی</label>
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">عکس اسلایدر</label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2 cursor-pointer"
-                                        type="file" name='slider_img' title="آیکون شبکه اجتماعی">
+                                        type="file" name='slider_img' title="عکس اسلایدر">
                                 </div>
                             </div>
                         </div>
