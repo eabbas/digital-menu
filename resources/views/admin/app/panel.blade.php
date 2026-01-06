@@ -298,6 +298,41 @@
                         </li>
                     </ul>
                 </div>
+                {{-- contactUs --}}
+                <div class="dashboard">
+                    <div class="flex flex-row-reverse justify-between">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="size-6 fill-white w-[15px]">
+                            <path fill-rule="evenodd"
+                                d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <div class="flex flex-row-reverse items-center gap-2">
+                            <span class=" text-[white] flex justify-end font-bold">ارتباط باما</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="800px" height="800px"
+                                class="size-5 fill-white " viewBox="0 0 100 100" enable-background="new 0 0 100 100"
+                                xml:space="preserve">
+                                <path
+                                    d="M22.5,19.7h20c1.4,0,2.5,1.1,2.5,2.5v54.9c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V22.2  C20,20.8,21.1,19.7,22.5,19.7z" />
+                                <path
+                                    d="M57.5,19.6h20c1.4,0,2.5,1.1,2.5,2.5V42c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V22.1  C55,20.7,56.1,19.6,57.5,19.6z" />
+                                <path
+                                    d="M57.5,54.6h20c1.4,0,2.5,1.1,2.5,2.5v19.9c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V57.1  C55,55.8,56.1,54.6,57.5,54.6z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden">
+                           @if (Auth::user()->role[0]->title == 'admin')
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('contactUs.list') }}" class="text-white py-1">
+                                  لیست  تیکت ها
+                            </a>
+                        </li>
+                        @endif
+                    </ul>
+                </div>
+                {{-- end-contactUs --}}
                 {{-- customPro_list --}}
                 {{-- <div class="dashboard">
                     <div class="flex flex-row-reverse justify-between">
@@ -723,7 +758,28 @@
                                     </ul>
                                 </div>
                             @endif
+                            @if (Auth::user()->role[0]->title == 'admin')
+                                <div class="pt-3">
+                                    <h3 class="text-md font-bold text-gray-800 mb-1.5">
+                                        ارتباط با ما
+                                    </h3>
+                                    <ul class="pr-3.5">
+                                        <li>
+                                            <a href="{{ route('aboutUs.create_edit') }} }}"
+                                                class="block text-gray-700 py-2 text-md">
+                                                فرم ارتباط باما
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('aboutUs.list') }} }}"
+                                                class="block text-gray-700 py-2 text-md">
+                                                لیست ارتباط با ما
+                                            </a>
+                                        </li>
 
+                                    </ul>
+                                </div>
+                            @endif
 
 
                         </div>

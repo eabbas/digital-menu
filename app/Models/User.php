@@ -75,4 +75,7 @@ class User extends Authenticatable
     public function menus(){
         return $this->hasMany(menu::class);
     }
+    public function contactUs(){
+        return $this->hasMany(contactUs::class);
+    }
 }
