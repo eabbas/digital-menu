@@ -91,7 +91,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="block py-2 text-white font-medium">
+                            <a href="{{ route('contactUs.create') }}" class="block py-2 text-white font-medium">
                                 ارتباط با ما
                             </a>
                         </li>
