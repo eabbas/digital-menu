@@ -17,14 +17,13 @@ function rules(state){
 
 let signupButton = document.getElementById('signupButton')
 let rule = document.getElementById('rule')
-
 function checkRule(){
     if (rule.checked) {
         signupButton.classList.remove('bg-gray-400')
         signupButton.classList.add('bg-[#00a693]')
         signupButton.classList.add('hover:bg-[#119a8c]')
         signupButton.classList.add('cursor-pointer')
-        signupButton.removeAttribute('disabled') 
+        signupButton.removeAttribute('disabled')
     }
     if (!rule.checked) {
         signupButton.classList.add('bg-gray-400')

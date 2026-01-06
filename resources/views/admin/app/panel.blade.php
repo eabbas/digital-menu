@@ -435,10 +435,10 @@
                     <span class="w-full h-0.5 bg-black transition-all duration-300"></span>
                 </div>
                 @if (!Auth::user()->main_image)
-                    <img src="{{ asset('assets/img/user.png') }}" alt="user__avatar" class="size-16 rounded-xl">
+                    <img src="{{ asset('assets/img/user.png') }}" alt="user__avatar" class="size-16 rounded-full">
                 @else
                     <img src="{{ asset('storage/' . Auth::user()->main_image) }}" alt="user__picture"
-                        class="size-16 rounded-xl">
+                        class="size-16 rounded-full">
                 @endif
             </div>
             <!-- hamburger menu -->
