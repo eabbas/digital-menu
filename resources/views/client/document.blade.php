@@ -86,7 +86,7 @@
                         </li>
                         @endif
                         <li>
-                            <a href="{{ route('aboutUs.list') }}" class="block py-2 text-white font-medium">
+                            <a href="{{ route('aboutUs.clientList') }}" class="block py-2 text-white font-medium">
                                 درباره ما
                             </a>
                         </li>
