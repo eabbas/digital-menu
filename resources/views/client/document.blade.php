@@ -120,9 +120,9 @@
     <main class="2xl:container mx-auto w-11/12 mb-16">
         @yield('content')
     </main>
-     <footer class="fixed w-full bottom-0 right-0">
+     <footer class="w-full">
         <div
-            class="w-full bg-[#00a693] absolute bottom-0 flex flex-col gap-1 pt-1 justify-center items-center rounded-t-sm">
+            class="w-full bg-[#00a693] flex flex-col gap-1 pt-1 justify-center items-center rounded-t-sm">
             <span>آکادمی فائوس</span>
             <a href="tel:+989147794595" class="text-white">09147794595</a>
         </div>
