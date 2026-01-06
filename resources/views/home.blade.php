@@ -19,7 +19,7 @@
                 <span class="size-2 rounded-full bg-gray-300"></span>
             </div> --}}
             <div class="flex flex-row justify-between items-center">
-                <h1 class="text-xl">دسته بندی</h1>
+                <h1 class="text-xl">دسته ها</h1>
                 <a class="text-[13px] text-[#00a692]" href="{{ route('career.careersCategories') }}">مشاهده همه</a>
             </div>
             <div class="flex flex-row gap-3 my-4 overflow-x-auto overflow-y-clip" style="scrollbar-width: none;">
@@ -48,7 +48,7 @@
                 </h1>
                 <a class="text-[13px] text-[#00a692]" href="{{ route('career.careersList') }}">مشاهده همه</a>
             </div>
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 lg:grid-cols-8 gap-4">
 
                 @foreach($careers as $career)
                 <div class="relative careers" data-index="{{ $career->career_category_id }}">
