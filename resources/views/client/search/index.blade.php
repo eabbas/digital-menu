@@ -114,7 +114,7 @@
 @section('title', 'جست و جو')
     
 @section('content')
-<div class="py-2 flex flex-row items-center overflow-x-auto lg:hidden mt-4">
+<div class="py-2 flex flex-row items-center overflow-x-auto [&::-webkit-scrollbar]:hidden lg:hidden mt-4">
     <div class="px-3 py-1 ml-2 rounded-full border border-[var(--color-border)]">
         <div class=" flex flex-row items-center gap-1 cursor-pointer max-w-[100px] w-[74px]">
             <svg xmlns="http://www.w3.org/2000/svg" class="size-3" viewBox="0 0 576 512">

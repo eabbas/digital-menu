@@ -7,25 +7,17 @@ use Illuminate\Http\Request;
 
 class AboutUsController extends Controller
 {
-      public function create_edit($id=null){
-        $user = Auth::user();
-        return view('admin.aboutUs.create', ['user' => $user ,'id'=>$id]);
+      public function create_edit(aboutUs $aboutUs=null){
+        return view('admin.aboutUs.create', ['aboutUs'=> $aboutUs]);
     }
     public function updateOrcreate(Request $request){
-        if ($request->id){
             aboutUs::upsert([
-                'id' => $request->id,
+                'id' => isset($request->id) ? $request->id : 1,
                 'title' => $request->title,
                 'description' => $request->description],
                 ['id'], // unique
                 ['title','description']);
-        }else{
-            aboutUs::upsert([
-                'title' => $request->title,
-                'description' => $request->description],
-                ['id'],
-                ['title','description']);
-        }
+        
         return to_route('aboutUs.list');
     }
     public function index(){
@@ -36,5 +28,10 @@ class AboutUsController extends Controller
     {
         $aboutUs->delete();
         return redirect('/aboutUs/aboutUs');
+    }
+
+    public function clientList(){
+        $aboutUs = aboutUs::all();
+        return view("client.aboutUs.aboutUsList",['aboutUs'=>$aboutUs]);
     }
 }

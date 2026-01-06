@@ -39,7 +39,7 @@
                                  <div
                                      class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
                                      <div class="w-20 lg:w-full">
-                                        <span class="block w-20 lg:w-full">{{ $aboutUs->title }}</span>
+                                        <span class="block w-20 lg:w-full text-center">{{ $aboutUs->title }}</span>
                                      </div>
                                  </div>
                                  <div

@@ -345,10 +345,11 @@ Route::group([
     'as' => 'aboutUs.',
     'middleware' => [UserMiddleware::class]
 ], function () {
-    Route::get('/create_edit/{id?}', 'create_edit')->name('create_edit');
+    Route::get('/create_edit/{aboutUs?}', 'create_edit')->name('create_edit');
     Route::post('/updateOrcreate', 'updateOrcreate')->name('updateOrcreate');
     Route::get('/aboutUs', 'index')->name('list');
     Route::get('/delete/{aboutUs}', 'delete')->name('delete');
+    Route::get('/clientList', 'clientList')->name('clientList');
 });
 
 // favoriteCareer
