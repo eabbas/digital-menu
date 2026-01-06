@@ -94,7 +94,7 @@
                                     ورود به {{ $item->socialMedia->title }}
                                 </h3>
                                 <div class="mt-3 relative parentSocial">
-                                    <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-[{{ $item->socialMedia->color }}] rounded-full cursor-pointer editSocial relative z-555 transition-all duration-300"
+                                    <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-[{{ $item->socialMedia->color }}] rounded-full cursor-pointer editSocial relative transition-all duration-300"
                                         data-social-id="{{ $item->id }}"
                                         onclick='editSocial("{{ $item->id }}", "{{ $item->socialMedia->id }}")'>
                                         <img src="{{ asset('storage/' . $item->socialMedia->icon_path) }}"
@@ -131,7 +131,7 @@
                                     ورود به {{ $siteLink->title }}
                                 </h3>
                                 <div class="mt-3 relative parentLink">
-                                    <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-gray-200 rounded-full cursor-pointer editLink relative z-555 transition-all duration-300"
+                                    <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-gray-200 rounded-full cursor-pointer editLink relative transition-all duration-300"
                                         onclick='editLink("{{ $siteLink->id }}")' data-site-id="{{ $siteLink->id }}">
                                         <img src="{{ asset('assets/img/link-simple.svg') }}" class="size-5 rounded-md"
                                             alt="">
@@ -624,7 +624,7 @@
                                     ورود به ${ data.title }
                                 </h3>
                                 <div class="mt-3 relative parentLink">
-                                    <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-gray-200 rounded-full cursor-pointer editLink relative z-555 transition-all duration-300"
+                                    <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-gray-200 rounded-full cursor-pointer editLink relative transition-all duration-300"
                                        onclick='editLink(${data.id})' data-site-id="${data.id}"
                                         @if (isset($siteLink->icon_path))
                                                 <img src="{{ asset('storage/' . $siteLink->icon_path) }}"
@@ -854,7 +854,7 @@
                             ورود به ${datas.socialMedia.title}
                             </h3>
                             <div class="mt-3 relative parentSocial">
-                                <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-[${datas.socialMedia.color}] rounded-full cursor-pointer editSocial relative z-555 transition-all duration-300"
+                                <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-[${datas.socialMedia.color}] rounded-full cursor-pointer editSocial relative transition-all duration-300"
                                     data-social-id="${datas.address.id}"
                                     onclick='editSocial(${datas.address.id}, ${datas.socialMedia.id})'>
                                     <img src="${link}"

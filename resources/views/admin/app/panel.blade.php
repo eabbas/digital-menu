@@ -196,37 +196,37 @@
                         </li> --}}
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('covers.create') }}" class="text-white py-1">ایجادصفحه  
-                                </a>
+                            <a href="{{ route('covers.create') }}" class="text-white py-1">ایجادصفحه
+                            </a>
                         </li>
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('covers.social_list') }}" class="text-white py-1">  لیست صفحات </a>
-                            </li>
-                            @if (Auth::user()->role[0]->title == 'admin')
+                            <a href="{{ route('covers.social_list') }}" class="text-white py-1"> لیست صفحات </a>
+                        </li>
+                        @if (Auth::user()->role[0]->title == 'admin')
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('covers.list') }}" class="text-white py-1"> لیست همه صفحات 
-                                    </a>
+                                <a href="{{ route('covers.list') }}" class="text-white py-1"> لیست همه صفحات
+                                </a>
                             </li>
-                            @endif
+                        @endif
                         {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('covers.list') }}" class=" text-white py-1"> مشاهده لیست همه شبکه های اجتماعی کاربران</a>
                         </li> --}}
                         @if (Auth::user()->role[0]->title == 'admin')
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
-                            <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('socialMedia.create') }}" class="text-white py-1">
-                                ایجاد شبکه اجتماعی
-                            </a>
-                        </li>
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
-                            <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('socialMedia.list') }}" class="text-white py-1">
-                                لیست شبکه های اجتماعی
-                            </a>
-                        </li>
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('socialMedia.create') }}" class="text-white py-1">
+                                    ایجاد شبکه اجتماعی
+                                </a>
+                            </li>
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('socialMedia.list') }}" class="text-white py-1">
+                                    لیست شبکه های اجتماعی
+                                </a>
+                            </li>
                     </ul>
                 </div>
                 <div class="dashboard">
@@ -307,28 +307,23 @@
                                 d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
                                 clip-rule="evenodd" />
                         </svg>
+
                         <div class="flex flex-row-reverse items-center gap-2">
                             <span class=" text-[white] flex justify-end font-bold">ارتباط باما</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="800px" height="800px"
-                                class="size-5 fill-white " viewBox="0 0 100 100" enable-background="new 0 0 100 100"
-                                xml:space="preserve">
-                                <path
-                                    d="M22.5,19.7h20c1.4,0,2.5,1.1,2.5,2.5v54.9c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V22.2  C20,20.8,21.1,19.7,22.5,19.7z" />
-                                <path
-                                    d="M57.5,19.6h20c1.4,0,2.5,1.1,2.5,2.5V42c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V22.1  C55,20.7,56.1,19.6,57.5,19.6z" />
-                                <path
-                                    d="M57.5,54.6h20c1.4,0,2.5,1.1,2.5,2.5v19.9c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V57.1  C55,55.8,56.1,54.6,57.5,54.6z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 512 512">
+                                <path fill="white"
+                                    d="M384 48c8.8 0 16 7.2 16 16V448c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16H384zM96 0C60.7 0 32 28.7 32 64V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H96zM240 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128zm-32 32c-44.2 0-80 35.8-80 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16c0-44.2-35.8-80-80-80H208zM512 80c0-8.8-7.2-16-16-16s-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V80zM496 192c-8.8 0-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm16 144c0-8.8-7.2-16-16-16s-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V336z" />
                             </svg>
                         </div>
                     </div>
                     <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden">
-                           @if (Auth::user()->role[0]->title == 'admin')
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
-                            <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('contactUs.list') }}" class="text-white py-1">
-                                  لیست  تیکت ها
-                            </a>
-                        </li>
+                        @if (Auth::user()->role[0]->title == 'admin')
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('contactUs.list') }}" class="text-white py-1">
+                                    لیست تیکت ها
+                                </a>
+                            </li>
                         @endif
                     </ul>
                 </div>
@@ -424,8 +419,7 @@
                                 <ul class="rtl text-right ">
                                     <li
                                         class="hover:text-[#1B84FF] hover:bg-[#F1F1F4] mt-1 w-11/12 ml-auto mr-auto rounded-lg">
-                                        <a href="{{ route('user.profile') }}"
-                                            class="block w-full p-2">پروفایل من</a>
+                                        <a href="{{ route('user.profile') }}" class="block w-full p-2">پروفایل من</a>
                                     </li>
                                     @if (!Auth::user()->email)
                                         <li
@@ -499,14 +493,14 @@
                                 @endif
                             </div>
                             <div>
-                                <span class="text-lg text-gray-700 font-bold">{{ Auth::user()->name }}
-                                    {{ Auth::user()?->family }}</span>
+                                <span class="text-lg text-gray-700 font-bold">{{ Auth::user()->name }} {{ Auth::user()?->family }}</span>
                             </div>
                         </div>
                         <div class="overflow-y-auto [&::-webkit-scrollbar]:hidden h-[calc(100vh-134px)]">
                             <div class="pt-2 flex flex-col">
                                 <div>
-                                    <a href="{{ route('home') }}" class="block text-gray-700 py-2 text-md" target="_black">
+                                    <a href="{{ route('home') }}" class="block text-gray-700 py-2 text-md"
+                                        target="_black">
                                         بازدید از سایت
                                     </a>
                                 </div>
@@ -625,16 +619,15 @@
                                                 همه دسته های کسب و کارها
                                             </a>
                                         </li>
-                                        @endif
-                                        @if (count(Auth::user()->menus))
+                                    @endif
+                                    @if (count(Auth::user()->menus))
                                         <li>
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('menu.user_menus', [Auth::user()]) }}"
                                                 class="block text-gray-700 py-2 text-md">
-                                               لیست منو های من
+                                                لیست منو های من
                                             </a>
                                         </li>
-                                        
                                     @endif
                                 </ul>
                             </div>
@@ -644,24 +637,24 @@
                                     <li>
                                         <a href="{{ route('covers.create') }}"
                                             class="block text-gray-700 py-2 text-md">
-                                        ایجاد صفحه  
+                                            ایجاد صفحه
                                         </a>
                                     </li>
                                     @if (Auth::user()->role[0]->title == 'admin')
-                                    <li>
-                                        <a href="{{ route('covers.list') }}"
-                                            class="block text-gray-700 py-2 text-md">
-                                            لیست همه صفحات
-                                        </a>
-                                    </li>
+                                        <li>
+                                            <a href="{{ route('covers.list') }}"
+                                                class="block text-gray-700 py-2 text-md">
+                                                لیست همه صفحات
+                                            </a>
+                                        </li>
                                     @endif
                                     <li>
                                         <a href="{{ route('covers.social_list') }}"
                                             class="block text-gray-700 py-2 text-md">
-                                            لیست صفحات 
+                                            لیست صفحات
                                         </a>
                                     </li>
-                        
+
                                     @if (Auth::user()->role[0]->title == 'admin')
                                         <li>
                                             <span class="size-1 rounded-sm"></span>
@@ -900,9 +893,9 @@
 
 
                 },
-                    error: function(){
-                        alert('خطا در  دریافت داده')
-                    }
+                error: function() {
+                    alert('خطا در  دریافت داده')
+                }
 
             });
 

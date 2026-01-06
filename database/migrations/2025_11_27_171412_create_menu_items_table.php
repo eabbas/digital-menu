@@ -21,6 +21,7 @@ return new class extends Migration
             $table->tinyInteger('customizable')->default(0);
             $table->integer('price');
             $table->integer('discount')->nullable();
+            $table->integer('duration')->nullable();
             $table->timestamps();
         });
     }

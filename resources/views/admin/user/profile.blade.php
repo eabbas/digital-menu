@@ -16,7 +16,7 @@
                             <div class="div1 hidden lg:block text-center lg:text-start">
                                 <strong class="text-gray-700">{{ Auth::user()->name }} {{ Auth::user()?->family }}</strong>
                             </div>
-                            
+
                             <div class="flex flex-col lg:flex-row gap-2 mt-4 mx-10 lg:mx-0">
                                 <div
                                     class="py-1.5 lg:py-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px]">
@@ -25,7 +25,7 @@
                                 </div>
                                 <div
                                     class="py-1.5 lg:py-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px]">
-                                    <span class="font-bold text-blue-500">{{  count(Auth::user()->qr_codes)  }}</span>
+                                    <span class="font-bold text-blue-500">{{ count(Auth::user()->qr_codes) }}</span>
                                     <span class="text-[#4B5675]"> تعداد QR کد ها </span>
                                 </div>
                                 <div
@@ -41,55 +41,41 @@
             </div>
 
             <div class="pt-3 mt-4 lg:mt-8">
-                {{-- @dd(Auth::user()); --}}
                 <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5 bg-white">
-                    <h1 class="text-sm text-center lg:text-start lg:text-xl mt-3 lg:mt-5 font-bold mx-2">جزییات پروفایل </h1>
+                    <h1 class="text-sm text-center lg:text-start lg:text-xl mt-3 lg:mt-5 font-bold mx-2">جزییات پروفایل
+                    </h1>
 
                     <div class="w-full h-px bg-gray-200 my-3 lg:my-5 "></div>
                     <div class="flex gap-7 sm:hidden">
                         <div class="flex w-full flex-col">
-                            <label class="p-1.5 text-xs lg:p-2.5 text-gray-400">نام کامل</label>
-                            <span class="p-1.5 lg:p-2.5 text-gary-600 text-sm"><strong>{{ Auth::user()->name }}
-                                    {{ Auth::user()?->family }}</strong></span>
-                            {{-- <span class="p-2.5 text-gary-600">فائوس</span> --}}
-                            <label class="p-1.5 text-xs lg:p-2.5 text-gray-400">شماره تلفن</label>
-                            <span class="p-1.5 lg:p-2.5 text-gary-600">{{ Auth::user()->phoneNumber }}<mark
-                                    class="mx-2 text-green-700 bg-green-300 px-1 text-xs rounded-md">تایید
-                                    شده</mark></span>
-                            <label class="p-1.5 text-xs lg:p-2.5 text-gray-400">ایمیل</label>
+                            <span class="p-1.5 text-xs lg:p-2.5 text-gray-400">نام کامل</span>
+                            <span class="p-1.5 lg:p-2.5 text-gary-600 text-sm">
+                                <strong>{{ Auth::user()->name }}
+                                    {{ Auth::user()?->family }}
+                                </strong>
+                            </span>
+                            <span class="p-1.5 text-xs lg:p-2.5 text-gray-400">شماره تلفن</span>
+                            <span class="p-1.5 lg:p-2.5 text-gary-600">{{ Auth::user()->phoneNumber }}</span>
+                            <span class="p-1.5 text-xs lg:p-2.5 text-gray-400">ایمیل</span>
                             <span class="p-1.5 lg:p-2.5 text-gary-600">{{ Auth::user()->email }}</span>
-                            <label class="p-1.5 text-xs lg:p-2.5 text-gray-400">نقش</label>
+                            <span class="p-1.5 text-xs lg:p-2.5 text-gray-400">نقش</span>
                             <span class="p-1.5 lg:p-2.5 text-gary-600">{{ Auth::user()->role[0]->title }}</span>
-                            {{-- <label class="p-1.5 text-xs lg:p-2.5 text-gray-400">سایت کمپانی</label>
-                    <a href="#" class="p-2.5 text-gary-600">famenu.ie</a>
-                    <label class="p-1.5 text-xs lg:p-2.5 text-gray-400">کشور </label>
-                    <span class="p-2.5 text-gary-600">ایران</span>
-                    <label class="p-1.5 text-xs lg:p-2.5 text-gray-400">ارتباط</label>
-                    <span class="p-2.5 text-gary-600">ایمیل, تلفن</span> --}}
                         </div>
                     </div>
 
                     <div class="sm:grid sm:grid-cols-2 sm:gap-2 hidden">
                         <div class="flex w-full flex-col">
-                            <label class="p-2.5 text-gray-400">نام کامل</label>
-                            <label class="p-2.5 text-gray-400">شماره تلفن</label>
-                            <label class="p-2.5 text-gray-400">نقش</label>
-                            <label class="p-2.5 text-gray-400">ایمیل</label>
-                            {{-- <label class="p-2.5 text-gray-400">کشور </label>
-                    <label class="p-2.5 text-gray-400">ارتباط</label> --}}
+                            <span class="p-2.5 text-gray-400">نام کامل</span>
+                            <span class="p-2.5 text-gray-400">شماره تلفن</span>
+                            <span class="p-2.5 text-gray-400">نقش</span>
+                            <span class="p-2.5 text-gray-400">ایمیل</span>
                         </div>
                         <div class="flex w-full flex-col">
                             <span class="p-2.5 text-gary-600"><strong>{{ Auth::user()->name }}
                                     {{ Auth::user()?->family }}</strong></span>
-                            {{-- <span class="p-2.5 text-gary-600">فائوس</span> --}}
-                            <span class="p-2.5 text-gary-600">{{ Auth::user()->phoneNumber }}<mark
-                                    class="mx-2 text-green-700 bg-green-300 px-1 rounded-md">تایید
-                                    شده</mark></span>
-                            <span class="p-2.5 text-gary-600">{{ Auth::user()->role[0]->title}}</span>
+                            <span class="p-2.5 text-gary-600">{{ Auth::user()->phoneNumber }}</span>
+                            <span class="p-2.5 text-gary-600">{{ Auth::user()->role[0]->title }}</span>
                             <span class="p-2.5 text-gary-600">{{ Auth::user()->email }}</span>
-                            {{-- <a href="#" class="p-2.5 text-gary-600">famenu.ie</a>
-                    <span class="p-2.5 text-gary-600">ایران</span>
-                    <span class="p-2.5 text-gary-600">ایمیل, تلفن</span> --}}
                         </div>
                     </div>
 
