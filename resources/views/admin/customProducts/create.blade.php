@@ -9,62 +9,64 @@
             ثبت محصول شخصی‌سازی شده جدید
         </h2>
         <form action="{{ route('cp.save') }}" method="post" enctype="multipart/form-data" class="bg-white w-11/12 lg:w-full p-5 rounded-lg relative">
-                        <div id="loading"
-                            class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
-                        </div>
-                        @csrf
-                        <input type="hidden" name="career_id" value="{{ $career->id }}">
-                        <div class="mb-4">
-                            <label for="title" class="block text-sm font-medium mb-2">
-                                عنوان محصول
-                            </label>
-                            <input type="text" 
-                                name="title" 
-                                id="title"
-                                required
-                                class="w-full p-2 border-1 rounded border-gray-300 outline-none">
-                        </div>
-                        <div class="mb-4">
-                            <label for="title" class="block text-sm font-medium mb-2">
-                                تصویر محصول
-                            </label>
-                            <input type="file" 
-                                name="customProductImage" 
-                                id="customProductImage"
-                                class="w-full p-2 border-1 rounded border-gray-300 outline-none">
-                        </div>
-                        <div class="mb-4">
-                            <label for="title" class="block text-sm font-medium mb-2">
-                                محدودیت متریال
-                            </label>
-                            <input type="number" 
-                                name="material_limit" 
-                                id="material_limit"
-                                required
-                                placeholder="محدودیت متریال را وارد کنید"
-                                class="w-full p-2 border-1 rounded border-gray-300 outline-none">
-                        </div>
+            {{-- <div id="loading"
+                class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
+            </div> --}}
+            @csrf
+            <input type="hidden" name="career_id" value="{{ $career->id }}">
+            <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3">
+                <div>
+                    <label for="title" class="block text-sm font-medium mb-2">
+                        عنوان محصول
+                    </label>
+                    <div
+                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                        <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text" id="title"
+                            name='title' required placeholder="عنوان محصول">
+                    </div>
+                </div>
+                <div>
+                    <label for="title" class="block text-sm font-medium mb-2">
+                        تصویر محصول
+                    </label>
+                    <div
+                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                        <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="file"
+                            name='customProductImage' id="customProductImage" required>
+                    </div>
+                </div>
+                <div>
+                    <label for="title" class="block text-sm font-medium mb-2">
+                        محدودیت متریال
+                    </label>
+                    <div
+                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                        <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="number"
+                            name='material_limit' required placeholder="1">
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                    <label for="title" class="block text-sm font-medium mb-2">
+                        توضیحات
+                    </label>
+                    <div
+                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                        <textarea class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="number"
+                            name='description' rows="4" required placeholder="توضیحات محصول"></textarea>
+                    </div>
+                </div>
+            </div>
 
 
-                        <div class="mb-4">
-                            <label for="title" class="block text-sm font-medium mb-2">
-                                توضیحات
-                            </label>
-                            <textarea type="text" 
-                                name="description" 
-                                id="description"
-                                rows="4"
-                                class="w-full p-2 border-1 rounded border-gray-300 outline-none"></textarea>
-                        </div>
-                       
+            
 
-                            <div class="flex justify-end gap-3" >
-                                <button type="submit" onclick="storeCP(event)" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 cursor-pointer">
-                                    ثبت
-                                </button>
-                            </div>
-                           
-                    </form>
+            <div class="flex justify-end gap-3 mt-3">
+                <button type="submit" onclick="storeCP(event)" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 cursor-pointer">
+                    ثبت
+                </button>
+            </div>
+                
+        </form>
     </div>
    
     <script>

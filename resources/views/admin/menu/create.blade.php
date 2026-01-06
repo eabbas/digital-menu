@@ -34,7 +34,7 @@
                                     <div
                                         class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                         <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2 cursor-pointer" type="file"
-                                            name='banner' title="تصویر بنر">
+                                            name='banner' title="تصویر بنر" required>
                                     </div>
                                 </div>
                                 

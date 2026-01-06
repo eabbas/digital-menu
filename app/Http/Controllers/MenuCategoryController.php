@@ -26,6 +26,9 @@ class MenuCategoryController extends Controller
                 $path = $menuCat['image']->storeAs('images', $fullName, 'public');
                 $menuCats[$key]['image'] = $path;
             }
+            if (!isset($menuCat['image'])) {
+                $menuCats[$key]['image'] = null;
+            }
             $menuCats[$key]['menu_id'] = $request->menu_id;
         }
         menu_category::insert($menuCats);

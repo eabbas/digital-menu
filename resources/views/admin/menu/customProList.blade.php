@@ -50,7 +50,7 @@
                         </div>
                         @csrf
                         <input type="hidden" name="career_id" value="{{ $career->id }}">
-                        <div class="mb-4 relative">
+                        {{-- <div class="mb-4 relative">
                             <span class="absolute -bottom-5 right-4 opacity-0 text-xs text-red-500">الزامی است!</span>
                             <label for="title" class="block text-sm font-medium mb-2">
                                 عنوان محصول
@@ -82,10 +82,55 @@
                             </label>
                             <textarea type="text" name="description" id="description" rows="4"
                                 class="w-full p-2 border-1 rounded border-gray-300 focus:border-blue-500 focus:outline-none"></textarea>
+                        </div> --}}
+
+                        <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3">
+                            <div>
+                                <label for="title" class="block text-sm font-medium mb-2">
+                                    عنوان محصول
+                                </label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                    <span class="absolute -bottom-5 left-4 opacity-0 text-xs text-red-500">الزامی است!</span>
+                                    <input class="p-4 w-full focus:outline-none rounded-lg text-sm font-bold createCPRequired" type="text" id="title"
+                                        name='title' required placeholder="عنوان محصول">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="title" class="block text-sm font-medium mb-2">
+                                    تصویر محصول
+                                </label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <input class="p-4 w-full focus:outline-none text-sm font-bold" type="file"
+                                        name='customProductImage' id="customProductImage" required>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="title" class="block text-sm font-medium mb-2">
+                                    محدودیت متریال
+                                </label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                    <span class="absolute -bottom-5 left-4 opacity-0 text-xs text-red-500">الزامی است!</span>
+                                    <input class="p-4 w-full rounded-lg focus:outline-none text-sm font-bold createCPRequired" type="number"
+                                        name='material_limit' id="material_limit" required placeholder="1">
+                                </div>
+                            </div>
+                            <div class="lg:col-span-2">
+                                <label for="title" class="block text-sm font-medium mb-2">
+                                    توضیحات
+                                </label>
+                                <div
+                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                    <textarea class="p-4 w-full focus:outline-none text-sm font-bold" type="number"
+                                        name='description' rows="4" required id="description" placeholder="توضیحات محصول"></textarea>
+                                </div>
+                            </div>
                         </div>
 
 
-                        <div class="flex justify-end gap-3">
+                        <div class="flex justify-end gap-3 mt-3">
                             <button onclick="storeCP(event)"
                                 class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 cursor-pointer">
                                 ثبت

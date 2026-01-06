@@ -26,7 +26,7 @@
                             <div
                                 class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="w-full focus:outline-none text-sm font-bold mr-2" type="file"
-                                    name='image'>
+                                    name='image' required>
                             </div>
                         </div>
 

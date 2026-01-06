@@ -7,7 +7,6 @@
             <div class="min-h-screen flex items-start justify-center">
                 <div class="bg-white rounded-2xl shadow-md p-3 w-full md:w-9/12">
                     <div class="text-center mb-4">
-                       
                         <div id="menuCat">
                             <div class="w-full flex flex-col lg:flex-row gap-3 my-4">
                                 <input type="hidden" name="id" value="{{ $category->id }}">
