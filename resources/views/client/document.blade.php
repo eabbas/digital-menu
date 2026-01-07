@@ -351,6 +351,7 @@
             </ul>
         </div>
     </div>
+    @if (Auth::check())
     <div
         class="w-full h-[calc(100vh-300px)] fixed right-0 border-t-1 border-x-1 border-gray-300 transition-all duration-200 -bottom-full bg-white rounded-t-xl" id="popupUser">
         <div class="w-full relative">
@@ -387,6 +388,7 @@
             </ul>
         </div>
     </div>
+    @endif
     {{-- bottom menu mobile end --}}
     {{-- <footer class="w-11/12 lg:w-full mx-auto pb-20 lg:pb-0">
         <div class="w-full bg-gray-600 flex flex-col gap-1 pt-1 justify-center items-center rounded-t-sm rounded-b-sm lg:rounded-b-none">
