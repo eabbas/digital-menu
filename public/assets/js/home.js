@@ -35,3 +35,16 @@ function showCareer(index, el){
         <span class="font-bold">${el.children[1].innerText}</span>
     `
 }
+
+let popupUser = document.getElementById('popupUser')
+
+function openUserOptions(state){
+    if (state == 'open') {
+        popupUser.classList.remove('-bottom-full')
+        popupUser.classList.add('bottom-0')
+    }
+    if (state == 'close') {
+        popupUser.classList.remove('bottom-0')
+        popupUser.classList.add('-bottom-full')
+    }
+}

@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>editUser</title>
-    
 </head>
 <body>
     <section class="2xl:container mx-auto">

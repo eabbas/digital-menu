@@ -7,7 +7,6 @@
         @csrf
         <div class="w-full flex flex-col gap-3">
             <label>عکس پروفایل</label>
-            {{-- <input type="file" class="w-full p-[9px] mb-1 rounded-[7px] border border-[#DBDFE9] outline-none"> --}}
             <div
                 class="w-full flex">
                 <input class="p-4 w-full text-sm font-bold focus:text-[#056EE9] rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] cursor-pointer" type="file" name="main_image"
@@ -16,8 +15,6 @@
         </div>
         <div class="w-full flex flex-col gap-3">
             <label>ایمیل</label>
-            {{-- <input  class="w-full p-[9px] mb-1 rounded-[7px] border border-[#DBDFE9] outline-none"
-                 > --}}
             <div
                 class="w-full flex">
                 <input class="p-4 w-full text-sm font-bold focus:text-[#056EE9] rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7]" type="email" name="email"
