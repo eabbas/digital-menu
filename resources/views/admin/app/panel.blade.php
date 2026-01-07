@@ -40,13 +40,10 @@
                     </a>
                 </div>
                 <div class="dashboard">
-                    <div class="flex justify-between flex-row-reverse">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                            class="size-6 fill-white w-[15px]">
-                            <path fill-rule="evenodd"
-                                d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
-                                clip-rule="evenodd" />
-                        </svg>
+                    <div class="flex justify-between flex-row-reverse cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200" viewBox="0 0 448 512">
+                            <path fill="white" d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"/></svg>
+
                         <div class="flex flex-row-reverse items-center gap-2">
                             <span class=" text-[white] flex justify-end font-bold">فروشگاه</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 576 512">
@@ -56,7 +53,7 @@
                         </div>
                     </div>
 
-                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden">
+                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden max-h-0">
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a class="text-white" href="{{ route('ecomm.create') }}" class="text-white py-1">ایجاد
@@ -102,13 +99,9 @@
                     </ul>
                 </div>
                 <div class="dashboard">
-                    <div class="flex justify-between flex-row-reverse">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                            class="size-6 fill-white w-[15px]">
-                            <path fill-rule="evenodd"
-                                d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
-                                clip-rule="evenodd" />
-                        </svg>
+                    <div class="flex justify-between flex-row-reverse cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200" viewBox="0 0 448 512">
+                            <path fill="white" d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"/></svg>
                         <div class="flex flex-row-reverse items-center gap-2">
                             <span class=" text-[white] flex justify-end font-bold">کسب و کار ها</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
@@ -117,7 +110,7 @@
                             </svg>
                         </div>
                     </div>
-                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden">
+                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden max-h-0">
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('career.careers') }}" class="text-white py-1">
@@ -173,13 +166,9 @@
                     </ul>
                 </div>
                 <div class="dashboard">
-                    <div class="flex justify-between flex-row-reverse">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                            class="size-6 fill-white w-[15px]">
-                            <path fill-rule="evenodd"
-                                d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
-                                clip-rule="evenodd" />
-                        </svg>
+                    <div class="flex justify-between flex-row-reverse cursor-pointer">
+                       <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200" viewBox="0 0 448 512">
+                            <path fill="white" d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"/></svg>
                         <div class="flex flex-row-reverse items-center gap-2">
                             <span class=" text-[white] flex justify-end font-bold">شبکه های اجتماعی</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 512 512">
@@ -188,7 +177,7 @@
                             </svg>
                         </div>
                     </div>
-                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden">
+                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden max-h-0">
 
                         {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
@@ -230,13 +219,9 @@
                     </ul>
                 </div>
                 <div class="dashboard">
-                    <div class="flex flex-row-reverse justify-between">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                            class="size-6 fill-white w-[15px]">
-                            <path fill-rule="evenodd"
-                                d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
-                                clip-rule="evenodd" />
-                        </svg>
+                    <div class="flex flex-row-reverse justify-between cursor-pointer">
+                       <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200" viewBox="0 0 448 512">
+                            <path fill="white" d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"/></svg>
                         <div class="flex flex-row-reverse items-center gap-2">
                             <span class=" text-[white] flex justify-end font-bold">کاربران</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 448 512">
@@ -245,7 +230,7 @@
                             </svg>
                         </div>
                     </div>
-                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden">
+                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden max-h-0">
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('user.list') }}" class="text-white py-1">
@@ -262,13 +247,9 @@
                     </ul>
                 </div>
                 <div class="dashboard">
-                    <div class="flex flex-row-reverse justify-between">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                            class="size-6 fill-white w-[15px]">
-                            <path fill-rule="evenodd"
-                                d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
-                                clip-rule="evenodd" />
-                        </svg>
+                    <div class="flex flex-row-reverse justify-between cursor-pointer">
+                       <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200" viewBox="0 0 448 512">
+                            <path fill="white" d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"/></svg>
                         <div class="flex flex-row-reverse items-center gap-2">
                             <span class=" text-[white] flex justify-end font-bold">اسلایدر</span>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="800px" height="800px"
@@ -283,7 +264,7 @@
                             </svg>
                         </div>
                     </div>
-                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden">
+                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden max-h-0">
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('slider.create') }}" class="text-white py-1">
@@ -300,13 +281,9 @@
                 </div>
                 {{-- contactUs --}}
                 <div class="dashboard">
-                    <div class="flex flex-row-reverse justify-between">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                            class="size-6 fill-white w-[15px]">
-                            <path fill-rule="evenodd"
-                                d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
-                                clip-rule="evenodd" />
-                        </svg>
+                    <div class="flex flex-row-reverse justify-between cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200" viewBox="0 0 448 512">
+                            <path fill="white" d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"/></svg>
 
                         <div class="flex flex-row-reverse items-center gap-2">
                             <span class=" text-[white] flex justify-end font-bold">ارتباط باما</span>
@@ -316,7 +293,7 @@
                             </svg>
                         </div>
                     </div>
-                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden">
+                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden max-h-0">
                         @if (Auth::user()->role[0]->title == 'admin')
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                                 <span class="size-1 bg-white rounded-sm"></span>
@@ -359,13 +336,9 @@
                 </div> --}}
                 {{-- end customPro_list --}}
                 <div class="dashboard">
-                    <div class="flex flex-row-reverse justify-between">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                            class="size-6 fill-white w-[15px]">
-                            <path fill-rule="evenodd"
-                                d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
-                                clip-rule="evenodd" />
-                        </svg>
+                    <div class="flex flex-row-reverse justify-between cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200" viewBox="0 0 448 512">
+                            <path fill="white" d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"/></svg>
                         <div class="flex flex-row-reverse items-center gap-2">
                             <span class=" text-[white] flex justify-end font-bold">درباره ما</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-6" viewBox="0 0 640 512">
@@ -374,7 +347,7 @@
                             </svg>
                         </div>
                     </div>
-                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden">
+                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden max-h-0">
                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('aboutUs.create_edit') }}" class="text-white py-1">
