@@ -27,9 +27,9 @@ function showCareer(index, el){
         }
     })
     careerCat.forEach((element)=>{
-        element.classList.remove('bg-[#00897b]')
+        element.classList.remove('bg-[#eb3254]')
     })
-    el.children[0].classList.add('bg-[#00897b]')
+    el.children[0].classList.add('bg-[#eb3254]')
     careerCatTitle.innerHTML = `
     <span>کسب و کار های</span> 
         <span class="font-bold">${el.children[1].innerText}</span>

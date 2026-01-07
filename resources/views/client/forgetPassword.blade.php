@@ -1,4 +1,4 @@
-<!doctype html>
+{{-- <!doctype html>
 <html lang="fa" dir="rtl">
 
 <head>
@@ -9,19 +9,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>فراموشی رمز عبور</title>
     <style>
-        input:focus {
-            color: #00a693;
-        }
+       
     </style>
 </head>
 
-<body>
+<body> --}}
+        @extends('client.menuMobile')
+@section('title', 'ورود')
+@section('content')
     <div class="w-full h-dvh flex flex-col justify-start items-center md:flex-row-reverse">
-        <div class="flex justify-center max-sm:h-30 max-md:h-35 md:h-dvh md:w-4/12 lg:w-5/12 xl:w-6/12 bg-[#00a692]">
+        <div class="flex justify-center max-sm:h-30 max-md:h-35 md:h-dvh md:w-4/12 lg:w-5/12 xl:w-6/12 bg-[#eb3254]">
             <div class="flex flex-col my-12 items-center justify-center">
                 <div class="w-full flex flex-row justify-center items-center">
                     <img class="max-md:w-4/12 w-8/12"
-                        src="{{ asset('assets/img/e125edbd-f303-47f3-9dbc-af414f99ccb2.webp') }}" alt="">
+                        src="{{ asset('storage/images/Famenu1.png') }}" alt="">
                     <!-- <h2 class="text-center font-bold text-white text-3xl">Faos</h2> -->
                 </div>
             </div>
@@ -36,24 +37,24 @@
                         method="post" id="checkCodeForm">
                         @csrf
                         <input type="number"
-                            class="placeholder-[#00a692] focus:border-1 focus:border-[#00a692] p-2 md:p-[9px] text-[#00a693] mb-1 rounded-[7px] border-1 border-[#DBDFE9] focus:outline-none w-full"
+                            class="placeholder-[#eb3254] focus:border-1 focus:border-[#eb3254] p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] focus:outline-none w-full"
                             name="phoneNumber" placeholder="شماره تلفن" id="phoneNumber" required>
                         <div class="w-full flex flex-row items-center gap-3">
                             <input type="number"
-                                class="w-3/4 p-2 placeholder-[#00a692] focus:border-1 focus:border-[#00a692] text-[#00a693] md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
+                                class="w-3/4 p-2 placeholder-[#eb3254] focus:border-1 focus:border-[#eb3254] md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
                                 name="code" placeholder="کد" required id="code">
                             <button type="button"
-                                class="w-1/4 text-xs lg:text-base p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] bg-[#00a692] hover:bg-[#119a8c] text-white cursor-pointer"
+                                class="w-1/4 text-xs lg:text-base p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] bg-[#eb3254] hover:bg-[#d52b4a] text-white cursor-pointer"
                                 onclick="sendCode()">ارسال کد </button>
                         </div>
                         <button onclick="check(event)"
-                            class="focus:bg-[#00a692] hover:bg-[#119a8c] transition-all duration-400 text-center w-full bg-[#00a692] p-2 md:p-3 rounded-[10px] text-white cursor-pointer">بازیابی رمز عبور</button>
+                            class="focus:bg-[#eb3254] hover:bg-[#d52b4a] transition-all duration-400 text-center w-full bg-[#eb3254] p-2 md:p-3 rounded-[10px] text-white cursor-pointer">بازیابی رمز عبور</button>
                              <div class="w-full text-center my-1 md:my-4">
-                                <a href="{{ route('login') }}" class="text-[#00a692]">
+                                <a href="{{ route('login') }}" class="text-[#eb3254]">
                                     ورود
                                 </a>
                                 <span> / </span>
-                                <a href="{{ route('signup') }}" class="text-[#00a692]">
+                                <a href="{{ route('signup') }}" class="text-[#eb3254]">
                                     ثبت نام
                                 </a>
                         </div>
@@ -63,7 +64,7 @@
         </div>
     </div>
     <footer>
-        <div class="w-full h-17 bg-[#00a692] absolute bottom-0 flex flex-col justify-center items-center md:hidden">
+        <div class="w-full h-17 bg-[#eb3254] absolute bottom-0 flex flex-col justify-center items-center md:hidden">
             <div class="">اکادمی <b class="text-xl">Faos</b></div>
             <a href="tell:"><b class="text-white">09147794595</b></a>
         </div>
@@ -140,6 +141,7 @@
             }
         }
     </script>
-</body>
+    @endsection
+{{-- </body>
 
-</html>
+</html> --}}

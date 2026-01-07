@@ -1,6 +1,6 @@
 @extends('client.document')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-@section('title', 'خانه')
+@section('title', 'فامنو | منوی دیجیتال کسب و کار شما')
 @section('content')
     <div class="w-full pt-5 samim">
         <section>
