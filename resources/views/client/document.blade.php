@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
+    <link rel="shortcut icon" href="{{ asset('storage/images/Famenu1.png') }}" type="image/png">
     <title>@yield('title')</title>
 </head>
 
@@ -24,8 +25,10 @@
                 <!--    </div>-->
                 <!--</div>-->
                 <!--</div>-->
-                <div class="size-[50px] cursor-pointer">
-                    <img class="size-full" src="{{ asset('storage/images/Famenu1.png') }}" alt="">
+                <div class="size-[50px]">
+                    <a href="{{ route('home') }}">
+                        <img class="size-full" src="{{ asset('storage/images/Famenu1.png') }}" alt="">
+                    </a>
                 </div>
                 <form action="{{ route('search') }}" method="post" class="w-[calc(100%-60px)]">
                     @csrf
@@ -124,20 +127,19 @@
         </div>
         {{-- mobile menu end --}}
 
-        <div class="w-full hidden lg:block border-b-1 border-b-gray-300">
+        <div class="w-full hidden lg:block border-b-1 bg-[#eb3254] border-b-gray-300">
             <div class="w-11/12 mx-auto grid grid-cols-3 gap-10">
                 <div class="flex flex-row items-center gap-10">
                     {{-- logo --}}
-                    <div>
-                        <a href="{{ route('home') }}" class="text-lg font-bold">
-                            {{-- <img src="" alt=""> --}}
-                            famenu
+                    <div class="size-[50px]">
+                        <a href="{{ route('home') }}">
+                            <img class="size-full" src="{{ asset('storage/images/Famenu1.png') }}" alt="">
                         </a>
                     </div>
                     <ul class="flex flex-row items-center gap-5">
                         <li>
                             <a href="{{ route('home') }}"
-                                class="text-md text-sm hover:text-[#00a692] transition-all duration-200 py-5 inline-block">خانه</a>
+                                class="text-md text-sm text-white transition-all duration-200 py-5 inline-block">خانه</a>
                         </li>
                         {{-- @if (!Auth::check())
                             <li>
@@ -156,12 +158,12 @@
                         @endif --}}
                         <li>
                             <a href="{{ route('aboutUs.clientList') }}"
-                                class="text-md text-sm hover:text-[#00a692] transition-all duration-200 py-5 inline-block">درباره
+                                class="text-md text-sm transition-all text-white duration-200 py-5 inline-block">درباره
                                 ما</a>
                         </li>
                         <li>
                             <a href="{{ route('contactUs.create') }}"
-                                class="text-md text-sm hover:text-[#00a692] transition-all duration-200 py-5 inline-block">ارتباط
+                                class="text-md text-sm transition-all text-white duration-200 py-5 inline-block">ارتباط
                                 با ما</a>
                         </li>
                     </ul>
@@ -174,15 +176,15 @@
                             <div class="w-full bg-white flex flex-row rounded-full items-center gap-2 px-3">
 
                                 <input
-                                    class="outline-none p-2 w-full rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7]"
+                                    class="outline-none p-2 w-full rounded-lg bg-[#F9F9F9]"
                                     type="text" name="search" placeholder="جستجوی کسب و کار">
                             </div>
                             <div
-                                class="p-2 flex justify-center items-center rounded-full bg-[#00a692] mr-2 cursor-pointer">
+                                class="p-2 flex justify-center items-center rounded-full bg-white mr-2 cursor-pointer">
                                 <button class="cursor-pointer">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-6 rotate-y-180"
                                         viewBox="0 0 512 512">
-                                        <path fill="white"
+                                        <path fill="#eb3254"
                                             d="M368 208A160 160 0 1 0 48 208a160 160 0 1 0 320 0zM337.1 371.1C301.7 399.2 256.8 416 208 416C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208c0 48.8-16.8 93.7-44.9 129.1L505 471c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L337.1 371.1z" />
                                     </svg>
                                 </button>
@@ -205,7 +207,7 @@
                             </div>
                         @else
                             <div>
-                                <a href="{{ route('login') }}" class="text-xs font-bold text-[#00a692]">ورود | ثبت
+                                <a href="{{ route('login') }}" class="text-xs font-bold text-white">ورود | ثبت
                                     نام</a>
                             </div>
 
@@ -352,50 +354,50 @@
         </div>
     </div>
     @if (Auth::check())
-    <div
-        class="w-full h-[calc(100vh-300px)] fixed right-0 border-t-1 border-x-1 border-gray-300 transition-all duration-200 -bottom-full bg-white rounded-t-xl" id="popupUser">
-        <div class="w-full relative">
-            <svg xmlns="http://www.w3.org/2000/svg" class="absolute top-3 right-3 size-3 cursor-pointer"
-                onclick="openUserOptions('close')" viewBox="0 0 448 512">
-                <path
-                    d="M41 39C31.6 29.7 16.4 29.7 7 39S-2.3 63.6 7 73l183 183L7 439c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l183-183L407 473c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-183-183L441 73c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-183 183L41 39z" />
-            </svg>
-            <h3 class="text-center py-4 font-bold bg-gray-200 rounded-t-[11px] border-b border-gray-300">
-                {{ Auth::user()->name }} {{ Auth::user()->family }}</h3>
-            <ul class="flex flex-col px-3">
-                <li>
-                    <a href="{{ route('user.profile') }}"
-                        class="block py-3 border-b border-gray-300 text-sm font-bold">پروفایل من</a>
-                </li>
-                <li>
-                    <a href="{{ route('user.edit', [Auth::user()]) }}"
-                        class="block py-3 border-b border-gray-300 text-sm font-bold">
-                        ویرایش پروفایل
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('aboutUs.clientList') }}"
-                        class="block py-3 border-b border-gray-300 text-sm font-bold">درباره فامنو</a>
-                </li>
-                <li>
-                    <a href="{{ route('contactUs.create') }}"
-                        class="block py-3 border-b border-gray-300 text-sm font-bold">ارتباط با ما</a>
-                </li>
-                <li>
-                    <a href="{{ route('user.logout') }}"
-                        class="block py-3  text-sm font-bold bg-[#eb3254]/30 text-center">خروج از حساب کاربری</a>
-                </li>
-            </ul>
+        <div class="w-full h-[calc(100vh-300px)] fixed right-0 border-t-1 border-x-1 border-gray-300 transition-all duration-200 -bottom-full bg-white rounded-t-xl"
+            id="popupUser">
+            <div class="w-full relative">
+                <svg xmlns="http://www.w3.org/2000/svg" class="absolute top-3 right-3 size-3 cursor-pointer"
+                    onclick="openUserOptions('close')" viewBox="0 0 448 512">
+                    <path
+                        d="M41 39C31.6 29.7 16.4 29.7 7 39S-2.3 63.6 7 73l183 183L7 439c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l183-183L407 473c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-183-183L441 73c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-183 183L41 39z" />
+                </svg>
+                <h3 class="text-center py-4 font-bold bg-gray-200 rounded-t-[11px] border-b border-gray-300">
+                    {{ Auth::user()->name }} {{ Auth::user()->family }}</h3>
+                <ul class="flex flex-col px-3">
+                    <li>
+                        <a href="{{ route('user.profile') }}"
+                            class="block py-3 border-b border-gray-300 text-sm font-bold">پروفایل من</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('user.edit', [Auth::user()]) }}"
+                            class="block py-3 border-b border-gray-300 text-sm font-bold">
+                            ویرایش پروفایل
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('aboutUs.clientList') }}"
+                            class="block py-3 border-b border-gray-300 text-sm font-bold">درباره فامنو</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('contactUs.create') }}"
+                            class="block py-3 border-b border-gray-300 text-sm font-bold">ارتباط با ما</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('user.logout') }}"
+                            class="block py-3  text-sm font-bold bg-[#eb3254]/30 text-center">خروج از حساب کاربری</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
     @endif
     {{-- bottom menu mobile end --}}
-    {{-- <footer class="w-11/12 lg:w-full mx-auto pb-20 lg:pb-0">
-        <div class="w-full bg-gray-600 flex flex-col gap-1 pt-1 justify-center items-center rounded-t-sm rounded-b-sm lg:rounded-b-none">
+    <footer class="hidden lg:block lg:w-full mx-auto">
+        <div class="w-full bg-gray-600 flex flex-col gap-1 pt-1 justify-center items-center rounded-t-sm">
             <span class="text-white">آکادمی فائوس</span>
             <a href="tel:+989147794595" class="text-gray-100">09147794595</a>
         </div>
-    </footer> --}}
+    </footer>
     <script src="{{ asset('assets/js/home.js') }}"></script>
 </body>
 
