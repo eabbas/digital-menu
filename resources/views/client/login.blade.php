@@ -19,7 +19,7 @@
         <div class="flex justify-center max-sm:h-30 max-md:h-35 md:h-dvh md:w-4/12 lg:w-5/12 xl:w-6/12 bg-[#00a693]">
             <div class="flex flex-col my-12 items-center justify-center">
                 <div class="w-full flex flex-row justify-center items-center">
-                    <img class="max-md:w-4/12 w-8/12" src="{{ asset('storage/images/Famenu1.png') }}" alt="">
+                    <img class="max-md:w-4/12 w-8/12" src="{{ asset('storage/images/Famenu2.png') }}" alt="">
                     <!-- <h2 class="text-center font-bold text-white text-3xl">Faos</h2> -->
                 </div>
             </div>
