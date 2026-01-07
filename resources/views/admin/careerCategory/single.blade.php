@@ -24,7 +24,7 @@
         
     </div>
     <div class="pt-3 mt-4 lg:mt-8">
-        <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5">
+        <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5 bg-white">
             <h1 class="lg:text-xl mt-5 font-bold pb-3 border-b border-gray-200">جزییات دسته بندی  </h1>
            
             <div class="w-full lg:w-1/2 flex flex-col gap-y-3 lg:gap-y-5 mt-5">
@@ -44,7 +44,7 @@
                        {{ $careerCategory->description }}
                     </div>
                 </div>
-                <div class="flex flex-col xm:flex-row lg:flex-row gap-5 py-3">
+                <div class="flex flex-col xm:flex-row lg:flex-row py-3">
                     <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
                        اطلاعات صفحه اول
                     </div>

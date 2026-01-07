@@ -5,9 +5,12 @@
 
 @section('content')
     <div class="flex flex-col w-full mb-3">
-        <div class="flex flex-row justify-between items-center my-4">
+        <div class="flex flex-row justify-between items-end my-4">
             <div>
                 <h1 class="text-sm lg:text-lg font-bold"> لیست آیتم های منو {{ $category->title }} </h1>
+            </div>
+            <div>
+                <a href="{{ route('menuCat.list', [$category->menu]) }}" class="text-xs px-2 py-0.5 rounded-sm bg-gray-800 text-white">بازگشت</a>
             </div>
         </div>
         <form action="{{ route('menuItem.deleteAll') }}" method="post"

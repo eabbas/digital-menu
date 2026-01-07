@@ -6,7 +6,6 @@
     <div class="w-full">
         <div class="pb-5 w-full">
             <h1 class="text-xl text-center lg:text-start">{{ $career->title }}</h1>
-           
         </div>
 
         <div class="flex flex-row border-none rounded-[7px]">
@@ -42,8 +41,10 @@
             </div>
         </div>
     </div> --}}
-
-        <div class="mt-4 lg:mt-8 bg-white">
+        <div class="w-full flex flex-row justify-end">
+            <a href="{{ route('career.careers', [$career->user]) }}" class="text-xs px-2 py-0.5 rounded-sm bg-gray-800 text-white">بازگشت</a>
+        </div>
+        <div class="mt-4 lg:mt-5 bg-white">
             <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5">
                 <div class="flex flex-row justify-between items-center border-b border-gray-200">
                     <h1 class="lg:text-xl mt-5 font-bold pb-3">

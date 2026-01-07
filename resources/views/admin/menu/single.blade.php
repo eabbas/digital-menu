@@ -5,6 +5,9 @@
 @section('content')
     <div class="w-full min-h-screen pb-10 pt-16 bg-[#F4F8F9]">
         <div class="w-11/12 mx-auto">
+            <div class="flex flex-row justify-end">
+                <a href="{{ route('career.menus', [$menu->career]) }}" class="text-xs px-2 py-0.5 rounded-sm bg-gray-800 text-white">بازگشت</a>
+            </div>
             <!-- Header Section -->
             <div class="pb-4 text-3xl text-center font-bold text-gray-800">
                 <h2>{{ $menu->title }}</h2>
