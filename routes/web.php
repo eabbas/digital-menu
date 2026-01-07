@@ -30,7 +30,7 @@ use App\Http\Controllers\SiteLinkController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SocialAddressController;
 use App\Http\Controllers\SocialMediaController;
-use App\Http\Controllers\contactUsController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Middleware\LoginMiddleware;
 use App\Http\Middleware\UserMiddleware;
 
