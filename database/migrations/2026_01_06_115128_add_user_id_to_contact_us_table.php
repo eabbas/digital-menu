@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('careers', function (Blueprint $table) {
-            $table->string('banner')->nullable();
+        Schema::table('contact_us', function (Blueprint $table) {
+            $table->tinyInteger('user_id');
+            
         });
     }
 
@@ -21,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('careers', function (Blueprint $table) {
+        Schema::table('contact_us', function (Blueprint $table) {
             //
         });
     }

@@ -33,7 +33,7 @@
                                 <div
                                     class="p-3 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex pl-3">
                                     <select name="careerCategory"
-                                        class="w-full font-bold px-2 py-1 md:px-2 outline-none text-gray-500">
+                                        class="w-full font-bold px-2 py-1 md:px-2 outline-none text-gray-500 cursor-pointer">
                                         @foreach ($careerCategories as $careerCategory)
                                             <option value="{{ $careerCategory->id }}">{{ $careerCategory->title }}</option>
                                         @endforeach
@@ -62,7 +62,7 @@
 
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                    <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                    <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2 cursor-pointer" type="text"
                                         name='province' placeholder="استان خود را وارد کنید" onchange="changeCity(this)" required>
                                         @foreach ($provinces as $province)
                                             <option value="{{ $province->id }}">{{ $province->title }}</option>
@@ -74,8 +74,12 @@
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">شهر</label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                    <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='city' id="city" placeholder=" شهرخود را وارد کنید"required></select>
+                                    <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2 cursor-pointer" type="text"
+                                        name='city' id="city" placeholder=" شهرخود را وارد کنید"required>
+                                        @foreach ($cities as $city)
+                                                <option value="{{ $city->id }}">{{ $city->title }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -143,7 +147,6 @@
         <script>
             let city = document.getElementById('city')
             function changeCity(el){
-                city.innerHTML = ""
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -157,6 +160,7 @@
                         'id': el.value
                     },
                     success: function(datas){
+                        city.innerHTML = ""
                         datas.forEach(data => {
                             let option = document.createElement('option')
                             option.value = data.id

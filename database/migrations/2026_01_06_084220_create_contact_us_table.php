@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('menu_items', function (Blueprint $table) {
-            $table->integer('duration')->nullable();
+        Schema::create('contact_us', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->text('description');
+            $table->text('phoneNumber');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('menu_items', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('contact_us');
     }
 };

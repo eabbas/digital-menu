@@ -20,15 +20,15 @@ class CareerController extends Controller
     {
         $careerCategories = careerCategory::all();
         $provinces = province_cities::where('parent', 0)->get();
+        $cities = province_cities::where('parent', 1)->get();
         if (!$user) {
             $user = Auth::user();
         }
-        return view('admin.careers.create', ['user' => $user, 'careerCategories' => $careerCategories, 'provinces' => $provinces]);
+        return view('admin.careers.create', ['user' => $user, 'careerCategories' => $careerCategories, 'provinces' => $provinces, 'cities'=>$cities]);
     }
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $roles = role::all();
         if ($request->user_id) {
             $user = user::find($request->user_id);
@@ -149,9 +149,6 @@ class CareerController extends Controller
                     $qr_count--;
                 }
             }
-            // if ($request->qr_num<=$menu->qr_num) {
-            //     # code...
-            // }
         }
         $career->qr_count = $request->qr_count;
         $career->save();
@@ -255,12 +252,9 @@ class CareerController extends Controller
     {
         $careers = career::all();
         return view('client.career.careersList' , ['careers'=> $careers]);
-        // dd($careers);
     }
     public function categoryCareers(careerCategory $careerCategory)
     {
-        // $careerCategory->careers;
-        // dd($careerCategory->careers);
         return view('client.career.categoryCareers', ['careerCategory' => $careerCategory]);
     }
 }

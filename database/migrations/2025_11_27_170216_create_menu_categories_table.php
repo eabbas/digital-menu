@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('description')->nullable();
             $table->string('image')->nullable();
-            $table->integer('career_id');
+             $table->integer('menu_id');
             $table->timestamps();
         });
     }

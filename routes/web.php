@@ -30,6 +30,7 @@ use App\Http\Controllers\SiteLinkController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SocialAddressController;
 use App\Http\Controllers\SocialMediaController;
+use App\Http\Controllers\contactUsController;
 use App\Http\Middleware\LoginMiddleware;
 use App\Http\Middleware\UserMiddleware;
 
@@ -546,6 +547,24 @@ Route::group([
     'as' => 'ecomm_qr.'
 ], function () {
     Route::get('/{ecomm}/{slug}', 'load')->name('load');
+});
+
+///contactUs
+Route::group([
+    'prefix' => 'contactUs',
+    'controller' => contactUsController::class,
+    'as' => 'contactUs.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/myMessage', 'myMessage')->name('myMessage');
+    Route::get('/contactUs', 'index')->name('list');
+    Route::get('/single/{contactUs}', 'single')->name('single');
+    Route::get('/clientSingle/{contactUs}', 'clientSingle')->name('show');
+    Route::get('/edit/{contactUs}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{contactUs}', 'delete')->name('delete');
 });
 
 Route::fallback(function () {

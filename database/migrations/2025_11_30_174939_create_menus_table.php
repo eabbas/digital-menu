@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('subtitle')->nullable();
             $table->string('banner')->nullable();
-            $table->integer('qr_num');
             $table->integer('career_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

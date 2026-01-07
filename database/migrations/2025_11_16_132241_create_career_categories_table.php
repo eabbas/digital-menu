@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('career_categories', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
+            $table->text('description')->nullable();
             $table->tinyInteger('show_in_home')->default(0);
             $table->string('main_image')->nullable();
             $table->timestamps();
