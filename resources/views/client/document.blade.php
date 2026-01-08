@@ -14,7 +14,7 @@
 <body class="bg-[#ffffff]">
     <header>
         {{-- mobile menu --}}
-        <div class="w-full px-3 pt-4 pb-4 bg-[#eb3254] lg:hidden">
+        <div class="w-full px-3 pt-4 pb-4 bg-[#D6236A] lg:hidden">
             <div class="w-full flex flex-row items-center justify-between gap-3">
                 <!--<div class="flex flex-row items-center gap-3">-->
                 <!--<div class="rounded-md p-2 bg-white/20 cursor-pointer" onclick="home_menu('open')">-->
@@ -293,8 +293,20 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('home') }}"
-                        class="size-10 bg-[#EB3254] flex justify-center items-center rounded-full">
+                    <a href="{{ route('home') }}" class="size-10 bg-[#EB3254] flex justify-center items-center rounded-full">
+                        {{-- <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 576 512">
+                            <defs>
+                                <style>
+                                    .fa-secondary {
+                                        opacity: .4
+                                    }
+                                </style>
+                            </defs>
+                            <path class="fa-secondary"
+                                d="M64 270.5L64.1 472c0 22.1 17.9 40 40 40H184c22.1 0 40-17.9 40-40V383.7c0-17.7 14.3-32 32-32h64c17.7 0 32 14.3 32 32V472c0 22.1 17.9 40 40 40h80.5c22.1 0 40-18 40-40.1l-.4-201.3L288 74.5 64 270.5z" />
+                            <path class="fa-primary"
+                                d="M266.9 7.9C279-2.6 297-2.6 309.1 7.9l256 224c13.3 11.6 14.6 31.9 3 45.2s-31.9 14.6-45.2 3L288 74.5 53.1 280.1c-13.3 11.6-33.5 10.3-45.2-3s-10.3-33.5 3-45.2l256-224z" />
+                        </svg> --}}
                         <?xml version="1.0" encoding="UTF-8"?>
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" id="Layer_1" data-name="Layer 1"
                             viewBox="0 0 24 24">
