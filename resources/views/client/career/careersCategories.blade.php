@@ -6,7 +6,7 @@
         <section>
             <div class="flex flex-row justify-between items-center mt-5 mb-3">
                 <h1 class="lg:text-xl text-sm font-bold" id="careerCatTitle">
-                 همه دسته ها    
+                 همه دسته بندی ها    
                 </h1>
             </div>
             <div class="grid grid-cols-2 lg:grid-cols-8 gap-4">
