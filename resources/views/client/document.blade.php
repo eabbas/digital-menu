@@ -444,11 +444,11 @@
                     </li>
                     <li>
                         <a href="{{ route('contactUs.create') }}"
-                            class="block py-3 border-b border-gray-300 text-sm font-bold">ارتباط با ما</a>
+                            class="block py-3 text-sm font-bold">ارتباط با ما</a>
                     </li>
                     <li>
                         <a href="{{ route('user.logout') }}"
-                            class="block py-3  text-sm font-bold bg-[#eb3254]/30 text-center">خروج از حساب کاربری</a>
+                            class="block py-3  text-sm font-bold bg-[#eb3254]/30 text-center text-red-500 rounded-sm">خروج از حساب کاربری</a>
                     </li>
                 </ul>
             </div>
