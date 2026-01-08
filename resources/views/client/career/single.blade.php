@@ -5,7 +5,6 @@
         {{-- <div class="py-5 w-full">
             
         </div> --}}
-
         <div class="flex flex-col border-none rounded-[7px]">
             <div class="flex flex-row justify-between items-center py-3 lg:py-5">
                 <h1 class="lg:text-xl text-center font-bold">{{ $career->title }}</h1>
@@ -26,7 +25,7 @@
             @endif
         </div>
         <div class="mt-2 lg:mt-5">
-            <a href="{{ route('career.menus', [$career->id]) }}" class="px-3 py-1 bg-[#00a692] text-white text-xs lg:text-sm float-end rounded-lg">مشاهده منو ها</a>
+            <a href="{{ route('career.menus', [$career->id]) }}" class="px-3 py-1 bg-[#eb3254] text-white text-xs lg:text-sm float-end rounded-lg">مشاهده منو ها</a>
         </div>
         <div class="pt-3">
             <div class="rounded-md lg:p-5 p-2 mb-3 lg:mb-5">
@@ -38,7 +37,6 @@
                         </div>
                     @endif
                 </div>
-
                 <div class="w-full lg:w-3/4 mx-auto flex flex-col gap-y-3 lg:gap-y-5 mt-5">
                     <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
                         <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">

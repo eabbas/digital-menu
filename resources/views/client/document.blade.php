@@ -14,7 +14,7 @@
 <body class="bg-[#ffffff]">
     <header>
         {{-- mobile menu --}}
-        <div class="w-full px-3 pt-4 pb-4 bg-[#D6236A] lg:hidden">
+        <div class="w-full px-3 pt-4 pb-4 bg-[#eb3254] lg:hidden">
             <div class="w-full flex flex-row items-center justify-between gap-3">
                 <!--<div class="flex flex-row items-center gap-3">-->
                 <!--<div class="rounded-md p-2 bg-white/20 cursor-pointer" onclick="home_menu('open')">-->
