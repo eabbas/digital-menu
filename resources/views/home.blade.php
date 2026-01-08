@@ -8,10 +8,10 @@
                 <h1 class="text-xl">پیشنهادات ویژه</h1>
                 <a class="text-[13px] text-[#00a692]" href="#">مشاهده همه</a>
             </div> --}}
-            {{-- <div class="w-full bg-green-300 h-40 overflow-hidden rounded-[15px] my-3">
+            <div class="w-full bg-green-300 h-40 overflow-hidden rounded-[15px] my-3">
                 <img class="size-full rounded-inherit object-cover"
-                    src="{{ asset('assets/img/b1ddaeba-d51c-4633-9813-5c71022038d1.png') }}" alt="">
-            </div> --}}
+                    src="{{ asset('assets/img/0f45cb57f458472281f94e87c7dfc67def10436d_1767515466.jpg') }}" alt="">
+            </div>
             {{-- <div class="my-3 flex flex-row justify-center items-center gap-2">
                 <span class="size-2 rounded-full bg-gray-300"></span>
                 <span class="size-2 rounded-full bg-[#00a692]"></span>
