@@ -7,13 +7,14 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{{ url('assets/css/style.css') }}" type="text/css">
+    <link rel="shortcut icon" href="{{ asset('storage/images/icon.png') }}" type="image/png">
     <title>@yield('title')</title>
 </head>
 
 <body>
 
     <div class="w-full flex flex-row">
-        <div class="hidden lg:block lg:w-[265px] bg-[#0D0E12] fixed z-50 right-0 top-0 h-dvh px-5 text-sm">
+        <div class="hidden lg:block lg:w-[265px] bg-[#0D0E12] fixed z-50 right-0 top-0 h-dvh px-3 text-sm">
             <div class="w-full">
                 <a href="{{ route('home') }}"
                     class="block w-full py-3 text-center font-bold text-3xl text-white border-b border-[darkslategray]">
@@ -21,7 +22,7 @@
                 </a>
             </div>
             <div class="py-5 h-[90%] overflow-y-auto flex flex-col gap-5" style="scrollbar-width: none;">
-                <div class="flex flex-row items-start gap-2.5">
+                <div class="flex flex-row items-start gap-2.5 px-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 512 512">
                         <path fill="white"
                             d="M256 464c7.4 0 27-7.2 47.6-48.4c8.8-17.7 16.4-39.2 22-63.6H186.4c5.6 24.4 13.2 45.9 22 63.6C229 456.8 248.6 464 256 464zM178.5 304h155c1.6-15.3 2.5-31.4 2.5-48s-.9-32.7-2.5-48h-155c-1.6 15.3-2.5 31.4-2.5 48s.9 32.7 2.5 48zm7.9-144H325.6c-5.6-24.4-13.2-45.9-22-63.6C283 55.2 263.4 48 256 48s-27 7.2-47.6 48.4c-8.8 17.7-16.4 39.2-22 63.6zm195.3 48c1.5 15.5 2.2 31.6 2.2 48s-.8 32.5-2.2 48h76.7c3.6-15.4 5.6-31.5 5.6-48s-1.9-32.6-5.6-48H381.8zm58.8-48c-21.4-41.1-56.1-74.1-98.4-93.4c14.1 25.6 25.3 57.5 32.6 93.4h65.9zm-303.3 0c7.3-35.9 18.5-67.7 32.6-93.4c-42.3 19.3-77 52.3-98.4 93.4h65.9zM53.6 208c-3.6 15.4-5.6 31.5-5.6 48s1.9 32.6 5.6 48h76.7c-1.5-15.5-2.2-31.6-2.2-48s.8-32.5 2.2-48H53.6zM342.1 445.4c42.3-19.3 77-52.3 98.4-93.4H374.7c-7.3 35.9-18.5 67.7-32.6 93.4zm-172.2 0c-14.1-25.6-25.3-57.5-32.6-93.4H71.4c21.4 41.1 56.1 74.1 98.4 93.4zM256 512A256 256 0 1 1 256 0a256 256 0 1 1 0 512z" />
@@ -30,7 +31,7 @@
                         بازدید از سایت
                     </a>
                 </div>
-                <div class="flex flex-row items-start gap-2.5">
+                <div class="flex flex-row items-start gap-2.5 rounded-sm px-2 @if(Route::is('user.profile')) bg-gray-700 @endif">
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 576 512">
                         <path fill="white"
                             d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z" />
@@ -39,7 +40,7 @@
                         داشبورد
                     </a>
                 </div>
-                <div class="dashboard">
+                {{-- <div class="dashboard">
                     <div class="flex justify-between flex-row-reverse cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200" viewBox="0 0 448 512">
                             <path fill="white" d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"/></svg>
@@ -53,54 +54,54 @@
                         </div>
                     </div>
 
-                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden max-h-0">
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                    <ul class="my-1 pr-3 transition-all duration-500 overflow-hidden max-h-0">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a class="text-white" href="{{ route('ecomm.create') }}" class="text-white py-1">ایجاد
+                            <a class="text-white" href="{{ route('ecomm.create') }}" class="text-white py-1 block">ایجاد
                                 فروشگاه
                                 جدید</a>
                         </li>
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a class="text-white" href="{{ route('ecomm.ecomms') }}" class="text-white py-1">
+                            <a class="text-white" href="{{ route('ecomm.ecomms') }}" class="text-white py-1 block">
                                 فروشگاه های
                                 من</a>
                         </li>
                         @if (Auth::user()->role[0]->title == 'admin')
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('ecomm.list') }}" class="text-white py-1">
+                                <a href="{{ route('ecomm.list') }}" class="text-white py-1 block">
                                     مشاهده همه فروشگاه ها
                                 </a>
                             </li>
                         @endif
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('ecomm_category.index') }}" class="text-white"> دسته ها </a>
                         </li>
                         @if (count(Auth::user()->ecomms))
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
                                 <span class="size-1 bg-white rounded-sm"></span>
                                 <a href="{{ route('ecomm_category.create') }}" class="text-white">ایجاد دسته </a>
                             </li>
                         @endif
 
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('ecomm_product.index') }}" class="text-white">محصولات </a>
                         </li>
                         @if (count(Auth::user()->ecomms))
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
                                 <span class="size-1 bg-white rounded-sm"></span>
                                 <a href="{{ route('ecomm_product.create') }}" class="text-white"> ایجاد محصول </a>
                             </li>
                         @endif
 
                     </ul>
-                </div>
+                </div> --}}
                 <div class="dashboard">
-                    <div class="flex justify-between flex-row-reverse cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200" viewBox="0 0 448 512">
+                    <div class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if(Route::is('career.*') || Route::is('menu.createMenu') || Route::is('menu.user_menus') || Route::is('cc.create') || Route::is('cc.list')) bg-gray-700 @endif">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200 @if(Route::is('career.*') || Route::is('menu.createMenu') || Route::is('menu.user_menus') || Route::is('cc.create') || Route::is('cc.list')) rotate-180 @endif" viewBox="0 0 448 512">
                             <path fill="white" d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"/></svg>
                         <div class="flex flex-row-reverse items-center gap-2">
                             <span class=" text-[white] flex justify-end font-bold">کسب و کار ها</span>
@@ -110,55 +111,55 @@
                             </svg>
                         </div>
                     </div>
-                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden max-h-0">
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                    <ul class="my-1 pr-3 transition-all duration-500 overflow-hidden @if(Route::is('career.*') || Route::is('menu.createMenu') || Route::is('menu.user_menus') || Route::is('cc.create') || Route::is('cc.list')) max-h-[500px] @else max-h-0 @endif">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('career.careers')) bg-gray-700  @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('career.careers') }}" class="text-white py-1">
+                            <a href="{{ route('career.careers') }}" class="text-white py-1 block">
                                 لیست کسب و کار های من
                             </a>
                         </li>
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('career.create')) bg-gray-700  @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('career.create') }}" class="text-white py-1">ایجاد
+                            <a href="{{ route('career.create') }}" class="text-white py-1 block">ایجاد
                                 کسب و کار
                                 جدید</a>
                         </li>
                         @if (count(Auth::user()->careers))
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('menu.createMenu')) bg-gray-700  @endif">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('menu.createMenu') }}" class="text-white py-1">
+                                <a href="{{ route('menu.createMenu') }}" class="text-white py-1 block">
                                     ایجاد منو برای کسب و کار
                                 </a>
                             </li>
                         @endif
                         @if (count(Auth::user()->menus))
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('menu.user_menus')) bg-gray-700  @endif">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('menu.user_menus', [Auth::user()]) }}" class="text-white py-1">
+                                <a href="{{ route('menu.user_menus', [Auth::user()]) }}" class="text-white py-1 block">
                                     لیست منو های من
                                 </a>
                             </li>
                         @endif
-                        {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                        {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('favoriteCareer.list') }}" class="text-white py-1">لیست علاقه مندی ها</a>
+                            <a href="{{ route('favoriteCareer.list') }}" class="text-white py-1 block">لیست علاقه مندی ها</a>
                         </li> --}}
                         @if (Auth::user()->role[0]->title == 'admin')
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('cc.create')) bg-gray-700  @endif">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('cc.create') }}" class="text-white py-1">
+                                <a href="{{ route('cc.create') }}" class="text-white py-1 block">
                                     ایجاد دسته کسب و کار
                                 </a>
                             </li>
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('cc.list')) bg-gray-700  @endif">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('cc.list') }}" class="text-white py-1">
+                                <a href="{{ route('cc.list') }}" class="text-white py-1 block">
                                     همه دسته های کسب و کارها
                                 </a>
                             </li>
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('career.list')) bg-gray-700  @endif">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('career.list') }}" class="text-white py-1">
+                                <a href="{{ route('career.list') }}" class="text-white py-1 block">
                                     همه کسب و کارها
                                 </a>
                             </li>
@@ -166,8 +167,8 @@
                     </ul>
                 </div>
                 <div class="dashboard">
-                    <div class="flex justify-between flex-row-reverse cursor-pointer">
-                       <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200" viewBox="0 0 448 512">
+                    <div class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if(Route::is('covers.*') || Route::is('socialMedia.create') || Route::is('socialMedia.list')) bg-gray-700 @endif">
+                       <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200 @if(Route::is('covers.*') || Route::is('socialMedia.create') || Route::is('socialMedia.list')) rotate-180 @endif" viewBox="0 0 448 512">
                             <path fill="white" d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"/></svg>
                         <div class="flex flex-row-reverse items-center gap-2">
                             <span class=" text-[white] flex justify-end font-bold">شبکه های اجتماعی</span>
@@ -177,50 +178,50 @@
                             </svg>
                         </div>
                     </div>
-                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden max-h-0">
+                    <ul class="my-1 pr-3 transition-all duration-500 overflow-hidden @if(Route::is('covers.*') || Route::is('socialMedia.create') || Route::is('socialMedia.list')) max-h-[500px] @else max-h-0 @endif">
 
-                        {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                        {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('favoriteCareer.list') }}" class="text-white py-1">لیست علاقه مندی ها</a>
+                            <a href="{{ route('favoriteCareer.list') }}" class="text-white py-1 block">لیست علاقه مندی ها</a>
                         </li> --}}
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('covers.create')) bg-gray-700 @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('covers.create') }}" class="text-white py-1">ایجادصفحه
+                            <a href="{{ route('covers.create') }}" class="text-white py-1 block">ایجادصفحه
                             </a>
                         </li>
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('covers.social_list')) bg-gray-700 @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('covers.social_list') }}" class="text-white py-1"> لیست صفحات </a>
+                            <a href="{{ route('covers.social_list') }}" class="text-white py-1 block"> لیست صفحات </a>
                         </li>
                         @if (Auth::user()->role[0]->title == 'admin')
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('covers.list')) bg-gray-700 @endif">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('covers.list') }}" class="text-white py-1"> لیست همه صفحات
+                                <a href="{{ route('covers.list') }}" class="text-white py-1 block"> لیست همه صفحات
                                 </a>
                             </li>
                         @endif
-                        {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                        {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('covers.list') }}" class=" text-white py-1"> مشاهده لیست همه شبکه های اجتماعی کاربران</a>
                         </li> --}}
                         @if (Auth::user()->role[0]->title == 'admin')
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('socialMedia.create')) bg-gray-700 @endif">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('socialMedia.create') }}" class="text-white py-1">
+                                <a href="{{ route('socialMedia.create') }}" class="text-white py-1 block">
                                     ایجاد شبکه اجتماعی
                                 </a>
                             </li>
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('socialMedia.list')) bg-gray-700 @endif">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('socialMedia.list') }}" class="text-white py-1">
+                                <a href="{{ route('socialMedia.list') }}" class="text-white py-1 block">
                                     لیست شبکه های اجتماعی
                                 </a>
                             </li>
                     </ul>
                 </div>
                 <div class="dashboard">
-                    <div class="flex flex-row-reverse justify-between cursor-pointer">
-                       <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200" viewBox="0 0 448 512">
+                    <div class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if(Route::is('user.list') || Route::is('user.create_user')) bg-gray-700 @endif">
+                       <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200 @if(Route::is('user.list') || Route::is('user.create_user')) rotate-180 @endif" viewBox="0 0 448 512">
                             <path fill="white" d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"/></svg>
                         <div class="flex flex-row-reverse items-center gap-2">
                             <span class=" text-[white] flex justify-end font-bold">کاربران</span>
@@ -230,16 +231,16 @@
                             </svg>
                         </div>
                     </div>
-                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden max-h-0">
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                    <ul class="my-1 pr-3 transition-all duration-500 overflow-hidden @if(Route::is('user.list') || Route::is('user.create_user')) max-h-[500px] @else max-h-0 @endif">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('user.list')) bg-gray-700 @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('user.list') }}" class="text-white py-1">
+                            <a href="{{ route('user.list') }}" class="text-white py-1 block">
                                 مشاهده همه کاربران
                             </a>
                         </li>
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('user.create_user')) bg-gray-700 @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('user.create_user') }}" class="text-white py-1">
+                            <a href="{{ route('user.create_user') }}" class="text-white py-1 block">
                                 ایجاد کاربر جدید
                             </a>
                         </li>
@@ -247,8 +248,8 @@
                     </ul>
                 </div>
                 <div class="dashboard">
-                    <div class="flex flex-row-reverse justify-between cursor-pointer">
-                       <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200" viewBox="0 0 448 512">
+                    <div class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if(Route::is('slider.*')) bg-gray-700 @endif">
+                       <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200 @if(Route::is('slider.*')) rotate-180 @endif" viewBox="0 0 448 512">
                             <path fill="white" d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"/></svg>
                         <div class="flex flex-row-reverse items-center gap-2">
                             <span class=" text-[white] flex justify-end font-bold">اسلایدر</span>
@@ -264,16 +265,16 @@
                             </svg>
                         </div>
                     </div>
-                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden max-h-0">
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                    <ul class="my-1 pr-3 transition-all duration-500 overflow-hidden @if(Route::is('slider.*')) max-h-[500px] @else max-h-0 @endif">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('slider.create')) bg-gray-700 @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('slider.create') }}" class="text-white py-1">
+                            <a href="{{ route('slider.create') }}" class="text-white py-1 block">
                                 ایجاد اسلایدر
                             </a>
                         </li>
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('slider.list')) bg-gray-700 @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('slider.list') }}" class="text-white py-1">
+                            <a href="{{ route('slider.list') }}" class="text-white py-1 block">
                                 لیست اسلایدر
                             </a>
                         </li>
@@ -281,8 +282,8 @@
                 </div>
                 {{-- contactUs --}}
                 <div class="dashboard">
-                    <div class="flex flex-row-reverse justify-between cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200" viewBox="0 0 448 512">
+                    <div class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if(Route::is('contactUs.*')) bg-gray-700 @endif">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200 @if(Route::is('contactUs.*')) rotate-180 @endif" viewBox="0 0 448 512">
                             <path fill="white" d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"/></svg>
 
                         <div class="flex flex-row-reverse items-center gap-2">
@@ -293,11 +294,11 @@
                             </svg>
                         </div>
                     </div>
-                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden max-h-0">
+                    <ul class="my-1 pr-3 transition-all duration-500 overflow-hidden @if(Route::is('contactUs.*')) max-h-[500px] @else max-h-0 @endif">
                         @if (Auth::user()->role[0]->title == 'admin')
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('contactUs.list')) bg-gray-700 @endif">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('contactUs.list') }}" class="text-white py-1">
+                                <a href="{{ route('contactUs.list') }}" class="text-white py-1 block">
                                     لیست تیکت ها
                                 </a>
                             </li>
@@ -326,9 +327,9 @@
                     </div>
                    
                     <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden">
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('cp.list') }}" class="text-white py-1">
+                            <a href="{{ route('cp.list') }}" class="text-white py-1 block">
                                 همه محصولات
                             </a>
                         </li>
@@ -336,8 +337,8 @@
                 </div> --}}
                 {{-- end customPro_list --}}
                 <div class="dashboard">
-                    <div class="flex flex-row-reverse justify-between cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200" viewBox="0 0 448 512">
+                    <div class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if(Route::is('aboutUs.*')) bg-gray-700 @endif">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200 @if(Route::is('aboutUs.*')) rotate-180 @endif" viewBox="0 0 448 512">
                             <path fill="white" d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"/></svg>
                         <div class="flex flex-row-reverse items-center gap-2">
                             <span class=" text-[white] flex justify-end font-bold">درباره ما</span>
@@ -347,16 +348,16 @@
                             </svg>
                         </div>
                     </div>
-                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden max-h-0">
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                    <ul class="my-1 pr-3 transition-all duration-500 overflow-hidden @if(Route::is('aboutUs.create_edit')) max-h-[500px] @else max-h-0 @endif">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('aboutUs.*')) bg-gray-700 @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('aboutUs.create_edit') }}" class="text-white py-1">
+                            <a href="{{ route('aboutUs.create_edit') }}" class="text-white py-1 block">
                                 ایجاد درباره ما
                             </a>
                         </li>
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('aboutUs.list')) bg-gray-700 @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('aboutUs.list') }}" class="text-white py-1">
+                            <a href="{{ route('aboutUs.list') }}" class="text-white py-1 block">
                                 لیست درباره ما
                             </a>
                         </li>
