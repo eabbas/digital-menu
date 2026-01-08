@@ -2,13 +2,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 @section('title', 'فامنو | منوی دیجیتال کسب و کار شما')
 @section('content')
-    <div class="w-full pt-5 samim">
+    <div class="w-full pt-3 samim">
         <section>
             {{-- <div class="flex flex-row justify-between items-center">
                 <h1 class="text-xl">پیشنهادات ویژه</h1>
                 <a class="text-[13px] text-[#00a692]" href="#">مشاهده همه</a>
             </div> --}}
-            <div class="w-full bg-green-300 h-40 overflow-hidden rounded-[15px] my-3">
+            <div class="w-full bg-green-300 h-50 overflow-hidden rounded-[15px] my-3">
                 <img class="size-full rounded-inherit object-cover"
                     src="{{ asset('assets/img/0f45cb57f458472281f94e87c7dfc67def10436d_1767515466.jpg') }}" alt="">
             </div>
