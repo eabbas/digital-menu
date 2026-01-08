@@ -9,7 +9,6 @@
                   کسب و کار های {{ $careerCategory->title }}
                 </h1>
             </div>
-       
             <div class="grid grid-cols-2 lg:grid-cols-8 gap-4">
                 @foreach($careerCategory->careers as $career)
                 <div class="relative careers" data-index="{{ $career->career_category_id }}">
