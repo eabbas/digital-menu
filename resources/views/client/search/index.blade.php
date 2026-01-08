@@ -70,8 +70,8 @@
             @foreach ($careerTitles as $careerTitle)
                 <a href="{{ route('show_career', [$careerTitle]) }}" data-index="{{ $careerTitle->career_category_id }}"
                     class="w-full h-40 rounded-[11px] flex flex-col items-center justify-center gap-2 careers">
-                    <div class="w-full h-28 rounded-md overflow-hidden">
-                        <img class="size-28 mx-auto roundede-md rounded-inherit object-cover"
+                    <div class="w-full rounded-md overflow-hidden">
+                        <img class="size-26 mx-auto rounded-[7px] object-cover"
                             src="{{ asset('storage/' . $careerTitle->logo) }}" alt="career logo">
                     </div>
                     <span class="text-gray-500 text-sm font-medium">
@@ -89,18 +89,3 @@
     @endif
 
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-{{--    
-</html>
-</body> --}}

@@ -172,9 +172,7 @@
                     <form action="{{ route('search') }}" method="post" class="w-full">
                         @csrf
                         <div class="w-full flex flex-row items-center samim">
-
                             <div class="w-full bg-white flex flex-row rounded-full items-center gap-2 px-3">
-
                                 <input
                                     class="outline-none p-2 w-full rounded-lg bg-[#F9F9F9]"
                                     type="text" name="search" placeholder="جستجوی کسب و کار">
@@ -191,7 +189,6 @@
                             </div>
                         </div>
                     </form>
-
                 </div>
                 <div class="flex flex-row justify-end items-center">
                     <div class="relative hover_profile">
