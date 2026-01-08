@@ -17,11 +17,11 @@
     <div class="w-full flex flex-col justify-start items-center md:flex-row-reverse">
         <div class="flex justify-center max-sm:h-25 max-md:h-30 md:h-dvh md:w-4/12 lg:w-5/12 xl:w-6/12 bg-[#eb3254]">
             <div class="flex flex-col my-12 items-center justify-center">
-                <div class="w-full flex flex-row justify-center items-center">
+                <a href="https://famenu.ir" class="w-full flex flex-row justify-center items-center">
                     <img class="max-md:w-4/12 w-8/12"
                         src="{{ asset('storage/images/Famenu1.png') }}" alt="Faos">
 
-                </div>
+                </a>
             </div>
         </div>
         <div class="w-full md:w-8/12 bg-white flex justify-center md:px-5">
