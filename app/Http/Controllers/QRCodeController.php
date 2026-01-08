@@ -21,9 +21,9 @@ class QrCodeController extends Controller
     }
 
     public function load(career $career, string $slug){
-        // $user = $career->user;
-        // $user->scan_count += 1;
-        // $user->save();
+        $user = $career->user;
+        $user->scan_count += 1;
+        $user->save();
         return to_route('client.menu', [$career, $slug]);
     }
    

@@ -10,10 +10,24 @@ class ClientController extends Controller
 {
     public function show_menu(career $career, string $slug = null)
     {
-        $user = $career->user;
-        $user->scan_count += 1;
-        $user->save();
+        // $campare = $product->price->price - $product->price->discount;
+        // $x = $campare / $product->price->price;
+        // $persent = $x * 100;
+
+        // $user = $career->user;
+        // $user->scan_count += 1;
+        // $user->save();
         // set qr count in qrcode controller load method
+        $menus = $career->menus;
+        foreach ($menus as $menu) {
+            foreach ($menu->menu_categories as $category) {
+                foreach($category->menu_items as $item){
+                    $campare = $item->price - $item->discount;
+                    $x = $campare / $item->price;
+                    $item['percent'] = intval($x * 100);
+                }
+            }
+        }
         return view('client.menu', ['career' => $career, 'slug' => $slug]);
     }
 

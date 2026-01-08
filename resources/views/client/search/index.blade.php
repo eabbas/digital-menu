@@ -66,16 +66,16 @@
         </div>
     </div>
     <div class="grid grid-cols-3 lg:grid-cols-8 gap-3 lg:gap-4 mt-10">
-        @if ($careerTitles && $careerTitles->count() > 0)
-            @foreach ($careerTitles as $careerTitle)
-                <a href="{{ route('show_career', [$careerTitle]) }}" data-index="{{ $careerTitle->career_category_id }}"
+        @if ($careers && $careers->count() > 0)
+            @foreach ($careers as $career)
+                <a href="{{ route('client.menu', [$career]) }}" data-index="{{ $career->career_category_id }}"
                     class="w-full h-40 rounded-[11px] flex flex-col items-center justify-center gap-2 careers">
                     <div class="w-full rounded-md overflow-hidden">
                         <img class="size-26 mx-auto rounded-[7px] object-cover"
-                            src="{{ asset('storage/' . $careerTitle->logo) }}" alt="career logo">
+                            src="{{ asset('storage/' . $career->logo) }}" alt="career logo">
                     </div>
                     <span class="text-gray-500 text-sm font-medium">
-                        {{ $careerTitle->title }}
+                        {{ $career->title }}
                     </span>
                 </a>
             @endforeach

@@ -25,12 +25,11 @@
             @endif
         </div>
         <div class="mt-2 lg:mt-5">
-            <a href="{{ route('career.menus', [$career->id]) }}" class="px-3 py-1 bg-[#eb3254] text-white text-xs lg:text-sm float-end rounded-lg">مشاهده منو ها</a>
+            <a href="{{ route('client.menu', [$career]) }}" class="px-3 py-1 bg-[#eb3254] text-white text-xs lg:text-sm float-end rounded-lg">مشاهده منو ها</a>
         </div>
         <div class="pt-3">
             <div class="rounded-md lg:p-5 p-2 mb-3 lg:mb-5">
                 <div class="flex flex-row justify-between items-center">
-                    
                     @if ($career->menu)
                         <div
                             class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
