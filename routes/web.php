@@ -565,6 +565,7 @@ Route::group([
     Route::get('/edit/{contactUs}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{contactUs}', 'delete')->name('delete');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
 
 Route::fallback(function () {

@@ -62,4 +62,12 @@ class ContactUsController extends Controller
         $contactUs->delete();
         return to_route('contactUs.myMessage');
     }
+     public function deleteAll(Request $request)
+    {
+        foreach($request->allContactUs as $contactUs){
+            $contactUs = contactUs::find($contactUs);
+        }
+        $contactUs->delete();
+        return redirect()->back();
+    }
 }

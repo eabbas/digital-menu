@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="pb-4">
-    <h2 class="text-sm lg:text-lg font-bold text-gray-800">لیست منو های {{ $user->title }}</h2>
+    <h2 class="text-sm lg:text-lg font-bold text-gray-800">لیست منو های {{ $user->name }} {{ $user->family }}</h2>
 </div>
 <div class="w-full flex flex-col pb-4">
     <form action="{{ route('menu.deleteAll') }}" method="post" class="bg-white rounded-lg">
@@ -82,7 +82,7 @@
                                     </div>
                                     <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center col-span-2">
-                                        <span class="block w-24 lg:w-full">{{ $menu->career->title }}</span>
+                                        <span class="block w-24 lg:w-full">{{ $menu?->career?->title }}</span>
                                     </div>
                                     <div class="col-span-4">
                                         <div class="w-[320px] lg:w-full grid grid-cols-3 divide-x divide-[#f1f1f4] items-center">
