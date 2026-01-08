@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
-    <link rel="shortcut icon" href="{{ asset('storage/images/Famenu1.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('storage/images/icon.png') }}" type="image/png">
     <title>@yield('title')</title>
 </head>
 
