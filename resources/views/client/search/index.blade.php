@@ -65,8 +65,8 @@
             </div>
         </div>
     </div>
-    <div class="grid grid-cols-3 lg:grid-cols-8 gap-3 lg:gap-4 mt-10">
-        @if ($careers && $careers->count() > 0)
+    @if ($careers && $careers->count() > 0)
+        <div class="grid grid-cols-3 lg:grid-cols-8 gap-3 lg:gap-4 mt-10">
             @foreach ($careers as $career)
                 <a href="{{ route('client.menu', [$career]) }}" data-index="{{ $career->career_category_id }}"
                     class="w-full h-40 rounded-[11px] flex flex-col items-center justify-center gap-2 careers">
@@ -79,13 +79,13 @@
                     </span>
                 </a>
             @endforeach
-    </div>
-@else
-    <div class="px-6 py-12 text-center">
-        <div class="text-gray-400 text-4xl mb-3">📊</div>
-        <div class="text-gray-500 text-lg">هیچ اطلاعاتی یافت نشد</div>
-        <p class="text-gray-400 text-sm mt-2">لطفاً بعداً مراجعه کنید</p>
-    </div>
+        </div>
+    @else
+        <div class="px-6 py-12 text-center">
+            <div class="text-gray-400 text-4xl mb-3">📊</div>
+            <div class="text-gray-500 text-lg">هیچ اطلاعاتی یافت نشد</div>
+            <p class="text-gray-400 text-sm mt-2">لطفاً بعداً مراجعه کنید</p>
+        </div>
     @endif
 
 @endsection
