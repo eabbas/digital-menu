@@ -14,8 +14,8 @@
 <body class="bg-[#ffffff]">
     <!-- مودال ساده -->
     <div id="comingSoon" class="hidden fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-xs w-full p-5 relative transform transition-all duration-300 scale-95 opacity-0" id="contentCommingSoon">
-            <button id="closeModal" class="absolute top-3 left-3 text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white text-2xl">
+        <div class="bg-white rounded-xl shadow-xl max-w-xs w-full p-5 relative transform transition-all duration-300 scale-95 opacity-0" id="contentCommingSoon">
+            <button id="closeModal" class="absolute top-3 left-3 text-gray-500 hover:text-gray-800 text-2xl">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -23,14 +23,14 @@
             </button>
             
             <div class="text-center pt-2">
-                <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">به زودی</h3>
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-[#eb3254] dark:bg-blue-900/30 rounded-full mb-4">
-                    <svg class="w-8 h-8 text-[#eb3254] dark:text-blue-400" fill="white" stroke="currentColor" viewBox="0 0 24 24">
+                <h3 class="text-lg font-bold text-gray-800 mb-2">به زودی</h3>
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-[#eb3254] rounded-full mb-4">
+                    <svg class="w-8 h-8 text-[#eb3254]" fill="white" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </div>
                 <h6>سلام دوست عزیز</h6>
-                <p class="text-gray-600 dark:text-gray-300 text-sm mb-5">
+                <p class="text-gray-600 text-sm mb-5">
                     فروشگاه در حال راه‌اندازی است
                 </p>
                 
@@ -41,8 +41,8 @@
         </div>
     </div>
     <div id="cart" class="hidden fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-xs w-full p-5 relative transform transition-all duration-300 scale-95 opacity-0" id="contentCart">
-            <button id="closeCart" class="absolute top-3 left-3 text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white text-2xl">
+        <div class="bg-white rounded-xl shadow-xl max-w-xs w-full p-5 relative transform transition-all duration-300 scale-95 opacity-0" id="contentCart">
+            <button id="closeCart" class="absolute top-3 left-3 text-gray-500 hover:text-gray-800 text-2xl">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -50,14 +50,14 @@
             </button>
             
             <div class="text-center pt-2">
-                <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">به زودی</h3>
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-[#eb3254] dark:bg-blue-900/30 rounded-full mb-4">
-                    <svg class="w-8 h-8 text-[#eb3254] dark:text-blue-400" fill="white" stroke="currentColor" viewBox="0 0 24 24">
+                <h3 class="text-lg font-bold text-gray-800 mb-2">به زودی</h3>
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-[#eb3254] rounded-full mb-4">
+                    <svg class="w-8 h-8 text-[#eb3254]" fill="white" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </div>
                 <h6>سلام دوست عزیز</h6>
-                <p class="text-gray-600 dark:text-gray-300 text-sm mb-5">
+                <p class="text-gray-600 text-sm mb-5">
                    پس از راه اندازی فروشگاه سبد خرید راه اندازی میشود
                 </p>
                 
@@ -384,7 +384,7 @@
                 @if (!Auth::check())
                     <li>
                         <a href="{{ route('user.profile') }}"
-                            class="size-10 flex justify-center items-center rounded-full">
+                            class="size-10 flex justify-center items-center rounded-full @if(Route::is('login')) bg-[#eb3254] @endif">
                             <?xml version="1.0" encoding="UTF-8"?>
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-6" id="Outline"
                                 viewBox="0 0 24 24" width="512" height="512">
@@ -531,4 +531,3 @@
 </body>
 
 </html>
-git
