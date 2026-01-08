@@ -2,7 +2,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 @section('title', 'فامنو | منوی دیجیتال کسب و کار شما')
 @section('content')
-    <div class="w-full pt-3 samim">
+    <div class="w-full pt-1 samim">
         <section>
             {{-- <div class="flex flex-row justify-between items-center">
                 <h1 class="text-xl">پیشنهادات ویژه</h1>
@@ -18,7 +18,7 @@
                 <span class="size-2 rounded-full bg-gray-300"></span>
                 <span class="size-2 rounded-full bg-gray-300"></span>
             </div> --}}
-            <div class="flex flex-row justify-between items-center">
+            <div class="flex flex-row justify-between items-center pt-1">
                 <h1 class="lg:text-xl text-sm font-bold"> دسته بندی کسب و کارها</h1>
                 <a class="text-[13px] text-[#eb3254] font-bold" href="{{ route('career.careersCategories') }}">مشاهده همه</a>
             </div>

@@ -6,7 +6,7 @@
             <a href="{{ route('show_career', [$career]) }}" class="text-sky-700">مشاهده جزئیات کسب وکار</a>
         </div>
     </div>
-    <div class="w-full pt-4 lg:pt-16 bg-[#F4F8F9]">
+    <div class="w-full pt-4 lg:pt-16 pb-4 bg-[#F4F8F9]">
         <div class="pb-4 text-lg lg:text-3xl text-center font-bold">
             <h2>{{ $career->title }}</h2>
         </div>
@@ -18,7 +18,7 @@
                 class="w-11/12 h-[120px] sm:h-[180px] mx-auto rounded-md object-cover" alt="career banner">
         @endif
     </div>
-    <div class="w-full bg-[#F4F8F9] py-3">
+    <div class="w-full py-3">
         <h3 class="w-11/12 mx-auto py-3 text-base font-bold lg:text-md">منو های {{ $career->title }}</h3>
         <div class="w-11/12 flex flex-row items-center gap-3 pb-3 mx-auto overflow-x-auto [&::-webkit-scrollbar]:hidden">
             @foreach ($career->menus as $menu)
