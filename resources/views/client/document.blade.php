@@ -72,7 +72,7 @@
         {{-- mobile menu --}}
         <div class="w-full px-3 pt-4 pb-4 bg-[#eb3254] lg:hidden">
             <div class="w-full flex flex-row items-center justify-between gap-3">
-                <!--<div class="flex flex-row items-center gap-3">-->
+                {{-- <!--<div class="flex flex-row items-center gap-3">-->
                 <!--<div class="rounded-md p-2 bg-white/20 cursor-pointer" onclick="home_menu('open')">-->
                 <!--    <div class="w-5 h-4 flex flex-col justify-between items-center">-->
                 <!--        <span class="block w-full h-0.5 bg-white"></span>-->
@@ -80,7 +80,7 @@
                 <!--        <span class="block w-full h-0.5 bg-white"></span>-->
                 <!--    </div>-->
                 <!--</div>-->
-                <!--</div>-->
+                <!--</div>--> --}}
                 <div class="size-[50px]">
                     <a href="{{ route('home') }}">
                         <img class="size-full" src="{{ asset('storage/images/Famenu1.png') }}" alt="">
@@ -228,9 +228,9 @@
                     <form action="{{ route('search') }}" method="post" class="w-full">
                         @csrf
                         <div class="w-full flex flex-row items-center samim">
-                            <div class="w-full bg-white flex flex-row rounded-full items-center gap-2 px-3">
+                            <div class="w-full bg-white flex flex-row rounded-full items-center gap-2 px-3 bg-[#F9F9F9]">
                                 <input
-                                    class="outline-none p-2 w-full rounded-lg bg-[#F9F9F9]"
+                                    class="outline-none p-2 w-full rounded-lg"
                                     type="text" name="search" placeholder="جستجوی کسب و کار">
                             </div>
                             <div
@@ -266,7 +266,7 @@
 
                         @endif
                         @if (Auth::check())
-                            <div class="absolute left-0 pt-5 invisible opacity-0 transition-all duration-300">
+                            <div class="absolute left-0 pt-5 invisible opacity-0 transition-all duration-300 z-999">
                                 <div class="w-[250px] rounded-xl  py-4 bg-white shadow__all__prof">
                                     <div class="text-center px-2">
                                         <span class="font-bold">
