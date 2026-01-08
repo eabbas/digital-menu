@@ -12,6 +12,31 @@
 </head>
 
 <body class="bg-[#ffffff]">
+    <!-- مودال ساده -->
+    <div id="comingSoon" class="hidden fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-xs w-full p-5 relative transform transition-all duration-300 scale-95 opacity-0" id="contentCommingSoon">
+            <button id="closeModal" class="absolute top-3 left-3 text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white text-2xl">
+                &times;
+            </button>
+            
+            <div class="text-center pt-2">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-[#eb3254] dark:bg-blue-900/30 rounded-full mb-4">
+                    <svg class="w-8 h-8 text-[#eb3254] dark:text-blue-400" fill="white" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                
+                <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">به زودی</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm mb-5">
+                    فروشگاه در حال راه‌اندازی است
+                </p>
+                
+                <button id="closeForm" class="w-full bg-[#eb3254] hover:bg-[#eb3254] text-white py-2.5 rounded-lg text-sm font-medium transition">
+                    باشه
+                </button>
+            </div>
+        </div>
+    </div>
     <header>
         {{-- mobile menu --}}
         <div class="w-full px-3 pt-4 pb-4 bg-[#eb3254] lg:hidden">
@@ -267,7 +292,7 @@
                 class="w-full mx-auto flex flex-row justify-between items-center bg-white border-t-1 border-gray-300 p-2">
                 <li>
                     {{-- category --}}
-                    <a href="#" class="size-10 flex justify-center items-center rounded-full">
+                    <a href="{{ route('home') }}" class="size-10 flex justify-center items-center rounded-full">
                         <?xml version="1.0" encoding="UTF-8"?>
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" id="Layer_1" data-name="Layer 1"
                             viewBox="0 0 24 24" width="512" height="512">
@@ -278,19 +303,17 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('career.careers') }}"
-                        class="size-10 flex justify-center items-center rounded-full">
+                    <a href="#" id="shopIcon" class="size-10 flex justify-center items-center rounded-full transition cursor-pointer">
                         <?xml version="1.0" encoding="UTF-8"?>
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" id="Outline" viewBox="0 0 24 24"
                             width="512" height="512">
                             <path
                                 d="M21,6H18A6,6,0,0,0,6,6H3A3,3,0,0,0,0,9V19a5.006,5.006,0,0,0,5,5H19a5.006,5.006,0,0,0,5-5V9A3,3,0,0,0,21,6ZM12,2a4,4,0,0,1,4,4H8A4,4,0,0,1,12,2ZM22,19a3,3,0,0,1-3,3H5a3,3,0,0,1-3-3V9A1,1,0,0,1,3,8H6v2a1,1,0,0,0,2,0V8h8v2a1,1,0,0,0,2,0V8h3a1,1,0,0,1,1,1Z" />
                         </svg>
-
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('home') }}" class="size-10 bg-[#EB3254] flex justify-center items-center rounded-full">
+                    <a href="" class="size-10 bg-[#EB3254] flex justify-center items-center rounded-full">
                         {{-- <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 576 512">
                             <defs>
                                 <style>
@@ -408,6 +431,41 @@
         </div>
     </footer>
     <script src="{{ asset('assets/js/home.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const shopIcon = document.getElementById('shopIcon');
+        const comingSoon = document.getElementById('comingSoon');
+        const contentCommingSoon = document.getElementById('contentCommingSoon');
+        const closeBtn = document.getElementById('closeModal');
+        const confirmBtn = document.getElementById('closeForm');
+        
+        if (shopIcon) {
+            shopIcon.addEventListener('click', function(e) {
+                e.preventDefault()
+                openModal()
+            });
+        }
+        
+        function openModal() {
+            comingSoon.classList.remove('hidden')
+            contentCommingSoon.classList.remove('scale-95', 'opacity-0')
+            contentCommingSoon.classList.add('scale-100', 'opacity-100')
+        }
+        
+        function closeModal() {
+            contentCommingSoon.classList.remove('scale-100', 'opacity-100')
+            contentCommingSoon.classList.add('scale-95', 'opacity-0')
+            comingSoon.classList.add('hidden')
+           
+        }
+        
+        if (closeBtn) closeBtn.addEventListener('click', closeModal)
+        if (confirmBtn) confirmBtn.addEventListener('click', closeModal)
+        
+       
+        
+    })
+    </script>
 </body>
 
 </html>
