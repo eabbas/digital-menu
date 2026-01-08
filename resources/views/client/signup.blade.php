@@ -1,4 +1,4 @@
-<!doctype html>
+{{-- <!doctype html>
 <html lang="fa" dir="rtl">
 
 <head>
@@ -10,18 +10,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
-<body>
-    <div class="w-full h-dvh flex flex-col justify-start items-center md:flex-row-reverse">
-        <div class="flex justify-center max-sm:h-25 max-md:h-30 md:h-dvh md:w-4/12 lg:w-5/12 xl:w-6/12 bg-[#00a692]">
+<body> --}}
+    @extends('client.menuMobile')
+@section('title', 'ورود')
+@section('content')
+    <div class="w-full flex flex-col justify-start items-center md:flex-row-reverse">
+        <div class="flex justify-center max-sm:h-25 max-md:h-30 md:h-dvh md:w-4/12 lg:w-5/12 xl:w-6/12 bg-[#eb3254]">
             <div class="flex flex-col my-12 items-center justify-center">
                 <div class="w-full flex flex-row justify-center items-center">
                     <img class="max-md:w-4/12 w-8/12"
-                        src="{{ asset('assets/img/e125edbd-f303-47f3-9dbc-af414f99ccb2.webp') }}" alt="Faos">
+                        src="{{ asset('storage/images/Famenu1.png') }}" alt="Faos">
 
                 </div>
             </div>
         </div>
-        <div class="w-full md:w-8/12 bg-white flex justify-center md:px-5 mt-5">
+        <div class="w-full md:w-8/12 bg-white flex justify-center md:px-5">
             <div class="flex flex-col items-center justify-center w-full">
                 <h1 class="md:text-2xl font-bold text-base">ثبت نام</h1>
                 <div class="w-2/3 md:w-1/2 mx-auto flex flex-col">
@@ -29,23 +32,23 @@
                         class="w-full flex flex-col items-center my-6 gap-2 md:gap-3" method="post" id="signupForm">
                         @csrf
                         <input type="text"
-                            class="w-full p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
+                            class="w-full p-2 md:p-[9px] placeholder-[#eb3254] focus:border-[#eb3254] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
                             name="name" placeholder="نام" required>
                         <input type="text"
-                            class="w-full p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
+                            class="w-full p-2 md:p-[9px] placeholder-[#eb3254] focus:border-[#eb3254] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
                             name="family" placeholder="نام خانوادگی" required>
                         <input type="number"
-                            class="w-full p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
+                            class="w-full p-2 md:p-[9px] placeholder-[#eb3254] focus:border-[#eb3254] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
                             name="phoneNumber" placeholder="شماره تلفن" required id="phoneNumber">
                         <input type="password"
-                            class="w-full p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
+                            class="w-full p-2 md:p-[9px] placeholder-[#eb3254] focus:border-[#eb3254] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
                             name="password" placeholder="کلمه عبور" required>
                         <div class="w-full flex flex-row items-center gap-3">
                             <input type="number"
-                                class="w-3/4 p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
+                                class="w-3/4 p-2 placeholder-[#eb3254] focus:border-[#eb3254] md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
                                 name="code" placeholder="کد" required id="code">
                             <button type="button"
-                                class="w-1/4 text-xs lg:text-base h-full p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] bg-[#00a693] hover:bg-[#119a8c] text-white cursor-pointer"
+                                class="w-1/4 text-xs lg:text-base h-full p-2 md:p-[9px] mb-0.5 md:mb-1 rounded-[7px] bg-[#eb3254] hover:bg-[#d52b4a] text-white cursor-pointer"
                                 onclick="sendCode()">ارسال کد </button>
                         </div>
                         <div class="w-full flex gap-2 items-center ">
@@ -53,7 +56,7 @@
                                 onchange="checkRule()" id="rule">
                             <label for="rules" class="max-md:text-sm text-[#4B5675] cursor-pointer">قوانین را قبول
                                 میکنم
-                                <span class="text-[#00a693] cursor-pointer" onclick="rules('open')">قوانین</span>
+                                <span class="text-[#eb3254] cursor-pointer" onclick="rules('open')">قوانین</span>
                             </label>
                         </div>
                         <!-- rules -->
@@ -112,12 +115,12 @@
                         </div>
                         <!-- rules end -->
                         <button
-                            class="focus:bg-[#00a693] transition-all duration-400 text-center w-full bg-gray-400 py-2 md:p-3 rounded-[10px] text-white cursor-no-drop"
+                            class="focus:bg-[#eb3254] transition-all duration-400 text-center w-full bg-gray-400 py-2 md:p-3 rounded-[10px] text-white cursor-no-drop"
                             id="signupButton" disabled onclick="checkAuth(event)">ثبت نام</button>
                         <div class="w-full text-center my-1 md:my-4">
                             <span class="text-sm mt-5">
                                 از قبل اکانت داری؟
-                                <a href="{{ route('login') }}" class="text-[#00a693]">
+                                <a href="{{ route('login') }}" class="text-[#eb3254]">
                                     ورود
                                 </a>
                             </span>
@@ -129,13 +132,13 @@
             </div>
         </div>
     </div>
-    <footer>
+    {{-- <footer>
         <div
-            class="w-full h-10 bg-[#00a693] absolute bottom-0 flex flex-row gap-4 justify-center items-center md:hidden">
+            class="w-full h-10 bg-[#eb3254] absolute bottom-0 flex flex-row gap-4 justify-center items-center md:hidden">
             <div class="">اکادمی <b class="text-xl">Faos</b></div>
             <a href="tell:"><b class="text-white">09147794595</b></a>
         </div>
-    </footer>
+    </footer> --}}
     <script>
         let code = document.getElementById('code')
 
@@ -208,6 +211,7 @@
         }
     </script>
     <script src="{{ asset('assets/js/rules.js') }}"></script>
-</body>
+    @endsection
+{{-- </body>
 
-</html>
+</html> --}}

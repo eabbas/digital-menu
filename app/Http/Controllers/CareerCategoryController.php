@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\careerCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class CareerCategoryController extends Controller
 {
@@ -52,7 +53,7 @@ class CareerCategoryController extends Controller
         $careerCategory = careerCategory::find($request->id);
         if (isset($request->main_image)) {
             if ($careerCategory->main_image) {
-               Str::disk('public')->delete($careerCategory->main_image);
+               Storage::disk('public')->delete($careerCategory->main_image);
             }
             $name = $request->main_image->getClientOriginalName();
             $fullName = Str::uuid() . '_' . $name;

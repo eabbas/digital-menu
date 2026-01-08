@@ -81,7 +81,7 @@ Route::group([
 ], function () {
     Route::get('/create/{user?}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/userCareers/{user?}', 'user_careers')->name('careers')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/userCareers/{user?}', 'user_careers')->name('careers');
     Route::get('/edit/{career}/{user?}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{career}', 'delete')->name('delete');
