@@ -16,7 +16,7 @@ class HomeController extends Controller
     }
     public function search(Request $request)
     {
-        $careerTitles = career::where('title' , $request->search)->get();
-        return view('client.search.index' , ['careerTitles'=>$careerTitles]);
+        $careers = career::where('title' , $request->search)->get();
+        return view('client.search.index' , ['careers'=>$careers]);
     }
 }

@@ -10,13 +10,13 @@ function showMenu(el, index) {
         }
     });
     menuParent.forEach((menuCild)=>{
-        menuCild.classList.remove('bg-[#00a693]')
+        menuCild.classList.remove('bg-[#eb3254]')
         menuCild.classList.add('bg-white')
         menuCild.classList.remove('text-white')
         menuCild.classList.add('text-black')
     })
     el.classList.remove('bg-white')
-    el.classList.add('bg-[#00a693]')
+    el.classList.add('bg-[#eb3254]')
     el.classList.remove('text-black')
     el.classList.add('text-white')
 }

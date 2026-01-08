@@ -13,6 +13,61 @@
 </head>
 
 <body class="bg-[#ffffff]">
+    <!-- مودال ساده -->
+    <div id="comingSoon" class="hidden fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-xs w-full p-5 relative transform transition-all duration-300 scale-95 opacity-0" id="contentCommingSoon">
+            <button id="closeModal" class="absolute top-3 left-3 text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white text-2xl">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            
+            <div class="text-center pt-2">
+                <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">به زودی</h3>
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-[#eb3254] dark:bg-blue-900/30 rounded-full mb-4">
+                    <svg class="w-8 h-8 text-[#eb3254] dark:text-blue-400" fill="white" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h6>سلام دوست عزیز</h6>
+                <p class="text-gray-600 dark:text-gray-300 text-sm mb-5">
+                    فروشگاه در حال راه‌اندازی است
+                </p>
+                
+                <button id="closeForm" class="w-full bg-[#eb3254] hover:bg-[#eb3254] text-white py-2.5 rounded-lg text-sm font-medium transition">
+                    باشه
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="cart" class="hidden fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-xs w-full p-5 relative transform transition-all duration-300 scale-95 opacity-0" id="contentCart">
+            <button id="closeCart" class="absolute top-3 left-3 text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white text-2xl">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            
+            <div class="text-center pt-2">
+                <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">به زودی</h3>
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-[#eb3254] dark:bg-blue-900/30 rounded-full mb-4">
+                    <svg class="w-8 h-8 text-[#eb3254] dark:text-blue-400" fill="white" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h6>سلام دوست عزیز</h6>
+                <p class="text-gray-600 dark:text-gray-300 text-sm mb-5">
+                   پس از راه اندازی فروشگاه سبد خرید راه اندازی میشود
+                </p>
+                
+                <button id="closeFormCart" class="w-full bg-[#eb3254] hover:bg-[#eb3254] text-white py-2.5 rounded-lg text-sm font-medium transition">
+                    باشه
+                </button>
+            </div>
+        </div>
+    </div>
     <header>
         {{-- mobile menu --}}
         <div class="w-full px-3 pt-4 pb-4 bg-[#eb3254] lg:hidden">
@@ -268,9 +323,9 @@
                 class="w-full mx-auto flex flex-row justify-between items-center bg-white border-t-1 border-gray-300 p-2">
                 <li>
                     {{-- category --}}
-                    <a href="#" class="size-10 flex justify-center items-center rounded-full">
+                    <a href="{{ route('home') }}" class="size-10 flex justify-center items-center rounded-full @if(Route::is('home')) bg-[#eb3254] @endif">
                         <?xml version="1.0" encoding="UTF-8"?>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-5" id="Layer_1" data-name="Layer 1"
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-5 @if(Route::is('home')) fill-white @endif" id="Layer_1" data-name="Layer 1"
                             viewBox="0 0 24 24" width="512" height="512">
                             <path
                                 d="M22.849,7.68l-.869-.68h.021V2h-2v3.451L13.849,.637c-1.088-.852-2.609-.852-3.697,0L1.151,7.68c-.731,.572-1.151,1.434-1.151,2.363v13.957H9V15c0-.551,.448-1,1-1h4c.552,0,1,.449,1,1v9h9V10.043c0-.929-.42-1.791-1.151-2.363Zm-.849,14.32h-5v-7c0-1.654-1.346-3-3-3h-4c-1.654,0-3,1.346-3,3v7H2V10.043c0-.31,.14-.597,.384-.788L11.384,2.212c.363-.284,.869-.284,1.232,0l9,7.043c.244,.191,.384,.478,.384,.788v11.957Z" />
@@ -279,19 +334,17 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('career.careers') }}"
-                        class="size-10 flex justify-center items-center rounded-full">
+                    <a href="#" id="shopIcon" class="size-10 flex justify-center items-center rounded-full transition cursor-pointer">
                         <?xml version="1.0" encoding="UTF-8"?>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-5" id="Outline" viewBox="0 0 24 24"
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-5 " id="Outline" viewBox="0 0 24 24"
                             width="512" height="512">
                             <path
                                 d="M21,6H18A6,6,0,0,0,6,6H3A3,3,0,0,0,0,9V19a5.006,5.006,0,0,0,5,5H19a5.006,5.006,0,0,0,5-5V9A3,3,0,0,0,21,6ZM12,2a4,4,0,0,1,4,4H8A4,4,0,0,1,12,2ZM22,19a3,3,0,0,1-3,3H5a3,3,0,0,1-3-3V9A1,1,0,0,1,3,8H6v2a1,1,0,0,0,2,0V8h8v2a1,1,0,0,0,2,0V8h3a1,1,0,0,1,1,1Z" />
                         </svg>
-
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('home') }}" class="size-10 bg-[#EB3254] flex justify-center items-center rounded-full">
+                    <a href="" class="size-10 flex justify-center items-center rounded-full">
                         {{-- <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 576 512">
                             <defs>
                                 <style>
@@ -308,7 +361,7 @@
                         <?xml version="1.0" encoding="UTF-8"?>
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" id="Layer_1" data-name="Layer 1"
                             viewBox="0 0 24 24">
-                            <path fill="white"
+                            <path
                                 d="m4,11h7v-7h-7v7Zm2-5h3v3h-3v-3Zm14-2h-7v7h7v-7Zm-2,5h-3v-3h3v3Zm-14,11h7v-7h-7v7Zm2-5h3v3h-3v-3Zm-3,7h4v2H3c-1.654,0-3-1.346-3-3v-4h2v4c0,.551.449,1,1,1Zm19-5h2v4c0,1.654-1.346,3-3,3h-4v-2h4c.551,0,1-.449,1-1v-4Zm2-14v4h-2V3c0-.551-.449-1-1-1h-4V0h4c1.654,0,3,1.346,3,3ZM2,7H0V3C0,1.346,1.346,0,3,0h4v2H3c-.551,0-1,.449-1,1v4Zm11,10h3v3h-3v-3Zm4-1v-3h3v3h-3Zm-4-3h3v3h-3v-3Z" />
                         </svg>
 
@@ -316,7 +369,7 @@
                 </li>
                 <li>
                     {{-- ecommerce --}}
-                    <a href="#" class="size-10 flex justify-center items-center rounded-full">
+                    <a href="#" id="cartIcon" class="size-10 flex justify-center items-center rounded-full">
                         <?xml version="1.0" encoding="UTF-8"?>
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-6" id="Outline" viewBox="0 0 24 24"
                             width="512" height="512">
@@ -410,6 +463,74 @@
     </footer>
     <script src="{{ asset('assets/js/home.js') }}"></script>
     @RegisterServiceWorkerScript
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        let shopIcon = document.getElementById('shopIcon');
+        let comingSoon = document.getElementById('comingSoon');
+        let contentCommingSoon = document.getElementById('contentCommingSoon');
+        let closeBtn = document.getElementById('closeModal');
+        let confirmBtn = document.getElementById('closeForm');
+        
+        if (shopIcon) {
+            shopIcon.addEventListener('click', function(e) {
+                e.preventDefault()
+                openModal()
+            })
+        }
+        
+        function openModal() {
+            comingSoon.classList.remove('hidden')
+            contentCommingSoon.classList.remove('scale-95', 'opacity-0')
+            contentCommingSoon.classList.add('scale-100', 'opacity-100')
+        }
+        
+        function closeModal() {
+            contentCommingSoon.classList.remove('scale-100', 'opacity-100')
+            contentCommingSoon.classList.add('scale-95', 'opacity-0')
+            comingSoon.classList.add('hidden')
+           
+        }
+        
+        if (closeBtn) closeBtn.addEventListener('click', closeModal)
+        if (confirmBtn) confirmBtn.addEventListener('click', closeModal)
+        
+    })
+
+    let cartIcon = document.getElementById('cartIcon');
+    let cartModal = document.getElementById('cart');
+    let cartContent = document.getElementById('contentCart');
+    let closeCartBtn = document.getElementById('closeCart');
+    let closeCartForm = document.getElementById('closeFormCart');
+    
+
+
+    
+    // کد مربوط به سبد خرید
+    if (cartIcon) {
+        cartIcon.addEventListener('click', function(e) {
+            e.preventDefault();
+            openCartModal();
+        });
+    }
+    
+    function openCartModal() {
+        cartModal.classList.remove('hidden')
+        cartContent.classList.remove('scale-95', 'opacity-0')
+        cartContent.classList.add('scale-100', 'opacity-100')
+    }
+    
+    function closeCart() {
+        cartContent.classList.remove('scale-100', 'opacity-100')
+        cartContent.classList.add('scale-95', 'opacity-0')
+        cartModal.classList.add('hidden')
+    }
+    
+    
+    if (closeCartBtn) closeCartBtn.addEventListener('click', closeCart)
+    if (closeCartForm) closeCartForm.addEventListener('click', closeCart)
+    
+    </script>
 </body>
 
 </html>
+git
