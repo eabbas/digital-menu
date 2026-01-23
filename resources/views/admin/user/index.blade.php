@@ -61,7 +61,7 @@
                              <span class="block w-20 lg:w-full">شماره تلفن</span>
                          </div>
                          <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
-                             <span class="block w-20 lg:w-full">نقش</span>
+                             <span class="block w-26 lg:w-full text-center">نقش</span>
                          </div>
                          <div
                              class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-3">
@@ -207,10 +207,9 @@
                                     <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
                                         <div class="w-20 lg:w-full">
-                                            @if ($user->main_image)
-                                            <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
-                                                src="{{ asset('storage/${user.main_image}') }}">
-                                            @endif
+
+                                            <img src="${user.main_image ? '{{ asset('storage/') }}/' + user.main_image : '{{ asset('storage/images/user.png') }}'}"
+                                                alt="user__avtar" class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md">
                                            
                                         </div>
                                     </div>

@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class order extends Model
 {
-    protected $fillable= [
+    protected $fillable=[
         'career_id',
         'slug',
-        'title',
-        'count',
         'menu_item_id',
-        'user_id'
+        'user_id',
+        'quantity',
+        'status',
     ];
     public function careers()
     {
@@ -21,5 +21,13 @@ class order extends Model
     public function qr_code()
     {
         return $this->belongsTo(qr_code::class);
+    }
+    public function menu_item()
+    {
+        return $this->belongsTo(menu_item::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

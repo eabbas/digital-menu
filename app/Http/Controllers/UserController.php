@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\order;
 use App\Models\phone_code;
 use App\Models\role;
 use App\Models\role_user;
@@ -48,7 +47,7 @@ class UserController extends Controller
                 Auth::login($user);
                 return to_route('user.profile');
             }
-            return to_route('login');
+            return to_route('login', ['message'=>'لطفا اطلاعات خود را مجددا بررسی کنید']);
         }
         return to_route('signup');
     }
@@ -147,9 +146,9 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    public function login()
+    public function login($message=null)
     {
-        return view('client.login');
+        return view('client.login', ['message'=>$message]);
     }
 
     public function compelete_form()
@@ -172,18 +171,18 @@ class UserController extends Controller
         return to_route('user.profile');
     }
 
-    public function set_order(Request $request)
-    {
-        dd($request->all());
-        foreach ($request->titles as $key => $title) {
-            order::create([
-                'career_id' => $request->career,
-                'slug' => $request->slug,
-                'title' => $request->title,
-                'count' => $request->count
-            ]);
-        }
-    }
+//    public function set_order(Request $request)
+//    {
+//        dd($request->all());
+//        foreach ($request->titles as $key => $title) {
+//            order::create([
+//                'career_id' => $request->career,
+//                'slug' => $request->slug,
+//                'title' => $request->title,
+//                'count' => $request->count
+//            ]);
+//        }
+//    }
 
     public function setting()
     {
@@ -275,5 +274,23 @@ class UserController extends Controller
     {
         $users=User::where('family',$request->key)->get();
         return response()->json($users);
+    }
+    public function removeActivationCode(Request $request){
+        $row = phone_code::where('phoneNumber', $request->phoneNumber)->first();
+        $row->delete();
+        return response()->json($row);
+    }
+
+    public function checkFromMenu(Request $request){
+        $user = User::where('phoneNumber', $request->phoneNumber)->first();
+        if ($user) {
+            $checkHash = Hash::check($request->password, $user->password);
+            if ($checkHash) {
+                Auth::login($user);
+                return response()->json($user);
+            }
+            return response()->json('incorrectPassword');
+        }
+        return to_route('signup');
     }
 }

@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 use function Symfony\Component\Clock\now;
 
@@ -39,7 +38,7 @@ class MenuController extends Controller
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
+        
         return to_route('career.menus', [$request->career_id]);
     }
 
@@ -91,7 +90,7 @@ class MenuController extends Controller
         }
         $menu->delete();
         if (Auth::user()->role[0]->title == 'admin') {
-            return to_route('career.careers');
+            return to_route('career.menus', [$menu->career]);
         }
         return to_route('career.careers', [Auth::user()]);
     }
@@ -116,7 +115,6 @@ class MenuController extends Controller
     }
 
     public function deleteAll(Request $request){
-        dd($request->all());
         if (!isset($request->menus)) {
             return redirect()->back();
         }

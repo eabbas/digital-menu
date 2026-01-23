@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    public function show_menu(career $career, string $slug = null)
+    public function show_menu(career $career, $slug = null)
     {
         // $campare = $product->price->price - $product->price->discount;
         // $x = $campare / $product->price->price;
@@ -31,7 +31,7 @@ class ClientController extends Controller
         return view('client.menu', ['career' => $career, 'slug' => $slug]);
     }
 
-    public function loadLink(covers $covers, string $slug = null){
+    public function loadLink(covers $covers, $slug = null){
         $user = $covers->user;
         $user->scan_count += 1;
         $user->save();

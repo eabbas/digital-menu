@@ -31,8 +31,8 @@
                             @foreach ($covers as $cover)
                                 @if ($cover)
                                     <div class="w-full flex flex-row justify-between shadow-sm items-center px-3">
+                                        <div class="lg:w-9/12 flex flex-row gap-3">
                                         <input type="checkbox" name="covers[]" class="check" value="{{ $cover->id }}">
-                                        <div class="lg:w-9/12">
                                             <a href="{{ route('covers.single', [$cover]) }}"
                                                 class="flex flex-row items-center gap-3 py-3">
                                                 <!-- لوگو -->

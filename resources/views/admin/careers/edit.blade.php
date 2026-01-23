@@ -1,7 +1,7 @@
 @extends('admin.app.panel')
 @section('title', 'ویرایش کسب و کار')
 @section('content')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
     <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">فرم ویرایش کسب وکار</h1>
     <form action="{{ route('career.update') }}" method="post" enctype='multipart/form-data'>
         @csrf

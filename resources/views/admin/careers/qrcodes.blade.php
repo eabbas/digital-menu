@@ -1,7 +1,7 @@
 @extends('admin.app.panel')
 @section('title', 'مشاهده QR کد ها')
 @section('content')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
     <div class="w-full grid grid-cols-1 md:grid-cols-4 xl:grid-cols-8 gap-3 mt-5">
         <?php $i = 1; ?>
         @foreach ($career->qr_codes as $qr_code)
