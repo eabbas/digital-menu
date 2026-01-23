@@ -46,9 +46,6 @@
                         <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
                             <span class="block w-20 lg:w-full">دسته</span>
                         </div>
-                        {{-- <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-2">
-                            <span class="block w-24 lg:w-full">توضیحات</span>
-                        </div> --}}
                         <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-4">
                             <span class="block w-[320px] lg:w-full">عملیات</span>
                         </div>
@@ -95,10 +92,6 @@
                                             class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center">
                                             <span class="block w-24 lg:w-full">{{ $career->careerCategory->title }}</span>
                                         </div>
-                                        {{-- <div
-                                        class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center col-span-2">
-                                        <span class="block w-24 lg:w-full">{{ $career->description }}</span>
-                                    </div> --}}
 
                                         <div class="col-span-4">
                                             <div
@@ -166,10 +159,6 @@
                                 @endphp
                             @endforeach
                         @endif
-
-                        {{-- <div class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                        <a href="{{ route('cpm.create', [$career])}}" class="text-sky-700">ایجاد منوی شخصی سازی شده </a>
-                                    </div> --}}
                     </div>
                 </div>
             </form>

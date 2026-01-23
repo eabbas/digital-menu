@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class order extends Model
 {
-    protected $fillable=[
-        'career_id' ,
-        'slug' ,
-        'title' ,
-        'count'
+    protected $fillable= [
+        'career_id',
+        'slug',
+        'title',
+        'count',
+        'menu_item_id',
+        'user_id'
     ];
     public function careers()
     {

@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('career_id');
             $table->string('slug');
-            $table->string('title');
-            $table->string('count');
+
             $table->timestamps();
         });
     }

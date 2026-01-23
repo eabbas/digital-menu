@@ -40,7 +40,7 @@
                         <!-- Category Header -->
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-2.5 lg:p-5 border-b border-gray-100 bg-gray-200">
                             <div class="flex items-center gap-4">
-                                <img src="{{ asset('storage/' . $category->image) }}" 
+                                <img src="{{ asset('storage/' . $category->image) }}"
                                         alt="{{ $category->title }}"
                                         class="size-12 lg:size-14 rounded-lg object-cover border border-gray-200 shadow-sm bg-white">
                                 <div>
@@ -52,7 +52,7 @@
 
                         <!-- Items List -->
                         <div class="p-2 lg:p-4">
-                        
+
                                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 pr-8 lg:pr-0">
                                     @foreach ($category->menu_items as $item)
                                         <div class="w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative">
@@ -63,7 +63,7 @@
                                             @endif
                                             <div class="w-full flex items-center justify-between">
                                                 <div class="w-full flex items-center gap-4 flex-1">
-                                                    <img src="{{ asset('storage/' . $item->image) }}" 
+                                                    <img src="{{ asset('storage/' . $item->image) }}"
                                                             class="size-10 lg:size-12 rounded-lg object-cover border border-gray-300"
                                                             alt="{{ $item->title }}">
                                                     <div class="flex-1 min-w-0 max-w-[100px]">
