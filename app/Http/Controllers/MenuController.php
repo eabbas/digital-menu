@@ -39,7 +39,7 @@ class MenuController extends Controller
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        
+
         return to_route('career.menus', [$request->career_id]);
     }
 
