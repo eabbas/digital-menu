@@ -129,6 +129,8 @@ Route::group([
     Route::get('/', 'index')->name('list');
     Route::post('/update', 'update')->name('update');
     Route::post('/delete/', 'delete')->name('delete');
+    Route::post('/showOrders', 'showOrders')->name('showOrders');
+    Route::post('/set', 'set')->name('set');
 });
 Route::group([
     'prefix' => 'menu',
