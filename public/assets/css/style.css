@@ -359,14 +359,29 @@ td {
     }
 }
 
-.parentSocial:hover div:first-child{
-    width: 87%;
-}
-.parentLink:hover div:first-child{
-    width: 87%;
+.activeCatCareer::before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #eb3254;
+    border-radius: 4px;
+    transition: all 300ms ease-in-out;
 }
 
-#reader>video{
-    width: 100%;
-    height: 100%;
+.arrow{
+    animation: selected 1500ms infinite;
+}
+@keyframes selected{
+    0%{
+        transform: translate(13px, -13px);
+    }
+    50%{
+        transform: translate(27px, -13px);
+    }
+    100%{
+        transform: translate(13px, -13px);
+    }
 }

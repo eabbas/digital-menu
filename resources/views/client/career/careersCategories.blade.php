@@ -1,12 +1,11 @@
 @extends('client.document')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 @section('title', 'همه دسته ها')
 @section('content')
     <div class="w-full h-full pt-5 samim">
         <section>
             <div class="flex flex-row justify-between items-center mt-5 mb-3">
                 <h1 class="lg:text-xl text-sm font-bold" id="careerCatTitle">
-                 همه دسته بندی ها    
+                 همه دسته ها    
                 </h1>
             </div>
             <div class="grid grid-cols-2 lg:grid-cols-8 gap-4">

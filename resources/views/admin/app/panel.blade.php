@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
+    <script src="{{ asset('assets/js/tailwind.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
     <link rel="stylesheet" href="{{ url('assets/css/style.css') }}" type="text/css">
     <link rel="shortcut icon" href="{{ asset('storage/images/icon.png') }}" type="image/png">
     <title>@yield('title')</title>
@@ -40,65 +42,65 @@
                         داشبورد
                     </a>
                 </div>
-                {{-- <div class="dashboard">
-                    <div class="flex justify-between flex-row-reverse cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200" viewBox="0 0 448 512">
-                            <path fill="white" d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"/></svg>
+                <!--{{-- <div class="dashboard">-->
+                <!--    <div class="flex justify-between flex-row-reverse cursor-pointer">-->
+                <!--        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200" viewBox="0 0 448 512">-->
+                <!--            <path fill="white" d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"/></svg>-->
 
-                        <div class="flex flex-row-reverse items-center gap-2">
-                            <span class=" text-[white] flex justify-end font-bold">فروشگاه</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 576 512">
-                                <path fill="white"
-                                    d="M507.1 129.5l0 0c5.8 9.2 6.4 20.5 2.3 30.1c-3.9 9.2-11.1 14.8-20.1 16c-2 .3-3.9 .4-5.8 .4c-11.7 0-22.2-5.1-29.7-13.2c-9.1-10-22-15.7-35.6-15.7s-26.5 5.8-35.5 15.8c-7.3 8.1-17.7 13.2-29.6 13.2c-11.8 0-22.3-5.1-29.6-13.2c-9.1-10.1-22-15.8-35.6-15.8s-26.5 5.7-35.6 15.8c-7.3 8.1-17.7 13.2-29.6 13.2c-11.8 0-22.3-5.1-29.6-13.2c-9.1-10.1-22-15.8-35.6-15.8s-26.5 5.7-35.6 15.8c-7.3 8.1-17.7 13.2-29.6 13.2c-1.8 0-3.8-.1-5.8-.4c-8.9-1.2-16-6.8-19.9-16c-4.1-9.6-3.5-20.9 2.3-30.1l0 0 0 0L120.4 48H455.6l51.5 81.5zM483.5 224c4.1 0 8.1-.3 12-.8c55.5-7.4 81.8-72.5 52.1-119.4L490.3 13.1C485.2 5 476.1 0 466.4 0H109.6C99.9 0 90.8 5 85.7 13.1L28.3 103.8c-29.6 46.8-3.4 111.9 51.9 119.4c4 .5 8.1 .8 12.1 .8c0 0 0 0 0 0c19.6 0 37.5-6.4 51.9-17c4.8-3.5 9.2-7.6 13.2-11.9c4 4.4 8.4 8.4 13.2 11.9c14.5 10.6 32.4 17 52 17c19.6 0 37.5-6.4 52-17c4.8-3.5 9.2-7.6 13.2-12c4 4.4 8.4 8.4 13.2 11.9c14.5 10.6 32.4 17 52 17c19.8 0 37.8-6.5 52.3-17.3c4.7-3.5 9-7.4 12.9-11.7c3.9 4.3 8.3 8.3 13 11.8c14.5 10.7 32.5 17.2 52.2 17.2c0 0 0 0 0 0zM112 336V254.4c-6.4 1.1-12.9 1.6-19.6 1.6c-5.5 0-11-.4-16.3-1.1l-.1 0c-4.1-.6-8.1-1.3-12-2.3V336v48 64c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V384 336 252.6c-4 1-8 1.8-12.3 2.3l-.1 0c-5.3 .7-10.7 1.1-16.2 1.1c-6.6 0-13.1-.5-19.4-1.6V336H112zm352 48v64c0 8.8-7.2 16-16 16H128c-8.8 0-16-7.2-16-16V384H464z" />
-                            </svg>
-                        </div>
-                    </div>
+                <!--        <div class="flex flex-row-reverse items-center gap-2">-->
+                <!--            <span class=" text-[white] flex justify-end font-bold">فروشگاه</span>-->
+                <!--            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 576 512">-->
+                <!--                <path fill="white"-->
+                <!--                    d="M507.1 129.5l0 0c5.8 9.2 6.4 20.5 2.3 30.1c-3.9 9.2-11.1 14.8-20.1 16c-2 .3-3.9 .4-5.8 .4c-11.7 0-22.2-5.1-29.7-13.2c-9.1-10-22-15.7-35.6-15.7s-26.5 5.8-35.5 15.8c-7.3 8.1-17.7 13.2-29.6 13.2c-11.8 0-22.3-5.1-29.6-13.2c-9.1-10.1-22-15.8-35.6-15.8s-26.5 5.7-35.6 15.8c-7.3 8.1-17.7 13.2-29.6 13.2c-11.8 0-22.3-5.1-29.6-13.2c-9.1-10.1-22-15.8-35.6-15.8s-26.5 5.7-35.6 15.8c-7.3 8.1-17.7 13.2-29.6 13.2c-1.8 0-3.8-.1-5.8-.4c-8.9-1.2-16-6.8-19.9-16c-4.1-9.6-3.5-20.9 2.3-30.1l0 0 0 0L120.4 48H455.6l51.5 81.5zM483.5 224c4.1 0 8.1-.3 12-.8c55.5-7.4 81.8-72.5 52.1-119.4L490.3 13.1C485.2 5 476.1 0 466.4 0H109.6C99.9 0 90.8 5 85.7 13.1L28.3 103.8c-29.6 46.8-3.4 111.9 51.9 119.4c4 .5 8.1 .8 12.1 .8c0 0 0 0 0 0c19.6 0 37.5-6.4 51.9-17c4.8-3.5 9.2-7.6 13.2-11.9c4 4.4 8.4 8.4 13.2 11.9c14.5 10.6 32.4 17 52 17c19.6 0 37.5-6.4 52-17c4.8-3.5 9.2-7.6 13.2-12c4 4.4 8.4 8.4 13.2 11.9c14.5 10.6 32.4 17 52 17c19.8 0 37.8-6.5 52.3-17.3c4.7-3.5 9-7.4 12.9-11.7c3.9 4.3 8.3 8.3 13 11.8c14.5 10.7 32.5 17.2 52.2 17.2c0 0 0 0 0 0zM112 336V254.4c-6.4 1.1-12.9 1.6-19.6 1.6c-5.5 0-11-.4-16.3-1.1l-.1 0c-4.1-.6-8.1-1.3-12-2.3V336v48 64c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V384 336 252.6c-4 1-8 1.8-12.3 2.3l-.1 0c-5.3 .7-10.7 1.1-16.2 1.1c-6.6 0-13.1-.5-19.4-1.6V336H112zm352 48v64c0 8.8-7.2 16-16 16H128c-8.8 0-16-7.2-16-16V384H464z" />-->
+                <!--            </svg>-->
+                <!--        </div>-->
+                <!--    </div>-->
 
-                    <ul class="my-1 pr-3 transition-all duration-500 overflow-hidden max-h-0">
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
-                            <span class="size-1 bg-white rounded-sm"></span>
-                            <a class="text-white" href="{{ route('ecomm.create') }}" class="text-white py-1 block">ایجاد
-                                فروشگاه
-                                جدید</a>
-                        </li>
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
-                            <span class="size-1 bg-white rounded-sm"></span>
-                            <a class="text-white" href="{{ route('ecomm.ecomms') }}" class="text-white py-1 block">
-                                فروشگاه های
-                                من</a>
-                        </li>
-                        @if (Auth::user()->role[0]->title == 'admin')
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
-                                <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('ecomm.list') }}" class="text-white py-1 block">
-                                    مشاهده همه فروشگاه ها
-                                </a>
-                            </li>
-                        @endif
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
-                            <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('ecomm_category.index') }}" class="text-white"> دسته ها </a>
-                        </li>
-                        @if (count(Auth::user()->ecomms))
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
-                                <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('ecomm_category.create') }}" class="text-white">ایجاد دسته </a>
-                            </li>
-                        @endif
+                <!--    <ul class="my-1 pr-3 transition-all duration-500 overflow-hidden max-h-0">-->
+                <!--        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">-->
+                <!--            <span class="size-1 bg-white rounded-sm"></span>-->
+                <!--            <a class="text-white" href="{{ route('ecomm.create') }}" class="text-white py-1 block">ایجاد-->
+                <!--                فروشگاه-->
+                <!--                جدید</a>-->
+                <!--        </li>-->
+                <!--        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">-->
+                <!--            <span class="size-1 bg-white rounded-sm"></span>-->
+                <!--            <a class="text-white" href="{{ route('ecomm.ecomms') }}" class="text-white py-1 block">-->
+                <!--                فروشگاه های-->
+                <!--                من</a>-->
+                <!--        </li>-->
+                <!--        @if (Auth::user()->role[0]->title == 'admin')-->
+                <!--            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">-->
+                <!--                <span class="size-1 bg-white rounded-sm"></span>-->
+                <!--                <a href="{{ route('ecomm.list') }}" class="text-white py-1 block">-->
+                <!--                    مشاهده همه فروشگاه ها-->
+                <!--                </a>-->
+                <!--            </li>-->
+                <!--        @endif-->
+                <!--        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">-->
+                <!--            <span class="size-1 bg-white rounded-sm"></span>-->
+                <!--            <a href="{{ route('ecomm_category.index') }}" class="text-white"> دسته ها </a>-->
+                <!--        </li>-->
+                <!--        @if (count(Auth::user()->ecomms))-->
+                <!--            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">-->
+                <!--                <span class="size-1 bg-white rounded-sm"></span>-->
+                <!--                <a href="{{ route('ecomm_category.create') }}" class="text-white">ایجاد دسته </a>-->
+                <!--            </li>-->
+                <!--        @endif-->
 
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
-                            <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('ecomm_product.index') }}" class="text-white">محصولات </a>
-                        </li>
-                        @if (count(Auth::user()->ecomms))
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
-                                <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('ecomm_product.create') }}" class="text-white"> ایجاد محصول </a>
-                            </li>
-                        @endif
+                <!--        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">-->
+                <!--            <span class="size-1 bg-white rounded-sm"></span>-->
+                <!--            <a href="{{ route('ecomm_product.index') }}" class="text-white">محصولات </a>-->
+                <!--        </li>-->
+                <!--        @if (count(Auth::user()->ecomms))-->
+                <!--            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">-->
+                <!--                <span class="size-1 bg-white rounded-sm"></span>-->
+                <!--                <a href="{{ route('ecomm_product.create') }}" class="text-white"> ایجاد محصول </a>-->
+                <!--            </li>-->
+                <!--        @endif-->
 
-                    </ul>
-                </div> --}}
+                <!--    </ul>-->
+                <!--</div> --}}-->
                 <div class="dashboard">
                     <div class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if(Route::is('career.*') || Route::is('menu.createMenu') || Route::is('menu.user_menus') || Route::is('cc.create') || Route::is('cc.list')) bg-gray-700 @endif">
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200 @if(Route::is('career.*') || Route::is('menu.createMenu') || Route::is('menu.user_menus') || Route::is('cc.create') || Route::is('cc.list')) rotate-180 @endif" viewBox="0 0 448 512">
@@ -306,36 +308,7 @@
                     </ul>
                 </div>
                 {{-- end-contactUs --}}
-                {{-- customPro_list --}}
-                {{-- <div class="dashboard">
-                    <div class="flex flex-row-reverse justify-between">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                            class="size-6 fill-white w-[15px]">
-                            <path fill-rule="evenodd"
-                                d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
-                                clip-rule="evenodd" />
-                        </svg>
-
-                        <div class="flex flex-row-reverse items-center gap-2">
-                            <span class=" text-[white] flex justify-end font-bold"> محصولات شخصی سازی
-                                شده</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5 fill-white " viewBox="0 0 448 512">
-                                <path
-                                    d="M416 0C400 0 288 32 288 176V288c0 35.3 28.7 64 64 64h32V480c0 17.7 14.3 32 32 32s32-14.3 32-32V352 240 32c0-17.7-14.3-32-32-32zM64 16C64 7.8 57.9 1 49.7 .1S34.2 4.6 32.4 12.5L2.1 148.8C.7 155.1 0 161.5 0 167.9c0 45.9 35.1 83.6 80 87.7V480c0 17.7 14.3 32 32 32s32-14.3 32-32V255.6c44.9-4.1 80-41.8 80-87.7c0-6.4-.7-12.8-2.1-19.1L191.6 12.5c-1.8-8-9.3-13.3-17.4-12.4S160 7.8 160 16V150.2c0 5.4-4.4 9.8-9.8 9.8c-5.1 0-9.3-3.9-9.8-9L127.9 14.6C127.2 6.3 120.3 0 112 0s-15.2 6.3-15.9 14.6L83.7 151c-.5 5.1-4.7 9-9.8 9c-5.4 0-9.8-4.4-9.8-9.8V16zm48.3 152l-.3 0-.3 0 .3-.7 .3 .7z" />
-                            </svg>
-                        </div>
-                    </div>
-                   
-                    <ul class="mt-2.5 mb-2.5 pr-3 transition-all duration-500 overflow-hidden">
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
-                            <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('cp.list') }}" class="text-white py-1 block">
-                                همه محصولات
-                            </a>
-                        </li>
-                    </ul>
-                </div> --}}
-                {{-- end customPro_list --}}
+               
                 <div class="dashboard">
                     <div class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if(Route::is('aboutUs.*')) bg-gray-700 @endif">
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200 @if(Route::is('aboutUs.*')) rotate-180 @endif" viewBox="0 0 448 512">
@@ -446,7 +419,7 @@
             </div>
             <!-- hamburger menu -->
             <div
-                class="w-full h-dvh fixed top-0 -right-full bg-black/50 flex flex-row-reverse z-50 transition-all duration-500 backdrop-blur-sm">
+                class="w-full h-dvh fixed top-0 -right-full bg-black/50 flex flex-row-reverse z-99999 transition-all duration-500 backdrop-blur-sm">
                 <div class="w-1/3 bg-inherit h-full relative" onclick="hamburgerMenu('close', this)">
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-6 absolute top-5 left-5 cursor-pointer"
                         viewBox="0 0 384 512">
@@ -494,66 +467,66 @@
                             </div>
 
 
-                            <div class="pt-3">
-                                <h3 class="text-md font-bold text-gray-800 mb-1.5">فروشگاه</h3>
-                                <ul class="pr-3.5">
-                                    <li>
-                                        <a href="{{ route('ecomm.create') }}"
-                                            class="block text-gray-700 py-2 text-md">
-                                            فروشگاه جدید
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('ecomm.ecomms') }}"
-                                            class="block text-gray-700 py-2 text-md">
-                                            فروشگاه های من
-                                        </a>
-                                    </li>
+                            <!--<div class="pt-3">-->
+                            <!--    <h3 class="text-md font-bold text-gray-800 mb-1.5">فروشگاه</h3>-->
+                            <!--    <ul class="pr-3.5">-->
+                            <!--        <li>-->
+                            <!--            <a href="{{ route('ecomm.create') }}"-->
+                            <!--                class="block text-gray-700 py-2 text-md">-->
+                            <!--                فروشگاه جدید-->
+                            <!--            </a>-->
+                            <!--        </li>-->
+                            <!--        <li>-->
+                            <!--            <a href="{{ route('ecomm.ecomms') }}"-->
+                            <!--                class="block text-gray-700 py-2 text-md">-->
+                            <!--                فروشگاه های من-->
+                            <!--            </a>-->
+                            <!--        </li>-->
 
-                                    @if (Auth::user()->role[0]->title == 'admin')
-                                        <li>
-                                            <span class="size-1 rounded-sm"></span>
-                                            <a href="{{ route('ecomm.list') }}"
-                                                class="block text-gray-700 py-2 text-md">
-                                                همه فروشگاه ها
-                                            </a>
-                                        </li>
-                                    @endif
+                            <!--        @if (Auth::user()->role[0]->title == 'admin')-->
+                            <!--            <li>-->
+                            <!--                <span class="size-1 rounded-sm"></span>-->
+                            <!--                <a href="{{ route('ecomm.list') }}"-->
+                            <!--                    class="block text-gray-700 py-2 text-md">-->
+                            <!--                    همه فروشگاه ها-->
+                            <!--                </a>-->
+                            <!--            </li>-->
+                            <!--        @endif-->
 
-                                    <li>
-                                        <span class="size-1 rounded-sm"></span>
-                                        <a href="{{ route('ecomm_category.index') }}"
-                                            class="block text-gray-700 py-2 text-md">
-                                            دسته ها
-                                        </a>
-                                    </li>
-                                    @if (count(Auth::user()->ecomms))
-                                        <li>
-                                            <span class="size-1 rounded-sm"></span>
-                                            <a href="{{ route('ecomm_category.create') }}"
-                                                class="block text-gray-700 py-2 text-md">
-                                                ایجاد دسته
-                                            </a>
-                                        </li>
-                                    @endif
-                                    <li>
-                                        <span class="size-1 rounded-sm"></span>
-                                        <a href="{{ route('ecomm_product.index') }}"
-                                            class="block text-gray-700 py-2 text-md">
-                                            محصولات
-                                        </a>
-                                    </li>
-                                    @if (count(Auth::user()->ecomms))
-                                        <li>
-                                            <span class="size-1 rounded-sm"></span>
-                                            <a href="{{ route('ecomm_product.create') }}"
-                                                class="block text-gray-700 py-2 text-md">
-                                                ایجاد محصول
-                                            </a>
-                                        </li>
-                                    @endif
-                                </ul>
-                            </div>
+                            <!--        <li>-->
+                            <!--            <span class="size-1 rounded-sm"></span>-->
+                            <!--            <a href="{{ route('ecomm_category.index') }}"-->
+                            <!--                class="block text-gray-700 py-2 text-md">-->
+                            <!--                دسته ها-->
+                            <!--            </a>-->
+                            <!--        </li>-->
+                            <!--        @if (count(Auth::user()->ecomms))-->
+                            <!--            <li>-->
+                            <!--                <span class="size-1 rounded-sm"></span>-->
+                            <!--                <a href="{{ route('ecomm_category.create') }}"-->
+                            <!--                    class="block text-gray-700 py-2 text-md">-->
+                            <!--                    ایجاد دسته-->
+                            <!--                </a>-->
+                            <!--            </li>-->
+                            <!--        @endif-->
+                            <!--        <li>-->
+                            <!--            <span class="size-1 rounded-sm"></span>-->
+                            <!--            <a href="{{ route('ecomm_product.index') }}"-->
+                            <!--                class="block text-gray-700 py-2 text-md">-->
+                            <!--                محصولات-->
+                            <!--            </a>-->
+                            <!--        </li>-->
+                            <!--        @if (count(Auth::user()->ecomms))-->
+                            <!--            <li>-->
+                            <!--                <span class="size-1 rounded-sm"></span>-->
+                            <!--                <a href="{{ route('ecomm_product.create') }}"-->
+                            <!--                    class="block text-gray-700 py-2 text-md">-->
+                            <!--                    ایجاد محصول-->
+                            <!--                </a>-->
+                            <!--            </li>-->
+                            <!--        @endif-->
+                            <!--    </ul>-->
+                            <!--</div>-->
 
 
                             <div class="pt-3">
@@ -688,21 +661,6 @@
                                 </div>
                             @endif
 
-                            {{-- @if (Auth::user()->role[0]->title == 'admin') --}}
-                            <div class="pt-3">
-                                <h3 class="text-md font-bold text-gray-800 mb-1.5">
-                                    محصولات شخصی سازی شده
-                                </h3>
-                                <ul class="pr-3.5">
-                                    <li>
-                                        <a href="{{ route('cp.list') }}" class="block text-gray-700 py-2 text-md">
-                                            همه محصولات
-                                        </a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                            {{-- @endif --}}
                             @if (Auth::user()->role[0]->title == 'admin')
                                 <div class="pt-3">
                                     <h3 class="text-md font-bold text-gray-800 mb-1.5">
@@ -710,13 +668,13 @@
                                     </h3>
                                     <ul class="pr-3.5">
                                         <li>
-                                            <a href="{{ route('aboutUs.create_edit') }} }}"
+                                            <a href="{{ route('aboutUs.create_edit') }}"
                                                 class="block text-gray-700 py-2 text-md">
                                                 ایجاد درباره ما
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('aboutUs.list') }} }}"
+                                            <a href="{{ route('aboutUs.list') }}"
                                                 class="block text-gray-700 py-2 text-md">
                                                 لیست درباره ما
                                             </a>
@@ -732,13 +690,13 @@
                                     </h3>
                                     <ul class="pr-3.5">
                                         <li>
-                                            <a href="{{ route('aboutUs.create_edit') }} }}"
+                                            <a href="{{ route('contactUs.create') }}"
                                                 class="block text-gray-700 py-2 text-md">
                                                 فرم ارتباط باما
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('aboutUs.list') }} }}"
+                                            <a href="{{ route('contactUs.list') }}"
                                                 class="block text-gray-700 py-2 text-md">
                                                 لیست ارتباط با ما
                                             </a>

@@ -1,6 +1,6 @@
 @extends('client.document')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-@section('title', 'کسب و کار')
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
+@section('title', 'خانه')
 @section('content')
     <div class="w-full h-full pt-5 samim">
         <section>
@@ -9,6 +9,7 @@
                   کسب و کار های {{ $careerCategory->title }}
                 </h1>
             </div>
+       
             <div class="grid grid-cols-2 lg:grid-cols-8 gap-4">
                 @foreach($careerCategory->careers as $career)
                 <div class="relative careers" data-index="{{ $career->career_category_id }}">

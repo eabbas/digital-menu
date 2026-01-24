@@ -63,7 +63,7 @@
                     <div class="flex gap-7 sm:hidden">
                         <div class="flex w-full flex-col">
                             <label class="p-2.5 text-gray-400">نام کامل</label>
-                            <span class="p-2.5 text-gary-600"><strong>{{ $user->name }}
+                            <span class="p-2.5 text-gary-600"><strong>{{ $user->name }} 
                                     {{ $user?->family }}</strong></span>
                             <span class="p-2.5 text-gary-600">فائوس</span>
                             <label class="p-2.5 text-gray-400">شماره تلفن</label>

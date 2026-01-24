@@ -4,6 +4,7 @@ use App\Http\Controllers\CareerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\SettingController;
@@ -34,12 +35,13 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Middleware\LoginMiddleware;
 use App\Http\Middleware\UserMiddleware;
 
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::post('search', [HomeController::class, 'search'])->name('search');
-Route::get('/login', [UserController::class, 'login'])->name('login')->middleware([LoginMiddleware::class]);
+Route::any('search', [HomeController::class, 'search'])->name('search');
+Route::any('filter', [HomeController::class, 'filter'])->name('filter');
+Route::get('/login/{message?}', [UserController::class, 'login'])->name('login')->middleware([LoginMiddleware::class]);
 Route::get('/signup', [UserController::class, 'create'])->name('signup')->middleware([LoginMiddleware::class]);
 Route::post('/send_code', [UserController::class, 'send_code'])->name('send_code');
+Route::post('/removeActivationCode', [UserController::class, 'removeActivationCode'])->name('removeActivationCode');
 Route::get('/forget_password', [UserController::class, 'forget_password'])->name('forget_password');
 Route::post('/set_password', [UserController::class, 'set_password'])->name('set_password');
 Route::get('/reset_password/{user}', [UserController::class, 'reset_password'])->name('reset_password');
@@ -71,6 +73,7 @@ Route::group([
     Route::get('/create_user', 'create_user')->name('create_user');
     Route::post('/store_user', 'store_user')->name('store_user');
     Route::post('/search', 'search')->name('search');
+    Route::post('/checkFromMenu', 'checkFromMenu')->name('checkFromMenu')->withoutMiddleware([UserMiddleware::class]);
 });
 
 Route::group([
@@ -92,7 +95,7 @@ Route::group([
     Route::get('/careersCategories', 'careersCategories')->name('careersCategories')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/careersList', 'careersList')->name('careersList')->withoutMiddleware([UserMiddleware::class]);
     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
-    Route::get('/categoryCareers/{careerCategory}', 'categoryCareers')->name('categoryCareers');
+    Route::get('/categoryCareers/{careerCategory}', 'categoryCareers')->name('categoryCareers')->withoutMiddleware([UserMiddleware::class]);
 });
 Route::group([
     'prefix' => 'province',
@@ -116,7 +119,17 @@ Route::group([
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{careerCategory}', 'delete')->name('delete');
 });
-
+Route::group([
+    'prefix' => 'orders',
+    'controller' => OrderController::class,
+    'as' => 'order.',
+    'middleware' => [UserMiddleware::class]
+], function(){
+    Route::post('/store', 'store')->name('store');
+    Route::get('/', 'index')->name('list');
+    Route::post('/update', 'update')->name('update');
+    Route::post('/delete/', 'delete')->name('delete');
+});
 Route::group([
     'prefix' => 'menu',
     'controller' => MenuController::class,
@@ -209,7 +222,7 @@ Route::group([
     'controller' => ClientController::class,
     'as' => 'client.'
 ], function () {
-    Route::get('/links/{covers}/{slug?}', 'loadLink')->name('loadLink')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/links/{covers}/{slug?}', 'loadLink')->name('loadLink');
     Route::get('/{career}/{slug?}', 'show_menu')->name('menu');
     // Route::get('/{career}', 'career_menu')->name('careerMenu');
     // Route::get('/career/{$career}', 'show_career')->name('show_career');
@@ -350,7 +363,7 @@ Route::group([
     Route::post('/updateOrcreate', 'updateOrcreate')->name('updateOrcreate');
     Route::get('/aboutUs', 'index')->name('list');
     Route::get('/delete/{aboutUs}', 'delete')->name('delete');
-    Route::get('/clientList', 'clientList')->name('clientList');
+    Route::get('/clientList', 'clientList')->name('clientList')->withoutMiddleware([UserMiddleware::class]);
 });
 
 // favoriteCareer

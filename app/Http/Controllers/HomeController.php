@@ -6,6 +6,8 @@ use App\Models\careerCategory;
 use Illuminate\Http\Request;
 use App\Models\slider;
 use App\Models\career;
+use App\Models\covers;
+use App\Models\menu;
 class HomeController extends Controller
 {
     public function index(){
@@ -16,7 +18,40 @@ class HomeController extends Controller
     }
     public function search(Request $request)
     {
-        $careers = career::where('title' , $request->search)->get();
-        return view('client.search.index' , ['careers'=>$careers]);
+        if(!$request->search){
+            $request->search = '';
+        }
+        $datas = [];
+        $datas['title'] = $request->search;
+        $datas['careers'] = career::where('title' , 'like' , "%".$request->search."%")->get();
+        $datas['careerCategories'] = careerCategory::where('title' , 'like' , "%".$request->search."%")->get();
+        $datas['socialMedias'] = covers::where('title' , 'like' , "%".$request->search."%")->get();
+        $datas['menus'] = menu::where('title' , 'like' , "%".$request->search."%")->get();
+        
+        return view('client.search.index' , ['datas'=>$datas, 'searchTitle'=>$request->search]);
     }
+    
+    public function filter(Request $request){
+        $datas = [];
+        if(isset($request->models)){
+            if(in_array('all', $request->models)){
+                $datas['careerCategory'] = careerCategory::where('title' , 'like' , "%".$request->searchTitle."%")->get();
+                $datas['career'] = career::where('title' , 'like' , "%".$request->searchTitle."%")->get();
+                $datas['covers'] = covers::where('title' , 'like' , "%".$request->searchTitle."%")->get();
+                $datas['menu'] = menu::where('title' , 'like' , "%".$request->searchTitle."%")->get();
+            } else {
+                if(isset($request->models)){
+                    foreach($request->models as $model){
+                        $className = 'App\\Models\\'.$model;
+                        $datas[$model]=$className::where('title', 'like', "%".$request->searchTitle."%")->get();
+                    }
+                }
+            }
+        }
+        return response()->json($datas);
+    }
+    
 }
+
+
+

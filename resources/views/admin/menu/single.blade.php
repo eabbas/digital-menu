@@ -18,7 +18,7 @@
             <!-- Stats and Actions -->
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
                 
-                <div class="flex flex-wrap items-center justify-end gap-3">
+                <div class="flex flex-wrap items-center gap-3 justify-center">
                     <a href="{{ route('menuCat.create', [$menu]) }}"
                         class="text-sm px-5 py-2 bg-green-500 text-white hover:bg-green-600 transition-all duration-150 rounded-lg shadow-sm hover:shadow-md">
                         ایجاد دسته
@@ -26,7 +26,7 @@
                     @if (count($menu->menu_categories))
                         <a href="{{ route('menuCat.list', [$menu]) }}"
                             class="text-sm px-5 py-2 bg-emerald-500 text-white hover:bg-emerald-600 transition-all duration-150 rounded-lg shadow-sm hover:shadow-md">
-                            مشاهده دسته ها
+                            دسته ها
                         </a>
                      @endif
                     <a href="{{ route('menu.edit', [$menu]) }}"
@@ -38,17 +38,17 @@
                         حذف منو
                     </a>
                    
-                    {{-- @dd($menu->career->custom_product) --}}
-                    <a href="{{ route('cp.create', [$menu->career])}}"
-                        class="text-sm px-5 py-2 bg-indigo-500 text-white hover:bg-indigo-600 transition-all duration-150 rounded-lg shadow-sm hover:shadow-md">
-                        ایجاد محصول شخصی‌سازی
-                    </a>
-                    @if(count($menu->career->custom_product))
-                    <a href="{{ route('menu.customProList', [$menu->career]) }}"
-                        class="text-sm px-5 py-2 bg-indigo-500 text-white hover:bg-indigo-600 transition-all duration-150 rounded-lg shadow-sm hover:shadow-md">
-                      لیست محصولات
-                    </a>
-                    @endif
+                    
+                    <!--<a href="{{ route('cp.create', [$menu->career])}}"-->
+                    <!--    class="text-sm px-5 py-2 bg-indigo-500 text-white hover:bg-indigo-600 transition-all duration-150 rounded-lg shadow-sm hover:shadow-md">-->
+                    <!--    ایجاد محصول شخصی‌سازی-->
+                    <!--</a>-->
+                    <!--@if(count($menu->career->custom_product))-->
+                    <!--<a href="{{ route('menu.customProList', [$menu->career]) }}"-->
+                    <!--    class="text-sm px-5 py-2 bg-indigo-500 text-white hover:bg-indigo-600 transition-all duration-150 rounded-lg shadow-sm hover:shadow-md">-->
+                    <!--  لیست محصولات-->
+                    <!--</a>-->
+                    <!--@endif-->
                 </div>
             </div>
 
@@ -95,8 +95,8 @@
                             @if(count($category->menu_items) > 0)
                                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                                     @foreach ($category->menu_items as $item)
-                                        <div class="flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-4 transition-all duration-150">
-                                            <div class="flex items-center gap-4 flex-1">
+                                        <div class="flex flex-col-reverse lg:flex-row items-end lg:items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-4 transition-all duration-150">
+                                            <div class="w-full flex items-center gap-4 justify-between">
                                                 <img src="{{ asset('storage/' . $item->image) }}" 
                                                      class="size-12 rounded-lg object-cover border border-gray-300"
                                                      alt="{{ $item->title }}">
@@ -104,8 +104,8 @@
                                                     <h3 class="font-medium text-gray-800 truncate">{{ $item->title }}</h3>
                                                     <p class="text-sm text-gray-500 truncate mt-1">{{ $item->description }}</p>
                                                 </div>
-                                                <div class="text-left ml-4">
-                                                    <span class="font-bold text-green-600">{{ number_format($item->price) }} تومان</span>
+                                                <div class="text-left">
+                                                    <span class="font-bold text-xs lg:text-base text-green-600">{{ number_format($item->price) }} تومان</span>
                                                 </div>
                                             </div>
                                             <a href="{{ route('menuItem.edit', [$item->id]) }}"

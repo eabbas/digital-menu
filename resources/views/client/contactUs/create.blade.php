@@ -37,8 +37,7 @@
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">توضیحات</label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                    <textarea class="p-4 w-full focus:outline-none text-sm font-bold mr-2" name='description' required>
-                                </textarea>
+                                    <textarea class="p-4 w-full focus:outline-none text-sm font-bold mr-2" name='description' required></textarea>
                                 </div>
                             </div>
                         </div>

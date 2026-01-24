@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
 
-<head>
-    <meta charset="UTF-8">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $cover->title }}</title>
-</head>
-
-<body>
+    @extends('client.document')
+    @section('title')
+    {{ $cover->title }}
+    @endsection
+    @section('content')
     <div class="2xl:container w-11/12 mx-auto lg:max-w-xl mb-10">
         <div class="w-full my-5 p-5 bg-gray-100 flex flex-col relative">
             <div class="relative">
@@ -80,15 +73,13 @@
             </div>
         </div>
     </div>
-    <footer class="w-full fixed bottom-0 flex flex-row justify-center items-center right-0">
-        <div class="2xl:container w-full mx-auto lg:max-w-xl bg-gray-800 py-3 lg:py-5">
-            <p class="text-center text-xs lg:text-sm text-white">
-                ساخته شده توسط
-                <a href="{{ route('home') }}" class="px-2 font-bold">Famenu.ir</a>
-            </p>
-        </div>
-    </footer>
+    <!--<footer class="w-full fixed bottom-0 flex flex-row justify-center items-center right-0">-->
+    <!--    <div class="2xl:container w-full mx-auto lg:max-w-xl bg-gray-800 py-3 lg:py-5">-->
+    <!--        <p class="text-center text-xs lg:text-sm text-white">-->
+    <!--            ساخته شده توسط-->
+    <!--            <a href="{{ route('home') }}" class="px-2 font-bold">Famenu.ir</a>-->
+    <!--        </p>-->
+    <!--    </div>-->
+    <!--</footer>-->
     <script src="{{ asset('assets/js/blocks.js') }}"></script>
-</body>
-
-</html>
+@endsection

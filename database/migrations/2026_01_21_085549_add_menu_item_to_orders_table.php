@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->string('career_id');
-            $table->string('slug')->nullable();
+        Schema::table('orders', function (Blueprint $table) {
             $table->string('menu_item_id')->unique();
             $table->string('user_id')->unique();
             $table->integer('quantity')->default(1);
             $table->tinyInteger('status')->default(0);
-            $table->timestamps();
         });
     }
 
@@ -28,6 +24,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::table('orders', function (Blueprint $table) {
+            //
+        });
     }
 };
