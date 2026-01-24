@@ -1,442 +1,588 @@
-@extends('client.document')
-@section('title')
-    {{ 'فامنو | ' }}{{ $career->title }}
-@endsection
-@section('content')
-    <div id="parentMenuPage">
-        <div class="w-full flex flex-row justify-between gap-3 py-3 lg:py-8 rounded-2xl">
-            <div class="w-1/2 p-1 lg:p-3 text-xs lg:text-sm h-full font-medium">
-                <a href="{{ route('show_career', [$career]) }}" class="text-sky-700">مشاهده جزئیات کسب وکار</a>
-            </div>
-        </div>
-        <div class="w-full pt-4 lg:pt-16 pb-4 bg-[#F4F8F9]">
-            <div class="pb-4 text-lg lg:text-3xl text-center font-bold">
-                <h2>{{ $career->title }}</h2>
-            </div>
-            @if (!$career->banner)
-                <img src="{{ asset('storage/images/banner01.jpg') }}"
-                     class="w-11/12 h-[120px] sm:h-[180px] mx-auto rounded-md object-cover" alt="career banner">
-            @else
-                <img src="{{ asset('storage/' . $career->banner) }}"
-                     class="w-11/12 h-[120px] sm:h-[180px] mx-auto rounded-md object-cover" alt="career banner">
-            @endif
-        </div>
-        <div class="w-full py-3">
-            <h3 class="w-11/12 mx-auto py-3 text-base font-bold lg:text-md">منو های {{ $career->title }}</h3>
-            <div class="w-11/12 flex flex-row items-center gap-3 pb-3 mx-auto overflow-x-auto [&::-webkit-scrollbar]:hidden">
-                @foreach ($career->menus as $menu)
-                    <div class="cursor-pointer rounded-lg menuParent bg-white" title="{{ $menu->title }}"
-                         onclick='showMenu(this, "{{ $menu->id }}")'>
-                        <div class="w-20 gap-2 p-2 flex flex-col items-center">
-                            <img class="size-10" src="{{ asset('storage/' . $menu->banner) }}" alt="menu image">
-                            <span
-                                    class="block w-full title_category_icon text-center truncate text-xs">{{ $menu->title }}</span>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-        @foreach ($career->menus as $menu)
-            <div class="flex flex-col gap-3 mt-3 menus" data-menu-id="{{ $menu->id }}">
-                @foreach ($menu->menu_categories as $category)
-                    @if (count($category->menu_items))
-                        <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-                            <!-- Category Header -->
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-2.5 lg:p-5 border-b border-gray-100 bg-gray-200">
-                                <div class="flex items-center gap-4">
-                                    <img src="{{ asset('storage/' . $category->image) }}"
-                                         alt="{{ $category->title }}"
-                                         class="size-14 rounded-lg object-cover border border-gray-200 shadow-sm bg-white">
-                                    <div>
-                                        <h2 class="lg:text-xl font-bold text-gray-800">{{ $category->title }}</h2>
-                                        <p class="text-xs lg:text-sm text-gray-500 mt-1">{{ count($category->menu_items) }}
-                                            آیتم</p>
-                                    </div>
-                                </div>
-                            </div>
+<?php
 
-                            <!-- Items List -->
-                            <div class="p-2 lg:p-4">
-                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                                    @foreach ($category->menu_items as $item)
-                                        <div class="w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative"
-                                             data-menu-item-title="{{ $item->title }}">
-                                            <!--<span class="absolute -top-1 -right-2 bg-[#eb3254] px-2 py-0.5 rounded text-sm text-white">ویژه</span>-->
-                                            @if ($item->discount)
-                                                <span class="text-xs text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
-                                                    {{ $item->percent }}%
-                                                </span>
-                                            @endif
-                                            <div class="w-full flex items-center justify-between">
-                                                <div class="w-full flex items-center gap-2 lg:gap-4 flex-1">
-                                                    <img src="{{ asset('storage/' . $item->image) }}"
-                                                         class="size-22 rounded-lg object-cover border border-gray-300"
-                                                         alt="{{ $item->title }}">
-                                                    <div class="flex-1 min-w-0 max-w-[100px]">
-                                                        <h3 class="font-medium text-gray-800 truncate text-sm lg:text-base">{{ $item->title }}</h3>
-                                                        <p class="text-sm text-gray-500 truncate mt-1 lg:text-sm">{{ $item->description }}</p>
-                                                    </div>
-                                                </div>
-                                                <div class="text-left pl-2 lg:pl-0 lg:ml-4 flex flex-col items-end gap-0.5 lg:gap-3">
-                                                    <div class="flex flex-row items-center gap-3">
+use App\Http\Controllers\CareerController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\QRCodeController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
+// use App\Http\Controllers\adminController;
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\CareerCategoryController;
+use App\Http\Controllers\CoversController;
+use App\Http\Controllers\CustomCategoryController;
+use App\Http\Controllers\CustomProductController;
+use App\Http\Controllers\CustomProductMaterialController;
+use App\Http\Controllers\CustomProductVariantController;
+use App\Http\Controllers\EcommCategoryController;
+use App\Http\Controllers\EcommController;
+use App\Http\Controllers\EcommProductController;
+use App\Http\Controllers\EcommQrCodeController;
+use App\Http\Controllers\favoriteCareerController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MenuCategoryController;
+use App\Http\Controllers\MenuItemController;
+use App\Http\Controllers\ProvinceCityController;
+use App\Http\Controllers\SiteLinkController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\SocialAddressController;
+use App\Http\Controllers\SocialMediaController;
+use App\Http\Controllers\ContactUsController;
+use App\Http\Middleware\LoginMiddleware;
+use App\Http\Middleware\UserMiddleware;
 
-                                                        <div class="text-left flex flex-col items-end">
-                                                            @if (!$item->discount)
-                                                                <span class="font-bold text-xs lg:text-sm">{{ number_format($item->price) }} تومان</span>
-                                                            @else
-                                                                <span class="font-bold text-xs lg:text-sm">{{ number_format($item->discount) }} تومان</span>
-                                                                <span class="text-gray-400 text-[10px] line-through lg:text-sm">{{ number_format($item->price) }} تومان</span>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                    @php
-                                                        $userOrder = $item->orders()->where('user_id', Auth::id())->first();
-                                                    @endphp
-                                                    <div data-item-id="{{ $item->id }}">
-                                                        @if(Auth::check() && count($item->orders))
-                                                            <div class="relative w-16 lg:w-20">
-                                                                <button class="absolute right-0 bottom-1.5 rounded size-5 lg:size-6 flex justify-center bg-gray-400 items-center text-white cursor-pointer" onclick="setCount(this, '+')">+</button>
-                                                                <input type="number" class="outline-none w-full rounded text-center text-sm py-1" min="1" value="{{ $userOrder->quantity ?? 1 }}" disabled>
-                                                                <button class="absolute left-0 bottom-1.5 rounded size-5 lg:size-6 flex justify-center bg-gray-400 items-center text-white cursor-pointer" onclick="setCount(this, '-')">-</button>
-                                                            </div>
-                                                        @else
-                                                            <div class="w-[82px] h-[32px] lg:w-[90px] lg:h-[36px] flex flex-row justify-end items-center gap-3">
-                                                                <button class="w-full h-full flex flex-row justify-center items-center bg-green-500 rounded text-white text-sm lg:text-base cursor-pointer"
-                                                                        onclick="setOrderCount(this)">افزودن +
-                                                                </button>
-                                                            </div>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                @endforeach
-            </div>
-        @endforeach
-        <div id="orderBasket" class="w-full fixed bottom-15 right-0 z-1 hidden lg:hidden">
-            <div class="w-11/12 mx-auto p-3 lg:p-5 bg-[#eb3254] rounded-md text-center text-white cursor-pointer"
-                 onclick="openShoppingCart('phoneOpen')">
-                سبد خرید ( <span>{{ Auth::check() ? count(Auth::user()->orders) : 0 }}</span> )
-            </div>
-        </div>
-        <div id="orderList"
-             class="w-full fixed lg:hidden top-0 right-0 transition-all duration-300 z-5 max-h-0 overflow-hidden bg-white">
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-5 mt-3 mr-3 cursor-pointer"
-                 onclick="openShoppingCart('phoneClose')" viewBox="0 0 384 512">
-                <path d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
-            </svg>
-            {{--            <div class="w-full transition-all duration-300 [&::-webkit-scrollbar]:hidden flex flex-col items-center gap-3 p-5">--}}
-            {{--                <div class="w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative"--}}
-            {{--                     data-menu-item-title="{{ $item->title }}">--}}
-            {{--                    <!--<span class="absolute -top-1 -right-2 bg-[#eb3254] px-2 py-0.5 rounded text-sm text-white">ویژه</span>-->--}}
-            {{--                    @if ($item->discount)--}}
-            {{--                        <span class="text-xs text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">--}}
-            {{--                            {{ $item->percent }}%--}}
-            {{--                        </span>--}}
-            {{--                    @endif--}}
-            {{--                    <div class="w-full flex items-center justify-between">--}}
-            {{--                        <div class="w-full flex items-center gap-2 lg:gap-4 flex-1">--}}
-            {{--                            <img src="{{ asset('storage/' . $item->image) }}"--}}
-            {{--                                 class="size-22 rounded-lg object-cover border border-gray-300"--}}
-            {{--                                 alt="{{ $item->title }}">--}}
-            {{--                            <div class="flex-1 min-w-0 max-w-[100px]">--}}
-            {{--                                <h3 class="font-medium text-gray-800 truncate text-sm lg:text-base">{{ $item->title }}</h3>--}}
-            {{--                                <p class="text-sm text-gray-500 truncate mt-1 lg:text-sm">{{ $item->description }}</p>--}}
-            {{--                            </div>--}}
-            {{--                        </div>--}}
-            {{--                        <div class="text-left pl-2 lg:pl-0 lg:ml-4 flex flex-col items-end gap-0.5 lg:gap-3">--}}
-            {{--                            <div class="flex flex-row items-center gap-3">--}}
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::any('search', [HomeController::class, 'search'])->name('search');
+Route::any('filter', [HomeController::class, 'filter'])->name('filter');
+Route::get('/login/{message?}', [UserController::class, 'login'])->name('login')->middleware([LoginMiddleware::class]);
+Route::get('/signup', [UserController::class, 'create'])->name('signup')->middleware([LoginMiddleware::class]);
+Route::post('/send_code', [UserController::class, 'send_code'])->name('send_code');
+Route::post('/removeActivationCode', [UserController::class, 'removeActivationCode'])->name('removeActivationCode');
+Route::get('/forget_password', [UserController::class, 'forget_password'])->name('forget_password');
+Route::post('/set_password', [UserController::class, 'set_password'])->name('set_password');
+Route::get('/reset_password/{user}', [UserController::class, 'reset_password'])->name('reset_password');
+Route::post('/save_password', [UserController::class, 'save_password'])->name('save_password');
+Route::post('/check', [UserController::class, 'checkAuth'])->name('checkAuth');
 
-            {{--                                <div class="text-left flex flex-col items-end">--}}
-            {{--                                    @if (!$item->discount)--}}
-            {{--                                        <span class="font-bold text-xs lg:text-sm">{{ number_format($item->price) }} تومان</span>--}}
-            {{--                                    @else--}}
-            {{--                                        <span class="font-bold text-xs lg:text-sm">{{ number_format($item->discount) }} تومان</span>--}}
-            {{--                                        <span class="text-gray-400 text-[10px] line-through lg:text-sm">{{ number_format($item->price) }} تومان</span>--}}
-            {{--                                    @endif--}}
-            {{--                                </div>--}}
-            {{--                            </div>--}}
-            {{--                            <div class="flex flex-row justify-end items-center gap-3">--}}
-            {{--                                <div class="relative w-16 lg:w-20">--}}
-            {{--                                    <button class="absolute right-0 bottom-1.5 rounded size-5 lg:size-6 flex justify-center bg-gray-400 items-center text-white cursor-pointer"--}}
-            {{--                                            onclick="setCount(this, '+')">+--}}
-            {{--                                    </button>--}}
-            {{--                                    <input type="number" class="outline-none w-full rounded text-center text-sm py-1"--}}
-            {{--                                           min="1" value="1" disabled>--}}
-            {{--                                    <button class="absolute left-0 bottom-1.5 rounded size-5 lg:size-6 flex justify-center bg-gray-400 items-center text-white cursor-pointer"--}}
-            {{--                                            onclick="setCount(this, '-')">---}}
-            {{--                                    </button>--}}
-            {{--                                </div>--}}
-            {{--                            </div>--}}
-            {{--                        </div>--}}
-            {{--                    </div>--}}
-            {{--                </div>--}}
-            {{--            </div>--}}
-        </div>
-        <div id="authenticationDiv"
-             class="fixed w-full h-dvh bg-black/50 backdrop-blur-sm top-0 right-0 flex justify-center items-center transition-all duration-300 opacity-0 invisible">
-            <div class="absolute top-0 opacity-0 invisible right-1/2 translate-x-1/2 w-3/4 lg:w-1/3 bg-white rounded-lg shadow-md transition-all duration-500 z-10"
-                 id="message">
-                <div class="relative">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         class="size-4 absolute top-1/2 -translate-y-1/2 right-3 cursor-pointer"
-                         onclick="showMessage('close')" viewBox="0 0 384 512">
-                        <path d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
-                    </svg>
+Route::group([
+    'prefix' => 'users',
+    'controller' => UserController::class,
+    'as' => 'user.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::post('/store', 'store')->name('store')->withoutMiddleware([UserMiddleware::class]);
+    Route::post('/check', 'check')->name('check')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/logout', 'logout')->name('logout');
+    Route::get('/', 'index')->name('list');
+    Route::get('/panel/{user}', 'panel')->name('panel');
+    Route::get('/profile', 'profile')->name('profile');
+    Route::get('/show/{user}', 'show')->name('show');
+    Route::get('/edit/{user}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{user}', 'delete')->name('delete');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+    Route::get('/compelete', 'compelete_form')->name('compelete_form');
+    Route::post('/save', 'save')->name('save');
+    Route::get('/setting', 'setting')->name('setting');
+    Route::post('/set', 'set')->name('set');
+    route::post('/set_order', 'set_order')->name('set_order');
+    Route::get('/create_user', 'create_user')->name('create_user');
+    Route::post('/store_user', 'store_user')->name('store_user');
+    Route::post('/search', 'search')->name('search');
+    Route::post('/checkFromMenu', 'checkFromMenu')->name('checkFromMenu')->withoutMiddleware([UserMiddleware::class]);
+});
 
-                </div>
-            </div>
-            <div class="w-3/4 bg-white rounded-sm p-3 transition-all duration-300 delay-100 scale-95">
-                <svg xmlns="http://www.w3.org/2000/svg" class="size-5 cursor-pointer"
-                     onclick="closeLoginForm()" viewBox="0 0 384 512">
-                    <path d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
-                </svg>
-                <h3 class="text-center text-sm font-bold text-gray-800">ابتدا وارد شوید</h3>
-                <form action="{{ route('user.check') }}" class="flex flex-col items-center my-6 gap-3 w-full"
-                      method="post" id="loginForm">
-                    @csrf
-                    <input type="number"
-                           class="placeholder-gray-400 focus:border-1 focus:border-[#eb3254] p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] focus:outline-none w-full"
-                           name="phoneNumber" placeholder="شماره تلفن" id="phoneNumber">
-                    <input type="password"
-                           class="placeholder-gray-400 focus:border-1 focus:border-[#eb3254] p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] focus:outline-none w-full"
-                           name="password" placeholder="کلمه عبور" id="password">
-                    <div class="w-full text-center">
-                        <a href="{{ route('forget_password') }}"
-                           class="text-[#eb3254] inline-block max-md:my-1 my-4 max-md:text-sm">فراموشی رمز عبور</a>
-                    </div>
-                    <button onclick="check(event)"
-                            class="focus:bg-[#eb3254] hover:bg-[#eb3254] transition-all duration-400 text-center w-full bg-[#eb3254] p-2 md:p-3 rounded-[10px] text-white cursor-pointer">
-                        ورود
-                    </button>
-                    <div class="w-full text-center">
-                            <span class="text-[#4B5675] mt-1 md:mt-5 max-md:text-sm">
-                                هنوز عضو نشدی؟
-                                <a href="{{ route('signup') }}" class="text-[#eb3254] mr-2">ثبت نام!</a>
-                            </span>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <script>
-        let shoppingCartCount = document.getElementById('shoppingCartCount')
-        let orderBasket = document.getElementById('orderBasket')
-        let parent = document.getElementById('parentMenuPage')
-        let length = 0
-        let orderList = document.getElementById('orderList')
+Route::group([
+    'prefix' => 'careers',
+    'controller' => CareerController::class,
+    'as' => 'career.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create/{user?}', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/userCareers/{user?}', 'user_careers')->name('careers');
+    Route::get('/edit/{career}/{user?}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{career}', 'delete')->name('delete');
+    Route::get('/list', 'index')->name('list');
+    Route::get('/show/{career}', 'single')->name('single')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/qrcodes/{career}', 'qr_codes')->name('qr_codes');
+    Route::get('/menuList/{career}', 'menus')->name('menus');
+    Route::get('/careersCategories', 'careersCategories')->name('careersCategories')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/careersList', 'careersList')->name('careersList')->withoutMiddleware([UserMiddleware::class]);
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+    Route::get('/categoryCareers/{careerCategory}', 'categoryCareers')->name('categoryCareers')->withoutMiddleware([UserMiddleware::class]);
+});
+Route::group([
+    'prefix' => 'province',
+    'controller' => ProvinceCityController::class,
+    'as' => 'pc.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::post('/city', 'city')->name('city');
+});
+Route::group([
+    'prefix' => 'careerCategory',
+    'controller' => CareerCategoryController::class,
+    'as' => 'cc.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/', 'list')->name('list');
+    Route::get('/show/{careerCategory}', 'show')->name('single');
+    Route::get('/edit/{careerCategory}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{careerCategory}', 'delete')->name('delete');
+});
+Route::group([
+    'prefix' => 'orders',
+    'controller' => OrderController::class,
+    'as' => 'order.',
+    'middleware' => [UserMiddleware::class]
+], function(){
+    Route::post('/store', 'store')->name('store');
+    Route::get('/', 'index')->name('list');
+    Route::post('/update', 'update')->name('update');
+    Route::post('/delete/', 'delete')->name('delete');
+    Route::post('/showOrders', 'showOrders')->name('showOrders');
+    Route::post('/set', 'set')->name('set');
+});
+Route::group([
+    'prefix' => 'menu',
+    'controller' => MenuController::class,
+    'middleware' => [UserMiddleware::class],
+    'as' => 'menu.'
+], function () {
+    Route::get('/create/{career?}', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/show/{menu}', 'single')->name('single');
+    Route::get('/customProList/{career}', 'customProMenu')->name('customProList');
+    Route::get('/edit/{menu}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{menu}', 'delete')->name('delete');
+    // Route::get('/showMenu/{menu}', 'showMenu')->name('showMenu');
+    Route::get('/createMenu', 'createMenu')->name('createMenu');
+    Route::get('/myMenu/{user}', 'user_menu')->name('user_menus');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+});
 
-        let authenticationDiv = document.getElementById('authenticationDiv')
+Route::group([
+    'prefix' => 'menuCategory',
+    'controller' => MenuCategoryController::class,
+    'middleware' => [UserMiddleware::class],
+    'as' => 'menuCat.'
+], function () {
+    Route::get('/create/{menu}', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/list/{menu}', 'index')->name('list');
+    Route::get('/edit/{menu_category}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{menu_category}', 'delete')->name('delete');
+    Route::get('/{menu}', 'menu')->name('menu');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+});
 
-        let message = document.getElementById('message')
-        let element = document.createElement('div')
-        element.classList = "text-sm font-bold flex flex-row items-center justify-center py-3 gap-2 lg:gap-3"
+Route::group([
+    'prefix' => 'menuItem',
+    'controller' => MenuItemController::class,
+    'as' => 'menuItem.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    // Route::get('/{menu_category}', 'index')->name('list');
+    Route::get('/create/{menu_category}', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/edit/{menu_item}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{menu_item}', 'delete')->name('delete');
+    Route::get('/qr_codes/{menu_item}', 'qr_codes')->name('qr_codes');
+    Route::get('/items/{menu_category}', 'items')->name('items');
+    Route::get('/variants/{menu_item}', 'variants')->name('variants');
+    Route::get('/{menu_item}', 'single')->name('single');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+});
 
-        let loginForm = document.getElementById('loginForm')
-        let phoneNumber = document.getElementById('phoneNumber')
-        let password = document.getElementById('password')
+// category.......................................................................
+Route::get('category/create', [CategoryController::class, 'create']);
+Route::post('category/store', [CategoryController::class, 'store']);
+Route::get('categories', [CategoryController::class, 'index']);
+Route::get('category/show/{category}', [CategoryController::class, 'show']);
+Route::get('category/edit/{category}', [CategoryController::class, 'edit']);
+Route::post('category/update', [CategoryController::class, 'update']);
+Route::get('category/delete/{category}', [CategoryController::class, 'delete']);
 
+// product.................................................................................
+Route::get('product/create', [ProductController::class, 'create']);
+Route::post('product/store', [ProductController::class, 'store']);
+Route::get('products', [ProductController::class, 'index']);
+Route::get('product/show/{product}', [ProductController::class, 'show']);
+Route::get('product/edit/{product}', [ProductController::class, 'edit']);
+Route::post('product/update', [ProductController::class, 'update']);
+Route::get('product/delete/{product}', [ProductController::class, 'delete']);
 
-        function setCount(el, state) {
-            el.setAttribute('disabled', true)
-            el.innerHTML = `
-                <div class="w-5 h-5 border-2 border-gray-200 border-t-gray-500 rounded-full animate-spin"></div>
-            `
-            if (state == "+") {
-                el.parentElement.children[1].value++
-                orderBasket.children[0].children[0].innerText++
-                shoppingCartCount.innerText++
-                length++
-            }
-                    // console.log('input : '+el.parentElement.children[1].value, 'span : '+orderBasket.children[0].children[0].innerText)
-            if (el.parentElement.children[1].value != 0 && orderBasket.children[0].children[0].innerText != 0) {
-                if (state == "-") {
-                    el.parentElement.children[1].value--
-                    orderBasket.children[0].children[0].innerText--
-                    shoppingCartCount.innerText--
-                    length--
-                }
-            }
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-            $.ajax({
-                url: "{{ route('order.store') }}",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    'career_id': "{{ $career->id }}",
-                    'slug': "{{ $slug }}",
-                    'menu_item_id' :  el.parentElement.parentElement.getAttribute('data-item-id'),
-                    'quantity': el.parentElement.children[1].value
-                },
-                success: function(data){
-                    // console.log(data, state)
-                    el.removeAttribute('disabled')
+// qr-code
+Route::group([
+    'prefix' => 'qrcode',
+    'controller' => QRCodeController::class,
+    'as' => 'qr.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/qr-code', 'index')->name('list');
+    Route::post('/delete', 'delete')->name('delete');
+    Route::get('/{career}/{slug}', 'load')->name('load')->withoutMiddleware([UserMiddleware::class]);
+    Route::post('/edit', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+});
 
-                    if (state == "+"){
-                        el.innerHTML = "+"
-                    }if (state == "-"){
-                        el.innerHTML = "-"
-                    }
+// client
+Route::group([
+    'prefix' => 'qrcodes',
+    'controller' => ClientController::class,
+    'as' => 'client.'
+], function () {
+    Route::get('/links/{covers}/{slug?}', 'loadLink')->name('loadLink');
+    Route::get('/{career}/{slug?}', 'show_menu')->name('menu');
+    // Route::get('/{career}', 'career_menu')->name('careerMenu');
+    // Route::get('/career/{$career}', 'show_career')->name('show_career');
+});
+Route::get('/career/{career}', [ClientController::class, 'show_career'])->name('show_career');
+// Route::get('/socialPage/{covers}', [ClientController::class, 'show_socialPage'])->name('show_socialPage');
 
-                },
-                error: function(){
-                    alert('error')
-                }
-            })
-        }
+Route::group([
+    'prefix' => 'settings',
+    'controller' => SettingController::class,
+    'as' => 'settings.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::group([
+        'prefix' => 'colors',
+        'as' => 'colors.'
+    ], function () {
+        Route::get('/create', 'createColor')->name('createColor');
+        Route::post('/update', 'upsertColor')->name('upsertColor');
+        Route::get('/show', 'showColors')->name('showColors');
+        Route::get('/delete', 'deleteColor')->name('deleteColor');
+    });
+});
 
-        function setOrderCount(el) {
-            el.innerHTML = `
-                <div class="w-5 h-5 border-2 border-gray-200 border-t-green-500 rounded-full animate-spin"></div>
-            `
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-            $.ajax({
-                url: "{{ route('order.store') }}",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    'career_id': "{{ $career->id }}",
-                    'slug': "{{ $slug }}",
-                    'menu_item_id': el.parentElement.parentElement.getAttribute('data-item-id')
-                },
-                success: function (data) {
-                    console.log(data)
-                    if ("{{ Auth::check() }}") {
-                        if (orderBasket.classList.contains('hidden')) {
-                            orderBasket.classList.remove('hidden')
-                            orderBasket.classList.add('block')
-                            // parent.setAttribute('class', 'mb-[113px]')
-                            parent.classList = "mb-[113px] lg:mb-0"
-                        }
-                        length++
-                        orderBasket.children[0].children[0].innerText = length
-                        shoppingCartCount.innerText = length
-                        el.parentElement.parentElement.innerHTML = `
-                            <div class="relative w-16 lg:w-20">
-                                <button class="absolute right-0 bottom-1.5 rounded size-5 lg:size-6 flex justify-center bg-gray-400 items-center text-white cursor-pointer" onclick="setCount(this, '+')">+</button>
-                                <input type="number" class="outline-none w-full rounded text-center text-sm py-1" min="1" value="1" disabled>
-                                <button class="absolute left-0 bottom-1.5 rounded size-5 lg:size-6 flex justify-center bg-gray-400 items-center text-white cursor-pointer" onclick="setCount(this, '-')">-</button>
-                            </div>
-                        `
-                    }
-                },
-                error: function () {
-                    authenticationDiv.classList.remove('invisible')
-                    authenticationDiv.classList.remove('opacity-0')
-                    authenticationDiv.children[0].classList.remove('scale')
-                }
-            })
+Route::group([
+    'prefix' => 'settings',
+    'controller' => SettingController::class,
+    'as' => 'settings.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::group([
+        'prefix' => 'logo',
+        'as' => 'logo.'
+    ], function () {
+        Route::get('/create', 'createLogo')->name('createLogo');
+        Route::post('/update', 'upsertLogo')->name('upsertLogo');
+        Route::get('/show', 'showLogo')->name('showLogo');
+    });
+});
 
-        }
+Route::group([
+    'prefix' => 'settings',
+    'controller' => SettingController::class,
+    'as' => 'settings.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::group([
+        'prefix' => 'main_ads',
+        'as' => 'mainAds.'
+    ], function () {
+        Route::get('/create', 'createMainAds')->name('createMainAds');
+        Route::post('/update', 'upsertMainAds')->name('upsertMainAds');
+        Route::get('/show', 'showMainAds')->name('showMainAds');
+    });
+});
 
-        function check(ev) {
-            ev.preventDefault()
-            if (phoneNumber.value == "" || password.value == "") {
-                showMessage('open')
-                element.innerHTML = `
-                        <span>لطفا همه فیلد ها را پر کنید</span>
-                        <span class="text-red-500">!</span>
-                    `
-                message.children[0].appendChild(element)
-                setTimeout(() => {
-                    showMessage('close')
-                }, 2000)
-            } else {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                    }
-                })
-                $.ajax({
-                    url: "{{ route('user.checkFromMenu') }}",
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        'phoneNumber': phoneNumber.value,
-                        'password': password.value
-                    },
-                    success: function (data) {
+Route::group([
+    'prefix' => 'settings',
+    'controller' => SettingController::class,
+    'as' => 'settings.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::group([
+        'prefix' => 'main_banner_home',
+        'as' => 'mainBanner.'
+    ], function () {
+        Route::get('/create', 'createMainBanner')->name('createMainBanner');
+        Route::post('/update', 'upsertMainBanner')->name('upsertMainBanner');
+        Route::get('/show', 'showMainBanner')->name('showMainBanner');
+    });
+});
 
-                        if (data == "incorrectPassword") {
+Route::group([
+    'prefix' => 'settings',
+    'controller' => SettingController::class,
+    'as' => 'settings.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::group([
+        'prefix' => 'single_ads',
+        'as' => 'singleAds.'
+    ], function () {
+        Route::get('/create', 'createSingleAds')->name('createSingleAds');
+        Route::post('/update', 'upsertSingleAds')->name('upsertSingleAds');
+        Route::get('/show', 'showSingleAds')->name('showSingleAds');
+    });
+});
 
-                            showMessage('open')
-                            element.innerHTML = `
-                                <span>رمز عبور نادرست است</span>
-                                <span class="text-red-500">!</span>
-                            `
-                            message.children[0].appendChild(element)
-                            setTimeout(() => {
-                                showMessage('close')
-                            }, 2000)
-                        } else {
+Route::group([
+    'prefix' => 'settings',
+    'controller' => SettingController::class,
+    'as' => 'settings.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::group([
+        'prefix' => 'category_ads',
+        'as' => 'categoryAds.'
+    ], function () {
+        Route::get('/create', 'createCategoryAds')->name('createCategoryAds');
+        Route::post('/update', 'upsertCategoryAds')->name('upsertCategoryAds');
+        Route::get('/show', 'showCategoryAds')->name('showCategoryAds');
+    });
+});
 
-                            showMessage('open')
-                            element.innerHTML = `
-                                <span> خوش اومدی ${data.name} ${data.family} عزیز</span>
-                            `
-                            message.children[0].appendChild(element)
-                            setTimeout(() => {
-                                showMessage('close')
-                                closeLoginForm()
-                            }, 2000)
-                        }
-                    },
-                    error: function () {
-                        alert('error in sendig data')
-                    }
-                })
-            }
-        }
+// //admin
+// Route::get('/adminProfile', [adminController::class, 'adminPanel'])->name('adminPanel');
+// Route::group([
+//     'prefix'=>'admin',
+//     'controller'=>adminController::class,
+//     'as'=>'admin.'
+// ], function(){
+//     Route::get('/profile', 'adminProfile')->name('adminProfile');
+// });
 
-        function closeLoginForm() {
-            authenticationDiv.classList.add('invisible')
-            authenticationDiv.classList.add('opacity-0')
-            authenticationDiv.children[0].classList.add('scale')
-        }
+// slider
+Route::group([
+    'prefix' => 'slider',
+    'controller' => SliderController::class,
+    'as' => 'slider.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/sliders', 'index')->name('list');
+    Route::get('/edit/{slider}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{slider}', 'delete')->name('delete');
+});
 
-        function openShoppingCart(state) {
+// aboutUs
+Route::group([
+    'prefix' => 'aboutUs',
+    'controller' => AboutUsController::class,
+    'as' => 'aboutUs.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create_edit/{aboutUs?}', 'create_edit')->name('create_edit');
+    Route::post('/updateOrcreate', 'updateOrcreate')->name('updateOrcreate');
+    Route::get('/aboutUs', 'index')->name('list');
+    Route::get('/delete/{aboutUs}', 'delete')->name('delete');
+    Route::get('/clientList', 'clientList')->name('clientList')->withoutMiddleware([UserMiddleware::class]);
+});
 
-            if (state == 'phoneOpen') {
-                orderList.classList.remove('max-h-0')
-                orderList.classList.remove('overflow-hidden')
-                orderList.classList.add('min-h-[calc(100vh-57px)]')
-                orderList.classList.add('overflow-y-auto')
-            }
-            if (state == 'phoneClose') {
-                orderList.classList.remove('min-h-[calc(100vh-57px)]')
-                orderList.classList.remove('overflow-y-auto')
-                orderList.classList.add('max-h-0')
-                orderList.classList.add('overflow-hidden')
-            }
-        }
+// favoriteCareer
+Route::group([
+    'prefix' => 'favoriteCareer',
+    'controller' => favoriteCareerController::class,
+    'as' => 'favoriteCareer.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::post('/create', 'create')->name('create')->middleware([UserMiddleware::class]);
+    Route::get('/favoriteCareers', 'index')->name('list');
+    Route::get('/delete/{career}', 'delete')->name('delete');
+});
 
-        function showMessage(state) {
-            if (state == 'open') {
-                message.classList.remove('top-0')
-                message.classList.remove('opacity-0')
-                message.classList.remove('invisible')
-                message.classList.add('top-1/10')
-            }
-            if (state == 'close') {
-                message.classList.remove('top-1/10')
-                message.classList.add('top-0')
-                message.classList.add('opacity-0')
-                message.classList.add('invisible')
-            }
-        }
-    </script>
-    <script src="{{ asset('assets/js/menu.js') }}"></script>
-@endsection
+Route::group([
+    'prefix' => 'customProducts',
+    'controller' => CustomProductController::class,
+    'as' => 'cp.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create/{career?}', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::post('/save', 'save')->name('save');
+    Route::get('/customProductList', 'index')->name('list');
+    Route::get('/category_list/{custom_product?}', 'category_list')->name('category_list');
+    Route::get('/show/{customProduct}', 'show')->name('single');
+    Route::post('/edit', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::post('/delete/{customProduct?}', 'delete')->name('delete');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+});
+
+Route::group([
+    'prefix' => 'customProductVariants',
+    'controller' => CustomProductVariantController::class,
+    'as' => 'cpv.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create/{custom_product?}', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/variantList/{customProduct?}', 'index')->name('list');
+    Route::get('/show/{cpVariants}', 'show')->name('single');
+    Route::post('/edit', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::post('/delete', 'delete')->name('delete');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+});
+
+// socialMedia
+Route::group([
+    'prefix' => 'socialMedia',
+    'controller' => SocialMediaController::class,
+    'as' => 'socialMedia.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/socialMedias', 'index')->name('list');
+    Route::get('/edit/{socialMedia}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{socialMedia}', 'delete')->name('delete');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+});
+// siteLink
+Route::group([
+    'prefix' => 'siteLink',
+    'controller' => SiteLinkController::class,
+    'as' => 'siteLink.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create/{covers}', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/medias', 'index')->name('list');
+    Route::post('/edit', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::post('/delete', 'delete')->name('delete');
+});
+// socialAddress
+Route::group([
+    'prefix' => 'socialAddress',
+    'controller' => SocialAddressController::class,
+    'as' => 'socialAddress.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create/{covers}', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/socialAddress', 'index')->name('list');
+    Route::post('/edit/{social_address}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::post('/delete', 'delete')->name('delete');
+});
+// ////covers
+Route::group([
+    'prefix' => 'covers',
+    'controller' => CoversController::class,
+    'as' => 'covers.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/social_list', 'social_list')->name('social_list');
+    Route::get('/covers', 'index')->name('list');
+    Route::get('/edit/{covers}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{covers}', 'delete')->name('delete');
+    Route::get('/show/{covers}', 'single')->name('single');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+});
+Route::group([
+    'prefix' => 'customProductMaterial',
+    'controller' => CustomProductMaterialController::class,
+    'as' => 'cpm.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create/{customCategory?}', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/materialList/{customProduct?}', 'index')->name('list');
+    Route::get('/show/{cpm}', 'show')->name('single');
+    Route::post('/edit', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::post('/delete', 'delete')->name('delete');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+});
+Route::group([
+    'prefix' => 'customCategories',
+    'controller' => CustomCategoryController::class,
+    'as' => 'custmCategory.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create/{custom_product?}', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/custmoCategoryList/{customProduct?}', 'index')->name('list');
+    Route::get('/item_list/{customCategory?}', 'item_list')->name('item_list');
+    Route::get('/show/{customCategory?}', 'show')->name('single');
+    Route::post('/edit/{customCategory?}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::post('/delete', 'delete')->name('delete');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+});
+
+Route::group([
+    'prefix' => 'ecomms',
+    'controller' => EcommController::class,
+    'as' => 'ecomm.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/list', 'user_ecomms')->name('ecomms')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/edit/{ecomm}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{ecomm}', 'delete')->name('delete');
+    Route::get('/ecomms', 'index')->name('list');
+    Route::get('/show/{ecomm}', 'single')->name('single')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/ecomm_menu/{ecomm}', 'ecomm_menu')->name('ecomm_menu')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/ecomm_single_menu/{ecomm}', 'ecomm_single_menu')->name('ecomm_single_menu')->withoutMiddleware([UserMiddleware::class]);
+});
+
+Route::group(['prefix' => 'ecomm_category',
+        'controller' => EcommCategoryController::class,
+        'as' => 'ecomm_category.',
+        'middleware' => [UserMiddleware::class]], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/index', 'index')->name('index');
+    Route::get('/show/{ecomm_category}', 'show')->name('show');
+    Route::get('/edit/{ecomm_category}/', 'edit')->name('edit');
+    Route::get('/edit_ecomm_categories/{ecomm_category}/', 'edit_ecomm_categories')->name('edit_ecomm_categories');
+    Route::get('/ecomm_categories/{ecomm}', 'ecomm_categories')->name('ecomm_categories');
+    Route::post('/update', 'update')->name('update');
+    Route::post('/update_ecomm_categories', 'update_ecomm_categories')->name('update_ecomm_categories');
+    Route::get('/delete/{ecomm_category}', 'delete')->name('delete');
+    Route::post('/getEcommCategories', 'getEcommCategories')->name('getEcommCategories');
+});
+Route::group([
+    'prefix' => 'ecomm_product',
+    'controller' => EcommProductController::class,
+    'as' => 'ecomm_product.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/index', 'index')->name('index');
+    Route::get('/show/{ecomm_product}', 'show')->name('show');
+    Route::get('/edit/{ecomm_product}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{ecomm_product}', 'delete')->name('delete');
+    Route::get('/category_product/{ecomm_category}', 'category_product')->name('category_product');
+    Route::post('/menu_ecomm_category_product', 'menu_ecomm_category_product')->name('menu_ecomm_category_product');
+});
+Route::group([
+    'prefix' => 'ecomm_qrCode',
+    'controller' => EcommQrCodeController::class,
+    'as' => 'ecomm_qr.'
+], function () {
+    Route::get('/{ecomm}/{slug}', 'load')->name('load');
+});
+
+///contactUs
+Route::group([
+    'prefix' => 'contactUs',
+    'controller' => contactUsController::class,
+    'as' => 'contactUs.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/myMessage', 'myMessage')->name('myMessage');
+    Route::get('/contactUs', 'index')->name('list');
+    Route::get('/single/{contactUs}', 'single')->name('single');
+    Route::get('/clientSingle/{contactUs}', 'clientSingle')->name('show');
+    Route::get('/edit/{contactUs}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{contactUs}', 'delete')->name('delete');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+});
+
+Route::fallback(function () {
+    return view('404');
+});
