@@ -7,6 +7,9 @@ use App\Models\province_cities;
 use App\Models\qr_code;
 use App\Models\role;
 use App\Models\User;
+use App\Models\cart;
+use App\Models\address;
+use App\Models\order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -73,7 +76,8 @@ class CareerController extends Controller
             qr_code::create([
                 'qr_path' => $fileName,
                 'career_id' => $career_id,
-                'slug' => 'qrcode/' . $career_id . '/' . $random,
+                'page_path' => 'qrcode/' . $career_id . '/' . $random,
+                'slug' => $random,
                 'user_id' => Auth::id()
             ]);
         }
@@ -143,7 +147,8 @@ class CareerController extends Controller
                     qr_code::create([
                         'qr_path' => $fileName,
                         'career_id' => $career->id,
-                        'slug' => 'qrcode/' . $career->id . '/' . $random,
+                        'page_path' => 'qrcode/' . $career->id . '/' . $random,
+                        'slug' => $random,
                         'user_id' => Auth::id()
                     ]);
                     $qr_count--;
@@ -256,5 +261,16 @@ class CareerController extends Controller
     public function categoryCareers(careerCategory $careerCategory)
     {
         return view('client.career.categoryCareers', ['careerCategory' => $careerCategory]);
+    }
+
+    public function orders(career $career){
+        foreach($career->carts as $cart){
+            $order = order::where('cartNumber', $cart->cartNumber)->first();
+            if(isset($order->address_id)){
+                $address = address::find($order->address_id);
+                $cart['address']= $address->address;
+            }
+        }
+        return view('admin.careers.orders', ['career'=>$career]);
     }
 }

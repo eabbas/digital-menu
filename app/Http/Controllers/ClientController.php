@@ -31,15 +31,15 @@ class ClientController extends Controller
                 }
             }
         }
-        $orderCount = 0;
+        $cartCount = 0;
         if (Auth::check()) {
-            if (count(Auth::user()->orders)) {
-                foreach (Auth::user()->orders as $order) {
-                    $orderCount += $order->quantity;
+            if (count(Auth::user()->carts)) {
+                foreach (Auth::user()->carts as $cart) {
+                    $cartCount += $cart->quantity;
                 }
             }
         }
-        return view('client.menu', ['career' => $career, 'slug' => $slug, 'orderCount'=>$orderCount]);
+        return view('client.menu', ['career' => $career, 'slug' => $slug, 'cartCount'=>$cartCount]);
     }
 
     public function loadLink(covers $covers, $slug = null)

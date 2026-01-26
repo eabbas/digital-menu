@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('qr_path');
+            $table->string('page_path');
+            $table->string('slug');
             $table->string('career_id');
             $table->integer('user_id');
         });
