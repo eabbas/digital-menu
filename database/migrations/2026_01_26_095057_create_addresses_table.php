@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->string('menu_item_id')->unique();
-            $table->string('user_id')->unique();
-            $table->integer('quantity')->default(1);
-            $table->tinyInteger('status')->default(0);
+        Schema::create('addresses', function (Blueprint $table) {
+            $table->id();
+            $table->string('user_id');
+            $table->text('address');
+            $table->timestamps();
         });
     }
 
@@ -24,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('orders', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('addresses');
     }
 };

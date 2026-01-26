@@ -4,6 +4,7 @@ use App\Http\Controllers\CareerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QRCodeController;
@@ -74,6 +75,7 @@ Route::group([
     Route::post('/store_user', 'store_user')->name('store_user');
     Route::post('/search', 'search')->name('search');
     Route::post('/checkFromMenu', 'checkFromMenu')->name('checkFromMenu')->withoutMiddleware([UserMiddleware::class]);
+    Route::post('/setAddress', 'setAddress')->name('setAddress');
 });
 
 Route::group([
@@ -96,7 +98,9 @@ Route::group([
     Route::get('/careersList', 'careersList')->name('careersList')->withoutMiddleware([UserMiddleware::class]);
     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
     Route::get('/categoryCareers/{careerCategory}', 'categoryCareers')->name('categoryCareers')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/orders/{career}', 'orders')->name('orders');
 });
+
 Route::group([
     'prefix' => 'province',
     'controller' => ProvinceCityController::class,
@@ -120,17 +124,25 @@ Route::group([
     Route::get('/delete/{careerCategory}', 'delete')->name('delete');
 });
 Route::group([
-    'prefix' => 'orders',
-    'controller' => OrderController::class,
-    'as' => 'order.',
+    'prefix' => 'carts',
+    'controller' => CartController::class,
+    'as' => 'cart.',
     'middleware' => [UserMiddleware::class]
 ], function(){
     Route::post('/store', 'store')->name('store');
     Route::get('/', 'index')->name('list');
     Route::post('/update', 'update')->name('update');
     Route::post('/delete/', 'delete')->name('delete');
-    Route::post('/showOrders', 'showOrders')->name('showOrders');
+    Route::post('/showCarts', 'showCarts')->name('showCarts');
     Route::post('/set', 'set')->name('set');
+});
+Route::group([
+    'prefix'=>'order',
+    'controller'=>OrderController::class,
+    'middleware' => [UserMiddleware::class],
+    'as'=>'order.'
+], function (){
+    Route::post('/store', 'store')->name('store');
 });
 Route::group([
     'prefix' => 'menu',

@@ -23,7 +23,7 @@ class User extends Authenticatable
         'password',
         'family',
         'main_image',
-        'email'
+        'email',
     ];
 
     /**
@@ -78,7 +78,13 @@ class User extends Authenticatable
     public function contactUs(){
         return $this->hasMany(contactUs::class);
     }
+    public function carts(){
+        return $this->hasMany(cart::class);
+    }
     public function orders(){
         return $this->hasMany(order::class);
+    }
+    public function addresses(){
+        return $this->hasMany(address::class);
     }
 }

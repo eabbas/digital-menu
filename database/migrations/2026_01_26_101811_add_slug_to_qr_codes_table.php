@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('qr_codes', function (Blueprint $table) {
-            $table->integer('menu_id')->default(0);
+            $table->string('slug');
         });
     }
 

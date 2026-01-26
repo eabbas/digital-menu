@@ -11,11 +11,12 @@ class qr_code extends Model
         'user_id',
         'description',
         'career_id',
-        'slug'
+        'slug',
+        'page_path',
     ];
-    public function orders()
+    public function carts()
     {
-        return $this->hasMany(order::class)->chaperOne();
+        return $this->hasMany(cart::class);
     }
     public function career(){
         return $this->belongsTo(career::class);
@@ -23,4 +24,5 @@ class qr_code extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
 }

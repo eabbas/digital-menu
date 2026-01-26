@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\phone_code;
 use App\Models\role;
 use App\Models\role_user;
+use App\Models\address;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -119,6 +120,7 @@ class UserController extends Controller
             $path = $request->file('main_image')->storeAs('images', $fullName, 'public');
             $user->main_image = $path;
         }
+//        $request->address && $user->address = $request->address;
         $user->save();
         return redirect()->back();
     }
@@ -170,19 +172,6 @@ class UserController extends Controller
         $user->save();
         return to_route('user.profile');
     }
-
-//    public function set_order(Request $request)
-//    {
-//        dd($request->all());
-//        foreach ($request->titles as $key => $title) {
-//            order::create([
-//                'career_id' => $request->career,
-//                'slug' => $request->slug,
-//                'title' => $request->title,
-//                'count' => $request->count
-//            ]);
-//        }
-//    }
 
     public function setting()
     {
@@ -292,5 +281,14 @@ class UserController extends Controller
             return response()->json('incorrectPassword');
         }
         return to_route('signup');
+    }
+
+    public function setAddress(Request $request){
+        $address_id = address::create([
+            'user_id'=>Auth::id(),
+            'address'=>$request->address,
+        ]);
+        $address = address::find($address_id);
+        return response()->json($address);
     }
 }
