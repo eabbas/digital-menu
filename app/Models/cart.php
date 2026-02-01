@@ -12,9 +12,7 @@ class cart extends Model
         'menu_item_id',
         'user_id',
         'quantity',
-        'status',
-        'cartNumber',
-        'show_for_customer',
+        'order_id',
     ];
     public function careers()
     {
@@ -31,5 +29,9 @@ class cart extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function order(){
+        return $this->belongsTo(order::class);
     }
 }

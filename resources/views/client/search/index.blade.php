@@ -38,7 +38,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="px-3 py-1 ml-2 rounded-full border-1 border-gray-300 filter cursor-pointer" data-title="covers">
+                <div class="px-3 py-1 ml-2 rounded-full border-1 border-gray-300 filter cursor-pointer" data-title="pages">
                     <div class=" flex flex-row items-center justify-center gap-1 min-w-[110px]">
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-3" viewBox="0 0 448 512">
                             <path fill="var(--color-fill)"
@@ -66,7 +66,7 @@
                     <div class="p-3 bg-white border-b border-gray-300 filter cursor-pointer" data-title="all">همه</div>
                     <div class="p-3 bg-white border-b border-gray-300 filter cursor-pointer" data-title="careerCategory">دسته کسب و کار</div>
                     <div class="p-3 bg-white border-b border-gray-300 filter cursor-pointer" data-title="career">کسب و کار</div>
-                    <div class="p-3 bg-white border-b border-gray-300 filter cursor-pointer" data-title="covers">شبکه اجتماعی</div>
+                    <div class="p-3 bg-white border-b border-gray-300 filter cursor-pointer" data-title="pages">شبکه اجتماعی</div>
                     <div class="p-3 bg-white filter cursor-pointer" data-title="menu">منو</div>
                 </div>
             </div>
@@ -298,7 +298,7 @@
                                 })
                                 parentItems.appendChild(div)
                             }
-                            if(key == "covers"){
+                            if(key == "pages"){
                                 let div = document.createElement('div')
                                 div.classList = "parent"
                                 let heading = document.createElement('h2')

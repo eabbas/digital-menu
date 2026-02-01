@@ -20,10 +20,10 @@ class career extends Model
         return $this->hasMany(menu::class)->chaperOne();
     }
 
-    public function carts()
-    {
-        return $this->hasMany(cart::class);
-    }
+//    public function carts()
+//    {
+//        return $this->hasMany(cart::class);
+//    }
 
     public function careerCategory()
     {

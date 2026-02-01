@@ -8,6 +8,11 @@
             <div class="w-1/2 p-1 lg:p-3 text-xs lg:text-sm h-full font-medium">
                 <a href="{{ route('show_career', [$career]) }}" class="text-sky-700">مشاهده جزئیات کسب وکار</a>
             </div>
+            @if(Auth::check() && count(Auth::user()->orders))
+                <div class="w-1/2 p-1 lg:p-3 text-xs lg:text-sm h-full font-medium">
+                    <div class="text-sky-700 float-end cursor-pointer" onclick="orders('open')">سفارشات من</div>
+                </div>
+            @endif
         </div>
         <div class="w-full pt-4 lg:pt-16 pb-4 bg-[#F4F8F9]">
             <div class="pb-4 text-lg lg:text-3xl text-center font-bold">
@@ -91,27 +96,41 @@
                                                         </div>
                                                     </div>
                                                     @php
-                                                        $userCart = $item->carts()->where('user_id', Auth::id())->first();
-                                                        $itemCart = $item->carts()->where('menu_item_id', $item->id)->where('user_id', Auth::id())->first();
+                                                        $userCart = $item->load(['carts' => function ($query) {
+                                                                                    $query->whereNull('order_id')->where('user_id' , Auth::id());
+                                                                                }]);
+
+//                                                        dd($userCart->carts[0]->quantity);
                                                     @endphp
                                                     <div data-item-id="{{ $item->id }}">
-                                                        @if((Auth::check() && count(Auth::user()->carts)) && $itemCart)
+                                                        @if((Auth::check() && count($currentUser->carts)) && count($userCart->carts))
                                                             <div class="relative w-16 lg:w-20">
                                                                 <button class="absolute right-0 bottom-1.5 rounded size-5 lg:size-6 flex justify-center bg-gray-400 items-center text-white cursor-pointer"
                                                                         onclick="setCount(this, '+')">+
                                                                 </button>
                                                                 <input type="number"
                                                                        class="outline-none w-full rounded text-center text-sm py-1"
-                                                                       min="1" value="{{ $userCart->quantity ?? 1 }}"
+                                                                       min="1"
+                                                                       value="{{ $userCart->carts[0]->quantity }}"
                                                                        disabled>
                                                                 <button class="absolute left-0 bottom-1.5 rounded size-5 lg:size-6 flex justify-center bg-gray-400 items-center text-white cursor-pointer"
-                                                                        onclick="setCount(this, '-')">-
+                                                                        onclick="setCount(this, '-')">
+                                                                    @if($userCart->carts[0]->quantity > 1)
+                                                                        -
+
+                                                                    @else
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                             class="size-[14px]" viewBox="0 0 448 512">
+                                                                            <path fill="white"
+                                                                                  d="M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 32 24C10.7 80 0 90.7 0 104s10.7 24 24 24H35.6L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3H324.6c33.5 0 61.3-25.9 63.8-59.3L412.4 128H424c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8H367.9 354.2zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8H123.4c-8.4 0-15.3-6.5-16-14.8L83.7 128H364.3z"/>
+                                                                        </svg>
+                                                                    @endif
                                                                 </button>
                                                             </div>
                                                         @else
                                                             <div class="w-[82px] h-[32px] lg:w-[90px] lg:h-[36px] flex flex-row justify-end items-center gap-3">
                                                                 <button class="w-full h-full flex flex-row justify-center items-center bg-green-500 rounded text-white text-sm lg:text-base cursor-pointer set"
-                                                                        onclick="setOrderCount(this)">افزودن +
+                                                                        onclick="addToCart(this)">افزودن +
                                                                 </button>
                                                             </div>
                                                         @endif
@@ -127,7 +146,7 @@
                 @endforeach
             </div>
         @endforeach
-        @if(Auth::check())
+        @if(Auth::check() && $order)
             <div id="orderBasket"
                  class="w-full fixed bottom-15 right-0 z-1 @if(count(Auth::user()->carts)) block @else hidden @endif lg:hidden">
                 <div class="w-11/12 mx-auto p-3 lg:p-5 bg-[#eb3254] rounded-md text-center text-white cursor-pointer"
@@ -136,7 +155,7 @@
                 </div>
             </div>
         @endif
-        <div id="orderList"
+        <div id="cartList"
              class="w-full fixed lg:hidden top-0 right-0 transition-all duration-300 z-5 max-h-0 overflow-hidden bg-white">
             <div class="flex flex-row justify-between items-center pt-3 px-3">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5 cursor-pointer"
@@ -149,10 +168,38 @@
                     </button>
                 </div>
             </div>
-
             <div class="w-full transition-all duration-300 [&::-webkit-scrollbar]:hidden flex flex-col items-center gap-3 p-5 overflow-y-auto"></div>
+        </div>
+        <div id="orderList"
+             class="w-full fixed lg:hidden top-0 right-0 transition-all duration-300 z-5 max-h-0 overflow-hidden bg-white">
+            <div class="flex flex-row items-center pt-3 px-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5 cursor-pointer"
+                     onclick="orders('close')" viewBox="0 0 384 512">
+                    <path d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
+                </svg>
 
+            </div>
+            <div class="w-full transition-all duration-300 [&::-webkit-scrollbar]:hidden flex flex-col items-center gap-3 p-5 overflow-y-auto">
+                <div class="w-full mx-auto shadow-md rounded mb-5 overflow-x-auto [&::-webkit-scrollbar]:hidden lg:overflow-visible">
+                    <div
+                        class="w-full flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4] sticky -top-5">
+                        <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
+                            <span class="block w-10 lg:w-full text-center">ردیف</span>
+                        </div>
+                        <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-2">
+                            <span class="block w-30 lg:w-full">شناسه سفارش</span>
+                        </div>
+                        <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-4">
+                            <span class="block w-[180px] lg:w-full">آدرس</span>
+                        </div>
+                        <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-4">
+                            <span class="block w-[130px] lg:w-full">وضعیت سفارش</span>
+                        </div>
+                    </div>
+                    <div class="bg-white divide-y divide-[#f1f1f4]"></div>
 
+                </div>
+            </div>
         </div>
 
 
@@ -211,7 +258,7 @@
                 </svg>
                 <h3 class="text-center text-sm font-bold text-gray-800">انتخاب آدرس</h3>
                 <div class="flex flex-col items-center mt-6 gap-3 w-full">
-                    <select name="address" id="address" onchange="setOrder()"
+                    <select name="address" id="address" onchange="setOrder('address')"
                             class="w-full font-bold px-2 py-1 md:px-2 outline-none text-gray-500 cursor-pointer border-1 border-gray-300 rounded-md @if(Auth::check() && !count(Auth::user()->addresses)) hidden @endif">
                         <option disabled>انتخاب کنید</option>
                         @if(Auth::check())
@@ -246,7 +293,8 @@
                          onclick="setAddress()">انتخاب آدرس
                     </div>
                     @if($slug)
-                        <div class="w-full text-center py-2 border-1 text-sm font-bold border-gray-300 rounded-md cursor-pointer" onclick="setOrder()">
+                        <div class="w-full text-center py-2 border-1 text-sm font-bold border-gray-300 rounded-md cursor-pointer"
+                             onclick="setOrder('slug')">
                             سرو در محل
                         </div>
                     @endif
@@ -259,6 +307,7 @@
         let orderBasket = document.getElementById('orderBasket')
         let parent = document.getElementById('parentMenuPage')
         let length = 0
+        let cartList = document.getElementById('cartList')
         let orderList = document.getElementById('orderList')
         let authenticationDiv = document.getElementById('authenticationDiv')
 
@@ -282,13 +331,13 @@
             el.innerHTML = `
                 <div class="w-5 h-5 border-2 border-gray-200 border-t-gray-500 rounded-full animate-spin"></div>
             `
+
             if (state == "+") {
                 el.parentElement.children[1].value++
                 orderBasket.children[0].children[0].innerText++
                 shoppingCartCount.innerText++
                 length++
             }
-            // console.log('input : '+el.parentElement.children[1].value, 'span : '+orderBasket.children[0].children[0].innerText)
             if (el.parentElement.children[1].value != 0 && orderBasket.children[0].children[0].innerText != 0) {
                 if (state == "-") {
                     el.parentElement.children[1].value--
@@ -297,48 +346,89 @@
                     length--
                 }
             }
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-            $.ajax({
-                url: "{{ route('cart.store') }}",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    'career_id': "{{ $career->id }}",
-                    'slug': "{{ $slug }}",
-                    'menu_item_id': el.parentElement.parentElement.getAttribute('data-item-id'),
-                    'quantity': el.parentElement.children[1].value
-                },
-                success: function (data) {
-                    console.log(data)
-                    el.removeAttribute('disabled')
-
-                    if (state == "+") {
-                        el.innerHTML = "+"
+            if (el.parentElement.children[1].value == 0) {
+                console.log('the count of item is zero');
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
                     }
-                    if (state == "-") {
-                        el.innerHTML = "-"
-                    }
-
-                },
-                error: function () {
-                    showMessage('open')
-                    element.innerHTML = `
-                        <span>خطا در دریافت اطلاعات</span>
-                        <span class="text-red-500">!</span>
+                })
+                $.ajax({
+                    url: "{{ route('cart.delete') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'menu_item_id': el.parentElement.parentElement.getAttribute('data-item-id'),
+                    },
+                    success: function (data) {
+                        console.log(data)
+                        el.parentElement.parentElement.innerHTML = `
+                            <div class="w-[82px] h-[32px] lg:w-[90px] lg:h-[36px] flex flex-row justify-end items-center gap-3">
+                                <button class="w-full h-full flex flex-row justify-center items-center bg-green-500 rounded text-white text-sm lg:text-base cursor-pointer set"
+                                        onclick="addToCart(this)">افزودن +
+                                </button>
+                            </div>
                         `
-                    message.children[0].appendChild(element)
-                    setTimeout(() => {
-                        showMessage('close')
-                    }, 2000)
-                }
-            })
+                    },
+                    error: function () {
+                        showMessage('open')
+                        element.innerHTML = `
+                            <span>خطا در دریافت اطلاعات</span>
+                            <span class="text-red-500">!</span>
+                            `
+                        message.children[0].appendChild(element)
+                        setTimeout(() => {
+                            showMessage('close')
+                        }, 2000)
+                    }
+                })
+            } else {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+                $.ajax({
+                    url: "{{ route('cart.update') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'career_id': "{{ $career->id }}",
+                        'menu_item_id': el.parentElement.parentElement.getAttribute('data-item-id'),
+                        'quantity': el.parentElement.children[1].value
+                    },
+                    success: function (data) {
+                        console.log(data)
+                        el.removeAttribute('disabled')
+
+                        if (state == "+") {
+                            el.innerHTML = "+"
+                            el.parentElement.children[1].value == 1 ? el.parentElement.children[2].innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="size-[14px]" viewBox="0 0 448 512"><path fill="white" d="M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 32 24C10.7 80 0 90.7 0 104s10.7 24 24 24H35.6L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3H324.6c33.5 0 61.3-25.9 63.8-59.3L412.4 128H424c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8H367.9 354.2zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8H123.4c-8.4 0-15.3-6.5-16-14.8L83.7 128H364.3z"/></svg>` : el.parentElement.children[2].innerHTML = "-"
+                        }
+                        if (state == "-") {
+                            el.innerHTML = "-"
+                            el.parentElement.children[1].value == 1 ? el.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="size-[14px]" viewBox="0 0 448 512"><path fill="white" d="M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 32 24C10.7 80 0 90.7 0 104s10.7 24 24 24H35.6L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3H324.6c33.5 0 61.3-25.9 63.8-59.3L412.4 128H424c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8H367.9 354.2zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8H123.4c-8.4 0-15.3-6.5-16-14.8L83.7 128H364.3z"/></svg>` : el.innerHTML = "-"
+                        }
+
+                    },
+                    error: function () {
+                        showMessage('open')
+                        element.innerHTML = `
+                            <span>خطا در دریافت اطلاعات</span>
+                            <span class="text-red-500">!</span>
+                            `
+                        message.children[0].appendChild(element)
+                        setTimeout(() => {
+                            showMessage('close')
+                        }, 2000)
+                    }
+                })
+            }
         }
 
-        function setOrderCount(el) {
+        function addToCart(el) {
+
+            console.log(el.parentElement.parentElement.getAttribute('data-item-id'))
             el.innerHTML = `
                 <div class="w-5 h-5 border-2 border-gray-200 border-t-green-500 rounded-full animate-spin"></div>
             `
@@ -354,17 +444,15 @@
                     dataType: "json",
                     data: {
                         'career_id': "{{ $career->id }}",
-                        'slug': "{{ $slug }}",
                         'menu_item_id': el.parentElement.parentElement.getAttribute('data-item-id')
                     },
                     success: function (data) {
-                        console.log(data, el)
+                        console.log(data)
                         if ("{{ Auth::check() }}") {
                             let length = "{{ $cartCount }}"
                             if (orderBasket.classList.contains('hidden')) {
                                 orderBasket.classList.remove('hidden')
                                 orderBasket.classList.add('block')
-                                // parent.setAttribute('class', 'mb-[113px]')
                                 parent.classList = "mb-[113px] lg:mb-0"
                             }
                             length++
@@ -374,7 +462,11 @@
                         <div class="relative w-16 lg:w-20">
                             <button class="absolute right-0 bottom-1.5 rounded size-5 lg:size-6 flex justify-center bg-gray-400 items-center text-white cursor-pointer" onclick="setCount(this, '+')">+</button>
                             <input type="number" class="outline-none w-full rounded text-center text-sm py-1" min="1" value="1" disabled>
-                            <button class="absolute left-0 bottom-1.5 rounded size-5 lg:size-6 flex justify-center bg-gray-400 items-center text-white cursor-pointer" onclick="setCount(this, '-')">-</button>
+                            <button class="absolute left-0 bottom-1.5 rounded size-5 lg:size-6 flex justify-center bg-gray-400 items-center text-white cursor-pointer" onclick="setCount(this, '-')">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="size-[14px]" viewBox="0 0 448 512">
+                                    <path fill="white" d="M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 32 24C10.7 80 0 90.7 0 104s10.7 24 24 24H35.6L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3H324.6c33.5 0 61.3-25.9 63.8-59.3L412.4 128H424c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8H367.9 354.2zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8H123.4c-8.4 0-15.3-6.5-16-14.8L83.7 128H364.3z"/>
+                                </svg>
+                            </button>
                         </div>
                     `
                         }
@@ -400,7 +492,7 @@
         }
 
         function saveAddress() {
-            if(newAddress.value != ""){
+            if (newAddress.value != "") {
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -448,7 +540,7 @@
         }
 
         function closeSection() {
-            sections.forEach((section)=>{
+            sections.forEach((section) => {
                 section.classList.add('invisible')
                 section.classList.add('opacity-0')
             })
@@ -532,7 +624,7 @@
         function openShoppingCart(state) {
 
             if (state == 'phoneOpen') {
-                orderList.children[1].innerHTML = ""
+                cartList.children[1].innerHTML = ""
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -546,13 +638,11 @@
                         'career_id': "{{ $career->id }}"
                     },
                     success: function (data) {
-                        orderList.classList.remove('max-h-0')
-                        orderList.classList.add('min-h-[calc(100vh-57px)]')
-                        orderList.children[1].classList.add('h-[calc(100vh-89px)]')
+                        cartList.classList.remove('max-h-0')
+                        cartList.classList.add('min-h-[calc(100vh-57px)]')
+                        cartList.children[1].classList.add('h-[calc(100vh-89px)]')
                         console.log(data)
                         data.forEach((item) => {
-
-
                             let parentDiv = document.createElement('div')
                             parentDiv.classList = "w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative shoppingCartOrders"
                             parentDiv.setAttribute('data-menu-item-title', item.title)
@@ -582,7 +672,7 @@
                                     <div class="text-left pl-2 lg:pl-0 lg:ml-4 flex flex-col items-end gap-0.5 lg:gap-3">
                                         <div class="flex flex-row items-center gap-3">
                                             <div class="text-left flex flex-col items-end">
-                                                <span class="font-bold text-xs lg:text-sm">${item.discount != 0 ? item.discount : item.price} تومان</span>
+                                                <span class="font-bold text-xs lg:text-sm">${item.discount != 0 ? item.discount * item.quantity : item.price * item.quantity} تومان</span>
                                             </div>
                                         </div>
                                         <div class="flex flex-row justify-end items-center gap-3" data-item-id="${item.id}">
@@ -600,7 +690,7 @@
                                     </div>
                                 </div>
                                 `
-                            orderList.children[1].appendChild(parentDiv)
+                            cartList.children[1].appendChild(parentDiv)
                         })
                     },
                     error: function () {
@@ -617,6 +707,75 @@
                 })
             }
             if (state == 'phoneClose') {
+                cartList.children[1].classList.remove('h-[calc(100vh-89px)]')
+                cartList.classList.remove('min-h-[calc(100vh-57px)]')
+                cartList.classList.add('max-h-0')
+            }
+        }
+
+        function orders(state) {
+            if (state == "open") {
+                let counter = 1;
+                orderList.children[1].children[0].children[1].innerHTML = ""
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+                $.ajax({
+                    url: "{{ route('order.show') }}",
+                    type: "POST",
+                    dataType: "json",
+                    success: function (data) {
+                        orderList.classList.remove('max-h-0')
+                        orderList.classList.add('min-h-[calc(100vh-57px)]')
+                        orderList.children[1].classList.add('h-[calc(100vh-89px)]')
+
+                        data.forEach((item) => {
+
+                            let parentDiv = document.createElement('div')
+                            parentDiv.classList = "bg-white divide-y divide-[#f1f1f4]"
+                            parentDiv.innerHTML = `
+                            <div
+                                class="w-full flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4] py-2">
+                                <div
+                                    class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
+                                    <span class="block w-10 lg:w-full">${counter}</span>
+                                </div>
+                                <div
+                                    class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
+                                    <span class="block w-30 lg:w-full">${item.order_code}</span>
+                                </div>
+                                <div
+                                    class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 lg:w-full text-center col-span-4">
+                                    <span
+                                        class="block w-[180px] lg:w-full">${item.address ? item.address.address : item.table}</span>
+                                </div>
+                                <div
+                                    class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 lg:w-full text-center col-span-4">
+                                    <span
+                                        class="block w-[130px] lg:w-full">${item.status}</span>
+                                </div>
+                            </div>
+`
+                            orderList.children[1].children[0].children[1].appendChild(parentDiv)
+                            counter++
+                        })
+                    },
+                    error: function () {
+                        showMessage('open')
+                        element.innerHTML = `
+                        <span>خطا در دریافت اطلاعات</span>
+                        <span class="text-red-500">!</span>
+                        `
+                        message.children[0].appendChild(element)
+                        setTimeout(() => {
+                            showMessage('close')
+                        }, 2000)
+                    }
+                })
+            }
+            if (state == "close") {
                 orderList.children[1].classList.remove('h-[calc(100vh-89px)]')
                 orderList.classList.remove('min-h-[calc(100vh-57px)]')
                 orderList.classList.add('max-h-0')
@@ -638,7 +797,7 @@
             }
         }
 
-        function setOrder() {
+        function setOrder(way) {
             let orders = []
             let shoppingCartOrders = document.querySelectorAll('.shoppingCartOrders')
             shoppingCartOrders.forEach((item) => {
@@ -654,9 +813,10 @@
                 type: "POST",
                 dataType: "json",
                 data: {
-                    'address': address.value,
+                    'career_id': "{{ $career->id }}",
+                    'address': way === 'address' ? address.value : null,
                     'carts': orders,
-                    'slug': "{{ $slug }}"
+                    'slug': way === 'slug' ? "{{ $slug }}" : null
                 },
                 success: function (data) {
                     console.log(data)

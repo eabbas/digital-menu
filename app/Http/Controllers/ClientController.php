@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\career;
-use App\Models\covers;
+use App\Models\pages;
+use App\Models\order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +20,8 @@ class ClientController extends Controller
         // $user->scan_count += 1;
         // $user->save();
         // set qr count in qrcode controller load method
-
+        $order = order::where('user_id',Auth::id())->where('status',1)->first();
+//        dd($order);
         $menus = $career->menus;
         foreach ($menus as $menu) {
             foreach ($menu->menu_categories as $category) {
@@ -32,22 +34,25 @@ class ClientController extends Controller
             }
         }
         $cartCount = 0;
-        if (Auth::check()) {
-            if (count(Auth::user()->carts)) {
-                foreach (Auth::user()->carts as $cart) {
-                    $cartCount += $cart->quantity;
-                }
-            }
+
+        Auth::check() && Auth::user()->carts();
+        $currentUser = Auth::user();
+        $currentUser->load(['carts' => function ($query) {
+            $query->whereNull('order_id');
+        }]);
+        foreach ($currentUser->carts as $cart) {
+            $cartCount += $cart->quantity;
         }
-        return view('client.menu', ['career' => $career, 'slug' => $slug, 'cartCount'=>$cartCount]);
+
+        return view('client.menu', ['career' => $career, 'slug' => $slug, 'cartCount'=>$cartCount, 'order'=>$order , 'currentUser'=>$currentUser]);
     }
 
-    public function loadLink(covers $covers, $slug = null)
+    public function loadLink(pages $pages, $slug = null)
     {
-        $user = $covers->user;
+        $user = $pages->user;
         $user->scan_count += 1;
         $user->save();
-        return view('client.link.single', ['cover' => $covers, 'slug' => $slug]);
+        return view('client.link.single', ['page' => $pages, 'slug' => $slug]);
     }
 
     public function show_career(career $career)

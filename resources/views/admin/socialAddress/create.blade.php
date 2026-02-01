@@ -8,7 +8,7 @@
     @section('content')
     <form action="{{ route('socialAddress.store') }}" method="post">
         @csrf
-            <input type="hidden" name="covers_id" value="{{ $covers->id }}">
+            <input type="hidden" name="pages_id" value="{{ $pages->id }}">
 
         <div class="min-h-screen flex items-start justify-center">
             <div class="bg-white rounded-2xl shadow-md p-3 w-full md:w-9/12">

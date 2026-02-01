@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('socialMedia_id');
             $table->string('user_id');
             $table->string('username');
+            $table->string('page_id');
             $table->timestamps();
         });
     }

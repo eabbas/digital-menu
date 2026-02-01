@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\cart;
-use App\Models\career;
-use App\Models\qr_code;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,39 +11,35 @@ class CartController extends Controller
 {
     public function store(Request $request)
     {
-//        return response()->json($request->all());
-        $qrcode_id = null;
-        if ($request->slug) {
-            $qrcode = qr_code::where('slug', $request->slug)->first();
-            $qrcode_id = $qrcode->id;
-        }
-
-        $cart_id = cart::upsert([
+        $cart = cart::create([
             'career_id' => $request->career_id,
-            'qr_code_id' => $qrcode_id,
             'menu_item_id' => $request->menu_item_id,
             'user_id' => Auth::id(),
-
             'quantity' => $request->quantity ? $request->quantity : 1,
-        ], [
-            'user_id', 'menu_item_id'
-        ], [
-            'career_id', 'qr_code_id', 'quantity'
         ]);
-        $cart = cart::find($cart_id);
         return response()->json($cart);
+    }
+
+    function update(Request $request){
+        $cart = cart::where(['career_id'=>$request->career_id, 'menu_item_id'=>$request->menu_item_id, 'user_id'=>Auth::id(), 'order_id'=>null])->first();
+        $cart->quantity = $request->quantity;
+        $cart->save();
+        return response()->json([$cart, $cart->quantity, $request->quantity]);
     }
 
     public function showcarts(Request $request)
     {
-        $career = career::find($request->career_id);
-        $data = [];
-        foreach (Auth::user()->carts as $cart) {
+        $data = Auth::user()->load(['carts'=>function($query){
+            $query->whereNull('order_id')->with('menu_item')->get();
+        }]);
+        $datas = [];
+        foreach ($data->carts as $cart) {
             $cart->menu_item['quantity'] = $cart->quantity;
             $cart->menu_item['cart_id'] = $cart->id;
-            $data[] = $cart->menu_item;
+            $cart->menu_item['quantity'] = $cart->quantity;
+            $datas[] = $cart->menu_item;
         }
-        return response()->json($data);
+        return response()->json($datas);
     }
 
     public function set(Request $request)
@@ -56,5 +50,11 @@ class CartController extends Controller
             $cart->save();
         }
         return response()->json($cart);
+    }
+
+    public function delete(Request $request){
+        $cart = cart::where(['menu_item_id'=>$request->menu_item_id, 'user_id'=>Auth::id()])->first();
+        $cart->delete();
+        return response()->json('ok');
     }
 }

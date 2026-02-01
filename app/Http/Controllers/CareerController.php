@@ -7,8 +7,6 @@ use App\Models\province_cities;
 use App\Models\qr_code;
 use App\Models\role;
 use App\Models\User;
-use App\Models\cart;
-use App\Models\address;
 use App\Models\order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -264,13 +262,16 @@ class CareerController extends Controller
     }
 
     public function orders(career $career){
-        foreach($career->carts as $cart){
-            $order = order::where('cartNumber', $cart->cartNumber)->first();
-            if(isset($order->address_id)){
-                $address = address::find($order->address_id);
-                $cart['address']= $address->address;
-            }
-        }
+
         return view('admin.careers.orders', ['career'=>$career]);
+    }
+
+    public function acceptOrder(Request $request){
+        $order = order::find($request->order_id);
+        $request->state=='accept' && $order->status = 2;
+        $request->state=='send' && $order->status = 3;
+
+        $order->save();
+        return response()->json($order);
     }
 }

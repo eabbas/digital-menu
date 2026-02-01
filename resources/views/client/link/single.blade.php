@@ -1,36 +1,36 @@
 
     @extends('client.document')
     @section('title')
-    {{ $cover->title }}
+    {{ $page->title }}
     @endsection
     @section('content')
-    <div class="2xl:container w-11/12 mx-auto lg:max-w-xl mb-10">
-        <div class="w-full my-5 p-5 bg-gray-100 flex flex-col relative">
+    <div class="2xl:container w-full lg:max-w-xl mb-10">
+        <div class="w-full my-5 py-5 flex flex-col relative">
             <div class="relative">
                 <div>
-                    <img class="w-full h-[130px] object-cover lg:h-[200px]" src="{{ asset('storage/' . $cover->cover_path) }}"
+                    <img class="w-full h-[180px] object-cover lg:h-[200px] rounded-sm" src="{{ asset('storage/' . $page->cover_path) }}"
                         alt="">
                 </div>
                 <div class="flex flex-col items-center justify-end w-full h-[100px]">
                     <h2 class="text-center text-base lg:text-lg font-bold text-gray-800">
-                        {{ $cover->title }}
+                        {{ $page->title }}
                     </h2>
                     <span class="block text-cetner text-sm lg:text-md text-gray-500">
-                        {{ $cover->subTitle }}
+                        {{ $page->subTitle }}
                     </span>
                 </div>
-                <img src="{{ asset('storage/' . $cover->logo_path) }}"
-                    class="size-20 lg:size-30 rounded-full absolute inset-1/2 translate-x-1/2 -translate-y-1/5"
+                <img src="{{ asset('storage/' . $page->logo_path) }}"
+                    class="size-26 lg:size-30 rounded-full absolute inset-1/2 translate-x-1/2 -translate-y-1/5 border-4 border-white object-cover"
                     alt="">
             </div>
             <div class="w-full mt-5 lg:mt-10 flex flex-col gap-5">
     
                 <div class="w-full flex flex-col gap-3 lg:gap-5" id="socialLinks">
-                    @if (count($cover->socialAddresses))
-                        @foreach ($cover->socialAddresses as $item)
+                    @if (count($page->socialAddresses))
+                        @foreach ($page->socialAddresses as $item)
                             <div class="lg:py-2">
                                 <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center">
-                                    ورود به {{ $item->socialMedia->title }}
+                                   ورود به {{ $item->socialMedia->title }}
                                 </h3>
                                 <div class="mt-3">
                                     <a href="{{ $item->socialMedia->link . $item->username }}"
@@ -45,8 +45,9 @@
                     @endif
                 </div>
                 <div class="w-full flex flex-col gap-3 lg:gap-5" id="siteLinks">
-                    @if (count($cover->siteLinks))
-                        @foreach ($cover->siteLinks as $siteLink)
+                   
+                    @if (count($page->siteLinks))
+                        @foreach ($page->siteLinks as $siteLink)
                             <div class="lg:py-2">
                                 <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center viewLinkTitle"
                                     data-view-link-id="{{ $siteLink->id }}">
@@ -73,13 +74,5 @@
             </div>
         </div>
     </div>
-    <!--<footer class="w-full fixed bottom-0 flex flex-row justify-center items-center right-0">-->
-    <!--    <div class="2xl:container w-full mx-auto lg:max-w-xl bg-gray-800 py-3 lg:py-5">-->
-    <!--        <p class="text-center text-xs lg:text-sm text-white">-->
-    <!--            ساخته شده توسط-->
-    <!--            <a href="{{ route('home') }}" class="px-2 font-bold">Famenu.ir</a>-->
-    <!--        </p>-->
-    <!--    </div>-->
-    <!--</footer>-->
     <script src="{{ asset('assets/js/blocks.js') }}"></script>
 @endsection

@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\covers;
+use App\Models\pages;
 use App\Models\site_link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class SiteLinkController extends Controller
 {
-    public function create(covers $covers)
+    public function create(pages $pages)
     {
-        return view('admin.siteLink.create', ['covers' => $covers]);
+        return view('admin.siteLink.create', ['pages' => $pages]);
     }
 
     public function store(Request $request)
@@ -27,7 +26,7 @@ class SiteLinkController extends Controller
             'address' => 'https://' . $request->address,
             'user_id' => Auth::id(),
             'title' => $request->title,
-            'covers_id' => $request->cover_id,
+            'page_id' => $request->page_id,
             // 'icon_path' => $path
         ]);
         $data = site_link::find($id);

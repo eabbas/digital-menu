@@ -169,8 +169,8 @@
                     </ul>
                 </div>
                 <div class="dashboard">
-                    <div class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if(Route::is('covers.*') || Route::is('socialMedia.create') || Route::is('socialMedia.list')) bg-gray-700 @endif">
-                       <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200 @if(Route::is('covers.*') || Route::is('socialMedia.create') || Route::is('socialMedia.list')) rotate-180 @endif" viewBox="0 0 448 512">
+                    <div class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if(Route::is('pages.*') || Route::is('socialMedia.create') || Route::is('socialMedia.list')) bg-gray-700 @endif">
+                       <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200 @if(Route::is('pages.*') || Route::is('socialMedia.create') || Route::is('socialMedia.list')) rotate-180 @endif" viewBox="0 0 448 512">
                             <path fill="white" d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"/></svg>
                         <div class="flex flex-row-reverse items-center gap-2">
                             <span class=" text-[white] flex justify-end font-bold">شبکه های اجتماعی</span>
@@ -180,31 +180,31 @@
                             </svg>
                         </div>
                     </div>
-                    <ul class="my-1 pr-3 transition-all duration-500 overflow-hidden @if(Route::is('covers.*') || Route::is('socialMedia.create') || Route::is('socialMedia.list')) max-h-[500px] @else max-h-0 @endif">
+                    <ul class="my-1 pr-3 transition-all duration-500 overflow-hidden @if(Route::is('pages.*') || Route::is('socialMedia.create') || Route::is('socialMedia.list')) max-h-[500px] @else max-h-0 @endif">
 
                         {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
                             <span class="size-1 bg-white rounded-sm"></span>
                             <a href="{{ route('favoriteCareer.list') }}" class="text-white py-1 block">لیست علاقه مندی ها</a>
                         </li> --}}
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('covers.create')) bg-gray-700 @endif">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('pages.create')) bg-gray-700 @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('covers.create') }}" class="text-white py-1 block">ایجادصفحه
+                            <a href="{{ route('pages.create') }}" class="text-white py-1 block">ایجادصفحه
                             </a>
                         </li>
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('covers.social_list')) bg-gray-700 @endif">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('pages.social_list')) bg-gray-700 @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('covers.social_list') }}" class="text-white py-1 block"> لیست صفحات </a>
+                            <a href="{{ route('pages.social_list') }}" class="text-white py-1 block"> لیست صفحات </a>
                         </li>
                         @if (Auth::user()->role[0]->title == 'admin')
-                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('covers.list')) bg-gray-700 @endif">
+                            <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('pages.list')) bg-gray-700 @endif">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('covers.list') }}" class="text-white py-1 block"> لیست همه صفحات
+                                <a href="{{ route('pages.list') }}" class="text-white py-1 block"> لیست همه صفحات
                                 </a>
                             </li>
                         @endif
                         {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('covers.list') }}" class=" text-white py-1"> مشاهده لیست همه شبکه های اجتماعی کاربران</a>
+                            <a href="{{ route('pages.list') }}" class=" text-white py-1"> مشاهده لیست همه شبکه های اجتماعی کاربران</a>
                         </li> --}}
                         @if (Auth::user()->role[0]->title == 'admin')
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('socialMedia.create')) bg-gray-700 @endif">
@@ -582,21 +582,21 @@
                                 <h3 class="text-md font-bold text-gray-800 mb-1.5">شبکه های اجتماعی</h3>
                                 <ul class="pr-3.5">
                                     <li>
-                                        <a href="{{ route('covers.create') }}"
+                                        <a href="{{ route('pages.create') }}"
                                             class="block text-gray-700 py-2 text-md">
                                             ایجاد صفحه
                                         </a>
                                     </li>
                                     @if (Auth::user()->role[0]->title == 'admin')
                                         <li>
-                                            <a href="{{ route('covers.list') }}"
+                                            <a href="{{ route('pages.list') }}"
                                                 class="block text-gray-700 py-2 text-md">
                                                 لیست همه صفحات
                                             </a>
                                         </li>
                                     @endif
                                     <li>
-                                        <a href="{{ route('covers.social_list') }}"
+                                        <a href="{{ route('pages.social_list') }}"
                                             class="block text-gray-700 py-2 text-md">
                                             لیست صفحات
                                         </a>

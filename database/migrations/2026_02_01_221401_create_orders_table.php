@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('cartNumber');
-            $table->string('address_id')->nullable();
-            $table->string('user_id');
-            $table->string('career_id');
+            $table->integer('address_id')->nullable();
+            $table->integer('user_id');
+            $table->integer('qr_code_id')->nullable();
+            $table->integer('career_id');
+            $table->integer('status')->default(1);
+            $table->bigInteger('order_code');
             $table->timestamps();
         });
     }

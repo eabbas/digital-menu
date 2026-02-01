@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\covers;
+use App\Models\pages;
 use App\Models\social_address;
 use App\Models\socialMedia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class SocialAddressController extends Controller
 {
-    public function create(covers $covers)
+    public function create(pages $pages)
     {
         $socialMedias = socialMedia::all();
-        return view('admin.socialAddress.create', ['socialMedias' => $socialMedias, 'covers' => $covers]);
+        return view('admin.socialAddress.create', ['socialMedias' => $socialMedias, 'pages' => $pages]);
     }
 
     public function store(Request $request)
@@ -22,7 +21,7 @@ class SocialAddressController extends Controller
         $socialAddress = social_address::insertGetId([
             'socialMedia_id' => $request->socialMedia_id,
             'user_id' => Auth::id(),
-            'covers_id' => $request->cover_id,
+            'page_id' => $request->page_id,
             'username' => $request->userName,
         ]);
         $data['address'] = social_address::find($socialAddress);
@@ -47,7 +46,7 @@ class SocialAddressController extends Controller
     {
         $social_address = social_address::find($request->id);
         $social_address->username = $request->username;
-        $social_address->covers_id = $request->cover_id;
+        $social_address->page_id = $request->page_id;
         $social_address->save();
         return response()->json($social_address);
     }
