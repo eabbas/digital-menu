@@ -11,10 +11,10 @@ class site_link extends Model
         'user_id' , 
         'title' ,
         // 'icon_path',
-        'covers_id', 
+        'page_id',
     ];
 
-    public function cover(){
-        return $this->belongsTo(covers::class);
+    public function page(){
+        return $this->belongsTo(pages::class , 'page_id');
     }
 }

@@ -11,10 +11,9 @@ use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers\adminController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\CareerCategoryController;
-use App\Http\Controllers\CoversController;
+use App\Http\Controllers\PagesController;
 use App\Http\Controllers\CustomCategoryController;
 use App\Http\Controllers\CustomProductController;
 use App\Http\Controllers\CustomProductMaterialController;
@@ -99,6 +98,7 @@ Route::group([
     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
     Route::get('/categoryCareers/{careerCategory}', 'categoryCareers')->name('categoryCareers')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/orders/{career}', 'orders')->name('orders');
+    Route::post('/acceptOrder', 'acceptOrder')->name('acceptOrder');
 });
 
 Route::group([
@@ -137,12 +137,14 @@ Route::group([
     Route::post('/set', 'set')->name('set');
 });
 Route::group([
-    'prefix'=>'order',
+    'prefix'=>'orders',
     'controller'=>OrderController::class,
     'middleware' => [UserMiddleware::class],
     'as'=>'order.'
 ], function (){
     Route::post('/store', 'store')->name('store');
+    Route::post('/show', 'show')->name('show');
+    Route::post('/showItems', 'showItems')->name('showItems');
 });
 Route::group([
     'prefix' => 'menu',
@@ -236,13 +238,13 @@ Route::group([
     'controller' => ClientController::class,
     'as' => 'client.'
 ], function () {
-    Route::get('/links/{covers}/{slug?}', 'loadLink')->name('loadLink');
+    Route::get('/links/{pages}/{slug?}', 'loadLink')->name('loadLink');
     Route::get('/{career}/{slug?}', 'show_menu')->name('menu');
     // Route::get('/{career}', 'career_menu')->name('careerMenu');
     // Route::get('/career/{$career}', 'show_career')->name('show_career');
 });
 Route::get('/career/{career}', [ClientController::class, 'show_career'])->name('show_career');
-// Route::get('/socialPage/{covers}', [ClientController::class, 'show_socialPage'])->name('show_socialPage');
+// Route::get('/socialPage/{pages}', [ClientController::class, 'show_socialPage'])->name('show_socialPage');
 
 Route::group([
     'prefix' => 'settings',
@@ -448,7 +450,7 @@ Route::group([
     'as' => 'siteLink.',
     'middleware' => [UserMiddleware::class]
 ], function () {
-    Route::get('/create/{covers}', 'create')->name('create');
+    Route::get('/create/{pages}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::get('/medias', 'index')->name('list');
     Route::post('/edit', 'edit')->name('edit');
@@ -462,28 +464,28 @@ Route::group([
     'as' => 'socialAddress.',
     'middleware' => [UserMiddleware::class]
 ], function () {
-    Route::get('/create/{covers}', 'create')->name('create');
+    Route::get('/create/{pages}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::get('/socialAddress', 'index')->name('list');
     Route::post('/edit/{social_address}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::post('/delete', 'delete')->name('delete');
 });
-// ////covers
+// ////pages
 Route::group([
-    'prefix' => 'covers',
-    'controller' => CoversController::class,
-    'as' => 'covers.',
+    'prefix' => 'pages',
+    'controller' => PagesController::class,
+    'as' => 'pages.',
     'middleware' => [UserMiddleware::class]
 ], function () {
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::get('/social_list', 'social_list')->name('social_list');
-    Route::get('/covers', 'index')->name('list');
-    Route::get('/edit/{covers}', 'edit')->name('edit');
+    Route::get('/pages', 'index')->name('list');
+    Route::get('/edit/{pages}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
-    Route::get('/delete/{covers}', 'delete')->name('delete');
-    Route::get('/show/{covers}', 'single')->name('single');
+    Route::get('/delete/{pages}', 'delete')->name('delete');
+    Route::get('/show/{pages}', 'single')->name('single');
     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
 Route::group([

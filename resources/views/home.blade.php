@@ -3,6 +3,7 @@
 <script src="{{ asset('assets/js/jquery.js') }}"></script>
 @section('title', 'فامنو | منوی دیجیتال کسب و کار شما')
 @section('content')
+
     <div class="w-full pt-1 samim">
         <section>
             {{-- <div class="flex flex-row justify-between items-center">
@@ -14,7 +15,7 @@
                 <!--    src="{{ asset('assets/img/0f45cb57f458472281f94e87c7dfc67def10436d_1767515466.jpg') }}" alt="">-->
                 <div class="w-5/12 lg:w-1/3 flex flex-row items-center justify-center">
                     <div class="flex flex-col gap-3 lg:gap-5 text-white p-3 lg:p-5 items-end">
-                        <p classd="font-bold text-[10px] lg:text-[30px] font-bold">
+                        <p class="font-bold text-[10px] lg:text-[30px] font-bold">
                            سلام دوست عزیز 
                         </p>
                         <div>

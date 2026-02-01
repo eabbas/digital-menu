@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('social_qr_codes', function (Blueprint $table) {
             $table->id();
-            $table->string('covers_id');
+            $table->string('page_id');
             $table->string('qr_path');
             $table->string('slug');
             $table->timestamps();

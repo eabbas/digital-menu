@@ -10,14 +10,14 @@ class social_address extends Model
         'socialMedia_id',
         'user_id' , 
         'username' ,
-        'covers_id' 
+        'page_id'
     ];
      public function socialMedia()
     {
         return $this->belongsTo(socialMedia::class, 'socialMedia_id');
     }
 
-    public function cover(){
-        return $this->belongsTo(covers::class);
+    public function page(){
+        return $this->belongsTo(pages::class , 'page_id');
     }
 }

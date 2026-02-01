@@ -1,10 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Models;
 
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 
-class AddressController extends Controller
+class address extends Model
 {
-    //
+    protected $fillable = [
+        'user_id',
+        'address',
+    ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function carts(){
+        return $this->hasMany(cart::class);
+    }
+
+    public function orders(){
+        return $this->hasMany(order::class);
+    }
 }

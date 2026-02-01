@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class order extends Model
 {
     protected $fillable = [
-        'cartNumber',
         'address_id',
         'user_id',
-        'career_id'
+        'qr_code_id',
+        'career_id',
+        'status',
+        'order_code',
     ];
 
     public function user(){
@@ -19,5 +21,16 @@ class order extends Model
 
     public function career(){
         return $this->belongsTo('career::class');
+    }
+
+    public function address(){
+        return $this->belongsTo(address::class);
+    }
+    public function qr_code(){
+        return $this->belongsTo(qr_code::class);
+    }
+
+    public function carts(){
+        return $this->hasMany(cart::class);
     }
 }

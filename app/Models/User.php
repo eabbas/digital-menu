@@ -66,8 +66,8 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(ecomm_category::class, ecomm::class,'user_id','ecomm_id');
     }
-     public function covers(){
-        return $this->hasMany(covers::class)->chaperOne();
+     public function pages(){
+        return $this->hasMany(pages::class)->chaperOne();
     }
     public function qr_codes(){
         return $this->hasMany(qr_code::class);

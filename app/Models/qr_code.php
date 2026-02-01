@@ -18,6 +18,10 @@ class qr_code extends Model
     {
         return $this->hasMany(cart::class);
     }
+    public function orders()
+    {
+        return $this->hasMany(order::class);
+    }
     public function career(){
         return $this->belongsTo(career::class);
     }
