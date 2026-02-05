@@ -327,6 +327,7 @@
         let sections = document.querySelectorAll('.section')
 
         function setCount(el, state) {
+            console.log( orderBasket)
             el.setAttribute('disabled', true)
             el.innerHTML = `
                 <div class="w-5 h-5 border-2 border-gray-200 border-t-gray-500 rounded-full animate-spin"></div>

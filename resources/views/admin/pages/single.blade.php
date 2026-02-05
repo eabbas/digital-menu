@@ -1,7 +1,7 @@
 @extends('admin.app.panel')
 
 @section('title')
-    {{ $cover->title }}
+    {{ $page->title }}
 @endsection
 @section('content')
     <script src="{{ asset('assets/js/jquery.js') }}"></script>
@@ -11,10 +11,10 @@
             <div class="w-full flex flex-row justify-between items-center gap-3 pb-5">
                 <div class="w-full flex flex-row  items-center gap-3">
                     <div>
-                        <img class="size-12 rounded-lg" src="{{ asset('storage/' . $cover->logo_path) }}" alt="لوگو">
+                        <img class="size-12 rounded-lg" src="{{ asset('storage/' . $page->logo_path) }}" alt="لوگو">
                     </div>
                     <h2 class="text-sm lg:text-lg font-bold text-gray-800">
-                        {{ $cover->title }}
+                        {{ $page->title }}
                     </h2>
                 </div>
                 <div>
@@ -30,12 +30,12 @@
                                         d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
                                 </svg>
                             </div>
-                            @if (isset($cover->social_qr_codes->qr_path))
+                            @if (isset($page->social_qr_codes->qr_path))
                                 <div class="w-2/3 lg:w-1/4 mx-auto bg-white rounded-lg p-5">
-                                    <img src="{{ asset('storage/' . $cover->social_qr_codes->qr_path) }}" class="w-full"
+                                    <img src="{{ asset('storage/' . $page->social_qr_codes->qr_path) }}" class="w-full"
                                         alt="">
                                     <div class="lg:w-full mx-auto bg-gray-300 rounded-lg p-2 mt-2 flex items-center justify-center cursor-pointer"
-                                        onclick='copyText({{ $cover->id }} , "{{ $cover->social_qr_codes->slug }}")'>
+                                        onclick='copyText({{ $page->id }} , "{{ $page->social_qr_codes->slug }}")'>
                                         کپی لینک
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div>
-                    <a href="{{ route('client.loadLink', [$cover]) }}"
+                    <a href="{{ route('client.loadLink', [$page]) }}"
                         class="inline-block p-2 rounded-md bg-gray-200 cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 576 512">
                             <path
@@ -70,25 +70,25 @@
             <div class="relative">
                 <div>
                     <img class="w-full h-[130px] object-cover lg:h-[200px] rounded-md"
-                        src="{{ asset('storage/' . $cover->cover_path) }}" alt="">
+                        src="{{ asset('storage/' . $page->cover_path) }}" alt="">
                 </div>
                 <div class="flex flex-col items-center justify-end w-full h-[100px]">
                     <h2 class="text-center text-base lg:text-lg font-bold text-gray-800">
-                        {{ $cover->title }}
+                        {{ $page->title }}
                     </h2>
                     <span class="block text-cetner text-sm lg:text-md text-gray-500">
-                        {{ $cover->subTitle }}
+                        {{ $page->subTitle }}
                     </span>
                 </div>
-                <img src="{{ asset('storage/' . $cover->logo_path) }}"
+                <img src="{{ asset('storage/' . $page->logo_path) }}"
                     class="size-20 lg:size-30 rounded-full absolute inset-1/2 translate-x-1/2 -translate-y-1/5"
                     alt="">
             </div>
             <div class="w-full mt-5 lg:mt-10 flex flex-col gap-3">
 
                 <div class="w-full flex flex-col gap-3" id="socialLinks">
-                    @if (count($cover->socialAddresses))
-                        @foreach ($cover->socialAddresses as $item)
+                    @if (count($page->socialAddresses))
+                        @foreach ($page->socialAddresses as $item)
                             <div class="lg:py-2">
                                 <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center">
                                     ورود به {{ $item->socialMedia->title }}
@@ -123,8 +123,8 @@
                     @endif
                 </div>
                 <div class="w-full flex flex-col gap-3" id="siteLinks">
-                    @if (count($cover->siteLinks))
-                        @foreach ($cover->siteLinks as $siteLink)
+                    @if (count($page->siteLinks))
+                        @foreach ($page->siteLinks as $siteLink)
                             <div class="lg:py-2">
                                 <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center viewLinkTitle"
                                     data-view-link-id="{{ $siteLink->id }}">
@@ -605,7 +605,7 @@
                     data: {
                         'address': link_address_create.value,
                         'title': link_title_create.value,
-                        'cover_id': "{{ $cover->id }}",
+                        'cover_id': "{{ $page->id }}",
                         // 'icon_path': link_icon_path_create.value
                     },
                     success: function(data) {
@@ -686,7 +686,7 @@
                     'title': link_title_input.value,
                     'address': link_address_input.value,
                     // 'icon_path': icon_path.value,
-                    'cover_id': "{{ $cover->id }}"
+                    'cover_id': "{{ $page->id }}"
                 },
                 success: function(data) {
                     linkTitle.innerText = data.title
@@ -785,7 +785,7 @@
                 data: {
                     'id': socialAddressId.value,
                     'username': userNameUpdate.value,
-                    'cover_id': "{{ $cover->id }}"
+                    'cover_id': "{{ $page->id }}"
                 },
                 success: function(data) {
                     editsocialMediaForm.children[0].classList.remove('flex')
@@ -827,7 +827,7 @@
                     dataType: 'json',
                     data: {
                         'socialMedia_id': socialMedia_id_create.value,
-                        'cover_id': "{{ $cover->id }}",
+                        'cover_id': "{{ $page->id }}",
                         'userName': userNameCreate.value
                     },
                     success: function(datas) {
@@ -1003,7 +1003,7 @@
             })
         }
     </script>
-    @isset($cover)
+    @isset($page)
         <script>
             function copyText(coverId, slug) {
                 let url = "{{ url('qrcodes/links/') }}/" + coverId + "/" + slug
