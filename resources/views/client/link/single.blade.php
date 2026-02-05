@@ -4,7 +4,7 @@
     {{ $page->title }}
     @endsection
     @section('content')
-    <div class="2xl:container w-full lg:max-w-xl mb-10">
+    <div class="2xl:container w-full lg:max-w-xl lg:mx-auto mb-10">
         <div class="w-full my-5 py-5 flex flex-col relative">
             <div class="relative">
                 <div>
