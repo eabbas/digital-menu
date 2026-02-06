@@ -14,7 +14,8 @@ class HomeController extends Controller
         $sliders = slider::all();
         $careerCategories = careerCategory::all();
         $careers = career::all();
-        return view('home', ['sliders'=>$sliders ,'careerCategories'=>$careerCategories, 'careers'=>$careers]);
+        $pages = pages::all();
+        return view('home', ['sliders'=>$sliders ,'careerCategories'=>$careerCategories, 'careers'=>$careers, 'pages'=>$pages]);
     }
     public function search(Request $request)
     {
@@ -52,6 +53,3 @@ class HomeController extends Controller
     }
     
 }
-
-
-
