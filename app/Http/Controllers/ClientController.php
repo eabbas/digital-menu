@@ -64,4 +64,9 @@ class ClientController extends Controller
     {
         return view('client.career.single', ['career' => $career]);
     }
+
+    public function allPages(){
+        $pages = pages::all();
+        return view('client.link.index', ['pages'=>$pages]);
+    }
 }

@@ -11,7 +11,7 @@
                  ایجاد صفحه شبکه های اجتماعی
             </h1>
         </div>
-        <form action="{{ route('covers.store') }}" method="post" enctype='multipart/form-data'>
+        <form action="{{ route('pages.store') }}" method="post" enctype='multipart/form-data'>
             @csrf
             <div class="min-h-screen flex items-start justify-center">
                 <div class="bg-white rounded-2xl shadow-md p-3 w-full lg:w-3/4">

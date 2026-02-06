@@ -130,7 +130,7 @@
                                     data-view-link-id="{{ $siteLink->id }}">
                                     ورود به {{ $siteLink->title }}
                                 </h3>
-                                <div class="mt-3 relative mt-3 relative flex flex-col lg:flex-row gap-3">
+                                <div class="mt-3 relative flex flex-col lg:flex-row gap-3">
                                     <div class="w-full lg:w-8/9 flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-gray-200 rounded-full cursor-pointer editLink relative transition-all duration-300"
                                         onclick='editLink("{{ $siteLink->id }}")' data-site-id="{{ $siteLink->id }}">
                                         <img src="{{ asset('assets/img/link-simple.svg') }}" class="size-5 rounded-md"
@@ -605,7 +605,7 @@
                     data: {
                         'address': link_address_create.value,
                         'title': link_title_create.value,
-                        'cover_id': "{{ $page->id }}",
+                        'page_id': "{{ $page->id }}",
                         // 'icon_path': link_icon_path_create.value
                     },
                     success: function(data) {
@@ -827,7 +827,7 @@
                     dataType: 'json',
                     data: {
                         'socialMedia_id': socialMedia_id_create.value,
-                        'cover_id': "{{ $page->id }}",
+                        'page_id': "{{ $page->id }}",
                         'userName': userNameCreate.value
                     },
                     success: function(datas) {

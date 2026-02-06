@@ -6,9 +6,9 @@
             ویرایش شبکه اجتماعی
         </h1>
     </div>
-    <form action="{{ route('covers.update') }}" method="post" enctype='multipart/form-data'>
+    <form action="{{ route('pages.update') }}" method="post" enctype='multipart/form-data'>
         @csrf
-        <input type="hidden" name ="id" value ="{{ $covers->id }}">
+        <input type="hidden" name ="id" value ="{{ $pages->id }}">
         <div class="min-h-screen flex items-start justify-center">
             <div class="bg-white rounded-2xl shadow-md p-3 w-full lg:w-3/4">
                 <div class="text-center mb-4">
@@ -19,7 +19,7 @@
                             <div
                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                    name='title' placeholder="عنوان" value="{{ $covers->title }}">
+                                    name='title' placeholder="عنوان" value="{{ $pages->title }}">
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -27,7 +27,7 @@
                             <div
                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                    name='subTitle' placeholder="عنوان فرعی" value="{{ $covers->subTitle }}">
+                                    name='subTitle' placeholder="عنوان فرعی" value="{{ $pages->subTitle }}">
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -51,7 +51,7 @@
                             <div
                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <textarea class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text" name='description'
-                                    placeholder="توضیحات">{{ $covers->description }}</textarea>
+                                    placeholder="توضیحات">{{ $pages->description }}</textarea>
                             </div>
                         </div>
                     </div>
