@@ -33,7 +33,9 @@ class UserController extends Controller
                 'password' => $password,
             ]);
             role_user::create(['role_id' => 3, 'user_id' => $user_id]);
-            return to_route('login');
+            $user = User::find($user_id);
+            Auth::login($user);
+            return to_route('home');
         }
         return to_route('signup');
     }
