@@ -86,7 +86,7 @@
                                      class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
                                      <span class="block w-20 lg:w-full">{{ $i }}</span>
                                  </div>
-                                 <div
+                                 <a href="{{ route('user.show', [$user]) }}"
                                      class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
                                      <div class="w-20 lg:w-full">
                                          @if ($user->main_image)
@@ -98,15 +98,15 @@
                                                  src="{{ asset('assets/img/user.png') }}">
                                          @endif
                                      </div>
-                                 </div>
-                                 <div
+                                 </a>
+                                 <a href="{{ route('user.show', [$user]) }}"
                                      class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
                                      <span class="block w-20 lg:w-full">{{ $user->name }} {{ $user->family }}</span>
-                                 </div>
-                                 <div
+                                 </a>
+                                 <a href="{{ route('user.show', [$user]) }}"
                                      class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
                                      <span class="block w-20 lg:w-full">{{ $user->phoneNumber }}</span>
-                                 </div>
+                                 </a>
                                  <div
                                      class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center">
                                      <span class="block w-24 lg:w-full text-xs">
