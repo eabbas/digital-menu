@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\address;
 use App\Models\phone_code;
 use App\Models\role;
 use App\Models\role_user;
-use App\Models\address;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,7 +50,7 @@ class UserController extends Controller
                 Auth::login($user);
                 return to_route('user.profile');
             }
-            return to_route('login', ['message'=>'لطفا اطلاعات خود را مجددا بررسی کنید']);
+            return to_route('login', ['message' => 'لطفا اطلاعات خود را مجددا بررسی کنید']);
         }
         return to_route('signup');
     }
@@ -64,6 +64,24 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+        foreach ($users as $user) {
+            $rolesArray = [];
+            foreach ($user->role as $role) {
+                if ($role->title == 'admin') {
+                    $rolesArray[] = 'ادمین';
+                }
+                if ($role->title == 'admin2') {
+                    $rolesArray[] = 'ادمین2';
+                }
+                if ($role->title == 'career') {
+                    $rolesArray[] = 'صاحب کسب و کار';
+                }
+                if ($role->title == 'general') {
+                    $rolesArray[] = 'کاربر عادی';
+                }
+            }
+            $user->setAttribute('roles', $rolesArray);
+        }
         return view('admin.user.index', ['users' => $users]);
     }
 
@@ -122,7 +140,7 @@ class UserController extends Controller
             $path = $request->file('main_image')->storeAs('images', $fullName, 'public');
             $user->main_image = $path;
         }
-//        $request->address && $user->address = $request->address;
+        //        $request->address && $user->address = $request->address;
         $user->save();
         return redirect()->back();
     }
@@ -135,12 +153,13 @@ class UserController extends Controller
         $user->delete();
         return to_route('user.list');
     }
+
     public function deleteAll(Request $request)
     {
-        if(!isset($request->users)){
+        if (!isset($request->users)) {
             return redirect()->back();
         }
-        foreach($request->users as $user_id){
+        foreach ($request->users as $user_id) {
             $user = User::find($user_id);
             foreach ($user->careers as $career) {
                 $career->delete();
@@ -150,9 +169,9 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    public function login($message=null)
+    public function login($message = null)
     {
-        return view('client.login', ['message'=>$message]);
+        return view('client.login', ['message' => $message]);
     }
 
     public function compelete_form()
@@ -227,7 +246,7 @@ class UserController extends Controller
         $flag = false;
         $user = User::where('phoneNumber', $request->phoneNumber)->first();
         if ($user) {
-            $flag=true;
+            $flag = true;
         }
         if (!$flag) {
             $code = rand(1000, 10000);
@@ -247,33 +266,39 @@ class UserController extends Controller
         return response()->json($flag);
     }
 
-    public function forget_password(){
+    public function forget_password()
+    {
         return view('client.forgetPassword');
     }
 
-    public function set_password(Request $request){
+    public function set_password(Request $request)
+    {
         $user = User::where('phoneNumber', $request->phoneNumber)->first();
         return to_route('reset_password', [$user]);
     }
-    
-    public function reset_password(User $user){
-        
-        return view('client.setPassword', ['user'=>$user]);
-    }   
 
-    public function save_password(Request $request){
+    public function reset_password(User $user)
+    {
+        return view('client.setPassword', ['user' => $user]);
+    }
+
+    public function save_password(Request $request)
+    {
         $user = User::find($request->user_id);
         $password = Hash::make($request->password);
         $user->password = $password;
         $user->save();
         return to_route('login');
     }
-     public function search(Request $request)
+
+    public function search(Request $request)
     {
-        $users=User::where('family',$request->key)->get();
+        $users = User::where('family', $request->key)->get();
         return response()->json($users);
     }
-    public function removeActivationCode(Request $request){
+
+    public function removeActivationCode(Request $request)
+    {
         $row = phone_code::where('phoneNumber', $request->phoneNumber)->first();
         if ($row) {
             $row->delete();
@@ -281,7 +306,8 @@ class UserController extends Controller
         return response()->json($row);
     }
 
-    public function checkFromMenu(Request $request){
+    public function checkFromMenu(Request $request)
+    {
         $user = User::where('phoneNumber', $request->phoneNumber)->first();
         if ($user) {
             $checkHash = Hash::check($request->password, $user->password);
@@ -294,12 +320,37 @@ class UserController extends Controller
         return to_route('signup');
     }
 
-    public function setAddress(Request $request){
+    public function setAddress(Request $request)
+    {
         $address_id = address::create([
-            'user_id'=>Auth::id(),
-            'address'=>$request->address,
+            'user_id' => Auth::id(),
+            'address' => $request->address,
         ]);
         $address = address::find($address_id);
         return response()->json($address);
+    }
+
+    public function myUsers()
+    {
+        $users = User::where('parent_id', Auth::user()->id)->get();
+        foreach ($users as $user) {
+            $rolesArray = [];
+            foreach ($user->role as $role) {
+                if ($role->title == 'admin') {
+                    $rolesArray[] = 'ادمین';
+                }
+                if ($role->title == 'admin2') {
+                    $rolesArray[] = 'ادمین2';
+                }
+                if ($role->title == 'career') {
+                    $rolesArray[] = 'صاحب کسب و کار';
+                }
+                if ($role->title == 'general') {
+                    $rolesArray[] = 'کاربر عادی';
+                }
+            }
+            $user->setAttribute('roles', $rolesArray);
+        }
+        return view('admin.user.customers', ['users' => $users]);
     }
 }

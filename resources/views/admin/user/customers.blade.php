@@ -1,15 +1,15 @@
  @extends('admin.app.panel')
- @section('title', 'همه کاربران')
+ @section('title', 'فامنو | مشتریان من')
  @section('content')
 
      <div class="w-full flex flex-col pb-4">
          <div class="bg-white rounded-lg">
 
-             <h2 class="text-lg font-bold text-gray-800 p-4 text-center">لیست کاربران</h2>
+             <h2 class="text-lg font-bold text-gray-800 p-4 text-center">لیست مشتریان من</h2>
 
              <form action="{{ route('user.deleteAll') }}" method="post" class="flex flex-col gap-5">
                  @csrf
-                 <div class="w-10/12 mx-auto flex flex-row justify-start gap-3 samim">
+                 <div class="w-11/12 mx-auto flex flex-row justify-start gap-3 samim">
                      <div class="bg-white flex flex-row rounded-md items-center gap-2">
                          {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                              stroke="currentColor" class="size-6">
@@ -24,7 +24,7 @@
                          جستجو
                      </div>
                  </div>
-                 <div class="w-11/12 mx-auto flex flex-row justify-between items-center pb-4">
+                 <div class="w-10/12 mx-auto flex flex-row justify-between items-center pb-4">
                      <div class="flex flex-row items-center gap-3">
                          <input type="checkbox" id="all" onchange="checkAll()">
                          <label for="all" class="text-gray-700 text-xs">انتخاب همه</label>
@@ -109,12 +109,16 @@
                                  </div>
                                  <div
                                      class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center">
-                                     <span class="block w-24 lg:w-full">
-                                        @foreach ($user->roles as $role)
-                                            {{ $role }} </br>
-                                        @endforeach
+                                     <span class="block w-24 lg:w-full text-xs">
+                                
+                                        
+                                       @foreach ($user->roles as $role)
+                                           {{ $role }} </br>
+                                       @endforeach
                                      </span>
                                  </div>
+
+
                                  <div class="col-span-3">
                                      <div class="w-[270px] grid grid-cols-2 divide-x divide-[#f1f1f4] items-center">
                                          <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3">

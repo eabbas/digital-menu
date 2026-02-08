@@ -75,6 +75,7 @@ Route::group([
     Route::post('/search', 'search')->name('search');
     Route::post('/checkFromMenu', 'checkFromMenu')->name('checkFromMenu')->withoutMiddleware([UserMiddleware::class]);
     Route::post('/setAddress', 'setAddress')->name('setAddress');
+    Route::get('/customers', 'myUsers')->name('myUsers');
 });
 
 Route::group([
@@ -86,7 +87,6 @@ Route::group([
     Route::get('/create/{user?}', 'create')->name('create');
     Route::get('/createUser', 'createUser')->name('createUser');
     Route::post('/storeUser', 'storeUser')->name('storeUser');
-    // Route::get('/createCareerForUser/{user}', 'createCareerForUser')->name('createCareerForUser');
     Route::post('/store', 'store')->name('store');
     Route::get('/userCareers/{user?}', 'user_careers')->name('careers');
     Route::get('/edit/{career}/{user?}', 'edit')->name('edit');
