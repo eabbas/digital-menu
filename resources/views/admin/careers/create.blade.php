@@ -1,9 +1,13 @@
     @extends('admin.app.panel')
     @section('title', 'ثبت نام کسب و کار')
     @section('content')
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
-    <script src="{{ asset('assets/js/jquery.js') }}"></script>
-    <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">فرم اطلاعات کسب وکار</h1>
+        <script src="{{ asset('assets/js/jquery.js') }}"></script>
+        @if ($user !== Auth::user())
+            <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">ایجاد کسب و کار برای {{ $user->name }}
+                {{ $user->family }}</h1>
+        @else
+            <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">فرم اطلاعات کسب وکار</h1>
+        @endif
         <form action="{{ route('career.store') }}" method="post" enctype='multipart/form-data'>
             @csrf
             <div class="min-h-screen flex items-start justify-center">
@@ -15,11 +19,10 @@
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="file"
-                                        name='logo' placeholder=" لوگو کسب وکار خود را وارد کنید" title="لوگو کسب و کار" required>
+                                        name='logo' placeholder=" لوگو کسب وکار خود را وارد کنید" title="لوگو کسب و کار"
+                                        required>
                                 </div>
-                                @if($user)
                                 <input type="hidden" name="user_id" value="{{ $user->id }}">
-                                @endif
                             </div>
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">نام کسب وکار</label>
@@ -63,8 +66,9 @@
 
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                    <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2 cursor-pointer" type="text"
-                                        name='province' placeholder="استان خود را وارد کنید" onchange="changeCity(this)" required>
+                                    <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2 cursor-pointer"
+                                        type="text" name='province' placeholder="استان خود را وارد کنید"
+                                        onchange="changeCity(this)" required>
                                         @foreach ($provinces as $province)
                                             <option value="{{ $province->id }}">{{ $province->title }}</option>
                                         @endforeach
@@ -75,10 +79,11 @@
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">شهر</label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                    <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2 cursor-pointer" type="text"
-                                        name='city' id="city" placeholder=" شهرخود را وارد کنید"required>
+                                    <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2 cursor-pointer"
+                                        type="text" name='city' id="city"
+                                        placeholder=" شهرخود را وارد کنید"required>
                                         @foreach ($cities as $city)
-                                                <option value="{{ $city->id }}">{{ $city->title }}</option>
+                                            <option value="{{ $city->id }}">{{ $city->title }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -125,12 +130,13 @@
                                         name='social_medias[whatsapp]' placeholder="آدرس واتساپ">
                                 </div>
                             </div>
-                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1 lg:col-span-2">
+                            <div
+                                class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1 lg:col-span-2">
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">توضیحات</label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                    <textarea rows="5" class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text" name='description'
-                                        placeholder="توضیحات کسب وکار" class="w-full px-3 py-1 md:px-2 outline-none text-gray-500"></textarea>
+                                    <textarea rows="5" class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                        name='description' placeholder="توضیحات کسب وکار" class="w-full px-3 py-1 md:px-2 outline-none text-gray-500"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +153,8 @@
 
         <script>
             let city = document.getElementById('city')
-            function changeCity(el){
+
+            function changeCity(el) {
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -160,7 +167,7 @@
                     data: {
                         'id': el.value
                     },
-                    success: function(datas){
+                    success: function(datas) {
                         city.innerHTML = ""
                         datas.forEach(data => {
                             let option = document.createElement('option')
@@ -169,7 +176,7 @@
                             city.appendChild(option)
                         });
                     },
-                    error: function(){
+                    error: function() {
                         alert('خطا در دریافت داده')
                     }
                 })

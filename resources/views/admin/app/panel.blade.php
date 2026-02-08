@@ -120,9 +120,9 @@
                                 لیست کسب و کار های من
                             </a>
                         </li>
-                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('career.createCareer')) bg-gray-700  @endif">
+                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if(Route::is('career.createUser')) bg-gray-700  @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('career.createCareer') }}" class="text-white py-1 block">
+                            <a href="{{ route('career.createUser') }}" class="text-white py-1 block">
                                ایجاد کسب و کار برای دیگری
                             </a>
                         </li>
@@ -545,7 +545,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('career.createCareer') }}"
+                                        <a href="{{ route('career.createUser') }}"
                                             class="block text-gray-700 py-2 text-md">
                                            ایجاد کسب و کار برای  دیگری
                                         </a>
