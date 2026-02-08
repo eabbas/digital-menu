@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\address;
 use App\Models\phone_code;
+use App\Models\requests;
 use App\Models\role;
 use App\Models\role_user;
 use App\Models\User;
@@ -95,6 +96,21 @@ class UserController extends Controller
 
     public function profile()
     {
+        foreach (Auth::user()->role as $role) {
+            if ($role->title == 'admin') {
+                $rolesArray[] = 'ادمین';
+            }
+            if ($role->title == 'admin2') {
+                $rolesArray[] = 'ادمین2';
+            }
+            if ($role->title == 'career') {
+                $rolesArray[] = 'صاحب کسب و کار';
+            }
+            if ($role->title == 'general') {
+                $rolesArray[] = 'کاربر عادی';
+            }
+        }
+        Auth::user()->setAttribute('roles', $rolesArray);
         return view('admin.user.profile');
     }
 
@@ -315,9 +331,10 @@ class UserController extends Controller
 
         return response()->json($users);
     }
+
     public function customerSearch(Request $request)
     {
-        $users = Auth::user()->customers()->where(function($query) use ($request){
+        $users = Auth::user()->customers()->where(function ($query) use ($request) {
             $query->where('name', 'like', '%' . $request->key . '%')->orWhere('family', 'like', '%' . $request->key . '%');
         })->get();
         foreach ($users as $user) {
@@ -396,5 +413,50 @@ class UserController extends Controller
             $user->setAttribute('roles', $rolesArray);
         }
         return view('admin.user.customers', ['users' => $users]);
+    }
+
+    public function request(User $user)
+    {
+        requests::create(['user_id' => $user->id, 'status' => 1]);
+        return redirect()->back();
+    }
+
+    public function requestList(){
+        $requests = requests::where('status', 1)->get();
+        foreach($requests as $request){
+            $request['user']= User::find($request->user_id);
+        }
+        return view('admin.user.requests', ['requests'=>$requests]);
+    }
+
+    public function acceptRequest(Requests $requests){
+        $requests->status = 2;
+        $requests->save();
+        role_user::create(['user_id'=>$requests->user_id, 'role_id'=>4]);
+        return redirect()->back();
+    }
+    public function deleteRequest(Requests $requests){
+        $requests->delete();
+        return redirect()->back();
+    }
+    public function requestEvent(Request $request){
+        dd($request->all());
+        if(!isset($request->status)){
+            return redirect()->back();
+        }
+        if ($request->status == "accept") {
+            foreach($request->requests as $req_id){
+                $req = requests::find($req_id);
+                $req->status = 2;
+                $req->save();
+                role_user::create(['user_id'=>$req->user_id, 'role_id'=>4]);
+            }
+        }
+        if ($request->status == "delete") {
+            foreach($request->requests as $req_id){
+                $req->delete();
+            }
+        }
+        return redirect()->back();
     }
 }

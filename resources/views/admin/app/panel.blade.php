@@ -272,9 +272,9 @@
                 </div>
                 <div class="dashboard">
                     <div
-                        class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if (Route::is('user.list') || Route::is('user.create_user') || Route::is('user.myUsers')) bg-gray-700 @endif">
+                        class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if (Route::is('user.list') || Route::is('user.create_user') || Route::is('user.myUsers') || Route::is('user.requestList')) bg-gray-700 @endif">
                         <svg xmlns="http://www.w3.org/2000/svg"
-                            class="size-4 transition-all duration-200 @if (Route::is('user.list') || Route::is('user.create_user') || Route::is('user.myUsers')) rotate-180 @endif"
+                            class="size-4 transition-all duration-200 @if (Route::is('user.list') || Route::is('user.create_user') || Route::is('user.myUsers') || Route::is('user.requestList')) rotate-180 @endif"
                             viewBox="0 0 448 512">
                             <path fill="white"
                                 d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z" />
@@ -288,7 +288,7 @@
                         </div>
                     </div>
                     <ul
-                        class="my-1 pr-3 transition-all duration-500 overflow-hidden @if (Route::is('user.list') || Route::is('user.create_user') || Route::is('user.myUsers')) max-h-[500px] @else max-h-0 @endif">
+                        class="my-1 pr-3 transition-all duration-500 overflow-hidden @if (Route::is('user.list') || Route::is('user.create_user') || Route::is('user.myUsers') || Route::is('user.requestList')) max-h-[500px] @else max-h-0 @endif">
                         <li
                             class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('user.list')) bg-gray-700 @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
@@ -309,6 +309,15 @@
                                 <span class="size-1 bg-white rounded-sm"></span>
                                 <a href="{{ route('user.myUsers') }}" class="text-white py-1 block">
                                     مشتریان من
+                                </a>
+                            </li>
+                        @endif
+                        @if (in_array(1, $roles))
+                            <li
+                                class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('user.requestList')) bg-gray-700 @endif">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('user.requestList') }}" class="text-white py-1 block">
+                                   لیست درخواست ها
                                 </a>
                             </li>
                         @endif
@@ -745,6 +754,14 @@
                                                 <a href="{{ route('user.myUsers') }}"
                                                     class="block text-gray-700 py-2 text-md">
                                                     مشتریان من
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (in_array(1, $roles))
+                                            <li>
+                                                <a href="{{ route('user.requestList') }}"
+                                                    class="block text-gray-700 py-2 text-md">
+                                                   لیست درخواست ها
                                                 </a>
                                             </li>
                                         @endif

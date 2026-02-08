@@ -77,6 +77,11 @@ Route::group([
     Route::post('/setAddress', 'setAddress')->name('setAddress');
     Route::post('/customerSearch', 'customerSearch')->name('customerSearch');
     Route::get('/customers', 'myUsers')->name('myUsers');
+    Route::get('/request/{user}', 'request')->name('request');
+    Route::get('/requestList', 'requestList')->name('requestList');
+    Route::post('/requestEvent', 'requestEvent')->name('requestEvent');
+    Route::get('/deleteRequest/{requests}', 'deleteRequest')->name('deleteRequest');
+    Route::get('/acceptRequest/{requests}', 'acceptRequest')->name('acceptRequest');
 });
 
 Route::group([

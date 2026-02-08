@@ -91,4 +91,8 @@ class User extends Authenticatable
     public function customers(){
         return $this->hasMany(User::class, 'parent_id');
     }
+
+    public function request(){
+        return $this->hasOne(requests::class);
+    }
 }
