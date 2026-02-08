@@ -274,4 +274,12 @@ class CareerController extends Controller
         $order->save();
         return response()->json($order);
     }
+
+    public function createCareer(){
+        return view('admin.careers.createUser');
+    }
+
+    public function storeUser(Request $request){
+        dd($request->all());
+    }
 }

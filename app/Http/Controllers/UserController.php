@@ -224,20 +224,27 @@ class UserController extends Controller
 
     public function send_code(Request $request)
     {
-        $code = rand(1000, 10000);
-        phone_code::upsert(['phoneNumber' => $request->phoneNumber, 'code' => $code], ['phoneNumber'], ['code']);
-        $apiKey = 'YTBhZjhlNDAtZGI1Zi00ZWQ1LTkwNmYtZWU2MWFhYTkzY2M0NTcxZGQ3ZjY2Yzk1MmNjZmFiM2M2ZjVmNjBhMDg2MTQ=';
-        $client = new \IPPanel\Client($apiKey);
-        $patternValues = [
-            'activation_code' => $code,
-        ];
-        $bulkID = $client->sendPattern(
-            '7fvdx77gveizxqn',  // pattern code
-            '+983000505',  // originator
-            $request->phoneNumber,  // recipient
-            $patternValues,  // pattern values
-        );
-        return response()->json('ok');
+        $flag = false;
+        $user = User::where('phoneNumber', $request->phoneNumber)->first();
+        if ($user) {
+            $flag=true;
+        }
+        if (!$flag) {
+            $code = rand(1000, 10000);
+            phone_code::upsert(['phoneNumber' => $request->phoneNumber, 'code' => $code], ['phoneNumber'], ['code']);
+            $apiKey = 'YTBhZjhlNDAtZGI1Zi00ZWQ1LTkwNmYtZWU2MWFhYTkzY2M0NTcxZGQ3ZjY2Yzk1MmNjZmFiM2M2ZjVmNjBhMDg2MTQ=';
+            $client = new \IPPanel\Client($apiKey);
+            $patternValues = [
+                'activation_code' => $code,
+            ];
+            $bulkID = $client->sendPattern(
+                '7fvdx77gveizxqn',  // pattern code
+                '+983000505',  // originator
+                $request->phoneNumber,  // recipient
+                $patternValues,  // pattern values
+            );
+        }
+        return response()->json($flag);
     }
 
     public function forget_password(){
@@ -268,7 +275,9 @@ class UserController extends Controller
     }
     public function removeActivationCode(Request $request){
         $row = phone_code::where('phoneNumber', $request->phoneNumber)->first();
-        $row->delete();
+        if ($row) {
+            $row->delete();
+        }
         return response()->json($row);
     }
 
