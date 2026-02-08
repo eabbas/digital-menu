@@ -8,7 +8,7 @@
 
             <form class="flex flex-col gap-5" action="{{ route('career.deleteAll') }}" method="post">
                 @csrf
-                <div class="w-10/12 mx-auto flex flex-row justify-between items-center">
+                <div class="w-11/12 mx-auto flex flex-row justify-between items-center">
                     <div class="flex flex-row items-center gap-3">
                         <input type="checkbox" id="all" onchange="checkAll()">
                         <label for="all" class="text-gray-700 text-xs">انتخاب همه</label>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div
-                    class="w-11/12 lg:w-10/12 mx-auto shadow-md rounded mb-5 overflow-x-auto [&::-webkit-scrollbar]:hidden lg:overflow-visible">
+                    class="w-11/12 mx-auto shadow-md rounded mb-5 overflow-x-auto [&::-webkit-scrollbar]:hidden lg:overflow-visible">
                     <div
                         class="w-full flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4] sticky -top-5">
                         <div class="px-1 text-center text-xs font-medium text-gray-600 bg-gray-100 h-full">

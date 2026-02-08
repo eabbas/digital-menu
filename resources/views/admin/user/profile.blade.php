@@ -37,13 +37,17 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
             <div class="pt-3 mt-4 lg:mt-8">
                 <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5 bg-white">
-                    <h1 class="text-sm text-center lg:text-start lg:text-xl mt-3 lg:mt-5 font-bold mx-2">جزییات پروفایل
-                    </h1>
+                    <div class="flex flex-row justify-between items-center">
+                        <h1 class="text-sm text-center lg:text-start lg:text-xl mt-3 lg:mt-5 font-bold mx-2">جزییات پروفایل
+                        </h1>
+                        @if (!isset(Auth::user()->request))
+                            <a href="{{ route('user.request', [Auth::user()]) }}"
+                                class="font-bold text-blue-500 text-xs lg:text-sm">درخواست نمایندگی</a>
+                        @endif
+                    </div>
 
                     <div class="w-full h-px bg-gray-200 my-3 lg:my-5 "></div>
                     <div class="flex gap-7 sm:hidden">
@@ -59,7 +63,11 @@
                             <span class="p-1.5 text-xs lg:p-2.5 text-gray-400">ایمیل</span>
                             <span class="p-1.5 lg:p-2.5 text-gary-600">{{ Auth::user()->email }}</span>
                             <span class="p-1.5 text-xs lg:p-2.5 text-gray-400">نقش</span>
-                            <span class="p-1.5 lg:p-2.5 text-gary-600">{{ Auth::user()->role[0]->title }}</span>
+                            <span class="p-1.5 lg:p-2.5 text-gary-600">
+                                @foreach (Auth::user()->roles as $role)
+                                    {{ $role }} </br>
+                                @endforeach
+                            </span>
                         </div>
                     </div>
 
@@ -74,7 +82,11 @@
                             <span class="p-2.5 text-gary-600"><strong>{{ Auth::user()->name }}
                                     {{ Auth::user()?->family }}</strong></span>
                             <span class="p-2.5 text-gary-600">{{ Auth::user()->phoneNumber }}</span>
-                            <span class="p-2.5 text-gary-600">{{ Auth::user()->role[0]->title }}</span>
+                            <span class="p-2.5 text-gary-600">
+                                @foreach (Auth::user()->roles as $role)
+                                    {{ $role }} </br>
+                                @endforeach
+                            </span>
                             <span class="p-2.5 text-gary-600">{{ Auth::user()->email }}</span>
                         </div>
                     </div>

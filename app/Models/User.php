@@ -87,4 +87,12 @@ class User extends Authenticatable
     public function addresses(){
         return $this->hasMany(address::class);
     }
+
+    public function customers(){
+        return $this->hasMany(User::class, 'parent_id');
+    }
+
+    public function request(){
+        return $this->hasOne(requests::class);
+    }
 }

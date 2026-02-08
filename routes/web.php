@@ -75,6 +75,13 @@ Route::group([
     Route::post('/search', 'search')->name('search');
     Route::post('/checkFromMenu', 'checkFromMenu')->name('checkFromMenu')->withoutMiddleware([UserMiddleware::class]);
     Route::post('/setAddress', 'setAddress')->name('setAddress');
+    Route::post('/customerSearch', 'customerSearch')->name('customerSearch');
+    Route::get('/customers', 'myUsers')->name('myUsers');
+    Route::get('/request/{user}', 'request')->name('request');
+    Route::get('/requestList', 'requestList')->name('requestList');
+    Route::post('/requestEvent', 'requestEvent')->name('requestEvent');
+    Route::get('/deleteRequest/{requests}', 'deleteRequest')->name('deleteRequest');
+    Route::get('/acceptRequest/{requests}', 'acceptRequest')->name('acceptRequest');
 });
 
 Route::group([
@@ -84,6 +91,8 @@ Route::group([
     'middleware' => [UserMiddleware::class]
 ], function () {
     Route::get('/create/{user?}', 'create')->name('create');
+    Route::get('/createUser', 'createUser')->name('createUser');
+    Route::post('/storeUser', 'storeUser')->name('storeUser');
     Route::post('/store', 'store')->name('store');
     Route::get('/userCareers/{user?}', 'user_careers')->name('careers');
     Route::get('/edit/{career}/{user?}', 'edit')->name('edit');

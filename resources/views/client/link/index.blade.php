@@ -4,10 +4,10 @@
 
     <div class="mt-5">
         <h2 class="mb-5 font-bold text-sm lg:text-base">شبکه های اجتماعی</h2>
-        <div class="grid grid-cols-2 lg:grid-cols-5 gap-3 lg:gap-4">
+        <div class="grid grid-cols-2 lg:grid-cols-8 gap-3 lg:gap-4">
             @foreach ($pages as $page)
                 <a href="{{ route('client.loadLink', [$page]) }}"
-                    class="w-full h-40 rounded-[11px] flex flex-col items-center justify-center gap-2 careers border-1 border-gray-300"
+                    class="w-full h-40 rounded-[11px] flex flex-col items-center justify-center gap-2 careers"
                     title="{{ $page->title }}">
                     <div class="w-full rounded-md overflow-hidden">
                         <img class="size-26 mx-auto rounded-[7px] object-cover"
