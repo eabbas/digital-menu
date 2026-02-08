@@ -6,7 +6,6 @@
          <div class="bg-white rounded-lg">
 
              <h2 class="text-lg font-bold text-gray-800 p-4 text-center">لیست مشتریان من</h2>
-
              <form action="{{ route('user.deleteAll') }}" method="post" class="flex flex-col gap-5">
                  @csrf
                  <div class="w-11/12 mx-auto flex flex-row justify-start gap-3 samim">
@@ -19,8 +18,8 @@
                          <input class="outline-none py-2 text-xs bg-gray-100 rounded-md px-3" type="text" name="search"
                              placeholder=" نام خانوادگی را وارد کنید" id="searchUser">
                      </div>
-                     <div
-                         class="flex text-xs justify-center items-center rounded-md bg-sky-500 text-white hover:bg-sky-600 w-[60px] cursor-pointer" onclick="searchUser()">
+                     <div class="flex text-xs justify-center items-center rounded-md bg-sky-500 text-white hover:bg-sky-600 w-[60px] cursor-pointer"
+                         onclick="searchUser()">
                          جستجو
                      </div>
                  </div>
@@ -110,11 +109,11 @@
                                  <div
                                      class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center">
                                      <span class="block w-24 lg:w-full text-xs">
-                                
-                                        
-                                       @foreach ($user->roles as $role)
-                                           {{ $role }} </br>
-                                       @endforeach
+
+
+                                         @foreach ($user->roles as $role)
+                                             {{ $role }} </br>
+                                         @endforeach
                                      </span>
                                  </div>
 
@@ -158,8 +157,8 @@
                                          </ul>
                                          <div
                                              class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                             <a href="{{ route('career.careers', [$user->id]) }}"
-                                                 class="text-sky-700">کسب و کار ها</a>
+                                             <a href="{{ route('career.careers', [$user->id]) }}" class="text-sky-700">کسب
+                                                 و کار ها</a>
                                          </div>
                                      </div>
 
@@ -186,7 +185,7 @@
              });
 
              $.ajax({
-                 url: "{{ route('user.search') }}",
+                 url: "{{ route('user.customerSearch') }}",
                  type: 'POST',
                  dataType: "json",
                  data: {
@@ -197,6 +196,13 @@
                      let userInfo = document.getElementById("userInfo")
                      userInfo.innerHTML = ``
                      users.forEach((user, index) => {
+                        let roles = user.roles
+                        let roleTitle = ""
+                        roles.forEach(role=>{
+                            console.log(role)
+                            roleTitle += role
+                            roleTitle += "</br>"
+                        })
                          let info = document.createElement("div")
                          info.innerHTML = `  <div
                                     class="w-full flex flex-row lg:grid lg:grid-cols-11 items-center divide-x divide-[#f1f1f4]">
@@ -226,6 +232,10 @@
                                     <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
                                         <span class="block w-20 lg:w-full">${user.phoneNumber}</span>
+                                    </div>
+                                    <div
+                                        class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
+                                        <span class="block w-20 lg:w-full text-xs">${roleTitle}</span>
                                     </div>
                                     
                               

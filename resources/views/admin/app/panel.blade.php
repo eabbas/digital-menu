@@ -10,9 +10,7 @@
     <link rel="shortcut icon" href="{{ asset('storage/images/icon.png') }}" type="image/png">
     <title>@yield('title')</title>
 </head>
-
 <body>
-
     <div class="w-full flex flex-row">
         <div class="hidden lg:block lg:w-[265px] bg-[#0D0E12] fixed z-50 right-0 top-0 h-dvh px-3 text-sm">
             <div class="w-full">

@@ -75,6 +75,7 @@ Route::group([
     Route::post('/search', 'search')->name('search');
     Route::post('/checkFromMenu', 'checkFromMenu')->name('checkFromMenu')->withoutMiddleware([UserMiddleware::class]);
     Route::post('/setAddress', 'setAddress')->name('setAddress');
+    Route::post('/customerSearch', 'customerSearch')->name('customerSearch');
     Route::get('/customers', 'myUsers')->name('myUsers');
 });
 

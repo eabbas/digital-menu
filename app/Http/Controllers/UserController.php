@@ -293,7 +293,51 @@ class UserController extends Controller
 
     public function search(Request $request)
     {
-        $users = User::where('family', $request->key)->get();
+        $users = User::where('name', 'like', '%' . $request->key . '%')->orWhere('family', 'like', '%' . $request->key . '%')->get();
+        foreach ($users as $user) {
+            $rolesArray = [];
+            foreach ($user->role as $role) {
+                if ($role->title == 'admin') {
+                    $rolesArray[] = 'ادمین';
+                }
+                if ($role->title == 'admin2') {
+                    $rolesArray[] = 'ادمین2';
+                }
+                if ($role->title == 'career') {
+                    $rolesArray[] = 'صاحب کسب و کار';
+                }
+                if ($role->title == 'general') {
+                    $rolesArray[] = 'کاربر عادی';
+                }
+            }
+            $user->setAttribute('roles', $rolesArray);
+        }
+
+        return response()->json($users);
+    }
+    public function customerSearch(Request $request)
+    {
+        $users = Auth::user()->customers()->where(function($query) use ($request){
+            $query->where('name', 'like', '%' . $request->key . '%')->orWhere('family', 'like', '%' . $request->key . '%');
+        })->get();
+        foreach ($users as $user) {
+            $rolesArray = [];
+            foreach ($user->role as $role) {
+                if ($role->title == 'admin') {
+                    $rolesArray[] = 'ادمین';
+                }
+                if ($role->title == 'admin2') {
+                    $rolesArray[] = 'ادمین2';
+                }
+                if ($role->title == 'career') {
+                    $rolesArray[] = 'صاحب کسب و کار';
+                }
+                if ($role->title == 'general') {
+                    $rolesArray[] = 'کاربر عادی';
+                }
+            }
+            $user->setAttribute('roles', $rolesArray);
+        }
         return response()->json($users);
     }
 
