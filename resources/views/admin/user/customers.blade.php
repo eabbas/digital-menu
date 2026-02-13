@@ -23,7 +23,7 @@
                          جستجو
                      </div>
                  </div>
-                 <div class="w-10/12 mx-auto flex flex-row justify-between items-center pb-4">
+                 <div class="w-11/12 mx-auto flex flex-row justify-between items-center pb-4">
                      <div class="flex flex-row items-center gap-3">
                          <input type="checkbox" id="all" onchange="checkAll()">
                          <label for="all" class="text-gray-700 text-xs">انتخاب همه</label>

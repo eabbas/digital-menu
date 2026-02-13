@@ -9,7 +9,7 @@
 
              <form action="{{ route('user.deleteAll') }}" method="post" class="flex flex-col gap-5">
                  @csrf
-                 <div class="w-10/12 mx-auto flex flex-row justify-start gap-3 samim">
+                 <div class="w-11/12 mx-auto flex flex-row justify-start gap-3 samim">
                      <div class="bg-white flex flex-row rounded-md items-center gap-2">
                          {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                              stroke="currentColor" class="size-6">
@@ -192,15 +192,10 @@
                      console.log(users)
                      let userInfo = document.getElementById("userInfo")
                      userInfo.innerHTML = ``
-                     console.log('-------------------------------------')
-                     console.log(users[0])
-
                      users.forEach((user, index) => {
-                         console.log(user)
                          let roles = user.roles
                          let roleTitle = ""
                          roles.forEach(role => {
-                             console.log(role)
                              roleTitle += role
                              roleTitle += "</br>"
                          })
