@@ -17,6 +17,15 @@
 </head>
 
 <body class="bg-[#ffffff]">
+
+    <div class="w-full items-center py-2">
+        <div class="w-11/12 mx-auto flex flex-row justify-between">
+            <a href="#" class="text-sm font-bold text-gray-600 w-20 flex justify-center py-1 border-1 border-gray-300 rounded-sm">تستی</a>
+            <a href="#" class="text-sm font-bold text-gray-600 w-20 flex justify-center py-1 border-1 border-gray-300 rounded-sm">امتیاز</a>
+            <a href="#" class="text-sm font-bold text-gray-600 w-20 flex justify-center py-1 border-1 border-gray-300 rounded-sm">خرید گروهی</a>
+        </div>
+    </div>
+
     <!-- مودال ساده -->
     <div id="comingSoon" class="hidden fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
         <div class="bg-white rounded-xl shadow-xl max-w-xs w-full p-5 relative transform transition-all duration-300 scale-95 opacity-0"

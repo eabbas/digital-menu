@@ -10,6 +10,7 @@
     <link rel="shortcut icon" href="{{ asset('storage/images/icon.png') }}" type="image/png">
     <title>@yield('title')</title>
 </head>
+
 <body>
     <div class="w-full flex flex-row">
         <div class="hidden lg:block lg:w-[265px] bg-[#0D0E12] fixed z-50 right-0 top-0 h-dvh px-3 text-sm">
@@ -150,7 +151,6 @@
                                     ایجاد کسب و کار برای دیگری
                                 </a>
                             </li>
-                         
                         @endif
                         <li
                             class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('career.create')) bg-gray-700 @endif">
@@ -239,7 +239,8 @@
                         <li
                             class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('pages.social_list')) bg-gray-700 @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('pages.social_list') }}" class="text-white py-1 block"> لیست صفحه های من </a>
+                            <a href="{{ route('pages.social_list') }}" class="text-white py-1 block"> لیست صفحه های من
+                            </a>
                         </li>
                         @if (Auth::user()->role[0]->title == 'admin')
                             <li
@@ -272,9 +273,15 @@
                 </div>
                 <div class="dashboard">
                     <div
-                        class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if (Route::is('user.list') || Route::is('user.create_user') || Route::is('user.myUsers') || Route::is('user.requestList')) bg-gray-700 @endif">
+                        class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if (Route::is('user.list') ||
+                                Route::is('user.create_user') ||
+                                Route::is('user.myUsers') ||
+                                Route::is('user.requestList')) bg-gray-700 @endif">
                         <svg xmlns="http://www.w3.org/2000/svg"
-                            class="size-4 transition-all duration-200 @if (Route::is('user.list') || Route::is('user.create_user') || Route::is('user.myUsers') || Route::is('user.requestList')) rotate-180 @endif"
+                            class="size-4 transition-all duration-200 @if (Route::is('user.list') ||
+                                    Route::is('user.create_user') ||
+                                    Route::is('user.myUsers') ||
+                                    Route::is('user.requestList')) rotate-180 @endif"
                             viewBox="0 0 448 512">
                             <path fill="white"
                                 d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z" />
@@ -288,7 +295,10 @@
                         </div>
                     </div>
                     <ul
-                        class="my-1 pr-3 transition-all duration-500 overflow-hidden @if (Route::is('user.list') || Route::is('user.create_user') || Route::is('user.myUsers') || Route::is('user.requestList')) max-h-[500px] @else max-h-0 @endif">
+                        class="my-1 pr-3 transition-all duration-500 overflow-hidden @if (Route::is('user.list') ||
+                                Route::is('user.create_user') ||
+                                Route::is('user.myUsers') ||
+                                Route::is('user.requestList')) max-h-[500px] @else max-h-0 @endif">
                         <li
                             class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('user.list')) bg-gray-700 @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
@@ -317,7 +327,7 @@
                                 class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('user.requestList')) bg-gray-700 @endif">
                                 <span class="size-1 bg-white rounded-sm"></span>
                                 <a href="{{ route('user.requestList') }}" class="text-white py-1 block">
-                                   لیست درخواست ها
+                                    لیست درخواست ها
                                 </a>
                             </li>
                         @endif
@@ -397,7 +407,6 @@
                     </ul>
                 </div>
                 {{-- end-contactUs --}}
-
                 <div class="dashboard">
                     <div
                         class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if (Route::is('aboutUs.*')) bg-gray-700 @endif">
@@ -759,7 +768,7 @@
                                             <li>
                                                 <a href="{{ route('user.requestList') }}"
                                                     class="block text-gray-700 py-2 text-md">
-                                                   لیست درخواست ها
+                                                    لیست درخواست ها
                                                 </a>
                                             </li>
                                         @endif
@@ -802,7 +811,7 @@
                                         <li>
                                             <a href="{{ route('aboutUs.list') }}"
                                                 class="block text-gray-700 py-2 text-md">
-                                                 درباره ما
+                                                درباره ما
                                             </a>
                                         </li>
 
@@ -824,7 +833,7 @@
                                         <li>
                                             <a href="{{ route('contactUs.list') }}"
                                                 class="block text-gray-700 py-2 text-md">
-                                                 ارتباط با ما
+                                                ارتباط با ما
                                             </a>
                                         </li>
 
