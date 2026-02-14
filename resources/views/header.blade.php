@@ -20,9 +20,9 @@
 
     <div class="w-full items-center py-2">
         <div class="w-11/12 mx-auto flex flex-row justify-between">
-            <a href="#" class="text-sm font-bold text-gray-600 w-20 flex justify-center py-1 border-1 border-gray-300 rounded-sm">تستی</a>
-            <a href="#" class="text-sm font-bold text-gray-600 w-20 flex justify-center py-1 border-1 border-gray-300 rounded-sm">امتیاز</a>
-            <a href="#" class="text-sm font-bold text-gray-600 w-20 flex justify-center py-1 border-1 border-gray-300 rounded-sm">خرید گروهی</a>
+            <a href="#" class="text-sm font-bold text-gray-600 w-20 flex justify-center py-1 border-b-1 border-gray-300">تستی</a>
+            <a href="#" class="text-sm font-bold text-gray-600 w-20 flex justify-center py-1 border-b-1 border-gray-300">امتیاز</a>
+            <a href="#" class="text-sm font-bold text-gray-600 w-20 flex justify-center py-1 border-b-1 border-gray-300">خرید گروهی</a>
         </div>
     </div>
 
