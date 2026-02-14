@@ -72,7 +72,7 @@
                         <div class="fixed w-full h-dvh bg-black/50 top-0 right-0 opacity-0 invisible transition-all duration-500 backdrop-blur-xs"
                             id="rules">
                             <div
-                                class="w-2/3 h-5/6 lg:h-2/3 bg-white mx-auto mt-10 lg:mt-20 rounded-md transition-all duration-300 delay-200 opacity-0 scale-75 relative">
+                                class="w-10/12 lg:w-2/3 h-5/6 lg:h-2/3 bg-white mx-auto mt-10 lg:mt-20 rounded-md transition-all duration-300 delay-200 opacity-0 scale-75 relative">
                                 <div
                                     class="w-full py-3 text-center text-md font-medium sticky top-0 right-0 bg-white rounded-md">
                                     قوانین و مقررات

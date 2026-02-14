@@ -47,6 +47,7 @@ Route::post('/set_password', [UserController::class, 'set_password'])->name('set
 Route::get('/reset_password/{user}', [UserController::class, 'reset_password'])->name('reset_password');
 Route::post('/save_password', [UserController::class, 'save_password'])->name('save_password');
 Route::post('/check', [UserController::class, 'checkAuth'])->name('checkAuth');
+Route::post('/loginWithActivationCode', [UserController::class, 'loginWithActivationCode'])->name('loginWithActivationCode');
 
 Route::group([
     'prefix' => 'users',
