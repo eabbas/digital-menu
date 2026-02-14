@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
     <script src="{{ asset('assets/js/tailwind.js') }}"></script>
     <script src="{{ asset('assets/js/html5-qrcode.min.js') }}"></script>
@@ -13,6 +14,19 @@
 </head>
 
 <body>
+
+    <div class="absolute top-0 opacity-0 invisible right-1/2 translate-x-1/2 w-2/3 lg:w-1/3 bg-white rounded-lg shadow-md transition-all duration-500"
+        id="message">
+        <div class="relative">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                class="size-4 absolute top-1/2 -translate-y-1/2 right-3 cursor-pointer" onclick="showMessage('close')"
+                viewBox="0 0 384 512">
+                <path
+                    d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+            </svg>
+
+        </div>
+    </div>
 
     <div class="w-full flex flex-col justify-start items-center md:flex-row-reverse">
         <div class="flex justify-center max-sm:h-30 max-md:h-35 md:h-dvh md:w-4/12 lg:w-5/12 xl:w-6/12 bg-[#eb3254]">
@@ -23,10 +37,10 @@
                 </a>
             </div>
         </div>
-        @if($message)
-        <div class="w-8/12 mx-auto mt-5 lg:mt-0 bg-red-500 rounded-sm py-3 text-white text-center font-bold">
-            {{ $message }}
-        </div>
+        @if ($message)
+            <div class="w-8/12 mx-auto mt-5 lg:mt-0 bg-red-500 rounded-sm py-3 text-white text-center font-bold">
+                {{ $message }}
+            </div>
         @endif
         <div
             class="w-10/12 md:w-8/12 bg-white h-full mt-10 lg:mt-0 flex flex-col max-md:justify-start justify-center items-center px-4">
@@ -38,14 +52,163 @@
                         @csrf
                         <input type="number"
                             class="placeholder-gray-400 focus:border-1 focus:border-[#eb3254] p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] focus:outline-none w-full"
-                            name="phoneNumber" placeholder="شماره تلفن" required>
-                        <input type="password"
-                            class="placeholder-gray-400 focus:border-1 focus:border-[#eb3254] p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] focus:outline-none w-full"
-                            name="password" placeholder="کلمه عبور" required>
-                        <div class="w-full text-center">
+                            name="phoneNumber" id="phoneNumber" placeholder="شماره تلفن" required>
+
+
+                        <div class="w-full" id="login">
+                            <div class="w-full flex flex-row items-center gap-3">
+                                <input type="number"
+                                    class="w-8/12 p-2 placeholder-gray-400 focus:border-[#eb3254] md:p-[9px] rounded-[7px] border-1 border-[#DBDFE9] outline-none"
+                                    name="code" placeholder="کد" required id="code">
+                                <button type="button"
+                                    class="w-4/12 text-xs lg:text-base h-full p-2 md:p-[9px] rounded-[7px] bg-[#eb3254] hover:bg-[#d52b4a] text-white cursor-pointer"
+                                    onclick="sendCode()" id="countDown">ارسال کد </button>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+                        <div class="w-full flex flex-row items-center justify-between" id="loginWay">
                             <a href="{{ route('forget_password') }}"
                                 class="text-[#eb3254] inline-block max-md:my-1 my-4 max-md:text-sm">فراموشی رمز عبور</a>
+                            <span class="text-[#eb3254] inline-block max-md:my-1 my-4 max-md:text-sm cursor-pointer"
+                                onclick="loginWithPassKey(this)">ورود با رمز عبور</span>
                         </div>
+
+                        <script>
+                            let phoneNumber = document.getElementById('phoneNumber')
+
+
+                            let message = document.getElementById('message')
+                            let code = document.getElementById('code')
+                            let element = document.createElement('div')
+                            element.classList = "text-sm font-bold flex flex-row items-center justify-center py-3 gap-2 lg:gap-3"
+
+                            function sendCode() {
+
+                                let phoneNumber = document.getElementById('phoneNumber')
+                                if (phoneNumber.value == "") {
+                                    showMessage('open')
+                                    element.innerHTML = `
+                        <span class="text-red-500">!</span>
+                        <span>لطفا شماره تلفن را وارد کنید</span>
+                    `
+                                    message.children[0].appendChild(element)
+                                    setTimeout(() => {
+                                        showMessage('close')
+                                    }, 2000)
+                                } else {
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                        }
+                                    })
+                                    $.ajax({
+                                        url: "{{ route('loginWithActivationCode') }}",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: {
+                                            'phoneNumber': phoneNumber.value,
+                                        },
+                                        success: function(data) {
+                                            console.log(data)
+                                            if (!data) {
+                                                counter()
+                                                showMessage('open')
+                                                element.innerHTML = `
+                                <span>✅</span>
+                                <span class="text-shadw-lg">کد ارسال شد</span>
+                            `
+                                                message.children[0].appendChild(element)
+                                                setTimeout(() => {
+                                                    showMessage('close')
+                                                }, 2000)
+                                            } else {
+                                                showMessage('open')
+                                                element.innerHTML = `
+                                <span class="text-red-500">کاربر قبلا با این شماره ثبت نام کرده است!</span>
+                            `
+                                                message.children[0].appendChild(element)
+                                                setTimeout(() => {
+                                                    showMessage('close')
+                                                    // location.assign("{{ route('login') }}")
+                                                }, 2000)
+                                            }
+                                        },
+                                        error: function() {
+                                            showMessage('open')
+                                            element.innerHTML = `
+                            <span>❌</span>
+                            <span class="text-shadw-lg">خطا در دریافت اطلاعات!</span>
+                        `
+                                            message.children[0].appendChild(element)
+                                            setTimeout(() => {
+                                                showMessage('close')
+                                            }, 2500)
+                                        }
+                                    })
+                                }
+                            }
+
+                            let login = document.getElementById('login')
+                            let loginWay = document.getElementById('loginWay')
+
+                            function loginWithPassKey(el) {
+                                login.innerHTML = `
+                                    <input type="password"
+                                        class="placeholder-gray-400 focus:border-1 focus:border-[#eb3254] p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] focus:outline-none w-full"
+                                        name="password" placeholder="کلمه عبور" required>
+                                `
+                                el.parentElement.children[1].remove()
+                                let span = document.createElement('span')
+                                span.classList = "text-[#eb3254] inline-block max-md:my-1 my-4 max-md:text-sm cursor-pointer"
+                                span.setAttribute('onclick', 'loginWithActivationCode(this)')
+                                span.innerText = "ورود با کد فعال ساز"
+                                loginWay.appendChild(span)
+                            }
+
+                            function loginWithActivationCode(el) {
+                                login.innerHTML = `
+                                    <div class="w-full flex flex-row items-center gap-3">
+                                        <input type="number"
+                                            class="w-8/12 p-2 placeholder-gray-400 focus:border-[#eb3254] md:p-[9px] rounded-[7px] border-1 border-[#DBDFE9] outline-none"
+                                            name="code" placeholder="کد" required id="code">
+                                        <button type="button"
+                                            class="w-4/12 text-xs lg:text-base h-full p-2 md:p-[9px] rounded-[7px] bg-[#eb3254] hover:bg-[#d52b4a] text-white cursor-pointer"
+                                            onclick="sendCode()" id="countDown">ارسال کد </button>
+                                    </div>
+                                `
+                                el.parentElement.children[1].remove()
+                                let span = document.createElement('span')
+                                span.classList = "text-[#eb3254] inline-block max-md:my-1 my-4 max-md:text-sm cursor-pointer"
+                                span.setAttribute('onclick', 'loginWithPassKey(this)')
+                                span.innerText = "ورود با رمز عبور"
+                                loginWay.appendChild(span)
+                            }
+
+
+                            function showMessage(state) {
+                                if (state == 'open') {
+                                    message.classList.remove('top-0')
+                                    message.classList.remove('opacity-0')
+                                    message.classList.remove('invisible')
+                                    message.classList.add('top-2/10')
+                                }
+                                if (state == 'close') {
+                                    message.classList.remove('top-2/10')
+                                    message.classList.add('top-0')
+                                    message.classList.add('opacity-0')
+                                    message.classList.add('invisible')
+                                }
+                            }
+                        </script>
                         <button
                             class="focus:bg-[#eb3254] hover:bg-[#eb3254] transition-all duration-400 text-center w-full bg-[#eb3254] p-2 md:p-3 rounded-[10px] text-white cursor-pointer">ورود</button>
                         <div class="w-full text-center">
@@ -59,31 +222,35 @@
             </div>
         </div>
     </div>
-<div class="fixed bg-black/50 w-full h-full top-0 right-0 flex justify-center items-center invisible opacity-0 transition-all duration-300 z-50" id="popupQr">  
-                <div class="w-9/12 h-1/2 rounded-sm flex justify-center items-center p-5 transition-all duration-300 scale-95 relative">
-                    <!--loading scan-->
-                    <div class="absolute w-full h-full bg-white flex flex-row items-center justify-center invisible opacity-0 rounded-md" id="loading"></div>
-                    <!--loading scan  end-->
-                    <div class="p-3 rounded-full bg-white absolute top-1 right-1 z-50">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" onclick="scanQr('close')" viewBox="0 0 384 512">
-                        <path fill="red"
-                            d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
-                    </svg>
-                    </div>
-                    <div id="reader"></div>
-                </div>
+    <div class="fixed bg-black/50 w-full h-full top-0 right-0 flex justify-center items-center invisible opacity-0 transition-all duration-300 z-50"
+        id="popupQr">
+        <div
+            class="w-9/12 h-1/2 rounded-sm flex justify-center items-center p-5 transition-all duration-300 scale-95 relative">
+            <!--loading scan-->
+            <div class="absolute w-full h-full bg-white flex flex-row items-center justify-center invisible opacity-0 rounded-md"
+                id="loading"></div>
+            <!--loading scan  end-->
+            <div class="p-3 rounded-full bg-white absolute top-1 right-1 z-50">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-4" onclick="scanQr('close')" viewBox="0 0 384 512">
+                    <path fill="red"
+                        d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                </svg>
             </div>
-                  <style>
-                #reader{
-                     width: 100%;
-                    height: 100%;
-                }
-                #reader>video{
-                    width: 100%;
-                    height: 100%;
-                }
-            </style>
-            
+            <div id="reader"></div>
+        </div>
+    </div>
+    <style>
+        #reader {
+            width: 100%;
+            height: 100%;
+        }
+
+        #reader>video {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
     <div class="lg:hidden w-full fixed bottom-0 bg-white right-0">
         <div class="w-full flex flex-row justify-center">
             <ul
@@ -91,7 +258,8 @@
                 <li>
                     {{-- category --}}
                     <a href="{{ route('home') }}"
-                        class="size-10 flex justify-center items-center rounded-full @if (Route::is('home')) bg-[#eb3254] @endif" id="homeIcon">
+                        class="size-10 flex justify-center items-center rounded-full @if (Route::is('home')) bg-[#eb3254] @endif"
+                        id="homeIcon">
                         <?xml version="1.0" encoding="UTF-8"?>
                         <svg xmlns="http://www.w3.org/2000/svg"
                             class="size-5 @if (Route::is('home')) fill-white @endif" id="Layer_1"
@@ -138,13 +306,15 @@
                     </a>
                     {{-- ecommerce end --}}
                 </li>
-               
+
                 <li>
                     <a href="{{ route('user.profile') }}"
-                        class="size-10 flex justify-center items-center rounded-full @if (Route::is('login') || Route::is('signup') || Route::is('reset_password') || Route::is('forget_password')) bg-[#eb3254] @endif" id="userIcon">
+                        class="size-10 flex justify-center items-center rounded-full @if (Route::is('login') || Route::is('signup') || Route::is('reset_password') || Route::is('forget_password')) bg-[#eb3254] @endif"
+                        id="userIcon">
                         <?xml version="1.0" encoding="UTF-8"?>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 @if (Route::is('login') || Route::is('signup') || Route::is('reset_password') || Route::is('forget_password')) fill-white @else fill-black @endif" id="Outline"
-                            viewBox="0 0 24 24" width="512" height="512">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="size-6 @if (Route::is('login') || Route::is('signup') || Route::is('reset_password') || Route::is('forget_password')) fill-white @else fill-black @endif"
+                            id="Outline" viewBox="0 0 24 24" width="512" height="512">
                             <path
                                 d="M12,12A6,6,0,1,0,6,6,6.006,6.006,0,0,0,12,12ZM12,2A4,4,0,1,1,8,6,4,4,0,0,1,12,2Z" />
                             <path
@@ -153,7 +323,7 @@
 
                     </a>
                 </li>
-                
+
             </ul>
         </div>
     </div>
@@ -270,15 +440,17 @@
         let popupQr = document.getElementById('popupQr')
 
         function scanQr(state) {
-        const html5QrCode = new Html5Qrcode("reader")
-        
+            const html5QrCode = new Html5Qrcode("reader")
+
             if (state == 'open') {
-                if("{{ Route::is('home') }}"){
-                homeIcon.classList.remove('bg-[#eb3254]')
-                homeIcon.children[0].classList.remove('fill-white')
-                homeIcon.children[0].classList.add('fill-black')
+                if ("{{ Route::is('home') }}") {
+                    homeIcon.classList.remove('bg-[#eb3254]')
+                    homeIcon.children[0].classList.remove('fill-white')
+                    homeIcon.children[0].classList.add('fill-black')
                 }
-                if("{{ Route::is('login') || Route::is('signup') || Route::is('reset_password') || Route::is('forget_password') || Route::is('user.*') }}"){
+                if (
+                    "{{ Route::is('login') || Route::is('signup') || Route::is('reset_password') || Route::is('forget_password') || Route::is('user.*') }}"
+                ) {
                     userIcon.classList.remove('bg-[#eb3254]')
                     userIcon.children[0].classList.remove('fill-white')
                     userIcon.children[0].classList.add('fill-black')
@@ -320,12 +492,14 @@
                 qrIcon.children[0].classList.remove('fill-white')
                 qrIcon.classList.remove('bg-[#eb3254]')
                 qrIcon.children[0].classList.add('fill-black')
-                if("{{ Route::is('home') }}"){
+                if ("{{ Route::is('home') }}") {
                     homeIcon.children[0].classList.remove('fill-black')
                     homeIcon.classList.add('bg-[#eb3254]')
                     homeIcon.children[0].classList.add('fill-white')
                 }
-                if("{{ Route::is('login') || Route::is('signup') || Route::is('reset_password') || Route::is('forget_password') || Route::is('user.*') }}"){
+                if (
+                    "{{ Route::is('login') || Route::is('signup') || Route::is('reset_password') || Route::is('forget_password') || Route::is('user.*') }}"
+                ) {
                     userIcon.children[0].classList.remove('fill-black')
                     userIcon.classList.add('bg-[#eb3254]')
                     userIcon.children[0].classList.add('fill-white')
@@ -337,10 +511,10 @@
             }
 
         }
-        
-        
-        
-        function openUserOptions(state){
+
+
+
+        function openUserOptions(state) {
             if (state == 'open') {
                 popupUser.classList.remove('-bottom-full')
                 popupUser.classList.add('bottom-0')

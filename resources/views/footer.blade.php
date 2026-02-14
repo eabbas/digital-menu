@@ -84,6 +84,7 @@
                 <li>
                     <a href="{{ route('user.profile') }}"
                         class="size-10 flex justify-center items-center rounded-full @if (Route::is('login') || Route::is('signup') || Route::is('reset_password') || Route::is('forget_password')) bg-[#eb3254] @endif" id="userIcon">
+                        @if (!Auth::check())
                         <?xml version="1.0" encoding="UTF-8"?>
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-6 @if (Route::is('login') || Route::is('signup') || Route::is('reset_password') || Route::is('forget_password')) fill-white @else fill-black @endif" id="Outline"
                             viewBox="0 0 24 24" width="512" height="512">
@@ -92,6 +93,9 @@
                             <path
                                 d="M12,14a9.01,9.01,0,0,0-9,9,1,1,0,0,0,2,0,7,7,0,0,1,14,0,1,1,0,0,0,2,0A9.01,9.01,0,0,0,12,14Z" />
                         </svg>
+                        @else
+                        <img src="{{ asset('storage/'.Auth::user()->main_image) }}" class="size-10 rounded-full" alt="profile image">
+                        @endif
 
                     </a>
                 </li>

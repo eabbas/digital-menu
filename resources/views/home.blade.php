@@ -6,9 +6,9 @@
 
 <div class="w-full items-center py-2 border-b border-gray-300">
         <div class="w-11/12 mx-auto flex flex-row justify-between">
-            <a href="#" class="text-sm font-bold text-gray-600 w-20 flex justify-center py-1">تستی</a>
-            <a href="#" class="text-sm font-bold text-gray-600 w-20 flex justify-center py-1">امتیاز</a>
-            <a href="#" class="text-sm font-bold text-gray-600 w-20 flex justify-center py-1">خرید گروهی</a>
+            <a href="#" class="text-sm font-bold text-gray-600 w-20 flex justify-center py-1 border-1 border-gray-300 rounded-lg">انتخاب شهر</a>
+            <a href="#" class="text-sm font-bold text-gray-600 w-20 flex justify-center py-1 border-1 border-gray-300 rounded-lg">امتیاز</a>
+            <a href="#" class="text-sm font-bold text-gray-600 w-20 flex justify-center py-1 border-1 border-gray-300 rounded-lg">خرید گروهی</a>
         </div>
     </div>
 
@@ -25,40 +25,46 @@
                     خدمات
                 </h2>
                 <div class="w-full grid grid-cols-3 gap-3 mt-7">
-                    <a href="#" class="flex flex-col items-center gap-2">
+                    <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
                         <img src="{{ asset('assets/img/printer.png') }}" class="size-10" alt="">
                         <span class="text-sm font-bold text-gray-800">
                             چاپ
                         </span>
                     </a>
-                    <a href="#" class="flex flex-col items-center gap-2">
+                    <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
                         <img src="{{ asset('assets/img/website.png') }}" class="size-10" alt="">
                         <span class="text-sm font-bold text-gray-800">
                             طراحی سایت
                         </span>
                     </a>
-                    <a href="#" class="flex flex-col items-center gap-2">
+                    <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
                         <img src="{{ asset('assets/img/globe.png') }}" class="size-10" alt="">
                         <span class="text-sm font-bold text-gray-800">
                             زبان
                         </span>
                     </a>
-                    <a href="#" class="flex flex-col items-center gap-2">
+                    <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
                         <img src="{{ asset('assets/img/food.png') }}" class="size-10" alt="">
                         <span class="text-sm font-bold text-gray-800">
                             سفارش غذا
                         </span>
                     </a>
-                    <a href="#" class="flex flex-col items-center gap-2">
+                    <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
                         <img src="{{ asset('assets/img/pc.png') }}" class="size-10" alt="">
                         <span class="text-sm font-bold text-gray-800">
                             خدمات کامپیوتر
                         </span>
                     </a>
-                    <a href="#" class="flex flex-col items-center gap-2">
+                    <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
                         <img src="{{ asset('assets/img/simCard.png') }}" class="size-10" alt="">
                         <span class="text-sm font-bold text-gray-800">
                             اینترنت و شارژ
+                        </span>
+                    </a>
+                    <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
+                        <img src="{{ asset('assets/img/wall.png') }}" class="size-10" alt="">
+                        <span class="text-sm font-bold text-gray-800">
+                           دیوار اون شهر
                         </span>
                     </a>
                 </div>
@@ -68,25 +74,25 @@
                    صفحه خودتو بساز
                 </h2>
                 <div class="w-full grid grid-cols-4 gap-3 mt-7">
-                    <a href="#" class="flex flex-col items-center gap-2">
+                    <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
                         <img src="{{ asset('assets/img/shop.png') }}" class="size-10" alt="">
                         <span class="text-sm font-bold text-gray-800">
-                           فروشگاه
+                           فروشگاهی
                         </span>
                     </a>
-                    <a href="#" class="flex flex-col items-center gap-2">
+                    <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
                         <img src="{{ asset('assets/img/introduce.png') }}" class="size-10" alt="">
                         <span class="text-sm font-bold text-gray-800">
                            معرفی
                         </span>
                     </a>
-                    <a href="#" class="flex flex-col items-center gap-2">
+                    <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
                         <img src="{{ asset('assets/img/educate.png') }}" class="size-10" alt="">
                         <span class="text-sm font-bold text-gray-800">
                            دوره
                         </span>
                     </a>
-                    <a href="#" class="flex flex-col items-center gap-2">
+                    <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
                         <img src="{{ asset('assets/img/menu.png') }}" class="size-10" alt="">
                         <span class="text-sm font-bold text-gray-800">
                            منو دیجیتال
