@@ -27,7 +27,7 @@
                             d="M256 464c7.4 0 27-7.2 47.6-48.4c8.8-17.7 16.4-39.2 22-63.6H186.4c5.6 24.4 13.2 45.9 22 63.6C229 456.8 248.6 464 256 464zM178.5 304h155c1.6-15.3 2.5-31.4 2.5-48s-.9-32.7-2.5-48h-155c-1.6 15.3-2.5 31.4-2.5 48s.9 32.7 2.5 48zm7.9-144H325.6c-5.6-24.4-13.2-45.9-22-63.6C283 55.2 263.4 48 256 48s-27 7.2-47.6 48.4c-8.8 17.7-16.4 39.2-22 63.6zm195.3 48c1.5 15.5 2.2 31.6 2.2 48s-.8 32.5-2.2 48h76.7c3.6-15.4 5.6-31.5 5.6-48s-1.9-32.6-5.6-48H381.8zm58.8-48c-21.4-41.1-56.1-74.1-98.4-93.4c14.1 25.6 25.3 57.5 32.6 93.4h65.9zm-303.3 0c7.3-35.9 18.5-67.7 32.6-93.4c-42.3 19.3-77 52.3-98.4 93.4h65.9zM53.6 208c-3.6 15.4-5.6 31.5-5.6 48s1.9 32.6 5.6 48h76.7c-1.5-15.5-2.2-31.6-2.2-48s.8-32.5 2.2-48H53.6zM342.1 445.4c42.3-19.3 77-52.3 98.4-93.4H374.7c-7.3 35.9-18.5 67.7-32.6 93.4zm-172.2 0c-14.1-25.6-25.3-57.5-32.6-93.4H71.4c21.4 41.1 56.1 74.1 98.4 93.4zM256 512A256 256 0 1 1 256 0a256 256 0 1 1 0 512z" />
                     </svg>
                     <a href="{{ route('home') }}" class="block w-full text-white py-1" target="_blank">
-                       رفتن به سایت
+                        رفتن به سایت
                     </a>
                 </div>
                 <div
@@ -554,7 +554,7 @@
                             <div class="pt-2 flex flex-col">
                                 <div>
                                     <a href="{{ route('home') }}" class="block text-gray-700 py-2 text-md">
-                                       رفتن به سایت
+                                        رفتن به سایت
                                     </a>
                                 </div>
                                 @if (!Auth::user()->email)
@@ -575,7 +575,7 @@
 
                             <!--<div class="pt-3">-->
                             <!--    <h3 class="text-md font-bold text-gray-800 mb-1.5">فروشگاه</h3>-->
-                            <!--    <ul class="pr-3.5">-->
+                            <!--    <ul class="transition-all duration-300 overflow-hidden max-h-0">-->
                             <!--        <li>-->
                             <!--            <a href="{{ route('ecomm.create') }}"-->
                             <!--                class="block text-gray-700 py-2 text-md">-->
@@ -642,29 +642,47 @@
 
 
                             <div class="pt-3">
-                                <h3 class="text-md font-bold text-gray-800 mb-1.5">کسب و کار ها</h3>
-                                <ul class="pr-3.5">
-                                    <li>
+                                <div
+                                    class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
+                                    <h3 class="text-md font-bold text-gray-800 mb-1.5">کسب و کار ها</h3>
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="size-4 transition-all duration-300 @if (Route::is('career.*') ||
+                                                Route::is('menu.createMenu') ||
+                                                Route::is('menu.user_menus') ||
+                                                Route::is('cc.create') ||
+                                                Route::is('cc.list')) rotate-180 @endif"
+                                        viewBox="0 0 448 512">
+                                        <path
+                                            d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z" />
+                                    </svg>
+                                </div>
+                                <ul
+                                    class="transition-all duration-300 overflow-hidden @if (Route::is('career.*') ||
+                                            Route::is('menu.createMenu') ||
+                                            Route::is('menu.user_menus') ||
+                                            Route::is('cc.create') ||
+                                            Route::is('cc.list')) max-h-[1000px] @else max-h-0 @endif">
+                                    <li class="pr-3.5 @if(Route::is('career.careers')) bg-gray-100 @endif">
                                         <a href="{{ route('career.careers') }}"
                                             class="block text-gray-700 py-2 text-md">
                                             لیست کسب و کار های من
                                         </a>
                                     </li>
                                     @if (in_array(1, $roles) || in_array(4, $roles))
-                                        <li>
+                                        <li class="pr-3.5 @if(Route::is('career.createUser')) bg-gray-100 @endif">
                                             <a href="{{ route('career.createUser') }}"
                                                 class="block text-gray-700 py-2 text-md">
                                                 ایجاد کسب و کار برای دیگری
                                             </a>
                                         </li>
                                     @endif
-                                    <li>
+                                    <li class="pr-3.5 @if(Route::is('career.createUser')) bg-gray-100 @endif">
                                         <a href="{{ route('career.create') }}"
                                             class="block text-gray-700 py-2 text-md">ایجاد کسب و کار
                                             جدید</a>
                                     </li>
                                     @if (Auth::user()->role[0]->title == 'admin')
-                                        <li>
+                                        <li class="pr-3.5 @if(Route::is('career.list')) bg-gray-100 @endif">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('career.list') }}"
                                                 class="block text-gray-700 py-2 text-md">
@@ -672,14 +690,14 @@
                                             </a>
                                         </li>
 
-                                        <li>
+                                        <li class="pr-3.5 @if(Route::is('cc.create')) bg-gray-100 @endif">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('cc.create') }}"
                                                 class="block text-gray-700 py-2 text-md">
                                                 ایجاد دسته کسب و کار
                                             </a>
                                         </li>
-                                        <li>
+                                        <li class="pr-3.5 @if(Route::is('cc.list')) bg-gray-100 @endif">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('cc.list') }}"
                                                 class="block text-gray-700 py-2 text-md">
@@ -688,7 +706,7 @@
                                         </li>
                                     @endif
                                     @if (count(Auth::user()->menus))
-                                        <li>
+                                        <li class="pr-3.5 @if(Route::is('menu.user_menus')) bg-gray-100 @endif">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('menu.user_menus', [Auth::user()]) }}"
                                                 class="block text-gray-700 py-2 text-md">
@@ -699,22 +717,30 @@
                                 </ul>
                             </div>
                             <div class="pt-3">
-                                <h3 class="text-md font-bold text-gray-800 mb-1.5">صفحه ها</h3>
-                                <ul class="pr-3.5">
-                                    <li>
+                                <div
+                                    class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
+                                    <h3 class="text-md font-bold text-gray-800 mb-1.5">صفحه ها</h3>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-300 @if(Route::is('pages.*')||Route::is('socialMedia.*')) rotate-180 @endif"
+                                        viewBox="0 0 448 512">
+                                        <path
+                                            d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z" />
+                                    </svg>
+                                </div>
+                                <ul class="transition-all duration-300 overflow-hidden @if(Route::is('pages.*')||Route::is('socialMedia.*')) max-h-[1000px] @else max-h-0 @endif">
+                                    <li class="pr-3.5 @if(Route::is('pages.create')) bg-gray-100 @endif">
                                         <a href="{{ route('pages.create') }}"
                                             class="block text-gray-700 py-2 text-md">
                                             ایجاد صفحه
                                         </a>
                                     </li>
-                                    <li>
+                                    <li class="pr-3.5 @if(Route::is('pages.social_list')) bg-gray-100 @endif">
                                         <a href="{{ route('pages.social_list') }}"
                                             class="block text-gray-700 py-2 text-md">
                                             لیست صفحه های من
                                         </a>
                                     </li>
                                     @if (Auth::user()->role[0]->title == 'admin')
-                                        <li>
+                                        <li class="pr-3.5 @if(Route::is('pages.list')) bg-gray-100 @endif">
                                             <a href="{{ route('pages.list') }}"
                                                 class="block text-gray-700 py-2 text-md">
                                                 لیست همه صفحه ها
@@ -722,14 +748,14 @@
                                         </li>
                                     @endif
                                     @if (Auth::user()->role[0]->title == 'admin')
-                                        <li>
+                                        <li class="pr-3.5 @if(Route::is('socialMedia.create')) bg-gray-100 @endif">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('socialMedia.create') }}"
                                                 class="block text-gray-700 py-2 text-md">
                                                 ایجاد شبکه اجتماعی
                                             </a>
                                         </li>
-                                        <li>
+                                        <li class="pr-3.5 @if(Route::is('socialMedia.list')) bg-gray-100 @endif">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('socialMedia.list') }}"
                                                 class="block text-gray-700 py-2 text-md">
@@ -741,22 +767,30 @@
                             </div>
                             @if (Auth::user()->role[0]->title == 'admin')
                                 <div class="pt-3">
-                                    <h3 class="text-md font-bold text-gray-800 mb-1.5">کاربران</h3>
-                                    <ul class="pr-3.5">
-                                        <li>
+                                    <div
+                                        class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
+                                        <h3 class="text-md font-bold text-gray-800 mb-1.5">کاربران</h3>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="size-4 transition-all duration-300 @if(Route::is('user.*')) rotate-180 @endif" viewBox="0 0 448 512">
+                                            <path
+                                                d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z" />
+                                        </svg>
+                                    </div>
+                                    <ul class="transition-all duration-300 overflow-hidden @if(Route::is('user.*')) max-h-[1000px] @else max-h-0 @endif">
+                                        <li class="pr-3.5 @if(Route::is('user.list')) bg-gray-100 @endif">
                                             <a href="{{ route('user.list') }}"
                                                 class="block text-gray-700 py-2 text-md">
                                                 مشاهده همه کاربران
                                             </a>
                                         </li>
-                                        <li>
+                                        <li class="pr-3.5 @if(Route::is('user.create_user')) bg-gray-100 @endif">
                                             <a href="{{ route('user.create_user') }}"
                                                 class="block text-gray-700 py-2 text-md">
                                                 ایجاد کاربر جدید
                                             </a>
                                         </li>
                                         @if (in_array(1, $roles) || in_array(4, $roles))
-                                            <li>
+                                            <li class="pr-3.5 @if(Route::is('user.myUsers')) bg-gray-100 @endif">
                                                 <a href="{{ route('user.myUsers') }}"
                                                     class="block text-gray-700 py-2 text-md">
                                                     مشتریان من
@@ -764,7 +798,7 @@
                                             </li>
                                         @endif
                                         @if (in_array(1, $roles))
-                                            <li>
+                                            <li class="pr-3.5 @if(Route::is('user.requestList')) bg-gray-100 @endif">
                                                 <a href="{{ route('user.requestList') }}"
                                                     class="block text-gray-700 py-2 text-md">
                                                     لیست درخواست ها
@@ -777,15 +811,23 @@
 
                             @if (Auth::user()->role[0]->title == 'admin')
                                 <div class="pt-3">
-                                    <h3 class="text-md font-bold text-gray-800 mb-1.5">اسلایدر</h3>
-                                    <ul class="pr-3.5">
-                                        <li>
+                                    <div
+                                        class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
+                                        <h3 class="text-md font-bold text-gray-800 mb-1.5">اسلایدر</h3>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="size-4 transition-all duration-300 @if(Route::is('slider.*')) rotate-180 @endif" viewBox="0 0 448 512">
+                                            <path
+                                                d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z" />
+                                        </svg>
+                                    </div>
+                                    <ul class="transition-all duration-300 overflow-hidden @if(Route::is('slider.*')) max-h-[1000px] @else max-h-0 @endif">
+                                        <li class="pr-3.5 @if(Route::is('slider.create')) bg-gray-100 @endif">
                                             <a href="{{ route('slider.create') }}"
                                                 class="block text-gray-700 py-2 text-md">
                                                 ایجاد اسلایدر
                                             </a>
                                         </li>
-                                        <li>
+                                        <li class="pr-3.5 @if(Route::is('slider.list')) bg-gray-100 @endif">
                                             <a href="{{ route('slider.list') }}"
                                                 class="block text-gray-700 py-2 text-md">
                                                 لیست اسلایدر ها
@@ -797,17 +839,25 @@
 
                             @if (Auth::user()->role[0]->title == 'admin')
                                 <div class="pt-3">
-                                    <h3 class="text-md font-bold text-gray-800 mb-1.5">
-                                        درباره ما
-                                    </h3>
-                                    <ul class="pr-3.5">
-                                        <li>
+                                    <div
+                                        class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
+                                        <h3 class="text-md font-bold text-gray-800 mb-1.5">
+                                            درباره ما
+                                        </h3>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="size-4 transition-all duration-300 @if(Route::is('aboutUs.*')) rotate-180 @endif" viewBox="0 0 448 512">
+                                            <path
+                                                d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z" />
+                                        </svg>
+                                    </div>
+                                    <ul class="transition-all duration-300 overflow-hidden @if(Route::is('aboutUs.*')) max-h-[1000px] @else max-h-0 @endif">
+                                        <li class="pr-3.5 @if(Route::is('aboutUs.create_edit')) bg-gray-100 @endif">
                                             <a href="{{ route('aboutUs.create_edit') }}"
                                                 class="block text-gray-700 py-2 text-md">
                                                 ایجاد درباره ما
                                             </a>
                                         </li>
-                                        <li>
+                                        <li class="pr-3.5 @if(Route::is('aboutUs.list')) bg-gray-100 @endif">
                                             <a href="{{ route('aboutUs.list') }}"
                                                 class="block text-gray-700 py-2 text-md">
                                                 درباره ما
@@ -819,17 +869,25 @@
                             @endif
                             @if (Auth::user()->role[0]->title == 'admin')
                                 <div class="pt-3">
-                                    <h3 class="text-md font-bold text-gray-800 mb-1.5">
-                                        ارتباط با ما
-                                    </h3>
-                                    <ul class="pr-3.5">
-                                        <li>
+                                    <div
+                                        class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
+                                        <h3 class="text-md font-bold text-gray-800 mb-1.5">
+                                            ارتباط با ما
+                                        </h3>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="size-4 transition-all duration-300 @if(Route::is('contactUs.*')) rotate-180 @endif" viewBox="0 0 448 512">
+                                            <path
+                                                d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z" />
+                                        </svg>
+                                    </div>
+                                    <ul class="transition-all duration-300 overflow-hidden @if(Route::is('contactUs.*')) max-h-[1000px] @else max-h-0 @endif">
+                                        <li class="pr-3.5 @if(Route::is('contactUs.create')) bg-gray-100 @endif">
                                             <a href="{{ route('contactUs.create') }}"
                                                 class="block text-gray-700 py-2 text-md">
                                                 فرم ارتباط باما
                                             </a>
                                         </li>
-                                        <li>
+                                        <li class="pr-3.5 @if(Route::is('contactUs.list')) bg-gray-100 @endif">
                                             <a href="{{ route('contactUs.list') }}"
                                                 class="block text-gray-700 py-2 text-md">
                                                 ارتباط با ما
@@ -966,6 +1024,26 @@
             });
 
         }
+
+        let parentFields = document.querySelectorAll('.parentFields')
+        parentFields.forEach((parentField) => {
+            parentField.addEventListener('click', () => {
+                if (parentField.nextElementSibling.classList.contains('max-h-0')) {
+                    parentFields.forEach(row => {
+                        row.nextElementSibling.classList.remove('max-h-[1000px]')
+                        row.children[1].classList.remove('rotate-180')
+                        row.nextElementSibling.classList.add('max-h-0')
+                    })
+                    parentField.nextElementSibling.classList.remove('max-h-0')
+                    parentField.nextElementSibling.classList.add('max-h-[1000px]')
+                    parentField.children[1].classList.add('rotate-180')
+                } else {
+                    parentField.nextElementSibling.classList.remove('max-h-[1000px]')
+                    parentField.children[1].classList.remove('rotate-180')
+                    parentField.nextElementSibling.classList.add('max-h-0')
+                }
+            })
+        })
     </script>
 
 </body>

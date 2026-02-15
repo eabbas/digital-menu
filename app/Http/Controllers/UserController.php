@@ -108,6 +108,7 @@ class UserController extends Controller
 
     public function profile()
     {
+        // dd();
         foreach (Auth::user()->role as $role) {
             if ($role->title == 'admin') {
                 $rolesArray[] = 'ادمین';

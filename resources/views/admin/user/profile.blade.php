@@ -43,7 +43,7 @@
                     <div class="flex flex-row justify-between items-center">
                         <h1 class="text-sm text-center lg:text-start lg:text-xl mt-3 lg:mt-5 font-bold mx-2">جزییات پروفایل
                         </h1>
-                        @if (!isset(Auth::user()->request))
+                        @if (!isset(Auth::user()->request) && !in_array(1, Auth::user()->role->pluck('id')->toArray()))
                             <a href="{{ route('user.request', [Auth::user()]) }}"
                                 class="font-bold text-blue-500 text-xs lg:text-sm">درخواست نمایندگی</a>
                         @endif
