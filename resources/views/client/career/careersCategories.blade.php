@@ -14,7 +14,7 @@
                 @if(count($careerCategory->careers))
                 <div class="relative careers">
                     <a href="{{ route('career.categoryCareers', [$careerCategory]) }}" 
-                    class="px-5 w-full h-40 bg-[#f2f4f7] rounded-[11px] flex flex-col items-center justify-center gap-2">
+                    class="px-5 w-full h-40 rounded-[11px] flex flex-col items-center justify-center gap-2">
                         <div class="w-full h-28 rounded-md overflow-hidden">
                             @if ($careerCategory->main_image)
                             <img class="h-full w-full rounded-lg object-cover" 

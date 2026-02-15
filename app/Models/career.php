@@ -45,16 +45,22 @@ class career extends Model
   public function custom_product_variant()
   {
     return $this->hasManyThrough(
-      custom_product_material::class ,
-      custom_product::class ,
-      'career_id' ,
+      custom_product_material::class,
+      custom_product::class,
+      'career_id',
       'custom_product_id'
     );
   }
-  public function qr_codes(){
+  public function qr_codes()
+  {
     return $this->hasMany(qr_code::class);
   }
-  public function province_city(){
+  public function province_city()
+  {
     return $this->belongsTo(province_cities::class, 'city_id');
+  }
+  public function favorites()
+  {
+    return $this->hasMany(favorites::class, 'item_id');
   }
 }

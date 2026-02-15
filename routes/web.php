@@ -30,6 +30,8 @@ use App\Http\Controllers\SiteLinkController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SocialAddressController;
 use App\Http\Controllers\SocialMediaController;
+use App\Http\Controllers\favoritesController;
+use App\Http\Controllers\FavoriteCategoriesController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Middleware\LoginMiddleware;
 use App\Http\Middleware\UserMiddleware;
@@ -363,6 +365,28 @@ Route::group([
     Route::post('/create', 'create')->name('create')->middleware([UserMiddleware::class]);
     Route::get('/favoriteCareers', 'index')->name('list');
     Route::get('/delete/{career}', 'delete')->name('delete');
+});
+
+// favorites
+Route::group([
+    'prefix' => 'favorites',
+    'controller' => favoritesController::class,
+    'as' => 'favorite.',
+], function () {
+    Route::post('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/favoriteCareers', 'index')->name('list');
+    Route::post('/delete', 'delete')->name('delete');
+});
+//favorite_categories
+Route::group([
+    'prefix' => 'favoriteCategories',
+    'controller' => FavoriteCategoriesController::class,
+    'as' => 'favoriteCategory.',
+], function () {
+    Route::post('/store', 'store')->name('store');
+    Route::get('/favoriteCareers', 'index')->name('list');
+    Route::post('/delete', 'delete')->name('delete');
 });
 
 Route::group([
