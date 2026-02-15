@@ -5,14 +5,15 @@ use App\Models\career;
 use App\Models\careerCategory;
 use App\Models\province_cities;
 use App\Models\qr_code;
-use App\Models\role;
+use App\Models\role_user;
 use App\Models\User;
+use App\Models\order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use App\Models\menu;
+use Illuminate\Support\Facades\Hash;
 
 class CareerController extends Controller
 {
@@ -29,17 +30,14 @@ class CareerController extends Controller
 
     public function store(Request $request)
     {
-        $roles = role::all();
-        if ($request->user_id) {
-            $user = user::find($request->user_id);
-        }
+        // $user = user::find($request->user_id);
+        // dd($request->all());
         $path = null;
         $bannerPath = null;
-        if (Auth::user()->role[0]->title != 'admin') {
-            $user = Auth::user();
-            $user->role[0] = $roles[1];
-            $user->save();
-        }
+        role_user::create([
+            'user_id'=>$request->user_id,
+            'role_id'=>2
+        ]);
         if (isset($request->logo)) {
             $name = $request->logo->getClientOriginalName();
             $fullName = Str::uuid() . '_' . $name;
@@ -57,7 +55,7 @@ class CareerController extends Controller
             'city_id' => $request->city,
             'address' => $request->address,
             'social_media' => $social_medias,
-            'user_id' => $user->id,
+            'user_id' => $request->user_id,
             'email' => $request->email,
             'description' => $request->description,
             'career_category_id' => $request->careerCategory,
@@ -73,11 +71,12 @@ class CareerController extends Controller
             qr_code::create([
                 'qr_path' => $fileName,
                 'career_id' => $career_id,
-                'slug' => 'qrcode/' . $career_id . '/' . $random,
-                'user_id' => Auth::id()
+                'page_path' => 'qrcode/' . $career_id . '/' . $random,
+                'slug' => $random,
+                'user_id' => $request->user_id
             ]);
         }
-        return to_route('career.careers', ['user' => $user]);
+        return to_route('career.careers', ['user' => $request->user_id]);
     }
 
     public function user_careers(user $user = null)
@@ -143,7 +142,8 @@ class CareerController extends Controller
                     qr_code::create([
                         'qr_path' => $fileName,
                         'career_id' => $career->id,
-                        'slug' => 'qrcode/' . $career->id . '/' . $random,
+                        'page_path' => 'qrcode/' . $career->id . '/' . $random,
+                        'slug' => $random,
                         'user_id' => Auth::id()
                     ]);
                     $qr_count--;
@@ -256,5 +256,39 @@ class CareerController extends Controller
     public function categoryCareers(careerCategory $careerCategory)
     {
         return view('client.career.categoryCareers', ['careerCategory' => $careerCategory]);
+    }
+
+    public function orders(career $career){
+
+        return view('admin.careers.orders', ['career'=>$career]);
+    }
+
+    public function acceptOrder(Request $request){
+        $order = order::find($request->order_id);
+        $request->state=='accept' && $order->status = 2;
+        $request->state=='send' && $order->status = 3;
+
+        $order->save();
+        return response()->json($order);
+    }
+
+    public function createUser(){
+        return view('admin.careers.createUser');
+    }
+
+    public function storeUser(Request $request){
+        $password = Hash::make($request->password);
+        $user_id = User::insertGetId([
+            'name'=>$request->name,
+            'family'=>$request->family,
+            'phoneNumber'=>$request->phoneNumber,
+            'password'=>$password,
+            'parent_id'=>Auth::id()
+        ]);
+        role_user::create([
+            'role_id'=>3,
+            'user_id'=>$user_id
+        ]);
+        return to_route('career.create', [$user_id]);
     }
 }

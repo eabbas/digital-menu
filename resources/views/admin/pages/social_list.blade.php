@@ -5,8 +5,8 @@
         <div class="pb-4">
             <h2 class="lg:text-lg font-bold text-gray-800 text-center">اطلاعات صفحه های اجتماعی من</h2>
         </div>
-        @if (count(Auth::user()->covers))
-            <form action="{{ route('covers.deleteAll') }}" method="post" class="flex flex-col gap-5">
+        @if (count(Auth::user()->pages))
+            <form action="{{ route('pages.deleteAll') }}" method="post" class="flex flex-col gap-5">
                 @csrf
                 <div class="w-full flex flex-row justify-between items-center gap-5">
                     <div class="flex flex-row items-center gap-3">
@@ -28,12 +28,12 @@
                 <div class="overflow-x-auto shadow-sm bg-white rounded-lg" style="scrollbar-width: none;">
                     <div class="min-w-full">
                         <div class="bg-white divide-y divide-[#f1f1f4]">
-                            @foreach (Auth::user()->covers as $cover)
+                            @foreach (Auth::user()->pages as $cover)
                                 @if ($cover)
                                     <div class="w-full flex flex-row justify-between shadow-sm items-center px-3">
-                                        <input type="checkbox" name="covers[]" class="check" value="{{ $cover->id }}">
-                                        <div class="lg:w-9/12">
-                                            <a href="{{ route('covers.single', [$cover]) }}"
+                                        <div class="lg:w-9/12 flex flex-row gap-3">
+                                        <input type="checkbox" name="pages[]" class="check" value="{{ $cover->id }}">
+                                            <a href="{{ route('pages.single', [$cover]) }}"
                                                 class="flex flex-row items-center gap-3 py-3">
                                                 <!-- لوگو -->
                                                 <div class="text-sm h-full flex items-center justify-center text-gray-900">
@@ -67,11 +67,11 @@
                                                                 class="text-sky-700 text-sm block py-1">مشاهده لینک ها</a>
                                                         </div>
                                                         <div class="text-center">
-                                                            <a href="{{ route('covers.edit',[$cover])}}"
+                                                            <a href="{{ route('pages.edit',[$cover])}}"
                                                                 class="text-sky-700 text-sm block py-1">ویرایش</a>
                                                         </div>
                                                         <div class="text-center">
-                                                            <a href="{{ route('covers.delete',[$cover])}}"
+                                                            <a href="{{ route('pages.delete',[$cover])}}"
                                                                 class="text-sky-700 text-sm block py-1">حذف</a>
                                                         </div>
                                                     </div>
@@ -80,16 +80,16 @@
                                         </div>
                                         <div class="lg:w-2/12 flex flex-row justify-end items-center gap-3">
                                             <div class="lg:block hidden">
-                                                <a href="{{ route('covers.edit', [$cover]) }}"
+                                                <a href="{{ route('pages.edit', [$cover]) }}"
                                                     class="text-sky-700 text-sm block py-1">ویرایش</a>
                                             </div>
                                             <div class="lg:block hidden">
-                                                <a href="{{ route('covers.delete', [$cover]) }}"
+                                                <a href="{{ route('pages.delete', [$cover]) }}"
                                                     class="text-sky-700 text-sm block py-1">حذف</a>
                                             </div>
                                             <div class="lg:hidden block ">
                                                 <div class="flex justify-center">
-                                                    <a href="{{ route('covers.edit', [$cover]) }}"
+                                                    <a href="{{ route('pages.edit', [$cover]) }}"
                                                         class="w-fit flex flex-row items-center justify-center bg-green-500 hover:bg-green-600 p-1 rounded-sm"
                                                         title="ویرایش">
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="size-4"
@@ -102,7 +102,7 @@
                                             </div>
                                             <div class="lg:hidden block">
                                                 <div class="flex justify-center">
-                                                    <a href="{{ route('covers.delete', [$cover]) }}"
+                                                    <a href="{{ route('pages.delete', [$cover]) }}"
                                                         class="w-fit flex flex-row items-center justify-center bg-red-500 hover:bg-red-600 p-1 rounded-sm"
                                                         title="حذف">
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="size-4"
@@ -114,7 +114,7 @@
                                                 </div>
                                             </div>
                                             <div>
-                                                <a href="{{ route('covers.single', [$cover]) }}"
+                                                <a href="{{ route('pages.single', [$cover]) }}"
                                                     class="inline-block p-1 lg:p-2 rounded-md bg-gray-100 cursor-pointer">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-4"
                                                         viewBox="0 0 512 512">
@@ -149,7 +149,7 @@
                 <span class="text-gray-700 text-sm lg:text-base">
                     هنوز هیچ شبکه ای ایجاد نکرده اید!
                 </span>
-                <a href="{{ route('covers.create') }}" class="block text-blue-700 text-md">
+                <a href="{{ route('pages.create') }}" class="block text-blue-700 text-md">
                     ایجاد صفحه
                 </a>
             </div>

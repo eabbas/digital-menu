@@ -6,18 +6,31 @@ use Illuminate\Database\Eloquent\Model;
 
 class order extends Model
 {
-    protected $fillable=[
-        'career_id' ,
-        'slug' ,
-        'title' ,
-        'count'
+    protected $fillable = [
+        'address_id',
+        'user_id',
+        'qr_code_id',
+        'career_id',
+        'status',
+        'order_code',
     ];
-    public function careers()
-    {
-        return $this->belongsTo(career::class);
+
+    public function user(){
+        return $this->belongsTo('User::class');
     }
-    public function qr_code()
-    {
+
+    public function career(){
+        return $this->belongsTo('career::class');
+    }
+
+    public function address(){
+        return $this->belongsTo(address::class);
+    }
+    public function qr_code(){
         return $this->belongsTo(qr_code::class);
+    }
+
+    public function carts(){
+        return $this->hasMany(cart::class);
     }
 }

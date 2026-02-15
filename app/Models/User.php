@@ -23,7 +23,7 @@ class User extends Authenticatable
         'password',
         'family',
         'main_image',
-        'email'
+        'email',
     ];
 
     /**
@@ -66,8 +66,8 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(ecomm_category::class, ecomm::class,'user_id','ecomm_id');
     }
-     public function covers(){
-        return $this->hasMany(covers::class)->chaperOne();
+     public function pages(){
+        return $this->hasMany(pages::class)->chaperOne();
     }
     public function qr_codes(){
         return $this->hasMany(qr_code::class);
@@ -77,5 +77,22 @@ class User extends Authenticatable
     }
     public function contactUs(){
         return $this->hasMany(contactUs::class);
+    }
+    public function carts(){
+        return $this->hasMany(cart::class);
+    }
+    public function orders(){
+        return $this->hasMany(order::class);
+    }
+    public function addresses(){
+        return $this->hasMany(address::class);
+    }
+
+    public function customers(){
+        return $this->hasMany(User::class, 'parent_id');
+    }
+
+    public function request(){
+        return $this->hasOne(requests::class);
     }
 }

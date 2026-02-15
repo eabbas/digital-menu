@@ -1,6 +1,6 @@
 
 let home_hamburger_menu = document.getElementById('home_hamburger_menu')
-function home_menu(state){
+function home_menu(state) {
     if (state == "open") {
         home_hamburger_menu.classList.remove('-right-full')
         home_hamburger_menu.classList.remove('opacity-0')
@@ -16,35 +16,30 @@ function home_menu(state){
 let careers = document.querySelectorAll('.careers')
 let careerCat = document.querySelectorAll('.careerCat')
 let careerCatTitle = document.getElementById('careerCatTitle')
-function showCareer(index, el){
+function showCareer(index, el) {
     careerCatTitle.innerText = ""
-    careers.forEach((item)=>{
+    careers.forEach((item) => {
         item.classList.remove('flex')
         item.classList.add('hidden')
-        if (item.getAttribute('data-index')==index) {
+        if (item.getAttribute('data-index') == index) {
+            item.classList.add('flex')
+            item.classList.remove('hidden')
+        }
+        if (index == 0) {
             item.classList.add('flex')
             item.classList.remove('hidden')
         }
     })
-    careerCat.forEach((element)=>{
-        element.classList.remove('bg-[#eb3254]')
+    careerCat.forEach((element) => {
+        element.classList.remove('activeCatCareer')
+        element.children[0].classList.remove('block')
+        element.children[0].classList.add('hidden')
     })
-    el.children[0].classList.add('bg-[#eb3254]')
+    el.children[0].classList.remove('hidden')
+    el.classList.add('activeCatCareer')
+    el.children[0].classList.add('block')
     careerCatTitle.innerHTML = `
     <span>کسب و کار های</span> 
         <span class="font-bold">${el.children[1].innerText}</span>
     `
-}
-
-let popupUser = document.getElementById('popupUser')
-
-function openUserOptions(state){
-    if (state == 'open') {
-        popupUser.classList.remove('-bottom-full')
-        popupUser.classList.add('bottom-0')
-    }
-    if (state == 'close') {
-        popupUser.classList.remove('bottom-0')
-        popupUser.classList.add('-bottom-full')
-    }
 }

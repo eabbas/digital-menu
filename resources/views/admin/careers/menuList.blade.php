@@ -91,9 +91,10 @@
                                         <span class="block w-24 lg:w-full">{{ count($career->qr_codes) }}</span>
                                     </div>
                                     <div class="col-span-3">
+                                        <!--w-[404px] lg:w-[530px] grid grid-cols-5 divide-x divide-[#f1f1f4] items-center-->
                                         <div
-                                            class="w-[404px] lg:w-[530px] grid grid-cols-5 divide-x divide-[#f1f1f4] items-center">
-                                            <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3">
+                                            class="w-[295px] lg:w-[530px] grid grid-cols-3 divide-x divide-[#f1f1f4] items-center">
+                                            <ul class="w-[100px] lg:w-full text-sm mt-1 rounded-sm p-1 grid grid-cols-3">
                                                 <li class="flex justify-center">
                                                     <a href="{{ route('menu.single', [$menu]) }}"
                                                         class="w-fit flex flex-row items-center justify-center bg-sky-500 hover:bg-sky-600 p-1 rounded-sm"
@@ -141,21 +142,21 @@
                                                     </a>
                                                 </div>
                                             @endif
-                                            <div
-                                                class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                                <a href="{{ route('cp.create', [$menu->career]) }}" class="text-sky-700">
-                                                    ایجاد محصول
-                                                </a>
-                                            </div>
-                                            @if (count($menu->career->custom_product))
-                                                <div
-                                                    class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                                    <a href="{{ route('menu.customProList', [$menu->career]) }}"
-                                                        class="text-sky-700">
-                                                        محصولات
-                                                    </a>
-                                                </div>
-                                            @endif
+                                            {{-- <!--<div-->
+                                            <!--    class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">-->
+                                            <!--    <a href="{{ route('cp.create', [$menu->career]) }}" class="text-sky-700">-->
+                                            <!--        ایجاد محصول-->
+                                            <!--    </a>-->
+                                            <!--</div>-->
+                                            <!--@if (count($menu->career->custom_product))-->
+                                            <!--    <div-->
+                                            <!--        class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">-->
+                                            <!--        <a href="{{ route('menu.customProList', [$menu->career]) }}"-->
+                                            <!--            class="text-sky-700">-->
+                                            <!--            محصولات-->
+                                            <!--        </a>-->
+                                            <!--    </div>-->
+                                            <!--@endif--> --}}
 
                                         </div>
                                     </div>

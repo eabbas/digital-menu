@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('qr_codes', function (Blueprint $table) {
-            $table->integer('menu_id')->default(0);
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('parent_id')->default(0);
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('qr_codes', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
         });
     }

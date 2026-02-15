@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('site_links', function (Blueprint $table) {
-            $table->string('covers_id');
-            
+        Schema::table('qr_codes', function (Blueprint $table) {
+            $table->string('slug');
         });
     }
 
@@ -22,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('site_link', function (Blueprint $table) {
+        Schema::table('qr_codes', function (Blueprint $table) {
             //
         });
     }

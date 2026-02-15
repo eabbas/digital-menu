@@ -99,7 +99,7 @@
                                     </div> --}}
 
                                         <div class="col-span-5">
-                                            <div class="lg:w-full grid grid-cols-3 divide-x divide-[#f1f1f4] items-center w-[320px]">
+                                            <div class="lg:w-full grid grid-cols-4 divide-x divide-[#f1f1f4] items-center w-[320px]">
 
                                                 <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3">
                                                     <li class="flex justify-center">
@@ -148,6 +148,13 @@
                                                             class="text-sky-700">لیست منو</a>
                                                     </div>
                                                 @endif
+                                               @if (count($career->orders))
+                                                    <div
+                                                        class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
+                                                        <a href="{{ route('career.orders', [$career]) }}"
+                                                            class="text-sky-700">سفارشات</a>
+                                                    </div>
+                                               @endif
                                             </div>
                                         </div>
                                     </div>

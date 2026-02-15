@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('covers', function (Blueprint $table) {
+        Schema::create('pages', function (Blueprint $table) {
             $table->id();
             $table->string('logo_path');
             $table->string('cover_path');
@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('subTitle');
             $table->string('description');
+            $table->string('qr_code')->nullable();
             $table->timestamps();
         });
     }

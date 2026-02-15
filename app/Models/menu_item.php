@@ -26,4 +26,7 @@ class menu_item extends Model
     public function menu_custom_ingredients(){
         return $this->hasMany(menu_custom_ingredients::class);
     }
+    public function carts(){
+        return $this->hasMany(cart::class);
+    }
 }

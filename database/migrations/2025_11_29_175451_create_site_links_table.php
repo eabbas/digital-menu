@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('user_id');
             $table->string('title');
             $table->string('icon_path')->nullable();
+            $table->string('page_id');
             $table->timestamps();
         });
     }

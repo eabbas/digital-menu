@@ -1,20 +1,20 @@
 @extends('admin.app.panel')
 
 @section('title')
-    {{ $cover->title }}
+    {{ $page->title }}
 @endsection
 @section('content')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
     @csrf
     <div class="w-full lg:w-2/3 mx-auto">
         <div class="w-full mt-5 p-5 bg-white flex flex-col pb-40 relative rounded-lg">
             <div class="w-full flex flex-row justify-between items-center gap-3 pb-5">
                 <div class="w-full flex flex-row  items-center gap-3">
                     <div>
-                        <img class="size-12 rounded-lg" src="{{ asset('storage/' . $cover->logo_path) }}" alt="لوگو">
+                        <img class="size-12 rounded-lg" src="{{ asset('storage/' . $page->logo_path) }}" alt="لوگو">
                     </div>
                     <h2 class="text-sm lg:text-lg font-bold text-gray-800">
-                        {{ $cover->title }}
+                        {{ $page->title }}
                     </h2>
                 </div>
                 <div>
@@ -30,12 +30,12 @@
                                         d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
                                 </svg>
                             </div>
-                            @if (isset($cover->social_qr_codes->qr_path))
-                                <div class="w-11/12 lg:w-1/4 mx-auto bg-white rounded-lg p-5">
-                                    <img src="{{ asset('storage/' . $cover->social_qr_codes->qr_path) }}" class="w-full"
+                            @if (isset($page->social_qr_codes->qr_path))
+                                <div class="w-2/3 lg:w-1/4 mx-auto bg-white rounded-lg p-5">
+                                    <img src="{{ asset('storage/' . $page->social_qr_codes->qr_path) }}" class="w-full"
                                         alt="">
                                     <div class="lg:w-full mx-auto bg-gray-300 rounded-lg p-2 mt-2 flex items-center justify-center cursor-pointer"
-                                        onclick='copyText({{ $cover->id }} , "{{ $cover->social_qr_codes->slug }}")'>
+                                        onclick='copyText({{ $page->id }} , "{{ $page->social_qr_codes->slug }}")'>
                                         کپی لینک
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div>
-                    <a href="{{ route('client.loadLink', [$cover]) }}"
+                    <a href="{{ route('client.loadLink', [$page]) }}"
                         class="inline-block p-2 rounded-md bg-gray-200 cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 576 512">
                             <path
@@ -70,46 +70,46 @@
             <div class="relative">
                 <div>
                     <img class="w-full h-[130px] object-cover lg:h-[200px] rounded-md"
-                        src="{{ asset('storage/' . $cover->cover_path) }}" alt="">
+                        src="{{ asset('storage/' . $page->cover_path) }}" alt="">
                 </div>
                 <div class="flex flex-col items-center justify-end w-full h-[100px]">
                     <h2 class="text-center text-base lg:text-lg font-bold text-gray-800">
-                        {{ $cover->title }}
+                        {{ $page->title }}
                     </h2>
                     <span class="block text-cetner text-sm lg:text-md text-gray-500">
-                        {{ $cover->subTitle }}
+                        {{ $page->subTitle }}
                     </span>
                 </div>
-                <img src="{{ asset('storage/' . $cover->logo_path) }}"
+                <img src="{{ asset('storage/' . $page->logo_path) }}"
                     class="size-20 lg:size-30 rounded-full absolute inset-1/2 translate-x-1/2 -translate-y-1/5"
                     alt="">
             </div>
             <div class="w-full mt-5 lg:mt-10 flex flex-col gap-3">
 
                 <div class="w-full flex flex-col gap-3" id="socialLinks">
-                    @if (count($cover->socialAddresses))
-                        @foreach ($cover->socialAddresses as $item)
+                    @if (count($page->socialAddresses))
+                        @foreach ($page->socialAddresses as $item)
                             <div class="lg:py-2">
                                 <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center">
                                     ورود به {{ $item->socialMedia->title }}
                                 </h3>
-                                <div class="mt-3 relative parentSocial">
-                                    <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-[{{ $item->socialMedia->color }}] rounded-full cursor-pointer editSocial relative transition-all duration-300"
+                                <div class="mt-3 relative flex flex-col lg:flex-row gap-3">
+                                    <div class="w-full lg:w-8/9 flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-[{{ $item->socialMedia->color }}] rounded-full cursor-pointer editSocial relative transition-all duration-300"
                                         data-social-id="{{ $item->id }}"
                                         onclick='editSocial("{{ $item->id }}", "{{ $item->socialMedia->id }}")'>
                                         <img src="{{ asset('storage/' . $item->socialMedia->icon_path) }}"
                                             class="size-5 rounded-md" alt="">
                                         <span class="font-bold text-gray-800">{{ $item->socialMedia->title }}</span>
                                     </div>
-                                    <div class="absolute hidden left-3 top-[22%] z-444 lg:flex flex-row items-center gap-3">
-                                        <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
+                                    <div class="w-full lg:w-1/9 flex flex-row items-center gap-3">
+                                        <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer w-full flex justify-center items-center"
                                             onclick='editSocial("{{ $item->id }}", "{{ $item->socialMedia->id }}")'>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
                                                 <path fill="white"
                                                     d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
                                             </svg>
                                         </div>
-                                        <div class="p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer"
+                                        <div class="p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer w-full flex justify-center items-center"
                                             onclick='deleteMediaList(this, "{{ $item->id }}")'>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
                                                 <path fill="white"
@@ -123,30 +123,30 @@
                     @endif
                 </div>
                 <div class="w-full flex flex-col gap-3" id="siteLinks">
-                    @if (count($cover->siteLinks))
-                        @foreach ($cover->siteLinks as $siteLink)
+                    @if (count($page->siteLinks))
+                        @foreach ($page->siteLinks as $siteLink)
                             <div class="lg:py-2">
                                 <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center viewLinkTitle"
                                     data-view-link-id="{{ $siteLink->id }}">
                                     ورود به {{ $siteLink->title }}
                                 </h3>
-                                <div class="mt-3 relative parentLink">
-                                    <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-gray-200 rounded-full cursor-pointer editLink relative transition-all duration-300"
+                                <div class="mt-3 relative flex flex-col lg:flex-row gap-3">
+                                    <div class="w-full lg:w-8/9 flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-gray-200 rounded-full cursor-pointer editLink relative transition-all duration-300"
                                         onclick='editLink("{{ $siteLink->id }}")' data-site-id="{{ $siteLink->id }}">
                                         <img src="{{ asset('assets/img/link-simple.svg') }}" class="size-5 rounded-md"
                                             alt="">
                                         <span class="font-bold text-gray-800 viewLinkTitle"
                                             data-view-link-id="{{ $siteLink->id }}">{{ $siteLink->title }}</span>
                                     </div>
-                                    <div class="absolute hidden left-3 top-[22%] z-444 lg:flex flex-row items-center gap-3">
-                                        <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
+                                    <div class="w-full lg:w-1/9 flex flex-row items-center gap-3">
+                                        <div class="w-full flex flex-row justify-center items-center p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
                                             onclick='editLink("{{ $siteLink->id }}")'>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
                                                 <path fill="white"
                                                     d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
                                             </svg>
                                         </div>
-                                        <div class="p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer"
+                                        <div class="w-full flex flex-row justify-center items-center p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer"
                                             onclick='deleteLinkList(this, "{{ $siteLink->id }}")'>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
                                                 <path fill="white"
@@ -168,7 +168,6 @@
             id="block">
             <div class="w-full lg:w-[calc(100%-265px)] float-left h-dvh flex justify-center items-center">
                 <div class="w-11/12 lg:w-2/3 px-3 relative">
-
                     <div class="w-full bg-white py-5 rounded-lg transition-all duration-300 scale-95 opacity-0"
                         id="group">
                         <div class="w-full flex flex-row items-center gap-5 py-2.5 border-b border-gray-300 px-5 cursor-pointer"
@@ -190,7 +189,6 @@
                                     <span class="text-gray-700 font-bold">افزودن شبکه اجتماعی</span>
                                 </div>
                             </div>
-
                             <div class="w-full">
                                 <div onclick="addLink()"
                                     class="w-full p-5 border-1 border-gray-400 flex flex-row items-center gap-5 hover:ring-2 hover:ring-sky-500 hover:ring-offset-2 hover:bg-sky-200 rounded-lg transition-all duration-150 cursor-pointer">
@@ -607,7 +605,7 @@
                     data: {
                         'address': link_address_create.value,
                         'title': link_title_create.value,
-                        'cover_id': "{{ $cover->id }}",
+                        'page_id': "{{ $page->id }}",
                         // 'icon_path': link_icon_path_create.value
                     },
                     success: function(data) {
@@ -623,20 +621,15 @@
                                     data-view-link-id="${ data.id }">
                                     ورود به ${ data.title }
                                 </h3>
-                                <div class="mt-3 relative parentLink">
-                                    <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-gray-200 rounded-full cursor-pointer editLink relative transition-all duration-300"
+                                <div class="mt-3 relative mt-3 relative flex flex-col lg:flex-row gap-3">
+                                    <div class="w-full lg:w-8/9 flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-gray-200 rounded-full cursor-pointer editLink relative transition-all duration-300"
                                        onclick='editLink(${data.id})' data-site-id="${data.id}"
-                                        @if (isset($siteLink->icon_path))
-                                                <img src="{{ asset('storage/' . $siteLink->icon_path) }}"
-                                                    class="size-5 rounded-md" alt="">
-                                            @else
-                                                <img src="{{ asset('assets/img/link-simple.svg') }}" class="size-5 rounded-md"
-                                                    alt="">
-                                            @endif
+                                        <img src="{{ asset('assets/img/link-simple.svg') }}" class="size-5 rounded-md"
+                                            alt="">
                                         <span class="font-bold text-gray-800 viewLinkTitle"
                                             data-view-link-id=${data.id}">${data.title}</span>
                                     </div>
-                                    <div class="absolute hidden left-3 top-[22%] z-444 lg:flex flex-row items-center gap-3">
+                                    <div class="w-full lg:w-1/9 flex flex-row items-center gap-3">
                                         <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
                                             onclick='editLink("${ data.id }")'>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
@@ -693,7 +686,7 @@
                     'title': link_title_input.value,
                     'address': link_address_input.value,
                     // 'icon_path': icon_path.value,
-                    'cover_id': "{{ $cover->id }}"
+                    'cover_id': "{{ $page->id }}"
                 },
                 success: function(data) {
                     linkTitle.innerText = data.title
@@ -792,7 +785,7 @@
                 data: {
                     'id': socialAddressId.value,
                     'username': userNameUpdate.value,
-                    'cover_id': "{{ $cover->id }}"
+                    'cover_id': "{{ $page->id }}"
                 },
                 success: function(data) {
                     editsocialMediaForm.children[0].classList.remove('flex')
@@ -834,7 +827,7 @@
                     dataType: 'json',
                     data: {
                         'socialMedia_id': socialMedia_id_create.value,
-                        'cover_id': "{{ $cover->id }}",
+                        'page_id': "{{ $page->id }}",
                         'userName': userNameCreate.value
                     },
                     success: function(datas) {
@@ -847,21 +840,21 @@
                         link += "/"
                         link += datas.socialMedia.icon_path
                         let div = document.createElement('div')
-                        div.classList = "py-2"
+                        div.classList = "lg:py-2"
                         let element = `
-                        <div class="lg:py-2">
+                        
                             <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center">
                             ورود به ${datas.socialMedia.title}
                             </h3>
-                            <div class="mt-3 relative parentSocial">
-                                <div class="w-full flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-[${datas.socialMedia.color}] rounded-full cursor-pointer editSocial relative transition-all duration-300"
+                            <div class="mt-3 relative flex flex-col lg:flex-row gap-3">
+                                <div class="w-full lg:w-8/9 flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-[${datas.socialMedia.color}] rounded-full cursor-pointer editSocial relative transition-all duration-300"
                                     data-social-id="${datas.address.id}"
                                     onclick='editSocial(${datas.address.id}, ${datas.socialMedia.id})'>
                                     <img src="${link}"
                                         class="size-5 rounded-md" alt="">
                                     <span class="font-bold text-gray-800">${datas.socialMedia.title}</span>
                                 </div>
-                                <div class="absolute hidden left-3 top-[22%] z-444 lg:flex flex-row items-center gap-3">
+                                <div class="w-full lg:w-1/9 flex flex-row items-center gap-3">
                                     <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
                                         onclick='editSocial(${datas.address.id}, ${datas.socialMedia.id})'>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
@@ -878,7 +871,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        
                         `
                         div.innerHTML = element
                         socialLinks.appendChild(div)
@@ -1010,7 +1003,7 @@
             })
         }
     </script>
-    @isset($cover)
+    @isset($page)
         <script>
             function copyText(coverId, slug) {
                 let url = "{{ url('qrcodes/links/') }}/" + coverId + "/" + slug

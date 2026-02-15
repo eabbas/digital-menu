@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class social_qr_codes extends Model
 {
   protected $fillable = [
-    'covers_id',
+    'page_id',
     'qr_path',
     'slug'
   ];
 
-  public function covers()
+  public function pages()
   {
-    return $this->belongsTo(Covers::class);
+    return $this->belongsTo(pages::class , 'page_id');
   }
 }

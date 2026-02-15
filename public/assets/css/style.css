@@ -11,26 +11,11 @@
 .yekan {
     font-family: "Yekan";
 }
-/* 
-input[class*="border"],
-input, select, textarea {
-    border: 1px solid #DBDFE9 !important;
-    border-radius: 7px !important;
-    padding: 8px !important;
-}
-
-input:focus, select:focus, textarea:focus {
-    border-color: #3B82F6 !important;  /* یا #1D4ED8 برای آبی تیره‌تر 
-    outline: none !important;
-    /* box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3) !important;
-} */
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
     margin: 0;
-    /* <-- Apparently some margin are still there even though it's hidden */
 }
 
 input[type="number"] {
@@ -65,7 +50,6 @@ input[type="number"] {
 }
 
 .shadow__prosheh {
-    /* box-shadow: 0px 0px 5px rgb(200, 4, 4); */
     background-color: rgba(255, 16, 16, 0.237);
 }
 
@@ -224,7 +208,6 @@ input[type="number"] {
 }
 
 .shadow__prosheh {
-    /* box-shadow: 0px 0px 5px rgb(200, 4, 4); */
     background-color: rgba(255, 16, 16, 0.237);
 }
 
@@ -322,8 +305,6 @@ td {
     fill: white;
 }
 
-/* ------ */
-
 .loader {
     width: 48px;
     height: 48px;
@@ -378,9 +359,29 @@ td {
     }
 }
 
-.parentSocial:hover div:first-child{
-    width: 87%;
+.activeCatCareer::before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #eb3254;
+    border-radius: 4px;
+    transition: all 300ms ease-in-out;
 }
-.parentLink:hover div:first-child{
-    width: 87%;
+
+.arrow{
+    animation: selected 1500ms infinite;
+}
+@keyframes selected{
+    0%{
+        transform: translate(13px, -13px);
+    }
+    50%{
+        transform: translate(27px, -13px);
+    }
+    100%{
+        transform: translate(13px, -13px);
+    }
 }

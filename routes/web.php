@@ -4,15 +4,16 @@ use App\Http\Controllers\CareerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers\adminController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\CareerCategoryController;
-use App\Http\Controllers\CoversController;
+use App\Http\Controllers\PagesController;
 use App\Http\Controllers\CustomCategoryController;
 use App\Http\Controllers\CustomProductController;
 use App\Http\Controllers\CustomProductMaterialController;
@@ -36,17 +37,19 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Middleware\LoginMiddleware;
 use App\Http\Middleware\UserMiddleware;
 
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::post('search', [HomeController::class, 'search'])->name('search');
-Route::get('/login', [UserController::class, 'login'])->name('login')->middleware([LoginMiddleware::class]);
+Route::any('search', [HomeController::class, 'search'])->name('search');
+Route::any('filter', [HomeController::class, 'filter'])->name('filter');
+Route::get('/login/{message?}', [UserController::class, 'login'])->name('login')->middleware([LoginMiddleware::class]);
 Route::get('/signup', [UserController::class, 'create'])->name('signup')->middleware([LoginMiddleware::class]);
 Route::post('/send_code', [UserController::class, 'send_code'])->name('send_code');
+Route::post('/removeActivationCode', [UserController::class, 'removeActivationCode'])->name('removeActivationCode');
 Route::get('/forget_password', [UserController::class, 'forget_password'])->name('forget_password');
 Route::post('/set_password', [UserController::class, 'set_password'])->name('set_password');
 Route::get('/reset_password/{user}', [UserController::class, 'reset_password'])->name('reset_password');
 Route::post('/save_password', [UserController::class, 'save_password'])->name('save_password');
 Route::post('/check', [UserController::class, 'checkAuth'])->name('checkAuth');
+Route::post('/loginWithActivationCode', [UserController::class, 'loginWithActivationCode'])->name('loginWithActivationCode');
 
 Route::group([
     'prefix' => 'users',
@@ -73,6 +76,15 @@ Route::group([
     Route::get('/create_user', 'create_user')->name('create_user');
     Route::post('/store_user', 'store_user')->name('store_user');
     Route::post('/search', 'search')->name('search');
+    Route::post('/checkFromMenu', 'checkFromMenu')->name('checkFromMenu')->withoutMiddleware([UserMiddleware::class]);
+    Route::post('/setAddress', 'setAddress')->name('setAddress');
+    Route::post('/customerSearch', 'customerSearch')->name('customerSearch');
+    Route::get('/customers', 'myUsers')->name('myUsers');
+    Route::get('/request/{user}', 'request')->name('request');
+    Route::get('/requestList', 'requestList')->name('requestList');
+    Route::post('/requestEvent', 'requestEvent')->name('requestEvent');
+    Route::get('/deleteRequest/{requests}', 'deleteRequest')->name('deleteRequest');
+    Route::get('/acceptRequest/{requests}', 'acceptRequest')->name('acceptRequest');
 });
 
 Route::group([
@@ -82,6 +94,8 @@ Route::group([
     'middleware' => [UserMiddleware::class]
 ], function () {
     Route::get('/create/{user?}', 'create')->name('create');
+    Route::get('/createUser', 'createUser')->name('createUser');
+    Route::post('/storeUser', 'storeUser')->name('storeUser');
     Route::post('/store', 'store')->name('store');
     Route::get('/userCareers/{user?}', 'user_careers')->name('careers');
     Route::get('/edit/{career}/{user?}', 'edit')->name('edit');
@@ -94,8 +108,11 @@ Route::group([
     Route::get('/careersCategories', 'careersCategories')->name('careersCategories')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/careersList', 'careersList')->name('careersList')->withoutMiddleware([UserMiddleware::class]);
     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
-    Route::get('/categoryCareers/{careerCategory}', 'categoryCareers')->name('categoryCareers');
+    Route::get('/categoryCareers/{careerCategory}', 'categoryCareers')->name('categoryCareers')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/orders/{career}', 'orders')->name('orders');
+    Route::post('/acceptOrder', 'acceptOrder')->name('acceptOrder');
 });
+
 Route::group([
     'prefix' => 'province',
     'controller' => ProvinceCityController::class,
@@ -118,7 +135,29 @@ Route::group([
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{careerCategory}', 'delete')->name('delete');
 });
-
+Route::group([
+    'prefix' => 'carts',
+    'controller' => CartController::class,
+    'as' => 'cart.',
+    'middleware' => [UserMiddleware::class]
+], function(){
+    Route::post('/store', 'store')->name('store');
+    Route::get('/', 'index')->name('list');
+    Route::post('/update', 'update')->name('update');
+    Route::post('/delete/', 'delete')->name('delete');
+    Route::post('/showCarts', 'showCarts')->name('showCarts');
+    Route::post('/set', 'set')->name('set');
+});
+Route::group([
+    'prefix'=>'orders',
+    'controller'=>OrderController::class,
+    'middleware' => [UserMiddleware::class],
+    'as'=>'order.'
+], function (){
+    Route::post('/store', 'store')->name('store');
+    Route::post('/show', 'show')->name('show');
+    Route::post('/showItems', 'showItems')->name('showItems');
+});
 Route::group([
     'prefix' => 'menu',
     'controller' => MenuController::class,
@@ -211,13 +250,13 @@ Route::group([
     'controller' => ClientController::class,
     'as' => 'client.'
 ], function () {
-    Route::get('/links/{covers}/{slug?}', 'loadLink')->name('loadLink')->withoutMiddleware([UserMiddleware::class]);
+    Route::get('/allPages', "allPages")->name('allPages');
+    Route::get('/links/{pages}/{slug?}', 'loadLink')->name('loadLink');
     Route::get('/{career}/{slug?}', 'show_menu')->name('menu');
-    // Route::get('/{career}', 'career_menu')->name('careerMenu');
     // Route::get('/career/{$career}', 'show_career')->name('show_career');
 });
 Route::get('/career/{career}', [ClientController::class, 'show_career'])->name('show_career');
-// Route::get('/socialPage/{covers}', [ClientController::class, 'show_socialPage'])->name('show_socialPage');
+// Route::get('/socialPage/{pages}', [ClientController::class, 'show_socialPage'])->name('show_socialPage');
 
 Route::group([
     'prefix' => 'settings',
@@ -352,7 +391,7 @@ Route::group([
     Route::post('/updateOrcreate', 'updateOrcreate')->name('updateOrcreate');
     Route::get('/aboutUs', 'index')->name('list');
     Route::get('/delete/{aboutUs}', 'delete')->name('delete');
-    Route::get('/clientList', 'clientList')->name('clientList');
+    Route::get('/clientList', 'clientList')->name('clientList')->withoutMiddleware([UserMiddleware::class]);
 });
 
 // favoriteCareer
@@ -445,7 +484,7 @@ Route::group([
     'as' => 'siteLink.',
     'middleware' => [UserMiddleware::class]
 ], function () {
-    Route::get('/create/{covers}', 'create')->name('create');
+    Route::get('/create/{pages}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::get('/medias', 'index')->name('list');
     Route::post('/edit', 'edit')->name('edit');
@@ -459,28 +498,28 @@ Route::group([
     'as' => 'socialAddress.',
     'middleware' => [UserMiddleware::class]
 ], function () {
-    Route::get('/create/{covers}', 'create')->name('create');
+    Route::get('/create/{pages}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::get('/socialAddress', 'index')->name('list');
     Route::post('/edit/{social_address}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::post('/delete', 'delete')->name('delete');
 });
-// ////covers
+// ////pages
 Route::group([
-    'prefix' => 'covers',
-    'controller' => CoversController::class,
-    'as' => 'covers.',
+    'prefix' => 'pages',
+    'controller' => PagesController::class,
+    'as' => 'pages.',
     'middleware' => [UserMiddleware::class]
 ], function () {
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::get('/social_list', 'social_list')->name('social_list');
-    Route::get('/covers', 'index')->name('list');
-    Route::get('/edit/{covers}', 'edit')->name('edit');
+    Route::get('/pages', 'index')->name('list');
+    Route::get('/edit/{pages}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
-    Route::get('/delete/{covers}', 'delete')->name('delete');
-    Route::get('/show/{covers}', 'single')->name('single');
+    Route::get('/delete/{pages}', 'delete')->name('delete');
+    Route::get('/show/{pages}', 'single')->name('single');
     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
 Route::group([
