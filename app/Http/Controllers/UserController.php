@@ -43,15 +43,27 @@ class UserController extends Controller
 
     public function check(Request $request)
     {
+        
         $user = User::where('phoneNumber', $request->phoneNumber)->first();
 
         if ($user) {
-            $checkHash = Hash::check($request->password, $user->password);
-            if ($checkHash) {
-                Auth::login($user);
-                return to_route('user.profile');
+            if(isset($request->password)){
+                $checkHash = Hash::check($request->password, $user->password);
+                if ($checkHash) {
+                    Auth::login($user);
+                    return to_route('user.profile');
+                }
+                return to_route('login', ['message' => 'لطفا اطلاعات خود را مجددا بررسی کنید']);
             }
-            return to_route('login', ['message' => 'لطفا اطلاعات خود را مجددا بررسی کنید']);
+            if (isset($request->code)) {
+                $code = phone_code::where('phoneNumber', $request->phoneNumber)->first();
+                if($code->code == $request->code){
+                    Auth::login($user);
+                    return to_route('user.profile');
+                }
+                return to_route('login', ['message' => 'لطفا اطلاعات خود را مجددا بررسی کنید']);
+            }
+            
         }
         return to_route('signup');
     }
@@ -461,6 +473,26 @@ class UserController extends Controller
     }
 
     public function loginWithActivationCode(Request $request){
-        return response()->json($request->all());
+        $flag = true;
+        $user = User::where('phoneNumber', $request->phoneNumber)->first();
+        if ($user) {
+            $flag = false;
+        }
+        if (!$flag) {
+            $code = rand(1000, 10000);
+            phone_code::upsert(['phoneNumber' => $request->phoneNumber, 'code' => $code], ['phoneNumber'], ['code']);
+            $apiKey = 'YTBhZjhlNDAtZGI1Zi00ZWQ1LTkwNmYtZWU2MWFhYTkzY2M0NTcxZGQ3ZjY2Yzk1MmNjZmFiM2M2ZjVmNjBhMDg2MTQ=';
+            $client = new \IPPanel\Client($apiKey);
+            $patternValues = [
+                'activation_code' => $code,
+            ];
+            $bulkID = $client->sendPattern(
+                '7fvdx77gveizxqn',  // pattern code
+                '+983000505',  // originator
+                $request->phoneNumber,  // recipient
+                $patternValues,  // pattern values
+            );
+        }
+        return response()->json($flag);
     }
 }

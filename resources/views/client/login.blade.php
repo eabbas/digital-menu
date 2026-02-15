@@ -133,7 +133,7 @@
                                             } else {
                                                 showMessage('open')
                                                 element.innerHTML = `
-                                <span class="text-red-500">کاربر قبلا با این شماره ثبت نام کرده است!</span>
+                                <span class="text-red-500">ابتدا ثبت نام کنید !</span>
                             `
                                                 message.children[0].appendChild(element)
                                                 setTimeout(() => {
@@ -207,6 +207,66 @@
                                     message.classList.add('opacity-0')
                                     message.classList.add('invisible')
                                 }
+                            }
+
+                            function counter() {
+                                let phoneNumber = document.getElementById('phoneNumber')
+                                countDown.classList.add('cursor-no-drop')
+                                countDown.classList.remove('cursor-pointer')
+                                countDown.classList.remove('hover:bg-[#d52b4a]')
+                                countDown.classList.add('hover:bg-[#d52b4a]/50')
+                                countDown.classList.remove('bg-[#eb3254]')
+                                countDown.classList.add('bg-[#eb3254]/50')
+                                countDown.setAttribute('disabled', true)
+                                countDown.setAttribute('dir', 'ltr')
+                                let count = 120
+                                let result = setInterval(() => {
+                                    let minute = Math.floor(count / 60)
+                                    let seconds = count % 60
+                                    count -= 1
+                                    if (count < 0) {
+
+                                        $.ajaxSetup({
+                                            headers: {
+                                                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                            }
+                                        })
+                                        $.ajax({
+                                            url: "{{ route('removeActivationCode') }}",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data: {
+                                                'phoneNumber': phoneNumber.value
+                                            },
+                                            success: function(data) {
+                                                console.log(data)
+                                                countDown.classList.remove('cursor-no-drop')
+                                                countDown.classList.add('bg-[#eb3254]')
+                                                countDown.classList.remove('bg-[#eb3254]/50')
+                                                countDown.classList.add('cursor-pointer')
+                                                countDown.classList.add('hover:bg-[#d52b4a]')
+                                                countDown.classList.remove('hover:bg-[#d52b4a]/50')
+                                                countDown.removeAttribute('disabled')
+                                                countDown.removeAttribute('dir')
+                                                countDown.innerText = "ارسال مجدد"
+                                            },
+                                            error: function() {
+                                                showMessage('open')
+                                                element.innerHTML = `
+                                <span>❌</span>
+                                <span class="text-shadw-lg">خطا در دریافت اطلاعات!</span>
+                            `
+                                                message.children[0].appendChild(element)
+                                                setTimeout(() => {
+                                                    showMessage('close')
+                                                }, 2500)
+                                            }
+                                        })
+                                        clearInterval(result)
+                                    }
+                                    countDown.innerText = minute.toString().padStart(2, "0") + " : " + seconds.toString().padStart(2,
+                                        "0");
+                                }, 1000)
                             }
                         </script>
                         <button
