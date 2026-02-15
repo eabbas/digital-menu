@@ -66,4 +66,8 @@ class career extends Model
     public function orders(){
         return $this->hasMany(order::class);
     }
+  public function favorites()
+  {
+    return $this->hasMany(favorites::class, 'item_id');
+  }
 }
