@@ -82,193 +82,7 @@
                                 onclick="loginWithPassKey(this)">ورود با رمز عبور</span>
                         </div>
 
-                        <script>
-                            let phoneNumber = document.getElementById('phoneNumber')
 
-
-                            let message = document.getElementById('message')
-                            let code = document.getElementById('code')
-                            let element = document.createElement('div')
-                            element.classList = "text-sm font-bold flex flex-row items-center justify-center py-3 gap-2 lg:gap-3"
-
-                            function sendCode() {
-
-                                let phoneNumber = document.getElementById('phoneNumber')
-                                if (phoneNumber.value == "") {
-                                    showMessage('open')
-                                    element.innerHTML = `
-                        <span class="text-red-500">!</span>
-                        <span>لطفا شماره تلفن را وارد کنید</span>
-                    `
-                                    message.children[0].appendChild(element)
-                                    setTimeout(() => {
-                                        showMessage('close')
-                                    }, 2000)
-                                } else {
-                                    $.ajaxSetup({
-                                        headers: {
-                                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                                        }
-                                    })
-                                    $.ajax({
-                                        url: "{{ route('loginWithActivationCode') }}",
-                                        type: "POST",
-                                        dataType: "json",
-                                        data: {
-                                            'phoneNumber': phoneNumber.value,
-                                        },
-                                        success: function(data) {
-                                            console.log(data)
-                                            if (!data) {
-                                                counter()
-                                                showMessage('open')
-                                                element.innerHTML = `
-                                <span>✅</span>
-                                <span class="text-shadw-lg">کد ارسال شد</span>
-                            `
-                                                message.children[0].appendChild(element)
-                                                setTimeout(() => {
-                                                    showMessage('close')
-                                                }, 2000)
-                                            } else {
-                                                showMessage('open')
-                                                element.innerHTML = `
-                                <span class="text-red-500">ابتدا ثبت نام کنید !</span>
-                            `
-                                                message.children[0].appendChild(element)
-                                                setTimeout(() => {
-                                                    showMessage('close')
-                                                    // location.assign("{{ route('login') }}")
-                                                }, 2000)
-                                            }
-                                        },
-                                        error: function() {
-                                            showMessage('open')
-                                            element.innerHTML = `
-                            <span>❌</span>
-                            <span class="text-shadw-lg">خطا در دریافت اطلاعات!</span>
-                        `
-                                            message.children[0].appendChild(element)
-                                            setTimeout(() => {
-                                                showMessage('close')
-                                            }, 2500)
-                                        }
-                                    })
-                                }
-                            }
-
-                            let login = document.getElementById('login')
-                            let loginWay = document.getElementById('loginWay')
-
-                            function loginWithPassKey(el) {
-                                login.innerHTML = `
-                                    <input type="password"
-                                        class="placeholder-gray-400 focus:border-1 focus:border-[#eb3254] p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] focus:outline-none w-full"
-                                        name="password" placeholder="کلمه عبور" required>
-                                `
-                                el.parentElement.children[1].remove()
-                                let span = document.createElement('span')
-                                span.classList = "text-[#eb3254] inline-block max-md:my-1 my-4 max-md:text-sm cursor-pointer"
-                                span.setAttribute('onclick', 'loginWithActivationCode(this)')
-                                span.innerText = "ورود با کد فعال ساز"
-                                loginWay.appendChild(span)
-                            }
-
-                            function loginWithActivationCode(el) {
-                                login.innerHTML = `
-                                    <div class="w-full flex flex-row items-center gap-3">
-                                        <input type="number"
-                                            class="w-8/12 p-2 placeholder-gray-400 focus:border-[#eb3254] md:p-[9px] rounded-[7px] border-1 border-[#DBDFE9] outline-none"
-                                            name="code" placeholder="کد" required id="code">
-                                        <button type="button"
-                                            class="w-4/12 text-xs lg:text-base h-full p-2 md:p-[9px] rounded-[7px] bg-[#eb3254] hover:bg-[#d52b4a] text-white cursor-pointer"
-                                            onclick="sendCode()" id="countDown">ارسال کد </button>
-                                    </div>
-                                `
-                                el.parentElement.children[1].remove()
-                                let span = document.createElement('span')
-                                span.classList = "text-[#eb3254] inline-block max-md:my-1 my-4 max-md:text-sm cursor-pointer"
-                                span.setAttribute('onclick', 'loginWithPassKey(this)')
-                                span.innerText = "ورود با رمز عبور"
-                                loginWay.appendChild(span)
-                            }
-
-
-                            function showMessage(state) {
-                                if (state == 'open') {
-                                    message.classList.remove('top-0')
-                                    message.classList.remove('opacity-0')
-                                    message.classList.remove('invisible')
-                                    message.classList.add('top-2/10')
-                                }
-                                if (state == 'close') {
-                                    message.classList.remove('top-2/10')
-                                    message.classList.add('top-0')
-                                    message.classList.add('opacity-0')
-                                    message.classList.add('invisible')
-                                }
-                            }
-
-                            function counter() {
-                                let phoneNumber = document.getElementById('phoneNumber')
-                                countDown.classList.add('cursor-no-drop')
-                                countDown.classList.remove('cursor-pointer')
-                                countDown.classList.remove('hover:bg-[#d52b4a]')
-                                countDown.classList.add('hover:bg-[#d52b4a]/50')
-                                countDown.classList.remove('bg-[#eb3254]')
-                                countDown.classList.add('bg-[#eb3254]/50')
-                                countDown.setAttribute('disabled', true)
-                                countDown.setAttribute('dir', 'ltr')
-                                let count = 120
-                                let result = setInterval(() => {
-                                    let minute = Math.floor(count / 60)
-                                    let seconds = count % 60
-                                    count -= 1
-                                    if (count < 0) {
-
-                                        $.ajaxSetup({
-                                            headers: {
-                                                'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                                            }
-                                        })
-                                        $.ajax({
-                                            url: "{{ route('removeActivationCode') }}",
-                                            type: "POST",
-                                            dataType: "json",
-                                            data: {
-                                                'phoneNumber': phoneNumber.value
-                                            },
-                                            success: function(data) {
-                                                console.log(data)
-                                                countDown.classList.remove('cursor-no-drop')
-                                                countDown.classList.add('bg-[#eb3254]')
-                                                countDown.classList.remove('bg-[#eb3254]/50')
-                                                countDown.classList.add('cursor-pointer')
-                                                countDown.classList.add('hover:bg-[#d52b4a]')
-                                                countDown.classList.remove('hover:bg-[#d52b4a]/50')
-                                                countDown.removeAttribute('disabled')
-                                                countDown.removeAttribute('dir')
-                                                countDown.innerText = "ارسال مجدد"
-                                            },
-                                            error: function() {
-                                                showMessage('open')
-                                                element.innerHTML = `
-                                <span>❌</span>
-                                <span class="text-shadw-lg">خطا در دریافت اطلاعات!</span>
-                            `
-                                                message.children[0].appendChild(element)
-                                                setTimeout(() => {
-                                                    showMessage('close')
-                                                }, 2500)
-                                            }
-                                        })
-                                        clearInterval(result)
-                                    }
-                                    countDown.innerText = minute.toString().padStart(2, "0") + " : " + seconds.toString().padStart(2,
-                                        "0");
-                                }, 1000)
-                            }
-                        </script>
                         <button
                             class="focus:bg-[#eb3254] hover:bg-[#eb3254] transition-all duration-400 text-center w-full bg-[#eb3254] p-2 md:p-3 rounded-[10px] text-white cursor-pointer">ورود</button>
                         <div class="w-full text-center">
@@ -433,6 +247,199 @@
         </div>
     </footer>
     <script>
+        // login
+
+        let phoneNumber = document.getElementById('phoneNumber')
+
+
+        let message = document.getElementById('message')
+        let code = document.getElementById('code')
+        let element = document.createElement('div')
+        element.classList = "text-sm font-bold flex flex-row items-center justify-center py-3 gap-2 lg:gap-3"
+
+        function sendCode() {
+
+            let phoneNumber = document.getElementById('phoneNumber')
+            if (phoneNumber.value == "") {
+                showMessage('open')
+                element.innerHTML = `
+                        <span class="text-red-500">!</span>
+                        <span>لطفا شماره تلفن را وارد کنید</span>
+                    `
+                message.children[0].appendChild(element)
+                setTimeout(() => {
+                    showMessage('close')
+                }, 2000)
+            } else {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+                $.ajax({
+                    url: "{{ route('loginWithActivationCode') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'phoneNumber': phoneNumber.value,
+                    },
+                    success: function(data) {
+                        console.log(data)
+                        if (!data) {
+                            counter()
+                            showMessage('open')
+                            element.innerHTML = `
+                                <span>✅</span>
+                                <span class="text-shadw-lg">کد ارسال شد</span>
+                            `
+                            message.children[0].appendChild(element)
+                            setTimeout(() => {
+                                showMessage('close')
+                            }, 2000)
+                        } else {
+                            showMessage('open')
+                            element.innerHTML = `
+                                <span class="text-red-500">ابتدا ثبت نام کنید !</span>
+                            `
+                            message.children[0].appendChild(element)
+                            setTimeout(() => {
+                                showMessage('close')
+                                // location.assign("{{ route('login') }}")
+                            }, 2000)
+                        }
+                    },
+                    error: function() {
+                        showMessage('open')
+                        element.innerHTML = `
+                            <span>❌</span>
+                            <span class="text-shadw-lg">خطا در دریافت اطلاعات!</span>
+                        `
+                        message.children[0].appendChild(element)
+                        setTimeout(() => {
+                            showMessage('close')
+                        }, 2500)
+                    }
+                })
+            }
+        }
+
+        let login = document.getElementById('login')
+        let loginWay = document.getElementById('loginWay')
+
+        function loginWithPassKey(el) {
+            login.innerHTML = `
+                                    <input type="password"
+                                        class="placeholder-gray-400 focus:border-1 focus:border-[#eb3254] p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] focus:outline-none w-full"
+                                        name="password" placeholder="کلمه عبور" required>
+                                `
+            el.parentElement.children[1].remove()
+            let span = document.createElement('span')
+            span.classList = "text-[#eb3254] inline-block max-md:my-1 my-4 max-md:text-sm cursor-pointer"
+            span.setAttribute('onclick', 'loginWithActivationCode(this)')
+            span.innerText = "ورود با کد فعال ساز"
+            loginWay.appendChild(span)
+        }
+
+        function loginWithActivationCode(el) {
+            login.innerHTML = `
+                                    <div class="w-full flex flex-row items-center gap-3">
+                                        <input type="number"
+                                            class="w-8/12 p-2 placeholder-gray-400 focus:border-[#eb3254] md:p-[9px] rounded-[7px] border-1 border-[#DBDFE9] outline-none"
+                                            name="code" placeholder="کد" required id="code">
+                                        <button type="button"
+                                            class="w-4/12 text-xs lg:text-base h-full p-2 md:p-[9px] rounded-[7px] bg-[#eb3254] hover:bg-[#d52b4a] text-white cursor-pointer"
+                                            onclick="sendCode()" id="countDown">ارسال کد </button>
+                                    </div>
+                                `
+            el.parentElement.children[1].remove()
+            let span = document.createElement('span')
+            span.classList = "text-[#eb3254] inline-block max-md:my-1 my-4 max-md:text-sm cursor-pointer"
+            span.setAttribute('onclick', 'loginWithPassKey(this)')
+            span.innerText = "ورود با رمز عبور"
+            loginWay.appendChild(span)
+        }
+
+
+        function showMessage(state) {
+            if (state == 'open') {
+                message.classList.remove('top-0')
+                message.classList.remove('opacity-0')
+                message.classList.remove('invisible')
+                message.classList.add('top-2/10')
+            }
+            if (state == 'close') {
+                message.classList.remove('top-2/10')
+                message.classList.add('top-0')
+                message.classList.add('opacity-0')
+                message.classList.add('invisible')
+            }
+        }
+
+        function counter() {
+            let phoneNumber = document.getElementById('phoneNumber')
+            countDown.classList.add('cursor-no-drop')
+            countDown.classList.remove('cursor-pointer')
+            countDown.classList.remove('hover:bg-[#d52b4a]')
+            countDown.classList.add('hover:bg-[#d52b4a]/50')
+            countDown.classList.remove('bg-[#eb3254]')
+            countDown.classList.add('bg-[#eb3254]/50')
+            countDown.setAttribute('disabled', true)
+            countDown.setAttribute('dir', 'ltr')
+            let count = 120
+            let result = setInterval(() => {
+                let minute = Math.floor(count / 60)
+                let seconds = count % 60
+                count -= 1
+                if (count < 0) {
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                        }
+                    })
+                    $.ajax({
+                        url: "{{ route('removeActivationCode') }}",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            'phoneNumber': phoneNumber.value
+                        },
+                        success: function(data) {
+                            console.log(data)
+                            countDown.classList.remove('cursor-no-drop')
+                            countDown.classList.add('bg-[#eb3254]')
+                            countDown.classList.remove('bg-[#eb3254]/50')
+                            countDown.classList.add('cursor-pointer')
+                            countDown.classList.add('hover:bg-[#d52b4a]')
+                            countDown.classList.remove('hover:bg-[#d52b4a]/50')
+                            countDown.removeAttribute('disabled')
+                            countDown.removeAttribute('dir')
+                            countDown.innerText = "ارسال مجدد"
+                        },
+                        error: function() {
+                            showMessage('open')
+                            element.innerHTML = `
+                                <span>❌</span>
+                                <span class="text-shadw-lg">خطا در دریافت اطلاعات!</span>
+                            `
+                            message.children[0].appendChild(element)
+                            setTimeout(() => {
+                                showMessage('close')
+                            }, 2500)
+                        }
+                    })
+                    clearInterval(result)
+                }
+                countDown.innerText = minute.toString().padStart(2, "0") + " : " + seconds.toString().padStart(2,
+                    "0");
+            }, 1000)
+        }
+
+        // login end
+
+
+
+
         document.addEventListener('DOMContentLoaded', function() {
             let shopIcon = document.getElementById('shopIcon');
             let comingSoon = document.getElementById('comingSoon');
