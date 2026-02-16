@@ -377,6 +377,7 @@
                     </ul>
                 </div>
                 {{-- contactUs --}}
+                @if (Auth::user()->role[0]->title == 'admin')
                 <div class="dashboard">
                     <div
                         class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if (Route::is('contactUs.*')) bg-gray-700 @endif">
@@ -397,7 +398,6 @@
                     </div>
                     <ul
                         class="my-1 pr-3 transition-all duration-500 overflow-hidden @if (Route::is('contactUs.*')) max-h-[500px] @else max-h-0 @endif">
-                        @if (Auth::user()->role[0]->title == 'admin')
                             <li
                                 class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('contactUs.list')) bg-gray-700 @endif">
                                 <span class="size-1 bg-white rounded-sm"></span>
@@ -405,9 +405,17 @@
                                     لیست تیکت ها
                                 </a>
                             </li>
-                        @endif
-                    </ul>
-                </div>
+                            <li
+                                class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('contactUs.create')) bg-gray-700 @endif">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('contactUs.create') }}" class="text-white py-1 block">
+                                 فرم ارتباط با ما
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    @endif
                 {{-- end-contactUs --}}
                 <div class="dashboard">
                     <div
@@ -892,7 +900,7 @@
                                         <li class="pr-3.5 @if(Route::is('contactUs.list')) bg-gray-100 @endif">
                                             <a href="{{ route('contactUs.list') }}"
                                                 class="block text-gray-700 py-2 text-md">
-                                                ارتباط با ما
+                                               لیست تیکت ها
                                             </a>
                                         </li>
 

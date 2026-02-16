@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('order_id')->nullable();
             $table->integer('career_id');
-            $table->integer('menu_item_id')->unique();
-            $table->integer('user_id')->unique();
+            $table->integer('menu_item_id');
+            $table->integer('user_id');
             $table->integer('quantity')->default(1);
             $table->timestamps();
         });

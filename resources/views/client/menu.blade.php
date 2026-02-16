@@ -146,7 +146,7 @@
                 @endforeach
             </div>
         @endforeach
-        @if(Auth::check() && $order)
+        @if(Auth::check() && count(Auth::user()->carts))
             <div id="orderBasket"
                  class="w-full fixed bottom-15 right-0 z-1 @if(count(Auth::user()->carts)) block @else hidden @endif lg:hidden">
                 <div class="w-11/12 mx-auto p-3 lg:p-5 bg-[#eb3254] rounded-md text-center text-white cursor-pointer"
