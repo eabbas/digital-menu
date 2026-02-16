@@ -234,97 +234,79 @@
 
                 </div>
             </div>
-            {{-- current start --}}
-            <div class="grid grid-cols-3 lg:grid-cols-8 gap-3 lg:gap-4" id="favorite_section">
-               
-                <div class="fixed w-full h-dvh bg-black/50 flex justify-center items-center top-0 right-0 z-40 invisible opacity-0 form" id="openFavorite">
-                    <div class="w-2/4 h-2/3 overflow-y-auto [&::-webkit-scrollbar]:hidden bg-white rounded-lg flex flex-row justify-center items-start p-4 gap-4">
-                        <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200"
-                        onclick="closeForm()">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
-                            <path fill="gray"
-                                d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
-                            </svg>
-                        </div>
-                        <div class="w-full flex flex-col items-center gap-2">
-                            <div class="size-8 bg-[#eb3254] rounded-full" onclick="openDropdown()">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="size-6 lg:size-8" viewBox="0 0 448 512">
-                                    <path fill="white"
-                                    d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+
+            <div class="bg-white p-5 rounded-[20px] w-[95%] mx-auto my-3">
+                <div class="flex flex-row justify-between items-center mt-5 mb-3">
+                    <h1 class="lg:text-xl text-sm font-bold" id="careerCatTitle">
+                      کسب و کار ها
+                    </h1>
+                    <a class="text-[13px] text-[#eb3254] font-bold" href="{{ route('career.careersList') }}">مشاهده همه</a>
+                </div>
+                <div class="grid grid-cols-3 lg:grid-cols-8 gap-3 lg:gap-4" id="favorite_section">
+                   
+                    <div class="fixed w-full h-dvh bg-black/50 flex justify-center items-center top-0 right-0 z-40 invisible opacity-0 form" id="openFavorite">
+                        <div class="w-2/4 h-2/3 overflow-y-auto [&::-webkit-scrollbar]:hidden bg-white rounded-lg flex flex-row justify-center items-start p-4 gap-4">
+                            <div class="cursor-pointer absolute top-4 right-4 text-4xl close_icon hover:bg-red-500 bg-white size-8 rounded-full flex items-center justify-center transition-all duration-200"
+                            onclick="closeForm()">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
+                                <path fill="gray"
+                                    d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
                                 </svg>
                             </div>
-                            <div class="w-full flex flex-col items-center" id="parentFavorite">
-                                
-                            </div>
-                            <div class="w-full flex flex-col gap-3 items-center" id="parentItems">
-                                <div class="w-full py-2 bg-[#eb3254] rounded-lg text-white text-center">
-                                    کلی
+                            <div class="w-full flex flex-col items-center gap-2">
+                                <div class="size-8 bg-[#eb3254] rounded-full" onclick="openDropdown()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-6 lg:size-8" viewBox="0 0 448 512">
+                                        <path fill="white"
+                                        d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                                    </svg>
                                 </div>
-
+                                <div class="w-full flex flex-col items-center" id="parentFavorite">
+                                    
+                                </div>
+                                <div class="w-full flex flex-col gap-3 items-center" id="parentItems">
+                                    <div class="w-full py-2 bg-[#eb3254] rounded-lg text-white text-center">
+                                        کلی
+                                    </div>
+    
+                                </div>
+                                <div class="md:text-left text-center md:px-12 mt-5 lg:mt-30">
+                                    <button class="px-4 py-2 bg-[#eb3254] text-white rounded-lg cursor-pointer" onclick="finalSave(event)">ثبت</button>
+                                    {{-- <button class="px-4 py-2 bg-[#eb3254] text-white rounded-lg cursor-pointer" onclick='deleteFavorite("{{ $career->id }}"  , "career" ,event)'>حذف از علاقه مندی ها</button> --}}
+                                </div>
+                               
                             </div>
-                            <div class="md:text-left text-center md:px-12 mt-5 lg:mt-30">
-                                <button class="px-4 py-2 bg-[#eb3254] text-white rounded-lg cursor-pointer" onclick="finalSave(event)">ثبت</button>
-                                {{-- <button class="px-4 py-2 bg-[#eb3254] text-white rounded-lg cursor-pointer" onclick='deleteFavorite("{{ $career->id }}"  , "career" ,event)'>حذف از علاقه مندی ها</button> --}}
-                            </div>
-                           
+                            
                         </div>
-                        
                     </div>
-                </div>
-                
-                @foreach($careers as $career)
-                {{-- @if(count($career->favorites))
-                @dd($career->favorites)
-                @endif --}}
-                <div class="relative careers" data-index="{{ $career->career_category_id }}">
-                    <!-- آیکون قلب در گوشه بالا سمت چپ -->
-                    {{-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 absolute top-1 right-1 cursor-pointer rotate-20 {{ count($career->favorites) ? 'fill-red-500' : 'fill-gray-500' }}" onclick='addToFavorite("{{ $career->id }}" , "career" , this)'>
-                        <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
-                    </svg> --}}
-                    {{-- @dd($career->favorites) --}}
-                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="size-5 absolute top-1  cursor-pointer  {{ count($career->favorites)  ? 'fill-red-500' : 'fill-gray-400' }}" onclick='addToFavorite("{{ $career->id }}" , "career" , this)'>
-                    <path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"/>
-                    </svg>
-
-                    <a href="{{ route('client.menu', [$career]) }}"
-                        class="w-full h-40 rounded-[11px] flex flex-col items-center justify-center gap-2">
-                        <div class="w-full rounded-md overflow-hidden">
-                            <img class="size-26 mx-auto rounded-[7px] object-cover"
-                                src="{{ asset('storage/'.$career->logo) }}" alt="career logo">
-                                {{-- current end --}}
-
-            {{-- incoming start --}}
-            <div class="bg-white p-5 rounded-[20px] w-[95%] mx-auto">
-                <div class="flex flex-row justify-between items-center mt-5 mb-3">
-                    <h2 class="lg:text-xl text-sm font-bold" id="careerCatTitle">
-                        کسب و کار ها
-                    </h2>
-                    <a class="text-[13px] text-[#eb3254] font-bold" href="{{ route('career.careersList') }}">مشاهده
-                        همه</a>
-                </div>
-                <div class="grid grid-cols-3 lg:grid-cols-8 gap-3 lg:gap-4">
-
-                    @foreach ($careers as $career)
-                        <div class="relative careers" data-index="{{ $career->career_category_id }}">
-                            <!-- آیکون قلب در گوشه بالا سمت چپ -->
-                            {{-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 absolute top-2 right-2 cursor-pointer" onclick="favoriteCareer({{$career->id}},this)">
-                            <path fill="gray" d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
+                    
+                    @foreach($careers as $career)
+                    {{-- @if(count($career->favorites))
+                    @dd($career->favorites)
+                    @endif --}}
+                    <div class="relative careers" data-index="{{ $career->career_category_id }}">
+                        <!-- آیکون قلب در گوشه بالا سمت چپ -->
+                        {{-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 absolute top-1 right-1 cursor-pointer rotate-20 {{ count($career->favorites) ? 'fill-red-500' : 'fill-gray-500' }}" onclick='addToFavorite("{{ $career->id }}" , "career" , this)'>
+                            <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
                         </svg> --}}
-                            <a href="{{ route('client.menu', [$career]) }}"
-                               class="w-full h-40 rounded-[11px] flex flex-col items-center justify-center gap-2">
-                                <div class="w-full rounded-md overflow-hidden">
-                                    <img class="size-26 mx-auto rounded-[7px] object-cover"
-                                         src="{{ asset('storage/' . $career->logo) }}" alt="career logo">
-                                </div>
-                                <span class="text-gray-500 text-sm font-medium">
+                        {{-- @dd($career->favorites) --}}
+                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="size-5 absolute top-1  cursor-pointer  {{ count($career->favorites)  ? 'fill-red-500' : 'fill-gray-400' }}" onclick='addToFavorite("{{ $career->id }}" , "career" , this)'>
+                        <path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"/>
+                        </svg>
+    
+                        <a href="{{ route('client.menu', [$career]) }}"
+                            class="w-full h-40 rounded-[11px] flex flex-col items-center justify-center gap-2">
+                            <div class="w-full rounded-md overflow-hidden">
+                                <img class="size-26 mx-auto rounded-[7px] object-cover"
+                                    src="{{ asset('storage/'.$career->logo) }}" alt="career logo">
+                            </div>
+                            <span class="text-gray-500 text-sm font-medium">
                                 {{ $career->title }}
                             </span>
-                            </a>
-                                {{-- incoming end --}}
-                        </div>
+                        </a>
+                    </div>
                     @endforeach
+                   
                 </div>
-
             </div>
         </section>
     </div>
