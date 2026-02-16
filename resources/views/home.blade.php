@@ -4,21 +4,47 @@
 <script src="{{ asset('assets/js/tailwind.js') }}"></script>
 @section('title', 'فامنو | منوی دیجیتال کسب و کار شما')
 @section('content')
-
-    <div class="items-center bg-white p-5 rounded-[20px] w-[95%] mx-auto">
-        <div class="w-11/12 mx-auto flex flex-row justify-between">
+<style>
+        .money{
+            background: #86dbd8;
+            background: linear-gradient(0deg, rgba(134, 219, 216, 1) 31%, rgba(89, 207, 203, 1) 80%);
+        }
+        .group{
+            background: #ffbe6e;
+            background: linear-gradient(0deg, rgba(255, 190, 110, 1) 31%, rgba(255, 160, 18, 1) 80%);
+        }
+        .group>img, .money>img{
+            filter: drop-shadow(0 0 0.25rem white);
+        }
+    </style>
+    <div class="items-center bg-white py-5 rounded-[20px] w-[95%] mx-auto">
+        <div class="w-11/12 mx-auto flex flex-row gap-5">
             <a href="#"
-               class="text-sm font-bold text-gray-600 w-20 flex justify-center py-1 border-1 border-gray-300 rounded-lg">انتخاب
-                شهر</a>
+               class="text-sm font-bold flex flex-col items-center rounded-3xl w-1/2 money text-white py-2 relative h-24">
+                <img src="{{ asset('assets/img/income2.png') }}" class="size-24 absolute top-4 -right-5" alt="">
+                <div class="absolute top-4 left-4 text-lg flex flex-col items-end gap-4">
+                    <span>
+                        درآمد زایی
+                    </span>
+                    <span class="text-xs font-bold">
+                        کلیک کنید
+                    </span>
+                </div>
+            </a>
             <a href="#"
-               class="text-sm font-bold text-gray-600 w-20 flex justify-center py-1 border-1 border-gray-300 rounded-lg">درآمد
-                زایی</a>
-            <a href="#"
-               class="text-sm font-bold text-gray-600 w-20 flex justify-center py-1 border-1 border-gray-300 rounded-lg">خرید
-                گروهی</a>
+               class="text-sm font-bold flex flex-col items-center rounded-3xl w-1/2 group text-white py-2 relative h-24">
+                <img src="{{ asset('assets/img/group2.png') }}" class="size-26 absolute top-6 -right-5" alt="">
+                <div class="absolute top-4 left-2 text-lg flex flex-col items-end gap-4">
+                    <span>
+                        خرید گروهی
+                    </span>
+                    <span class="text-xs font-bold">
+                        کلیک کنید
+                    </span>
+                </div>
+            </a>
         </div>
     </div>
-
     <div class="w-full pt-1 samim">
 
 
