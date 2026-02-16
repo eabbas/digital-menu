@@ -47,7 +47,7 @@ class ClientController extends Controller
                 $cartCount += $cart->quantity;
             }
         }
-
+        // dd(count(Auth::user()->carts));
 
         return view('client.menu', ['career' => $career, 'slug' => $slug, 'cartCount'=>$cartCount, 'order'=>$order , 'currentUser'=>$currentUser]);
     }
