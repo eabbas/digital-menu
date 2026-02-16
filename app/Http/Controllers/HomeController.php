@@ -15,8 +15,9 @@ class HomeController extends Controller
         $sliders = slider::all();
         $careerCategories = careerCategory::all();
         $careers = career::all();
+        $pages = pages::all();
 
-        return view('home', ['sliders' => $sliders, 'careerCategories' => $careerCategories, 'careers' => $careers]);
+        return view('home', ['sliders' => $sliders, 'careerCategories' => $careerCategories, 'careers' => $careers, 'pages'=>$pages]);
     }
 
     public function search(Request $request)
@@ -74,24 +75,24 @@ class HomeController extends Controller
 
     }
     
-    public function filter(Request $request){
-        $datas = [];
-        if(isset($request->models)){
-            if(in_array('all', $request->models)){
-                $datas['careerCategory'] = careerCategory::where('title' , 'like' , "%".$request->searchTitle."%")->get();
-                $datas['career'] = career::where('title' , 'like' , "%".$request->searchTitle."%")->get();
-                $datas['pages'] = pages::where('title' , 'like' , "%".$request->searchTitle."%")->get();
-                $datas['menu'] = menu::where('title' , 'like' , "%".$request->searchTitle."%")->get();
-            } else {
-                if(isset($request->models)){
-                    foreach($request->models as $model){
-                        $className = 'App\\Models\\'.$model;
-                        $datas[$model]=$className::where('title', 'like', "%".$request->searchTitle."%")->get();
-                    }
-                }
-            }
-        }
-        return response()->json($datas);
-    }
+    // public function filter(Request $request){
+    //     $datas = [];
+    //     if(isset($request->models)){
+    //         if(in_array('all', $request->models)){
+    //             $datas['careerCategory'] = careerCategory::where('title' , 'like' , "%".$request->searchTitle."%")->get();
+    //             $datas['career'] = career::where('title' , 'like' , "%".$request->searchTitle."%")->get();
+    //             $datas['pages'] = pages::where('title' , 'like' , "%".$request->searchTitle."%")->get();
+    //             $datas['menu'] = menu::where('title' , 'like' , "%".$request->searchTitle."%")->get();
+    //         } else {
+    //             if(isset($request->models)){
+    //                 foreach($request->models as $model){
+    //                     $className = 'App\\Models\\'.$model;
+    //                     $datas[$model]=$className::where('title', 'like', "%".$request->searchTitle."%")->get();
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return response()->json($datas);
+    // }
     
 }
