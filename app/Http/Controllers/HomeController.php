@@ -30,7 +30,7 @@ class HomeController extends Controller
         $datas['title'] = $request->search;
         $datas['careers'] = career::where('title', 'like', "%" . $request->search . "%")->get();
         $datas['careerCategories'] = careerCategory::where('title', 'like', "%" . $request->search . "%")->get();
-        $datas['socialMedias'] = covers::where('title', 'like', "%" . $request->search . "%")->get();
+        $datas['socialMedias'] = pages::where('title', 'like', "%" . $request->search . "%")->get();
         $datas['menus'] = menu::where('title', 'like', "%" . $request->search . "%")->get();
         return view('client.search.index', ['datas' => $datas, 'searchTitle' => $request->search]);
     }
@@ -43,7 +43,7 @@ class HomeController extends Controller
             if (in_array('all', $request->models)) {
                 $datas['careerCategory'] = careerCategory::where('title', 'like', "%" . $request->searchTitle . "%")->get();
                 $datas['career'] = career::where('title', 'like', "%" . $request->searchTitle . "%")->get();
-                $datas['covers'] = covers::where('title', 'like', "%" . $request->searchTitle . "%")->get();
+                $datas['covers'] = pages::where('title', 'like', "%" . $request->searchTitle . "%")->get();
                 $datas['menu'] = menu::where('title', 'like', "%" . $request->searchTitle . "%")->get();
             } else {
                 if (isset($request->models)) {
@@ -94,5 +94,9 @@ class HomeController extends Controller
     //     }
     //     return response()->json($datas);
     // }
+
+    public function printery(){
+        return view('client.printery.index');
+    }
     
 }
