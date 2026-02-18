@@ -146,15 +146,13 @@
                 @endforeach
             </div>
         @endforeach
-        @if(Auth::check() && count(Auth::user()->carts))
-            <div id="orderBasket"
-                 class="w-full fixed bottom-15 right-0 z-1 @if(count(Auth::user()->carts)) block @else hidden @endif lg:hidden">
-                <div class="w-11/12 mx-auto p-3 lg:p-5 bg-[#eb3254] rounded-md text-center text-white cursor-pointer"
-                     onclick="openShoppingCart('phoneOpen')">
-                    سبد خرید ( <span>{{ $cartCount }}</span> )
-                </div>
+        <div id="orderBasket"
+                class="w-full fixed bottom-15 right-0 z-1 @if(Auth::check() && count(Auth::user()->carts)) block @else hidden @endif lg:hidden">
+            <div class="w-11/12 mx-auto p-3 lg:p-5 bg-[#eb3254] rounded-md text-center text-white cursor-pointer"
+                    onclick="openShoppingCart('phoneOpen')">
+                سبد خرید ( <span>{{ $cartCount }}</span> )
             </div>
-        @endif
+        </div>
         <div id="cartList"
              class="w-full fixed lg:hidden top-0 right-0 transition-all duration-300 z-5 max-h-0 overflow-hidden bg-white">
             <div class="flex flex-row justify-between items-center pt-3 px-3">
@@ -448,7 +446,6 @@
                         'menu_item_id': el.parentElement.parentElement.getAttribute('data-item-id')
                     },
                     success: function (data) {
-                        console.log(data)
                         if ("{{ Auth::check() }}") {
                             let length = "{{ $cartCount }}"
                             if (orderBasket.classList.contains('hidden')) {
@@ -457,7 +454,8 @@
                                 parent.classList = "mb-[113px] lg:mb-0"
                             }
                             length++
-                            orderBasket.children[0].children[0].innerText = length
+                            // orderBasket.children[0].children[0].innerText = length
+                            orderBasket.children[0].children[0].innerText++
                             shoppingCartCount.innerText = length
                             el.parentElement.parentElement.innerHTML = `
                         <div class="relative w-16 lg:w-20">

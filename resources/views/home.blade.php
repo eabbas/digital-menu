@@ -59,7 +59,7 @@
                     خدمات
                 </h2>
                 <div class="w-full grid grid-cols-4 gap-3 mt-7">
-                    <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
+                    <a href="{{ route('printery') }}" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
                         <img src="{{ asset('assets/img/printer.png') }}" class="size-10" alt="">
                         <span class="text-sm font-bold text-gray-800 text-center">
                             چاپ
