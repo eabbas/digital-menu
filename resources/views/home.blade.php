@@ -77,7 +77,7 @@
                             زبان
                         </span>
                     </a>
-                    <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
+                    <a href="{{ route('career.careersList') }}" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
                         <img src="{{ asset('assets/img/food.png') }}" class="size-10" alt="">
                         <span class="text-sm font-bold text-gray-800 text-center">
                             سفارش غذا
@@ -89,18 +89,18 @@
                             خدمات کامپیوتر
                         </span>
                     </a>
-                    <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
-                        <img src="{{ asset('assets/img/simCard.png') }}" class="size-10" alt="">
-                        <span class="text-sm font-bold text-gray-800 text-center">
-                            اینترنت و شارژ
-                        </span>
-                    </a>
-                    <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
-                        <img src="{{ asset('assets/img/wall.png') }}" class="size-10" alt="">
-                        <span class="text-sm font-bold text-gray-800 text-center">
-                           دیوار شهر شما
-                        </span>
-                    </a>
+{{--                    <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">--}}
+{{--                        <img src="{{ asset('assets/img/simCard.png') }}" class="size-10" alt="">--}}
+{{--                        <span class="text-sm font-bold text-gray-800 text-center">--}}
+{{--                            اینترنت و شارژ--}}
+{{--                        </span>--}}
+{{--                    </a>--}}
+{{--                    <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">--}}
+{{--                        <img src="{{ asset('assets/img/wall.png') }}" class="size-10" alt="">--}}
+{{--                        <span class="text-sm font-bold text-gray-800 text-center">--}}
+{{--                           دیوار شهر شما--}}
+{{--                        </span>--}}
+{{--                    </a>--}}
                 </div>
             </div>
             <div class="my-3 bg-white p-5 rounded-[20px] w-[95%] mx-auto">
@@ -123,7 +123,7 @@
                     <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
                         <img src="{{ asset('assets/img/educate.png') }}" class="size-10" alt="">
                         <span class="text-sm font-bold text-gray-800 text-center">
-                           دوره
+                           آموزشگاهی
                         </span>
                     </a>
                     <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
