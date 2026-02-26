@@ -35,6 +35,7 @@ use App\Http\Controllers\favoritesController;
 use App\Http\Controllers\FavoriteCategoriesController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Middleware\LoginMiddleware;
+use App\Http\Controllers\FAQController;
 use App\Http\Middleware\UserMiddleware;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -230,6 +231,35 @@ Route::get('product/show/{product}', [ProductController::class, 'show']);
 Route::get('product/edit/{product}', [ProductController::class, 'edit']);
 Route::post('product/update', [ProductController::class, 'update']);
 Route::get('product/delete/{product}', [ProductController::class, 'delete']);
+
+///// FAQ
+Route::group([
+    'prefix' => 'FAQ',
+    'controller' => FAQController::class,
+    'as' => 'FAQ.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::get('/create/{pages}', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/FaqList', 'index')->name('list');
+    Route::post('/edit', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::post('/delete', 'delete')->name('delete');
+    Route::post('/add-question', 'addQuestion')->name('addQuestion');
+
+});
+///pageBlocks
+Route::group([
+    'prefix' => 'pageBlocks',
+    'controller' => pageBlocksController::class,
+    'as' => 'pageBlocks.',
+    'middleware' => [UserMiddleware::class]
+], function () {
+    Route::post('/edit', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::post('/delete', 'delete')->name('delete');
+});
+
 
 // qr-code
 Route::group([
