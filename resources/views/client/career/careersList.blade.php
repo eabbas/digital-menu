@@ -1,8 +1,8 @@
 @extends('client.document')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>--}}
 @section('title', 'همه کسب کار ها')
 @section('content')
-    <div class="w-full h-full pt-5 samim">
+    <div class="w-11/12 mx-auto h-full pt-5 samim">
         <section>
             
            
