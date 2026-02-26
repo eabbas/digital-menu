@@ -13,6 +13,8 @@ let socialMediaForm = document.getElementById('socialMediaForm')
 // link form
 let siteLinkForm = document.querySelector('.createSiteLink')
 
+// Faq form
+let faqForm = document.querySelector('.createFaq')
 
 // edit socialmedia div
 let editSocialM = document.querySelector('.editsocialMediaForm')
@@ -60,10 +62,23 @@ function addLink() {
     siteLinkForm.classList.add('-translate-y-1/4')
 }
 
+function addFaq() {
+    group.classList.add('scale-95')
+    group.classList.add('opacity-0')
+    group.classList.add('invisible')
+
+    faqForm.classList.remove('invisible')
+    faqForm.classList.remove('opacity-0')
+    faqForm.classList.remove('top-full')
+    faqForm.classList.add('top-0')
+    faqForm.classList.add('-translate-y-1/4')
+}
 
 let forms = document.querySelectorAll('.form')
 let editSMF = document.querySelector('.editSMF')
 let editSLF = document.querySelector('.editSLF')
+let editFAQ = document.querySelector('.editFAQ')
+
 function closeForm() {
     forms.forEach((form) => {
         form.classList.add('invisible')
@@ -74,6 +89,8 @@ function closeForm() {
     editSMF.classList.add('max-h-0')
     editSLF.classList.remove('max-h-[500px]')
     editSLF.classList.add('max-h-0')
+    editFAQ.classList.remove('max-h-[500px]')
+    editFAQ.classList.add('max-h-0')
     block.classList.add('invisible')
     block.classList.add('opacity-0')
     group.classList.add('scale-95')
@@ -98,6 +115,25 @@ function openDropdown(page) {
         } else {
             editSLF.classList.remove('max-h-[500px]')
             editSLF.classList.add('max-h-0')
+        }
+    }
+    if (page == 'faq') {
+        if (editFAQ.classList.contains('max-h-0')) {
+            editFAQ.classList.remove('max-h-0')
+            editFAQ.classList.add('max-h-[500px]')
+        } else {
+            editFAQ.classList.remove('max-h-[500px]')
+            editFAQ.classList.add('max-h-0')
+        }
+    }
+    if (page == 'title') {
+        let editTLF = document.querySelector('.editTLF')
+        if (editTLF.classList.contains('max-h-0')) {
+            editTLF.classList.remove('max-h-0')
+            editTLF.classList.add('max-h-[500px]')
+        } else {
+            editTLF.classList.remove('max-h-[500px]')
+            editTLF.classList.add('max-h-0')
         }
     }
 }

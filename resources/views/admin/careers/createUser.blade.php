@@ -1,5 +1,5 @@
 @extends('admin.app.panel')
-@section('title', 'ایجاد کسب و کار برای دیگری')
+@section('title', 'ایجاد رستوران برای دیگری')
 @section('content')
     <div class="w-full md:w-8/12 mx-auto bg-white flex justify-center p-5">
         <div class="flex flex-col items-center justify-center w-full">

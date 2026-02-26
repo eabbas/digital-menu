@@ -13,6 +13,7 @@ class pages extends Model
         'title',
         'subTitle',
         'description',
+        
     ];
      public function socialMedia(){
       return $this->belongsToMany(socialMedia::class,'social_addresses','page_id','socialMedia_id');
@@ -32,5 +33,12 @@ class pages extends Model
      public function user()
     {
     return $this->belongsTo(User::class);
+    }
+    public function FAQs(){
+      return $this->hasMany(FAQ::class , 'page_id');
+    }
+    public function page_blocks()
+    {
+        return $this->hasMany(page_blocks::class , 'page_id');
     }
 }
