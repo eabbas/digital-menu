@@ -23,6 +23,7 @@ use App\Http\Controllers\EcommController;
 use App\Http\Controllers\EcommProductController;
 use App\Http\Controllers\EcommQrCodeController;
 use App\Http\Controllers\favoriteCareerController;
+use App\Http\Controllers\pageBlocksController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuCategoryController;
 use App\Http\Controllers\MenuItemController;
