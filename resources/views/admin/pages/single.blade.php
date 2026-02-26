@@ -9,7 +9,7 @@
 <div class="w-full lg:w-2/3 mx-auto">
     <div class="w-full mt-5 p-5 bg-white flex flex-col pb-40 relative rounded-lg">
         <div class="w-full flex flex-row justify-between items-center gap-3 pb-5">
-            <div class="w-full flex flex-row  items-center gap-3">
+            <div class="w-full flex flex-row items-center gap-3">
                 <div>
                     <img class="size-12 rounded-lg" src="{{ asset('storage/' . $page->logo_path) }}" alt="لوگو">
                 </div>
