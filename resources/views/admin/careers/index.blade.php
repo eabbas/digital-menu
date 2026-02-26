@@ -1,10 +1,10 @@
 @extends('admin.app.panel')
-@section('title', ' همه کسب وکارها')
+@section('title', ' همه رستورانها')
 @section('content')
     <div class="w-full flex flex-col pb-4">
         <div class="bg-white rounded-lg">
 
-            <h2 class="text-lg font-bold text-gray-800 p-4 text-center">لیست کسب و کار ها</h2>
+            <h2 class="text-lg font-bold text-gray-800 p-4 text-center">لیست رستوران</h2>
 
             <form class="flex flex-col gap-5" action="{{ route('career.deleteAll') }}" method="post">
                 @csrf

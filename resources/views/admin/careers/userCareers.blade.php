@@ -1,19 +1,18 @@
 @extends('admin.app.panel')
 
-@section('title', 'کسب و کارهای من')
+@section('title', 'رستوران من')
 
 @section('content')
     <div class="w-full flex flex-col pb-4">
         <div class="bg-white rounded-lg">
 
-            <h2 class="text-lg font-bold text-gray-800 p-4 text-center">لیست کسب و کار های من</h2>
+            <h2 class="text-lg font-bold text-gray-800 p-4 text-center">لیست رستورانی من</h2>
 
             <form class="flex flex-col gap-5" action="{{ route('career.deleteAll') }}" method="post">
                 @csrf
                 <div class="flex justify-end w-10/12 mx-auto">
                     <a href="{{ route('career.create', [$user]) }}"
-                        class="px-5 py-1 rounded-sm bg-blue-500 hover:bg-blue-600 text-white text-xs lg:text-base">ایجاد کسب
-                        وکار </a>
+                        class="px-5 py-1 rounded-sm bg-blue-500 hover:bg-blue-600 text-white text-xs lg:text-base">ایجاد رستوران </a>
                 </div>
                 <div class="w-10/12 mx-auto flex flex-row justify-between items-center">
                     <div class="flex flex-row items-center gap-3">

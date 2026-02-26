@@ -1,8 +1,8 @@
 @extends('admin.app.panel')
-@section('title', 'ویرایش کسب و کار')
+@section('title', 'ویرایش رستوران')
 @section('content')
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
-    <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">فرم ویرایش کسب وکار</h1>
+    <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">فرم ویرایش رستوران</h1>
     <form action="{{ route('career.update') }}" method="post" enctype='multipart/form-data'>
         @csrf
         <input type="hidden" name="id" value="{{ $career->id }}">
@@ -12,24 +12,24 @@
                 <div class="text-center mb-4">
                     <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="text-sm mb-1 mt-2.5 flex">لوگو کسب وکار</label>
+                            <label class="text-sm mb-1 mt-2.5 flex">لوگو رستوران</label>
                             <div
                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="file"
-                                    name='logo' placeholder=" لوگو کسب وکار خود را وارد کنید" title="لوگو کسب و کار">
+                                    name='logo' placeholder=" لوگو رستوران خود را وارد کنید" title="لوگو رستوران">
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="text-sm mb-1 mt-2.5 flex">نام کسب وکار</label>
+                            <label class="text-sm mb-1 mt-2.5 flex">نام رستوران</label>
                             <div
                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                    name='title' placeholder="نام کسب وکار خود را وارد کنید" required
+                                    name='title' placeholder="نام رستوران خود را وارد کنید" required
                                     value="{{ $career->title }}">
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="text-sm mb-1 mt-2.5 flex">دسته کسب و کار</label>
+                            <label class="text-sm mb-1 mt-2.5 flex">دسته رستوران</label>
                             <div
                                 class="p-3 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex pl-3">
                                 <select name="careerCategory"
@@ -54,12 +54,12 @@
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="text-sm mb-1 mt-2.5 flex">بنر کسب و کار</label>
+                            <label class="text-sm mb-1 mt-2.5 flex">بنر رستوران</label>
 
                             <div
                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="file"
-                                    name="banner" title="بنر کسب و کار">
+                                    name="banner" title="بنر رستوران">
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -92,7 +92,7 @@
                             <div
                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                    name='address' placeholder=" ادرس کسب وکار خود را وارد کنید" required
+                                    name='address' placeholder=" ادرس رستوران خود را وارد کنید" required
                                     value="{{ $career->address }}">
                             </div>
                         </div>
@@ -138,7 +138,7 @@
                             <div
                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <textarea rows="5" class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                    name='description' placeholder="توضیحات کسب وکار" class="w-full px-3 py-1 md:px-2 outline-none text-gray-500">{{ $career->description }}</textarea>
+                                    name='description' placeholder="توضیحات رستوران" class="w-full px-3 py-1 md:px-2 outline-none text-gray-500">{{ $career->description }}</textarea>
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 lg:col-span-2">
