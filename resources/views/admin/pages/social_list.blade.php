@@ -1,9 +1,9 @@
 @extends('admin.app.panel')
-@section('title', ' صفحه شبکه های اجتماعی ')
+@section('title', ' صفحه های من ')
 @section('content')
     <div class="w-full flex flex-col pb-4">
         <div class="pb-4">
-            <h2 class="lg:text-lg font-bold text-gray-800 text-center">اطلاعات صفحه های اجتماعی من</h2>
+            <h2 class="lg:text-lg font-bold text-gray-800 text-center">اطلاعات صفحه های من</h2>
         </div>
         @if (count(Auth::user()->pages))
             <form action="{{ route('pages.deleteAll') }}" method="post" class="flex flex-col gap-5">
