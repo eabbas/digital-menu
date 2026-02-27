@@ -47,7 +47,7 @@ function addSocialMedia() {
     socialMediaForm.classList.remove('opacity-0')
     socialMediaForm.classList.remove('top-full')
     socialMediaForm.classList.add('top-0')
-    socialMediaForm.classList.add('-translate-y-1/4')
+    // socialMediaForm.classList.add('-translate-y-1/4')
 }
 
 function addLink() {
@@ -59,7 +59,7 @@ function addLink() {
     siteLinkForm.classList.remove('opacity-0')
     siteLinkForm.classList.remove('top-full')
     siteLinkForm.classList.add('top-0')
-    siteLinkForm.classList.add('-translate-y-1/4')
+    // siteLinkForm.classList.add('-translate-y-1/4')
 }
 
 function addFaq() {
@@ -71,7 +71,7 @@ function addFaq() {
     faqForm.classList.remove('opacity-0')
     faqForm.classList.remove('top-full')
     faqForm.classList.add('top-0')
-    faqForm.classList.add('-translate-y-1/4')
+    faqForm.classList.add('-translate-y-1/9')
 }
 
 let forms = document.querySelectorAll('.form')
@@ -148,3 +148,15 @@ function qrCard(state) {
     }
 }
 
+let introBox = document.getElementById('introBox')
+
+function addIntroBox(){
+    console.log(555)
+    group.classList.add('scale-95')
+    group.classList.add('opacity-0')
+    group.classList.add('invisible')
+    introBox.classList.remove('invisible')
+    introBox.classList.remove('opacity-0')
+    introBox.classList.remove('top-full')
+    introBox.classList.add('top-0')
+}
