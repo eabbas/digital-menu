@@ -4,7 +4,7 @@
         }
     </style>
     @extends('admin.app.panel')
-    @section('title', 'ایجاد کاور لوگو')
+    @section('title', 'ایجاد صفحه معرفی')
     @section('content')
         <div class="text-center mb-4">
             <h1 class="text-lg font-bold text-gray-800">
