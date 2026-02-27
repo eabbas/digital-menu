@@ -40,6 +40,9 @@ use App\Http\Controllers\FAQController;
 use App\Http\Middleware\UserMiddleware;
 
 Route::get('/set-ref-code', [UserController::class, "setRefCode"]);
+Route::get('/test', function(){
+    return view('test');
+});
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/printery', [HomeController::class, 'printery'])->name('printery');
