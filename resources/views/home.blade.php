@@ -114,7 +114,7 @@
                            فروشگاهی
                         </span>
                     </a>
-                    <a href="#" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
+                    <a href="{{ route('pages.create') }}" class="flex flex-col items-center gap-2 border-1 border-gray-300 rounded-lg py-1.5">
                         <img src="{{ asset('assets/img/introduce.png') }}" class="size-10" alt="">
                         <span class="text-sm font-bold text-gray-800 text-center">
                            معرفی
@@ -134,10 +134,7 @@
                     </a>
                 </div>
             </div>
-
             <div class="w-[95%] mx-auto bg-[#00ae6f] h-14 lg:h-100 overflow-hidden rounded-lg my-3 flex flex-row">
-                <!--<img class="size-full rounded-inherit object-cover"-->
-                <!--    src="{{ asset('assets/img/0f45cb57f458472281f94e87c7dfc67def10436d_1767515466.jpg') }}" alt="">-->
                 <div class="w-6/12 lg:w-1/3 flex flex-row items-center justify-center">
                     <div class="flex flex-row pr-3 lg:flex-col gap-3 lg:gap-5 text-white lg:p-5 items-end">
                         <p class="font-bold text-[10px] lg:text-[30px]">
