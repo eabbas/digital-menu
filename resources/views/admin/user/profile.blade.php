@@ -43,10 +43,16 @@
                     <div class="flex flex-row justify-between items-center">
                         <h1 class="text-sm text-center lg:text-start lg:text-xl mt-3 lg:mt-5 font-bold mx-2">جزییات پروفایل
                         </h1>
-                        @if (!isset(Auth::user()->request) && !in_array(1, Auth::user()->role->pluck('id')->toArray()))
-                            <a href="{{ route('user.request', [Auth::user()]) }}"
-                                class="font-bold text-blue-500 text-xs lg:text-sm">درخواست نمایندگی</a>
-                        @endif
+                        <div class="flex flex-row items-center gap-5">
+                            @if (!isset(Auth::user()->request) && !in_array(1, Auth::user()->role->pluck('id')->toArray()))
+                                <a href="{{ route('user.request', [Auth::user()]) }}"
+                                    class="font-bold text-blue-500 text-xs lg:text-sm">درخواست نمایندگی</a>
+                            @endif
+                            <div class="flex flex-row items-center gap-2">
+                                <span class="text-sm text-gray-400">کد معرف شما :</span>
+                                <span class="text-blue-700 cursor-pointer" title="برای کپی کلیک کنید" onclick='copyText("{{ Auth::user()->ref_code }}")'>{{ Auth::user()->ref_code }}</span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="w-full h-px bg-gray-200 my-3 lg:my-5 "></div>
@@ -94,4 +100,11 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            function copyText(refCode) {
+            navigator.clipboard.writeText(refCode)
+            alert("لینک کپی شد")
+        }
+        </script>
     @endsection

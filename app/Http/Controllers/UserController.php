@@ -7,7 +7,9 @@ use App\Models\requests;
 use App\Models\role;
 use App\Models\role_user;
 use App\Models\User;
+use App\Models\refUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -27,13 +29,19 @@ class UserController extends Controller
                 return redirect()->back()->with('message', 'این شماره تلفن قبلا استفاده شده');
             }
             $password = Hash::make($request->password);
+            $ref_code = Str::random(10);
             $user_id = User::insertGetId([
                 'name' => $request->name,
                 'family' => $request->family,
                 'phoneNumber' => $request->phoneNumber,
                 'password' => $password,
+                'ref_code' => $ref_code,
             ]);
             role_user::create(['role_id' => 3, 'user_id' => $user_id]);
+            if (isset($request->ref_code)) {
+                $ref_user = User::where('ref_code', $request->ref_code)->first();
+                refUser::create(['user_id'=>$ref_user->id, 'invited_user_id'=>$user_id]);
+            }
             $user = User::find($user_id);
             Auth::login($user);
             return to_route('home');
