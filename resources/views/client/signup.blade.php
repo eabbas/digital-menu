@@ -52,6 +52,9 @@
                         <input type="password"
                             class="w-full p-2 md:p-[9px] placeholder-gray-400 focus:border-[#eb3254] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
                             name="password" placeholder="کلمه عبور" required>
+                        <input type="text"
+                            class="w-full p-2 md:p-[9px] placeholder-gray-400 focus:border-[#eb3254] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
+                            name="ref_code" placeholder="کد معرف (اختیاری)">
                         <div class="w-full flex flex-row items-center gap-3">
                             <input type="number"
                                 class="w-8/12 p-2 placeholder-gray-400 focus:border-[#eb3254] md:p-[9px] rounded-[7px] border-1 border-[#DBDFE9] outline-none"

@@ -24,6 +24,7 @@ class User extends Authenticatable
         'family',
         'main_image',
         'email',
+        'ref_code'
     ];
 
     /**
@@ -94,5 +95,9 @@ class User extends Authenticatable
 
     public function request(){
         return $this->hasOne(requests::class);
+    }
+
+    public function refUsers(){
+        return $this->hasMany(refUser::class);
     }
 }
