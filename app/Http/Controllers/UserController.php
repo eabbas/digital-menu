@@ -504,4 +504,16 @@ class UserController extends Controller
         }
         return response()->json($flag);
     }
+
+    public function setRefCode(){
+        $users = User::all();
+        foreach($users as $user){
+            if (!$user->ref_code) {
+                $ref_code = Str::random(10);
+                $user->ref_code = $ref_code;
+                $user->save();
+            }
+        }
+        dd('all users has ref code');
+    }
 }

@@ -39,6 +39,8 @@ use App\Http\Middleware\LoginMiddleware;
 use App\Http\Controllers\FAQController;
 use App\Http\Middleware\UserMiddleware;
 
+Route::get('/set-ref-code', [UserController::class, "setRefCode"]);
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/printery', [HomeController::class, 'printery'])->name('printery');
 Route::any('search', [HomeController::class, 'search'])->name('search');
