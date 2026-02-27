@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class intro_category extends Model
 {
-    protected $fillable = ['title'];
+    protected $fillable = ['title', 'user_id'];
 
     public function products(){
         return $this->belongsToMany(intro_product::class, 'intro_pro_cats');
