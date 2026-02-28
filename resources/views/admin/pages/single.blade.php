@@ -266,7 +266,7 @@
                                 <div
                                     class="w-full overflow-y-auto px-5 py-3 [&::-webkit-scrollbar]:w-0 flex flex-col gap-3">
                                     <div class="w-full">
-                                        <div onclick="addIntroBox()"
+                                        <div onclick="addIntroCategory()"
                                             class="w-full p-5 border-1 border-gray-400 flex flex-row items-center gap-5 hover:ring-2 hover:ring-sky-500 hover:ring-offset-2 hover:bg-sky-200 rounded-lg transition-all duration-150 cursor-pointer">
                                             <svg class="size-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                 width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -417,18 +417,23 @@
                                                             class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی
                                                             است!</span>
                                                         <input
-                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createSocialRequire rounded-md"
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md"
                                                             type="text" name='introCatTitle' id="introCatTitle"
                                                             placeholder="عنوان دسته">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="w-full text-left">
+                                            <div class="w-full flex flex-row justify-between items-center">
+                                                <button type="submit" onclick="addIntroProduct()"
+                                                    class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer @if(count(Auth::user()->introCats)==0) invisible @endif">
+                                                   افزودن محصول
+                                                </button>
                                                 <button type="submit" onclick="storeIntroCat(this)"
                                                     class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
                                                     ثبت
                                                 </button>
                                             </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -458,7 +463,12 @@
                                                 "title": introCatTitle.value
                                             },
                                             success: function(data){
+                                                
+                                                introCatTitle.value = ""
                                                 el.innerHTML = buttonText
+                                                if (el.previousElementSibling.classList.contains('invisible')) {
+                                                    el.previousElementSibling.classList.remove('invisible')
+                                                }
                                                 el.removeAttribute('disabled')
                                                 console.log(data)
                                             },
@@ -474,7 +484,7 @@
                             {{-- create intro product --}}
                             <div
                                 class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute right-0 top-full form px-5"
-                                id="introBox">
+                                id="introProduct">
                                 <div
                                     class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
                                 </div>
@@ -483,30 +493,85 @@
                                     <path
                                         d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
                                 </svg>
-                                <div class="flex items-start justify-center">
+                                <div class="flex items-start justify-center max-h-[550px] overflow-y-auto [&::-webkit-scrollbar]:hidden">
                                     <div class="bg-white rounded-2xl p-3 w-full lg:w-3/4">
                                         <div class="text-center mb-8">
                                             <h3 class="lg:text-lg font-bold text-gray-800"> معرفی محصول </h3>
                                         </div class="w-full">
                                         <div class="text-center mb-4">
-                                            <div class="w-full flex flex-col gap-3 my-4">
+                                            <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
                                                 <div
                                                     class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان دسته</label>
+                                                    <label class="text-sm mb-1 mt-2.5 flex">عنوان محصول</label>
                                                     <div
                                                         class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
                                                         <span
                                                             class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی
                                                             است!</span>
                                                         <input
-                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createSocialRequire rounded-md"
-                                                            type="text" name='introCatTitle' id="introCatTitle"
-                                                            placeholder="عنوان دسته">
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md"
+                                                            type="text" name='introProTitle' id="introProTitle"
+                                                            placeholder="عنوان محصول">
                                                     </div>
                                                 </div>
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                                    <label class="text-sm mb-1 mt-2.5 flex">دسته محصول</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                        
+                                                        <select
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md" onchange="addCats(this)" name='introProCat' id="introProCat" multiple>
+                                                            <option value="0" disabled>انتخاب کنید</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                                    <label class="text-sm mb-1 mt-2.5 flex">تصویر محصول</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                        <input
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md"
+                                                            type="file" name='introProImg' id="introProImg"
+                                                            placeholder="تصویر محصول">
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                                    <label class="text-sm mb-1 mt-2.5 flex">گالری تصاویر محصول</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                       
+                                                        <input
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md"
+                                                            type="file" name='introProGallery' id="introProGallery"
+                                                            placeholder="گالری تصاویر محصول" multiple>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1 lg:col-span-2">
+                                                    <label class="text-sm mb-1 mt-2.5 flex">توضیحات محصول</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                        <textarea
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md"
+                                                            type="text" name='introProDescription' id="introProDescription"
+                                                            placeholder="توضیحات محصول"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="w-full flex flex-col gap-4 itmes-center max-md:flex-col lg:col-span-2" id="features">
+                                                </div>
+                                            </div>
+                                            <div class="w-full text-center">
+                                                <button type="submit" onclick="addAttribute()"
+                                                    class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
+                                                    افزودن ویژگی
+                                                </button>
                                             </div>
                                             <div class="w-full text-left">
-                                                <button type="submit" onclick="storeIntroCat(this)"
+                                                <button type="submit" onclick="storeIntroPro(this)"
                                                     class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
                                                     ثبت
                                                 </button>
@@ -519,7 +584,105 @@
 
 
 
+                            <script>
 
+                                let categories = [];
+
+                                function addCats(el){
+                                    categories = []
+                                    console.log(el.selectedOptions)
+                                    let arr = el.selectedOptions
+                                    for (let i = 0; i < arr.length; i++) {
+                                        categories.push(arr[i].value)
+                                    }
+                                    
+                                }
+                                
+                                let introProTitle = document.getElementById('introProTitle')
+                                let introProCat = document.getElementById('introProCat')
+                                let introProImg = document.getElementById('introProImg')
+                                let introProGallery = document.getElementById('introProGallery')
+                                let introProDescription = document.getElementById('introProDescription')
+                                function storeIntroPro(el){
+                                    if(introProTitle.value == ""){
+                                        el.parentElement.parentElement.children[0].children[1].children[0].classList.remove('opacity-0')
+                                    } else {
+                                        let buttonText = el.innerText
+                                        // el.setAttribute('disabled', true)
+                                        // el.innerHTML = `<div class="w-6 h-6 border-2 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>`
+                                        let formData = new FormData()
+                                        formData.append('title', introProTitle.value)
+                                        formData.append('categpries', categories)
+                                        formData.append('main_image', introProImg.files[0])
+                                        for (let i = 0; i < introProGallery.files.length; i++) {
+                                            formData.append('gallery[]', introProGallery.files[i])
+                                        }
+                                        const rows = document.querySelectorAll('#features .feature-row');
+                                        rows.forEach((row, index) => {
+                                            const keyInput   = row.querySelector('input.key');
+                                            const valueInput = row.querySelector('input.value');
+
+                                            const key   = keyInput.value;
+                                            const value = valueInput.value;
+                                            if (key && value) {
+                                                formData.append(`attributes[${index}][${key}]`,   value);
+                                                // formData.append(`attributes[${index}][]`,   key);
+                                                // formData.append(`attributes[${index}][]`, value);
+                                            }
+                                        });
+                                        formData.append('description', introProDescription.value)
+                                        $.ajaxSetup({
+                                            headers: {
+                                                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                            }
+                                        })
+                                        $.ajax({
+                                            url: "{{ route('introPro.store') }}",
+                                            type: "POST",
+                                            contentType: false,
+                                            processData: false,
+                                            data: formData,
+                                            success: function(data){
+                                                console.log(data)
+                                                // introProTitle.value = ""
+                                                // introProCat.value = ""
+                                                // introProImg.value = ""
+                                                // introProGallery.value = ""
+                                                // introProDescription.value = ""
+                                                el.innerHTML = buttonText
+                                                el.removeAttribute('disabled')
+                                                // closeForm()
+                                            },
+                                            error: function(){
+                                                console.log('error')
+                                            }
+                                        })
+                                    }
+                                }
+                                function setCategories(){
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                        }
+                                    })
+                                    $.ajax({
+                                        url: "{{ route('introCat.selectCats') }}",
+                                        type: "GET",
+                                        success: function(datas){
+                                            datas.forEach((data)=>{
+                                                let option = document.createElement('option')
+                                                option.value = data.id
+                                                option.innerText = data.title
+                                                introProCat.appendChild(option)
+                                            })
+                                            console.log(datas)
+                                        },
+                                        error: function(){
+                                            console.log('error')
+                                        }
+                                    })
+                                }
+                            </script>
 
 
 

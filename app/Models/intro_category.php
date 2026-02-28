@@ -11,4 +11,8 @@ class intro_category extends Model
     public function products(){
         return $this->belongsToMany(intro_product::class, 'intro_pro_cats');
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

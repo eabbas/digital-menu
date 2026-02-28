@@ -100,4 +100,8 @@ class User extends Authenticatable
     public function refUsers(){
         return $this->hasMany(refUser::class);
     }
+
+    public function introCats(){
+        return $this->hasMany(intro_category::class);
+    }
 }

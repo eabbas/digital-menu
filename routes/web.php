@@ -51,7 +51,19 @@ Route::group([
     Route::post('/store', 'store')->name('store');
     Route::post('/update', 'update')->name('update');
     Route::post('/delete', 'delete')->name('delete');
+    Route::get('/selectCats', 'selectCats')->name('selectCats');
     Route::get('/user-intro-categories/{user}', 'user_cats')->name('list');
+});
+Route::group([
+    'prefix'=>"intro-pro",
+    'controller'=>IntroProductController::class,
+    'middleware'=>[UserMiddleware::class],
+    'as'=>'introPro.'
+], function(){
+    Route::post('/store', 'store')->name('store');
+    Route::post('/update', 'update')->name('update');
+    Route::post('/delete', 'delete')->name('delete');
+    // Route::get('/user-intro-categories/{user}', 'user_cats')->name('list');
 });
 
 

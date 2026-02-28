@@ -18,4 +18,9 @@ class IntroCategoryController extends Controller
         $category = intro_category::find($cat_id);
         return response()->json($category);
     }
+
+    public function selectCats(){
+        $categories = Auth::user()->introCats;
+        return response()->json($categories);
+    }
 }
