@@ -10,6 +10,8 @@ class intro_product extends Model
         'title',
         'description',
         'main_image',
+        'user_id',
+        'page_id',
     ];
 
     public function categories(){
@@ -22,5 +24,13 @@ class intro_product extends Model
 
     public function attributes(){
         return $this->hasMany(intro_product_attribute::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function page(){
+        return $this->belongsTo(pages::class, 'page_id');
     }
 }

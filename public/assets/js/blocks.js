@@ -176,6 +176,7 @@ function addIntroProduct(){
 }
 
 let features = document.getElementById("features")
+let featuresEdit = document.getElementById("featuresEdit")
 
 function addAttribute(){
     let attrBox = document.createElement('div')
@@ -198,6 +199,28 @@ function addAttribute(){
         attrBox.remove();
     });
     features.appendChild(attrBox)
+}
+function addAttributeEdit(){
+    let attrBox = document.createElement('div')
+    attrBox.classList = 'w-full grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 border-1 border-gray-300 rounded-lg relative feature-row'
+    attrBox.innerHTML = `
+        <span class="absolute -top-2 left-[-8px] px-2 py-1 bg-white rounded-full text-sm cursor-pointer shadow delete-btn">
+            ❌
+        </span>
+        <input
+            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] key"
+            type="text"
+            placeholder="نام ویژگی">
+        <input
+            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] value"
+            type="text"
+            placeholder="مقدار ویژگی">
+        
+        `
+    attrBox.querySelector('.delete-btn').addEventListener('click', () => {
+        attrBox.remove();
+    });
+    featuresEdit.appendChild(attrBox)
 }
 
 function removeAttribute(el){

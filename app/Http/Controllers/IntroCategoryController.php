@@ -12,6 +12,7 @@ class IntroCategoryController extends Controller
         $cat_id = intro_category::insertGetId([
             'title'=>$request->title,
             'user_id'=>Auth::id(),
+            'page_id'=>$request->page_id,
             'created_at'=>now(),
             'updated_at'=>now()
         ]);

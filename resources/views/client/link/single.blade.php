@@ -72,6 +72,133 @@
                     class="size-26 lg:size-30 rounded-full absolute inset-1/2 translate-x-1/2 -translate-y-1/5 border-4 border-white object-cover"
                     alt="">
             </div>
+
+
+              @if(count($page->introCats) && count($page->introPros))
+            <section class="w-full flex flex-col gap-3 mt-5">
+                <h2 class="text-lg font-bold py-3 text-center">محصولات ما</h2>
+                {{-- <div class="w-full h-10 flex items-center justify-between ">
+                    <span> مشاهده کردن بیشتر</span>
+                    <a href="" class="text-[#1dcd0e]">دیدن همه</a>
+                </div> --}}
+                <div class="w-full h-12 overflow-auto flex gap-2 items-center pb-1 text-[15px]">
+                    <span class="px-3 h-8 text-nowrap bg-white shadow-sm shadow-[#afa4a4] flex justify-center items-center font-bold rounded-xl cursro-pointer cursor-pointer" onclick="allProducts(this)">همه</span>
+                    @foreach ($introCats as $introCat)
+                        <span class="px-3 h-8 text-nowrap bg-white shadow-sm shadow-[#afa4a4] flex justify-center items-center font-bold rounded-xl cursro-pointer cursor-pointer introCategories" data-cat-id="{{ $introCat->id }}">{{ $introCat->title }}</span>
+                    @endforeach
+                </div>
+                <div class="w-full grid grid-cols-2 gap-4" id="allProducts">
+                    @foreach($introPros as $introPro)
+                    <div class="w-full flex flex-col items-center gap-3">
+
+                        <a href="#" class="w-full flex flex-col gap-3 bg-[#fafafa] p-1 shadow-sm rounded-xl introProducts" data-pro-id="{{ $introPro->id }}">
+                           
+                               
+                            <div class="w-full flex justify-center">
+                                {{-- <div class="absolute right-2 top-2 w-10 h-10 bg-[#fff] rounded-xl flex justify-center items-center">
+                                    <svg class="w-[28px] h-[28px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
+                                    </svg>
+                                </div> --}}
+                                @if(isset($introPro->main_image))
+                                <img src="{{ asset('storage/'.$introPro->main_image) }}" alt="" class="w-full max-h-[180px] object-cover lg:max-h-[250px] rounded-xl">
+                                @else
+                                <img src="{{ asset('assets/img/product/قیمت-گوشی-سامسونگ-Samsung-Galaxy-S24-Ultra-حافظه-512-رم-12-پارت-ویتنام.jpeg') }}" alt="" class="w-full max-h-[180px] object-cover lg:max-h-[300px] rounded-xl">
+                                @endif
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-[#868a88]">{{ $introPro->title }}</span>
+                            </div>
+                            {{-- <span class="font-bold">1.500.000 تومان</span> --}}
+                        </a>
+                       
+                    </div>
+                    @endforeach
+                </div>
+
+                <div class="w-full grid grid-cols-2 gap-4" id="customProducts"></div>
+            </section>
+            @endif
+
+
+
+            <script>
+                let allPros = document.getElementById('allProducts')
+                let customProducts = document.getElementById('customProducts')
+                let introCategories = document.querySelectorAll('.introCategories')
+
+                introCategories.forEach((introProduct)=>{
+                    introProduct.addEventListener('click', ()=>{
+                        allPros.classList.remove('grid')
+                        allPros.classList.add('hidden')
+                        introProduct.parentElement.children[0].classList.remove('bg-gray-200')
+                        introProduct.parentElement.children[0].classList.add('bg-white')
+                        if(introProduct.classList.contains('bg-white')){
+                            introCategories.forEach((item)=>{
+                                item.classList.add('bg-white')
+                                item.classList.remove('bg-gray-200')
+                            })
+                            introProduct.classList.remove('bg-white')
+                            introProduct.classList.add('bg-gray-200')
+                            $.ajaxSetup({
+                                headers: {
+                                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                }
+                            })
+                            $.ajax({
+                                url: "{{ route('introPro.showProducts') }}",
+                                type: "POST",
+                                dataType: "json",
+                                data: {
+                                    "category_id": introProduct.getAttribute('data-cat-id'),
+                                },
+                                success: function(datas){
+                                    customProducts.innerHTML = ""
+                                    datas.forEach((data)=>{
+                                        let div = document.createElement('div')
+                                        div.classList = "w-full flex flex-col items-center gap-3"
+                                        div.innerHTML = `
+                                        <a href="#" class="w-full flex flex-col gap-3 bg-[#fafafa] p-1 shadow-sm rounded-xl introProducts" data-pro_id="${data.id}">
+                                            <div class="w-full flex justify-center relative">
+                                                
+                                                <img src="${data.main_image ? '{{ asset('storage/') }}/' + data.main_image : '/images/default-product.png'}" alt="" class="w-full max-h-[180px] object-cover lg:max-h-[250px] rounded-xl">
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-[#868a88]">${data.title}</span>
+                                            </div>
+                                            <span class="font-bold">1.500.000 تومان</span>
+                                            
+                                        </a>
+                                        `
+                                        customProducts.appendChild(div)
+                                    })
+                                },
+                                error: function(){
+                                    console.log('error')
+                                }
+                            })
+                        } else {
+                            introProduct.classList.remove('bg-gray-200')
+                            introProduct.classList.add('bg-white')
+                        }
+
+                    })
+                })
+                function allProducts(el){
+                    console.log(allPros)
+                    introCategories.forEach((introProduct)=>{
+                        introProduct.classList.remove('bg-gray-200')
+                        introProduct.classList.add('bg-white')
+                    })
+                    el.classList.remove('bg-white')
+                    el.classList.add('bg-gray-200')
+                    allPros.classList.remove('hidden')
+                    allPros.classList.add('grid')
+                    customProducts.innerHTML = ""
+                }
+            </script>
+
+
             <div class="w-full mt-5 lg:mt-10 flex flex-col gap-5">
 
                 <div class="w-full flex flex-col gap-3 lg:gap-5" id="socialLinks">

@@ -104,4 +104,7 @@ class User extends Authenticatable
     public function introCats(){
         return $this->hasMany(intro_category::class);
     }
+    public function introPros(){
+        return $this->hasMany(intro_product::class);
+    }
 }
