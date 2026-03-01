@@ -45,7 +45,8 @@ class IntroProductController extends Controller
                 'intro_product_id'=>$pro_id
             ]);
         }
-        return response()->json($request->all());
+        $product = intro_product::find($pro_id);
+        return response()->json($product);
     }
 
     public function showProducts(Request $request){
@@ -63,6 +64,7 @@ class IntroProductController extends Controller
 
     public function update(Request $request){
         $product = intro_product::find($request->input('intro_product_id'));
+        // return response()->json($product);
         $product->title = $request->input('title');
         $product->description = $request->input('description');
         $product->attributes = json_encode($request->input('attributes'));
@@ -94,7 +96,7 @@ class IntroProductController extends Controller
         }
         $product->updated_at = now();
         $product->save();
-        return response()->json([$request->all(), $product, json_encode($request->input('main_image'))]);
+        return response()->json($product);
     }
 
     public function delete(Request $request){
