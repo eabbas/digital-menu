@@ -101,13 +101,9 @@
                 <div class="w-full grid grid-cols-2 gap-4" id="allProducts">
                     @foreach($introPros as $introPro)
                     <div class="w-full flex flex-col items-center gap-3">
-                        <a href="#" class="w-full flex flex-col gap-3 bg-[#fafafa] p-1 shadow-sm rounded-xl introProducts" data-pro-id="{{ $introPro->id }}">
+                        <a href="{{ route('introPro.single', [$introPro->id]) }}" class="w-full flex flex-col gap-3 bg-[#fafafa] p-1 shadow-sm rounded-xl introProducts" data-pro-id="{{ $introPro->id }}">
                             <div class="w-full flex justify-center">
-                                {{-- <div class="absolute right-2 top-2 w-10 h-10 bg-[#fff] rounded-xl flex justify-center items-center">
-                                    <svg class="w-[28px] h-[28px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                    </svg>
-                                </div> --}}
+                             
                                 @if(isset($introPro->main_image))
                                 <img src="{{ asset('storage/'.$introPro->main_image) }}" alt="" class="w-full max-h-[180px] object-cover lg:max-h-[250px] rounded-xl">
                                 @else
@@ -117,7 +113,6 @@
                             <div class="flex justify-between">
                                 <span class="text-[#868a88]">{{ $introPro->title }}</span>
                             </div>
-                            {{-- <span class="font-bold">1.500.000 تومان</span> --}}
                         </a>
                         <div class="w-full flex flex-row items-center gap-3">
                             <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer w-full flex justify-center items-center"

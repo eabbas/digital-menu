@@ -91,7 +91,7 @@
                     @foreach($introPros as $introPro)
                     <div class="w-full flex flex-col items-center gap-3">
 
-                        <a href="#" class="w-full flex flex-col gap-3 bg-[#fafafa] p-1 shadow-sm rounded-xl introProducts" data-pro-id="{{ $introPro->id }}">
+                        <a href="{{ route('introPro.showForUser', [$introPro->id]) }}" class="w-full flex flex-col gap-3 bg-[#fafafa] p-1 shadow-sm rounded-xl introProducts" data-pro-id="{{ $introPro->id }}">
                            
                                
                             <div class="w-full flex justify-center">

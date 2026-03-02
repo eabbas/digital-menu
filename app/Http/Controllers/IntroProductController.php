@@ -9,6 +9,7 @@ use App\Models\intro_pro_cat;
 use App\Models\intro_product_attribute;
 use App\Models\intro_product_gallery;
 use App\Models\User;
+use App\Models\pages;
 use Illuminate\Support\Facades\Auth;
 use Log;
 
@@ -87,11 +88,6 @@ class IntroProductController extends Controller
             }
         }
         intro_pro_cat::where('intro_product_id', $request->intro_product_id)->delete();
-        // return response()->json($product->categories[1]->pivot);
-        // foreach($product->categories as $category){
-        //     return response()->json($category->pivot);
-        // }
-        // $categories = explode(',',);
         foreach($request->categpries as $category){
             intro_pro_cat::create([
                 'intro_category_id'=>$category,
@@ -100,6 +96,7 @@ class IntroProductController extends Controller
         }
         $product->updated_at = now();
         $product->save();
+        $product['attributes']=json_decode($product->attributes);
         return response()->json($product);
     }
 
@@ -112,5 +109,20 @@ class IntroProductController extends Controller
         }
         $product->delete();
         return response()->json('deleted');
+    }
+
+    public function single(intro_product $intro_product){
+        return view('admin.pages.product.single', ['product'=>$intro_product]);
+    }
+    public function showForUser(intro_product $intro_product){
+        return view('client.link.product.single', ['product'=>$intro_product]);
+    }
+
+    public function editSingle(Request $request){
+        $page = pages::find($request->page_id);
+        $product = intro_product::find($request->product_id);
+        $product['categories']=$product->categories;
+        $product['attributes']=json_decode($product->attributes);
+        return response()->json(['categories'=>$page->introCats, 'product'=>$product]);
     }
 }

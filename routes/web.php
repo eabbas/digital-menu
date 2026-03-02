@@ -54,7 +54,6 @@ Route::group([
     Route::post('/delete', 'delete')->name('delete');
     Route::get('/selectCats/{pages}', 'selectCats')->name('selectCats');
     Route::get('/selectCats', 'selectCats')->name('selectCats');
-    
     Route::get('/user-intro-categories/{user?}', 'user_cats')->name('list');
 });
 Route::group([
@@ -68,6 +67,9 @@ Route::group([
     Route::post('/delete', 'delete')->name('delete');
     Route::post('/showProducts', 'showProducts')->name('showProducts');
     Route::post('/edit', 'edit')->name('edit');
+    Route::post('/editSingle', 'editSingle')->name('editSingle');
+    Route::get('/single/{intro_product}', 'single')->name('single');
+    Route::get('/user-show/{intro_product}', 'showForUser')->name('showForUser');
     // Route::get('/user-intro-categories/{user}', 'user_cats')->name('list');
 });
 
