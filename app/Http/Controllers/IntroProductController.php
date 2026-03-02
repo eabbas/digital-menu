@@ -64,7 +64,6 @@ class IntroProductController extends Controller
 
     public function update(Request $request){
         $product = intro_product::find($request->input('intro_product_id'));
-        // return response()->json($product);
         $product->title = $request->input('title');
         $product->description = $request->input('description');
         $product->attributes = json_encode($request->input('attributes'));
@@ -87,8 +86,13 @@ class IntroProductController extends Controller
                 ]);
             }
         }
-        $categories = explode(',',$request->categpries);
-        foreach($categories as $category){
+        intro_pro_cat::where('intro_product_id', $request->intro_product_id)->delete();
+        // return response()->json($product->categories[1]->pivot);
+        // foreach($product->categories as $category){
+        //     return response()->json($category->pivot);
+        // }
+        // $categories = explode(',',);
+        foreach($request->categpries as $category){
             intro_pro_cat::create([
                 'intro_category_id'=>$category,
                 'intro_product_id'=>$request->input('intro_product_id')

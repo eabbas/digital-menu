@@ -226,3 +226,18 @@ function addAttributeEdit(){
 function removeAttribute(el){
     el.parentElement.remove()
 }
+
+let introCatsList = document.getElementById('introCatsList')
+function showIntroCats(){
+    block.classList.remove('invisible')
+    block.classList.remove('opacity-0')
+    group.classList.add('scale-95')
+    group.classList.add('opacity-0')
+    group.classList.add('invisible')
+    introCatsList.classList.remove('invisible')
+    introCatsList.classList.remove('opacity-0')
+    introCatsList.classList.remove('top-full')
+    introCatsList.classList.add('top-0')
+    // introCatsList.classList.add('-translate-y-1/6')
+    showCategories()
+}

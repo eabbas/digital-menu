@@ -84,18 +84,19 @@
                     class="size-20 lg:size-30 rounded-full absolute inset-1/2 translate-x-1/2 -translate-y-1/5"
                     alt="">
             </div>
-            
-
-
-
-
+        
             @if(count($page->introCats) && count($page->introPros))
-            <section class="w-full flex flex-col gap-3 mt-5">
-                <div class="w-full h-12 overflow-auto flex gap-2 items-center pb-1 text-[15px]">
-                    <span class="px-3 h-8 text-nowrap bg-white shadow-sm shadow-[#afa4a4] flex justify-center items-center font-bold rounded-xl cursro-pointer cursor-pointer" onclick="allProducts(this)">همه</span>
-                    @foreach ($introCats as $introCat)
-                        <span class="px-3 h-8 text-nowrap bg-white shadow-sm shadow-[#afa4a4] flex justify-center items-center font-bold rounded-xl cursro-pointer cursor-pointer introCategories" data-cat-id="{{ $introCat->id }}">{{ $introCat->title }}</span>
-                    @endforeach
+            <section class="w-full flex flex-col gap-3 mt-10">
+                <div class="w-full flex flex-row justify-between items-center">
+                    <div class="w-9/12 lg:w-10/12 flex gap-2 items-center pb-1 text-[15px] overflow-x-auto [&-webkit-scrollbar]:hidden">
+                        <span class="px-3 h-8 text-nowrap bg-white shadow-sm shadow-[#afa4a4] flex justify-center items-center font-bold rounded-xl cursro-pointer cursor-pointer" onclick="allProducts(this)">همه</span>
+                        @foreach ($introCats as $introCat)
+                            <div class="px-3 h-8 text-nowrap bg-white shadow-sm shadow-[#afa4a4] flex justify-center items-center font-bold rounded-xl cursro-pointer cursor-pointer relative introCategories" data-cat-id="{{ $introCat->id }}">
+                                <span>{{ $introCat->title }}</span>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="w-fit text-sm text-blue-800 font-bold cursor-pointer" onclick="showIntroCats()">ویرایش دسته ها</div>
                 </div>
                 <div class="w-full grid grid-cols-2 gap-4" id="allProducts">
                     @foreach($introPros as $introPro)
@@ -118,7 +119,7 @@
                             </div>
                             {{-- <span class="font-bold">1.500.000 تومان</span> --}}
                         </a>
-                        <div class="w-full lg:w-1/9 flex flex-row items-center gap-3">
+                        <div class="w-full flex flex-row items-center gap-3">
                             <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer w-full flex justify-center items-center"
                                 onclick='editIntroPro("{{ $introPro->id }}")'>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
@@ -213,7 +214,7 @@
                                             {{-- <span class="font-bold">1.500.000 تومان</span> --}}
                                             
                                         </a>
-                                        <div class="w-full lg:w-1/9 flex flex-row items-center gap-3">
+                                        <div class="w-full flex flex-row items-center gap-3">
                                             <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer w-full flex justify-center items-center"
                                                 onclick='editIntroPro(${data.id})'>
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
@@ -246,7 +247,7 @@
                 })
 
                 function allProducts(el){
-                    console.log(allPros)
+                    // console.log(allPros)
                     introCategories.forEach((introProduct)=>{
                         introProduct.classList.remove('bg-gray-200')
                         introProduct.classList.add('bg-white')
@@ -555,17 +556,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
                             {{-- create intro category --}}
                             <div
                                 class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute right-0 top-full form px-5"
@@ -620,7 +610,7 @@
                             <script>
                                 let introCatTitle = document.getElementById('introCatTitle')
                                 function storeIntroCat(el){
-                                    console.log(el.parentElement.previousElementSibling.children[0].children[1].children[0])
+                                    // console.log(el.parentElement.previousElementSibling.children[0].children[1].children[0])
                                     if(introCatTitle.value == ""){
                                         el.parentElement.previousElementSibling.children[0].children[1].children[0].classList.remove('opacity-0')
                                     } else {
@@ -648,7 +638,7 @@
                                                     el.previousElementSibling.classList.remove('invisible')
                                                 }
                                                 el.removeAttribute('disabled')
-                                                console.log(data)
+                                                // console.log(data)
                                             },
                                             error: function(){
                                                 console.log('error')
@@ -877,7 +867,7 @@
                                         }
                                     })
                                     $.ajax({
-                                        url: "{{ route('introCat.selectCats') }}",
+                                        url: "{{ route('introCat.selectCats', $page->id) }}",
                                         type: "GET",
                                         success: function(datas){
                                             datas.forEach((data)=>{
@@ -886,7 +876,7 @@
                                                 option.innerText = data.title
                                                 introProCat.appendChild(option)
                                             })
-                                            console.log(datas)
+                                            // console.log(datas)
                                         },
                                         error: function(){
                                             console.log('error')
@@ -1002,9 +992,7 @@
                                 </div>
                             </div>
                             {{-- edit intro product --}}
-
-
-
+                    
 
                             <script>
                                 let introProductEdit = document.getElementById('introProductEdit')
@@ -1017,6 +1005,7 @@
                                 let introProDescriptionEdit = document.getElementById('introProDescriptionEdit')
 
                                 let deleteBtn = document.querySelectorAll('.deleteBtn')
+                               
 
                                 function editIntroPro(introProId){
                                     
@@ -1101,7 +1090,7 @@
                                         el.innerHTML = `<div class="w-6 h-6 border-2 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>`
                                         let formData = new FormData()
                                         formData.append('title', introProTitleEdit.value)
-                                        console.log(introProImgEdit.files[0]);
+                                        // console.log(introProImgEdit.files[0]);
                                         
                                         formData.append('main_image', introProImgEdit.files[0])
                                         formData.append('page_id', "{{ $page->id }}")
@@ -1110,12 +1099,13 @@
                                             formData.append('gallery[]', introProGalleryEdit.files[i])
                                         }
                                         let children = introProCatEdit.children
+                                        let array = [];
                                         for(let child of children){
                                             if (child.selected == true) {
-                                                formData.append('categpries', child.value)
+                                                formData.append('categpries[]', child.value)
                                             }
-                                            
                                         }
+                                        
                                         const rows = document.querySelectorAll('#featuresEdit .feature-row');
                                         rows.forEach((row, index) => {
                                             const keyInput   = row.querySelector('input.key');
@@ -1144,14 +1134,14 @@
                                             success: function(data){
                                                 introProducts.forEach((product)=>{
                                                     if(product.getAttribute('data-pro-id') == data.id){
-                                                        console.log(product.children[0].children[0]);
+                                                        // console.log(product.children[0].children[0]);
                                                         product.children[0].children[0].removeAttribute('src')
                                                         product.children[0].children[0].setAttribute('src', "{{ asset('storage/') }}/"+data.main_image)
-                                                        console.log("{{ asset('storage/') }}"+data.main_image);
+                                                        // console.log("{{ asset('storage/') }}"+data.main_image);
                                                         product.children[1].children[0].innerText = data.title
                                                     }
                                                 })
-                                                console.log(data)
+                                                // console.log(data)
                                                 introProTitle.value = ""
                                                 introProCat.value = ""
                                                 introProImg.value = ""
@@ -1166,6 +1156,212 @@
                                             }
                                         })
                                     }
+                                }
+                            </script>
+
+
+
+
+                            {{-- edit intro category --}}
+                            <div
+                                class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute right-0 top-full form px-5"
+                                id="introCatsList">
+                                <div
+                                    class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" onclick="closeForm()"
+                                    class="size-5 cursor-pointer" viewBox="0 0 384 512">
+                                    <path
+                                        d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                                </svg>
+                                <div class="flex items-start justify-center max-h-[550px] overflow-y-auto [&::-webkit-scrollbar]:hidden">
+                                    <div class="bg-white rounded-2xl p-3 w-full lg:w-3/4">
+                                        <div class="text-center mb-8">
+                                            <h3 class="lg:text-lg font-bold text-gray-800"> ویرایش دسته ها </h3>
+                                        </div class="w-full">
+                                        <div id="allCatList" class="w-full flex flex-col gap-4 relative"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                             <div
+                                class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute right-0 top-full form px-5"
+                                id="editIntroCat">
+                                <div
+                                    class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" onclick="closeForm()"
+                                    class="size-5 cursor-pointer" viewBox="0 0 384 512">
+                                    <path
+                                        d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                                </svg>
+                                <div class="flex items-start justify-center">
+                                    <div class="bg-white rounded-2xl p-3 w-full lg:w-3/4">
+                                        <div class="text-center mb-8">
+                                            <h3 class="lg:text-lg font-bold text-gray-800">ویرایش دسته</h3>
+                                        </div class="w-full">
+                                        <div class="text-center mb-4">
+                                            <div class="w-full flex flex-col gap-3 my-4">
+                                                <input type="hidden" id="intCatId">
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان دسته</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                        <span
+                                                            class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی
+                                                            است!</span>
+                                                        <input
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md"
+                                                            type="text" name='introCatTitleEdit' id="introCatTitleEdit"
+                                                            placeholder="عنوان دسته">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="w-full flex flex-row justify-between items-center">
+                                                
+                                                <button type="submit" onclick="updateIntroCat()"
+                                                    class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
+                                                    ثبت
+                                                </button>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            {{-- edit intro category --}}
+
+
+
+                            <script>
+
+
+
+                                let intCatId = document.getElementById('intCatId')
+                                let introCatTitleEdit = document.getElementById('introCatTitleEdit')
+                                let editIntroCatEl = document.getElementById('editIntroCat')
+
+                                function editIntroCat(catId){
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                        }
+                                    })
+                                    $.ajax({
+                                        url : "{{ route('introCat.edit') }}",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: {
+                                            'introCatId': catId
+                                        },
+                                        success: function(data){
+                                            introCatTitleEdit.value = data.title
+                                            intCatId.value = data.id
+                                            block.classList.remove('invisible')
+                                            block.classList.remove('opacity-0')
+                                            group.classList.add('scale-95')
+                                            group.classList.add('opacity-0')
+                                            group.classList.add('invisible')
+                                            editIntroCatEl.classList.remove('invisible')
+                                            editIntroCatEl.classList.remove('opacity-0')
+                                            editIntroCatEl.classList.remove('top-full')
+                                            editIntroCatEl.classList.add('top-0')
+                                        },
+                                        error: function(){
+                                            console.log(error)
+                                        }
+                                    })
+                                }
+
+                                function updateIntroCat(){
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                        }
+                                    })
+                                    $.ajax({
+                                        url: "{{ route('introCat.update') }}",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: {
+                                            'category_id': intCatId.value,
+                                            'title': introCatTitleEdit.value
+                                        },
+                                        success: function(data){
+                                            console.log(data)
+                                            introCategories.forEach((element)=>{
+                                                if(element.getAttribute('data-cat-id') == data.id){
+                                                    element.innerText = data.title
+                                                }
+                                            })
+                                            closeForm()
+                                        },
+                                        error: function(){
+                                            console.log(error);
+                                            
+                                        }
+                                    })
+                                    // introCategories
+                                }
+
+                                let allCatList = document.getElementById('allCatList')
+
+                                function showCategories(){
+                                    
+                                    
+                                    allCatList.innerHTML = `
+                                    <div class="absolute w-full h-full top-0 right-0 flex justify-center items-center">
+                                        <div class="loading-wave">
+                                            <div class="loading-bar"></div>
+                                            <div class="loading-bar"></div>
+                                            <div class="loading-bar"></div>
+                                            <div class="loading-bar"></div>
+                                        </div>
+                                    </div>
+                                    `
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                        }
+                                    })
+                                    $.ajax({
+                                        url: "{{ route('introCat.selectCats', $page->id) }}",
+                                        type: "GET",
+                                        success: function(datas){
+                                            console.log(datas);
+                                            allCatList.innerHTML = ""
+                                            datas.forEach((data)=>{
+                                                let div = document.createElement('div')
+                                                div.classList = "flex flex-row justify-between items-center"
+                                                div.innerHTML = `
+                                                <span class="inline-block w-1/2 text-sm text-gray-800 font-bold">${data.title}</span>
+                                                    <div class="w-1/5 lg:w-1/8 flex flex-row items-center gap-3">
+                                                        <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer w-full flex justify-center items-center"
+                                                            onclick='editIntroCat(${data.id})'>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
+                                                                <path fill="white"
+                                                                    d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
+                                                            </svg>
+                                                        </div>
+                                                        <div class="p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer w-full flex justify-center items-center"
+                                                            onclick='deleteIntroCat(${data.id}, this)'>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
+                                                                <path fill="white"
+                                                                    d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                `
+                                                allCatList.appendChild(div)
+                                            })
+                                        },
+                                        error: function(){
+                                            console.log('error')
+                                        }
+                                    })
                                 }
                             </script>
 
