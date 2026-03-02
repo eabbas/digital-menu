@@ -37,4 +37,11 @@ class IntroCategoryController extends Controller
         $category->save();
         return response()->json($category);
     }
+
+    public function delete(Request $request){
+        $id = $request->category_id;
+        $category = intro_category::find($request->category_id);
+        $category->delete();
+        return response()->json($id);
+    }
 }

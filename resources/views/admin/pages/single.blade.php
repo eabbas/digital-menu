@@ -88,12 +88,12 @@
             @if(count($page->introCats) && count($page->introPros))
             <section class="w-full flex flex-col gap-3 mt-10">
                 <div class="w-full flex flex-row justify-between items-center">
-                    <div class="w-9/12 lg:w-10/12 flex gap-2 items-center pb-1 text-[15px] overflow-x-auto [&-webkit-scrollbar]:hidden">
+                    <div class="w-9/12 lg:w-10/12 flex gap-2 items-center pb-1 text-[15px] overflow-x-auto [&-webkit-scrollbar]:hidden" id="intro_categories">
                         <span class="px-3 h-8 text-nowrap bg-white shadow-sm shadow-[#afa4a4] flex justify-center items-center font-bold rounded-xl cursro-pointer cursor-pointer" onclick="allProducts(this)">همه</span>
                         @foreach ($introCats as $introCat)
-                            <div class="px-3 h-8 text-nowrap bg-white shadow-sm shadow-[#afa4a4] flex justify-center items-center font-bold rounded-xl cursro-pointer cursor-pointer relative introCategories" data-cat-id="{{ $introCat->id }}">
-                                <span>{{ $introCat->title }}</span>
-                            </div>
+                            <span class="px-3 h-8 text-nowrap bg-white shadow-sm shadow-[#afa4a4] flex justify-center items-center font-bold rounded-xl cursro-pointer cursor-pointer relative introCategories" data-cat-id="{{ $introCat->id }}">
+                                {{ $introCat->title }}
+                            </span>
                         @endforeach
                     </div>
                     <div class="w-fit text-sm text-blue-800 font-bold cursor-pointer" onclick="showIntroCats()">ویرایش دسته ها</div>
@@ -609,6 +609,7 @@
 
                             <script>
                                 let introCatTitle = document.getElementById('introCatTitle')
+                                let intro_categories = document.getElementById('intro_categories')
                                 function storeIntroCat(el){
                                     // console.log(el.parentElement.previousElementSibling.children[0].children[1].children[0])
                                     if(introCatTitle.value == ""){
@@ -631,14 +632,17 @@
                                                 'page_id': "{{ $page->id }}"
                                             },
                                             success: function(data){
-                                                
+                                                let span = document.createElement('span')
+                                                span.classList = "px-3 h-8 text-nowrap bg-white shadow-sm shadow-[#afa4a4] flex justify-center items-center font-bold rounded-xl cursro-pointer cursor-pointer relative introCategories"
+                                                span.setAttribute('data-cat-id', data.id)
+                                                span.innerText = data.title
+                                                intro_categories.appendChild(span)
                                                 introCatTitle.value = ""
                                                 el.innerHTML = buttonText
                                                 if (el.previousElementSibling.classList.contains('invisible')) {
                                                     el.previousElementSibling.classList.remove('invisible')
                                                 }
                                                 el.removeAttribute('disabled')
-                                                // console.log(data)
                                             },
                                             error: function(){
                                                 console.log('error')
@@ -1244,6 +1248,36 @@
                                 let introCatTitleEdit = document.getElementById('introCatTitleEdit')
                                 let editIntroCatEl = document.getElementById('editIntroCat')
 
+                                function deleteIntroCat(catId){
+                                    let introCategories = document.querySelectorAll('.introCategories')
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                        }
+                                    })
+                                    $.ajax({
+                                        url: "{{ route('introCat.delete') }}",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: {
+                                            'category_id': catId
+                                        },
+                                        success: function(data){
+                                            introCategories.forEach((element)=>{
+                                                if (element.getAttribute('data-cat-id') == data) {
+                                                    element.remove();
+                                                }
+                                            })
+                                            closeForm()
+                                        },
+                                        error: function(){
+                                            console.log('error')
+                                        }
+                                    })
+                                    
+                                    
+                                }
+
                                 function editIntroCat(catId){
                                     $.ajaxSetup({
                                         headers: {
@@ -1277,6 +1311,7 @@
                                 }
 
                                 function updateIntroCat(){
+                                    let introCategories = document.querySelectorAll('.introCategories')
                                     $.ajaxSetup({
                                         headers: {
                                             'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -1304,7 +1339,6 @@
                                             
                                         }
                                     })
-                                    // introCategories
                                 }
 
                                 let allCatList = document.getElementById('allCatList')
@@ -1331,7 +1365,7 @@
                                         url: "{{ route('introCat.selectCats', $page->id) }}",
                                         type: "GET",
                                         success: function(datas){
-                                            console.log(datas);
+                                           
                                             allCatList.innerHTML = ""
                                             datas.forEach((data)=>{
                                                 let div = document.createElement('div')
@@ -1347,7 +1381,7 @@
                                                             </svg>
                                                         </div>
                                                         <div class="p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer w-full flex justify-center items-center"
-                                                            onclick='deleteIntroCat(${data.id}, this)'>
+                                                            onclick='deleteIntroCat(${data.id})'>
                                                             <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
                                                                 <path fill="white"
                                                                     d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
