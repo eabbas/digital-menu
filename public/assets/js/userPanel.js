@@ -22,17 +22,6 @@ function hamburgerMenu(state, element){
     }
 }
 
-// let menus = document.querySelectorAll('.dashboard')
-// menus.forEach((element)=>{
-//     element.children[0].addEventListener('click', ()=>{
-//         menus.forEach((item)=>{
-//             item.children[1].classList.remove('max-h-[500px]')
-//             item.children[1].classList.add('max-h-0')
-//         })
-//         element.children[1].classList.remove('max-h-0');
-//         element.children[1].classList.add('max-h-[500px]');
-//     })
-// })
 let dashboards = document.querySelectorAll(".dashboard")
 dashboards.forEach(dashboard => {
     dashboard.children[0].addEventListener('click',()=>{
