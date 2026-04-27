@@ -57,7 +57,9 @@ class ClientController extends Controller
         $user = $pages->user;
         $user->scan_count += 1;
         $user->save();
-        return view('client.link.single', ['page' => $pages, 'slug' => $slug]);
+        $introCats = $pages->introCats;
+        $introPros = $pages->introPros;
+        return view('client.link.single', ['page' => $pages, 'slug' => $slug, 'introCats'=>$introCats, 'introPros'=>$introPros]);
     }
 
     public function show_career(career $career)

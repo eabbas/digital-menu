@@ -1,230 +1,129 @@
 @extends('admin.app.panel')
 
 @section('title')
-{{ $page->title }}
+    {{ $page->title }}
 @endsection
 @section('content')
-<script src="{{ asset('assets/js/jquery.js') }}"></script>
-@csrf
-<div class="w-full lg:w-2/3 mx-auto">
-    <div class="w-full mt-5 p-5 bg-white flex flex-col pb-40 relative rounded-lg">
-        <div class="w-full flex flex-row justify-between items-center gap-3 pb-5">
-            <div class="w-full flex flex-row items-center gap-3">
-                <div>
-                    <img class="size-12 rounded-lg" src="{{ asset('storage/' . $page->logo_path) }}" alt="لوگو">
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    @csrf
+    <div class="w-full lg:w-2/3 mx-auto">
+        <div class="w-full mt-5 p-5 bg-white flex flex-col pb-40 relative rounded-lg">
+            <div class="w-full flex flex-row justify-between items-center gap-3 pb-5">
+                <div class="w-full flex flex-row items-center gap-3">
+                    <div>
+                        <img class="size-12 rounded-lg" src="{{ asset('storage/' . $page->logo_path) }}" alt="لوگو">
+                    </div>
+                    <h2 class="text-sm lg:text-lg font-bold text-gray-800">
+                        {{ $page->title }}
+                    </h2>
                 </div>
-                <h2 class="text-sm lg:text-lg font-bold text-gray-800">
-                    {{ $page->title }}
-                </h2>
-            </div>
-            <div>
-                {{-- page qr code --}}
-                <div class="w-full h-dvh fixed top-0 right-0 z-999 bg-black/50 invisible opacity-0 transition-all duration-300"
-                    id="qrcode_card">
-                    <div
-                        class="relative w-full lg:w-[calc(100%-265px)] h-full float-end flex items-center justify-center">
-                        <div class="absolute top-10 right-10 bg-white rounded-full p-2 cursor-pointer"
-                            onclick="qrCard('close')">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
-                                <path
-                                    d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
-                            </svg>
-                        </div>
-                        @if (isset($page->social_qr_codes->qr_path))
-                        <div class="w-2/3 lg:w-1/4 mx-auto bg-white rounded-lg p-5">
-                            <img src="{{ asset('storage/' . $page->social_qr_codes->qr_path) }}" class="w-full"
-                                alt="">
-                            <div class="lg:w-full mx-auto bg-gray-300 rounded-lg p-2 mt-2 flex items-center justify-center cursor-pointer"
-                                onclick='copyText({{ $page->id }} , "{{ $page->social_qr_codes->slug }}")'>
-                                کپی لینک
+                <div>
+                    {{-- page qr code --}}
+                    <div class="w-full h-dvh fixed top-0 right-0 z-999 bg-black/50 invisible opacity-0 transition-all duration-300"
+                        id="qrcode_card">
+                        <div
+                            class="relative w-full lg:w-[calc(100%-265px)] h-full float-end flex items-center justify-center">
+                            <div class="absolute top-10 right-10 bg-white rounded-full p-2 cursor-pointer"
+                                onclick="qrCard('close')">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
+                                    <path
+                                        d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                                </svg>
                             </div>
+                            @if (isset($page->social_qr_codes->qr_path))
+                                <div class="w-2/3 lg:w-1/4 mx-auto bg-white rounded-lg p-5">
+                                    <img src="{{ asset('storage/' . $page->social_qr_codes->qr_path) }}" class="w-full"
+                                        alt="">
+                                    <div class="lg:w-full mx-auto bg-gray-300 rounded-lg p-2 mt-2 flex items-center justify-center cursor-pointer"
+                                        onclick='copyText({{ $page->id }} , "{{ $page->social_qr_codes->slug }}")'>
+                                        کپی لینک
+                                    </div>
+                                </div>
+                            @endif
                         </div>
-                        @endif
+                    </div>
+                    {{-- page qr code end --}}
+                    <div class="inline-block p-2 rounded-md bg-gray-200 cursor-pointer" onclick="qrCard('open')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
+                            <path
+                                d="M352 224c53 0 96-43 96-96s-43-96-96-96s-96 43-96 96c0 4 .2 8 .7 11.9l-94.1 47C145.4 170.2 121.9 160 96 160c-53 0-96 43-96 96s43 96 96 96c25.9 0 49.4-10.2 66.6-26.9l94.1 47c-.5 3.9-.7 7.8-.7 11.9c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-25.9 0-49.4 10.2-66.6 26.9l-94.1-47c.5-3.9 .7-7.8 .7-11.9s-.2-8-.7-11.9l94.1-47C302.6 213.8 326.1 224 352 224z" />
+                        </svg>
                     </div>
                 </div>
-                {{-- page qr code end --}}
-                <div class="inline-block p-2 rounded-md bg-gray-200 cursor-pointer" onclick="qrCard('open')">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
-                        <path
-                            d="M352 224c53 0 96-43 96-96s-43-96-96-96s-96 43-96 96c0 4 .2 8 .7 11.9l-94.1 47C145.4 170.2 121.9 160 96 160c-53 0-96 43-96 96s43 96 96 96c25.9 0 49.4-10.2 66.6-26.9l94.1 47c-.5 3.9-.7 7.8-.7 11.9c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-25.9 0-49.4 10.2-66.6 26.9l-94.1-47c.5-3.9 .7-7.8 .7-11.9s-.2-8-.7-11.9l94.1-47C302.6 213.8 326.1 224 352 224z" />
-                    </svg>
+                <div>
+                    <a href="{{ route('client.loadLink', [$page]) }}"
+                        class="inline-block p-2 rounded-md bg-gray-200 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 576 512">
+                            <path
+                                d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z" />
+                        </svg>
+                    </a>
                 </div>
             </div>
-            <div>
-                <a href="{{ route('client.loadLink', [$page]) }}"
-                    class="inline-block p-2 rounded-md bg-gray-200 cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 576 512">
-                        <path
-                            d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z" />
-                    </svg>
-                </a>
+            <div class="p-3 lg:p-5 rounded-full bg-black bottom-10 right-3 lg:-right-10 fixed lg:absolute cursor-pointer"
+                onclick="addBlock('open')">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-6 lg:size-10" viewBox="0 0 448 512">
+                    <path fill="white"
+                        d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                </svg>
             </div>
-        </div>
-        <div class="p-3 lg:p-5 rounded-full bg-black bottom-10 right-3 lg:-right-10 fixed lg:absolute cursor-pointer"
-            onclick="addBlock('open')">
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 lg:size-10" viewBox="0 0 448 512">
-                <path fill="white"
-                    d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-            </svg>
-        </div>
-        <div class="relative">
-            <div>
-                <img class="w-full h-[130px] object-cover lg:h-[200px] rounded-md"
-                    src="{{ asset('storage/' . $page->cover_path) }}" alt="">
+            <div class="relative">
+                <div>
+                    <img class="w-full h-[130px] object-cover lg:h-[200px] rounded-md"
+                        src="{{ asset('storage/' . $page->cover_path) }}" alt="">
+                </div>
+                <div class="flex flex-col items-center justify-end w-full h-[100px]">
+                    <h2 class="text-center text-base lg:text-lg font-bold text-gray-800">
+                        {{ $page->title }}
+                    </h2>
+                    <span class="block text-cetner text-sm lg:text-md text-gray-500">
+                        {{ $page->subTitle }}
+                    </span>
+                </div>
+                <img src="{{ asset('storage/' . $page->logo_path) }}"
+                    class="size-20 lg:size-30 rounded-full absolute inset-1/2 translate-x-1/2 -translate-y-1/5"
+                    alt="">
             </div>
-            <div class="flex flex-col items-center justify-end w-full h-[100px]">
-                <h2 class="text-center text-base lg:text-lg font-bold text-gray-800">
-                    {{ $page->title }}
-                </h2>
-                <span class="block text-cetner text-sm lg:text-md text-gray-500">
-                    {{ $page->subTitle }}
-                </span>
-            </div>
-            <img src="{{ asset('storage/' . $page->logo_path) }}"
-                class="size-20 lg:size-30 rounded-full absolute inset-1/2 translate-x-1/2 -translate-y-1/5"
-                alt="">
-        </div>
-        <div class="w-full mt-5 lg:mt-10 flex flex-col gap-3">
-
-            <div class="w-full flex flex-col gap-3" id="socialLinks">
-                @if (count($page->socialAddresses))
-                @foreach ($page->socialAddresses as $item)
-                <div class="lg:py-2">
-                    <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center">
-                        ورود به {{ $item->socialMedia->title }}
-                    </h3>
-                    <div class="mt-3 relative flex flex-col lg:flex-row gap-3">
-                        <div class="w-full lg:w-8/9 flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-[{{ $item->socialMedia->color }}] rounded-full cursor-pointer editSocial relative transition-all duration-300"
-                            data-social-id="{{ $item->id }}"
-                            onclick='editSocial("{{ $item->id }}", "{{ $item->socialMedia->id }}")'>
-                            <img src="{{ asset('storage/' . $item->socialMedia->icon_path) }}"
-                                class="size-5 rounded-md" alt="">
-                            <span class="font-bold text-gray-800">{{ $item->socialMedia->title }}</span>
-                        </div>
-                        <div class="w-full lg:w-1/9 flex flex-row items-center gap-3">
+        
+            @if(count($page->introCats) && count($page->introPros))
+            <section class="w-full flex flex-col gap-3 mt-10">
+                <div class="w-full flex flex-row justify-between items-center">
+                    <div class="w-9/12 lg:w-10/12 flex gap-2 items-center pb-1 text-[15px] overflow-x-auto [&-webkit-scrollbar]:hidden" id="intro_categories">
+                        <span class="px-3 h-8 text-nowrap bg-white shadow-sm shadow-[#afa4a4] flex justify-center items-center font-bold rounded-xl cursro-pointer cursor-pointer" onclick="allProducts(this)">همه</span>
+                        @foreach ($introCats as $introCat)
+                            <span class="px-3 h-8 text-nowrap bg-white shadow-sm shadow-[#afa4a4] flex justify-center items-center font-bold rounded-xl cursro-pointer cursor-pointer relative introCategories" data-cat-id="{{ $introCat->id }}">
+                                {{ $introCat->title }}
+                            </span>
+                        @endforeach
+                    </div>
+                    <div class="w-fit text-sm text-blue-800 font-bold cursor-pointer" onclick="showIntroCats()">ویرایش دسته ها</div>
+                </div>
+                <div class="w-full grid grid-cols-2 gap-4" id="allProducts">
+                    @foreach($introPros as $introPro)
+                    <div class="w-full flex flex-col items-center gap-3">
+                        <a href="{{ route('introPro.single', [$introPro->id]) }}" class="w-full flex flex-col gap-3 bg-[#fafafa] p-1 shadow-sm rounded-xl introProducts" data-pro-id="{{ $introPro->id }}">
+                            <div class="w-full flex justify-center">
+                             
+                                @if(isset($introPro->main_image))
+                                <img src="{{ asset('storage/'.$introPro->main_image) }}" alt="" class="w-full max-h-[180px] object-cover lg:max-h-[250px] rounded-xl">
+                                @else
+                                <img src="{{ asset('assets/img/product/قیمت-گوشی-سامسونگ-Samsung-Galaxy-S24-Ultra-حافظه-512-رم-12-پارت-ویتنام.jpeg') }}" alt="" class="w-full max-h-[180px] object-cover lg:max-h-[250px] rounded-xl">
+                                @endif
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-[#868a88]">{{ $introPro->title }}</span>
+                            </div>
+                        </a>
+                        <div class="w-full flex flex-row items-center gap-3">
                             <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer w-full flex justify-center items-center"
-                                onclick='editSocial("{{ $item->id }}", "{{ $item->socialMedia->id }}")'>
+                                onclick='editIntroPro("{{ $introPro->id }}")'>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
                                     <path fill="white"
                                         d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
                                 </svg>
                             </div>
                             <div class="p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer w-full flex justify-center items-center"
-                                onclick='deleteMediaList(this, "{{ $item->id }}")'>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
-                                    <path fill="white"
-                                        d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-                @endif
-            </div>
-            <div class="w-full flex flex-col gap-3" id="siteLinks">
-                @if (count($page->siteLinks))
-                @foreach ($page->siteLinks as $siteLink)
-                <div class="lg:py-2">
-                    <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center viewLinkTitle"
-                        data-view-link-id="{{ $siteLink->id }}">
-                        ورود به {{ $siteLink->title }}
-                    </h3>
-                    <div class="mt-3 relative mt-3 relative flex flex-col lg:flex-row gap-3">
-                        <div class="w-full lg:w-8/9 flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-gray-200 rounded-full cursor-pointer editLink relative transition-all duration-300"
-                            onclick='editLink("{{ $siteLink->id }}")' data-site-id="{{ $siteLink->id }}">
-                            <img src="{{ asset('assets/img/link-simple.svg') }}" class="size-5 rounded-md"
-                                alt="">
-                            <span class="font-bold text-gray-800 viewLinkTitle"
-                                data-view-link-id="{{ $siteLink->id }}">{{ $siteLink->title }}</span>
-                        </div>
-                        <div class="w-full lg:w-1/9 flex flex-row items-center gap-3">
-                            <div class="w-full flex flex-row justify-center items-center p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
-                                onclick='editLink("{{ $siteLink->id }}")'>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
-                                    <path fill="white"
-                                        d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
-                                </svg>
-                            </div>
-                            <div class="w-full flex flex-row justify-center items-center p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer"
-                                onclick='deleteLinkList(this, "{{ $siteLink->id }}")'>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
-                                    <path fill="white"
-                                        d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-                @endif
-            </div>
-
-            {{-- Faq start --}}
-            <div class="w-full flex flex-col gap-3" id="faq">
-                @if (count($page->page_blocks) > 0)
-                @foreach($page->page_blocks as $page_block)
-                <div class="lg:py-2">
-                    <h3 class="lg:block text-lg font-bold text-gray-800 text-center cursor-pointer viewFAQ"
-                        onclick='editTitle("{{ $page_block->id }}")'
-                        data-block-id="{{ $page_block->id }}">
-                        {{ $page_block->title }}
-                    </h3>
-                    <div class="flex flex-row-reverse items-center gap-2">
-                        <div class="p-1.5 rounded-md bg-blue-500 hover:bg-blue-600 cursor-pointer"
-                            onclick='addQuestionToBlock("{{ $page_block->id }}", this)'>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
-                                <path fill="white"
-                                    d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-                            </svg>
-                        </div>
-                        <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
-                            onclick='editTitle("{{ $page_block->id }}")'>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
-                                <path fill="white"
-                                    d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
-                            </svg>
-                        </div>
-                        <div class="p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer"
-                            onclick='deleteTitle("{{ $page_block->id }}", this)'>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
-                                <path fill="white"
-                                    d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
-                            </svg>
-                        </div>
-                    </div>
-
-                    @foreach ($page_block->FAQs as $FAQ)
-                    <div class="mt-3 relative flex flex-col lg:flex-row gap-3">
-                        <div class="w-full lg:w-8/9 faqBox">
-                            <div class="flex flex-row justify-between items-center gap-3 py-3 px-4 border-1 border-gray-400 bg-fuchsia-100 rounded-full relative transition-all duration-300">
-                                <div class="flex flex-row items-center gap-2" onclick='editFaq("{{ $FAQ->id }}")'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="size-5 rounded-md">
-                                        <path d="M80 160c0-35.3 28.7-64 64-64h32c35.3 0 64 28.7 64 64v3.6c0 21.8-11.1 42.1-29.4 53.8l-42.2 27.1c-25.2 16.2-40.4 44.1-40.4 74V320c0 17.7 14.3 32 32 32s32-14.3 32-32v-1.4c0-8.2 4.2-15.8 11-20.2l42.2-27.1c36.6-23.6 58.8-64.1 58.8-107.7V160c0-70.7-57.3-128-128-128H144C73.3 32 16 89.3 16 160c0 17.7 14.3 32 32 32s32-14.3 32-32zm80 320a40 40 0 1 0 0-80 40 40 0 1 0 0 80z" />
-                                    </svg>
-                                    <span class="font-bold text-gray-800 viewFAQ" data-view-FAQ-id="{{ $FAQ->id }}">{{ $FAQ->question }}</span>
-                                </div>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-all duration-200 cursor-pointer" viewBox="0 0 448 512">
-                                    <path fill="black" d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z" />
-                                </svg>
-                            </div>
-                            <div class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                                <div class="p-3 bg-fuchsia-100 border-1 border-gray-400 rounded-full mt-2">
-                                    <p class="text-gray-700 font-bold">{{ $FAQ->answer }}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="w-full lg:w-1/9 flex flex-row items-center gap-3">
-                            <div class="w-full flex flex-row justify-center items-center p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
-                                onclick='editFaq("{{ $FAQ->id }}")'>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
-                                    <path fill="white"
-                                        d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
-                                </svg>
-                            </div>
-                            <div class="w-full flex flex-row justify-center items-center p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer"
-                                onclick='deleteFAQ(this, "{{ $FAQ->id }}")'>
+                                onclick='deleteIntroPro("{{ $introPro->id }}", this)'>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
                                     <path fill="white"
                                         d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
@@ -233,212 +132,1428 @@
                         </div>
                     </div>
                     @endforeach
+                </div> 
+                <div class="w-full grid grid-cols-2 gap-4" id="customProducts"></div>
+            </section>
+            @endif
+
+
+
+            <script>
+                let allPros = document.getElementById('allProducts')
+                let customProducts = document.getElementById('customProducts')
+                let introCategories = document.querySelectorAll('.introCategories')
+
+                function deleteIntroPro(introProId, el){
+                     $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                        }
+                    })
+                    $.ajax({
+                        url: "{{ route('introPro.delete') }}",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            "product_id": introProId,
+                        },
+                        success: function(data){
+                            el.parentElement.parentElement.remove();
+                            
+                        },
+                        error: function(){
+                            console.log('error')
+                        }
+                    })
+                }
+
+                introCategories.forEach((introProduct)=>{
+                    introProduct.addEventListener('click', ()=>{
+                        allPros.classList.remove('grid')
+                        allPros.classList.add('hidden')
+                        introProduct.parentElement.children[0].classList.remove('bg-gray-200')
+                        introProduct.parentElement.children[0].classList.add('bg-white')
+                        if(introProduct.classList.contains('bg-white')){
+                            introCategories.forEach((item)=>{
+                                item.classList.add('bg-white')
+                                item.classList.remove('bg-gray-200')
+                            })
+                            introProduct.classList.remove('bg-white')
+                            introProduct.classList.add('bg-gray-200')
+                            $.ajaxSetup({
+                                headers: {
+                                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                }
+                            })
+                            $.ajax({
+                                url: "{{ route('introPro.showProducts') }}",
+                                type: "POST",
+                                dataType: "json",
+                                data: {
+                                    "category_id": introProduct.getAttribute('data-cat-id'),
+                                },
+                                success: function(datas){
+                                    customProducts.innerHTML = ""
+                                    datas.forEach((data)=>{
+                                        let div = document.createElement('div')
+                                        div.classList = "w-full flex flex-col items-center gap-3"
+                                        div.innerHTML = `
+                                        <a href="#" class="w-full flex flex-col gap-3 bg-[#fafafa] p-1 shadow-sm rounded-xl introProducts" data-pro_id="${data.id}">
+                                            <div class="w-full flex justify-center relative">
+                                               
+                                                <img src="${data.main_image ? '{{ asset('storage/') }}/' + data.main_image : '/images/default-product.png'}" alt="" class="w-full max-h-[180px] object-cover lg:max-h-[250px] rounded-xl">
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-[#868a88]">${data.title}</span>
+                                            </div>
+                                            {{-- <span class="font-bold">1.500.000 تومان</span> --}}
+                                            
+                                        </a>
+                                        <div class="w-full flex flex-row items-center gap-3">
+                                            <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer w-full flex justify-center items-center"
+                                                onclick='editIntroPro(${data.id})'>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
+                                                    <path fill="white"
+                                                        d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
+                                                </svg>
+                                            </div>
+                                            <div class="p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer w-full flex justify-center items-center"
+                                                onclick='deleteIntroPro(${data.id}, this)'>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
+                                                    <path fill="white"
+                                                        d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        `
+                                        customProducts.appendChild(div)
+                                    })
+                                },
+                                error: function(){
+                                    console.log('error')
+                                }
+                            })
+                        } else {
+                            introProduct.classList.remove('bg-gray-200')
+                            introProduct.classList.add('bg-white')
+                        }
+
+                    })
+                })
+
+                function allProducts(el){
+                    // console.log(allPros)
+                    introCategories.forEach((introProduct)=>{
+                        introProduct.classList.remove('bg-gray-200')
+                        introProduct.classList.add('bg-white')
+                    })
+                    el.classList.remove('bg-white')
+                    el.classList.add('bg-gray-200')
+                    allPros.classList.remove('hidden')
+                    allPros.classList.add('grid')
+                    customProducts.innerHTML = ""
+                }
+            </script>
+
+
+            
+            <div class="w-full mt-5 lg:mt-10 flex flex-col gap-3">
+
+                <div class="w-full flex flex-col gap-3" id="socialLinks">
+                    @if (count($page->socialAddresses))
+                        @foreach ($page->socialAddresses as $item)
+                            <div class="lg:py-2">
+                                <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center">
+                                    ورود به {{ $item->socialMedia->title }}
+                                </h3>
+                                <div class="mt-3 relative flex flex-col lg:flex-row gap-3">
+                                    <div class="w-full lg:w-8/9 flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-[{{ $item->socialMedia->color }}] rounded-full cursor-pointer editSocial relative transition-all duration-300"
+                                        data-social-id="{{ $item->id }}"
+                                        onclick='editSocial("{{ $item->id }}", "{{ $item->socialMedia->id }}")'>
+                                        <img src="{{ asset('storage/' . $item->socialMedia->icon_path) }}"
+                                            class="size-5 rounded-md" alt="">
+                                        <span class="font-bold text-gray-800">{{ $item->socialMedia->title }}</span>
+                                    </div>
+                                    <div class="w-full lg:w-1/9 flex flex-row items-center gap-3">
+                                        <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer w-full flex justify-center items-center"
+                                            onclick='editSocial("{{ $item->id }}", "{{ $item->socialMedia->id }}")'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
+                                                <path fill="white"
+                                                    d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
+                                            </svg>
+                                        </div>
+                                        <div class="p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer w-full flex justify-center items-center"
+                                            onclick='deleteMediaList(this, "{{ $item->id }}")'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
+                                                <path fill="white"
+                                                    d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
-                @endforeach
-                @endif
-            </div>
-            {{-- Faq end --}}
+                <div class="w-full flex flex-col gap-3" id="siteLinks">
+                    @if (count($page->siteLinks))
+                        @foreach ($page->siteLinks as $siteLink)
+                            <div class="lg:py-2">
+                                <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center viewLinkTitle"
+                                    data-view-link-id="{{ $siteLink->id }}">
+                                    ورود به {{ $siteLink->title }}
+                                </h3>
+                                <div class="mt-3 relative flex flex-col lg:flex-row gap-3">
+                                    <div class="w-full lg:w-8/9 flex flex-row justify-center items-center gap-3 py-3 border-1 border-gray-400 bg-gray-200 rounded-full cursor-pointer editLink relative transition-all duration-300"
+                                        onclick='editLink("{{ $siteLink->id }}")' data-site-id="{{ $siteLink->id }}">
+                                        <img src="{{ asset('assets/img/link-simple.svg') }}" class="size-5 rounded-md"
+                                            alt="">
+                                        <span class="font-bold text-gray-800 viewLinkTitle"
+                                            data-view-link-id="{{ $siteLink->id }}">{{ $siteLink->title }}</span>
+                                    </div>
+                                    <div class="w-full lg:w-1/9 flex flex-row items-center gap-3">
+                                        <div class="w-full flex flex-row justify-center items-center p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
+                                            onclick='editLink("{{ $siteLink->id }}")'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
+                                                <path fill="white"
+                                                    d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
+                                            </svg>
+                                        </div>
+                                        <div class="w-full flex flex-row justify-center items-center p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer"
+                                            onclick='deleteLinkList(this, "{{ $siteLink->id }}")'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
+                                                <path fill="white"
+                                                    d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+
+                {{-- Faq start --}}
+                <div class="w-full flex flex-col gap-3" id="faq">
+                    @if (count($page->page_blocks) > 0)
+                        @foreach ($page->page_blocks as $page_block)
+                            <div class="lg:py-2">
+                                <h3 class="lg:block text-lg font-bold text-gray-800 text-center cursor-pointer viewFAQ"
+                                    onclick='editTitle("{{ $page_block->id }}")' data-block-id="{{ $page_block->id }}">
+                                    {{ $page_block->title }}
+                                </h3>
+                                <div class="flex flex-row-reverse items-center gap-2">
+                                    <div class="p-1.5 rounded-md bg-blue-500 hover:bg-blue-600 cursor-pointer"
+                                        onclick='addQuestionToBlock("{{ $page_block->id }}", this)'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
+                                            <path fill="white"
+                                                d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                                        </svg>
+                                    </div>
+                                    <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
+                                        onclick='editTitle("{{ $page_block->id }}")'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
+                                            <path fill="white"
+                                                d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
+                                        </svg>
+                                    </div>
+                                    <div class="p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer"
+                                        onclick='deleteTitle("{{ $page_block->id }}", this)'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
+                                            <path fill="white"
+                                                d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                @foreach ($page_block->FAQs as $FAQ)
+                                    <div class="mt-3 relative flex flex-col lg:flex-row gap-3">
+                                        <div class="w-full lg:w-8/9 faqBox">
+                                            <div
+                                                class="flex flex-row justify-between items-center gap-3 py-3 px-4 border-1 border-gray-400 bg-fuchsia-100 rounded-full relative transition-all duration-300">
+                                                <div class="flex flex-row items-center gap-2"
+                                                    onclick='editFaq("{{ $FAQ->id }}")'>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+                                                        class="size-5 rounded-md">
+                                                        <path
+                                                            d="M80 160c0-35.3 28.7-64 64-64h32c35.3 0 64 28.7 64 64v3.6c0 21.8-11.1 42.1-29.4 53.8l-42.2 27.1c-25.2 16.2-40.4 44.1-40.4 74V320c0 17.7 14.3 32 32 32s32-14.3 32-32v-1.4c0-8.2 4.2-15.8 11-20.2l42.2-27.1c36.6-23.6 58.8-64.1 58.8-107.7V160c0-70.7-57.3-128-128-128H144C73.3 32 16 89.3 16 160c0 17.7 14.3 32 32 32s32-14.3 32-32zm80 320a40 40 0 1 0 0-80 40 40 0 1 0 0 80z" />
+                                                    </svg>
+                                                    <span class="font-bold text-gray-800 viewFAQ"
+                                                        data-view-FAQ-id="{{ $FAQ->id }}">{{ $FAQ->question }}</span>
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="size-4 transition-all duration-200 cursor-pointer"
+                                                    viewBox="0 0 448 512">
+                                                    <path fill="black"
+                                                        d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z" />
+                                                </svg>
+                                            </div>
+                                            <div class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                                                <div class="p-3 bg-fuchsia-100 border-1 border-gray-400 rounded-full mt-2">
+                                                    <p class="text-gray-700 font-bold">{{ $FAQ->answer }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="w-full lg:w-1/9 flex flex-row items-center gap-3">
+                                            <div class="w-full flex flex-row justify-center items-center p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
+                                                onclick='editFaq("{{ $FAQ->id }}")'>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4"
+                                                    viewBox="0 0 512 512">
+                                                    <path fill="white"
+                                                        d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
+                                                </svg>
+                                            </div>
+                                            <div class="w-full flex flex-row justify-center items-center p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer"
+                                                onclick='deleteFAQ(this, "{{ $FAQ->id }}")'>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4"
+                                                    viewBox="0 0 448 512">
+                                                    <path fill="white"
+                                                        d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+                {{-- Faq end --}}
 
 
-            <div class="w-full h-dvh bg-black/50 fixed top-0 right-0 z-9999 transition-all duration-300 invisible opacity-0"
-                id="block">
-                <div class="w-full lg:w-[calc(100%-265px)] float-left h-dvh flex justify-center items-center">
-                    <div class="w-11/12 lg:w-2/3 px-3 relative">
-                        <div class="w-full bg-white py-5 rounded-lg transition-all duration-300 scale-95 opacity-0"
-                            id="group">
-                            <div class="w-full flex flex-row items-center gap-5 py-2.5 border-b border-gray-300 px-5 cursor-pointer"
-                                onclick="addBlock('close')">
+                <div class="w-full h-dvh bg-black/50 fixed top-0 right-0 z-9999 transition-all duration-300 invisible opacity-0"
+                    id="block">
+                    <div class="w-full lg:w-[calc(100%-265px)] float-left h-dvh flex justify-center items-center">
+                        <div class="w-11/12 lg:w-2/3 px-3 relative">
+                            <div class="w-full bg-white py-5 rounded-lg transition-all duration-300 scale-95 opacity-0"
+                                id="group">
+                                <div class="w-full flex flex-row items-center gap-5 py-2.5 border-b border-gray-300 px-5 cursor-pointer"
+                                    onclick="addBlock('close')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
+                                        <path
+                                            d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                                    </svg>
+                                    <span class="text-gray-700 font-bold">افزودن بلوک جدید</span>
+                                </div>
+                                <div
+                                    class="w-full overflow-y-auto px-5 py-3 [&::-webkit-scrollbar]:w-0 flex flex-col gap-3">
+                                    <div class="w-full">
+                                        <div onclick="addIntroCategory()"
+                                            class="w-full p-5 border-1 border-gray-400 flex flex-row items-center gap-5 hover:ring-2 hover:ring-sky-500 hover:ring-offset-2 hover:bg-sky-200 rounded-lg transition-all duration-150 cursor-pointer">
+                                            <svg class="size-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
+                                            </svg>
+                                            <span class="text-gray-700 font-bold">افزودن معرفی محصول</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-full">
+                                        <div onclick="addSocialMedia()"
+                                            class="w-full p-5 border-1 border-gray-400 flex flex-row items-center gap-5 hover:ring-2 hover:ring-sky-500 hover:ring-offset-2 hover:bg-sky-200 rounded-lg transition-all duration-150 cursor-pointer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 448 512">
+                                                <path
+                                                    d="M448 128c0 53-43 96-96 96c-28.9 0-54.8-12.8-72.4-33l-89.7 44.9c1.4 6.5 2.1 13.2 2.1 20.1s-.7 13.6-2.1 20.1L279.6 321c17.6-20.2 43.5-33 72.4-33c53 0 96 43 96 96s-43 96-96 96s-96-43-96-96c0-6.9 .7-13.6 2.1-20.1L168.4 319c-17.6 20.2-43.5 33-72.4 33c-53 0-96-43-96-96s43-96 96-96c28.9 0 54.8 12.8 72.4 33l89.7-44.9c-1.4-6.5-2.1-13.2-2.1-20.1c0-53 43-96 96-96s96 43 96 96zM96 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zM400 128a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM352 432a48 48 0 1 0 0-96 48 48 0 1 0 0 96z" />
+                                            </svg>
+                                            <span class="text-gray-700 font-bold">افزودن شبکه اجتماعی</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-full">
+                                        <div onclick="addLink()"
+                                            class="w-full p-5 border-1 border-gray-400 flex flex-row items-center gap-5 hover:ring-2 hover:ring-sky-500 hover:ring-offset-2 hover:bg-sky-200 rounded-lg transition-all duration-150 cursor-pointer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 576 512">
+                                                <path
+                                                    d="M0 256C0 167.6 71.6 96 160 96h72c13.3 0 24 10.7 24 24s-10.7 24-24 24H160C98.1 144 48 194.1 48 256s50.1 112 112 112h72c13.3 0 24 10.7 24 24s-10.7 24-24 24H160C71.6 416 0 344.4 0 256zm576 0c0 88.4-71.6 160-160 160H344c-13.3 0-24-10.7-24-24s10.7-24 24-24h72c61.9 0 112-50.1 112-112s-50.1-112-112-112H344c-13.3 0-24-10.7-24-24s10.7-24 24-24h72c88.4 0 160 71.6 160 160zM184 232H392c13.3 0 24 10.7 24 24s-10.7 24-24 24H184c-13.3 0-24-10.7-24-24s10.7-24 24-24z" />
+                                            </svg>
+                                            <span class="text-gray-700 font-bold">افزودن لینک</span>
+                                        </div>
+                                    </div>
+                                    {{-- FAQ --}}
+                                    <div class="w-full">
+                                        <div onclick="addFaq() "
+                                            class="w-full p-5 border-1 border-gray-400 flex flex-row items-center gap-5 hover:ring-2 hover:ring-sky-500 hover:ring-offset-2 hover:bg-sky-200 rounded-lg transition-all duration-150 cursor-pointer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="size-5">
+                                                <path
+                                                    d="M80 160c0-35.3 28.7-64 64-64h32c35.3 0 64 28.7 64 64v3.6c0 21.8-11.1 42.1-29.4 53.8l-42.2 27.1c-25.2 16.2-40.4 44.1-40.4 74V320c0 17.7 14.3 32 32 32s32-14.3 32-32v-1.4c0-8.2 4.2-15.8 11-20.2l42.2-27.1c36.6-23.6 58.8-64.1 58.8-107.7V160c0-70.7-57.3-128-128-128H144C73.3 32 16 89.3 16 160c0 17.7 14.3 32 32 32s32-14.3 32-32zm80 320a40 40 0 1 0 0-80 40 40 0 1 0 0 80z" />
+                                            </svg>
+                                            <span class="text-gray-700 font-bold">افزودن سوالات متداول</span>
+                                        </div>
+                                    </div>
+                                    {{-- FAQ end --}}
+                                </div>
+                            </div>
+
+
+                            {{-- create social media --}}
+                            <form action="{{ route('socialAddress.store') }}" method="post"
+                                enctype='multipart/form-data'
+                                class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute right-0 top-full form px-5"
+                                id="socialMediaForm">
+                                <div
+                                    class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
+                                </div>
+                                @csrf
+                                <svg xmlns="http://www.w3.org/2000/svg" onclick="closeForm()"
+                                    class="size-5 cursor-pointer" viewBox="0 0 384 512">
+                                    <path
+                                        d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                                </svg>
+                                <div class="flex items-start justify-center">
+                                    <div class="bg-white rounded-2xl p-3 w-full lg:w-3/4">
+                                        <div class="text-center mb-8">
+                                            <h3 class="lg:text-lg font-bold text-gray-800"> شبکه اجتماعی</h3>
+                                        </div class="w-full">
+                                        <div class="text-center mb-4">
+                                            <div class="w-full flex flex-col gap-3 my-4">
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">شبکه اجتماعی</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                                        <select name="socialMedia_id" id="socialMedia_id"
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createSocialRequire">
+                                                            @foreach ($socialMedias as $socialMedia)
+                                                                <option value="{{ $socialMedia->id }}">
+                                                                    {{ $socialMedia->title }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">نام کاربری</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                        <span
+                                                            class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی
+                                                            است!</span>
+                                                        <input
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createSocialRequire rounded-md"
+                                                            type="text" name='username' id="username"
+                                                            placeholder="نام کاربری">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="w-full text-left">
+                                                <button type="submit" onclick="storeSocialmedia(event)"
+                                                    class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
+                                                    ثبت
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            {{-- create social media end --}}
+
+
+
+                            {{-- create intro category --}}
+                            <div
+                                class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute right-0 top-full form px-5"
+                                id="introBox">
+                                <div
+                                    class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" onclick="closeForm()"
+                                    class="size-5 cursor-pointer" viewBox="0 0 384 512">
+                                    <path
+                                        d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                                </svg>
+                                <div class="flex items-start justify-center">
+                                    <div class="bg-white rounded-2xl p-3 w-full lg:w-3/4">
+                                        <div class="text-center mb-8">
+                                            <h3 class="lg:text-lg font-bold text-gray-800"> معرفی محصول </h3>
+                                        </div class="w-full">
+                                        <div class="text-center mb-4">
+                                            <div class="w-full flex flex-col gap-3 my-4">
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان دسته</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                        <span
+                                                            class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی
+                                                            است!</span>
+                                                        <input
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md"
+                                                            type="text" name='introCatTitle' id="introCatTitle"
+                                                            placeholder="عنوان دسته">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="w-full flex flex-row justify-between items-center">
+                                                <button type="submit" onclick="addIntroProduct()"
+                                                    class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer @if(count(Auth::user()->introCats)==0) invisible @endif">
+                                                   افزودن محصول
+                                                </button>
+                                                <button type="submit" onclick="storeIntroCat(this)"
+                                                    class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
+                                                    ثبت
+                                                </button>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- create intro category --}}
+
+                            <script>
+                                let introCatTitle = document.getElementById('introCatTitle')
+                                let intro_categories = document.getElementById('intro_categories')
+                                function storeIntroCat(el){
+                                    // console.log(el.parentElement.previousElementSibling.children[0].children[1].children[0])
+                                    if(introCatTitle.value == ""){
+                                        el.parentElement.previousElementSibling.children[0].children[1].children[0].classList.remove('opacity-0')
+                                    } else {
+                                        let buttonText = el.innerText
+                                        el.setAttribute('disabled', true)
+                                        el.innerHTML = `<div class="w-6 h-6 border-2 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>`
+                                        $.ajaxSetup({
+                                            headers: {
+                                                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                            }
+                                        })
+                                        $.ajax({
+                                            url: "{{ route('introCat.store') }}",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data: {
+                                                "title": introCatTitle.value,
+                                                'page_id': "{{ $page->id }}"
+                                            },
+                                            success: function(data){
+                                                let span = document.createElement('span')
+                                                span.classList = "px-3 h-8 text-nowrap bg-white shadow-sm shadow-[#afa4a4] flex justify-center items-center font-bold rounded-xl cursro-pointer cursor-pointer relative introCategories"
+                                                span.setAttribute('data-cat-id', data.id)
+                                                span.innerText = data.title
+                                                intro_categories.appendChild(span)
+                                                introCatTitle.value = ""
+                                                el.innerHTML = buttonText
+                                                if (el.previousElementSibling.classList.contains('invisible')) {
+                                                    el.previousElementSibling.classList.remove('invisible')
+                                                }
+                                                el.removeAttribute('disabled')
+                                            },
+                                            error: function(){
+                                                console.log('error')
+                                            }
+                                        })
+                                    }
+                                }
+                            </script>
+
+
+                            {{-- create intro product --}}
+                            <div
+                                class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute right-0 top-full form px-5"
+                                id="introProduct">
+                                <div
+                                    class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" onclick="closeForm()"
+                                    class="size-5 cursor-pointer" viewBox="0 0 384 512">
+                                    <path
+                                        d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                                </svg>
+                                <div class="flex items-start justify-center max-h-[550px] overflow-y-auto [&::-webkit-scrollbar]:hidden">
+                                    <div class="bg-white rounded-2xl p-3 w-full lg:w-3/4">
+                                        <div class="text-center mb-8">
+                                            <h3 class="lg:text-lg font-bold text-gray-800"> معرفی محصول </h3>
+                                        </div class="w-full">
+                                        <div class="text-center mb-4">
+                                            <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                                    <label class="text-sm mb-1 mt-2.5 flex">عنوان محصول</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                        <span
+                                                            class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی
+                                                            است!</span>
+                                                        <input
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md"
+                                                            type="text" name='introProTitle' id="introProTitle"
+                                                            placeholder="عنوان محصول">
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                                    <label class="text-sm mb-1 mt-2.5 flex">دسته محصول</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                        
+                                                        <select
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md" onchange="addCats(this)" name='introProCat' id="introProCat" multiple>
+                                                            <option value="0" disabled>انتخاب کنید</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                                    <label class="text-sm mb-1 mt-2.5 flex">تصویر محصول</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                        <input
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md"
+                                                            type="file" name='introProImg' id="introProImg"
+                                                            placeholder="تصویر محصول">
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                                    <label class="text-sm mb-1 mt-2.5 flex">گالری تصاویر محصول</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                       
+                                                        <input
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md"
+                                                            type="file" name='introProGallery' id="introProGallery"
+                                                            placeholder="گالری تصاویر محصول" multiple>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1 lg:col-span-2">
+                                                    <label class="text-sm mb-1 mt-2.5 flex">توضیحات محصول</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                        <textarea
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md"
+                                                            type="text" name='introProDescription' id="introProDescription"
+                                                            placeholder="توضیحات محصول"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="w-full flex flex-col gap-4 itmes-center max-md:flex-col lg:col-span-2" id="features">
+                                                </div>
+                                            </div>
+                                            <div class="w-full text-center">
+                                                <button type="submit" onclick="addAttribute()"
+                                                    class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
+                                                    افزودن ویژگی
+                                                </button>
+                                            </div>
+                                            <div class="w-full text-left">
+                                                <button type="submit" onclick="storeIntroPro(this)"
+                                                    class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
+                                                    ثبت
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- create intro product --}}
+
+
+
+                            <script>
+
+                                let categories = [];
+
+                                function addCats(el){
+                                    categories = []
+                                    
+                                    let arr = el.selectedOptions
+                                    for (let i = 0; i < arr.length; i++) {
+                                        categories.push(arr[i].value)   
+                                        
+                                    }
+                                    
+                                }
+                                
+                                let introProTitle = document.getElementById('introProTitle')
+                                let introProCat = document.getElementById('introProCat')
+                                let introProImg = document.getElementById('introProImg')
+                                let introProGallery = document.getElementById('introProGallery')
+                                let introProDescription = document.getElementById('introProDescription')
+                                function storeIntroPro(el){
+                                    if(introProTitle.value == ""){
+                                        el.parentElement.parentElement.children[0].children[1].children[0].classList.remove('opacity-0')
+                                    } else {
+                                        let buttonText = el.innerText
+                                        el.setAttribute('disabled', true)
+                                        el.innerHTML = `<div class="w-6 h-6 border-2 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>`
+                                        let formData = new FormData()
+                                        formData.append('title', introProTitle.value)
+                                        formData.append('categpries', categories)
+                                        formData.append('main_image', introProImg.files[0])
+                                        formData.append('page_id', "{{ $page->id }}")
+                                        for (let i = 0; i < introProGallery.files.length; i++) {
+                                            formData.append('gallery[]', introProGallery.files[i])
+                                        }
+                                        const rows = document.querySelectorAll('#features .feature-row');
+                                        rows.forEach((row, index) => {
+                                            const keyInput   = row.querySelector('input.key');
+                                            const valueInput = row.querySelector('input.value');
+
+                                            const key   = keyInput.value;
+                                            const value = valueInput.value;
+                                            if (key && value) {
+                                                formData.append(`attributes[${index}][key]`,   key);
+                                                formData.append(`attributes[${index}][value]`, value);
+                                            }
+                                        });
+                                        formData.append('description', introProDescription.value)
+                                        $.ajaxSetup({
+                                            headers: {
+                                                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                            }
+                                        })
+                                        $.ajax({
+                                            url: "{{ route('introPro.store') }}",
+                                            type: "POST",
+                                            contentType: false,
+                                            processData: false,
+                                            data: formData,
+                                            success: function(data){
+                                                let div = document.createElement('div')
+                                                div.classList = "w-full flex flex-col items-center gap-3"
+                                                div.innerHTML = `
+                                                <a href="#" class="w-full flex flex-col gap-3 bg-[#fafafa] p-1 shadow-sm rounded-xl introProducts" data-pro_id="${data.id}">
+                                                    <div class="w-full flex justify-center relative">
+                                                    
+                                                        <img src="${data.main_image ? '{{ asset('storage/') }}/' + data.main_image : '/images/default-product.png'}" alt="" class="w-full max-h-[180px] object-cover lg:max-h-[250px] rounded-xl">
+                                                    </div>
+                                                    <div class="flex justify-between">
+                                                        <span class="text-[#868a88]">${data.title}</span>
+                                                    </div>
+                                                    {{-- <span class="font-bold">1.500.000 تومان</span> --}}
+                                                    
+                                                </a>
+                                                <div class="w-full lg:w-1/9 flex flex-row items-center gap-3">
+                                                    <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer w-full flex justify-center items-center"
+                                                        onclick='editIntroPro(${data.id})'>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
+                                                            <path fill="white"
+                                                                d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
+                                                        </svg>
+                                                    </div>
+                                                    <div class="p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer w-full flex justify-center items-center"
+                                                        onclick='deleteIntroPro(${data.id}, this)'>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
+                                                            <path fill="white"
+                                                                d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                `
+                                                allPros.appendChild(div)
+                                            
+                                                introProTitle.value = ""
+                                                introProCat.value = ""
+                                                introProImg.value = ""
+                                                introProGallery.value = ""
+                                                introProDescription.value = ""
+                                                el.innerHTML = buttonText
+                                                el.removeAttribute('disabled')
+                                                closeForm()
+                                            },
+                                            error: function(){
+                                                console.log('error')
+                                            }
+                                        })
+                                    }
+                                }
+                                function setCategories(){
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                        }
+                                    })
+                                    $.ajax({
+                                        url: "{{ route('introCat.selectCats', $page->id) }}",
+                                        type: "GET",
+                                        success: function(datas){
+                                            datas.forEach((data)=>{
+                                                let option = document.createElement('option')
+                                                option.value = data.id
+                                                option.innerText = data.title
+                                                introProCat.appendChild(option)
+                                            })
+                                            // console.log(datas)
+                                        },
+                                        error: function(){
+                                            console.log('error')
+                                        }
+                                    })
+                                }
+                            </script>
+
+
+                           
+                            {{-- edit intro product --}}
+                            <div
+                                class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute right-0 top-full form px-5"
+                                id="introProductEdit">
+                                <div
+                                    class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" onclick="closeForm()"
+                                    class="size-5 cursor-pointer" viewBox="0 0 384 512">
+                                    <path
+                                        d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                                </svg>
+                                <div class="flex items-start justify-center max-h-[550px] overflow-y-auto [&::-webkit-scrollbar]:hidden">
+                                    <div class="bg-white rounded-2xl p-3 w-full lg:w-3/4">
+                                        <div class="text-center mb-8">
+                                            <h3 class="lg:text-lg font-bold text-gray-800"> معرفی محصول </h3>
+                                        </div class="w-full">
+                                        <div class="text-center mb-4">
+                                            <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                                    <label class="text-sm mb-1 mt-2.5 flex">عنوان محصول</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                        <span
+                                                            class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی
+                                                            است!</span>
+                                                        <input
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md"
+                                                            type="text" name='introProTitleEdit' id="introProTitleEdit"
+                                                            placeholder="عنوان محصول">
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="introProIdEdit" id="introProIdEdit">
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                                    <label class="text-sm mb-1 mt-2.5 flex">دسته محصول</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                        
+                                                        <select
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md" onchange="addCats(this)" name='introProCatEdit' id="introProCatEdit" multiple>
+                                                            <option value="0" disabled>انتخاب کنید</option>
+                                                            @foreach ($introCats as $introCat)
+                                                            <option value="{{ $introCat->id }}">{{ $introCat->title }}</option>
+                                                                
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                                    <label class="text-sm mb-1 mt-2.5 flex">تصویر محصول</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                        <input
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md"
+                                                            type="file" name='introProImgEdit' id="introProImgEdit"
+                                                            placeholder="تصویر محصول">
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                                    <label class="text-sm mb-1 mt-2.5 flex">گالری تصاویر محصول</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                       
+                                                        <input
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md"
+                                                            type="file" name='introProGalleryEdit' id="introProGalleryEdit"
+                                                            placeholder="گالری تصاویر محصول" multiple>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1 lg:col-span-2">
+                                                    <label class="text-sm mb-1 mt-2.5 flex">توضیحات محصول</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                        <textarea
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md"
+                                                            type="text" name='introProDescriptionEdit' id="introProDescriptionEdit"
+                                                            placeholder="توضیحات محصول"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="w-full flex flex-col gap-4 itmes-center max-md:flex-col lg:col-span-2" id="featuresEdit">
+                                                </div>
+                                            </div>
+                                            <div class="w-full text-center">
+                                                <button type="submit" onclick="addAttributeEdit()"
+                                                    class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
+                                                    افزودن ویژگی
+                                                </button>
+                                            </div>
+                                            <div class="w-full text-left">
+                                                <button type="submit" onclick="updateIntroPro(this)"
+                                                    class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
+                                                    ثبت
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- edit intro product --}}
+                    
+
+                            <script>
+                                let introProductEdit = document.getElementById('introProductEdit')
+
+                                let introProTitleEdit = document.getElementById('introProTitleEdit')
+                                let introProIdEdit = document.getElementById('introProIdEdit')
+                                let introProCatEdit = document.getElementById('introProCatEdit')
+                                let introProImgEdit = document.getElementById('introProImgEdit')
+                                let introProGalleryEdit = document.getElementById('introProGalleryEdit')
+                                let introProDescriptionEdit = document.getElementById('introProDescriptionEdit')
+
+                                let deleteBtn = document.querySelectorAll('.deleteBtn')
+                               
+
+                                function editIntroPro(introProId){
+                                    
+                                    let children = introProCatEdit.children
+                                    for(let child of children){
+                                        child.selected=false
+                                    }
+                                    featuresEdit.innerHTML = ""
+                                    
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                        }
+                                    })
+                                    $.ajax({
+                                        url: "{{ route('introPro.edit') }}",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: {
+                                            "product_id": introProId
+                                        },
+                                        success: function(data){
+                                            introProTitleEdit.value = data.title
+                                            introProDescriptionEdit.value = data.description
+                                            introProIdEdit.value = data.id
+                                            data.categories.forEach((cat)=>{
+                                                for(let child of children){
+                                                    if(cat.id == child.value){
+                                                        child.selected=true
+                                                    }
+                                                }
+                                            })
+                                           
+                                            data.attributes.forEach((attribute)=>{
+                                                
+                                                let attrBox = document.createElement('div')
+                                                attrBox.classList = 'w-full grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 border-1 border-gray-300 rounded-lg relative feature-row'
+                                                attrBox.innerHTML = `
+                                                <span class="absolute -top-2 left-[-8px] px-2 py-1 bg-white rounded-full text-sm cursor-pointer shadow delete-btn">
+                                                    ❌
+                                                </span>
+                                                <input
+                                                    class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] key"
+                                                    type="text" value="${attribute.key}"
+                                                    placeholder="نام ویژگی">
+                                                <input
+                                                    class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] value"
+                                                    type="text" value="${attribute.value}"
+                                                    placeholder="مقدار ویژگی">
+                                                `
+                                                attrBox.querySelector('.delete-btn').addEventListener('click', () => {
+                                                    attrBox.remove();
+                                                });
+                                                featuresEdit.appendChild(attrBox)
+                                            })
+                                            block.classList.remove('invisible')
+                                            block.classList.remove('opacity-0')
+                                            group.classList.add('scale-95')
+                                            group.classList.add('opacity-0')
+                                            group.classList.add('invisible')
+                                            introProductEdit.classList.remove('invisible')
+                                            introProductEdit.classList.remove('opacity-0')
+                                            introProductEdit.classList.remove('top-full')
+                                            introProductEdit.classList.add('top-0')
+                                            introProductEdit.classList.add('-translate-y-1/6')
+                                            
+                                        },
+                                        error: function(){
+                                            console.log('error')
+                                        }
+                                    })
+                                }
+
+                                function updateIntroPro(el){
+                                    
+                                    if(introProTitleEdit.value == ""){
+                                        el.parentElement.parentElement.children[0].children[1].children[0].classList.remove('opacity-0')
+                                    } else {
+                                        let introProducts = document.querySelectorAll('.introProducts')
+                                        let buttonText = el.innerText
+                                        el.setAttribute('disabled', true)
+                                        el.innerHTML = `<div class="w-6 h-6 border-2 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>`
+                                        let formData = new FormData()
+                                        formData.append('title', introProTitleEdit.value)
+                                        // console.log(introProImgEdit.files[0]);
+                                        
+                                        formData.append('main_image', introProImgEdit.files[0])
+                                        formData.append('page_id', "{{ $page->id }}")
+                                        formData.append('intro_product_id', introProIdEdit.value)
+                                        for (let i = 0; i < introProGalleryEdit.files.length; i++) {
+                                            formData.append('gallery[]', introProGalleryEdit.files[i])
+                                        }
+                                        let children = introProCatEdit.children
+                                        let array = [];
+                                        for(let child of children){
+                                            if (child.selected == true) {
+                                                formData.append('categpries[]', child.value)
+                                            }
+                                        }
+                                        
+                                        const rows = document.querySelectorAll('#featuresEdit .feature-row');
+                                        rows.forEach((row, index) => {
+                                            const keyInput   = row.querySelector('input.key');
+                                            const valueInput = row.querySelector('input.value');
+
+                                            const key   = keyInput.value;
+                                            const value = valueInput.value;
+                                            if (key && value) {
+                                                // formData.append(`attributes[${index}][${key}]`,   value);
+                                                formData.append(`attributes[${index}][key]`,   key);
+                                                formData.append(`attributes[${index}][value]`, value);
+                                            }
+                                        });
+                                        formData.append('description', introProDescriptionEdit.value)
+                                        $.ajaxSetup({
+                                            headers: {
+                                                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                            }
+                                        })
+                                        $.ajax({
+                                            url: "{{ route('introPro.update') }}",
+                                            type: "POST",
+                                            contentType: false,
+                                            processData: false,
+                                            data: formData,
+                                            success: function(data){
+                                                introProducts.forEach((product)=>{
+                                                    if(product.getAttribute('data-pro-id') == data.id){
+                                                        // console.log(product.children[0].children[0]);
+                                                        product.children[0].children[0].removeAttribute('src')
+                                                        product.children[0].children[0].setAttribute('src', "{{ asset('storage/') }}/"+data.main_image)
+                                                        // console.log("{{ asset('storage/') }}"+data.main_image);
+                                                        product.children[1].children[0].innerText = data.title
+                                                    }
+                                                })
+                                                // console.log(data)
+                                                introProTitle.value = ""
+                                                introProCat.value = ""
+                                                introProImg.value = ""
+                                                introProGallery.value = ""
+                                                introProDescription.value = ""
+                                                el.innerHTML = buttonText
+                                                el.removeAttribute('disabled')
+                                                closeForm()
+                                            },
+                                            error: function(){
+                                                console.log('error')
+                                            }
+                                        })
+                                    }
+                                }
+                            </script>
+
+
+
+
+                            {{-- edit intro category --}}
+                            <div
+                                class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute right-0 top-full form px-5"
+                                id="introCatsList">
+                                <div
+                                    class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" onclick="closeForm()"
+                                    class="size-5 cursor-pointer" viewBox="0 0 384 512">
+                                    <path
+                                        d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                                </svg>
+                                <div class="flex items-start justify-center max-h-[550px] overflow-y-auto [&::-webkit-scrollbar]:hidden">
+                                    <div class="bg-white rounded-2xl p-3 w-full lg:w-3/4">
+                                        <div class="text-center mb-8">
+                                            <h3 class="lg:text-lg font-bold text-gray-800"> ویرایش دسته ها </h3>
+                                        </div class="w-full">
+                                        <div id="allCatList" class="w-full flex flex-col gap-4 relative"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                             <div
+                                class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute right-0 top-full form px-5"
+                                id="editIntroCat">
+                                <div
+                                    class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" onclick="closeForm()"
+                                    class="size-5 cursor-pointer" viewBox="0 0 384 512">
+                                    <path
+                                        d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                                </svg>
+                                <div class="flex items-start justify-center">
+                                    <div class="bg-white rounded-2xl p-3 w-full lg:w-3/4">
+                                        <div class="text-center mb-8">
+                                            <h3 class="lg:text-lg font-bold text-gray-800">ویرایش دسته</h3>
+                                        </div class="w-full">
+                                        <div class="text-center mb-4">
+                                            <div class="w-full flex flex-col gap-3 my-4">
+                                                <input type="hidden" id="intCatId">
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان دسته</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                        <span
+                                                            class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی
+                                                            است!</span>
+                                                        <input
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md"
+                                                            type="text" name='introCatTitleEdit' id="introCatTitleEdit"
+                                                            placeholder="عنوان دسته">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="w-full flex flex-row justify-between items-center">
+                                                
+                                                <button type="submit" onclick="updateIntroCat()"
+                                                    class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
+                                                    ثبت
+                                                </button>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            {{-- edit intro category --}}
+
+
+
+                            <script>
+
+
+
+                                let intCatId = document.getElementById('intCatId')
+                                let introCatTitleEdit = document.getElementById('introCatTitleEdit')
+                                let editIntroCatEl = document.getElementById('editIntroCat')
+
+                                function deleteIntroCat(catId){
+                                    let introCategories = document.querySelectorAll('.introCategories')
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                        }
+                                    })
+                                    $.ajax({
+                                        url: "{{ route('introCat.delete') }}",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: {
+                                            'category_id': catId
+                                        },
+                                        success: function(data){
+                                            introCategories.forEach((element)=>{
+                                                if (element.getAttribute('data-cat-id') == data) {
+                                                    element.remove();
+                                                }
+                                            })
+                                            closeForm()
+                                        },
+                                        error: function(){
+                                            console.log('error')
+                                        }
+                                    })
+                                    
+                                    
+                                }
+
+                                function editIntroCat(catId){
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                        }
+                                    })
+                                    $.ajax({
+                                        url : "{{ route('introCat.edit') }}",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: {
+                                            'introCatId': catId
+                                        },
+                                        success: function(data){
+                                            introCatTitleEdit.value = data.title
+                                            intCatId.value = data.id
+                                            block.classList.remove('invisible')
+                                            block.classList.remove('opacity-0')
+                                            group.classList.add('scale-95')
+                                            group.classList.add('opacity-0')
+                                            group.classList.add('invisible')
+                                            editIntroCatEl.classList.remove('invisible')
+                                            editIntroCatEl.classList.remove('opacity-0')
+                                            editIntroCatEl.classList.remove('top-full')
+                                            editIntroCatEl.classList.add('top-0')
+                                        },
+                                        error: function(){
+                                            console.log(error)
+                                        }
+                                    })
+                                }
+
+                                function updateIntroCat(){
+                                    let introCategories = document.querySelectorAll('.introCategories')
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                        }
+                                    })
+                                    $.ajax({
+                                        url: "{{ route('introCat.update') }}",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: {
+                                            'category_id': intCatId.value,
+                                            'title': introCatTitleEdit.value
+                                        },
+                                        success: function(data){
+                                            console.log(data)
+                                            introCategories.forEach((element)=>{
+                                                if(element.getAttribute('data-cat-id') == data.id){
+                                                    element.innerText = data.title
+                                                }
+                                            })
+                                            closeForm()
+                                        },
+                                        error: function(){
+                                            console.log(error);
+                                            
+                                        }
+                                    })
+                                }
+
+                                let allCatList = document.getElementById('allCatList')
+
+                                function showCategories(){
+                                    
+                                    
+                                    allCatList.innerHTML = `
+                                    <div class="absolute w-full h-full top-0 right-0 flex justify-center items-center">
+                                        <div class="loading-wave">
+                                            <div class="loading-bar"></div>
+                                            <div class="loading-bar"></div>
+                                            <div class="loading-bar"></div>
+                                            <div class="loading-bar"></div>
+                                        </div>
+                                    </div>
+                                    `
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                        }
+                                    })
+                                    $.ajax({
+                                        url: "{{ route('introCat.selectCats', $page->id) }}",
+                                        type: "GET",
+                                        success: function(datas){
+                                           
+                                            allCatList.innerHTML = ""
+                                            datas.forEach((data)=>{
+                                                let div = document.createElement('div')
+                                                div.classList = "flex flex-row justify-between items-center"
+                                                div.innerHTML = `
+                                                <span class="inline-block w-1/2 text-sm text-gray-800 font-bold">${data.title}</span>
+                                                    <div class="w-1/5 lg:w-1/8 flex flex-row items-center gap-3">
+                                                        <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer w-full flex justify-center items-center"
+                                                            onclick='editIntroCat(${data.id})'>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
+                                                                <path fill="white"
+                                                                    d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
+                                                            </svg>
+                                                        </div>
+                                                        <div class="p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer w-full flex justify-center items-center"
+                                                            onclick='deleteIntroCat(${data.id})'>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
+                                                                <path fill="white"
+                                                                    d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                `
+                                                allCatList.appendChild(div)
+                                            })
+                                        },
+                                        error: function(){
+                                            console.log('error')
+                                        }
+                                    })
+                                }
+                            </script>
+
+
+                            {{-- create link --}}
+
+
+                            <form action="{{ route('siteLink.store') }}" method="post" enctype='multipart/form-data'
+                                class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 right-0 absolute top-full form px-5 createSiteLink"
+                                id="siteLinkForm">
+                                <div
+                                    class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg createSiteLink z-50">
+                                </div>
+                                @csrf
+                                <svg xmlns="http://www.w3.org/2000/svg" onclick="closeForm()"
+                                    class="size-5 cursor-pointer" viewBox="0 0 384 512">
+                                    <path
+                                        d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                                </svg>
+                                <div class="flex items-start justify-center">
+                                    <div class="bg-white rounded-2xl shadow-md p-3 w-full lg:w-3/4">
+                                        <div class="text-center mb-8">
+                                            <h3 class="lg:text-lg font-bold text-gray-800">ایجاد لینک</h3>
+                                        </div class="w-full ">
+                                        <div class="text-center mb-4">
+                                            <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
+
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان لینک</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                        <span
+                                                            class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی
+                                                            است!</span>
+                                                        <input
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createLinkRequire rounded-md"
+                                                            type="text" name='title' id="link_title_create"
+                                                            placeholder="عنوان لینک">
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">آدرس لینک</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                        <span
+                                                            class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی
+                                                            است!</span>
+                                                        <input
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createLinkRequire rounded-md"
+                                                            type="text" dir="ltr" name='address'
+                                                            id="link_address_create" placeholder="آدرس لینک">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="w-full text-left">
+                                                <button type="submit" onclick="storeLink(event)"
+                                                    class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
+                                                    ثبت
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            {{-- create link end --}}
+
+
+                            {{-- create FAQ --}}
+
+                            <form action="{{ route('FAQ.store') }}" method="post" enctype='multipart/form-data'
+                                class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 right-0 absolute top-full form px-5 max-h-[600px] overflow-y-auto [&::webkit-scrollbar]:hidden createFaq"
+                                id="FaqForm">
+                                <div
+                                    class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg createFaq z-50">
+                                </div>
+                                @csrf
+                                <svg xmlns="http://www.w3.org/2000/svg" onclick="closeForm()"
+                                    class="size-5 cursor-pointer" viewBox="0 0 384 512">
+                                    <path
+                                        d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                                </svg>
+                                <div class="flex items-start justify-center">
+                                    <div class="bg-white rounded-2xl shadow-md p-3 w-full lg:w-3/4">
+                                        <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان</label>
+                                        <div
+                                            class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                            <input
+                                                class="p-6 w-full focus:outline-none text-sm font-bold mr-2 createFaqRequire rounded-md"
+                                                type="text" name='title' placeholder="عنوان" id="faq_title_create">
+                                        </div class="w-full">
+                                        <div class="text-center mb-4">
+                                            <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
+
+                                                <div
+                                                    class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1 parentFAQs">
+                                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">سوال</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                        <span
+                                                            class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی
+                                                            است!</span>
+                                                        <input
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createFaqRequire rounded-md"
+                                                            type="text" name='faqs[0][question]' placeholder="سوال"
+                                                            id="question_input">
+                                                    </div>
+                                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">پاسخ</label>
+                                                    <div
+                                                        class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
+                                                        <span
+                                                            class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی
+                                                            است!</span>
+                                                        <input
+                                                            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createFaqRequire rounded-md"
+                                                            type="text" name='faqs[0][answer]' placeholder=" پاسخ"
+                                                            id="answer_input">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1"
+                                            id="parentFAQ">
+                                        </div>
+                                        <div class="w-full text-left flex flex-row justify-between mt-15">
+                                            <div class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer"
+                                                onclick="openFAQ()">افزودن سوال جدید</div>
+                                            <button type="submit" onclick="storeFaq(event,this)"
+                                                class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
+                                                ثبت
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        </form>
+                        {{-- create FAQ end --}}
+                        {{-- add question faq group --}}
+                        <form action="{{ route('FAQ.addQuestion') }}" method="post" enctype='multipart/form-data'
+                            class="w-full bg-white p-5 rounded-lg transition-all duration-300 invisible opacity-0 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 max-w-2xl w-11/12 form addQuestionForm"
+                            id="addQuestionForm">
+                            <div
+                                class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg addQuestion z-50">
+                            </div>
+                            @csrf
+                            <div onclick="closeForm()"
+                                class="p-3 cursor-pointer absolute -top-14 right-0 lg:-top-5 lg:-right-5 rounded-full bg-rose-100 hover:bg-rose-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
                                     <path
                                         d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
                                 </svg>
-                                <span class="text-gray-700 font-bold">افزودن بلوک جدید</span>
                             </div>
-                            <div class="w-full overflow-y-auto px-5 py-3 [&::-webkit-scrollbar]:w-0 flex flex-col gap-3">
-                                <div class="w-full">
-                                    <div onclick="addSocialMedia()"
-                                        class="w-full p-5 border-1 border-gray-400 flex flex-row items-center gap-5 hover:ring-2 hover:ring-sky-500 hover:ring-offset-2 hover:bg-sky-200 rounded-lg transition-all duration-150 cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 448 512">
-                                            <path
-                                                d="M448 128c0 53-43 96-96 96c-28.9 0-54.8-12.8-72.4-33l-89.7 44.9c1.4 6.5 2.1 13.2 2.1 20.1s-.7 13.6-2.1 20.1L279.6 321c17.6-20.2 43.5-33 72.4-33c53 0 96 43 96 96s-43 96-96 96s-96-43-96-96c0-6.9 .7-13.6 2.1-20.1L168.4 319c-17.6 20.2-43.5 33-72.4 33c-53 0-96-43-96-96s43-96 96-96c28.9 0 54.8 12.8 72.4 33l89.7-44.9c-1.4-6.5-2.1-13.2-2.1-20.1c0-53 43-96 96-96s96 43 96 96zM96 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zM400 128a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM352 432a48 48 0 1 0 0-96 48 48 0 1 0 0 96z" />
-                                        </svg>
-                                        <span class="text-gray-700 font-bold">افزودن شبکه اجتماعی</span>
-                                    </div>
-                                </div>
-                                <div class="w-full">
-                                    <div onclick="addLink()"
-                                        class="w-full p-5 border-1 border-gray-400 flex flex-row items-center gap-5 hover:ring-2 hover:ring-sky-500 hover:ring-offset-2 hover:bg-sky-200 rounded-lg transition-all duration-150 cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 576 512">
-                                            <path
-                                                d="M0 256C0 167.6 71.6 96 160 96h72c13.3 0 24 10.7 24 24s-10.7 24-24 24H160C98.1 144 48 194.1 48 256s50.1 112 112 112h72c13.3 0 24 10.7 24 24s-10.7 24-24 24H160C71.6 416 0 344.4 0 256zm576 0c0 88.4-71.6 160-160 160H344c-13.3 0-24-10.7-24-24s10.7-24 24-24h72c61.9 0 112-50.1 112-112s-50.1-112-112-112H344c-13.3 0-24-10.7-24-24s10.7-24 24-24h72c88.4 0 160 71.6 160 160zM184 232H392c13.3 0 24 10.7 24 24s-10.7 24-24 24H184c-13.3 0-24-10.7-24-24s10.7-24 24-24z" />
-                                        </svg>
-                                        <span class="text-gray-700 font-bold">افزودن لینک</span>
-                                    </div>
-                                </div>
-                                {{-- FAQ --}}
-                                <div class="w-full">
-                                    <div onclick="addFaq() "
-                                        class="w-full p-5 border-1 border-gray-400 flex flex-row items-center gap-5 hover:ring-2 hover:ring-sky-500 hover:ring-offset-2 hover:bg-sky-200 rounded-lg transition-all duration-150 cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="size-5">
-                                            <path d="M80 160c0-35.3 28.7-64 64-64h32c35.3 0 64 28.7 64 64v3.6c0 21.8-11.1 42.1-29.4 53.8l-42.2 27.1c-25.2 16.2-40.4 44.1-40.4 74V320c0 17.7 14.3 32 32 32s32-14.3 32-32v-1.4c0-8.2 4.2-15.8 11-20.2l42.2-27.1c36.6-23.6 58.8-64.1 58.8-107.7V160c0-70.7-57.3-128-128-128H144C73.3 32 16 89.3 16 160c0 17.7 14.3 32 32 32s32-14.3 32-32zm80 320a40 40 0 1 0 0-80 40 40 0 1 0 0 80z" />
-                                        </svg>
-                                        <span class="text-gray-700 font-bold">افزودن سوالات متداول</span>
-                                    </div>
-                                </div>
-                                {{-- FAQ end --}}
-                            </div>
-                        </div>
-
-
-                        {{-- create social media --}}
-                        <form action="{{ route('socialAddress.store') }}" method="post" enctype='multipart/form-data'
-                            class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute right-0 top-full form px-5"
-                            id="socialMediaForm">
-                            <div
-                                class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">
-                            </div>
-                            @csrf
-                            <svg xmlns="http://www.w3.org/2000/svg" onclick="closeForm()" class="size-5 cursor-pointer"
-                                viewBox="0 0 384 512">
-                                <path
-                                    d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
-                            </svg>
-                            <div class="flex items-start justify-center">
-                                <div class="bg-white rounded-2xl p-3 w-full lg:w-3/4">
-                                    <div class="text-center mb-8">
-                                        <h3 class="lg:text-lg font-bold text-gray-800"> شبکه اجتماعی</h3>
-                                    </div class="w-full">
-                                    <div class="text-center mb-4">
-                                        <div class="w-full flex flex-col gap-3 my-4">
-                                            <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                                <label class="w-30 text-sm mb-1 mt-2.5 flex">شبکه اجتماعی</label>
-                                                <div
-                                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                                    <select name="socialMedia_id" id="socialMedia_id"
-                                                        class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createSocialRequire">
-                                                        @foreach ($socialMedias as $socialMedia)
-                                                        <option value="{{ $socialMedia->id }}">{{ $socialMedia->title }}
-                                                        </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                                <label class="w-30 text-sm mb-1 mt-2.5 flex">نام کاربری</label>
-                                                <div
-                                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
-                                                    <span
-                                                        class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی
-                                                        است!</span>
-                                                    <input
-                                                        class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createSocialRequire rounded-md"
-                                                        type="text" name='username' id="username"
-                                                        placeholder="نام کاربری">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="w-full text-left">
-                                            <button type="submit" onclick="storeSocialmedia(event)"
-                                                class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
-                                                ثبت
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-
-                        {{-- create social media end --}}
-
-
-                        {{-- create link --}}
-
-
-                        <form action="{{ route('siteLink.store') }}" method="post" enctype='multipart/form-data'
-                            class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 right-0 absolute top-full form px-5 createSiteLink"
-                            id="siteLinkForm">
-                            <div
-                                class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg createSiteLink z-50">
-                            </div>
-                            @csrf
-                            <svg xmlns="http://www.w3.org/2000/svg" onclick="closeForm()" class="size-5 cursor-pointer"
-                                viewBox="0 0 384 512">
-                                <path
-                                    d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
-                            </svg>
                             <div class="flex items-start justify-center">
                                 <div class="bg-white rounded-2xl shadow-md p-3 w-full lg:w-3/4">
-                                    <div class="text-center mb-8">
-                                        <h3 class="lg:text-lg font-bold text-gray-800">ایجاد لینک</h3>
-                                    </div class="w-full ">
+                                    <h3 class="text-center lg:text-lg font-bold text-gray-800 mb-4">افزودن سوال جدید به
+                                        گروه</h3>
+                                    <input type="hidden" name="block_id" id="add_question_block_id">
                                     <div class="text-center mb-4">
-                                        <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
-
-                                            <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                                <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان لینک</label>
-                                                <div
-                                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
-                                                    <span
-                                                        class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی
-                                                        است!</span>
-                                                    <input
-                                                        class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createLinkRequire rounded-md"
-                                                        type="text" name='title' id="link_title_create"
-                                                        placeholder="عنوان لینک">
-                                                </div>
-                                            </div>
-                                            <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                                <label class="w-30 text-sm mb-1 mt-2.5 flex">آدرس لینک</label>
-                                                <div
-                                                    class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
-                                                    <span
-                                                        class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی
-                                                        است!</span>
-                                                    <input
-                                                        class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createLinkRequire rounded-md"
-                                                        type="text" dir="ltr" name='address'
-                                                        id="link_address_create" placeholder="آدرس لینک">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="w-full text-left">
-                                            <button type="submit" onclick="storeLink(event)"
-                                                class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
-                                                ثبت
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-
-                        {{-- create link end --}}
-
-
-                        {{-- create FAQ --}}
-
-                        <form action="{{ route('FAQ.store') }}" method="post" enctype='multipart/form-data'
-                            class="w-full bg-white py-5 rounded-lg transition-all duration-300 invisible opacity-0 right-0 absolute top-full form px-5 max-h-[600px] overflow-y-auto [&::webkit-scrollbar]:hidden createFaq"
-                            id="FaqForm">
-                            <div
-                                class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg createFaq z-50">
-                            </div>
-                            @csrf
-                            <svg xmlns="http://www.w3.org/2000/svg" onclick="closeForm()" class="size-5 cursor-pointer"
-                                viewBox="0 0 384 512">
-                                <path
-                                    d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
-                            </svg>
-                            <div class="flex items-start justify-center">
-                                <div class="bg-white rounded-2xl shadow-md p-3 w-full lg:w-3/4">
-                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان</label>
-                                    <div class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
-                                        <input class="p-6 w-full focus:outline-none text-sm font-bold mr-2 createFaqRequire rounded-md" type="text" name='title' placeholder="عنوان" id="faq_title_create">
-                                    </div class="w-full">
-                                    <div class="text-center mb-4">
-                                        <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
-
-                                            <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1 parentFAQs">
+                                        <div class="w-full grid grid-cols-1 gap-3 my-4">
+                                            <div
+                                                class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">سوال</label>
                                                 <div
                                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
@@ -446,11 +1561,13 @@
                                                         class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی
                                                         است!</span>
                                                     <input
-                                                        class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createFaqRequire rounded-md"
-                                                        type="text" name='faqs[0][question]'
-                                                        placeholder="سوال"
-                                                        id="question_input">
+                                                        class="p-4 w-full focus:outline-none text-sm font-bold mr-2 addQuestionRequire rounded-md"
+                                                        type="text" name='question' id="add_question_input"
+                                                        placeholder="سوال">
                                                 </div>
+                                            </div>
+                                            <div
+                                                class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">پاسخ</label>
                                                 <div
                                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
@@ -458,194 +1575,132 @@
                                                         class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی
                                                         است!</span>
                                                     <input
-                                                        class="p-4 w-full focus:outline-none text-sm font-bold mr-2 createFaqRequire rounded-md"
-                                                        type="text" name='faqs[0][answer]'
-                                                        placeholder=" پاسخ"
-                                                        id="answer_input">
+                                                        class="p-4 w-full focus:outline-none text-sm font-bold mr-2 addQuestionRequire rounded-md"
+                                                        type="text" name='answer' id="add_answer_input"
+                                                        placeholder="پاسخ">
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1" id="parentFAQ">
-                                    </div>
-                                    <div class="w-full text-left flex flex-row justify-between mt-15">
-                                        <div class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer" onclick="openFAQ()">افزودن سوال جدید</div>
-                                        <button type="submit" onclick="storeFaq(event,this)"
-                                            class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
-                                            ثبت
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                    </form>
-                    {{-- create FAQ end --}}
-                    {{-- add question faq group --}}
-                    <form action="{{ route('FAQ.addQuestion') }}" method="post" enctype='multipart/form-data'
-                        class="w-full bg-white p-5 rounded-lg transition-all duration-300 invisible opacity-0 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 max-w-2xl w-11/12 form addQuestionForm"
-                        id="addQuestionForm">
-                        <div
-                            class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg addQuestion z-50">
-                        </div>
-                        @csrf
-                        <div onclick="closeForm()"
-                            class="p-3 cursor-pointer absolute -top-14 right-0 lg:-top-5 lg:-right-5 rounded-full bg-rose-100 hover:bg-rose-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
-                                <path
-                                    d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
-                            </svg>
-                        </div>
-                        <div class="flex items-start justify-center">
-                            <div class="bg-white rounded-2xl shadow-md p-3 w-full lg:w-3/4">
-                                <h3 class="text-center lg:text-lg font-bold text-gray-800 mb-4">افزودن سوال جدید به گروه</h3>
-                                <input type="hidden" name="block_id" id="add_question_block_id">
-                                <div class="text-center mb-4">
-                                    <div class="w-full grid grid-cols-1 gap-3 my-4">
-                                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                            <label class="w-30 text-sm mb-1 mt-2.5 flex">سوال</label>
-                                            <div
-                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
-                                                <span
-                                                    class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی
-                                                    است!</span>
-                                                <input
-                                                    class="p-4 w-full focus:outline-none text-sm font-bold mr-2 addQuestionRequire rounded-md"
-                                                    type="text" name='question' id="add_question_input"
-                                                    placeholder="سوال">
-                                            </div>
-                                        </div>
-                                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                            <label class="w-30 text-sm mb-1 mt-2.5 flex">پاسخ</label>
-                                            <div
-                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex relative">
-                                                <span
-                                                    class="absolute -bottom-5 right-3 opacity-0 text-xs text-red-500">الزامی
-                                                    است!</span>
-                                                <input
-                                                    class="p-4 w-full focus:outline-none text-sm font-bold mr-2 addQuestionRequire rounded-md"
-                                                    type="text" name='answer' id="add_answer_input"
-                                                    placeholder="پاسخ">
-                                            </div>
+                                        <div class="w-full text-left">
+                                            <button type="submit" onclick="addQuestionToGroup(event)"
+                                                class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
+                                                ثبت سوال جدید
+                                            </button>
                                         </div>
                                     </div>
-                                    <div class="w-full text-left">
-                                        <button type="submit" onclick="addQuestionToGroup(event)"
-                                            class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
-                                            ثبت سوال جدید
-                                        </button>
-                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </form>
-                    {{-- add question faq group end --}}
-                    {{-- edit social media --}}
-                    <div
-                        class="w-full bg-white p-1.5 lg:p-5 rounded-lg transition-all duration-300 invisible right-0 opacity-0 absolute top-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 max-w-2xl w-11/12 form editsocialMediaForm">
-                        <div
-                            class="w-full absolute h-full top-0 right-0 bg-white flex items-center justify-center rounded-lg">
-                        </div>
-                        <div onclick="closeForm()"
-                            class="p-3 cursor-pointer absolute -top-14 right-0 lg:-top-5 lg:-right-5 rounded-full bg-rose-100 hover:bg-rose-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
-                                <path
-                                    d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
-                            </svg>
-                        </div>
-                        <div class="flex flex-row justify-between items-center p-5">
-                            <div class="flex flex-row items-center gap-3 lg:gap-5 w-10/12 cursor-pointer"
-                                onclick="openDropdown('media')">
-                                <div class="size-5 socialMediaIcon"></div>
-                                <div class="text-xs text-gray-600 socialLink"></div>
-                            </div>
-                            <div class="flex flex-row items-center gap-5">
-                                <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
-                                    onclick="openDropdown('media')">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
-                                        <path fill="white"
-                                            d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
-                                    </svg>
-                                </div>
-                                <div class="p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer"
-                                    onclick="deleteMedia()">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
-                                        <path fill="white"
-                                            d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <form action="{{ route('socialAddress.update') }}" method="post" enctype='multipart/form-data'
-                            class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out editSMF">
-                            @csrf
-                            <input type="hidden" name="id" class="socialAddressId">
-                            <div class="w-full socialDiv">
-                                <!-- عنوان شبکه اجتماعی -->
-                                @if (isset($item))
-                                <div class="w-full flex flex-col">
-                                    <label class="text-sm md:text-base mb-2" for="username">آدرس شبکه اجتماعی:</label>
-                                    <input type="text" name="username" id="userNameUpdate"
-                                        class="w-full px-3 py-2 outline-none border-1 border-sky-400 rounded-lg userName"
-                                        required>
-                                </div>
-                                @endif
-                            </div>
-                            <div class="text-center mt-8">
-                                <button type="submit" onclick="updateSocial(event)"
-                                    class="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-150 cursor-pointer">
-                                    ثبت
-                                </button>
                             </div>
                         </form>
-                    </div>
-                    {{-- edit social media end --}}
-
-
-                    {{-- edit site link  --}}
-                    <div
-                        class="w-full bg-white p-1.5 right-0 lg:p-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute top-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 max-w-2xl w-11/12 form editSiteLinkForm">
+                        {{-- add question faq group end --}}
+                        {{-- edit social media --}}
                         <div
-                            class="w-full absolute h-full top-0 right-0 bg-white hidden items-center justify-center rounded-lg">
-                        </div>
-                        <div onclick="closeForm()"
-                            class="p-3 cursor-pointer absolute -top-14 right-0 lg:-top-5 lg:-right-5 rounded-full bg-rose-100 hover:bg-rose-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
-                                <path
-                                    d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
-                            </svg>
-                        </div>
-                        <div class="flex flex-row justify-between items-center p-5">
-                            <div class="flex flex-row items-center gap-5 w-10/12 cursor-pointer"
-                                onclick="openDropdown('link')">
-                                <div class="text-sm text-gray-800 font-bold linkTitle"></div>
-                                {{-- <div class="text-xs text-gray-600 linkAddress"></div> --}}
+                            class="w-full bg-white p-1.5 lg:p-5 rounded-lg transition-all duration-300 invisible right-0 opacity-0 absolute top-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 max-w-2xl w-11/12 form editsocialMediaForm">
+                            <div
+                                class="w-full absolute h-full top-0 right-0 bg-white flex items-center justify-center rounded-lg">
                             </div>
-                            <div class="flex flex-row items-center gap-5">
+                            <div onclick="closeForm()"
+                                class="p-3 cursor-pointer absolute -top-14 right-0 lg:-top-5 lg:-right-5 rounded-full bg-rose-100 hover:bg-rose-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
+                                    <path
+                                        d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                                </svg>
+                            </div>
+                            <div class="flex flex-row justify-between items-center p-5">
+                                <div class="flex flex-row items-center gap-3 lg:gap-5 w-10/12 cursor-pointer"
+                                    onclick="openDropdown('media')">
+                                    <div class="size-5 socialMediaIcon"></div>
+                                    <div class="text-xs text-gray-600 socialLink"></div>
+                                </div>
+                                <div class="flex flex-row items-center gap-5">
+                                    <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
+                                        onclick="openDropdown('media')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
+                                            <path fill="white"
+                                                d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
+                                        </svg>
+                                    </div>
+                                    <div class="p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer"
+                                        onclick="deleteMedia()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
+                                            <path fill="white"
+                                                d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <form action="{{ route('socialAddress.update') }}" method="post"
+                                enctype='multipart/form-data'
+                                class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out editSMF">
+                                @csrf
+                                <input type="hidden" name="id" class="socialAddressId">
+                                <div class="w-full socialDiv">
+                                    <!-- عنوان شبکه اجتماعی -->
+                                    @if (isset($item))
+                                        <div class="w-full flex flex-col">
+                                            <label class="text-sm md:text-base mb-2" for="username">آدرس شبکه
+                                                اجتماعی:</label>
+                                            <input type="text" name="username" id="userNameUpdate"
+                                                class="w-full px-3 py-2 outline-none border-1 border-sky-400 rounded-lg userName"
+                                                required>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="text-center mt-8">
+                                    <button type="submit" onclick="updateSocial(event)"
+                                        class="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-150 cursor-pointer">
+                                        ثبت
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        {{-- edit social media end --}}
 
-                                <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
+
+                        {{-- edit site link  --}}
+                        <div
+                            class="w-full bg-white p-1.5 right-0 lg:p-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute top-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 max-w-2xl w-11/12 form editSiteLinkForm">
+                            <div
+                                class="w-full absolute h-full top-0 right-0 bg-white hidden items-center justify-center rounded-lg">
+                            </div>
+                            <div onclick="closeForm()"
+                                class="p-3 cursor-pointer absolute -top-14 right-0 lg:-top-5 lg:-right-5 rounded-full bg-rose-100 hover:bg-rose-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
+                                    <path
+                                        d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                                </svg>
+                            </div>
+                            <div class="flex flex-row justify-between items-center p-5">
+                                <div class="flex flex-row items-center gap-5 w-10/12 cursor-pointer"
                                     onclick="openDropdown('link')">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
-                                        <path fill="white"
-                                            d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
-                                    </svg>
+                                    <div class="text-sm text-gray-800 font-bold linkTitle"></div>
+                                    {{-- <div class="text-xs text-gray-600 linkAddress"></div> --}}
                                 </div>
-                                <div class="p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer"
-                                    onclick="deleteLink()">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
-                                        <path fill="white"
-                                            d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
-                                    </svg>
-                                </div>
-                            </div>
+                                <div class="flex flex-row items-center gap-5">
 
-                        </div>
-                        <form action="{{ route('siteLink.update') }}" method="post" enctype='multipart/form-data'
-                            class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out editSLF"
-                            id="editSiteLinkForm">
-                            @csrf
-                            <input type="hidden" name="siteLinkId" id="siteLinkId">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-5 lg:gap-10">
-                                {{-- <div class="w-full flex flex-col">
+                                    <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
+                                        onclick="openDropdown('link')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
+                                            <path fill="white"
+                                                d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
+                                        </svg>
+                                    </div>
+                                    <div class="p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer"
+                                        onclick="deleteLink()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
+                                            <path fill="white"
+                                                d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <form action="{{ route('siteLink.update') }}" method="post" enctype='multipart/form-data'
+                                class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out editSLF"
+                                id="editSiteLinkForm">
+                                @csrf
+                                <input type="hidden" name="siteLinkId" id="siteLinkId">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-5 lg:gap-10">
+                                    {{-- <div class="w-full flex flex-col">
                                     <div class="text-sm md:text-base border border-gray-400 rounded-[20px] py-1">
                                         <label
                                             class="p-1 w-20 flex flex-row justify-center text-sm">
@@ -655,219 +1710,221 @@
                                             class="w-full px-2 py-1 lg:px-2 outline-none text-gray-500 border-1 border-blue-300 rounded-md">
                                     </div>
                                 </div> --}}
-                                <div class="w-full flex flex-col">
-                                    <label class="text-sm md:text-base" for="title">عنوان لینک :</label>
-                                    <input type="text" name="title" id="title"
-                                        class="py-1 px-3 rounded-md border-1 border-blue-300 outline-none" required>
+                                    <div class="w-full flex flex-col">
+                                        <label class="text-sm md:text-base" for="title">عنوان لینک :</label>
+                                        <input type="text" name="title" id="title"
+                                            class="py-1 px-3 rounded-md border-1 border-blue-300 outline-none" required>
+                                    </div>
+                                    <div class="w-full flex flex-col">
+                                        <label class="text-sm md:text-base" for="address">آدرس لینک :</label>
+                                        <input type="text" name="address" dir="ltr" id="address"
+                                            class="py-1 px-3 rounded-md border-1 border-blue-300 outline-none" required>
+                                    </div>
+                                    <div class="md:text-left text-center md:px-12 mt-5 lg:mt-10">
+                                        <button onclick="updateLink(event)"
+                                            class="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-150 cursor-pointer">ثبت</button>
+                                    </div>
                                 </div>
-                                <div class="w-full flex flex-col">
-                                    <label class="text-sm md:text-base" for="address">آدرس لینک :</label>
-                                    <input type="text" name="address" dir="ltr" id="address"
-                                        class="py-1 px-3 rounded-md border-1 border-blue-300 outline-none" required>
-                                </div>
-                                <div class="md:text-left text-center md:px-12 mt-5 lg:mt-10">
-                                    <button onclick="updateLink(event)"
-                                        class="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-150 cursor-pointer">ثبت</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    {{-- edit site link end --}}
+                            </form>
+                        </div>
+                        {{-- edit site link end --}}
 
 
-                    {{-- edit faq --}}
-                    <div
-                        class="w-full bg-white p-1.5 right-0 lg:p-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute top-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 max-w-2xl w-11/12 form editFaqForm">
+                        {{-- edit faq --}}
                         <div
-                            class="w-full absolute h-full top-0 right-0 bg-white hidden items-center justify-center rounded-lg">
-                        </div>
-                        <div onclick="closeForm()"
-                            class="p-3 cursor-pointer absolute -top-14 right-0 lg:-top-5 lg:-right-5 rounded-full bg-rose-100 hover:bg-rose-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
-                                <path
-                                    d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
-                            </svg>
-                        </div>
-                        <div class="flex flex-row justify-between items-center p-5">
-                            <div class="flex flex-row items-center gap-5 w-10/12 cursor-pointer"
-                                onclick="openDropdown('faq')">
-                                <div class="text-sm text-gray-800 font-bold faqQuestion"></div>
-                                <div class="text-sm text-gray-800 font-bold faqAnswer"></div>
-
+                            class="w-full bg-white p-1.5 right-0 lg:p-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute top-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 max-w-2xl w-11/12 form editFaqForm">
+                            <div
+                                class="w-full absolute h-full top-0 right-0 bg-white hidden items-center justify-center rounded-lg">
                             </div>
-                            <div class="flex flex-row items-center gap-5">
-
-                                <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
+                            <div onclick="closeForm()"
+                                class="p-3 cursor-pointer absolute -top-14 right-0 lg:-top-5 lg:-right-5 rounded-full bg-rose-100 hover:bg-rose-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
+                                    <path
+                                        d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                                </svg>
+                            </div>
+                            <div class="flex flex-row justify-between items-center p-5">
+                                <div class="flex flex-row items-center gap-5 w-10/12 cursor-pointer"
                                     onclick="openDropdown('faq')">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
-                                        <path fill="white"
-                                            d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
-                                    </svg>
-                                </div>
-                                <!-- <div class="p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer"
-                        onclick="deleteFAQ()">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
-                            <path fill="white"
-                                d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
-                        </svg>
-                    </div> -->
-                            </div>
+                                    <div class="text-sm text-gray-800 font-bold faqQuestion"></div>
+                                    <div class="text-sm text-gray-800 font-bold faqAnswer"></div>
 
-                        </div>
-                        <form action="{{ route('FAQ.update') }}" method="post" enctype='multipart/form-data'
-                            class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out editFAQ"
-                            id="editFaqForm">
-                            @csrf
-                            <input type="hidden" name="FaqId" id="FaqId">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-5 lg:gap-10">
-                                <div class="w-full flex flex-col">
-                                    <label class="text-sm md:text-base" for="question"> سوال :</label>
-                                    <input type="text" name="question" id="question"
-                                        class="py-1 px-3 rounded-md border-1 border-blue-300 outline-none" required>
                                 </div>
-                                <div class="w-full flex flex-col">
-                                    <label class="text-sm md:text-base" for="answer"> پاسخ :</label>
-                                    <input type="text" name="answer" id="answer"
-                                        class="py-1 px-3 rounded-md border-1 border-blue-300 outline-none" required>
-                                </div>
-                                <div class="md:text-left text-center md:px-12 mt-5 lg:mt-10">
-                                    <button onclick="updateFaq(event)"
-                                        class="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-150 cursor-pointer">ثبت</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    {{-- edit faq end --}}
-                    {{--edit Title start --}}
-                    <div class="w-full bg-white p-1.5 right-0 lg:p-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute top-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 max-w-2xl w-11/12 form editTitleForm">
-                        <div class="w-full absolute h-full top-0 right-0 bg-white hidden items-center justify-center rounded-lg">
-                        </div>
-                        <div onclick="closeForm()"
-                            class="p-3 cursor-pointer absolute -top-14 right-0 lg:-top-5 lg:-right-5 rounded-full bg-rose-100 hover:bg-rose-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
-                                <path
-                                    d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                                <div class="flex flex-row items-center gap-5">
+
+                                    <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
+                                        onclick="openDropdown('faq')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
+                                            <path fill="white"
+                                                d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
+                                        </svg>
+                                    </div>
+                                    <!-- <div class="p-1.5 rounded-md bg-red-500 hover:bg-red-600 cursor-pointer"
+                            onclick="deleteFAQ()">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
+                                <path fill="white"
+                                    d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
                             </svg>
-                        </div>
-                        <div class="flex flex-row justify-between items-center p-5">
-                            <div class="flex flex-row items-center gap-5 w-10/12 cursor-pointer"
-                                onclick="openDropdown('title')">
-                                <div class="text-sm text-gray-800 font-bold titleText"></div>
+                        </div> -->
+                                </div>
+
                             </div>
-                            <div class="flex flex-row items-center gap-5">
-                                <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
+                            <form action="{{ route('FAQ.update') }}" method="post" enctype='multipart/form-data'
+                                class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out editFAQ"
+                                id="editFaqForm">
+                                @csrf
+                                <input type="hidden" name="FaqId" id="FaqId">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-5 lg:gap-10">
+                                    <div class="w-full flex flex-col">
+                                        <label class="text-sm md:text-base" for="question"> سوال :</label>
+                                        <input type="text" name="question" id="question"
+                                            class="py-1 px-3 rounded-md border-1 border-blue-300 outline-none" required>
+                                    </div>
+                                    <div class="w-full flex flex-col">
+                                        <label class="text-sm md:text-base" for="answer"> پاسخ :</label>
+                                        <input type="text" name="answer" id="answer"
+                                            class="py-1 px-3 rounded-md border-1 border-blue-300 outline-none" required>
+                                    </div>
+                                    <div class="md:text-left text-center md:px-12 mt-5 lg:mt-10">
+                                        <button onclick="updateFaq(event)"
+                                            class="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-150 cursor-pointer">ثبت</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        {{-- edit faq end --}}
+                        {{-- edit Title start --}}
+                        <div
+                            class="w-full bg-white p-1.5 right-0 lg:p-5 rounded-lg transition-all duration-300 invisible opacity-0 absolute top-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 max-w-2xl w-11/12 form editTitleForm">
+                            <div
+                                class="w-full absolute h-full top-0 right-0 bg-white hidden items-center justify-center rounded-lg">
+                            </div>
+                            <div onclick="closeForm()"
+                                class="p-3 cursor-pointer absolute -top-14 right-0 lg:-top-5 lg:-right-5 rounded-full bg-rose-100 hover:bg-rose-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
+                                    <path
+                                        d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                                </svg>
+                            </div>
+                            <div class="flex flex-row justify-between items-center p-5">
+                                <div class="flex flex-row items-center gap-5 w-10/12 cursor-pointer"
                                     onclick="openDropdown('title')">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
-                                        <path fill="white"
-                                            d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
-                                    </svg>
+                                    <div class="text-sm text-gray-800 font-bold titleText"></div>
                                 </div>
+                                <div class="flex flex-row items-center gap-5">
+                                    <div class="p-1.5 rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
+                                        onclick="openDropdown('title')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
+                                            <path fill="white"
+                                                d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
+                                        </svg>
+                                    </div>
 
+                                </div>
                             </div>
+                            <form action="{{ route('pageBlocks.update') }}" method="post" enctype='multipart/form-data'
+                                class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out editTLF"
+                                id="editTitleForm">
+                                @csrf
+                                <input type="hidden" name="blockId" id="blockId">
+                                <div class="grid grid-cols-1 md:grid-cols-1 gap-5 md:gap-5 lg:gap-10">
+                                    <div class="w-full flex flex-col">
+                                        <label class="text-sm md:text-base" for="title_input">عنوان :</label>
+                                        <input type="text" name="title" id="title_input"
+                                            class="py-1 px-3 rounded-md border-1 border-blue-300 outline-none" required>
+                                    </div>
+                                    <div class="md:text-left text-center md:px-12 mt-5 lg:mt-10">
+                                        <button onclick="updateTitle(event)"
+                                            class="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-150 cursor-pointer">ثبت</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                        <form action="{{ route('pageBlocks.update') }}" method="post" enctype='multipart/form-data'
-                            class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out editTLF"
-                            id="editTitleForm">
-                            @csrf
-                            <input type="hidden" name="blockId" id="blockId">
-                            <div class="grid grid-cols-1 md:grid-cols-1 gap-5 md:gap-5 lg:gap-10">
-                                <div class="w-full flex flex-col">
-                                    <label class="text-sm md:text-base" for="title_input">عنوان :</label>
-                                    <input type="text" name="title" id="title_input"
-                                        class="py-1 px-3 rounded-md border-1 border-blue-300 outline-none" required>
-                                </div>
-                                <div class="md:text-left text-center md:px-12 mt-5 lg:mt-10">
-                                    <button onclick="updateTitle(event)"
-                                        class="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-150 cursor-pointer">ثبت</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
 
-                    {{--edit Title end --}}
+                        {{-- edit Title end --}}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-        let socialMedia_id = document.querySelector('#socialMedia_id')
-        let userName = document.querySelector('.userName')
-        let editsocialMediaForm = document.querySelector('.editsocialMediaForm')
-        let editSiteLinkForm = document.querySelector('.editSiteLinkForm')
-        let editFaqForm = document.querySelector('.editFaqForm')
-        let socialAddressId = document.querySelector('.socialAddressId')
-        let socialLink = document.querySelector('.socialLink')
-        let socialMediaIcon = document.querySelector('.socialMediaIcon')
-        let editSocialSection = document.querySelectorAll('.editSocial')
-        let userNameUpdate = document.getElementById('userNameUpdate')
+        <script>
+            let socialMedia_id = document.querySelector('#socialMedia_id')
+            let userName = document.querySelector('.userName')
+            let editsocialMediaForm = document.querySelector('.editsocialMediaForm')
+            let editSiteLinkForm = document.querySelector('.editSiteLinkForm')
+            let editFaqForm = document.querySelector('.editFaqForm')
+            let socialAddressId = document.querySelector('.socialAddressId')
+            let socialLink = document.querySelector('.socialLink')
+            let socialMediaIcon = document.querySelector('.socialMediaIcon')
+            let editSocialSection = document.querySelectorAll('.editSocial')
+            let userNameUpdate = document.getElementById('userNameUpdate')
 
-        let userNameCreate = document.getElementById('username')
-        let socialMedia_id_create = document.getElementById('socialMedia_id')
-        let storeSocialForm = document.getElementById('socialMediaForm')
-        let socialLinks = document.getElementById('socialLinks') // append what sociala media create
+            let userNameCreate = document.getElementById('username')
+            let socialMedia_id_create = document.getElementById('socialMedia_id')
+            let storeSocialForm = document.getElementById('socialMediaForm')
+            let socialLinks = document.getElementById('socialLinks') // append what sociala media create
 
-        // deleteLink() method deficient
-        let linkSection = document.getElementById('linkSection')
-        let linkTitle = document.querySelector('.linkTitle')
-        // let linkAddress = document.querySelector('.linkAddress')
-        let link_title_input = document.getElementById('title')
-        let link_address_input = document.getElementById('address')
-        let siteLinkId = document.getElementById('siteLinkId')
-        // let icon_path = document.getElementById('icon_path')
+            // deleteLink() method deficient
+            let linkSection = document.getElementById('linkSection')
+            let linkTitle = document.querySelector('.linkTitle')
+            // let linkAddress = document.querySelector('.linkAddress')
+            let link_title_input = document.getElementById('title')
+            let link_address_input = document.getElementById('address')
+            let siteLinkId = document.getElementById('siteLinkId')
+            // let icon_path = document.getElementById('icon_path')
 
-        let link_title_create = document.getElementById('link_title_create')
-        let link_address_create = document.getElementById('link_address_create')
-        // let link_icon_path_create = document.getElementById('link_icon_path_create')
-        let siteLinks = document.getElementById('siteLinks')
-        let createSiteLink = document.querySelector('.createSiteLink')
+            let link_title_create = document.getElementById('link_title_create')
+            let link_address_create = document.getElementById('link_address_create')
+            // let link_icon_path_create = document.getElementById('link_icon_path_create')
+            let siteLinks = document.getElementById('siteLinks')
+            let createSiteLink = document.querySelector('.createSiteLink')
 
-        //FAQ
-        let faq = document.getElementById('faq')
-        let createFaq = document.querySelector('.createFaq')
-        let faqAnswer = document.querySelector('.faqAnswer')
-        let faqQuestion = document.querySelector('.faqQuestion')
-        // let question_create=document.getElementById('question_create')
-        // let answer_create=document.getElementById('answer_create')
-        let question_input = document.getElementById('question')
-        let answer_input = document.getElementById('answer')
-        let FaqId = document.getElementById('FaqId')
-        let parentFAQ = document.getElementById('parentFAQ')
-        let faqTitle = document.getElementById('faq_title_create')
+            //FAQ
+            let faq = document.getElementById('faq')
+            let createFaq = document.querySelector('.createFaq')
+            let faqAnswer = document.querySelector('.faqAnswer')
+            let faqQuestion = document.querySelector('.faqQuestion')
+            // let question_create=document.getElementById('question_create')
+            // let answer_create=document.getElementById('answer_create')
+            let question_input = document.getElementById('question')
+            let answer_input = document.getElementById('answer')
+            let FaqId = document.getElementById('FaqId')
+            let parentFAQ = document.getElementById('parentFAQ')
+            let faqTitle = document.getElementById('faq_title_create')
 
-        let editTitleForm = document.querySelector('.editTitleForm')
-        let titleText = document.querySelector('.titleText')
-        let title_input = document.getElementById('title_input')
-        let blockId = document.getElementById('blockId')
+            let editTitleForm = document.querySelector('.editTitleForm')
+            let titleText = document.querySelector('.titleText')
+            let title_input = document.getElementById('title_input')
+            let blockId = document.getElementById('blockId')
 
-        //faqBox
-        let faqBox = document.querySelectorAll(".faqBox")
-        faqBox.forEach(faq => {
-            faq.children[0].addEventListener('click', () => {
-                if (faq.children[1].classList.contains('max-h-0')) {
-                    faqBox.forEach((item) => {
-                        item.children[1].classList.remove('max-h-[500px]')
-                        item.children[1].classList.add('max-h-0')
-                        item.children[0].children[1].classList.remove('rotate-180')
-                        item.children[0].children[1].classList.add('rotate-0')
-                    })
-                    faq.children[1].classList.remove('max-h-0')
-                    faq.children[1].classList.add('max-h-[500px]')
-                    faq.children[0].children[1].classList.remove('rotate-0')
-                    faq.children[0].children[1].classList.add('rotate-180')
-                } else {
-                    faq.children[1].classList.remove('max-h-[500px]')
-                    faq.children[1].classList.add('max-h-0')
-                    faq.children[0].children[1].classList.remove('rotate-180')
-                    faq.children[0].children[1].classList.add('rotate-0')
-                }
+            //faqBox
+            let faqBox = document.querySelectorAll(".faqBox")
+            faqBox.forEach(faq => {
+                faq.children[0].addEventListener('click', () => {
+                    if (faq.children[1].classList.contains('max-h-0')) {
+                        faqBox.forEach((item) => {
+                            item.children[1].classList.remove('max-h-[500px]')
+                            item.children[1].classList.add('max-h-0')
+                            item.children[0].children[1].classList.remove('rotate-180')
+                            item.children[0].children[1].classList.add('rotate-0')
+                        })
+                        faq.children[1].classList.remove('max-h-0')
+                        faq.children[1].classList.add('max-h-[500px]')
+                        faq.children[0].children[1].classList.remove('rotate-0')
+                        faq.children[0].children[1].classList.add('rotate-180')
+                    } else {
+                        faq.children[1].classList.remove('max-h-[500px]')
+                        faq.children[1].classList.add('max-h-0')
+                        faq.children[0].children[1].classList.remove('rotate-180')
+                        faq.children[0].children[1].classList.add('rotate-0')
+                    }
+                })
             })
-        })
-        // deleteLink
-        function deleteLink() {
-            let viewLink = document.querySelectorAll('.editLink')
-            editSiteLinkForm.children[0].classList.remove('hidden')
-            editSiteLinkForm.children[0].classList.add('flex')
-            editSiteLinkForm.children[0].innerHTML = `
+            // deleteLink
+            function deleteLink() {
+                let viewLink = document.querySelectorAll('.editLink')
+                editSiteLinkForm.children[0].classList.remove('hidden')
+                editSiteLinkForm.children[0].classList.add('flex')
+                editSiteLinkForm.children[0].innerHTML = `
             <div class="loading-wave">
                 <div class="loading-bar"></div>
                 <div class="loading-bar"></div>
@@ -875,74 +1932,74 @@
                 <div class="loading-bar"></div>
             </div>
             `
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-            $.ajax({
-                url: "{{ route('siteLink.delete') }}",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    'id': siteLinkId.value
-                },
-                success: function(data) {
-                    editSiteLinkForm.children[0].classList.remove('flex')
-                    editSiteLinkForm.children[0].classList.add('hidden')
-                    viewLink.forEach((item) => {
-                        if (item.getAttribute('data-site-id') == siteLinkId.value) {
-                            item.parentElement.parentElement.remove()
-                        }
-                    })
-                    closeForm()
-                },
-                error: function() {
-                    alert('خطا در بارگیری اطلاعات')
-                }
-            })
-        }
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+                $.ajax({
+                    url: "{{ route('siteLink.delete') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'id': siteLinkId.value
+                    },
+                    success: function(data) {
+                        editSiteLinkForm.children[0].classList.remove('flex')
+                        editSiteLinkForm.children[0].classList.add('hidden')
+                        viewLink.forEach((item) => {
+                            if (item.getAttribute('data-site-id') == siteLinkId.value) {
+                                item.parentElement.parentElement.remove()
+                            }
+                        })
+                        closeForm()
+                    },
+                    error: function() {
+                        alert('خطا در بارگیری اطلاعات')
+                    }
+                })
+            }
 
-        function deleteLinkList(el, id) {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-            $.ajax({
-                url: "{{ route('siteLink.delete') }}",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    'id': id
-                },
-                success: function(data) {
-                    el.parentElement.parentElement.parentElement.remove()
-                },
-                error: function() {
-                    alert('خطا در بارگیری اطلاعات')
-                }
-            })
-        }
+            function deleteLinkList(el, id) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+                $.ajax({
+                    url: "{{ route('siteLink.delete') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'id': id
+                    },
+                    success: function(data) {
+                        el.parentElement.parentElement.parentElement.remove()
+                    },
+                    error: function() {
+                        alert('خطا در بارگیری اطلاعات')
+                    }
+                })
+            }
 
-        // StoreLink
-        function storeLink(e) {
-            let errorText = ""
-            e.preventDefault()
-            let createLinkRequire = document.querySelectorAll('.createLinkRequire')
-            let flag = true
-            createLinkRequire.forEach((item) => {
-                if (item.value == "") {
-                    item.classList.add('border-1')
-                    item.classList.add('border-red-500')
-                    item.parentElement.children[0].classList.remove('opacity-0')
-                    flag = false
-                }
-            })
-            if (flag) {
-                createSiteLink.children[0].classList.remove('hidden')
-                createSiteLink.children[0].classList.add('flex')
-                createSiteLink.children[0].innerHTML = `
+            // StoreLink
+            function storeLink(e) {
+                let errorText = ""
+                e.preventDefault()
+                let createLinkRequire = document.querySelectorAll('.createLinkRequire')
+                let flag = true
+                createLinkRequire.forEach((item) => {
+                    if (item.value == "") {
+                        item.classList.add('border-1')
+                        item.classList.add('border-red-500')
+                        item.parentElement.children[0].classList.remove('opacity-0')
+                        flag = false
+                    }
+                })
+                if (flag) {
+                    createSiteLink.children[0].classList.remove('hidden')
+                    createSiteLink.children[0].classList.add('flex')
+                    createSiteLink.children[0].innerHTML = `
                 <div class="loading-wave">
                     <div class="loading-bar"></div>
                     <div class="loading-bar"></div>
@@ -950,28 +2007,28 @@
                     <div class="loading-bar"></div>
                 </div>
                 `
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                    }
-                })
-                $.ajax({
-                    url: "{{ route('siteLink.store') }}",
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        'address': link_address_create.value,
-                        'title': link_title_create.value,
-                        'page_id': "{{ $page->id }}",
-                        // 'icon_path': link_icon_path_create.value
-                    },
-                    success: function(data) {
-                        createSiteLink.children[0].classList.remove('flex')
-                        createSiteLink.children[0].classList.add('hidden')
-                        link_address_create.value = ""
-                        link_title_create.value = ""
-                        let div = document.createElement('div')
-                        let element = `
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                        }
+                    })
+                    $.ajax({
+                        url: "{{ route('siteLink.store') }}",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            'address': link_address_create.value,
+                            'title': link_title_create.value,
+                            'page_id': "{{ $page->id }}",
+                            // 'icon_path': link_icon_path_create.value
+                        },
+                        success: function(data) {
+                            createSiteLink.children[0].classList.remove('flex')
+                            createSiteLink.children[0].classList.add('hidden')
+                            link_address_create.value = ""
+                            link_title_create.value = ""
+                            let div = document.createElement('div')
+                            let element = `
 
                         <div class="lg:py-2">
                                 <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center viewLinkTitle"
@@ -1005,80 +2062,80 @@
                                 </div>
                             </div>
                         `
-                        div.innerHTML = element
-                        siteLinks.appendChild(div)
-                        closeForm()
-                    },
-                    error: function() {
-                        alert('خطا در ارسال داده ها')
+                            div.innerHTML = element
+                            siteLinks.appendChild(div)
+                            closeForm()
+                        },
+                        error: function() {
+                            alert('خطا در ارسال داده ها')
+                        }
+                    })
+                }
+            }
+            // storeFaq 
+            function storeFaq(e, el) {
+                let question_input = document.getElementById('question_input')
+                let answer_input = document.getElementById('answer_input')
+                let faq_title_create = document.getElementById('faq_title_create')
+                let array = [];
+                let errorText = ""
+                e.preventDefault()
+                let createFaqRequire = document.querySelectorAll('.createFaqRequire')
+                let parentFAQs = document.querySelectorAll('.parentFAQs')
+                let flag = true
+
+                createFaqRequire.forEach((item) => {
+                    if (item.value == "") {
+                        item.classList.add('border-1')
+                        item.classList.add('border-red-500')
+                        item.parentElement.children[0].classList.remove('opacity-0')
+                        flag = false
                     }
                 })
-            }
-        }
-        // storeFaq 
-        function storeFaq(e, el) {
-            let question_input = document.getElementById('question_input')
-            let answer_input = document.getElementById('answer_input')
-            let faq_title_create = document.getElementById('faq_title_create')
-            let array = [];
-            let errorText = ""
-            e.preventDefault()
-            let createFaqRequire = document.querySelectorAll('.createFaqRequire')
-            let parentFAQs = document.querySelectorAll('.parentFAQs')
-            let flag = true
 
-            createFaqRequire.forEach((item) => {
-                if (item.value == "") {
-                    item.classList.add('border-1')
-                    item.classList.add('border-red-500')
-                    item.parentElement.children[0].classList.remove('opacity-0')
-                    flag = false
-                }
-            })
+                parentFAQs.forEach((faq) => {
+                    let datas = [faq.children[1].children[1].value, faq.children[3].children[1].value]
+                    array.push(datas)
+                })
 
-            parentFAQs.forEach((faq) => {
-                let datas = [faq.children[1].children[1].value, faq.children[3].children[1].value]
-                array.push(datas)
-            })
-
-            if (flag) {
-                createFaq.children[0].classList.remove('hidden')
-                createFaq.children[0].classList.add('flex')
-                createFaq.children[0].innerHTML = `
+                if (flag) {
+                    createFaq.children[0].classList.remove('hidden')
+                    createFaq.children[0].classList.add('flex')
+                    createFaq.children[0].innerHTML = `
             <div class="loading-wave">
                 <div class="loading-bar"></div>
                 <div class="loading-bar"></div>
                 <div class="loading-bar"></div>
                 <div class="loading-bar"></div>
             </div>
-        `
+            `
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                    }
-                })
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                        }
+                    })
 
-                $.ajax({
-                    url: "{{ route('FAQ.store') }}",
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        'title': faqTitle.value,
-                        'datas': array,
-                        'page_id': "{{ $page->id }}",
-                    },
-                    success: function(response) {
-                        createFaq.children[0].classList.remove('flex')
-                        createFaq.children[0].classList.add('hidden')
+                    $.ajax({
+                        url: "{{ route('FAQ.store') }}",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            'title': faqTitle.value,
+                            'datas': array,
+                            'page_id': "{{ $page->id }}",
+                        },
+                        success: function(response) {
+                            createFaq.children[0].classList.remove('flex')
+                            createFaq.children[0].classList.add('hidden')
 
-                        faq_title_create.value = ""
-                        question_input.value = ""
-                        answer_input.value = ""
-                        parentFAQ.innerHTML = ""
-                        let mainDiv = document.createElement('div')
-                        mainDiv.className = "lg:py-2"
-                        let element = `
+                            faq_title_create.value = ""
+                            question_input.value = ""
+                            answer_input.value = ""
+                            parentFAQ.innerHTML = ""
+                            let mainDiv = document.createElement('div')
+                            mainDiv.className = "lg:py-2"
+                            let element = `
                     <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center cursor-pointer viewFAQ" 
                         onclick='editTitle("${response.block.id}")' 
                         data-block-id="${response.block.id}">
@@ -1105,8 +2162,8 @@
                         </div>
                     </div>
                 `;
-                        response.faqs.forEach((data) => {
-                            element += `
+                            response.faqs.forEach((data) => {
+                                element += `
                         <div class="mt-3 relative flex flex-col lg:flex-row gap-3">
                             <div class="w-full lg:w-8/9 faqBox">
                                 <div class="flex flex-row justify-between items-center gap-3 py-3 px-4 border-1 border-gray-400 bg-fuchsia-100 rounded-full relative transition-all duration-300">
@@ -1142,265 +2199,268 @@
                             </div>
                         </div>
                     `;
-                        });
+                            });
 
-                        mainDiv.innerHTML = element;
-                        faq.appendChild(mainDiv);
+                            mainDiv.innerHTML = element;
+                            faq.appendChild(mainDiv);
 
 
 
-                        let faqBox = document.querySelectorAll(".faqBox")
-                        faqBox.forEach(faq => {
-                            faq.children[0].addEventListener('click', () => {
-                                if (faq.children[1].classList.contains('max-h-0')) {
-                                    faqBox.forEach((item) => {
-                                        item.children[1].classList.remove('max-h-[500px]')
-                                        item.children[1].classList.add('max-h-0')
-                                        item.children[0].children[1].classList.remove('rotate-180')
-                                        item.children[0].children[1].classList.add('rotate-0')
-                                    })
-                                    faq.children[1].classList.remove('max-h-0')
-                                    faq.children[1].classList.add('max-h-[500px]')
-                                    faq.children[0].children[1].classList.remove('rotate-0')
-                                    faq.children[0].children[1].classList.add('rotate-180')
-                                } else {
-                                    faq.children[1].classList.remove('max-h-[500px]')
-                                    faq.children[1].classList.add('max-h-0')
-                                    faq.children[0].children[1].classList.remove('rotate-180')
-                                    faq.children[0].children[1].classList.add('rotate-0')
-                                }
+                            let faqBox = document.querySelectorAll(".faqBox")
+                            faqBox.forEach(faq => {
+                                faq.children[0].addEventListener('click', () => {
+                                    if (faq.children[1].classList.contains('max-h-0')) {
+                                        faqBox.forEach((item) => {
+                                            item.children[1].classList.remove(
+                                                'max-h-[500px]')
+                                            item.children[1].classList.add('max-h-0')
+                                            item.children[0].children[1].classList.remove(
+                                                'rotate-180')
+                                            item.children[0].children[1].classList.add(
+                                                'rotate-0')
+                                        })
+                                        faq.children[1].classList.remove('max-h-0')
+                                        faq.children[1].classList.add('max-h-[500px]')
+                                        faq.children[0].children[1].classList.remove('rotate-0')
+                                        faq.children[0].children[1].classList.add('rotate-180')
+                                    } else {
+                                        faq.children[1].classList.remove('max-h-[500px]')
+                                        faq.children[1].classList.add('max-h-0')
+                                        faq.children[0].children[1].classList.remove('rotate-180')
+                                        faq.children[0].children[1].classList.add('rotate-0')
+                                    }
+                                })
                             })
+                            closeForm();
+                        },
+                        error: function() {
+                            alert('خطا در ارسال داده ها');
+                        }
+                    });
+                }
+            }
+            // updateLink
+            function updateLink(e) {
+                let viewLinkTitle = document.querySelectorAll('.viewLinkTitle')
+                e.preventDefault();
+                editSiteLinkForm.children[0].classList.remove('hidden')
+                editSiteLinkForm.children[0].classList.add('flex')
+                editSiteLinkForm.children[0].innerHTML = `
+            <div class="loading-wave">
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+            </div>
+            `
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+                $.ajax({
+                    url: "{{ route('siteLink.update') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'id': siteLinkId.value,
+                        'title': link_title_input.value,
+                        'address': link_address_input.value,
+                        // 'icon_path': icon_path.value,
+                        'page_id': "{{ $page->id }}"
+                    },
+                    success: function(data) {
+                        linkTitle.innerText = data.title
+                        // linkAddress.innerText = data.address
+                        link_title_input.value = data.title
+                        link_address_input.value = data.address
+                        editSiteLinkForm.children[0].classList.remove('flex')
+                        editSiteLinkForm.children[0].classList.add('hidden')
+                        closeForm()
+                        viewLinkTitle.forEach((element) => {
+                            if (element.getAttribute('data-view-link-id') == data.id) {
+                                element.innerText = '  ورود به  ' + data.title
+                            }
                         })
-                        closeForm();
                     },
                     error: function() {
-                        alert('خطا در ارسال داده ها');
+                        alert('خطا در ارسال داده')
+                    }
+                })
+            }
+
+            // editLink
+            function editLink(id) {
+
+                editSiteLinkForm.children[0].classList.remove('hidden')
+                editSiteLinkForm.children[0].classList.add('flex')
+                editSiteLinkForm.children[0].innerHTML = `
+            <div class="loading-wave">
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+            </div>
+            `
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+
+                $.ajax({
+                    url: "{{ route('siteLink.edit') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'id': id
+                    },
+                    success: function(data) {
+                        editSiteLinkForm.children[0].classList.remove('flex')
+                        editSiteLinkForm.children[0].classList.add('hidden')
+                        linkTitle.innerText = data.title
+                        link_title_input.value = data.title
+                        link_address_input.value = data.address
+                        siteLinkId.value = data.id
+                    },
+                    error: function() {
+                        alert('خطا در بارگذاری اطلاعات')
+                    }
+                })
+
+
+                block.classList.remove('invisible')
+                block.classList.remove('opacity-0')
+                group.classList.add('scale-95')
+                group.classList.add('opacity-0')
+                group.classList.add('invisible')
+                editSiteLinkForm.classList.remove('invisible')
+                editSiteLinkForm.classList.remove('opacity-0')
+                editSiteLinkForm.classList.remove('top-full')
+                editSiteLinkForm.classList.add('top-0')
+                editSiteLinkForm.classList.add('-translate-y-1/7')
+            }
+            //title edit
+            // function editTitle(id){
+            //     console.log(93847565)
+            //     editFaqForm.children[0].classList.remove('hidden')
+            //     editFaqForm.children[0].classList.add('flex')
+            //     editFaqForm.children[0].innerHTML = `
+    //     <div class="loading-wave">
+    //         <div class="loading-bar"></div>
+    //         <div class="loading-bar"></div>
+    //         <div class="loading-bar"></div>
+    //         <div class="loading-bar"></div>
+    //     </div>
+    //     `
+            //     $.ajaxSetup({
+            //         headers: {
+            //             'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            //         }
+            //     })
+
+            //     $.ajax({
+            //         url: "{{ route('pageBlocks.edit') }}",
+            //         type: "POST",
+            //         dataType: "json",
+            //         data: {
+            //             'id': id
+            //         },
+            //         success: function(data) {
+            //             editFaqForm.children[0].classList.remove('flex')
+            //             editFaqForm.children[0].classList.add('hidden')
+            //         },
+            //         error: function() {
+            //             alert('خطا در بارگذاری اطلاعات')
+            //         }
+            //     })
+
+
+            //     block.classList.remove('invisible')
+            //     block.classList.remove('opacity-0')
+            //     group.classList.add('scale-95')
+            //     group.classList.add('opacity-0')
+            //     group.classList.add('invisible')
+            //     editFaqForm.classList.remove('invisible')
+            //     editFaqForm.classList.remove('opacity-0')
+            //     editFaqForm.classList.remove('top-full')
+            //     editFaqForm.classList.add('top-0')
+            //     editFaqForm.classList.add('-translate-y-1/7')
+            // }
+
+            let currentBlock = ""
+
+            function addQuestionToBlock(blockId, el) {
+                currentBlock = el.parentElement.parentElement
+                document.getElementById('add_question_block_id').value = blockId;
+
+                block.classList.remove('invisible');
+                block.classList.remove('opacity-0');
+                group.classList.add('scale-95');
+                group.classList.add('opacity-0');
+                group.classList.add('invisible');
+
+                let addQuestionForm = document.getElementById('addQuestionForm');
+
+
+                let forms = document.querySelectorAll('.form');
+                forms.forEach((form) => {
+                    form.classList.add('invisible');
+                    form.classList.add('opacity-0');
+                    form.classList.remove('top-1/2');
+                    form.classList.remove('-translate-y-1/2');
+                });
+
+
+                addQuestionForm.classList.remove('invisible');
+                addQuestionForm.classList.remove('opacity-0');
+                addQuestionForm.classList.add('top-1/2');
+                addQuestionForm.classList.add('-translate-y-1/2');
+                addQuestionForm.classList.remove('top-full');
+            }
+
+
+            function addQuestionToGroup(e) {
+                e.preventDefault();
+                let question = document.getElementById('add_question_input').value;
+                let answer = document.getElementById('add_answer_input').value;
+                let blockId = document.getElementById('add_question_block_id').value;
+                let addQuestionForm = document.getElementById('addQuestionForm')
+                let faqSection = document.getElementById('faq')
+                addQuestionForm.children[0].classList.remove('hidden')
+                addQuestionForm.children[0].classList.add('flex')
+                addQuestionForm.children[0].innerHTML = `
+                <div class="loading-wave">
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                </div>
+                `;
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
                     }
                 });
-            }
-        }
-        // updateLink
-        function updateLink(e) {
-            let viewLinkTitle = document.querySelectorAll('.viewLinkTitle')
-            e.preventDefault();
-            editSiteLinkForm.children[0].classList.remove('hidden')
-            editSiteLinkForm.children[0].classList.add('flex')
-            editSiteLinkForm.children[0].innerHTML = `
-            <div class="loading-wave">
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-            </div>
-            `
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-            $.ajax({
-                url: "{{ route('siteLink.update') }}",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    'id': siteLinkId.value,
-                    'title': link_title_input.value,
-                    'address': link_address_input.value,
-                    // 'icon_path': icon_path.value,
-                    'page_id': "{{ $page->id }}"
-                },
-                success: function(data) {
-                    linkTitle.innerText = data.title
-                    // linkAddress.innerText = data.address
-                    link_title_input.value = data.title
-                    link_address_input.value = data.address
-                    editSiteLinkForm.children[0].classList.remove('flex')
-                    editSiteLinkForm.children[0].classList.add('hidden')
-                    closeForm()
-                    viewLinkTitle.forEach((element) => {
-                        if (element.getAttribute('data-view-link-id') == data.id) {
-                            element.innerText = '  ورود به  ' + data.title
-                        }
-                    })
-                },
-                error: function() {
-                    alert('خطا در ارسال داده')
-                }
-            })
-        }
 
-        // editLink
-        function editLink(id) {
-
-            editSiteLinkForm.children[0].classList.remove('hidden')
-            editSiteLinkForm.children[0].classList.add('flex')
-            editSiteLinkForm.children[0].innerHTML = `
-            <div class="loading-wave">
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-            </div>
-            `
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-
-            $.ajax({
-                url: "{{ route('siteLink.edit') }}",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    'id': id
-                },
-                success: function(data) {
-                    editSiteLinkForm.children[0].classList.remove('flex')
-                    editSiteLinkForm.children[0].classList.add('hidden')
-                    linkTitle.innerText = data.title
-                    link_title_input.value = data.title
-                    link_address_input.value = data.address
-                    siteLinkId.value = data.id
-                },
-                error: function() {
-                    alert('خطا در بارگذاری اطلاعات')
-                }
-            })
-
-
-            block.classList.remove('invisible')
-            block.classList.remove('opacity-0')
-            group.classList.add('scale-95')
-            group.classList.add('opacity-0')
-            group.classList.add('invisible')
-            editSiteLinkForm.classList.remove('invisible')
-            editSiteLinkForm.classList.remove('opacity-0')
-            editSiteLinkForm.classList.remove('top-full')
-            editSiteLinkForm.classList.add('top-0')
-            editSiteLinkForm.classList.add('-translate-y-1/7')
-        }
-        //title edit
-        // function editTitle(id){
-        //     console.log(93847565)
-        //     editFaqForm.children[0].classList.remove('hidden')
-        //     editFaqForm.children[0].classList.add('flex')
-        //     editFaqForm.children[0].innerHTML = `
-        //     <div class="loading-wave">
-        //         <div class="loading-bar"></div>
-        //         <div class="loading-bar"></div>
-        //         <div class="loading-bar"></div>
-        //         <div class="loading-bar"></div>
-        //     </div>
-        //     `
-        //     $.ajaxSetup({
-        //         headers: {
-        //             'X-CSRF-TOKEN': "{{ csrf_token() }}"
-        //         }
-        //     })
-
-        //     $.ajax({
-        //         url: "{{ route('pageBlocks.edit') }}",
-        //         type: "POST",
-        //         dataType: "json",
-        //         data: {
-        //             'id': id
-        //         },
-        //         success: function(data) {
-        //             editFaqForm.children[0].classList.remove('flex')
-        //             editFaqForm.children[0].classList.add('hidden')
-        //         },
-        //         error: function() {
-        //             alert('خطا در بارگذاری اطلاعات')
-        //         }
-        //     })
-
-
-        //     block.classList.remove('invisible')
-        //     block.classList.remove('opacity-0')
-        //     group.classList.add('scale-95')
-        //     group.classList.add('opacity-0')
-        //     group.classList.add('invisible')
-        //     editFaqForm.classList.remove('invisible')
-        //     editFaqForm.classList.remove('opacity-0')
-        //     editFaqForm.classList.remove('top-full')
-        //     editFaqForm.classList.add('top-0')
-        //     editFaqForm.classList.add('-translate-y-1/7')
-        // }
-
-        let currentBlock = ""
-
-        function addQuestionToBlock(blockId, el) {
-            currentBlock = el.parentElement.parentElement
-            document.getElementById('add_question_block_id').value = blockId;
-
-            block.classList.remove('invisible');
-            block.classList.remove('opacity-0');
-            group.classList.add('scale-95');
-            group.classList.add('opacity-0');
-            group.classList.add('invisible');
-
-            let addQuestionForm = document.getElementById('addQuestionForm');
-
-
-            let forms = document.querySelectorAll('.form');
-            forms.forEach((form) => {
-                form.classList.add('invisible');
-                form.classList.add('opacity-0');
-                form.classList.remove('top-1/2');
-                form.classList.remove('-translate-y-1/2');
-            });
-
-
-            addQuestionForm.classList.remove('invisible');
-            addQuestionForm.classList.remove('opacity-0');
-            addQuestionForm.classList.add('top-1/2');
-            addQuestionForm.classList.add('-translate-y-1/2');
-            addQuestionForm.classList.remove('top-full');
-        }
-
-
-        function addQuestionToGroup(e) {
-            e.preventDefault();
-            let question = document.getElementById('add_question_input').value;
-            let answer = document.getElementById('add_answer_input').value;
-            let blockId = document.getElementById('add_question_block_id').value;
-            let addQuestionForm = document.getElementById('addQuestionForm')
-            let faqSection = document.getElementById('faq')
-            addQuestionForm.children[0].classList.remove('hidden')
-            addQuestionForm.children[0].classList.add('flex')
-            addQuestionForm.children[0].innerHTML = `
-    <div class="loading-wave">
-        <div class="loading-bar"></div>
-        <div class="loading-bar"></div>
-        <div class="loading-bar"></div>
-        <div class="loading-bar"></div>
-    </div>
-    `;
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            });
-
-            $.ajax({
-                url: "{{ route('FAQ.addQuestion') }}",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    'question': question,
-                    'answer': answer,
-                    'block_id': blockId,
-                    'page_id': "{{ $page->id }}"
-                },
-                success: function(data) {
-                    addQuestionForm.children[0].classList.remove('flex');
-                    addQuestionForm.children[0].classList.add('hidden');
-                    document.getElementById('add_question_input').value = "";
-                    document.getElementById('add_answer_input').value = "";
-                    let div = document.createElement('div');
-                    let element = `
+                $.ajax({
+                    url: "{{ route('FAQ.addQuestion') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'question': question,
+                        'answer': answer,
+                        'block_id': blockId,
+                        'page_id': "{{ $page->id }}"
+                    },
+                    success: function(data) {
+                        addQuestionForm.children[0].classList.remove('flex');
+                        addQuestionForm.children[0].classList.add('hidden');
+                        document.getElementById('add_question_input').value = "";
+                        document.getElementById('add_answer_input').value = "";
+                        let div = document.createElement('div');
+                        let element = `
             <div class="lg:py-2">
                 <div class="mt-3 relative flex flex-col lg:flex-row gap-3">
                     <div class="w-full lg:w-8/9 faqBox">
@@ -1441,170 +2501,23 @@
             </div>
             `
 
-                    div.innerHTML = element
-                    currentBlock.appendChild(div)
+                        div.innerHTML = element
+                        currentBlock.appendChild(div)
 
-                    closeForm()
-                },
-                error: function() {
-                    alert('خطا در ارسال داده ها');
-                    addQuestionForm.children[0].classList.remove('flex')
-                    addQuestionForm.children[0].classList.add('hidden')
-                }
-            });
-        }
-        // editTitle
-        function editTitle(id) {
-            editTitleForm.children[0].classList.remove('hidden')
-            editTitleForm.children[0].classList.add('flex')
-            editTitleForm.children[0].innerHTML = `
-    <div class="loading-wave">
-        <div class="loading-bar"></div>
-        <div class="loading-bar"></div>
-        <div class="loading-bar"></div>
-        <div class="loading-bar"></div>
-    </div>
-    `
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-
-            $.ajax({
-                url: "{{ route('pageBlocks.edit') }}",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    'id': id
-                },
-                success: function(data) {
-                    editTitleForm.children[0].classList.remove('flex')
-                    editTitleForm.children[0].classList.add('hidden')
-
-                    titleText.innerText = data.title
-                    title_input.value = data.title
-                    blockId.value = data.id
-                },
-                error: function() {
-                    alert('خطا در بارگذاری اطلاعات')
-                }
-            })
-
-            block.classList.remove('invisible')
-            block.classList.remove('opacity-0')
-            group.classList.add('scale-95')
-            group.classList.add('opacity-0')
-            group.classList.add('invisible')
-            editTitleForm.classList.remove('invisible')
-            editTitleForm.classList.remove('opacity-0')
-            editTitleForm.classList.remove('top-full')
-            editTitleForm.classList.add('top-0')
-            editTitleForm.classList.add('-translate-y-1/7')
-        }
-
-        // updateTitle
-        function updateTitle(e) {
-            let viewTitles = document.querySelectorAll('.viewFAQ')
-            e.preventDefault();
-
-            editTitleForm.children[0].classList.remove('hidden')
-            editTitleForm.children[0].classList.add('flex')
-            editTitleForm.children[0].innerHTML = `
-    <div class="loading-wave">
-        <div class="loading-bar"></div>
-        <div class="loading-bar"></div>
-        <div class="loading-bar"></div>
-        <div class="loading-bar"></div>
-    </div>
-    `
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-
-            $.ajax({
-                url: "{{ route('pageBlocks.update') }}",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    'id': blockId.value,
-                    'title': title_input.value,
-                    'page_id': "{{ $page->id }}"
-                },
-                success: function(data) {
-                    titleText.innerText = data.title
-                    title_input.value = data.title
-
-                    editTitleForm.children[0].classList.remove('flex')
-                    editTitleForm.children[0].classList.add('hidden')
-                    closeForm()
-
-                    viewTitles.forEach((element) => {
-                        if (element.getAttribute('data-block-id') == data.id) {
-                            element.innerText = data.title
-                        }
-                    })
-                },
-                error: function() {
-                    alert('خطا در ارسال داده')
-                }
-            })
-        }
-
-        // deleteTitle
-        function deleteTitle(blockId, el) {
-            let viewTitles = document.querySelectorAll('.viewFAQ')
-            editTitleForm.children[0].classList.remove('hidden')
-            editTitleForm.children[0].classList.add('flex')
-            editTitleForm.children[0].innerHTML = `
-        <div class="loading-wave">
-            <div class="loading-bar"></div>
-            <div class="loading-bar"></div>
-            <div class="loading-bar"></div>
-            <div class="loading-bar"></div>
-        </div>
-        `
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-
-            $.ajax({
-                url: "{{ route('pageBlocks.delete') }}",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    'id': blockId
-                },
-                success: function(data) {
-                    console.log(data)
-                    editTitleForm.children[0].classList.remove('flex')
-                    editTitleForm.children[0].classList.add('hidden')
-
-                    // viewTitles.forEach((element) => {
-                    //     if (element.getAttribute('data-view-FAQ-id') == blockId.value) {
-                    el.parentElement.parentElement.remove()
-                    //     }
-                    // })
-                    closeForm()
-                },
-                error: function() {
-                    alert('خطا در بارگیری اطلاعات')
-                }
-            })
-        }
-
-        // faq edit
-        function editFaq(id) {
-            console.log(id)
-            editFaqForm.children[0].classList.remove('hidden')
-            editFaqForm.children[0].classList.add('flex')
-            editFaqForm.children[0].innerHTML = `
+                        closeForm()
+                    },
+                    error: function() {
+                        alert('خطا در ارسال داده ها');
+                        addQuestionForm.children[0].classList.remove('flex')
+                        addQuestionForm.children[0].classList.add('hidden')
+                    }
+                });
+            }
+            // editTitle
+            function editTitle(id) {
+                editTitleForm.children[0].classList.remove('hidden')
+                editTitleForm.children[0].classList.add('flex')
+                editTitleForm.children[0].innerHTML = `
             <div class="loading-wave">
                 <div class="loading-bar"></div>
                 <div class="loading-bar"></div>
@@ -1612,162 +2525,6 @@
                 <div class="loading-bar"></div>
             </div>
             `
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-
-            $.ajax({
-                url: "{{ route('FAQ.edit') }}",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    'id': id
-                },
-                success: function(data) {
-                    editFaqForm.children[0].classList.remove('flex')
-                    editFaqForm.children[0].classList.add('hidden')
-                    faqQuestion.innerText = data.question
-                    faqAnswer.innerText = data.answer
-
-                    question_input.value = data.question
-                    answer_input.value = data.answer
-
-                    FaqId.value = data.id
-                },
-                error: function() {
-                    alert('خطا در بارگذاری اطلاعات')
-                }
-            })
-
-
-            block.classList.remove('invisible')
-            block.classList.remove('opacity-0')
-            group.classList.add('scale-95')
-            group.classList.add('opacity-0')
-            group.classList.add('invisible')
-            editFaqForm.classList.remove('invisible')
-            editFaqForm.classList.remove('opacity-0')
-            editFaqForm.classList.remove('top-full')
-            editFaqForm.classList.add('top-0')
-            editFaqForm.classList.add('-translate-y-1/7')
-        }
-        // updateFAQ
-        function updateFaq(e) {
-            let viewFAQ = document.querySelectorAll('.viewFAQ')
-            e.preventDefault();
-            editFaqForm.children[0].classList.remove('hidden')
-            editFaqForm.children[0].classList.add('flex')
-            editFaqForm.children[0].innerHTML = `
-            <div class="loading-wave">
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-            </div>
-            `
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-            $.ajax({
-                url: "{{ route('FAQ.update') }}",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    'id': FaqId.value,
-                    'question': question_input.value,
-                    'answer': answer_input.value,
-                    'page_id': "{{ $page->id }}"
-                },
-                success: function(data) {
-                    faqQuestion.innerText = data.question
-                    faqAnswer.innerText = data.answer
-                    question_input.value = data.question
-                    answer_input.value = data.answer
-                    editFaqForm.children[0].classList.remove('flex')
-                    editFaqForm.children[0].classList.add('hidden')
-                    closeForm()
-                    viewFAQ.forEach((element) => {
-                        if (element.getAttribute('data-view-FAQ-id') == data.id) {
-                            element.innerText = data.question
-                            let parentDiv = element.closest('.faqBox')
-                            if (parentDiv) {
-                                let answerElement = parentDiv.querySelector('.text-gray-700.font-bold')
-                                if (answerElement) {
-                                    answerElement.innerText = data.answer
-                                }
-                            }
-                        }
-                    })
-                },
-                error: function() {
-                    alert('خطا در ارسال داده')
-                }
-            })
-
-
-        }
-
-        // updateSocial
-        function updateSocial(e) {
-            e.preventDefault()
-            editsocialMediaForm.children[0].classList.remove('hidden')
-            editsocialMediaForm.children[0].classList.add('flex')
-            editsocialMediaForm.children[0].innerHTML = `
-            <div class="loading-wave">
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-            </div>
-            `
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-
-            $.ajax({
-                url: "{{ route('socialAddress.update') }}",
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    'id': socialAddressId.value,
-                    'username': userNameUpdate.value,
-                    'page_id': "{{ $page->id }}"
-                },
-                success: function(data) {
-                    editsocialMediaForm.children[0].classList.remove('flex')
-                    editsocialMediaForm.children[0].classList.add('hidden')
-                    closeForm()
-                },
-                error: function() {
-                    alert('خطا در بارگیری داده ها')
-                }
-            })
-        }
-
-        // storeSocial
-        function storeSocialmedia(ev) {
-            ev.preventDefault();
-            if (userNameCreate.value == "") {
-                userNameCreate.classList.add('border-1')
-                userNameCreate.classList.add('border-red-500')
-                userNameCreate.parentElement.children[0].classList.remove('opacity-0')
-            } else {
-                storeSocialForm.children[0].classList.remove('hidden')
-                storeSocialForm.children[0].classList.add('flex')
-                storeSocialForm.children[0].innerHTML = `
-                <div class="loading-wave">
-                    <div class="loading-bar"></div>
-                    <div class="loading-bar"></div>
-                    <div class="loading-bar"></div>
-                    <div class="loading-bar"></div>
-                </div>
-                `
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -1775,26 +2532,329 @@
                 })
 
                 $.ajax({
-                    url: "{{ route('socialAddress.store') }}",
+                    url: "{{ route('pageBlocks.edit') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'id': id
+                    },
+                    success: function(data) {
+                        editTitleForm.children[0].classList.remove('flex')
+                        editTitleForm.children[0].classList.add('hidden')
+
+                        titleText.innerText = data.title
+                        title_input.value = data.title
+                        blockId.value = data.id
+                    },
+                    error: function() {
+                        alert('خطا در بارگذاری اطلاعات')
+                    }
+                })
+
+                block.classList.remove('invisible')
+                block.classList.remove('opacity-0')
+                group.classList.add('scale-95')
+                group.classList.add('opacity-0')
+                group.classList.add('invisible')
+                editTitleForm.classList.remove('invisible')
+                editTitleForm.classList.remove('opacity-0')
+                editTitleForm.classList.remove('top-full')
+                editTitleForm.classList.add('top-0')
+                editTitleForm.classList.add('-translate-y-1/7')
+            }
+
+            // updateTitle
+            function updateTitle(e) {
+                let viewTitles = document.querySelectorAll('.viewFAQ')
+                e.preventDefault();
+
+                editTitleForm.children[0].classList.remove('hidden')
+                editTitleForm.children[0].classList.add('flex')
+                editTitleForm.children[0].innerHTML = `
+            <div class="loading-wave">
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+            </div>
+            `
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+
+                $.ajax({
+                    url: "{{ route('pageBlocks.update') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'id': blockId.value,
+                        'title': title_input.value,
+                        'page_id': "{{ $page->id }}"
+                    },
+                    success: function(data) {
+                        titleText.innerText = data.title
+                        title_input.value = data.title
+
+                        editTitleForm.children[0].classList.remove('flex')
+                        editTitleForm.children[0].classList.add('hidden')
+                        closeForm()
+
+                        viewTitles.forEach((element) => {
+                            if (element.getAttribute('data-block-id') == data.id) {
+                                element.innerText = data.title
+                            }
+                        })
+                    },
+                    error: function() {
+                        alert('خطا در ارسال داده')
+                    }
+                })
+            }
+
+            // deleteTitle
+            function deleteTitle(blockId, el) {
+                let viewTitles = document.querySelectorAll('.viewFAQ')
+                editTitleForm.children[0].classList.remove('hidden')
+                editTitleForm.children[0].classList.add('flex')
+                editTitleForm.children[0].innerHTML = `
+                <div class="loading-wave">
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                </div>
+                `
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+
+                $.ajax({
+                    url: "{{ route('pageBlocks.delete') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'id': blockId
+                    },
+                    success: function(data) {
+                        console.log(data)
+                        editTitleForm.children[0].classList.remove('flex')
+                        editTitleForm.children[0].classList.add('hidden')
+
+                        // viewTitles.forEach((element) => {
+                        //     if (element.getAttribute('data-view-FAQ-id') == blockId.value) {
+                        el.parentElement.parentElement.remove()
+                        //     }
+                        // })
+                        closeForm()
+                    },
+                    error: function() {
+                        alert('خطا در بارگیری اطلاعات')
+                    }
+                })
+            }
+
+            // faq edit
+            function editFaq(id) {
+                console.log(id)
+                editFaqForm.children[0].classList.remove('hidden')
+                editFaqForm.children[0].classList.add('flex')
+                editFaqForm.children[0].innerHTML = `
+            <div class="loading-wave">
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+            </div>
+            `
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+
+                $.ajax({
+                    url: "{{ route('FAQ.edit') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'id': id
+                    },
+                    success: function(data) {
+                        editFaqForm.children[0].classList.remove('flex')
+                        editFaqForm.children[0].classList.add('hidden')
+                        faqQuestion.innerText = data.question
+                        faqAnswer.innerText = data.answer
+
+                        question_input.value = data.question
+                        answer_input.value = data.answer
+
+                        FaqId.value = data.id
+                    },
+                    error: function() {
+                        alert('خطا در بارگذاری اطلاعات')
+                    }
+                })
+
+
+                block.classList.remove('invisible')
+                block.classList.remove('opacity-0')
+                group.classList.add('scale-95')
+                group.classList.add('opacity-0')
+                group.classList.add('invisible')
+                editFaqForm.classList.remove('invisible')
+                editFaqForm.classList.remove('opacity-0')
+                editFaqForm.classList.remove('top-full')
+                editFaqForm.classList.add('top-0')
+                editFaqForm.classList.add('-translate-y-1/7')
+            }
+            // updateFAQ
+            function updateFaq(e) {
+                let viewFAQ = document.querySelectorAll('.viewFAQ')
+                e.preventDefault();
+                editFaqForm.children[0].classList.remove('hidden')
+                editFaqForm.children[0].classList.add('flex')
+                editFaqForm.children[0].innerHTML = `
+            <div class="loading-wave">
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+            </div>
+            `
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+                $.ajax({
+                    url: "{{ route('FAQ.update') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'id': FaqId.value,
+                        'question': question_input.value,
+                        'answer': answer_input.value,
+                        'page_id': "{{ $page->id }}"
+                    },
+                    success: function(data) {
+                        faqQuestion.innerText = data.question
+                        faqAnswer.innerText = data.answer
+                        question_input.value = data.question
+                        answer_input.value = data.answer
+                        editFaqForm.children[0].classList.remove('flex')
+                        editFaqForm.children[0].classList.add('hidden')
+                        closeForm()
+                        viewFAQ.forEach((element) => {
+                            if (element.getAttribute('data-view-FAQ-id') == data.id) {
+                                element.innerText = data.question
+                                let parentDiv = element.closest('.faqBox')
+                                if (parentDiv) {
+                                    let answerElement = parentDiv.querySelector('.text-gray-700.font-bold')
+                                    if (answerElement) {
+                                        answerElement.innerText = data.answer
+                                    }
+                                }
+                            }
+                        })
+                    },
+                    error: function() {
+                        alert('خطا در ارسال داده')
+                    }
+                })
+
+
+            }
+
+            // updateSocial
+            function updateSocial(e) {
+                e.preventDefault()
+                editsocialMediaForm.children[0].classList.remove('hidden')
+                editsocialMediaForm.children[0].classList.add('flex')
+                editsocialMediaForm.children[0].innerHTML = `
+            <div class="loading-wave">
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+            </div>
+            `
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+
+                $.ajax({
+                    url: "{{ route('socialAddress.update') }}",
                     type: 'POST',
                     dataType: 'json',
                     data: {
-                        'socialMedia_id': socialMedia_id_create.value,
-                        'page_id': "{{ $page->id }}",
-                        'userName': userNameCreate.value
+                        'id': socialAddressId.value,
+                        'username': userNameUpdate.value,
+                        'page_id': "{{ $page->id }}"
                     },
-                    success: function(datas) {
-                        storeSocialForm.children[0].classList.remove('flex')
-                        storeSocialForm.children[0].classList.add('hidden')
-                        socialMedia_id_create.value = 1
-                        userNameCreate.value = ""
+                    success: function(data) {
+                        editsocialMediaForm.children[0].classList.remove('flex')
+                        editsocialMediaForm.children[0].classList.add('hidden')
                         closeForm()
-                        let link = "<?php echo asset('storage/'); ?>"
-                        link += "/"
-                        link += datas.socialMedia.icon_path
-                        let div = document.createElement('div')
-                        div.classList = "lg:py-2"
-                        let element = `
+                    },
+                    error: function() {
+                        alert('خطا در بارگیری داده ها')
+                    }
+                })
+            }
+
+            // storeSocial
+            function storeSocialmedia(ev) {
+                ev.preventDefault();
+                if (userNameCreate.value == "") {
+                    userNameCreate.classList.add('border-1')
+                    userNameCreate.classList.add('border-red-500')
+                    userNameCreate.parentElement.children[0].classList.remove('opacity-0')
+                } else {
+                    storeSocialForm.children[0].classList.remove('hidden')
+                    storeSocialForm.children[0].classList.add('flex')
+                    storeSocialForm.children[0].innerHTML = `
+                <div class="loading-wave">
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                </div>
+                `
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                        }
+                    })
+
+                    $.ajax({
+                        url: "{{ route('socialAddress.store') }}",
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            'socialMedia_id': socialMedia_id_create.value,
+                            'page_id': "{{ $page->id }}",
+                            'userName': userNameCreate.value
+                        },
+                        success: function(datas) {
+                            storeSocialForm.children[0].classList.remove('flex')
+                            storeSocialForm.children[0].classList.add('hidden')
+                            socialMedia_id_create.value = 1
+                            userNameCreate.value = ""
+                            closeForm()
+                            let link = "<?php echo asset('storage/'); ?>"
+                            link += "/"
+                            link += datas.socialMedia.icon_path
+                            let div = document.createElement('div')
+                            div.classList = "lg:py-2"
+                            let element = `
                         
                             <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center">
                             ورود به ${datas.socialMedia.title}
@@ -1826,166 +2886,166 @@
                             </div>
                         
                         `
-                        div.innerHTML = element
-                        socialLinks.appendChild(div)
+                            div.innerHTML = element
+                            socialLinks.appendChild(div)
+                        },
+                        error: function() {
+                            alert('خطا در ارسال داده ها')
+                        }
+                    })
+                }
+
+
+
+            }
+            // editSocial
+            function editSocial(id, socialId) {
+                editsocialMediaForm.children[0].classList.remove('hidden')
+                editsocialMediaForm.children[0].classList.add('flex')
+                editsocialMediaForm.children[0].innerHTML = `
+            <div class="loading-wave">
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+            </div>
+            `
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+                $.ajax({
+                    url: `{{ url('socialAddress/edit/${id}') }}`,
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'social_id': id
+                    },
+                    success: function(datas) {
+                        console.log(datas, socialMediaIcon)
+                        editsocialMediaForm.children[0].classList.add('hidden')
+                        editsocialMediaForm.children[0].classList.remove('flex')
+                        userName.value = datas.data.username
+                        socialAddressId.value = datas.data.id
+                        socialLink.innerText = datas.data.username
+                        datas.socialMedias.forEach((socialMedia) => {
+                            if (socialId == socialMedia.id) {
+                                // console.log(socialMedia)
+                                socialMediaIcon.innerHTML = `
+                            <img src="{{ asset('storage/${socialMedia.icon_path}') }}" class="size-full object-cover">
+                            `
+                            }
+                        })
                     },
                     error: function() {
-                        alert('خطا در ارسال داده ها')
+                        alert('خطا در بارگیری اطلاعات')
+                    }
+                })
+                block.classList.remove('invisible')
+                block.classList.remove('opacity-0')
+                group.classList.add('scale-95')
+                group.classList.add('opacity-0')
+                group.classList.add('invisible')
+                editSocialM.classList.remove('invisible')
+                editSocialM.classList.remove('opacity-0')
+                editSocialM.classList.remove('top-full')
+                editSocialM.classList.add('top-0')
+                editSocialM.classList.add('-translate-y-1/7')
+            }
+
+            // deleteSocial
+            function deleteMedia() {
+                let editSocialSection = document.querySelectorAll('.editSocial')
+                editsocialMediaForm.children[0].classList.remove('hidden')
+                editsocialMediaForm.children[0].classList.add('flex')
+                editsocialMediaForm.children[0].innerHTML = `
+            <div class="loading-wave">
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+            </div>
+            `
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+                $.ajax({
+                    url: `{{ route('socialAddress.delete') }}`,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        'social_address_id': socialAddressId.value
+                    },
+                    success: function(datas) {
+                        editsocialMediaForm.children[0].classList.remove('flex')
+                        editsocialMediaForm.children[0].classList.add('hidden')
+                        editSocialSection.forEach((media) => {
+                            if (media.getAttribute('data-social-id') == socialAddressId.value) {
+                                media.parentElement.parentElement.remove()
+                            }
+                        })
+                        closeForm()
+                    },
+                    error: function() {
+                        alert('خطا در بارگیری اطلاعات')
+                    }
+                })
+            }
+            // deleteSocial
+            function deleteMediaList(el, id) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+                $.ajax({
+                    url: `{{ route('socialAddress.delete') }}`,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        'social_address_id': id
+                    },
+                    success: function(datas) {
+                        el.parentElement.parentElement.parentElement.remove()
+                    },
+                    error: function() {
+                        alert('خطا در بارگیری اطلاعات')
+                    }
+                })
+            }
+            /////deleteFAQ
+            function deleteFAQ(el, id) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                })
+                $.ajax({
+                    url: `{{ route('FAQ.delete') }}`,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        'id': id
+                    },
+                    success: function(datas) {
+                        el.parentElement.parentElement.remove()
+                    },
+                    error: function() {
+                        alert('خطا در بارگیری اطلاعات')
                     }
                 })
             }
 
+            ////openFAQ
+            let i = 1
 
-
-        }
-        // editSocial
-        function editSocial(id, socialId) {
-            editsocialMediaForm.children[0].classList.remove('hidden')
-            editsocialMediaForm.children[0].classList.add('flex')
-            editsocialMediaForm.children[0].innerHTML = `
-            <div class="loading-wave">
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-            </div>
-            `
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-            $.ajax({
-                url: `{{ url('socialAddress/edit/${id}') }}`,
-                type: "POST",
-                dataType: "json",
-                data: {
-                    'social_id': id
-                },
-                success: function(datas) {
-                    console.log(datas, socialMediaIcon)
-                    editsocialMediaForm.children[0].classList.add('hidden')
-                    editsocialMediaForm.children[0].classList.remove('flex')
-                    userName.value = datas.data.username
-                    socialAddressId.value = datas.data.id
-                    socialLink.innerText = datas.data.username
-                    datas.socialMedias.forEach((socialMedia) => {
-                        if (socialId == socialMedia.id) {
-                            // console.log(socialMedia)
-                            socialMediaIcon.innerHTML = `
-                            <img src="{{ asset('storage/${socialMedia.icon_path}') }}" class="size-full object-cover">
-                            `
-                        }
-                    })
-                },
-                error: function() {
-                    alert('خطا در بارگیری اطلاعات')
-                }
-            })
-            block.classList.remove('invisible')
-            block.classList.remove('opacity-0')
-            group.classList.add('scale-95')
-            group.classList.add('opacity-0')
-            group.classList.add('invisible')
-            editSocialM.classList.remove('invisible')
-            editSocialM.classList.remove('opacity-0')
-            editSocialM.classList.remove('top-full')
-            editSocialM.classList.add('top-0')
-            editSocialM.classList.add('-translate-y-1/7')
-        }
-
-        // deleteSocial
-        function deleteMedia() {
-            let editSocialSection = document.querySelectorAll('.editSocial')
-            editsocialMediaForm.children[0].classList.remove('hidden')
-            editsocialMediaForm.children[0].classList.add('flex')
-            editsocialMediaForm.children[0].innerHTML = `
-            <div class="loading-wave">
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-                <div class="loading-bar"></div>
-            </div>
-            `
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-            $.ajax({
-                url: `{{ route('socialAddress.delete') }}`,
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    'social_address_id': socialAddressId.value
-                },
-                success: function(datas) {
-                    editsocialMediaForm.children[0].classList.remove('flex')
-                    editsocialMediaForm.children[0].classList.add('hidden')
-                    editSocialSection.forEach((media) => {
-                        if (media.getAttribute('data-social-id') == socialAddressId.value) {
-                            media.parentElement.parentElement.remove()
-                        }
-                    })
-                    closeForm()
-                },
-                error: function() {
-                    alert('خطا در بارگیری اطلاعات')
-                }
-            })
-        }
-        // deleteSocial
-        function deleteMediaList(el, id) {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-            $.ajax({
-                url: `{{ route('socialAddress.delete') }}`,
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    'social_address_id': id
-                },
-                success: function(datas) {
-                    el.parentElement.parentElement.parentElement.remove()
-                },
-                error: function() {
-                    alert('خطا در بارگیری اطلاعات')
-                }
-            })
-        }
-        /////deleteFAQ
-        function deleteFAQ(el, id) {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-            $.ajax({
-                url: `{{ route('FAQ.delete') }}`,
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    'id': id
-                },
-                success: function(datas) {
-                    el.parentElement.parentElement.remove()
-                },
-                error: function() {
-                    alert('خطا در بارگیری اطلاعات')
-                }
-            })
-        }
-
-        ////openFAQ
-        let i = 1
-
-        function openFAQ() {
-            let div = document.createElement('div')
-            div.classList = "w-11/12 flex flex-col"
-            let element = `
+            function openFAQ() {
+                let div = document.createElement('div')
+                div.classList = "w-11/12 flex flex-col"
+                let element = `
             <form action="#" method="post" enctype='multipart/form-data'>
                 
                     <div class="w-10/12 flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1 mx-auto p-2 parentFAQs">
@@ -2014,20 +3074,20 @@
                     </div>
             
             `
-            div.innerHTML = element
-            parentFAQ.appendChild(div)
-            i++
+                div.innerHTML = element
+                parentFAQ.appendChild(div)
+                i++
 
-        }
-    </script>
-    @isset($page)
-    <script>
-        function copyText(pageId, slug) {
-            let url = "{{ url('qrcodes/links/') }}/" + pageId + "/" + slug
-            navigator.clipboard.writeText(url)
-            alert("لینک کپی شد")
-        }
-    </script>
-    @endisset
-    <script src="{{ asset('assets/js/blocks.js') }}"></script>
+            }
+        </script>
+        @isset($page)
+            <script>
+                function copyText(pageId, slug) {
+                    let url = "{{ url('qrcodes/links/') }}/" + pageId + "/" + slug
+                    navigator.clipboard.writeText(url)
+                    alert("لینک کپی شد")
+                }
+            </script>
+        @endisset
+        <script src="{{ asset('assets/js/blocks.js') }}"></script>
     @endsection

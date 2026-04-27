@@ -47,7 +47,7 @@ function addSocialMedia() {
     socialMediaForm.classList.remove('opacity-0')
     socialMediaForm.classList.remove('top-full')
     socialMediaForm.classList.add('top-0')
-    socialMediaForm.classList.add('-translate-y-1/4')
+    // socialMediaForm.classList.add('-translate-y-1/4')
 }
 
 function addLink() {
@@ -59,7 +59,7 @@ function addLink() {
     siteLinkForm.classList.remove('opacity-0')
     siteLinkForm.classList.remove('top-full')
     siteLinkForm.classList.add('top-0')
-    siteLinkForm.classList.add('-translate-y-1/4')
+    // siteLinkForm.classList.add('-translate-y-1/4')
 }
 
 function addFaq() {
@@ -71,7 +71,7 @@ function addFaq() {
     faqForm.classList.remove('opacity-0')
     faqForm.classList.remove('top-full')
     faqForm.classList.add('top-0')
-    faqForm.classList.add('-translate-y-1/4')
+    faqForm.classList.add('-translate-y-1/9')
 }
 
 let forms = document.querySelectorAll('.form')
@@ -96,6 +96,7 @@ function closeForm() {
     group.classList.add('scale-95')
     group.classList.add('opacity-0')
     group.classList.add('invisible')
+    features.innerHTML = ""
 }
 
 function openDropdown(page) {
@@ -148,3 +149,95 @@ function qrCard(state) {
     }
 }
 
+let introBox = document.getElementById('introBox')
+
+function addIntroCategory(){
+    group.classList.add('scale-95')
+    group.classList.add('opacity-0')
+    group.classList.add('invisible')
+    introBox.classList.remove('invisible')
+    introBox.classList.remove('opacity-0')
+    introBox.classList.remove('top-full')
+    introBox.classList.add('top-0')
+}
+
+let introProduct = document.getElementById('introProduct')
+
+function addIntroProduct(){
+    group.classList.add('scale-95')
+    group.classList.add('opacity-0')
+    group.classList.add('invisible')
+    introProduct.classList.remove('invisible')
+    introProduct.classList.remove('opacity-0')
+    introProduct.classList.remove('top-full')
+    introProduct.classList.add('top-0')
+    introProduct.classList.add('-translate-y-1/6')
+    setCategories()
+}
+
+let features = document.getElementById("features")
+let featuresEdit = document.getElementById("featuresEdit")
+
+function addAttribute(){
+    let attrBox = document.createElement('div')
+    attrBox.classList = 'w-full grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 border-1 border-gray-300 rounded-lg relative feature-row'
+    attrBox.innerHTML = `
+        <span class="absolute -top-2 left-[-8px] px-2 py-1 bg-white rounded-full text-sm cursor-pointer shadow delete-btn">
+            ❌
+        </span>
+        <input
+            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] key"
+            type="text"
+            placeholder="نام ویژگی">
+        <input
+            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] value"
+            type="text"
+            placeholder="مقدار ویژگی">
+        
+        `
+    attrBox.querySelector('.delete-btn').addEventListener('click', () => {
+        attrBox.remove();
+    });
+    features.appendChild(attrBox)
+}
+function addAttributeEdit(){
+    let attrBox = document.createElement('div')
+    attrBox.classList = 'w-full grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 border-1 border-gray-300 rounded-lg relative feature-row'
+    attrBox.innerHTML = `
+        <span class="absolute -top-2 left-[-8px] px-2 py-1 bg-white rounded-full text-sm cursor-pointer shadow delete-btn">
+            ❌
+        </span>
+        <input
+            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] key"
+            type="text"
+            placeholder="نام ویژگی">
+        <input
+            class="p-4 w-full focus:outline-none text-sm font-bold mr-2 rounded-md focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] value"
+            type="text"
+            placeholder="مقدار ویژگی">
+        
+        `
+    attrBox.querySelector('.delete-btn').addEventListener('click', () => {
+        attrBox.remove();
+    });
+    featuresEdit.appendChild(attrBox)
+}
+
+function removeAttribute(el){
+    el.parentElement.remove()
+}
+
+let introCatsList = document.getElementById('introCatsList')
+function showIntroCats(){
+    block.classList.remove('invisible')
+    block.classList.remove('opacity-0')
+    group.classList.add('scale-95')
+    group.classList.add('opacity-0')
+    group.classList.add('invisible')
+    introCatsList.classList.remove('invisible')
+    introCatsList.classList.remove('opacity-0')
+    introCatsList.classList.remove('top-full')
+    introCatsList.classList.add('top-0')
+    // introCatsList.classList.add('-translate-y-1/6')
+    showCategories()
+}

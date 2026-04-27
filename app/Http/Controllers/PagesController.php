@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\intro_category;
 use App\Models\pages;
 use App\Models\site_link;
 use App\Models\social_address;
@@ -122,7 +123,10 @@ class pagesController extends Controller
     public function single(pages $pages)
     {
         $socialMedias = socialMedia::all();
-        return view('admin.pages.single', ['page' => $pages, 'socialMedias' => $socialMedias]);
+        $introCats = $pages->introCats;
+        $introPros = $pages->introPros;
+        // dd($introCats);
+        return view('admin.pages.single', ['page' => $pages, 'socialMedias' => $socialMedias, 'introCats'=>$introCats, 'introPros'=>$introPros]);
     }
 
     public function deleteAll(Request $request)

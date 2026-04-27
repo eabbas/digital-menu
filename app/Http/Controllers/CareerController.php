@@ -194,6 +194,7 @@ class CareerController extends Controller
 
     public function single(career $career)
     {
+        dd($career->careerCategory);
         return view('admin.careers.single', ['career' => $career]);
     }
 

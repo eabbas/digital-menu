@@ -41,4 +41,10 @@ class pages extends Model
     {
         return $this->hasMany(page_blocks::class , 'page_id');
     }
+    public function introCats(){
+      return $this->hasMany(intro_category::class, 'page_id');
+    }
+    public function introPros(){
+      return $this->hasMany(intro_product::class, 'page_id');
+    }
 }

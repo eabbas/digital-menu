@@ -37,9 +37,47 @@ use App\Http\Controllers\FavoriteCategoriesController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Middleware\LoginMiddleware;
 use App\Http\Controllers\FAQController;
+use App\Http\Controllers\IntroCategoryController;
+use App\Http\Controllers\IntroProductController;
 use App\Http\Middleware\UserMiddleware;
 
+
+Route::group([
+    'prefix'=>"intro-cat",
+    'controller'=>IntroCategoryController::class,
+    'middleware'=>[UserMiddleware::class],
+    'as'=>'introCat.'
+], function(){
+    Route::post('/store', 'store')->name('store');
+    Route::post('/edit', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::post('/delete', 'delete')->name('delete');
+    Route::get('/selectCats/{pages}', 'selectCats')->name('selectCats');
+    Route::get('/selectCats', 'selectCats')->name('selectCats');
+    Route::get('/user-intro-categories/{user?}', 'user_cats')->name('list');
+});
+Route::group([
+    'prefix'=>"intro-pro",
+    'controller'=>IntroProductController::class,
+    'middleware'=>[UserMiddleware::class],
+    'as'=>'introPro.'
+], function(){
+    Route::post('/store', 'store')->name('store');
+    Route::post('/update', 'update')->name('update');
+    Route::post('/delete', 'delete')->name('delete');
+    Route::post('/showProducts', 'showProducts')->name('showProducts');
+    Route::post('/edit', 'edit')->name('edit');
+    Route::post('/editSingle', 'editSingle')->name('editSingle');
+    Route::get('/single/{intro_product}', 'single')->name('single');
+    Route::get('/user-show/{intro_product}', 'showForUser')->name('showForUser');
+    // Route::get('/user-intro-categories/{user}', 'user_cats')->name('list');
+});
+
+
 Route::get('/set-ref-code', [UserController::class, "setRefCode"]);
+Route::get('/test', function(){
+    return view('test');
+});
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/printery', [HomeController::class, 'printery'])->name('printery');
