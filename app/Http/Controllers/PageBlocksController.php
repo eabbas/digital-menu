@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\page_blocks;
 use App\Models\FAQ;
-class PageBlocksController extends Controller
+class pageBlocksController extends Controller
 {
     public function edit(Request $request)
     {
