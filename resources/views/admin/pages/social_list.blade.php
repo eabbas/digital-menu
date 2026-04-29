@@ -37,9 +37,13 @@
                                                 class="flex flex-row items-center gap-3 py-3">
                                                 <!-- لوگو -->
                                                 <div class="text-sm h-full flex items-center justify-center text-gray-900">
-
-                                                    <img class="size-10 rounded-full object-cover mx-auto"
-                                                        src="{{ asset('storage/' . $cover->logo_path) }}">
+                                                    @if($cover->logo_path)
+                                                        <img class="size-10 rounded-full object-cover mx-auto"
+                                                            src="{{ asset('storage/' . $cover->logo_path) }}">
+                                                    @else
+                                                        <img class="size-10 rounded-full object-cover mx-auto"
+                                                             src="{{ asset('assets/img/user.png') }}">
+                                                    @endif
 
                                                 </div>
                                                 <!-- عنوان -->
@@ -78,7 +82,11 @@
                                                 </div> --}}
                                             </a>
                                         </div>
-                                        <div class="lg:w-2/12 flex flex-row justify-end items-center gap-3">
+                                        <div class="lg:w-4/12 flex flex-row justify-end items-center gap-3">
+                                            <div class="lg:block hidden">
+                                                <a href="{{ route('special-user.index', [$cover]) }}"
+                                                   class="text-sky-700 text-sm block py-1">باشگاه مشتریان</a>
+                                            </div>
                                             <div class="lg:block hidden">
                                                 <a href="{{ route('pages.edit', [$cover]) }}"
                                                     class="text-sky-700 text-sm block py-1">ویرایش</a>
@@ -87,7 +95,16 @@
                                                 <a href="{{ route('pages.delete', [$cover]) }}"
                                                     class="text-sky-700 text-sm block py-1">حذف</a>
                                             </div>
-                                            <div class="lg:hidden block ">
+                                            <div class="lg:hidden block">
+                                                <div class="flex justify-center">
+                                                    <a href="{{ route('special-user.index', [$cover]) }}"
+                                                       class="w-fit flex flex-row items-center justify-center p-1 rounded-sm text-sm text-blue-600 font-bold"
+                                                       title="ویرایش">
+                                                        باشگاه مشتریان
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="lg:hidden block">
                                                 <div class="flex justify-center">
                                                     <a href="{{ route('pages.edit', [$cover]) }}"
                                                         class="w-fit flex flex-row items-center justify-center bg-green-500 hover:bg-green-600 p-1 rounded-sm"
@@ -115,7 +132,7 @@
                                             </div>
                                             <div>
                                                 <a href="{{ route('pages.single', [$cover]) }}"
-                                                    class="inline-block p-1 lg:p-2 rounded-md bg-gray-100 cursor-pointer">
+                                                    class="inline-block p-1 mt-2 lg:p-2 rounded-md bg-gray-200 cursor-pointer">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-4"
                                                         viewBox="0 0 512 512">
                                                         <path

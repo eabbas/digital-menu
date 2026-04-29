@@ -2,6 +2,9 @@
 @section('title', 'ویرایش رستوران')
 @section('content')
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
+    <div class="w-full flex flex-row justify-end">
+            <a href="{{ url()->previous()}}" class="text-xs px-2 py-0.5 rounded-sm bg-gray-500 text-white">بازگشت ←</a>
+               </div>
     <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">فرم ویرایش رستوران</h1>
     <form action="{{ route('career.update') }}" method="post" enctype='multipart/form-data'>
         @csrf
@@ -70,7 +73,7 @@
                                     <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
                                         name='province' placeholder="استان خود را وارد کنید" onchange="changeCity(this)" required>
                                         @foreach ($provinces as $province)
-                                            <option value="{{ $province->id }}" @if($province->id == $career->province_city->province->id){{ 'selected' }}@endif>{{ $province->title }}</option>
+                                            <option value="{{ $province->id }}" @if(isset($career->province_city) && ($province->id == $career->province_city->province->id)){{ 'selected' }}@endif>{{ $province->title }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -105,6 +108,14 @@
                                     name='email' placeholder="email@example.com" value="{{ $career->email }}">
                             </div>
                         </div>
+                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                            <label class="text-sm mb-1 mt-2.5 flex">شماره تلفن رستوران</label>
+                            <div
+                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
+                                    name='phone' placeholder="شماره تلفن رستوران را وارد کنید" value="{{ $career->phone}}">
+                            </div>
+                        </div>
 
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                             <label class="text-sm mb-1 mt-2.5 flex">اینستاگرام</label>
@@ -112,7 +123,7 @@
                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
                                     name='social_medias[instagram]' placeholder="آدرس اینستاگرام"
-                                    value="{{ $career->social_media->instagram }}">
+                                    value="{{ isset($career->social_media->instagram) ? $career->social_media->instagram : "" }}">
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -121,7 +132,7 @@
                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
                                     name='social_medias[telegram]' placeholder="آدرس تلگرام"
-                                    value="{{ $career->social_media->telegram }}">
+                                    value="{{ isset($career->social_media->telegram) ? $career->social_media->telegram : "" }}">
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -130,7 +141,7 @@
                                 class="w-full p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] flex">
                                 <input class="w-full focus:outline-none text-sm font-bold mr-2" type="text"
                                     name='social_medias[whatsapp]' placeholder="آدرس واتساپ"
-                                    value="{{ $career->social_media->whatsapp }}">
+                                    value="{{ isset($career->social_media->whatsapp) ? $career->social_media->whatsapp : "" }}">
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1 lg:col-span-2">
@@ -139,6 +150,23 @@
                                 class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <textarea rows="5" class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
                                     name='description' placeholder="توضیحات رستوران" class="w-full px-3 py-1 md:px-2 outline-none text-gray-500">{{ $career->description }}</textarea>
+                            </div>
+                        </div>
+                        <div class="w-full flex flex-rows gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                <label class="text-sm mb-1 mt-2.5 flex">فعال</label>
+                                <div
+                                    class="text-[#99A1B7] flex">
+                                    <input class="p-1 w-full focus:outline-none text-sm font-bold mr-2" type="checkbox"
+                                        name='active[]'@if($career->active == "1") {{ "checked" }}  @endif>
+                                </div>
+                            </div>
+                            <div class="w-full flex flex-rows gap-3 itmes-center max-md:flex-col max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">نمایش در صفحه اول</label>
+                                <div
+                                    class="text-[#99A1B7] flex">
+                                    <input class="p-1 w-full focus:outline-none text-sm font-bold mr-2" type="checkbox"
+                                        name='show_in_home[]'@if($career->show_in_home == "1") {{ "checked" }}  @endif>
+                                </div>
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 lg:col-span-2">
@@ -209,7 +237,7 @@
         <div class="w-full lg:w-[calc(100%-265px)] float-left h-dvh flex justify-center items-center relative">
 
             <div onclick="closeForm()"
-                class="size-8 flex justify-center items-center bg-white absolute top-10 right-10 rounded-full">
+                class="size-8 flex justify-center items-center bg-white absolute top-3/12 right-1/15 lg:top-2/12 lg:right-2/12  z-1 rounded-full">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5 cursor-pointer" viewBox="0 0 384 512">
                     <path fill="black"
                         d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
@@ -219,7 +247,7 @@
             <div class="w-11/12 lg:w-2/3 px-3 relative">
 
                 <form action="{{ route('qr.update') }}" method="post" enctype='multipart/form-data'
-                    class="w-full bg-white py-5 rounded-lg transition-all duration-300 absolute top-full invisible opacity-0 scale-95 form px-5 -translate-y-1/2"
+                    class=" w-full bg-white py-5 rounded-lg transition-all duration-300 absolute top-full invisible opacity-0 scale-95 form px-5 -translate-y-1/2 left-1 right-1"
                     id="editQr">
                     <div
                         class="w-full absolute h-full top-0 right-0 bg-white items-center justify-center hidden rounded-lg">

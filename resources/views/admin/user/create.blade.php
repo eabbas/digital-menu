@@ -20,10 +20,10 @@
                             <div class="w-full lg:w-10/12 text-sm flex flex-col lg:flex-row gap-4">
                                 <input
                                     class="w-full lg:w-1/2 p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] "
-                                    type="text" name="name" placeholder="نام" required>
+                                    type="text" name="name" placeholder="نام" >
                                 <input
                                     class="w-full lg:w-1/2 p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] "
-                                    type="text" name="family" placeholder="نام خانوادگی" required>
+                                    type="text" name="family" placeholder="نام خانوادگی">
                             </div>
                         </div>
                         <div class="flex flex-col lg:flex-row">

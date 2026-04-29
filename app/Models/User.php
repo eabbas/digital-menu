@@ -50,54 +50,96 @@ class User extends Authenticatable
         ];
     }
 
-    public function careers(){
+    public function careers()
+    {
         return $this->hasMany(career::class)->chaperOne();
     }
-    public function ecomms(){
+
+    public function ecomms()
+    {
         return $this->hasMany(ecomm::class)->chaperOne();
     }
     // public function ecomm_categories(){
     //     return $this->hasMany(ecomm_category::class)->chaperOne();
     // }
-    public function role(){
-      return $this->belongsToMany(role::class,'role_users');
+    public function role()
+    {
+        return $this->belongsToMany(role::class, 'role_users');
 
     }
-     public function ecomm_categories()
+
+    public function ecomm_categories()
     {
-        return $this->hasManyThrough(ecomm_category::class, ecomm::class,'user_id','ecomm_id');
+        return $this->hasManyThrough(ecomm_category::class, ecomm::class, 'user_id', 'ecomm_id');
     }
-     public function pages(){
+
+    public function pages()
+    {
         return $this->hasMany(pages::class)->chaperOne();
     }
-    public function qr_codes(){
+
+    public function qr_codes()
+    {
         return $this->hasMany(qr_code::class);
     }
-    public function menus(){
+
+    public function menus()
+    {
         return $this->hasMany(menu::class);
     }
-    public function contactUs(){
+
+    public function contactUs()
+    {
         return $this->hasMany(contactUs::class);
     }
-    public function carts(){
+
+    public function carts()
+    {
         return $this->hasMany(cart::class);
     }
-    public function orders(){
+
+    public function orders()
+    {
         return $this->hasMany(order::class);
     }
-    public function addresses(){
+
+    public function addresses()
+    {
         return $this->hasMany(address::class);
     }
 
-    public function customers(){
+    public function customers()
+    {
         return $this->hasMany(User::class, 'parent_id');
     }
 
-    public function request(){
+    public function request()
+    {
         return $this->hasOne(requests::class);
     }
 
-    public function refUsers(){
+    public function refUsers()
+    {
         return $this->hasMany(refUser::class);
+    }
+
+    public function introCats()
+    {
+        return $this->hasMany(intro_category::class);
+    }
+
+    public function introPros()
+    {
+        return $this->hasMany(intro_product::class);
+    }
+
+    public function specialPages()
+    {
+        return $this->belongsToMany(pages::class, 'special_users', 'page_id', 'user_id');
+    }
+
+    public function checkLists()
+    {
+        return $this->hasMany(checkList::class);
     }
 }

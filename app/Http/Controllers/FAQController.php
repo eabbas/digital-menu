@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Models\pages;
 use App\Models\FAQ;
 use App\Models\page_blocks;
@@ -8,17 +10,18 @@ use Illuminate\Support\Facades\Auth;
 
 class FAQController extends Controller
 {
-     public function create(pages $pages)
+    public function create(pages $pages)
     {
         return view('admin.faq.create', ['pages' => $pages]);
     }
     public function store(Request $request)
     {
         $page_block_id = page_blocks::insertGetId([
-            'title' => $request->title, 
-            'page_id' => $request->page_id
+            'title' => $request->title,
+            'page_id' => $request->page_id,
+            'type'=>'FAQS'
         ]);
-        
+
         $blockTitle = page_blocks::find($page_block_id);
         if ($request->datas) {
             $createdFaqs = [];
@@ -36,7 +39,7 @@ class FAQController extends Controller
                 'block' => $blockTitle
             ]);
         }
-        
+
         $faq = FAQ::create([
             'question' => $request->question,
             'answer' => $request->answer,
@@ -48,7 +51,7 @@ class FAQController extends Controller
             'block' => $blockTitle
         ]);
     }
-     public function edit(Request $request)
+    public function edit(Request $request)
     {
         $id = $request->input('id');
         $faq = FAQ::find($id);
@@ -68,18 +71,23 @@ class FAQController extends Controller
     {
         $id = $request->input('id');
         $faq = FAQ::find($id);
+        $page_blocks = page_blocks::where('page_id', $faq->page_id)->get();
+         foreach ($page_blocks as $page_block) {
+                $page_block->delete();
+            }
         $faq->delete();
         return response()->json('ok');
     }
     public function addQuestion(Request $request)
-{
-    $faq = FAQ::create([
-        'question' => $request->question,
-        'answer' => $request->answer,
-        'page_id' => $request->page_id,
-        'block_id' => $request->block_id
-    ]);
-    
-    return response()->json($faq);
+    {
+        $faq = FAQ::create([
+            'question' => $request->question,
+            'answer' => $request->answer,
+            'page_id' => $request->page_id,
+            'block_id' => $request->block_id
+        ]);
+
+        return response()->json($faq);
+    }
 }
-}
+

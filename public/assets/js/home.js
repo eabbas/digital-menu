@@ -39,7 +39,6 @@ function showCareer(index, el) {
     el.classList.add('activeCatCareer')
     el.children[0].classList.add('block')
     careerCatTitle.innerHTML = `
-    <span>کسب و کار های</span> 
-        <span class="font-bold">${el.children[1].innerText}</span>
+        <span class="font-bold">${el.children[2].innerText}</span>
     `
 }

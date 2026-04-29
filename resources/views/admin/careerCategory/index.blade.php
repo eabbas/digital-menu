@@ -45,18 +45,24 @@
                                     class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
                                     <div class="w-20 lg:w-full">
                                         @if ($careerCategory->main_image)
-                                            <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
-                                                src={{ asset('storage/' . $careerCategory->main_image) }}>
+                                            <a href="{{ route('cc.single', [$careerCategory]) }}">
+                                                <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
+                                                     src={{ asset('storage/' . $careerCategory->main_image) }}>
+                                            </a>
+
                                         @endif
                                         @if (!$careerCategory->main_image)
-                                            <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
+                                            <a href="{{ route('cc.single', [$careerCategory]) }}">
+
+                                                <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
                                                 src={{ asset('assets/img/default.png') }}>
+                                            </a>
                                         @endif
                                     </div>
                                 </div>
                                 <div
                                     class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
-                                    <span class="block w-20 lg:w-full">{{ $careerCategory->title }}</span>
+                                    <a href="{{ route('cc.single', [$careerCategory]) }}" class="block w-20 lg:w-full">{{ $careerCategory->title }}</a>
                                 </div>
                                 <div
                                     class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">

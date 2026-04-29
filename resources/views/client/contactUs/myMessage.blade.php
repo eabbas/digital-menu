@@ -5,7 +5,7 @@
     <div class="w-full flex flex-col pb-4">
         <div class="bg-white rounded-lg">
 
-            <h2 class="text-lg font-bold text-gray-800 p-4 text-center">لیست ارتباط با ما</h2>
+            <h2 class="text-lg font-bold text-[red] p-4 text-center">لیست ارتباط با ما</h2>
             <a href="{{ route('contactUs.create') }}" class="text-sky-700">برگشت</a>
 
             <form class="flex flex-col gap-5" action="{{ route('contactUs.deleteAll') }}" method="post">
@@ -28,9 +28,9 @@
                     </div>
                 </div>
                 <div
-                    class="w-10/12 mx-auto shadow-md rounded mb-5 overflow-x-auto [&::-webkit-scrollbar]:hidden lg:overflow-visible">
+                    class="max-w-90 mx-auto shadow-md rounded mb-5 overflow-x-auto [&::-webkit-scrollbar]:hidden lg:overflow-visible">
                     <div
-                        class="w-full flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4] sticky -top-5">
+                        class="min-w-100 flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4] sticky -top-5">
                         <div class="text-center text-xs font-medium text-gray-600 bg-gray-100 h-full">
                             <div class="w-10 lg:w-full h-10 text-gray-100"></div>
                         </div>
@@ -74,7 +74,7 @@
                                             <span class="block w-20 lg:w-full">{{ $contactUs->title }}</span>
                                         </div>
                                         <div
-                                            class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 lg:w-full text-center col-span-2">
+                                            class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 lg:w-full text-center col-span-2 overflow-y-auto break-words scrolling-auto">
                                             <span
                                                 class="block w-[120px] lg:w-full">{{ $contactUs->description }}</span>
                                         </div>

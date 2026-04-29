@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('menu_category_id');
             $table->string('image')->nullable();
             $table->tinyInteger('customizable')->default(0);
-            $table->integer('price');
+            $table->integer('price')->default(0);
             $table->integer('discount')->nullable();
             $table->integer('duration')->nullable();
             $table->timestamps();

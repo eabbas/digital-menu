@@ -16,11 +16,11 @@ class order extends Model
     ];
 
     public function user(){
-        return $this->belongsTo('User::class');
+        return $this->belongsTo(User::class);
     }
 
     public function career(){
-        return $this->belongsTo('career::class');
+        return $this->belongsTo(career::class);
     }
 
     public function address(){

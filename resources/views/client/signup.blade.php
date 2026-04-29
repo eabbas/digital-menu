@@ -40,12 +40,12 @@
                     <form action="{{ route('user.store') }}"
                         class="w-full flex flex-col items-center my-6 gap-2 md:gap-3" method="post" id="signupForm">
                         @csrf
-                        <input type="text"
-                            class="w-full p-2 md:p-[9px] placeholder-gray-400 focus:border-[#eb3254] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
-                            name="name" id="name" placeholder="نام" required>
-                        <input type="text"
-                            class="w-full p-2 md:p-[9px] placeholder-gray-400 focus:border-[#eb3254] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
-                            name="family" id="family" placeholder="نام خانوادگی" required>
+                        <!--<input type="text"-->
+                        <!--    class="w-full p-2 md:p-[9px] placeholder-gray-400 focus:border-[#eb3254] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"-->
+                        <!--    name="name" id="name" placeholder="نام" required>-->
+                        <!--<input type="text"-->
+                        <!--    class="w-full p-2 md:p-[9px] placeholder-gray-400 focus:border-[#eb3254] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"-->
+                        <!--    name="family" id="family" placeholder="نام خانوادگی" required>-->
                         <input type="number"
                             class="w-full p-2 md:p-[9px] placeholder-gray-400 focus:border-[#eb3254] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
                             name="phoneNumber" placeholder="شماره تلفن" required id="phoneNumber">
@@ -54,7 +54,7 @@
                             name="password" placeholder="کلمه عبور" required>
                         <input type="text"
                             class="w-full p-2 md:p-[9px] placeholder-gray-400 focus:border-[#eb3254] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
-                            name="ref_code" placeholder="کد معرف (اختیاری)">
+                            name="ref_code" placeholder="کد معرف (اختیاری)" value="{{ isset($slug) ? $slug : '' }}" @if(isset($slug)) readonly @endif>
                         <div class="w-full flex flex-row items-center gap-3">
                             <input type="number"
                                 class="w-8/12 p-2 placeholder-gray-400 focus:border-[#eb3254] md:p-[9px] rounded-[7px] border-1 border-[#DBDFE9] outline-none"
@@ -331,7 +331,7 @@
                     },
                     success: function(data) {
                         console.log(data)
-                        if (!data) {
+                        if (!data.flag) {
                             counter()
                             showMessage('open')
                             element.innerHTML = `

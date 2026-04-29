@@ -8,9 +8,9 @@
             <div>
                 <h1 class="text-sm lg:text-lg font-bold"> همه دسته های منوی {{ $menu->title }} </h1>
             </div>
-            <div>
-                <a href="{{ route('career.menus', [$menu->career]) }}" class="text-xs px-2 py-0.5 rounded-sm bg-gray-800 text-white">بازگشت</a>
-            </div>
+           <div class="w-full flex flex-row justify-end p-3">
+            <a href="{{ url()->previous()}}" class="text-xs px-2 py-0.5 rounded-sm bg-gray-500 text-white">بازگشت ←</a>
+               </div>
         </div>
         <form action="{{ route('menuCat.deleteAll') }}" method="post" class="flex flex-col p-2 lg:p-5 gap-3 shadow__profaill__list_products rounded-[7px] bg-white">
             @csrf

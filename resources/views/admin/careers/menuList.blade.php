@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="pb-4 flex flex-row justify-between items-end">
-        <h2 class="text-sm lg:text-lg font-bold text-gray-800">لیست منو های {{ $career->title }}</h2>
+        <h2 class="text-sm lg:text-lg font-bold text-gray-800">لیست منو هایxxxxxxxxxxxxxxxxxxxxx {{ $career->title }}</h2>
         <a href="{{ route('career.careers', [$career->user]) }}" class="text-xs px-2 py-0.5 rounded-sm bg-gray-800 text-white">بازگشت</a>
     </div>
     <div class="w-full flex flex-col pb-4">
@@ -80,11 +80,17 @@
                                     </div>
                                     <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
-                                        <span class="block w-20 lg:w-full truncate">{{ $menu->title }}</span>
+                                        <a  href="{{ route('menu.single', [$menu]) }}" class="block w-20 lg:w-full truncate">{{ $menu->title }}</a>
                                     </div>
                                     <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center col-span-2">
-                                        <span class="block w-24 lg:w-full truncate">{{ $menu->subtitle }}</span>
+                                        <span class="block w-24 lg:w-full truncate">
+                                            @if($menu->subTitle)
+                                                {{ $menu->subTitle }}
+                                            @else
+                                                -
+                                            @endif
+                                        </span>
                                     </div>
                                     <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center col-span-2">

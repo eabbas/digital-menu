@@ -25,4 +25,8 @@ class ecomm_product extends Model
   {
     return $this->belongsTo(ecomm::class);
   }
+
+  public function gallery(){
+      return $this->hasMany(ecomm_gallery::class);
+  }
 }

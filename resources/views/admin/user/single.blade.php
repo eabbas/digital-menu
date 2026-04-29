@@ -18,36 +18,6 @@
                             <div class="div1 text-center lg:text-start">
                                 <strong class="text-gray-700">{{ $user->name }} {{ $user?->family }}</strong>
                             </div>
-                            <div class="div2 hidden">
-                                <ul class="flex flex-col lg:flex-row gap-3 text-[#99A1B7]">
-                                    <li>
-                                        <a href="">توسعه دهنده</a>
-                                    </li>
-                                    <li>
-                                        <a href="">منطقه زندگی</a>
-                                    </li>
-                                    <li>
-                                        <a href="">max@kt.com</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="flex flex-col lg:flex-row gap-2 mt-8 mx-10 lg:mx-0">
-                                <div
-                                    class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px]">
-                                    <span class="font-bold text-blue-500">0</span>
-                                    <span class="text-[#4B5675]">تعداد اسکن ها</span>
-                                </div>
-                                <div
-                                    class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px]">
-                                    <span class="font-bold text-blue-500">{{  count($user->qr_codes)  }}</span>
-                                    <span class="text-[#4B5675]"> تعداد QR کد ها </span>
-                                </div>
-                                <div
-                                    class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border max-sm:border-[1.5px] rounded-[5px]">
-                                    <span class="font-bold text-blue-500">{{ count($user->careers) }}</span>
-                                    <span class="text-[#4B5675]">تعداد کسب و کارها</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -62,7 +32,7 @@
                     <div class="w-full h-px bg-gray-200 my-5 "></div>
                     <div class="flex gap-7 sm:hidden">
                         <div class="flex w-full flex-col">
-                            <label class="p-2.5 text-gray-400">نام کامل</label>
+                            <label class="p-2.5 text-gray-400">نام و نام خانوادگی</label>
                             <span class="p-2.5 text-gary-600"><strong>{{ $user->name }} 
                                     {{ $user?->family }}</strong></span>
                             <span class="p-2.5 text-gary-600">فائوس</span>
@@ -73,7 +43,11 @@
                             <label class="p-2.5 text-gray-400">ایمیل</label>
                             <span class="p-2.5 text-gary-600">{{ $user->email }}</span>
                             <label class="p-2.5 text-gray-400">نقش</label>
-                            <span class="p-2.5 text-gary-600">{{ $user->role[0]->title }}</span>
+                            <div class="p-2.5 text-gary-600">
+                                @foreach($user->roles as $role)
+                                    {{ $role }} <br>
+                                @endforeach
+                            </div>
                             {{-- <label class="p-2.5 text-gray-400">سایت کمپانی</label>
                     <a href="#" class="p-2.5 text-gary-600">famenu.ie</a>
                     <label class="p-2.5 text-gray-400">کشور </label>
@@ -99,7 +73,11 @@
                             <span class="p-2.5 text-gary-600">{{ $user->phoneNumber }}<mark
                                     class="mx-2 text-green-700 bg-green-300 px-1 rounded-md">تایید
                                     شده</mark></span>
-                            <span class="p-2.5 text-gary-600">{{ $user->role[0]->title}}</span>
+                            <span class="p-2.5 text-gary-600">
+                            @foreach($user->roles as $role)
+                                    {{ $role }} <br>
+                                @endforeach
+                            </span>
                             <span class="p-2.5 text-gary-600">{{ $user->email }}</span>
                             {{-- <a href="#" class="p-2.5 text-gary-600">famenu.ie</a>
                     <span class="p-2.5 text-gary-600">ایران</span>

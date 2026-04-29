@@ -11,7 +11,7 @@
 
 
                 <div
-                        class="w-10/12 mx-auto shadow-md rounded mb-5 overflow-x-auto [&::-webkit-scrollbar]:hidden lg:overflow-visible">
+                        class="w-10/12 mx-auto shadow-md rounded mb-5 overflow-x-auto lg:overflow-visible" style="scrollbar-width: thin;">
                     <div
                             class="w-full flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4] sticky -top-5">
 
@@ -38,6 +38,9 @@
                         @endphp
                         @if (isset($career->orders))
                             @foreach ($career->orders as $order)
+                                @if($order->status != 4)
+
+
                                 {{--                                @if ($cart->status)--}}
                                 <div
                                         class="w-full flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4]">
@@ -88,7 +91,7 @@
                                                 @endif
                                             </li>
                                             <li class="flex justify-center">
-                                                <div
+                                                <div onclick="deleteOrder(this, {{ $order->id }})"
                                                         class="w-fit flex flex-row items-center justify-center bg-red-500 hover:bg-red-600 p-1 rounded-sm text-white cursor-pointer"
                                                         title="حذف">
                                                     حذف
@@ -101,6 +104,7 @@
                                 @php
                                     $i++;
                                 @endphp
+                                @endif
                             @endforeach
                         @endif
                     </div>
@@ -274,6 +278,25 @@
                 }
             })
             console.log(orderId, element)
+        }
+
+        function deleteOrder(el, id){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                }
+            })
+            $.ajax({
+                url: "{{ url('orders/delete') }}/"+id,
+                type: "GET",
+                success: function(data){
+                    console.log(data)
+                    el.parentElement.parentElement.parentElement.parentElement.remove()
+                },
+                error: function(){
+                    console.log('error')
+                }
+            })
         }
     </script>
     <script src="{{ asset('assets/js/checkAll.js') }}"></script>

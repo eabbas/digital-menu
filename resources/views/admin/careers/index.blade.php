@@ -57,6 +57,7 @@
                         @endphp
                         @if ($careers)
                             @foreach ($careers as $career)
+
                                 @if ($career)
                                     <div
                                         class="w-full flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4]">
@@ -72,10 +73,10 @@
                                         </div>
                                         <div
                                             class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
-                                            <div class="w-20 lg:w-full">
+                                            <a href="{{ route('career.single', [$career]) }}" class="block w-20 lg:w-full">
                                                 <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
-                                                    src={{ asset('storage/' . $career->logo) }}>
-                                            </div>
+                                                    src="{{ $career->logo ? asset('storage/' . $career->logo) : asset('assets/img/user.png') }}">
+                                            </a>
                                         </div>
                                         <div
                                             class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
@@ -90,7 +91,7 @@
                                         </div>
                                         <div
                                             class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center">
-                                            <span class="block w-24 lg:w-full">{{ $career->careerCategory->title }}</span>
+                                            <span class="block w-24 lg:w-full">{{ $career->careerCategory ? $career->careerCategory->title : "" }}</span>
                                         </div>
 
                                         <div class="col-span-4">
@@ -137,13 +138,21 @@
                                                     <a href="{{ route('menu.create', [$career]) }}"
                                                         class="text-sky-700">ایجاد منو</a>
                                                 </div>
+{{--                                                @if (count($career->menus))--}}
+{{--                                                    <div--}}
+{{--                                                        class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">--}}
+{{--                                                        <a href="{{ route('career.menus', [$career]) }}"--}}
+{{--                                                            class="text-sky-700">لیست منو</a>--}}
+{{--                                                    </div>--}}
+{{--                                                @endif--}}
                                                 @if (count($career->menus))
                                                     <div
-                                                        class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                                        <a href="{{ route('career.menus', [$career]) }}"
-                                                            class="text-sky-700">لیست منو</a>
+                                                            class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
+                                                        <a href="{{ route('career.showWithMenu', [$career]) }}"
+                                                           class="text-sky-700"> منو</a>
                                                     </div>
                                                 @endif
+{{--                                                <a href="{{ route('career.menus', $career) }}">لیست منو ها</a>--}}
                                             </div>
                                         </div>
                                     </div>

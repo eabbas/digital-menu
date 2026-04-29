@@ -15,7 +15,9 @@ class ecomm extends Model
     'user_id',
     'email',
     'social_media',
-    'city_id'
+    'city_id',
+    'active',
+    'show_in_home',
 
   ];
 

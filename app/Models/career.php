@@ -6,7 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class career extends Model
 {
-    protected $fillable = ['logo', 'banner', 'title', 'city_id', 'address', 'email', 'description', 'user_id', 'career_category_id', 'qr_count'];
+    protected $fillable = [
+        'logo',
+        'banner',
+        'title',
+        'city_id',
+        'address',
+        'email',
+        'description',
+        'user_id',
+        'career_category_id',
+        'qr_count',
+        'page_id',
+        'show_in_home',
+        'phone',
+        'active'
+    ];
 
     public $timestamps = true;
 
@@ -63,11 +78,17 @@ class career extends Model
         return $this->belongsTo(province_cities::class, 'city_id');
     }
 
-    public function orders(){
+    public function orders()
+    {
         return $this->hasMany(order::class);
     }
-  public function favorites()
-  {
-    return $this->hasMany(favorites::class, 'item_id');
-  }
+
+    public function favorites()
+    {
+        return $this->hasMany(favorites::class, 'item_id');
+    }
+
+    public function page(){
+        return $this->belongsTo(pages::class, 'page_id');
+    }
 }

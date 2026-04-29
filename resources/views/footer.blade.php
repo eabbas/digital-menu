@@ -24,6 +24,17 @@
                     width: 100%;
                     height: 100%;
                 }
+
+                .underLineBorder::after{
+                    content: '';
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    width: 100%;
+                    height: 3px;
+                    border-radius: 9999px;
+                    background-color: #eb3254;
+                }
             </style>
             
     <div class="lg:hidden w-full fixed bottom-0 bg-white right-0">
@@ -33,7 +44,7 @@
                 <li>
                     {{-- category --}}
                     <a href="{{ route('home') }}"
-                        class="size-10 flex justify-center items-center rounded-full @if (Route::is('home')) bg-[#eb3254] @endif" id="homeIcon">
+                        class="size-10 flex justify-center items-center rounded-full @if (Route::is('home')) bg-[#eb3254] @endif footerItems relative relative" id="homeIcon">
                         <?xml version="1.0" encoding="UTF-8"?>
                         <svg xmlns="http://www.w3.org/2000/svg"
                             class="size-5 @if (Route::is('home')) fill-white @endif" id="Layer_1"
@@ -45,7 +56,7 @@
                 </li>
                 <li>
                     <a href="#" id="shopIcon"
-                        class="size-10 flex justify-center items-center rounded-full transition cursor-pointer">
+                        class="size-10 flex justify-center items-center rounded-full transition cursor-pointer footerItems relative">
                         <?xml version="1.0" encoding="UTF-8"?>
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5 " id="Outline" viewBox="0 0 24 24"
                             width="512" height="512">
@@ -55,7 +66,7 @@
                     </a>
                 </li>
                 <li onclick="scanQr('open')">
-                    <div class="size-10 flex justify-center items-center rounded-full" id="qrIcon">
+                    <div class="size-10 flex justify-center items-center rounded-full footerItems relative" id="qrIcon">
                         <?xml version="1.0" encoding="UTF-8"?>
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" id="Layer_1" data-name="Layer 1"
                             viewBox="0 0 24 24">
@@ -67,7 +78,7 @@
                 </li>
                 <li>
                     {{-- ecommerce --}}
-                    <a href="#" id="cartIcon" class="size-10 flex justify-center items-center rounded-full">
+                    <a href="#" id="cartIcon" class="size-10 flex justify-center items-center rounded-full footerItems relative">
                         <?xml version="1.0" encoding="UTF-8"?>
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-6" id="Outline" viewBox="0 0 24 24"
                             width="512" height="512">
@@ -81,10 +92,11 @@
                     {{-- ecommerce end --}}
                 </li>
                
-                <li>
-                    <a href="{{ route('user.profile') }}"
-                        class="size-10 flex justify-center items-center rounded-full @if (Route::is('login') || Route::is('signup') || Route::is('reset_password') || Route::is('forget_password')) bg-[#eb3254] @endif" id="userIcon">
-                        @if (!Auth::check())
+                 @if (!Auth::check())
+                <li class="relative">
+                    <div
+                        class="size-10 flex justify-center items-center rounded-full @if (Route::is('login') || Route::is('signup') || Route::is('reset_password') || Route::is('forget_password') || Route::is('user.profile')) bg-[#eb3254] @endif footerItems relative" id="userIcon">
+                        <a href="{{ route('login') }}">
                         <?xml version="1.0" encoding="UTF-8"?>
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-6 @if (Route::is('login') || Route::is('signup') || Route::is('reset_password') || Route::is('forget_password')) fill-white @else fill-black @endif" id="Outline"
                             viewBox="0 0 24 24" width="512" height="512">
@@ -93,13 +105,103 @@
                             <path
                                 d="M12,14a9.01,9.01,0,0,0-9,9,1,1,0,0,0,2,0,7,7,0,0,1,14,0,1,1,0,0,0,2,0A9.01,9.01,0,0,0,12,14Z" />
                         </svg>
-                        @else
-                        <img src="{{ asset('storage/'.Auth::user()->main_image) }}" class="size-10 rounded-full" alt="profile image">
-                        @endif
+                        </a>
+                        
+                       
+                    </div>
+{{--                    pup_up_user_profile_start--}}
+                   
 
-                    </a>
                 </li>
-                
+                 @else
+                  <li class="relative">
+                    <div
+                        class="size-10 flex justify-center items-center rounded-full @if (Route::is('login') || Route::is('signup') || Route::is('reset_password') || Route::is('forget_password') || Route::is('user.profile')) bg-[#eb3254] @endif footerItems relative" id="userIcon" >
+                            <img src="{{ Auth::user()->main_image ? asset('storage/'.Auth::user()->main_image) : asset('assets/img/user.png') }}" class="size-9 rounded-full" alt="profile image" onclick="pup_up_profil('open')">
+                             <div class="w-50 bg-white border-black shadow-[15px_0px_30px_#bab2b29e] fixed bottom-15 left-1/30 px-3 flex flex-col gap-2 rounded-lg max-h-0 overflow-hidden transition-all duration-400 invisible opacity-0 z-999999999" id="pup_up_profile">
+                                <div class="w-full flex gap-5 justify-start items-center px-4" onclick="account_user()">
+{{--                                    <div class="w-8 h-8 bg-[#eb3153] rounded-full absolute -top-4 -right-3 flex justify-center items-center" onclick="pup_up_profil('close')">--}}
+{{--                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="w-4 "  fill="#fff"><path d="M345 137l17-17L328 86.1l-17 17-119 119L73 103l-17-17L22.1 120l17 17 119 119L39 375l-17 17L56 425.9l17-17 119-119L311 409l17 17L361.9 392l-17-17-119-119L345 137z"/></svg>--}}
+{{--                                    </div>--}}
+                                    @if(Auth::check())
+                                    @if(Auth::user()->name && Auth::user()->family)
+                                    <h2 class=" font-bold text-nowrap">{{Auth::user()->name}} {{Auth::user()->family}}</h2>
+                                    @else
+                                     <h2 class=" font-bold">نام من</h2>
+                                    @endif
+                                    @endif
+                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-all duration-400 rotate-180"  id="account_user_sample"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                                </div>
+                                 <div class="w-full px-4 flex flex-col gap-2 overflow-y-hidden max-h-0 transition-all duration-400" id="account_user_items">
+                                    @foreach(Auth::user()->pages as $page)
+                                    <a href="{{ route('pages.single', [$page]) }}" class="block w-full rounded-lg cursor-pointer py-1 hover:bg-[#F9FAFC] flex gap-5 items-center">
+                                        <div class="min-w-10 max-w-10 min-h-10 max-h-10">
+                                            <img src="{{ $page->logo_path ? asset('storage/'. $page->logo_path) : asset('assets/img/user.png') }}" class="size-9 rounded-full" alt="user accont image">
+                                        </div>
+                                        <span class="text-xs text-[#5b5c75]">{{$page->title}}</span>
+                                    </a>
+                                    @endforeach
+                                     <!--<a href="" class="block w-full rounded-lg cursor-pointer py-1 hover:bg-[#F9FAFC] flex gap-5 items-center">-->
+                                     <!--    <img src="{{ Auth::user()->main_image ? asset('storage/'.Auth::user()->main_image) : asset('assets/img/user.png') }}" class="size-9 rounded-full" alt="user accont image">-->
+                                     <!--    <span class="text-sm text-[#5b5c75]">محمد</span>-->
+                                     <!--</a>-->
+                                 </div>
+                                <a href="{{ route('dashboard') }}" class="w-full rounded-lg cursor-pointer px-4 py-2 hover:bg-[#F9FAFC] flex gap-5 items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
+                                        <path d="M256 0c17 0 33.6 1.7 49.8 4.8c7.9 1.5 21.8 6.1 29.4 20.1c2 3.7 3.6 7.6 4.6 11.8l9.3 38.5C350.5 81 360.3 86.7 366 85l38-11.2c4-1.2 8.1-1.8 12.2-1.9c16.1-.5 27 9.4 32.3 15.4c22.1 25.1 39.1 54.6 49.9 86.3c2.6 7.6 5.6 21.8-2.7 35.4c-2.2 3.6-4.9 7-8 10L459 246.3c-4.2 4-4.2 15.5 0 19.5l28.7 27.3c3.1 3 5.8 6.4 8 10c8.2 13.6 5.2 27.8 2.7 35.4c-10.8 31.7-27.8 61.1-49.9 86.3c-5.3 6-16.3 15.9-32.3 15.4c-4.1-.1-8.2-.8-12.2-1.9L366 427c-5.7-1.7-15.5 4-16.9 9.8l-9.3 38.5c-1 4.2-2.6 8.2-4.6 11.8c-7.7 14-21.6 18.5-29.4 20.1C289.6 510.3 273 512 256 512s-33.6-1.7-49.8-4.8c-7.9-1.5-21.8-6.1-29.4-20.1c-2-3.7-3.6-7.6-4.6-11.8l-9.3-38.5c-1.4-5.8-11.2-11.5-16.9-9.8l-38 11.2c-4 1.2-8.1 1.8-12.2 1.9c-16.1 .5-27-9.4-32.3-15.4c-22-25.1-39.1-54.6-49.9-86.3c-2.6-7.6-5.6-21.8 2.7-35.4c2.2-3.6 4.9-7 8-10L53 265.7c4.2-4 4.2-15.5 0-19.5L24.2 218.9c-3.1-3-5.8-6.4-8-10C8 195.3 11 181.1 13.6 173.6c10.8-31.7 27.8-61.1 49.9-86.3c5.3-6 16.3-15.9 32.3-15.4c4.1 .1 8.2 .8 12.2 1.9L146 85c5.7 1.7 15.5-4 16.9-9.8l9.3-38.5c1-4.2 2.6-8.2 4.6-11.8c7.7-14 21.6-18.5 29.4-20.1C222.4 1.7 239 0 256 0zM218.1 51.4l-8.5 35.1c-7.8 32.3-45.3 53.9-77.2 44.6L97.9 120.9c-16.5 19.3-29.5 41.7-38 65.7l26.2 24.9c24 22.8 24 66.2 0 89L59.9 325.4c8.5 24 21.5 46.4 38 65.7l34.6-10.2c31.8-9.4 69.4 12.3 77.2 44.6l8.5 35.1c24.6 4.5 51.3 4.5 75.9 0l8.5-35.1c7.8-32.3 45.3-53.9 77.2-44.6l34.6 10.2c16.5-19.3 29.5-41.7 38-65.7l-26.2-24.9c-24-22.8-24-66.2 0-89l26.2-24.9c-8.5-24-21.5-46.4-38-65.7l-34.6 10.2c-31.8 9.4-69.4-12.3-77.2-44.6l-8.5-35.1c-24.6-4.5-51.3-4.5-75.9 0zM208 256a48 48 0 1 0 96 0 48 48 0 1 0 -96 0zm48 96a96 96 0 1 1 0-192 96 96 0 1 1 0 192z"></path>
+                                    </svg>
+                                    <span class="text-sm text-[#5b5c75]">داشبورد</span>
+                                </a>
+                                <a href="{{ route('user.profile') }}" class="w-full rounded-lg cursor-pointer px-4 py-2 hover:bg-[#F9FAFC] flex gap-5 items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4"><!--! Font Awesome Pro 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z"/></svg>
+                                    <span class="text-sm text-[#5b5c75]">اطلاعات کاربری</span>
+                                </a>
+                                <a href="{{ route('user.logout') }}" class="w-full rounded-lg cursor-pointer px-4 py-2 hover:bg-[#F9FAFC] flex gap-5 items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 20 20" id="entypo-log-out" class="w-4" fill="#eb3153"><g><path d="M19 10l-6-5v3H6v4h7v3l6-5zM3 3h8V1H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H3V3z"></path></g></svg>
+                                    <span class="text-sm text-[#eb3153]">خروج</span>
+                                </a>
+
+                    </div>
+                            </div>
+                            </li>
+                        @endif
+                <div class="w-full h-[100vh] fixed top-0 left-0 transition-all duration-400 invisible opacity-0" id="close_pup_up_profile_all_viwe" onclick="pup_up_profil('close')"></div>
+                    <script>
+                        let pup_up_profile= document.getElementById('pup_up_profile')
+                        let close_pup_up_profile_all_viwe=document.getElementById('close_pup_up_profile_all_viwe')
+                        function pup_up_profil(viwe){
+                            if(viwe =='open'){
+                                pup_up_profile.classList.toggle('max-h-0')
+                                pup_up_profile.classList.toggle('overflow-hidden')
+                                pup_up_profile.classList.toggle('invisible')
+                                pup_up_profile.classList.toggle('opacity-0')
+                                pup_up_profile.classList.toggle('py-4')
+                                close_pup_up_profile_all_viwe.classList.remove('invisible')
+                                close_pup_up_profile_all_viwe.classList.remove('opacity-0')
+                            }
+                            if(viwe =='close'){
+
+                                pup_up_profile.classList.add('max-h-0')
+                                pup_up_profile.classList.add('overflow-hidden')
+                                pup_up_profile.classList.add('invisible')
+                                pup_up_profile.classList.add('opacity-0')
+                                pup_up_profile.classList.remove('py-4')
+                                close_pup_up_profile_all_viwe.classList.add('invisible')
+                                close_pup_up_profile_all_viwe.classList.add('opacity-0')
+                            }
+                        }
+                        //users
+                        let account_user_items= document.getElementById('account_user_items')
+                        let account_user_sample= document.getElementById('account_user_sample')
+                        function account_user(){
+                            account_user_items.classList.toggle('max-h-0')
+                            account_user_items.classList.toggle('py-1')
+                            account_user_sample.classList.toggle('rotate-180')
+                        }
+                        //users
+
+                    </script>
+                {{--                      pup_up_user_profile_end--}}
             </ul>
         </div>
     </div>
@@ -152,6 +254,18 @@
     
     
     <script>
+
+        let footerItems = document.querySelectorAll('.footerItems')
+        footerItems.forEach((footerItem)=>{
+            footerItem.addEventListener('click', ()=>{
+
+                footerItems.forEach((item)=>{
+                    item.classList.remove('underLineBorder')
+                })
+                footerItem.classList.add('underLineBorder')
+            })
+        })
+
         document.addEventListener('DOMContentLoaded', function() {
             let shopIcon = document.getElementById('shopIcon');
             let comingSoon = document.getElementById('comingSoon');

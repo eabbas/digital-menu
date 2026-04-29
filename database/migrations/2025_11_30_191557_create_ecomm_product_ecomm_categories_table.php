@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('ecomm_product_ecomm_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('ecomm_product_id');
-            $table->string('ecomm_category_id');
+            $table->integer('ecomm_product_id');
+            $table->integer('ecomm_category_id');
             $table->timestamps();
         });
     }

@@ -15,20 +15,20 @@ class ecomm_category extends Model
         'ecomm_id'
     ];
 
-    public function parent()
-    {
-        return $this->belongsTo(category::class);
-    }
+//    public function parent()
+//    {
+//        return $this->belongsTo(category::class);
+//    }
 
     public function children()
     {
-        return $this->hasMany(category::class, 'parent_id');
+        return $this->hasMany(ecomm_category::class, 'parent_id')->with('children');
     }
 
-    public function grandChild()
-    {
-        return $this->children()->with('grandChild')->with('attribute');
-    }
+//    public function grandChild()
+//    {
+//        return $this->children()->with('grandChild')->with('attribute');
+//    }
 
     public function ecomm_products()
     {

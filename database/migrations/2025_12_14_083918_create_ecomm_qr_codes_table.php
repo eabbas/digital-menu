@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('ecomm_qr_codes', function (Blueprint $table) {
             $table->id();
            $table->string('qr_path');
-           $table->string('user_id');
-           $table->string('ecomm_id');
+           $table->integer('user_id');
+           $table->integer('ecomm_id');
            $table->string('slug');
             $table->timestamps();
         });

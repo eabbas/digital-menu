@@ -8,6 +8,9 @@ use App\Models\slider;
 use App\Models\career;
 use App\Models\pages;
 use App\Models\menu;
+use App\Models\ecomm;
+use Illuminate\Support\Facades\Auth;
+
 class HomeController extends Controller
 {
     public function index()
@@ -16,22 +19,26 @@ class HomeController extends Controller
         $careerCategories = careerCategory::all();
         $careers = career::all();
         $pages = pages::all();
-
-        return view('home', ['sliders' => $sliders, 'careerCategories' => $careerCategories, 'careers' => $careers, 'pages'=>$pages]);
+        $userPages=null;
+        if(Auth::check()){
+            $userPages=Auth::user()->pages;
+        }
+        return view('home', ['sliders' => $sliders, 'careerCategories' => $careerCategories, 'careers' => $careers, 'pages' => $pages,'userPages'=>$userPages]);
     }
 
     public function search(Request $request)
     {
-        if(!$request->search){
+        if (!$request->search) {
 
             $request->search = '';
         }
         $datas = [];
         $datas['title'] = $request->search;
-        $datas['careers'] = career::where('title', 'like', "%" . $request->search . "%")->get();
-        $datas['careerCategories'] = careerCategory::where('title', 'like', "%" . $request->search . "%")->get();
-        $datas['socialMedias'] = pages::where('title', 'like', "%" . $request->search . "%")->get();
-        $datas['menus'] = menu::where('title', 'like', "%" . $request->search . "%")->get();
+        $datas['careerCategory'] = careerCategory::where('title', 'like', "%" . $request->search . "%")->get();
+        $datas['career'] = career::where('title', 'like', "%" . $request->search . "%")->get();
+        $datas['pages'] = pages::where('title', 'like', "%" . $request->search . "%")->get();
+        $datas['menu'] = menu::where('title', 'like', "%" . $request->search . "%")->get();
+        $datas['ecomm'] = ecomm::where('title', 'like', "%" . $request->search . "%")->get();
         return view('client.search.index', ['datas' => $datas, 'searchTitle' => $request->search]);
     }
 
@@ -41,10 +48,11 @@ class HomeController extends Controller
         $datas = [];
         if (isset($request->models)) {
             if (in_array('all', $request->models)) {
-                $datas['careerCategory'] = careerCategory::where('title', 'like', "%" . $request->searchTitle . "%")->get();
-                $datas['career'] = career::where('title', 'like', "%" . $request->searchTitle . "%")->get();
-                $datas['covers'] = pages::where('title', 'like', "%" . $request->searchTitle . "%")->get();
-                $datas['menu'] = menu::where('title', 'like', "%" . $request->searchTitle . "%")->get();
+                $datas['careerCategory'] = careerCategory::where('title', 'like', "%" . $request->search . "%")->get();
+                $datas['career'] = career::where('title', 'like', "%" . $request->search . "%")->get();
+                $datas['pages'] = pages::where('title', 'like', "%" . $request->search . "%")->get();
+                $datas['menu'] = menu::where('title', 'like', "%" . $request->search . "%")->get();
+                $datas['ecomm'] = ecomm::where('title', 'like', "%" . $request->search . "%")->get();
             } else {
                 if (isset($request->models)) {
                     foreach ($request->models as $model) {
@@ -66,15 +74,15 @@ class HomeController extends Controller
         }
         return response()->json($datas);
 
-        $datas['careers'] = career::where('title' , 'like' , "%".$request->search."%")->get();
-        $datas['careerCategories'] = careerCategory::where('title' , 'like' , "%".$request->search."%")->get();
-        $datas['socialMedias'] = pages::where('title' , 'like' , "%".$request->search."%")->get();
-        $datas['menus'] = menu::where('title' , 'like' , "%".$request->search."%")->get();
-        
-        return view('client.search.index' , ['datas'=>$datas, 'searchTitle'=>$request->search]);
+        $datas['careers'] = career::where('title', 'like', "%" . $request->search . "%")->get();
+        $datas['careerCategories'] = careerCategory::where('title', 'like', "%" . $request->search . "%")->get();
+        $datas['socialMedias'] = pages::where('title', 'like', "%" . $request->search . "%")->get();
+        $datas['menus'] = menu::where('title', 'like', "%" . $request->search . "%")->get();
+
+        return view('client.search.index', ['datas' => $datas, 'searchTitle' => $request->search]);
 
     }
-    
+
     // public function filter(Request $request){
     //     $datas = [];
     //     if(isset($request->models)){
@@ -95,8 +103,9 @@ class HomeController extends Controller
     //     return response()->json($datas);
     // }
 
-    public function printery(){
+    public function printery()
+    {
         return view('client.printery.index');
     }
-    
+
 }

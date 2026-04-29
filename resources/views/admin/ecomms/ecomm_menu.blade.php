@@ -53,11 +53,11 @@
                                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                                     @foreach ($ecomm_category->ecomm_products as $ecomm_product)
                                         <div class="flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-4 transition-all duration-150">
-                                            <div class="flex items-center gap-4 flex-1">
+                                            <div class="w-full flex items-center gap-4 flex-1 overflow-hidden">
                                                 <img src="<?= asset('storage/'.$ecomm_product->image_path) ?>" 
                                                      class="size-12 rounded-lg object-cover border border-gray-300"
                                                      alt="{{ $ecomm_product->title }}">
-                                                <div class="flex-1 min-w-0">
+                                                <div class="flex-1 min-w-0 max-w-1/2">
                                                     <h3 class="font-medium text-gray-800 truncate">{{ $ecomm_product->title }}</h3>
                                                     <p class="text-sm text-gray-500 truncate mt-1">{{ $ecomm_product->description }}</p>
                                                 </div>
@@ -136,7 +136,7 @@
                                 <i class="fas fa-image ml-2 text-gray-500"></i>
                                 تصویر محصول
                             </label>
-                            <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-xl hover:border-blue-400 transition duration-200">
+                            <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-red-500 border-dashed rounded-xl hover:border-blue-400 transition duration-200">
                                 <div class="space-y-1 text-center">
                                     <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mx-auto"></i>
                                     <div class="flex text-sm text-gray-600">

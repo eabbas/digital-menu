@@ -6,7 +6,7 @@ use App\Models\ecomm;
 use App\Models\ecomm_category;
 use App\Models\province_cities;
 use App\Models\ecomm_qrCode;
-use App\Models\role;
+use App\Models\role_user;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,33 +17,38 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class EcommController extends Controller
 {
     public function create(User $user = null)
-    {       
-         $provinces = province_cities::where('parent', 0)->get();
-
+    {
+//         $provinces = province_cities::where('parent', 0)->get();
+        $provinces = province_cities::where('parent', 0)->get();
+        $cities = province_cities::where('parent', 1)->get();
         if (!$user) {
             $user = Auth::user();
         }
-        return view('admin.ecomms.create', ['user' => $user,'provinces'=>$provinces]);
+        return view('admin.ecomms.create', ['user' => $user,'provinces'=>$provinces, 'cities'=>$cities]);
     }
 
     public function store(Request $request)
     {
-        $roles = role::all();
-        $user = Auth::user();
         $path = null;
-        if ($user->role[0]->title != 'admin') {
-            $user->role[0] = $roles[2];
-            $user->save();
+        $bannerPath=null;
+        $ids = Auth::user()->role->pluck('id')->toArray();
+        if(!in_array(2, $ids)){
+            role_user::create([
+                'user_id'=>$request->user_id,
+                'role_id'=>2
+            ]);
         }
         if (isset($request->logo)) {
             $name = $request->logo->getClientOriginalName();
             $fullName = Str::uuid() . '_' . $name;
             $path = $request->file('logo')->storeAs('files', $fullName, 'public');
         }
+        if(isset($request->banner)){
+            $bannerName = $request->banner->getClientOriginalName();
+            $fullBannerName = Str::uuid() . '_' . $bannerName;
+            $bannerPath = $request->file('banner')->storeAs('files', $fullBannerName, 'public');
 
-        $bannerName = $request->banner->getClientOriginalName();
-        $fullBannerName = Str::uuid() . '_' . $bannerName;
-        $bannerPath = $request->file('banner')->storeAs('files', $fullBannerName, 'public');
+        }
         $social_medias = json_encode($request->social_medias);
         $ecomm_id = ecomm::insertGetId([
             'title' => $request->title,
@@ -51,10 +56,12 @@ class EcommController extends Controller
             'address' => $request->address,
             'social_media' => $social_medias,
             'city_id' => $request->city,
-            'user_id' => $user->id,
+            'user_id' => $request->user_id,
             'email' => $request->email,
             'description' => $request->description,
-            'banner' => $bannerPath
+            'banner' => $bannerPath,
+            'show_in_home'=> $request->show_in_home ? 1 : 0,
+            'active'=> $request->active ? 1 : 0
         ]);
 
         $random = Str::random(10);
@@ -75,7 +82,7 @@ class EcommController extends Controller
 
     public function user_ecomms()
     {
-            return view('admin.ecomms.userEcomms', ['user' => Auth::user()]);
+            return view('admin.ecomms.userEcomms');
         }
 
     public function edit(ecomm $ecomm)
@@ -117,27 +124,35 @@ class EcommController extends Controller
         $ecomm->address = $request->address;
         $ecomm->description = $request->description;
         $ecomm->email = $request->email;
+        $ecomm->show_in_home = $request->show_in_home ? 1 : 0;
+        $ecomm->active= $request->active ? 1 : 0;
         $ecomm->save();
-       
-                return back();
+//        return back();
+        return to_route('ecomm.ecomms');
     }
 
     public function delete(ecomm $ecomm)
     {
-        if ($ecomm->menu) {
-            if ($ecomm->menu->qr_codes) {
-                foreach ($ecomm->menu->qr_codes as $menu) {
-                    // $menu->delete();
-                }
-            }
-            // $ecomm->menu->delete();
-        }
-        if ($ecomm->ecomm_category) {
+//        if ($ecomm->menu) {
+//            if ($ecomm->menu->qr_codes) {
+//                foreach ($ecomm->menu->qr_codes as $menu) {
+//                    // $menu->delete();
+//                }
+//            }
+//            // $ecomm->menu->delete();
+//        }
+        if (count($ecomm->ecomm_category)) {
             foreach ($ecomm->ecomm_category as $ecomm_category) {
-                if ($ecomm_category->ecomm_products) {
+                if (count($ecomm_category->ecomm_products)) {
                     foreach ($ecomm_category->ecomm_products as $ecomm_product) {
+                        if($ecomm_product->image_path){
+                            Storage::disk('public')->delete($ecomm_product->image_path);
+                        }
                         $ecomm_product->delete();
                     }
+                }
+                if($ecomm_category->image_path){
+                    Storage::disk('public')->delete($ecomm_category->image_path);
                 }
                 $ecomm_category->delete();
             }
@@ -163,5 +178,34 @@ class EcommController extends Controller
     }
     public function ecomm_single_menu(ecomm $ecomm){
         return view('client.ecomm.single',['ecomm'=>$ecomm]);
+    }
+
+    public function deleteAll(Request $request){
+        if(!isset($request->ecomms)){
+            return redirect()->back();
+        }
+        foreach($request->ecomms as $ecomm_id){
+            $ecomm = ecomm::find($ecomm_id);
+            if(count($ecomm->ecomm_category)){
+                foreach($ecomm->ecomm_category as $category){
+                    if($category->image_path){
+                        Storage::disk('public')->delete($category->image_path);
+                    }
+                    $category->delete();
+                }
+            }
+            if(count($ecomm->ecomm_product)){
+                foreach($ecomm->ecomm_product as $product){
+                    if($product->image_path){
+                        Storage::disk('public')->delete($product->image_path);
+                    }
+                    $product->delete();
+                }
+            }
+            $qr = $ecomm->ecomm_qrCode;
+            $qr->delete();
+            $ecomm->delete();
+        }
+        return redirect()->back();
     }
 }

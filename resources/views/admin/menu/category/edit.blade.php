@@ -1,6 +1,9 @@
 @extends('admin.app.panel')
 @section('title', 'ویرایش دسته منو')
 @section('content')
+<div class="w-full flex flex-row justify-end p-4">
+            <a href="{{ url()->previous()}}" class="text-xs px-2 py-0.5 rounded-sm bg-gray-500 text-white">بازگشت ←</a>
+               </div>
  <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">ویرایش دسته منو</h1>
     <form action="{{ route('menuCat.update') }}" method="post" enctype='multipart/form-data'>
             @csrf

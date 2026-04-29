@@ -12,7 +12,7 @@
                             <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0"
                                 src="{{ asset('assets/img/user.png') }}" alt="user__avatar">
                         @else
-                            <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0"
+                            <img class="size-27 lg:size-41 rounded-lg mx-auto lg:m-0 object-cover"
                                 src="{{ asset('storage/' . $item->image) }}" alt="user__picture">
                         @endif
                         {{-- <div class="flex flex-col justify-end">
