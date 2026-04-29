@@ -32,5 +32,6 @@ class PageBlocksController extends Controller
         }
         $page_blocks->delete();
         return response()->json('ok');
+
     }
 }
