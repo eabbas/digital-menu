@@ -998,6 +998,32 @@ class UserController extends Controller
         $userContacts->setAttribute('roles', $rolesArray);
         return response()->json($userContacts);
     }
+    public function editInfo(Request $request){
+        $currentUser = Auth::user();
+        if ($request->state == "name") {
+            $currentUser->name = $request->inputValue;
+        }
+        if ($request->state == "family") {
+            $currentUser->family = $request->inputValue;
+        }
+        if ($request->state == "email") {
+            $currentUser->email = $request->inputValue;
+        }
+        if ($request->state == "phoneNumber") {
+            $currentUser->phoneNumber = $request->inputValue;
+        }
+        if ($request->state == "password") {
+            $currentUser->password = Hash::make($request->inputValue);
+        }
+        $currentUser->save();
+
+        return response()->json('ok');
+
+    }
+    public function editProfile(Request $request){
+        return response()->json($request->all());
+     
+    }
 
 
 }
