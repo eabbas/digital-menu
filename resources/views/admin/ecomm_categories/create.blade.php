@@ -19,10 +19,9 @@
      }
  </style>
  @extends('admin.app.panel')
- @section('title', 'دسته بندی فروشگاه')
+ @section('title', 'ایجاد دسته')
  @section('content')
-
-     <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">فرم ایجاد دسته بندی فروشگاه </h1>
+     <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">ایجاد دسته فروشگاه</h1>
      <form action ="{{ route('ecomm_category.store') }}" method="POST" enctype="multipart/form-data">
          @csrf
          <div class="min-h-screen flex items-start justify-center">
@@ -34,16 +33,16 @@
                          <div
                              class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                              <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                 name="title" title="title " required>
+                                 name="title" title="عنوان" required placeholder="عنوان دسته را وارد  کنید">
                          </div>
                      </div>
                      <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
-                         <label class="text-sm mb-1 mt-2.5 flex"> عکس دسته </label>
+                         <label class="text-sm mb-1 mt-2.5 flex"> تصویر دسته </label>
 
                          <div
                              class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                              <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="file"
-                                 name="image_path" title="image_path" placholder="عکس خود را وارد کنید">
+                                 name="image_path" title="تصویر دسته را وارد کنید" placholder="تصویر دسته را وارد کنید">
                          </div>
                      </div>
                     
@@ -61,24 +60,24 @@
                      </div>
 
                      <div class="selectbox w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
-                         <label class="text-sm mb-1 mt-2.5 flex"> والددسته ها </label>
+                         <label class="text-sm mb-1 mt-2.5 flex">دسته والد</label>
                          <select
                              class="w-full px-4 py-3 bg-linear-to-r from-gray-50 to-white border border-gray-200 rounded-2xl shadow-sm focus:shadow-lg focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition-all duration-300 cursor-pointer"
                              name="parent_id" id="ecomCategories">
-
+                             <option value="0">بدون والد</option>
                              @foreach ($user->ecomms[0]->ecomm_category as $ecomm_category)
                              @if($ecomm_category->title!=="بدون دسته بندی")
                                  <option value="{{ $ecomm_category->id }}">{{ $ecomm_category->title }}</option>
                                  @endif
                                  @endforeach
-                             <option value="0">بدون والد</option>
+
                          </select>
                      </div>
 
                      <div class="w-full flex flex-row items-center gap-3 max-md:flex-row max-md:gap-1">
 
                          <input class="" type="checkbox" name="show_in_home" value="1">
-                         <lable class="text-sm mb-1 mt-2.5 flex">این دسته جز صفحه اول هست</lable>
+                         <lable class="text-sm mb-1 mt-2.5 flex">نمایش در صفحه نخست</lable>
                      </div>
 
 
@@ -88,8 +87,8 @@
 
                          <div
                              class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                             <textarea class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                 name="description" title="description"></textarea>
+                             <textarea class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
+                                 name="description" title="توضیحات دسته"></textarea>
                          </div>
                      </div>
                  </div>

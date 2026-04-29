@@ -10,7 +10,19 @@
             <div
                 class="w-full flex">
                 <input class="p-4 w-full text-sm font-bold focus:text-[#056EE9] rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] cursor-pointer" type="file" name="main_image"
-                    title="پروفایل خود را وارد کنید"required>
+                    title="پروفایل خود را وارد کنید">
+            </div>
+            <label>نام</label>
+            <div
+                class="w-full flex">
+                <input class="p-4 w-full text-sm font-bold focus:text-[#056EE9] rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] cursor-pointer" type="text" name="name"
+                    title="اسم خود راواردکنید">
+            </div>
+            <label>نام خانوادگی</label>
+            <div
+                class="w-full flex">
+                <input class="p-4 w-full text-sm font-bold focus:text-[#056EE9] rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] cursor-pointer" type="text" name="family"
+                    title="نام خانوادگی خود را وارد کنید">
             </div>
         </div>
         <div class="w-full flex flex-col gap-3">
@@ -18,7 +30,7 @@
             <div
                 class="w-full flex">
                 <input class="p-4 w-full text-sm font-bold focus:text-[#056EE9] rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7]" type="email" name="email"
-                   placeholder="test@example.com" title="ایمیل خود را وارد کنید" required>
+                   placeholder="test@example.com" title="ایمیل خود را وارد کنید">
             </div>
         </div>
         <button class="text-center w-full bg-[#056EE9] p-3 rounded-[10px] text-white cursor-pointer">ذخیره</button>

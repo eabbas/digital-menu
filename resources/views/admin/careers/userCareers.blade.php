@@ -5,9 +5,9 @@
 @section('content')
     <div class="w-full flex flex-col pb-4">
         <div class="bg-white rounded-lg">
-
-            <h2 class="text-lg font-bold text-gray-800 p-4 text-center">لیست رستورانی من</h2>
-
+            
+            <h2 class="text-lg font-bold text-gray-800 p-4 text-center">لیست رستوران های من</h2>
+             @if (count(Auth::user()->careers))
             <form class="flex flex-col gap-5" action="{{ route('career.deleteAll') }}" method="post">
                 @csrf
                 <div class="flex justify-end w-10/12 mx-auto">
@@ -61,7 +61,7 @@
                         @php
                             $i = 1;
                         @endphp
-                        @if (isset($user->careers))
+                        @if (count($user->careers))
                             @foreach ($user->careers as $career)
                                 @if ($career)
                                     <div
@@ -78,14 +78,14 @@
                                         </div>
                                         <div
                                             class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
-                                            <div class="w-20 lg:w-full">
+                                            <a  href="{{ route('career.showWithMenu', [$career]) }}" class="block w-20 lg:w-full">
                                                 <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover"
-                                                    src="<?= asset('storage/' . $career->logo) ?>">
-                                            </div>
+                                                    src="{{ $career->logo ? asset('storage/' . $career->logo) : asset('assets/img/user.png') }}">
+                                            </a>
                                         </div>
                                         <div
                                             class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
-                                            <span class="block w-20 lg:w-full">{{ $career->title }}</span>
+                                            <a href="{{ route('career.showWithMenu', [$career]) }}" class="block w-20 lg:w-full">{{ $career->title }}</a>
                                         </div>
                                         <div
                                             class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 lg:w-full text-center col-span-2">
@@ -100,7 +100,7 @@
                                         <div class="col-span-5">
                                             <div class="lg:w-full grid grid-cols-4 divide-x divide-[#f1f1f4] items-center w-[320px]">
 
-                                                <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3">
+                                                <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3 gap-4">
                                                     <li class="flex justify-center">
                                                         <a href="{{ route('career.single', [$career]) }}"
                                                             class="w-fit flex flex-row items-center justify-center bg-sky-500 hover:bg-sky-600 p-1 rounded-sm"
@@ -140,13 +140,22 @@
                                                     <a href="{{ route('menu.create', [$career]) }}"
                                                         class="text-sky-700">ایجاد منو</a>
                                                 </div>
+{{--                                                @if (count($career->menus))--}}
+{{--                                                    <div--}}
+{{--                                                        class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">--}}
+{{--                                                        <a href="{{ route('career.menus', [$career]) }}"--}}
+{{--                                                            class="text-sky-700">لیست منو</a>--}}
+{{--                                                    </div>--}}
+{{--                                                @endif--}}
+
                                                 @if (count($career->menus))
                                                     <div
-                                                        class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                                        <a href="{{ route('career.menus', [$career]) }}"
-                                                            class="text-sky-700">لیست منو</a>
+                                                            class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
+                                                        <a href="{{ route('career.showWithMenu', [$career]) }}"
+                                                           class="text-sky-700"> منو</a>
                                                     </div>
                                                 @endif
+
                                                @if (count($career->orders))
                                                     <div
                                                         class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
@@ -176,6 +185,14 @@
                     </div>
                 </div>
             </form>
+               @else
+                    <div class="w-full flex flex-col items-center gap-5 pb-5">
+                        <a href="{{ route('career.create') }}" class="font-bold text-blue-500 hover:text-blue-600 py-3">رستوران جدید</a>
+                        <div class="text-center text-xs lg:text-sm text-gray-500">
+                            هیچ رستورانی یافت نشد
+                        </div>
+                    </div>
+                @endif
         </div>
     </div>
     <script src="{{ asset('assets/js/checkAll.js') }}"></script>

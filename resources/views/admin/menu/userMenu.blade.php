@@ -74,11 +74,11 @@
                                     </div>
                                     <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
-                                        <span class="block w-20 lg:w-full truncate">{{ $menu->title }}</span>
+                                        <a  href="{{ route('menu.single', [$menu]) }}" class="block w-20 lg:w-full truncate">{{ $menu->title }}</a>
                                     </div>
                                     <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center col-span-2">
-                                        <span class="block w-24 lg:w-full truncate">{{ $menu->subtitle }}</span>
+                                        <a  href="{{ route('menu.single', [$menu]) }}" class="block w-24 lg:w-full truncate">{{ $menu->subtitle }}</a>
                                     </div>
                                     <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center col-span-2">

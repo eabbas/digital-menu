@@ -6,8 +6,9 @@
              <div class="pb-4">
                  <h2 class="text-lg font-bold text-gray-800 p-2.5">لیست اسلایدر ها</h2>
              </div>
+               @if(count($sliders))
              <div class="flex flex-col gap-5">
-                 <div class="w-10/12 mx-auto shadow-md rounded mb-5">
+                 <div class="max-w-10/12 min-w-10/12 mx-auto rounded mb-5 overflow-auto">
                      <div
                          class="w-full flex flex-row lg:grid lg:grid-cols-4 items-center divide-x divide-[#f1f1f4] sticky -top-5">
                          <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
@@ -28,7 +29,7 @@
                          @php
                              $i = 1;
                          @endphp
-
+                      
                          @foreach ($sliders as $slider)
                              <div
                                  class="w-full flex flex-row lg:grid lg:grid-cols-4 items-center divide-x divide-[#f1f1f4]">
@@ -79,9 +80,17 @@
                                  $i++;
                              @endphp
                          @endforeach
+                           @else
+                    <div class="w-full flex flex-col items-center gap-5 pb-5">
+                        <a href="{{ route('slider.create') }}" class="font-bold text-blue-500 hover:text-blue-600 py-3">اسلایدر جدید</a>
+                        <div class="text-center text-xs lg:text-sm text-gray-500">
+                            هیچ اسلایدری یافت نشد
+                        </div>
+                    </div>
                      </div>
                  </div>
              </div>
+                @endif
          </div>
      </div>
  @endsection

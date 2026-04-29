@@ -78,12 +78,18 @@
                                      class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
                                      <div class="w-20 lg:w-full">
                                          @if ($request->user->main_image)
-                                             <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
-                                                 src="{{ asset('storage/' . $request->user->main_image) }}">
+                                             <a href="{{ route('user.show', [$request->user->id]) }}">
+                                                 <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
+                                                     src="{{ asset('storage/' . $request->user->main_image) }}">
+                                             </a>
+
                                          @endif
                                          @if (!$request->user->main_image)
-                                             <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
-                                                 src="{{ asset('assets/img/user.png') }}">
+                                             <a href="{{ route('user.show', [$request->user->id]) }}">
+                                                 <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
+                                                     src="{{ asset('assets/img/user.png') }}">
+                                             </a>
+
                                          @endif
                                      </div>
                                  </div>
@@ -103,6 +109,7 @@
                                          @endforeach
                                      </span>
                                  </div> --}}
+
                                  <div class="col-span-3">
                                      <div class="w-[270px] grid grid-cols-2 divide-x divide-[#f1f1f4] items-center">
                                        

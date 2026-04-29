@@ -1,6 +1,7 @@
     @extends('admin.app.panel')
     @section('title', ' تنظیمات اکانت')
     @section('content')
+
         <div class="w-full">
             <div class="pb-5 w-full">
                 <h1 class="text-xl text-center lg:text-start">اکانت من</h1>
@@ -8,7 +9,7 @@
                     class="flex flex-row justify-center lg:justify-start items-center gap-2 text-[#99A1B7] text-[11px] lg:text-sm">
                     {{-- <a href="{{ route('home') }}" class="p-2">خانه</a>
                     <span>/</span> --}}
-                    <a href="{{ route('user.profile', [Auth::user()]) }}">داشبورد</a>
+                    <a href="{{ route('user.profile', [Auth::user()]) }}"> 3234داشبورد</a>
                 </div>
             </div>
 
@@ -26,36 +27,7 @@
                             <div class="div1 text-center lg:text-start">
                                 <sdivong class="text-gray-700">{{ Auth::user()->name }} {{ Auth::user()?->family }}</sdivong>
                             </div>
-                            <div class="div2 hidden">
-                                <ul class="flex flex-col lg:flex-row gap-3 text-[#99A1B7]">
-                                    <li>
-                                        <a href="">توسعه دهنده</a>
-                                    </li>
-                                    <li>
-                                        <a href="">منطقه زندگی</a>
-                                    </li>
-                                    <li>
-                                        <a href="">max@kt.com</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="flex flex-col lg:flex-row gap-2 mt-8 mx-10 lg:mx-0">
-                                <div
-                                    class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px]">
-                                    <span class="font-bold text-blue-500">0</span>
-                                    <span class="text-[#4B5675]">تعداد اسکن ها</span>
-                                </div>
-                                <div
-                                    class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border rounded-[5px]">
-                                    <span class="font-bold text-blue-500">{{ count(Auth::user()->qr_codes) }}</span>
-                                    <span class="text-[#4B5675]"> تعداد QR کد ها </span>
-                                </div>
-                                <div
-                                    class="p-3 border-[#d6dbe8] flex flex-row-reverse px-2 justify-between lg:flex-col border max-sm:border-[1.5px] rounded-[5px]">
-                                    <span class="font-bold text-blue-500">{{ count(Auth::user()->careers) }}</span>
-                                    <span class="text-[#4B5675]">تعداد کسب و کارها</span>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -76,13 +48,13 @@
                                 <div class="flex flex-col lg:flex-row">
                                     <div>تصویر</div>
                                     <div>
-                                        <img class="size-30 rounded-full border-3 shadow__fhoto__insetting__profaill border-white"
-                                            src="{{ asset('storage/' . Auth::user()->main_image) }}" alt="user imag">
+{{--                                        <img class="size-30 rounded-full border-3 shadow__fhoto__insetting__profaill border-white"--}}
+{{--                                            src="{{ asset('storage/' . Auth::user()->main_image) }}" alt="user imag">--}}
                                         <input type="file" name="main_image" class="cursor-pointer">
                                     </div>
                                 </div>
                                 <div class="flex flex-col lg:flex-row">
-                                    <div class="w-full lg:w-2/12 text-sm py-4">نام کامل</div>
+                                    <div class="w-full lg:w-2/12 text-sm py-4">نام و نام خانوادگی</div>
                                     <div class="w-full lg:w-10/12 text-sm py-4 flex flex-col lg:flex-row gap-4">
                                         <input
                                             class="w-full lg:w-1/2 p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] "

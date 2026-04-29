@@ -17,7 +17,7 @@
                                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                          </svg> --}}
                          <input class="outline-none py-2 text-xs bg-gray-100 rounded-md px-3" type="text" name="search"
-                             placeholder=" نام خانوادگی را وارد کنید" id="searchUser">
+                             placeholder="جست و جو ..." id="searchUser">
                      </div>
                      <div class="flex text-xs justify-center items-center rounded-md bg-sky-500 text-white hover:bg-sky-600 w-[60px] cursor-pointer"
                          onclick="searchUser()">
@@ -40,7 +40,7 @@
                          </button>
                      </div>
                  </div>
-                 <div class="w-11/12 mx-auto shadow-md rounded mb-5 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+                 <div class="w-11/12 mx-auto shadow-md rounded mb-5 overflow-x-auto" style="scrollbar-width: thin;">
                      <div
                          class="w-full flex flex-row lg:grid lg:grid-cols-11 items-center divide-x divide-[#f1f1f4] sticky -top-5">
                          <div class="text-center text-xs font-medium text-gray-600 bg-gray-100 h-full">
@@ -111,7 +111,7 @@
                                      class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 w-[500px] lg:w-full text-center">
                                      <span class="block w-24 lg:w-full text-xs">
                                          @foreach ($user->roles as $role)
-                                             {{ $role }} </br>
+                                             {{ $role }} <br>
                                          @endforeach
                                      </span>
                                  </div>
@@ -154,8 +154,10 @@
                                          </ul>
                                          <div
                                              class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                             <a href="{{ route('career.careers', [$user->id]) }}" class="text-sky-700">کسب
-                                                 و کار ها</a>
+                                             <a href="{{ route('career.careers', [$user->id]) }}" class="text-sky-700">
+                                                 رستوران ها
+
+                                                 </a>
                                          </div>
                                      </div>
 
@@ -200,8 +202,8 @@
                              roleTitle += "</br>"
                          })
                          let info = document.createElement("div")
-                         info.innerHTML = `  <div
-                                      class="w-full flex flex-row lg:grid lg:grid-cols-11 items-center divide-x divide-[#f1f1f4]">
+                         info.classList = "w-full flex flex-row lg:grid lg:grid-cols-11 items-center divide-x divide-[#f1f1f4]"
+                         info.innerHTML = `
                                       <div
                                       class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
                                       <div class="w-10 lg:w-full">
@@ -214,24 +216,24 @@
                                       </div>
                                       <div
                                           class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
-                                          <div class="w-20 lg:w-full">
-   
+                                          <a href="${ '{{ url('users/show') }}/'+user.id }" class="block w-20 lg:w-full">
+
                                               <img src="${user.main_image ? '{{ asset('storage/') }}/' + user.main_image : '{{ asset('storage/images/user.png') }}'}"
                                                   alt="user__avtar" class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md">
                                              
-                                          </div>
+                                          </a>
                                       </div>
                                       <div
                                           class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
-                                          <span class="block w-20 lg:w-full">${user.name} ${user.family}</span>
+                                          <a href="${ '{{ url('users/show') }}/'+user.id }" class="block w-20 lg:w-full">${user.name} ${user.family}</a>
                                       </div>
                                       <div
                                           class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
-                                          <span class="block w-20 lg:w-full">${user.phoneNumber}</span>
+                                          <a href="${ '{{ url('users/show') }}/'+user.id }" class="block w-20 lg:w-full">${user.phoneNumber}</a>
                                       </div>
                                       <div
                                         class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
-                                        <span class="block w-20 lg:w-full text-xs">${roleTitle}</span>
+                                        <span class="block w-24 lg:w-full text-xs">${roleTitle}</span>
                                       </div>
                                       
                                 
@@ -265,12 +267,11 @@
                                                   </li>
                                               </ul>
                                               <div class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                                  <a href="{{ url('careers/userCareers/${user.id}') }}" class="text-sky-700">کسب و کار ها</a>
+                                                  <a href="{{ url('careers/userCareers/${user.id}') }}" class="text-sky-700">رستوران ها</a>
                                               </div>
                                           </div>
-                                         
-                                      </div>
-                                  </div>`
+
+                                      </div>`
                          userInfo.append(info)
                      });
 

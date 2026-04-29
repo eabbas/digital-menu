@@ -4,16 +4,16 @@
     <div class="w-full md:w-8/12 mx-auto bg-white flex justify-center p-5">
         <div class="flex flex-col items-center justify-center w-full">
             <h1 class="md:text-2xl font-bold text-base">ابتدا کاربر را ثبت نام کنید</h1>
-            <div class="w-2/3 md:w-1/2 mx-auto flex flex-col">
+            <div class="w-full md:w-1/2 mx-auto flex flex-col">
                 <form action="{{ route('career.storeUser') }}" class="w-full flex flex-col items-center my-6 gap-2 md:gap-3"
                     method="post" id="signupForm">
                     @csrf
-                    <input type="text"
-                        class="w-full p-2 md:p-[9px] placeholder-gray-400 focus:border-[#eb3254] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
-                        name="name" id="name" placeholder="نام" required>
-                    <input type="text"
-                        class="w-full p-2 md:p-[9px] placeholder-gray-400 focus:border-[#eb3254] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
-                        name="family" id="family" placeholder="نام خانوادگی" required>
+                    <!--<input type="text"-->
+                    <!--    class="w-full p-2 md:p-[9px] placeholder-gray-400 focus:border-[#eb3254] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"-->
+                    <!--    name="name" id="name" placeholder="نام" required>-->
+                    <!--<input type="text"-->
+                    <!--    class="w-full p-2 md:p-[9px] placeholder-gray-400 focus:border-[#eb3254] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"-->
+                    <!--    name="family" id="family" placeholder="نام خانوادگی" required>-->
                     <input type="number"
                         class="w-full p-2 md:p-[9px] placeholder-gray-400 focus:border-[#eb3254] mb-0.5 md:mb-1 rounded-[7px] border-1 border-[#DBDFE9] outline-none"
                         name="phoneNumber" placeholder="شماره تلفن" required id="phoneNumber">
@@ -84,7 +84,7 @@
                     },
                     success: function(data) {
                         console.log(data)
-                        if (!data) {
+                        if (!data.flag) {
                             counter()
                             showMessage('open')
                             element.innerHTML = `
@@ -101,6 +101,7 @@
                                 <span class="text-red-500">کاربر قبلا با این شماره ثبت نام کرده است!</span>
                             `
                             message.children[0].appendChild(element)
+                            location.assign("{{ route('career.create') }}/"+data.user.id)
                             setTimeout(() => {
                                 showMessage('close')
                                 // location.assign("{{ route('login') }}")
@@ -213,12 +214,16 @@
                         'code': code.value
                     },
                     success: function(user) {
+                        console.log(user.validate)
                         if (user.validate) {
+
                             showMessage('open')
                             element.innerHTML = `
                                 <span class="text-red-500">کاربر قبلا با این شماره ثبت نام کرده است!</span>
+
                             `
                             message.children[0].appendChild(element)
+                            location.assign("{{ route('career.create') }}/"+user.validate.id)
                             setTimeout(() => {
                                 showMessage('close')
                                 // location.assign("{{ route('login') }}")

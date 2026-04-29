@@ -1,25 +1,4 @@
-let menus = document.querySelectorAll('.menus')
-let menuParent = document.querySelectorAll('.menuParent')
-function showMenu(el, index) {
-    menus.forEach((element) => {
-        element.classList.add('hidden')
-        element.classList.remove('flex')
-        if (index == element.getAttribute('data-menu-id')) {
-            element.classList.remove('hidden')
-            element.classList.add('flex')
-        }
-    });
-    menuParent.forEach((menuCild)=>{
-        menuCild.classList.remove('bg-[#eb3254]')
-        menuCild.classList.add('bg-white')
-        menuCild.classList.remove('text-white')
-        menuCild.classList.add('text-black')
-    })
-    el.classList.remove('bg-white')
-    el.classList.add('bg-[#eb3254]')
-    el.classList.remove('text-black')
-    el.classList.add('text-white')
-}
+
 
 // let menuCategory = document.querySelectorAll('.menu_category')
 // function showItems(index) {
@@ -71,3 +50,5 @@ function calc(el, state) {
 //         element.parentElement.previousElementSibling.children[1].children[2].classList.remove('opacity-0')
 //     }
 // }
+
+

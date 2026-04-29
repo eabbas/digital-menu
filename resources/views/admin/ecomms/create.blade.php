@@ -9,6 +9,7 @@
      <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">فرم اطلاعات فروشگاه  </h1>
         <form action="{{ route('ecomm.store') }}" method="post" enctype='multipart/form-data'>
             @csrf
+            <input type="hidden" name="user_id" value="{{ $user->id }}">
             <div class="min-h-screen flex items-start justify-center">
                 <div class="bg-white rounded-2xl shadow-md p-3 w-full md:w-9/12">
                     <div class="text-center mb-4">
@@ -52,8 +53,8 @@
 
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                    <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='province' placeholder="استان خود را وارد کنید" onchange="changeCity(this)" required>
+                                    <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
+                                        name='province' onchange="changeCity(this)" required>
                                         @foreach ($provinces as $province)
                                             <option value="{{ $province->id }}">{{ $province->title }}</option>
                                         @endforeach
@@ -66,8 +67,12 @@
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">شهر</label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                    <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='city' id="city" placeholder=" شهرخود را وارد کنید"required></select>
+                                    <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
+                                        name='city' id="city" required>
+                                        @foreach($cities as $city)
+                                            <option value="{{ $city->id }}">{{ $city->title }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                              <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -122,7 +127,22 @@
                                         class="w-full px-3 py-1 md:px-2 outline-none text-gray-500"></textarea>
                                 </div>
                             </div>
-
+                             <div class="w-full flex flex-rows gap-3 itmes-center max-md:flex-row max-md:gap-1">
+                                <label class="text-sm mb-1 mt-2.5 flex">فعال</label>
+                                <div
+                                    class="text-[#99A1B7] flex">
+                                    <input class="p-1 w-full focus:outline-none text-sm font-bold mr-2" type="checkbox"
+                                        name='active[]'>
+                                </div>
+                            </div>
+                            <div class="w-full flex flex-rows gap-3 itmes-center max-md:flex-row max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">نمایش در صفحه اول</label>
+                                <div
+                                    class="text-[#99A1B7] flex">
+                                    <input class="p-1 w-full focus:outline-none text-sm font-bold mr-2" type="checkbox"
+                                        name='show_in_home[]'>
+                                </div>
+                            </div>
                         </div>
                         <div class="w-full text-left ">
                             <button type="submit"
@@ -137,7 +157,6 @@
            <script>
             let city = document.getElementById('city')
             function changeCity(el){
-                city.innerHTML = ""
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -151,6 +170,7 @@
                         'id': el.value
                     },
                     success: function(datas){
+                        city.innerHTML = ""
                         datas.forEach(data => {
                             let option = document.createElement('option')
                             option.value = data.id

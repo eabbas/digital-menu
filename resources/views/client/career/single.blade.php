@@ -1,22 +1,20 @@
 @extends('client.document')
 @section('title', 'کسب و کار  ')
 @section('content')
-    <div class="w-full">
-        {{-- <div class="py-5 w-full">
-            
-        </div> --}}
+    <div class="w-11/12 mx-auto">
+
         <div class="flex flex-col border-none rounded-[7px]">
             <div class="flex flex-row justify-between items-center py-3 lg:py-5">
                 <h1 class="lg:text-xl text-center font-bold">{{ $career->title }}</h1>
-                {{-- <div class="flex flex-row justify-center py-3"> --}}
-                    @if (!$career->logo)
-                        <img class="size-10 lg:size-20 rounded-lg"
-                            src="{{ asset('assets/img/user.png') }}" alt="career logo" />
-                    @else
-                        <img class="size-10 lg:size-20 rounded-lg"
-                            src="{{ asset('storage/' . $career->logo) }}" alt="career logo" />
-                    @endif
-                {{-- </div> --}}
+
+{{--                    @if (!$career->logo)--}}
+{{--                        <img class="size-10 lg:size-20 rounded-lg"--}}
+{{--                            src="{{ asset('assets/img/user.png') }}" alt="career logo" />--}}
+{{--                    @else--}}
+{{--                        <img class="size-10 lg:size-20 rounded-lg"--}}
+{{--                            src="{{ asset('storage/' . $career->logo) }}" alt="career logo" />--}}
+{{--                    @endif--}}
+
             </div>
         </div>
         <div class="w-full">
@@ -63,13 +61,13 @@
                     </div>
                     <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
                         <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
-                            توضیحات
+                               شماره تلفن رستوران
                         </div>
                         <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                            {{ $career->description }}
+                            {{ $career->phone}}
                         </div>
                     </div>
-                    
+                   
                     <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
                         <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
                             آدرس
@@ -86,6 +84,16 @@
                             {{ $career->email }}
                         </div>
                     </div>
+                    @if($career->description)
+                    <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
+                        <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
+                            توضیحات
+                        </div>
+                        <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
+                            {{ $career->description }}
+                        </div>
+                    </div>
+                    @endif
                     <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
                         <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
                             پل های ارتباطی

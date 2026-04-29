@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('logo')->nullable();
-            $table->string('city_id');
-            $table->string('address');
+            $table->integer('city_id')->nullable();
+            $table->string('address')->nullable();
             $table->string('social_media')->nullable();
             $table->string('user_id');
             $table->string('email')->nullable();
@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('career_category_id')->default(0);
             $table->string('banner')->nullable();
             $table->integer('qr_count')->default(0);
+            $table->integer('show_in_home')->default(0);
             $table->timestamps();
         });
     }

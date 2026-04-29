@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('ecomm_products', function (Blueprint $table) {
             $table->id();
-             $table->string('title');
-            $table->string('description');
-            $table->string('price');
-            $table->string('discount');
-            $table->tinyInteger('show_in_home')->nullable();
+            $table->string('title');
+            $table->string('description')->nullable();
+            $table->integer('price')->default(0);
+            $table->integer('discount')->default(0);
+            $table->tinyInteger('show_in_home')->default(0);
             $table->string('ecomm_id');
-            $table->string('image_path');
+            $table->string('image_path')->nullable();
             $table->timestamps();
         });
     }

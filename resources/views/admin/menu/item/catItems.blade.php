@@ -9,9 +9,9 @@
             <div>
                 <h1 class="text-sm lg:text-lg font-bold"> لیست آیتم های منو {{ $category->title }} </h1>
             </div>
-            <div>
-                <a href="{{ route('menuCat.list', [$category->menu]) }}" class="text-xs px-2 py-0.5 rounded-sm bg-gray-800 text-white">بازگشت</a>
-            </div>
+            <div class="w-full flex flex-row justify-end p-3">
+            <a href="{{ url()->previous()}}" class="text-xs px-2 py-0.5 rounded-sm bg-gray-500 text-white">بازگشت ←</a>
+               </div>
         </div>
         <form action="{{ route('menuItem.deleteAll') }}" method="post"
             class="flex flex-col p-2 lg:p-5 gap-3 shadow__profaill__list_products rounded-[7px] bg-white">
@@ -58,7 +58,7 @@
                             <span class="block w-24 lg:w-full">دسته</span>
                         </div>
                         <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-4">
-                            <span class="block w-[190px] lg:w-full">عملیات</span>
+                            <span class="block w-[140px] lg:w-full">عملیات</span>
                         </div>
                     </div>
 
@@ -97,8 +97,9 @@
 
 
                                 <div class="col-span-4">
+{{--                                    grid grid-cols-2 divide-x divide-[#f1f1f4] items-center--}}
                                     <div
-                                        class="lg:w-full grid grid-cols-2 divide-x divide-[#f1f1f4] items-center w-[190px]">
+                                        class="lg:w-full w-[140px]">
 
                                         <ul class="text-sm grid grid-cols-3 items-center mt-1 rounded-sm p-1">
 
@@ -137,14 +138,14 @@
                                             </li>
                                         </ul>
 
-                                        @if ($item->parent_id == 0)
-                                            <div
-                                                class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
-                                                <a href="{{ route('menuItem.variants', [$item->id]) }}"
-                                                    class="block text-center hover:text-blue-800 p-1 rounded-sm text-gray-700">ایجاد
-                                                    نوع </a>
-                                            </div>
-                                        @endif
+{{--                                        @if ($item->parent_id == 0)--}}
+{{--                                            <div--}}
+{{--                                                class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">--}}
+{{--                                                <a href="{{ route('menuItem.variants', [$item->id]) }}"--}}
+{{--                                                    class="block text-center hover:text-blue-800 p-1 rounded-sm text-gray-700">ایجاد--}}
+{{--                                                    نوع </a>--}}
+{{--                                            </div>--}}
+{{--                                        @endif--}}
                                     </div>
                                 </div>
                             </div>

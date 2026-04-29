@@ -38,8 +38,13 @@
                                                 <!-- لوگو -->
                                                 <div class="text-sm h-full flex items-center justify-center text-gray-900">
 
-                                                    <img class="size-10 rounded-full object-cover mx-auto"
-                                                        src="{{ asset('storage/' . $page->logo_path) }}">
+                                                    @if($page->logo_path)
+                                                        <img class="size-10 rounded-full object-cover mx-auto"
+                                                            src="{{ asset('storage/' . $page->logo_path) }}">
+                                                    @else
+                                                        <img class="size-10 rounded-full object-cover mx-auto"
+                                                             src="{{ asset('assets/img/user.png') }}">
+                                                    @endif
 
                                                 </div>
                                                 <!-- عنوان -->
@@ -115,7 +120,7 @@
                                             </div>
                                             <div>
                                                 <a href="{{ route('pages.single', [$page]) }}"
-                                                    class="inline-block p-1 lg:p-2 rounded-md bg-gray-100 cursor-pointer">
+                                                    class="inline-block p-1 lg:p-2 rounded-md bg-gray-200 cursor-pointer mt-2">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-4"
                                                         viewBox="0 0 512 512">
                                                         <path

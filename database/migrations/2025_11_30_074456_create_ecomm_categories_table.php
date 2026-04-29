@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('ecomm_categories', function (Blueprint $table) {
             $table->id();
              $table->string('title');
-            $table->string('description');
-            $table->string('parent_id');
-            $table->string('show_in_home');
+            $table->string('description')->nullable();
+            $table->integer('parent_id')->default(0);
+            $table->tinyInteger('show_in_home')->default(0);
             $table->string('image_path')->nullable();
+            $table->string('ecomm_id');
             $table->timestamps();
         });
     }

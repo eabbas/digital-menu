@@ -1,0 +1,2 @@
+[18-Mar-2026 21:46:01 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home/famenuir/public_html/app/Http/Controllers/IntroProductController.php on line 190
+[18-Mar-2026 21:59:49 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home/famenuir/public_html/storage/framework/views/5216c2fefb1b337425ae53e07e7fb706.php on line 63

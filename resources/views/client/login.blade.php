@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   <script src="{{ asset('assets/js/jquery.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
     <script src="{{ asset('assets/js/tailwind.js') }}"></script>
     <script src="{{ asset('assets/js/html5-qrcode.min.js') }}"></script>
@@ -65,15 +65,6 @@
                                     onclick="sendCode()" id="countDown">ارسال کد </button>
                             </div>
                         </div>
-
-
-
-
-
-
-
-
-
 
                         <div class="w-full flex flex-row items-center justify-between" id="loginWay">
                             <a href="{{ route('forget_password') }}"
@@ -258,7 +249,7 @@
         element.classList = "text-sm font-bold flex flex-row items-center justify-center py-3 gap-2 lg:gap-3"
 
         function sendCode() {
-
+            counter()
             let phoneNumber = document.getElementById('phoneNumber')
             if (phoneNumber.value == "") {
                 showMessage('open')
@@ -286,7 +277,7 @@
                     success: function(data) {
                         console.log(data)
                         if (!data) {
-                            counter()
+
                             showMessage('open')
                             element.innerHTML = `
                                 <span>✅</span>

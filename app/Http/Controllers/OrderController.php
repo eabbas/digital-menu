@@ -6,11 +6,16 @@ use App\Models\qr_code;
 use Illuminate\Http\Request;
 use App\Models\order;
 use App\Models\cart;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
     public function store(Request $request){
+        $user_id = Auth::id();
+        if(isset($request->user_id)){
+            $user_id = $request->user_id;
+        }
         $qr_code_id = null;
         if(isset($request->slug)){
             $qr_code_id = qr_code::where('slug', $request->slug)->first()->id;
@@ -18,7 +23,7 @@ class OrderController extends Controller
         $order_code = sprintf('%010d', random_int(0, 9999999999));
         $order_id = order::insertGetId([
             'address_id' => isset($request->address) ? $request->address : null,
-            'user_id' => Auth::id(),
+            'user_id' => $user_id,
             'qr_code_id' => $qr_code_id,
             'career_id' => $request->career_id,
             'status'=>1,
@@ -36,8 +41,13 @@ class OrderController extends Controller
     }
 
     public function show(Request $request){
+        $user_id = Auth::id();
+        if(isset($request->user_id)){
+            $user_id = $request->user_id;
+        }
         $datas = [];
-        foreach(Auth::user()->orders as $order){
+        $orders = order::where('user_id', $user_id)->where('career_id', $request->career_id)->where('status', 1)->orWhere('status', 2)->orWhere('status', 3)->get();
+        foreach($orders as $order){
             if($order->address){
                 $order['address'] =  $order->address;
             }
@@ -62,5 +72,11 @@ class OrderController extends Controller
         $order = order::find($request->order_id);
         $data = $order->carts->load('menu_item');
         return response()->json($data);
+    }
+
+    public function delete(order $order){
+        $order->update(['status'=>4]);
+        $orders = order::where('user_id', Auth::id())->where('career_id', $order->career->id)->where('status', 1)->orWhere('status', 2)->orWhere('status', 3)->get();
+        return response()->json($orders);
     }
 }

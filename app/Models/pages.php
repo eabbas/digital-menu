@@ -13,6 +13,8 @@ class pages extends Model
         'title',
         'subTitle',
         'description',
+        'active',
+        'show_in_home',
         
     ];
      public function socialMedia(){
@@ -41,4 +43,23 @@ class pages extends Model
     {
         return $this->hasMany(page_blocks::class , 'page_id');
     }
+    public function introCats(){
+        return $this->hasMany(intro_category::class, 'page_id');
+    }
+    public function introPros(){
+        return $this->hasMany(intro_product::class, 'page_id');
+    }
+
+    public function careers(){
+         return $this->hasMany(career::class, 'page_id');
+    }
+
+    public function specialUsers(){
+         return $this->belongsToMany(User::class, 'special_users','page_id', 'user_id');
+    }
+    public function page_contactuses(){
+        return $this->hasMany(page_contactus::class , 'page_id');
+    }
+
+
 }

@@ -35,15 +35,15 @@
                         </div>
                         
                         <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
-                            <label class="w-32 text-sm mb-1 mt-2.5 flex">قیمت اصلی:</label>
+                            <label class="text-sm mb-1 mt-2.5 flex">قیمت اصلی (تومان) :</label>
                             <div
                                 class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="w-full focus:outline-none text-sm font-bold mr-2" type="number"
-                                    name='price' placeholder="10000" value="{{ $menu->price }}">
+                                    name='price' placeholder="10000" value="{{ $menu->price }}" required>
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
-                            <label class="w-32 text-sm mb-1 mt-2.5 flex">قیمت تخفیف خورده:</label>
+                            <label class="text-sm mb-1 mt-2.5 flex">قیمت تخفیف خورده (تومان) :</label>
                             <div
                                 class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="w-full focus:outline-none text-sm font-bold mr-2" type="number"
@@ -51,19 +51,19 @@
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
-                            <label class="w-full text-sm mb-1 mt-2.5 flex">زمان تقریبی آماده شدن:</label>
+                            <label class="w-full text-sm mb-1 mt-2.5 flex">زمان تقریبی آماده شدن (دقیقه) :</label>
                             <div class="p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="w-full focus:outline-none text-sm font-bold mr-2" type="number" name='duration' placeholder="دقیقه" value="{{ $menu->duration }}">
                             </div>
                         </div>
-                        <div class="w-full flex flex-row items-center gap-3 max-md:gap-1">
-                        
-                                <input class="size-4 focus:outline-none text-sm font-bold cursor-pointer" type="checkbox"
-                                    name='customizable' value="1"
-                                    @if ($menu->customizable) {{ 'checked' }} @endif>
-                            
-                            <label class="text-sm mb-1 mt-2.5 flex">قابلیت شخصی سازی دارد:</label>
-                        </div>
+{{--                        <div class="w-full flex flex-row items-center gap-3 max-md:gap-1">--}}
+{{--                        --}}
+{{--                                <input class="size-4 focus:outline-none text-sm font-bold cursor-pointer" type="checkbox"--}}
+{{--                                    name='customizable' value="1"--}}
+{{--                                    @if ($menu->customizable) {{ 'checked' }} @endif>--}}
+{{--                            --}}
+{{--                            <label class="text-sm mb-1 mt-2.5 flex">قابلیت شخصی سازی دارد:</label>--}}
+{{--                        </div>--}}
                         <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1 lg:col-span-2">
                             <label class="w-32 text-sm mb-1 mt-2.5 flex">توضیحات:</label>
                             <div
@@ -73,82 +73,82 @@
                             </div>
                         </div>
                     </div>
-                    <div class="w-full p-3 bg-gray-100 rounded-lg">
-                        <div class="flex flex-col" id="ingredients">
-                            <?php
-                            $num = 0;
-                            ?>
+{{--                    <div class="w-full p-3 bg-gray-100 rounded-lg">--}}
+{{--                        <div class="flex flex-col" id="ingredients">--}}
+{{--                            <?php--}}
+{{--                            $num = 0;--}}
+{{--                            ?>--}}
 
-                            @foreach ($menu->ingredients as $ingredient)
-                                <div class="w-full flex flex-col my-4 bg-gray-200 p-3 rounded-lg">
-                                    <div class="flex justify-end pb-4">
-                                        <button type="button" onclick="removeIngre(this)"
-                                            class="p-1 rounded-md bg-red-300 hover:bg-red-500 text-sm cursor-pointer hover:text-white">حذف</button>
-                                    </div>
-                                    <div class="flex lg:flex-row flex-col gap-3">
-                                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                            <label class="w-32 text-sm mb-1 mt-2.5 flex flex-row">
-                                                <span>عنوان :</span>
-                                                <span class="text-rose-500">*</span>
-                                            </label>
+{{--                            @foreach ($menu->ingredients as $ingredient)--}}
+{{--                                <div class="w-full flex flex-col my-4 bg-gray-200 p-3 rounded-lg">--}}
+{{--                                    <div class="flex justify-end pb-4">--}}
+{{--                                        <button type="button" onclick="removeIngre(this)"--}}
+{{--                                            class="p-1 rounded-md bg-red-300 hover:bg-red-500 text-sm cursor-pointer hover:text-white">حذف</button>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="flex lg:flex-row flex-col gap-3">--}}
+{{--                                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">--}}
+{{--                                            <label class="w-32 text-sm mb-1 mt-2.5 flex flex-row">--}}
+{{--                                                <span>عنوان :</span>--}}
+{{--                                                <span class="text-rose-500">*</span>--}}
+{{--                                            </label>--}}
 
-                                            <div
-                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
-                                                    type="text" placeholder="عنوان"
-                                                    name="ingredients[{{ $num }}][title]" required
-                                                    value="{{ $ingredient->title }}">
-                                            </div>
-                                        </div>
+{{--                                            <div--}}
+{{--                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">--}}
+{{--                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2"--}}
+{{--                                                    type="text" placeholder="عنوان"--}}
+{{--                                                    name="ingredients[{{ $num }}][title]" required--}}
+{{--                                                    value="{{ $ingredient->title }}">--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
 
-                                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                            <label class="w-32 text-sm mb-1 mt-2.5 flex">توضیحات</label>
-                                            <div
-                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
-                                                    type="text" name='ingredients[{{ $num }}][description]'
-                                                    placeholder="توضیحات " value="{{ $ingredient->description }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex lg:flex-row flex-col gap-3">
-                                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                            <label class="w-32 text-sm mb-1 mt-2.5 flex">قیمت واحد</label>
-                                            <div
-                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="number" name='ingredients[{{ $num }}][price_per_unit]' placeholder="قیمت واحد " value="{{ $ingredient->price_per_unit }}">
-                                            </div>
-                                        </div>
-                                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                            <label class="w-32 text-sm mb-1 mt-2.5 flex">تصویر</label>
-                                            <div
-                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
-                                                    type="file" name='ingredients[{{ $num }}][image]'
-                                                    placeholder="تصویر " value="{{ $ingredient->description }}">
-                                            </div>
-                                        </div>
-                                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                            <label class="w-32 text-sm mb-1 mt-2.5 flex">بیشترین حد مجاز</label>
-                                            <div
-                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="number" name='ingredients[{{ $num }}][max_unit_amount]' placeholder="x واحد" value="{{ $ingredient->max_unit_amount }}">
-                                            </div>
-                                        </div>
-                                    </div>
+{{--                                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">--}}
+{{--                                            <label class="w-32 text-sm mb-1 mt-2.5 flex">توضیحات</label>--}}
+{{--                                            <div--}}
+{{--                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">--}}
+{{--                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2"--}}
+{{--                                                    type="text" name='ingredients[{{ $num }}][description]'--}}
+{{--                                                    placeholder="توضیحات " value="{{ $ingredient->description }}">--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="flex lg:flex-row flex-col gap-3">--}}
+{{--                                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">--}}
+{{--                                            <label class="w-32 text-sm mb-1 mt-2.5 flex">قیمت واحد</label>--}}
+{{--                                            <div--}}
+{{--                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">--}}
+{{--                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="number" name='ingredients[{{ $num }}][price_per_unit]' placeholder="قیمت واحد " value="{{ $ingredient->price_per_unit }}">--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">--}}
+{{--                                            <label class="w-32 text-sm mb-1 mt-2.5 flex">تصویر</label>--}}
+{{--                                            <div--}}
+{{--                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">--}}
+{{--                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2"--}}
+{{--                                                    type="file" name='ingredients[{{ $num }}][image]'--}}
+{{--                                                    placeholder="تصویر " value="{{ $ingredient->description }}">--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">--}}
+{{--                                            <label class="w-32 text-sm mb-1 mt-2.5 flex">بیشترین حد مجاز</label>--}}
+{{--                                            <div--}}
+{{--                                                class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">--}}
+{{--                                                <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="number" name='ingredients[{{ $num }}][max_unit_amount]' placeholder="x واحد" value="{{ $ingredient->max_unit_amount }}">--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-                                </div>
-                                <?php
-                                $num++;
-                                ?>
-                            @endforeach
-                        </div>
-                        <div class="text-end">
-                            <button type="button" onclick="addIngre()"
-                                class="px-5 py-1 bg-sky-500 hover:bg-blue-500 text-white rounded-lg cursor-pointer">افزودن
-                                مواد+</button>
-                        </div>
-                    </div>
+{{--                                </div>--}}
+{{--                                <?php--}}
+{{--                                $num++;--}}
+{{--                                ?>--}}
+{{--                            @endforeach--}}
+{{--                        </div>--}}
+{{--                        <div class="text-end">--}}
+{{--                            <button type="button" onclick="addIngre()"--}}
+{{--                                class="px-5 py-1 bg-sky-500 hover:bg-blue-500 text-white rounded-lg cursor-pointer">افزودن--}}
+{{--                                مواد+</button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <div class="w-full text-left">
                         <button type="submit"
                             class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
@@ -160,7 +160,7 @@
         </div>
     </form>
     <script>
-        let count = <?php echo $num; ?>;
+        // let count = <?php // echo $num; ?>;
     </script>
     <script src="{{ asset('assets/js/menuItem.js') }}"></script>
 @endsection

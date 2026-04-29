@@ -4,23 +4,21 @@
         <div class="w-full flex flex-col pb-4">
          <div class="bg-white rounded-lg">
              <div class="pb-4">
-                 <h2 class="text-lg font-bold text-gray-800 p-2.5">لیست درباره ما </h2>
+                 <h2 class="text-lg font-bold text-gray-800 p-2.5"> درباره ما </h2>
              </div>
              <div class="flex flex-col gap-5">
-                 <div class="w-2/3 mx-auto shadow-md rounded mb-5">
+                 <div class="max-w-10/12 min-w-10/12 mx-auto shadow-md rounded mb-5 overflow-auto">
                      <div
-                         class="w-full flex flex-row lg:grid lg:grid-cols-3 items-center divide-x divide-[#f1f1f4] sticky -top-5">
+                         class="w-full grid grid-cols-3 items-center divide-x divide-[#f1f1f4] sticky -top-5">
                          <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
-                             <span class="block w-20 lg:w-full">ردیف</span>
+                             <span class="block w-full">ردیف</span>
                          </div>
                          <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
-                             <span class="block w-20 lg:w-full">عنوان</span>
+                             <span class="block w-full">عنوان</span>
                          </div>
-                         {{-- <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
-                             <span class="block w-20 lg:w-full">توضیحات</span>
-                         </div> --}}
+
                          <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
-                             <span class="block w-24 lg:w-full">عملیات</span>
+                             <span class="block w-full">عملیات</span>
                          </div>
 
                      </div>
@@ -31,21 +29,17 @@
 
                          @foreach ($allAboutUs as $aboutUs)
                              <div
-                                 class="w-full flex flex-row lg:grid lg:grid-cols-3 items-center divide-x divide-[#f1f1f4]">
+                                 class="w-full grid grid-cols-3 items-center divide-x divide-[#f1f1f4]">
                                  <div
                                      class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
-                                     <span class="block w-20 lg:w-full">{{ $i }}</span>
+                                     <span class="block w-full">{{ $i }}</span>
                                  </div>
                                  <div
                                      class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900">
-                                     <div class="w-20 lg:w-full">
-                                        <span class="block w-20 lg:w-full text-center">{{ $aboutUs->title }}</span>
-                                     </div>
+
+                                        <span class="block w-full text-center">{{ $aboutUs->title }}</span>
+
                                  </div>
-                                 {{-- <div
-                                     class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
-                                     <span class="block w-20 lg:w-full">{{ $aboutUs->description }}</span>
-                                 </div> --}}
 
 
                                  <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-2">

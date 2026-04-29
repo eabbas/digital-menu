@@ -14,13 +14,15 @@ return new class extends Migration
         Schema::create('ecomms', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-             $table->string('logo')->nullable();
-             $table->string('banner')->nullable();
-            $table->string('description');
+            $table->string('logo')->nullable();
+            $table->string('banner')->nullable();
+            $table->string('description')->nullable();
             $table->string('title');
-            $table->string('address');
-            $table->string('user_id');
+            $table->string('address')->nullable();
+            $table->integer('user_id');
             $table->string('email')->nullable();
+            $table->integer('city_id');
+            $table->string('social_media')->nullable();
             
         });
     }

@@ -50,6 +50,22 @@
                                         type="file" name='cover_path' title="کاور"required>
                                 </div>
                             </div>
+                             <div class="w-full flex flex-rows gap-3 itmes-center max-md:flex-row max-md:gap-1">
+                                <label class="text-sm mb-1 mt-2.5 flex">فعال</label>
+                                <div
+                                    class="text-[#99A1B7] flex">
+                                    <input class="p-1 w-full focus:outline-none text-sm font-bold mr-2" type="checkbox"
+                                        name='active[]'>
+                                </div>
+                            </div>
+                            <div class="w-full flex flex-rows gap-3 itmes-center max-md:flex-row max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">نمایش در صفحه اول</label>
+                                <div
+                                    class="text-[#99A1B7] flex">
+                                    <input class="p-1 w-full focus:outline-none text-sm font-bold mr-2" type="checkbox"
+                                        name='show_in_home[]'>
+                                </div>
+                            </div>
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1 lg:col-span-2">
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">توضیحات</label>
                                 <div
