@@ -1021,8 +1021,13 @@ class UserController extends Controller
 
     }
     public function editProfile(Request $request){
-        return response()->json($request->all());
-     
+        // return response()->json($request->all());
+        $name = $request->image->getClientOriginalName();
+        $fullName = time().'_'.$name;
+        $path = $request->file('image')->storeAs('images', $fullName, 'public');
+        Auth::user()->main_image = $path;
+        Auth::user()->save();
+        return response()->json(Auth::user());
     }
 
 
