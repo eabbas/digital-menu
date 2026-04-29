@@ -498,7 +498,7 @@
         <div class="w-full lg:w-[calc(100%-265px)] float-end h-full flex flex-row justify-center items-center">
             <div class="p-5 rounded-lg bg-white relative -translate-y-20 lg:translate-y-0">
                     <span class="flex justify-center items-center size-8 bg-white rounded-full absolute -top-3 -right-3 cursor-pointer"
-                          onclick="showProfile(this, 'close')">❌</span>
+                          onchange="showProfile(this, 'close')">❌</span>
                 <img src=""
                      class="max-w-[300px] max-h-[300px] lg:max-w-[400px] lg:max-h-[400px] object-cover rounded-sm"
                      id="profileImage" alt="">
@@ -526,6 +526,41 @@
                 block.classList.add('opacity-0')
             }
         }
+        function editProfileImage(el){
+            console.log(el.files[0])
+            let image = document.getElementById('edit').files[0]
+            let prof = document.getElementById('prof')
+            let formData = new FormData()
+
+            if (image) {
+                    formData.append('image', image);
+            }
+
+            formData.append('_token', "{{ csrf_token() }}")
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                }
+            })
+            $.ajax({
+                url: "{{ route('user.editProfile') }}",
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(data){
+                    console.log(data)
+                    prof.children[0].setAttribute('src', "{{ asset('storage/') }}/"+data.image)
+
+                },
+                error: function(){
+                    console.log('errorrrr');
+                }
+            });
+        }
+        
+    
 
         let editIcon = `
                     <span

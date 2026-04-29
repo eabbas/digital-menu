@@ -201,6 +201,7 @@ Route::group([
     Route::get('/deleteRequest/{requests}', 'deleteRequest')->name('deleteRequest');
     Route::get('/acceptRequest/{requests}', 'acceptRequest')->name('acceptRequest');
     Route::post('/editInfo', 'editInfo')->name('editInfo');
+    Route::post('/editProfile', 'editProfile')->name('editProfile');
 });
 
 Route::group([
