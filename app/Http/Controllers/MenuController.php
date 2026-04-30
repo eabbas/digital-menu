@@ -153,27 +153,27 @@ class MenuController extends Controller
                         foreach ($category->menu_items as $item) {
                             if (count($item->ingredients)) {
                                 foreach ($item->ingredients as $ingredients) {
-                                      if ($ingredients->image) {
+                                    if ($ingredients->image) {
                                         Storage::disk('public')->delete($ingredients->image);
-                                        }
+                                    }
                                     $ingredients->delete();
                                 }
                             }
                             if ($item->image) {
                                 Storage::disk('public')->delete($item->image);
-                                }
+                            }
                             $item->delete();
                         }
                     }
-                     if ($category->image) {
+                    if ($category->image) {
                         Storage::disk('public')->delete($category->image);
-                        }
+                    }
                     $category->delete();
                 }
             }
-              if ($menu->banner) {
+            if ($menu->banner) {
                 Storage::disk('public')->delete($menu->banner);
-                }
+            }
             $menu->delete();
             return response()->json('ok');
         }
@@ -189,27 +189,27 @@ class MenuController extends Controller
                     foreach ($category->menu_items as $item) {
                         if (count($item->ingredients)) {
                             foreach ($item->ingredients as $ingredients) {
-                                  if ($ingredients->image) {
-                                        Storage::disk('public')->delete($ingredients->image);
-                                        }
+                                if ($ingredients->image) {
+                                    Storage::disk('public')->delete($ingredients->image);
+                                }
                                 $ingredients->delete();
                             }
                         }
                         if ($item->image) {
-                                Storage::disk('public')->delete($item->image);
-                                }
+                            Storage::disk('public')->delete($item->image);
+                        }
                         $item->delete();
                     }
                 }
-                 if ($category->image) {
-                        Storage::disk('public')->delete($category->image);
-                        }
+                if ($category->image) {
+                    Storage::disk('public')->delete($category->image);
+                }
                 $category->delete();
             }
         }
-          if ($menu->banner) {
-                Storage::disk('public')->delete($menu->banner);
-                }
+        if ($menu->banner) {
+            Storage::disk('public')->delete($menu->banner);
+        }
         $menu->delete();
         if (Auth::user()->role[0]->title == 'admin') {
             return to_route('career.menus', [$menu->career]);
@@ -237,18 +237,19 @@ class MenuController extends Controller
 
     public function showMenuClient(menu $menu)
     {
-//        return view('admin.menu.menu', ['menu' => $menu]);
+
         $categories = $menu->load(['menu_categories' => function ($query) {
             $query->with('menu_items')->get();
         }]);
-        foreach ($menu->menu_categories as $category) {
+
+        foreach ($categories->menu_categories as $category) {
             foreach ($category->menu_items as $item) {
                 if ($item->discount != 0) {
                     $campare = $item->price - $item->discount;
                     $x = $campare / $item->price;
                     $item['percent'] = intval($x * 100);
-                    $item['cart'] = cart::where('user_id', Auth::id())->where('order_id', null)->where('menu_item_id', $item->id)->where('career_id', $menu->career->id)->first();
                 }
+                $item['cart'] = cart::where('user_id', Auth::id())->where('order_id', null)->where('menu_item_id', $item->id)->where('career_id', $menu->career->id)->first();
             }
         }
         $user = null;
@@ -287,33 +288,34 @@ class MenuController extends Controller
                         foreach ($category->menu_items as $item) {
                             if (count($item->ingredients)) {
                                 foreach ($item->ingredients as $ingredients) {
-                                      if ($ingredients->image) {
+                                    if ($ingredients->image) {
                                         Storage::disk('public')->delete($ingredients->image);
-                                        }
+                                    }
                                     $ingredients->delete();
                                 }
                             }
                             if ($item->image) {
                                 Storage::disk('public')->delete($item->image);
-                                }
+                            }
                             $item->delete();
                         }
                     }
-                     if ($category->image) {
+                    if ($category->image) {
                         Storage::disk('public')->delete($category->image);
-                        }
+                    }
                     $category->delete();
                 }
             }
-              if ($menu->banner) {
+            if ($menu->banner) {
                 Storage::disk('public')->delete($menu->banner);
-                }
+            }
             $menu->delete();
         }
         return redirect()->back();
     }
 
-    public function showCats(menu $menu){
+    public function showCats(menu $menu)
+    {
         return response()->json($menu->menu_categories);
     }
 
