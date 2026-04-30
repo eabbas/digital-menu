@@ -15,6 +15,10 @@ Route::get('/scratch', function(Request $request) {
 });
 
 Route::post('/special-user-store', [SpecialUserController::class, 'store']);
+// Route::post('/special-user-page/{page_id}', [SpecialUserController::class, 'userPage']);
+// Route::get('/special-user-page/{page_id}', function(){
+//     return "صفحه باشگاه مشتریان";
+// });
 Route::post('/cart/store', [CartController::class, 'store']);
 Route::post('/cart/update', [CartController::class, 'update']);
 Route::post('cart/showCarts', [CartController::class, 'showCarts']);

@@ -517,7 +517,7 @@
 
     {{--"{{ Auth::check() }}"--}}
     function addSpecialCustomer(el , type){
-    
+        // console.log("{{ $page->id }}")
         let text = el.innerText
         if(flag){
             $.ajaxSetup({
@@ -560,6 +560,9 @@
                             showMessage('close')
                         }, 2000)
                     }
+                    
+                    // location.assign("{{ url('/api/special-user-page/'. $page->id) }}")
+                    location.assign("{{ route('special-user.page', [$page->id]) }}")
                 },
                 error: function (){
                     showMessage('open')
