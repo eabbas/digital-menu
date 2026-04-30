@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class SpecialUserController extends Controller
 {
     public function store(Request $request){
-//        return response()->json($request->all());
+    //    return response()->json($request->all());
         $user_id = 0;
         $flag = true;
         if(isset($request->user_id)){
@@ -20,7 +20,8 @@ class SpecialUserController extends Controller
         if(!isset($request->user_id)){
             $user_id = Auth::id();
         }
-        $datas = specialUser::where('page_id', $request->input('page_id'))->get();
+        // $datas = specialUser::where('page_id', $request->input('page_id'))->get();
+        $datas = specialUser::where('type', $request->type)->get();
         $idArr = $datas->pluck('user_id')->toArray();
         if(in_array($user_id, $idArr)){
             $flag = false;
