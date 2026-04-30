@@ -527,13 +527,12 @@
             }
         }
         function editProfileImage(el){
-            console.log(el.files[0])
-            let image = document.getElementById('edit').files[0]
+            let image = document.getElementById('edit')
             let prof = document.getElementById('prof')
             let formData = new FormData()
 
             if (image) {
-                    formData.append('image', image);
+                formData.append('image', image.files[0]);
             }
 
             formData.append('_token', "{{ csrf_token() }}")
@@ -550,12 +549,10 @@
                 contentType: false,
                 processData: false,
                 success: function(data){
-                    console.log(data)
-                    prof.children[0].setAttribute('src', "{{ asset('storage/') }}/"+data.image)
-
+                    prof.children[0].setAttribute('src', "{{ asset('storage/') }}/"+data.main_image)
                 },
                 error: function(){
-                    console.log('errorrrr');
+                    console.log('error');
                 }
             });
         }
