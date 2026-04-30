@@ -21,7 +21,7 @@
         <div class="w-full">
             <a href="{{ route('home') }}"
                class="block w-full py-3 text-center font-bold text-3xl text-white border-b border-[darkslategray]">
-                famenu.ir
+                ringaa.ir
             </a>
         </div>
         <div class="py-5 h-[90%] overflow-y-auto flex flex-col gap-5" style="scrollbar-width: none;">
