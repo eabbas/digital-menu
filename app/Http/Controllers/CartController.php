@@ -13,7 +13,7 @@ class CartController extends Controller
 {
     public function store(Request $request)
     {
-//        return response()->json($request->all());
+    //    return response()->json($request->all());
         $user_id = Auth::id();
         if (!Auth::check()) {
             $user_id = $request->input('user_id');
@@ -25,12 +25,12 @@ class CartController extends Controller
             'user_id' => $user_id,
             'quantity' => $request->quantity ? $request->quantity : 1,
         ]);
-//        dd($cart);
         return response()->json($cart);
     }
 
     function update(Request $request)
     {
+        // return response()->json($request->all());
         $user_id = $request->input('user_id');
         if (Auth::check()) {
             $user_id = Auth::id();
