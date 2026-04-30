@@ -54,17 +54,6 @@ Route::get('/robot', function () {
     return view('abbasScratch.index');
 });
 
-Route::get('/test', function () {
-    $careers = [];
-    foreach(career::all() as $career){
-        $careers[] = $career->load(['menus'=>function($query){
-            $query->with('menu_categories')->get();
-        }]);
-    }
-    dd($careers);
-
-});
-
 ///suggestion
 Route::group([
     'prefix' => 'suggestion',
