@@ -76,7 +76,8 @@
             <div class="w-full bg-white rounded-md">
                 <div class="w-11/12 mx-auto flex flex-row items-center gap-8 pb-3 py-4 overflow-x-auto bg-white"
                      style="scrollbar-width: thin;"
-                     id="menuList">
+                     {{-- edit by topol --}}
+                     id="menuList1">
                     @foreach ($career->menus as $menu)
                         <div class="relative selectItems @if($career->menus[0] == $menu) selected @endif allMenus min-w-20 min-h-20"
                              data-menu-id="{{ $menu->id }}">
@@ -528,7 +529,7 @@
 
     <script>
 
-        let menuList = document.getElementById('menuList')
+        let menuList = document.getElementById('menuList1')
         let selectItems = document.querySelectorAll('.allMenus')
         let newCat = document.getElementById('newCat')
         let newItem = document.getElementById('newItem')
@@ -586,6 +587,7 @@
         }
 
         function submitMenuForm(el) {
+
             let selectItems = document.querySelectorAll('.allMenus')
             let text = el.innerText
             if (menuTitle.value == "") {
@@ -650,7 +652,9 @@
                                 </div>
                             </div>
                             `
-                            menuList.appendChild(element)
+                            console.log(menuList.innerHTML)
+                        
+                            menuList.append(element)
                             console.log(element)
                             closeForm()
                         },

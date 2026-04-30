@@ -1,7 +1,7 @@
 @extends('admin.app.panel')
 @section('title')
 {{ $career->title }}
-    @dd('moraba')
+    {{-- @dd('moraba') --}}
 @endsection
 @section('content')
     <div class="w-full">
@@ -106,6 +106,7 @@
                             {{ $career->province_city ? $career->province_city->province->title : "" }} , {{ $career->province_city ? $career->province_city->title : "" }} , {{ $career->address && $career->address }}
                         </div>
                     </div>
+                    @if($career->email!=null)
                     <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
                         <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
                             ایمیل
@@ -114,6 +115,7 @@
                             {{ $career->email }}
                         </div>
                     </div>
+                    @endif
                     <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
                         <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
                             شماره تلفن رستوران
@@ -148,24 +150,37 @@
                         </div>
                     </div>
                     @endif
+                    {{-- @dd(json_decode($career->social_media)) --}}
                     @if(json_decode($career->social_media))
-                        <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
-                            <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
-                                پل های ارتباطی
-                            </div>
-                            <div class="w-1/2 flex flex-col items-center gap-3 pr-3 lg:pr-0">
-                                @foreach (json_decode($career->social_media) as $media => $link)
-                                    <div class="w-full flex flex-col lg:flex-row">
-                                        <div class="w-1/2 text-xs lg:text-sm text-gray-400">
-                                            {{ $media }}
+                    <div class='hidden'>{{$x=0}}</div>
+                        @foreach (json_decode($career->social_media) as $media => $link)
+                            @if($link==null)
+                                <div class='hidden'>{{$x++}}</div>
+                            @endif
+                        @endforeach
+                        {{-- @dd($x) --}}
+                        @if($x!=3)
+                            <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
+                                <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
+                                    پل های ارتباطی
+                                </div>
+                                <div class="w-1/2 flex flex-col items-center gap-3 pr-3 lg:pr-0">
+                                    @foreach (json_decode($career->social_media) as $media => $link)
+                                    {{-- @dd( $link!=null) --}}
+                                        <div class="w-full flex flex-col lg:flex-row">
+                                            @if($link!=null)
+                                                <div class="w-1/2 text-xs lg:text-sm text-gray-400">
+                                                    {{ $media }}
+                                                </div>
+                                                <div class="w-1/2 text-sm lg:text-base">
+                                                    {{ $link }}
+                                                </div>
+                                            @endif    
                                         </div>
-                                        <div class="w-1/2 text-sm lg:text-base">
-                                            {{ $link }}
-                                        </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     @endif
                 </div>
             </div>
