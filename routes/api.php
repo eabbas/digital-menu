@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SpecialUserController;
@@ -21,3 +22,4 @@ Route::post('cart/showCarts', [CartController::class, 'showCarts']);
 Route::post('cart/delete', [CartController::class, 'delete']);
 Route::post('/order/show', [OrderController::class, 'show']);
 Route::post('/order/store', [OrderController::class, 'store']);
+Route::post('/user/setAddress' , [UserController::class , 'setAddress']);

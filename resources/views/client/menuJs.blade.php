@@ -245,7 +245,7 @@
                                     inner += `-`
                                 }
                                 if (item.cart.quantity == 1) {
-                                    `
+                                    inner += `
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                      class="size-[14px]" viewBox="0 0 448 512">
                                     <path fill="white"
@@ -253,14 +253,14 @@
                                 </svg>
                                 `
                                 }
-                                `
-                                </button>
-                            </div>
-                        `
+                                inner +=  `
+                                    </button>
+                                </div>
+                            `
                             }
                             inner += `
-                        </div>
-                    </div>
+                                    </div>
+                                </div>
                                 `
                             div.innerHTML = inner
                             menuItemList.appendChild(div)

@@ -817,8 +817,12 @@ class UserController extends Controller
 
     public function setAddress(Request $request)
     {
+        $user_id = Auth::id();
+        if(isset($request->user_id)){
+            $user_id = $request->user_id;
+        }
         $address_id = address::create([
-            'user_id' => Auth::id(),
+            'user_id' => $user_id,
             'address' => $request->address,
         ]);
         $address = address::find($address_id);

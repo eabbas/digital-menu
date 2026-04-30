@@ -37,33 +37,35 @@ class MenuCategoryController extends Controller
         return to_route('menuCat.list', [$request->menu_id]);
     }
 
-    public function storeFront(Request $request){
+    public function storeFront(Request $request)
+    {
         $path = null;
-        if(isset($request->image)){
+        if (isset($request->image)) {
             $name = $request->image->getClientOriginalName();
-            $fullName = time()."_".$name;
+            $fullName = time() . "_" . $name;
             $path = $request->file('image')->storeAs('images', $fullName, 'public');
         }
         $category = menu_category::create([
-            'title'=>$request->title,
-            'image'=>$path,
-            'description'=>isset($request->description) ? $request->description : null,
-            'menu_id'=>$request->menu_id
+            'title' => $request->title,
+            'image' => $path,
+            'description' => isset($request->description) ? $request->description : null,
+            'menu_id' => $request->menu_id
         ]);
         return response()->json($category);
     }
 
-    public function updateFront(Request $request){
+    public function updateFront(Request $request)
+    {
 //        return response()->json(555);
         $path = null;
-        if(isset($request->image)){
+        if (isset($request->image)) {
             $name = $request->image->getClientOriginalName();
-            $fullName = time()."_".$name;
+            $fullName = time() . "_" . $name;
             $path = $request->file('image')->storeAs('images', $fullName, 'public');
         }
         $category = menu_category::find($request->category_id);
         $category->title = $request->title;
-        if(isset($request->menu_id)){
+        if (isset($request->menu_id)) {
             $category->menu_id = $request->menu_id;
         }
         $category->description = isset($request->description) ? $request->description : null;
@@ -72,7 +74,8 @@ class MenuCategoryController extends Controller
         return response()->json($category);
     }
 
-    public function deleteFront(menu_category $category){
+    public function deleteFront(menu_category $category)
+    {
         if (count($category->menu_items)) {
             foreach ($category->menu_items as $menu_item) {
                 if (count($menu_item->ingredients)) {
@@ -92,11 +95,12 @@ class MenuCategoryController extends Controller
         return response()->json('ok');
     }
 
-    public function items(menu_category $category){
+    public function items(menu_category $category)
+    {
         $items = $category->menu_items;
 
         foreach ($category->menu_items as $item) {
-            if($item->discount != 0){
+            if ($item->discount != 0) {
                 $campare = $item->price - $item->discount;
                 $x = $campare / $item->price;
                 $item['percent'] = intval($x * 100);
@@ -105,16 +109,17 @@ class MenuCategoryController extends Controller
         return response()->json($items);
     }
 
-    public function clientItems(menu_category $category){
+    public function clientItems(menu_category $category)
+    {
         $items = $category->menu_items;
 
         foreach ($category->menu_items as $item) {
-            if($item->discount != 0){
+            if ($item->discount != 0) {
                 $campare = $item->price - $item->discount;
                 $x = $campare / $item->price;
                 $item['percent'] = intval($x * 100);
-                $item['cart'] = cart::where('user_id', Auth::id())->where('order_id', null)->where('menu_item_id', $item->id)->where('career_id', $category->menu->career->id)->first();
             }
+            $item['cart'] = cart::where('user_id', Auth::id())->where('order_id', null)->where('menu_item_id', $item->id)->where('career_id', $category->menu->career->id)->first();
         }
         return response()->json($items);
     }
@@ -124,7 +129,8 @@ class MenuCategoryController extends Controller
         return view('admin.menu.category.index', ['menu' => $menu]);
     }
 
-    public function editFront(menu_category $category){
+    public function editFront(menu_category $category)
+    {
         return response()->json($category);
     }
 
@@ -173,12 +179,13 @@ class MenuCategoryController extends Controller
         $menu_category->delete();
         return to_route('menuCat.list', [$menu_id]);
     }
+
     public function deleteAll(Request $request)
     {
         if (!isset($request->menuCats)) {
             return redirect()->back();
         }
-        foreach($request->menuCats as $menuCat_id){
+        foreach ($request->menuCats as $menuCat_id) {
             $menu_category = menu_category::find($menuCat_id);
             $menu_id = $menu_category->menu->id;
             if (count($menu_category->menu_items)) {

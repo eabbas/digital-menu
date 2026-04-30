@@ -590,11 +590,12 @@
                     }
                 })
                 $.ajax({
-                    url: "{{ route('user.setAddress') }}",
+                    url: "{{ url('/api/user/setAddress') }}",
                     type: "POST",
                     dataType: "json",
                     data: {
-                        'address': newAddress.value
+                        'address': newAddress.value,
+                        'user_id': userId
                     },
                     success: function (data) {
                         newAddress.value = ""
@@ -1102,7 +1103,6 @@
                     'user_id': userId
                 },
                 success: function (data) {
-                   
                     count.forEach((item) => {
                         console.log(item)
                         item.innerHTML = `
@@ -1131,6 +1131,7 @@
                         showMessage('close')
                     }, 2000)
                     closeSection()
+                    showMenu(firstMenu, "{{ $menu_id }}")
                 },
                 error: function () {
                     showMessage('open')
