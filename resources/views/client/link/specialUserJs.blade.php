@@ -517,7 +517,7 @@
 
     {{--"{{ Auth::check() }}"--}}
     function addSpecialCustomer(el , type){
-        console.log(type)
+    
         let text = el.innerText
         if(flag){
             $.ajaxSetup({
