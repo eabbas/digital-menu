@@ -38,11 +38,13 @@ class CartController extends Controller
         $cart = cart::where(['career_id' => $request->career_id, 'menu_item_id' => $request->menu_item_id, 'user_id' => $user_id, 'order_id' => null])->first();
         $cart->quantity = $request->quantity ? $request->quantity : 1;
         $cart->save();
-        return response()->json([$cart, $cart->quantity, $request->quantity]);
+//        return response()->json([$cart, $cart->quantity, $request->quantity]);
+        return response()->json($cart);
     }
 
     public function showCarts(Request $request)
     {
+//        return response()->json($request->all());
         $user = null;
         if (isset($request->user_id)) {
             $user = User::find($request->user_id);
@@ -53,7 +55,7 @@ class CartController extends Controller
         $data = $user->load(['carts' => function ($query) {
             $query->whereNull('order_id')->with('menu_item')->get();
         }]);
-//        return response()->json($data);
+//        return response()->json($data->carts);
         $datas = [];
         foreach ($data->carts as $cart) {
             Log::info($cart);
@@ -77,7 +79,17 @@ class CartController extends Controller
 
     public function delete(Request $request)
     {
-        $cart = cart::where('menu_item_id', $request->menu_item_id)->where('user_id', $request->user_id)->delete();
-        return response()->json($cart);
+        $cart = cart::where('menu_item_id', $request->menu_item_id)->where('user_id', $request->user_id)->first();
+        $data = $cart;
+        $cart->delete();
+        return response()->json($data);
+    }
+
+    public function deleteAll(Request $request){
+        foreach ($request->cart_ids as $menu_item_id) {
+            $cart = cart::where('menu_item_id', $menu_item_id)->where('user_id', $request->user_id)->first();
+            $cart->delete();
+        }
+        return response()->json($request->cart_ids);
     }
 }
