@@ -16,9 +16,9 @@
     </div>
 
     <script src="{{ asset('assets/js/jquery.js') }}"></script>
-    <div class="w-full flex flex-row justify-end p-3">
+    {{-- <div class="w-full flex flex-row justify-end p-3">
         <a href="{{ url()->previous()}}" class="text-xs px-2 py-0.5 rounded-sm bg-gray-500 text-white">بازگشت ←</a>
-    </div>
+    </div> --}}
     @if ($user !== Auth::user())
         <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">ایجاد رستوران برای {{ $user->name }}
             {{ $user->family }}</h1>
