@@ -54,6 +54,10 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\career;
 
+Route::get("/test" , function(){
+    return "salam this is test";
+});
+
 Route::get('/robot', function () {
     return view('abbasScratch.index');
 });
