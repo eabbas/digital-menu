@@ -284,30 +284,30 @@ class pagesController extends Controller
         }]);
         return view('client.link.product.allProducts', ['page' => $pages]);
     }
-    public function editInfo(Request $request){
+    // public function editInfo(Request $request){
 
-        $page = pages::find($request->page_id);
+    //     $page = pages::find($request->page_id);
 
-        if ($request->state == "title") {
-            $page->title = $request->inputValue;
-        }
-        if ($request->state == "subtitle") {
-            $page->subTitle = $request->inputValue;
-        }
-        $page->save();
+    //     if ($request->state == "title") {
+    //         $page->title = $request->inputValue;
+    //     }
+    //     if ($request->state == "subtitle") {
+    //         $page->subTitle = $request->inputValue;
+    //     }
+    //     $page->save();
 
-        return response()->json('ok');
-    }
+    //     return response()->json('ok');
+    // }
     public function saveAll(Request $request)
     {
+        
+        $page = Pages::find($request->page_id);
 
-            $page = Pages::find($request->page_id);
-
-            if ($request->has('title') && $request->title != 'null' && $request->title != '') {
-                $page->title = $request->title;
+            if ($request->has('titleInput') && $request->titleInput != 'null' && $request->titleInput != '') {
+                $page->title = $request->titleInput;
             }
-            if ($request->has('subtitle') && $request->subtitle != 'null' && $request->subtitle != '') {
-                $page->subTitle = $request->subtitle;
+            if ($request->has('subTitleInput') && $request->subTitleInput != 'null' && $request->subTitleInput != '') {
+                $page->subTitle = $request->subTitleInput;
             }
 
 
@@ -315,7 +315,7 @@ class pagesController extends Controller
                 $coverImage = $request->file('cover_image');
                 $coverName = time() . '_cover_' . uniqid() . '.' . $coverImage->getClientOriginalExtension();
                 $coverPath = $coverImage->storeAs('covers', $coverName, 'public');
-                $page->cover_path = '/storage/' . $coverPath;
+                $page->cover_path = $coverPath;
             }
 
 
@@ -323,17 +323,12 @@ class pagesController extends Controller
                 $logoImage = $request->file('logo_image');
                 $logoName = time() . '_logo_' . uniqid() . '.' . $logoImage->getClientOriginalExtension();
                 $logoPath = $logoImage->storeAs('logos', $logoName, 'public');
-                $page->logo_path = '/storage/' . $logoPath;
+                $page->logo_path = $logoPath;
             }
 
             $page->save();
 
-            return response()->json([
-                'message' => 'اطلاعات با موفقیت ذخیره شد',
-                'data' => [
-                    'page' => $page
-                ]
-            ]);
+            return response()->json($page);
 
 
     }
