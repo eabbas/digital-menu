@@ -4936,144 +4936,139 @@
     </span>
 `;
 
-            let elementState = "";
-            let states = document.querySelectorAll('.states');
-            let pageId = document.getElementById('page_id')
-            function editInfo(el, inputState, value) {
-                console.log(value)
-                el.innerHTML = "";
+    //         let elementState = "";
+    //         let states = document.querySelectorAll('.states');
+    //         let pageId = document.getElementById('page_id')
+    //         function editInfo(el, inputState, value) {
+    //             console.log(value)
+    //             el.innerHTML = "";
 
-                let placeholderText = "";
-                let originalValue = value;
+    //             let placeholderText = "";
+    //             let originalValue = value;
 
-                switch(inputState) {
-                    case "title":
-                        placeholderText = "عنوان صفحه";
-                        break;
-                    case "subtitle":
-                        placeholderText = "عنوان فرعی";
-                        break;
-                }
+    //             switch(inputState) {
+    //                 case "title":
+    //                     placeholderText = "عنوان صفحه";
+    //                     break;
+    //                 case "subtitle":
+    //                     placeholderText = "عنوان فرعی";
+    //                     break;
+    //             }
 
-                let inputValue = (value == '' || value == null) ? '' : value;
+    //             let inputValue = (value == '' || value == null) ? '' : value;
 
-                let inp = `
-        <div class="flex gap-2">
-            <input type="text" value="${inputValue}" placeholder="${placeholderText}" class="border border-gray-300 outline-none rounded-md px-3 py-1.5 text-sm" id="tempInput">
-            <button onclick="saveEdit(this, '${inputState}', '${originalValue}')" data-change="${inputState}" class="text-green-600 font-bold cursor-pointer text-lg px-2">✓</button>
-            <button onclick="cancelEdit(this, '${inputState}', '${originalValue}')" data-change="${inputState}" class="text-red-500 font-bold cursor-pointer text-lg px-2">✗</button>
-        </div>
-    `;
+    //             let inp = `
+    //     <div class="flex gap-2">
+    //         <input type="text" value="${inputValue}" placeholder="${placeholderText}" class="border border-gray-300 outline-none rounded-md px-3 py-1.5 text-sm" id="tempInput">
+    //         <button onclick="saveEdit(this, '${inputState}', '${originalValue}')" data-change="${inputState}" class="text-green-600 font-bold cursor-pointer text-lg px-2">✓</button>
+    //         <button onclick="cancelEdit(this, '${inputState}', '${originalValue}')" data-change="${inputState}" class="text-red-500 font-bold cursor-pointer text-lg px-2">✗</button>
+    //     </div>
+    // `;
 
-                let textContainer = el.parentElement.parentElement.querySelector('.text-display');
-                if (textContainer) {
-                    textContainer.innerHTML = inp;
-                }
-            }
-
-
-            function saveEdit(el, inputState, oldValue) {
-                console.log(pageId.value)
-                elementState = el.getAttribute('data-change');
-                let inputElement = document.querySelector('#tempInput');
-                let newValue = inputElement.value;
-
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                    }
-                });
-
-                $.ajax({
-                    url: "{{ route('pages.editInfo') }}",
-                    type: 'POST',
-                    dataType: "json",
-                    data: {
-                        'state': inputState,
-                        'inputValue': newValue,
-                        'page_id' : pageId.value
-                    },
-                    success: function(data) {
-                        console.log(data);
-
-                        let defaultValues = {
-                            "title": "عنوان صفحه",
-                            "subtitle": "عنوان فرعی"
-                        };
-
-                        let displayValue = (newValue == "" || newValue == null) ? defaultValues[inputState] : newValue;
-
-                        let textContainer = el.parentElement.parentElement;
-                        textContainer.innerHTML = `<span class="text-gray-800 text-sm">${displayValue}</span>`;
-
-                        states.forEach((state) => {
-                            if (state.getAttribute('data-state') == elementState) {
-                                state.innerHTML = editIcon;
-                            }
-                        });
-                    },
-                    error: function() {
-                        console.log('error');
-                        cancelEdit(el, inputState, oldValue);
-                    }
-                });
-            }
+    //             let textContainer = el.parentElement.parentElement.querySelector('.text-display');
+    //             if (textContainer) {
+    //                 textContainer.innerHTML = inp;
+    //             }
+    //         }
 
 
-            function cancelEdit(el, inputState, oldValue) {
-                elementState = el.getAttribute('data-change');
+            // function saveEdit(el, inputState, oldValue) {
+            //     console.log(pageId.value)
+            //     elementState = el.getAttribute('data-change');
+            //     let inputElement = document.querySelector('#tempInput');
+            //     let newValue = inputElement.value;
 
-                let defaultValues = {
-                    "title": " عنوان صفحه",
-                    "subtitle": "عنوان فرعی"
-                };
+            //     $.ajaxSetup({
+            //         headers: {
+            //             'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            //         }
+            //     });
 
-                let displayValue = (oldValue == "" || oldValue == null) ? defaultValues[inputState] : oldValue;
+            //     $.ajax({
+            //         url: "{{ route('pages.editInfo') }}",
+            //         type: 'POST',
+            //         dataType: "json",
+            //         data: {
+            //             'state': inputState,
+            //             'inputValue': newValue,
+            //             'page_id' : pageId.value
+            //         },
+            //         success: function(data) {
+            //             console.log(data);
 
-                let textContainer = el.parentElement.parentElement;
-                textContainer.innerHTML = `<span class="text-gray-800 text-sm">${displayValue}</span>`;
+            //             let defaultValues = {
+            //                 "title": "عنوان صفحه",
+            //                 "subtitle": "عنوان فرعی"
+            //             };
 
-                states.forEach((state) => {
-                    if (state.getAttribute('data-state') == elementState) {
-                        state.innerHTML = editIcon;
-                    }
-                });
-            }
+            //             let displayValue = (newValue == "" || newValue == null) ? defaultValues[inputState] : newValue;
+
+            //             let textContainer = el.parentElement.parentElement;
+            //             textContainer.innerHTML = `<span class="text-gray-800 text-sm">${displayValue}</span>`;
+
+            //             states.forEach((state) => {
+            //                 if (state.getAttribute('data-state') == elementState) {
+            //                     state.innerHTML = editIcon;
+            //                 }
+            //             });
+            //         },
+            //         error: function() {
+            //             console.log('error');
+            //             cancelEdit(el, inputState, oldValue);
+            //         }
+            //     });
+            // }
+
+
+            // function cancelEdit(el, inputState, oldValue) {
+            //     elementState = el.getAttribute('data-change');
+
+            //     let defaultValues = {
+            //         "title": " عنوان صفحه",
+            //         "subtitle": "عنوان فرعی"
+            //     };
+
+            //     let displayValue = (oldValue == "" || oldValue == null) ? defaultValues[inputState] : oldValue;
+
+            //     let textContainer = el.parentElement.parentElement;
+            //     textContainer.innerHTML = `<span class="text-gray-800 text-sm">${displayValue}</span>`;
+
+            //     states.forEach((state) => {
+            //         if (state.getAttribute('data-state') == elementState) {
+            //             state.innerHTML = editIcon;
+            //         }
+            //     });
+            // }
 
 
             function saveAllChanges() {
-                let coverImage = document.getElementById('cover_image').files[0];
-                let logoImage = document.getElementById('logo_image').files[0];
+                let coverImage = document.getElementById('cover_image')
+                let logoImage = document.getElementById('logo_image')
 
-
-                let nameSpan = document.querySelector('[data-state="title"]')?.parentElement?.parentElement?.querySelector('.text-display span');
-                let subtitleSpan = document.querySelector('[data-state="subtitle"]')?.parentElement?.parentElement?.querySelector('.text-display span');
-
-                let nameValue = nameSpan ? nameSpan.innerText : '';
-
-                let subtitleValue = subtitleSpan ? subtitleSpan.innerText : '';
-
-
-                if (nameValue === 'عنوان صفحه') nameValue = '';
-
-                if (subtitleValue === 'عنوان فرعی') subtitleValue = '';
+                let titleInput = document.getElementById('titleInput')
+                let subTitleInput = document.getElementById('subTitleInput')
 
                 let formData = new FormData();
-
-                let pageId = document.getElementById('page_id')?.value || "{{ $page->id ?? '' }}";
-                formData.append('page_id', pageId);
-                formData.append('title', nameValue);
-
-                formData.append('subtitle', subtitleValue);
+                
+                let pageId = document.getElementById('page_id')
+                
+                formData.append('page_id', pageId.value)
+                
 
                 if (coverImage) {
-                    formData.append('cover_image', coverImage);
+                    formData.append('cover_image', coverImage.files[0])
                 }
                 if (logoImage) {
-                    formData.append('logo_image', logoImage);
+                    formData.append('logo_image', logoImage.files[0]);
+                }
+                if (titleInput) {
+                    formData.append('titleInput', titleInput.value)
+                }
+                if (subTitleInput) {
+                    formData.append('subTitleInput', subTitleInput.value);
                 }
 
-                formData.append('_token', "{{ csrf_token() }}");
+                formData.append('_token', "{{ csrf_token() }}")
 
                 $.ajax({
                     url: "{{ route('pages.saveAll') }}",
@@ -5082,7 +5077,28 @@
                     contentType: false,
                     processData: false,
                     success: function(response) {
-                        console.log(response.data.page);
+                        console.log(response);
+                        let titleInput = document.getElementById('titleInput')
+                        let subTitleInput = document.getElementById('subTitleInput')
+                        let pageCover = document.getElementById('pageCover')
+                        let pageLogo = document.getElementById('pageLogo')
+                        let pageTitle = document.getElementById('pageTitle')
+                        let pageSubTitle = document.getElementById('pageSubTitle')
+                        if(response.logo_path){
+                            pageLogo.setAttribute('src' ,  "{{ asset('storage/') }}/" + response.logo_path)
+                        }
+                        if(response.cover_path){
+                            pageCover.setAttribute('src' ,  "{{ asset('storage/') }}/" + response.cover_path)
+                        }
+                        if (response.title) {
+                            pageTitle.innerText = response.title
+                        }
+                        if (response.subTitle) {
+                            pageSubTitle.innerText = response.subTitle
+                        }
+        
+                    
+                        pup_up_edit('close')
                         
                     },
                     error: function() {
@@ -5090,7 +5106,8 @@
                     }
                 });
             }
-
+            
+            
 
         </script>
     @endisset
