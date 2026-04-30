@@ -50,10 +50,6 @@ use App\Http\Controllers\CheckListController;
 use App\Http\Middleware\checkListAdmin;
 use App\Http\Middleware\savePreviousUrl;
 
-use App\Models\User;
-use Illuminate\Support\Str;
-use App\Models\career;
-
 Route::get('/robot', function () {
     return view('abbasScratch.index');
 });
