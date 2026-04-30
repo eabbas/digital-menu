@@ -827,6 +827,7 @@
         let btn = ""
 
         function openShoppingCart(state) {
+            console.log('shopping cart')
             if (state == 'phoneOpen') {
                 btn = orderBasket.children[0].innerHTML
                 cartList.children[1].innerHTML = ""
@@ -923,6 +924,7 @@
                 orderBasket.children[0].removeAttribute('disabled')
                 orderBasket.children[0].classList.remove('cursor-no-drop')
                 orderBasket.children[0].innerHTML = btn
+                orderBasket.children[0].disabled = false
             }
         }
 
@@ -1117,6 +1119,7 @@
                     cartList.children[1].classList.remove('h-[calc(100vh-89px)]')
                     cartList.classList.remove('min-h-[calc(100vh-57px)]')
                     cartList.classList.add('max-h-0')
+                    orderBasket.children[0].disabled = false
                     showMessage('open')
                     element.innerHTML = `
                         <span>سفارش شما ثبت شد</span>
@@ -1192,6 +1195,7 @@
         }
 
         function getOpenShoppingCart() {
+            console.log('get open shopping cart')
             return openShoppingCart;
         }</script>
 
