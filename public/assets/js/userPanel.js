@@ -20,7 +20,6 @@ function hamburgerMenu(state){
         menuBlockliet.children[2].classList.add('opacity-0')
     }
     if (state == "close") {
-        console.log("asgfk.asjhgfkgsf")
         menuBlock.classList.add('invisible')
         menuBlock.classList.add('opacity-0')
         menuList.classList.add('translate-x-full')

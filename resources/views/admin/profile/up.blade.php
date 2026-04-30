@@ -7,6 +7,9 @@
         <img class="lg:block object-cover mx-auto sm:m-0 size-40 lg:m-0 rounded-xl cursor-pointer"
              onclick="showProfile(this)"
              src="{{ asset('storage/' . Auth::user()->main_image) }}" alt="user__picture">
+
+
+@endif
     <div class="absolute w-10 h-10 border-2 border-dashed border-[#00ffff] shadow-lg bg-zinc-300 rounded-full top-0 right-[25%] md:-right-3 flex items-center justify-center cursor-pointer">
             <label for="edit" class="border-2 border-dotted border-[#23c4c4] absolute bg-zinc-50 w-10 h-10 rounded-full flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 fill-zinc-500">
@@ -16,5 +19,3 @@
             <input class="absolute opacity-1 bg-red-500 w-10 h-10" onchange="editProfileImage(this)" type="file" name="" id="edit">
     </div>
 </div>
-
-@endif
