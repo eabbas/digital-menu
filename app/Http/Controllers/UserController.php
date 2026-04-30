@@ -864,7 +864,6 @@ class UserController extends Controller
         foreach ($requests as $request) {
             $request['user'] = User::find($request->user_id);
         }
-        // dd($request->user->id);
         return view('admin.user.requests', ['requests' => $requests]);
     }
 

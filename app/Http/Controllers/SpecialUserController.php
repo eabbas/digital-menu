@@ -45,4 +45,8 @@ class SpecialUserController extends Controller
         specialUser::where('page_id', $pages->id)->where('user_id', $user->id)->delete();
         return redirect()->back();
     }
+    public function customerPage($page_id)
+    {
+        return redirect()->back();
+    }
 }
