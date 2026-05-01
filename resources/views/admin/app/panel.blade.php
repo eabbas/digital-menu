@@ -254,7 +254,7 @@
                         </a>
                     </li>
 
-
+{{-- 
                     @if (count(Auth::user()->careers))
                         <li
                                 class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('menu.createMenu')) bg-gray-700 @endif">
@@ -263,8 +263,8 @@
                                 ایجاد منو برای رستوران
                             </a>
                         </li>
-                    @endif
-                    @if (count(Auth::user()->menus))
+                    @endif --}}
+                    {{-- @if (count(Auth::user()->menus))
                         <li
                                 class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('menu.user_menus')) bg-gray-700 @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
@@ -272,7 +272,7 @@
                                 لیست منو های من
                             </a>
                         </li>
-                    @endif
+                    @endif --}}
                     {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
                         <span class="size-1 bg-white rounded-sm"></span>
                         <a href="{{ route('favoriteCareer.list') }}" class="text-white py-1 block">لیست علاقه مندی ها</a>
@@ -1038,7 +1038,7 @@
                                         ایجاد رستوران جدید
                                     </a>
                                 </li>
-                                @if (count(Auth::user()->menus))
+                                {{-- @if (count(Auth::user()->menus))
                                     <li class="pr-3.5 @if(Route::is('menu.user_menus')) bg-gray-100 @endif">
                                         <span class="size-1 rounded-sm"></span>
                                         <a href="{{ route('menu.user_menus', [Auth::user()]) }}"
@@ -1046,15 +1046,15 @@
                                             لیست منو های من
                                         </a>
                                     </li>
-                                @endif
-                                @if (count(Auth::user()->careers))
+                                @endif --}}
+                                {{-- @if (count(Auth::user()->careers))
                                     <li class="pr-3.5 @if(Route::is('menu.createMenu')) bg-gray-100 @endif">
                                         <a href="{{ route('menu.createMenu') }}"
                                            class="block text-gray-700 py-2 text-md">
                                             ایجاد منو برای رستوران
                                         </a>
                                     </li>
-                                @endif
+                                @endif --}}
                                 @if (in_array(1, $ids) || in_array(4, $ids))
 
                                     <li class="pr-3.5 @if(Route::is('career.createUser')) bg-gray-100 @endif">

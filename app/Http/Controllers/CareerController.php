@@ -262,6 +262,7 @@ class CareerController extends Controller
         $career->qr_count = $request->qr_count;
         $career->save();
         return to_route('career.careers');
+        // return redirect(url()->previous());
     }
 
     public function delete(career $career)
