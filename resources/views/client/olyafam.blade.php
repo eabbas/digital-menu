@@ -65,7 +65,7 @@
                                                     data-menu-item-title="{{ $item->title }}"
                                                     data-menu-item-id="{{ $item->id }}">
                                                     <!--<span class="absolute -top-1 -right-2 bg-[#eb3254] px-2 py-0.5 rounded text-sm text-white">ویژه</span>-->
-                                                    <input type="hidden" value="{{ $item->id }}">
+{{--                                                    <input type="hidden" value="{{ $item->id }}">--}}
                                                     <span
                                                         class="text-xs @if (!$item->discount) invisible @else @endif text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
                                                         {{ $item->percent }}%
