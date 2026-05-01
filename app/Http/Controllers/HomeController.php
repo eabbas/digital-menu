@@ -17,6 +17,11 @@ class HomeController extends Controller
     {
         $sliders = slider::all();
         $careerCategories = careerCategory::all();
+        foreach($careerCategories as $cat){
+            $cat->load(['careers'=>function($query){
+                $query->where('show_in_home', 1)->get();
+            }]);
+        }
         $careers = career::all();
         $pages = pages::all();
         $userPages=null;
