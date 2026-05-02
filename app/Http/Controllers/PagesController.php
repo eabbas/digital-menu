@@ -7,20 +7,17 @@ use App\Models\site_link;
 use App\Models\social_address;
 use App\Models\social_qr_codes;
 use App\Models\FAQ;
-use App\Models\User;
 use App\Models\page_blocks;
 use App\Models\socialMedia;
 use App\Models\careerCategory;
 use App\Models\page_contactus;
 use App\Models\intro_category;
 use App\Models\intro_product;
-use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use function Laravel\Prompts\intro;
 
 class pagesController extends Controller
 {

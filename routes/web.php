@@ -47,7 +47,7 @@ use App\Http\Controllers\GeneralQrCodesController;
 use App\Http\Controllers\PageContactusController;
 use App\Http\Controllers\PageDescriptionController;
 use App\Http\Controllers\CheckListController;
-use App\Http\Middleware\checkListAdmin;
+// use App\Http\Middleware\checkListAdmin;
 use App\Http\Middleware\savePreviousUrl;
 
 use App\Models\User;
