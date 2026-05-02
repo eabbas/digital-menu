@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
             $table->string('logo_path')->nullable();
-            $table->string('cover_path');
+            $table->string('cover_path')->nullable();
             $table->string('user_id');
             $table->string('title');
-            $table->string('subTitle');
+            $table->string('subTitle')->nullable();
             $table->string('description')->nullable();
             $table->string('qr_code')->nullable();
             $table->timestamps();

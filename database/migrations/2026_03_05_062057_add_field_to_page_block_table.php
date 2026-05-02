@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('page_blocks', function (Blueprint $table) {
-            $table->string('type');
+            $table->string('type')->nullable();
         });
     }
 
