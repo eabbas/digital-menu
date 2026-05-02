@@ -1752,7 +1752,7 @@
                 inp.value = ""
             })
             textareas.forEach((textarea) => {
-                textarea.innerText = ""
+                textarea.value = ""
             })
         }
 
