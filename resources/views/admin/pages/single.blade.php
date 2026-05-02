@@ -62,7 +62,7 @@
                                     <img src="{{ asset('storage/' . $page->social_qr_codes->qr_path) }}" class="w-full"
                                          alt="">
                                     <div class="lg:w-full mx-auto bg-gray-300 rounded-lg p-2 mt-2 flex items-center justify-center cursor-pointer"
-                                         onclick='copyText({{ $page->id }} , "{{ $page->social_qr_codes->slug }}")'>
+                                         onclick='copyText({{ $page->id }} , "{{ $page->social_qr_codes->page_path }}")'>
                                         کپی لینک
                                     </div>
                                 </div>
@@ -4920,8 +4920,8 @@
     </script>
     @isset($page)
         <script>
-            function copyText(pageId, slug) {
-                let url = "{{ url('/') }}/" + slug
+            function copyText(pageId, pagePath) {
+                let url = "{{ url('/') }}/" + pagePath
                 navigator.clipboard.writeText(url)
                 alert("لینک کپی شد")
             }

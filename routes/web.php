@@ -52,10 +52,21 @@ use App\Http\Middleware\savePreviousUrl;
 
 use App\Models\User;
 use Illuminate\Support\Str;
-use App\Models\career;
+use App\Models\social_qr_codes;
 
 Route::get('/robot', function () {
     return view('abbasScratch.index');
+});
+
+Route::get('/set-page-path', function(){
+    $qrCodes = social_qr_codes::all();
+    foreach($qrCodes as $code){
+        $slugArr = explode('/',$code->slug);
+        $code->page_path = $code->slug;
+        $code->slug=$slugArr[count($slugArr)-1];
+        $code->save();
+    }
+    
 });
 
 Route::get('/test', function () {

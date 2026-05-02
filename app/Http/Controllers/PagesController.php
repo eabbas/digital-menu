@@ -61,7 +61,8 @@ class pagesController extends Controller
         social_qr_codes::create([
             'qr_path' => $fileName,
             'page_id' => $page_id,
-            'slug' => 'qrcodes/links/' . $page_id . '/' . $random
+            'page_path' => 'qrcodes/links/' . $page_id . '/' . $random,
+            'slug'=>$random
         ]);
         intro_category::create([
             'title'=>'بدون دسته بندی',
