@@ -213,7 +213,7 @@
                                                      data-menu-item-title="{{ $item->title }}"
                                                      data-menu-item-id="{{ $item->id }}">
                                                     <!--<span class="absolute -top-1 -right-2 bg-[#eb3254] px-2 py-0.5 rounded text-sm text-white">ویژه</span>-->
-                                                    <input type="hidden" value="{{$item->id}}">
+                                                    {{-- <input type="hidden" value="{{$item->id}}"> --}}
                                                     <span class="text-xs @if (!$item->discount) invisible @else  @endif text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
                                                         {{ $item->percent }}%
                                                     </span>
@@ -284,7 +284,7 @@
                                                      data-menu-item-title="{{ $item->title }}"
                                                      data-menu-item-id="{{ $item->id }}">
                                                     <!--<span class="absolute -top-1 -right-2 bg-[#eb3254] px-2 py-0.5 rounded text-sm text-white">ویژه</span>-->
-                                                    <input type="hidden" value="{{$item->id}}">
+                                                    {{-- <input type="hidden" value="{{$item->id}}"> --}}
                                                     <span class="text-xs @if (!$item->discount) invisible @else  @endif text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
                                                         {{ $item->percent }}%
                                                     </span>
@@ -1133,13 +1133,22 @@
                             div.classList = "w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems"
                             div.setAttribute('data-menu-item-title', data.title)
                             div.setAttribute('data-menu-item-id', data.id)
-                            let inner = ``
-                            if (data.discount != 0) {
-                                inner += `
-                                <span class="text-xs text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
-                                    ${data.percent}%
-                                </span>`
+                            let inner = `<span class="text-xs`
+                            // inner+=`<span class="text-xs`
+                            if(data.discount == 0){
+                                inner+=` invisible `
                             }
+                            inner+=` text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">`
+                            if(data.discount != 0){
+                                inner+=` ${data.percent}% `
+                            }
+                            inner+=`</span>`
+                            // if (data.discount != 0) {
+                            //     inner += `
+                            //     <span class="text-xs text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
+                            //         ${data.percent}%
+                            //     </span>`
+                            // }
                             inner += `
                                     <div class="w-full flex items-center justify-between">
                                         <div class="w-11/12 flex flex-row gap-5 items-center">
@@ -1377,19 +1386,29 @@
                                     div.classList = "w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems"
                                     div.setAttribute('data-menu-item-title', item.title)
                                     div.setAttribute('data-menu-item-id', item.id)
-                                    let inner = ``
-                                    if (item.discount != 0) {
-                                        inner += `
-                                    <span class="text-xs text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
-                                        ${item.percent}%
-                                    </span>`
+                                    let inner = `<span class="text-xs`
+                                    // inner+=`<span class="text-xs`
+                                    if(data.discount == 0){
+                                        inner+=` invisible `
                                     }
-                                    if (item.discount == 0) {
-                                        inner += `
-                                    <span class="text-xs text-white invisible bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
+                                    inner+=` text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">`
+                                    if(data.discount != 0){
+                                        inner+=` ${data.percent}% `
+                                    }
+                                    inner+=`</span>`
+                                    // let inner = ``
+                                    // if (item.discount != 0) {
+                                    //     inner += `
+                                    // <span class="text-xs text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
+                                    //     ${item.percent}%
+                                    // </span>`
+                                    // }
+                                    // if (item.discount == 0) {
+                                    //     inner += `
+                                    // <span class="text-xs text-white invisible bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
 
-                                    </span>`
-                                    }
+                                    // </span>`
+                                    // }
                                     inner += `
                                         <div class="w-full flex items-center justify-between">
                                             <div class="w-11/12 flex flex-row gap-5 items-center">
@@ -1467,19 +1486,30 @@
                                     div.classList = "w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems"
                                     div.setAttribute('data-menu-item-title', item.title)
                                     div.setAttribute('data-menu-item-id', item.id)
-                                    let inner = ``
-                                    if (item.discount != 0) {
-                                        inner += `
-                                    <span class="text-xs text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
-                                        ${item.percent}%
-                                    </span>`
-                                    }
-                                    if (item.discount == 0) {
-                                        inner += `
-                                    <span class="text-xs text-white invisible bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
 
-                                    </span>`
+                                    let inner = `<span class="text-xs`
+                                    // inner+=`<span class="text-xs`
+                                    if(item.discount == 0){
+                                        inner+=` invisible `
                                     }
+                                    inner+=` text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">`
+                                    if(item.discount != 0){
+                                        inner+=` ${item.percent}% `
+                                    }
+                                    inner+=`</span>`
+                                    // let inner = ``
+                                    // if (item.discount != 0) {
+                                    //     inner += `
+                                    // <span class="text-xs text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
+                                    //     ${item.percent}%
+                                    // </span>`
+                                    // }
+                                    // if (item.discount == 0) {
+                                    //     inner += `
+                                    // <span class="text-xs text-white invisible bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
+
+                                    // </span>`
+                                    // }
                                     inner += `
                                         <div class="w-full flex items-center justify-between">
                                             <div class="w-11/12 flex flex-row gap-5 items-center">
@@ -1582,19 +1612,29 @@
                         div.classList = "w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems"
                         div.setAttribute('data-menu-item-title', item.title)
                         div.setAttribute('data-menu-item-id', item.id)
-                        let inner = ``
-                        if (item.discount != 0) {
-                            inner += `
-                                <span class="text-xs text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
-                                    ${item.percent}%
-                                </span>`
+                        let inner = `<span class="text-xs`
+                        // inner+=`<span class="text-xs`
+                        if(item.discount == 0){
+                            inner+=` invisible `
                         }
-                        if (item.discount == 0) {
-                            inner += `
-                                <span class="text-xs invisible text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
+                        inner+=` text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">`
+                        if(item.discount != 0){
+                            inner+=` ${item.percent}% `
+                        }
+                        inner+=`</span>`
+                        // let inner = ``
+                        // if (item.discount != 0) {
+                        //     inner += `
+                        //         <span class="text-xs text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
+                        //             ${item.percent}%
+                        //         </span>`
+                        // }
+                        // if (item.discount == 0) {
+                        //     inner += `
+                        //         <span class="text-xs invisible text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
 
-                                </span>`
-                        }
+                        //         </span>`
+                        // }
                         inner += `
                             <div class="w-full flex items-center justify-between">
                                 <div class="w-11/12 flex flex-row gap-5 items-center">
