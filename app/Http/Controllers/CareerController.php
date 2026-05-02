@@ -103,7 +103,7 @@ class CareerController extends Controller
         $counter = 1;
         for ($i = 0; $i < $request->qr_count; $i++) {
             $random = Str::random(10);
-            $link = "famenu.ir/qrcode/$career_id/" . $random;
+            $link = url('/')."/qrcode/$career_id/" . $random;
             $qr_svg = QrCode::size(100)->generate($link);
             $fileName = 'qrcodes/' . $career_id . '_' . $random . '.svg';
             Storage::disk('public')->put($fileName, $qr_svg);
@@ -242,7 +242,7 @@ class CareerController extends Controller
                 $counter = 1;
                 while ($qr_count) {
                     $random = Str::random(10);
-                    $link = "famenu.ir/qrcodes/$career->id/" . $random;
+                    $link = url('/')."/qrcodes/$career->id/" . $random;
                     $qr_svg = QrCode::size(100)->generate($link);
                     $fileName = 'qrcodes/' . $career->id . '_' . $random . '.svg';
                     Storage::disk('public')->put($fileName, $qr_svg);

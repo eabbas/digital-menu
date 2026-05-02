@@ -54,7 +54,7 @@ class pagesController extends Controller
             'active'=> $request->active ? 1 : 0
         ]);
         $random = Str::random(10);
-        $link = "famenu.ir/qrcodes/links/$page_id/" . $random;
+        $link = url('/')."/qrcodes/links/$page_id/" . $random;
         $qr_svg = QrCode::size(100)->generate($link);
         $fileName = 'qrcodes/' . $page_id . '_' . $random . '.svg';
         Storage::disk('public')->put($fileName, $qr_svg);

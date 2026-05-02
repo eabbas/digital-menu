@@ -59,14 +59,9 @@ Route::get('/robot', function () {
 });
 
 Route::get('/test', function () {
-    $careers = [];
-    foreach(career::all() as $career){
-        $careers[] = $career->load(['menus'=>function($query){
-            $query->with('menu_categories')->get();
-        }]);
-    }
-    dd($careers);
-
+    $random = Str::random(10);
+    $link = url('/')."/qrcode/1/" . $random;
+    return $link;
 });
 
 ///suggestion
