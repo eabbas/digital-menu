@@ -322,6 +322,7 @@ Route::group([
     Route::post('/update-front', 'updateFront')->name('updateFront');
     Route::get('/delete/{menu_category}', 'delete')->name('delete');
     Route::get('/delete-front/{category}', 'deleteFront')->name('deleteFront');
+    Route::get('/delete-front-without-items/{category}', 'deleteFrontWithoutItems')->name('deleteFrontWithoutItems');
     Route::get('/{menu}', 'menu')->name('menu');
     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });

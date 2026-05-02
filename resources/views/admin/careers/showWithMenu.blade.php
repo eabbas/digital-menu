@@ -962,7 +962,39 @@
         }
 
         function deleteMenuCatWithoutItems(categoryId){
-            console.log(categoryId)
+            let menuItems = document.querySelectorAll('.menuItems')
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                }
+            })
+            $.ajax({
+                url: "{{ url('menuCategory/delete-front-without-items/') }}/"+categoryId,
+                type: "GET",
+                success: function(data){
+                    console.log(data);
+                    
+                    menuCategories.forEach((menuCategory)=>{
+                        if(menuCategory.getAttribute('data-menu-category-id') == data.category.id){
+                            menuCategory.remove()
+                        }
+                        if(menuCategory.getAttribute('data-menu-category-id')==data.withoutCatId){
+                            showItems(menuCategory, data.withoutCatId)
+                        }
+                    })
+                    menuItems.forEach((menuItem)=>{
+                        data.category.menu_item_ids.forEach((itemId)=>{
+                            if(menuItem.getAttribute('data-menu-item-id')==itemId){
+                                menuItem.remove()
+                            }
+                        })
+                    })
+                    closeForm()
+                },
+                error: function(){
+                    console.log('error')
+                }
+            })
         }
 
         let menuItemId = document.getElementById('menuItemId')
