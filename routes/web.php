@@ -47,26 +47,32 @@ use App\Http\Controllers\GeneralQrCodesController;
 use App\Http\Controllers\PageContactusController;
 use App\Http\Controllers\PageDescriptionController;
 use App\Http\Controllers\CheckListController;
-use App\Http\Middleware\checkListAdmin;
+// use App\Http\Middleware\checkListAdmin;
 use App\Http\Middleware\savePreviousUrl;
 
 use App\Models\User;
 use Illuminate\Support\Str;
-use App\Models\career;
+use App\Models\social_qr_codes;
 
 Route::get('/robot', function () {
     return view('abbasScratch.index');
 });
 
-Route::get('/test', function () {
-    $careers = [];
-    foreach(career::all() as $career){
-        $careers[] = $career->load(['menus'=>function($query){
-            $query->with('menu_categories')->get();
-        }]);
+Route::get('/set-page-path', function(){
+    $qrCodes = social_qr_codes::all();
+    foreach($qrCodes as $code){
+        $slugArr = explode('/',$code->slug);
+        $code->page_path = $code->slug;
+        $code->slug=$slugArr[count($slugArr)-1];
+        $code->save();
     }
-    dd($careers);
+    
+});
 
+Route::get('/test', function () {
+    $random = Str::random(10);
+    $link = url('/')."/qrcode/1/" . $random;
+    return $link;
 });
 
 ///suggestion
@@ -322,6 +328,7 @@ Route::group([
     Route::post('/update-front', 'updateFront')->name('updateFront');
     Route::get('/delete/{menu_category}', 'delete')->name('delete');
     Route::get('/delete-front/{category}', 'deleteFront')->name('deleteFront');
+    Route::get('/delete-front-without-items/{category}', 'deleteFrontWithoutItems')->name('deleteFrontWithoutItems');
     Route::get('/{menu}', 'menu')->name('menu');
     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });

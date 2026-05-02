@@ -229,7 +229,7 @@
                             class="w-full font-bold px-2 py-1 md:px-2 outline-none text-gray-500 cursor-pointer border-1 border-gray-300 rounded-md @if(Auth::check() && !count(Auth::user()->addresses)) hidden @endif">
                         <option>انتخاب میز</option>
                         @foreach ($career->qr_codes as $table)
-                            <option value="{{ $table->slug }}">{{ $table->description }}</option>
+                            <option value="{{ $table->slug }}" @if($slug && $table->slug == $slug) selected @endif>{{ $table->description }}</option>
                         @endforeach
                     </select>
                     @if($slug)

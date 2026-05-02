@@ -21,10 +21,10 @@ class ClientController extends Controller
         // $user->scan_count += 1;
         // $user->save();
         // set qr count in qrcode controller load method
-//        $order = null;
-//        if (Auth::check()) {
-//            $order = order::where('user_id', Auth::id())->where('status', 1)->first();
-//        }
+    //    $order = null;
+    //    if (Auth::check()) {
+    //        $order = order::where('user_id', Auth::id())->where('status', 1)->first();
+    //    }
         $menus = $career->menus;
         foreach ($menus as $menu) {
             foreach ($menu->menu_categories as $category) {
@@ -51,11 +51,6 @@ class ClientController extends Controller
             }
             $orders = order::where('user_id', Auth::id())->where('career_id', $career->id)->where('status', 1)->orWhere('status', 2)->orWhere('status', 3)->get();
         }
-//        dd($orders);
-//        foreach ($career as $item) {
-//            log::info($item);
-//        }
-
         return view('client.menu', ['career' => $career, 'slug' => $slug, 'cartCount' => $cartCount, 'currentUser' => $currentUser, 'orders'=>$orders]);
     }
 

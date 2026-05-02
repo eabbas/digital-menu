@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\career;
-use App\Models\custom_product;
 use App\Models\menu;
 use App\Models\menu_category;
 use App\Models\menu_item;

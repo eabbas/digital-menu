@@ -7,20 +7,17 @@ use App\Models\site_link;
 use App\Models\social_address;
 use App\Models\social_qr_codes;
 use App\Models\FAQ;
-use App\Models\User;
 use App\Models\page_blocks;
 use App\Models\socialMedia;
 use App\Models\careerCategory;
 use App\Models\page_contactus;
 use App\Models\intro_category;
 use App\Models\intro_product;
-use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use function Laravel\Prompts\intro;
 
 class pagesController extends Controller
 {
@@ -54,14 +51,15 @@ class pagesController extends Controller
             'active'=> $request->active ? 1 : 0
         ]);
         $random = Str::random(10);
-        $link = "famenu.ir/qrcodes/links/$page_id/" . $random;
+        $link = url('/')."/qrcodes/links/$page_id/" . $random;
         $qr_svg = QrCode::size(100)->generate($link);
         $fileName = 'qrcodes/' . $page_id . '_' . $random . '.svg';
         Storage::disk('public')->put($fileName, $qr_svg);
         social_qr_codes::create([
             'qr_path' => $fileName,
             'page_id' => $page_id,
-            'slug' => 'qrcodes/links/' . $page_id . '/' . $random
+            'page_path' => 'qrcodes/links/' . $page_id . '/' . $random,
+            'slug'=>$random
         ]);
         intro_category::create([
             'title'=>'بدون دسته بندی',

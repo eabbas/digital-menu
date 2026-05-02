@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\career;
 use App\Models\cart;
 use App\Models\menu;
 use App\Models\menu_category;
@@ -42,7 +41,7 @@ class MenuCategoryController extends Controller
         $path = null;
         if (isset($request->image)) {
             $name = $request->image->getClientOriginalName();
-            $fullName = time() . "_" . $name;
+            $fullName = time() . '_' . $name;
             $path = $request->file('image')->storeAs('images', $fullName, 'public');
         }
         $category = menu_category::create([
@@ -56,11 +55,11 @@ class MenuCategoryController extends Controller
 
     public function updateFront(Request $request)
     {
-//        return response()->json(555);
+        //        return response()->json(555);
         $path = null;
         if (isset($request->image)) {
             $name = $request->image->getClientOriginalName();
-            $fullName = time() . "_" . $name;
+            $fullName = time() . '_' . $name;
             $path = $request->file('image')->storeAs('images', $fullName, 'public');
         }
         $category = menu_category::find($request->category_id);
@@ -76,23 +75,55 @@ class MenuCategoryController extends Controller
 
     public function deleteFront(menu_category $category)
     {
+        $ids = [];
+        $ids[] = $category->menu_items()->pluck('id')->toArray();
+        $category['menu_item_ids'] = $ids;
+        $data = $category;
         if (count($category->menu_items)) {
             foreach ($category->menu_items as $menu_item) {
                 if (count($menu_item->ingredients)) {
                     foreach ($menu_item->ingredients as $ingredient) {
+                        if ($ingredient->image) {
+                            Storage::disk('public')->delete($ingredient->image);
+                        }
                         $ingredient->delete();
                     }
                 }
                 if (count($menu_item->menu_custom_ingredients)) {
                     foreach ($menu_item->menu_custom_ingredients as $menu_custom_ingredient) {
+                        if ($menu_custom_ingredient->image) {
+                            Storage::disk('public')->delete($menu_custom_ingredient->image);
+                        }
                         $menu_custom_ingredient->delete();
                     }
+                }
+                if ($menu_item->image) {
+                    Storage::disk('public')->delete($menu_item->image);
                 }
                 $menu_item->delete();
             }
         }
+        if ($category->image) {
+            Storage::disk('public')->delete($category->image);
+        }
         $category->delete();
-        return response()->json('ok');
+        return response()->json($data);
+    }
+
+    public function deleteFrontWithoutItems(menu_category $category){
+        $withoutCat = menu_category::where('menu_id', $category->menu_id)->where('title', 'بدون دسته بندی')->first();
+        foreach($category->menu_items as $item){
+            $item->update(['menu_category_id'=>$withoutCat->id]);
+        }
+        $ids = [];
+        $ids[] = $category->menu_items()->pluck('id')->toArray();
+        $category['menu_item_ids'] = $ids;
+        $data = $category;
+        if($category->image){
+            Storage::disk('public')->delete($category->image);
+        }
+        $category->delete();
+        return response()->json(['category'=>$data, 'withoutCatId'=>$withoutCat->id]);
     }
 
     public function items(menu_category $category)
