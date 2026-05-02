@@ -141,8 +141,9 @@
                                                                 d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
                                                     </svg>
                                                 </div>
+                                                {{-- onclick='deleteMenuCat(this, "{{ $category->id }}")' --}}
                                                 <div class="flex justify-center cursor-pointer"
-                                                     onclick='deleteMenuCat(this, "{{ $category->id }}")'>
+                                                     onclick='deleteCatBox("{{ $category->title }}", "{{ $category->id }}")'>
                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                          class="size-4 fill-gray-400 hover:fill-red-600"
                                                          viewBox="0 0 448 512">
@@ -169,8 +170,9 @@
                                                                 d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
                                                     </svg>
                                                 </div>
+                                                {{-- onclick='deleteMenuCat(this, "{{ $category->id }}")' --}}
                                                 <div class="flex justify-center cursor-pointer"
-                                                     onclick='deleteMenuCat(this, "{{ $category->id }}")'>
+                                                     onclick='deleteCatBox("{{ $category->title }}", "{{ $category->id }}")'>
                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                          class="size-4 fill-gray-400 hover:fill-red-600"
                                                          viewBox="0 0 448 512">
@@ -367,15 +369,15 @@
         <div class="fixed w-full h-dvh top-0 right-0 bg-black/50 flex flex-row justify-end invisible opacity-0 trnsition-all duration-300 z-9999"
              id="block">
             <div class="w-full lg:w-[calc(100%-265px)] h-full flex flex-row items-center justify-center">
-                <div class="w-11/12 lg:w-2/3 bg-white relative rounded-lg p-5 relative">
-                    <span class="block size-10 rounded-full bg-white flex items-center justify-center absolute -top-5 -right-5 cursor-pointer"
+                <div class="w-11/12 lg:w-2/3 bg-white relative rounded-lg p-5">
+                    <span class="size-10 rounded-full bg-white flex items-center justify-center absolute -top-5 -right-5 cursor-pointer"
                           onclick="closeForm()">❌</span>
                     <div id="loader" class="absolute top-0 right-0 w-full h-full hidden justify-center items-center">
                         <div class="w-12 h-12 border-4 border-[#eb3153] border-t-white rounded-full animate-spin"></div>
                     </div>
 
                     {{-- menu form --}}
-                    <div class="w-full p-3 bg-[#fff] rounded-lg hidden invisible opacity-0 transition-all duration-300 flex flex-col gap-4 form"
+                    <div class="w-full p-3 bg-[#fff] rounded-lg hidden invisible opacity-0 transition-all duration-300 flex-col gap-4 form"
                          id="menuForm">
                         <h2 class="text-md font-bold text-center" id="menuHeading"></h2>
                         <div class=" flex flex-col gap-3">
@@ -396,7 +398,7 @@
                     {{-- menu form --}}
 
                     {{-- menu category form --}}
-                    <div class="w-full p-3 bg-[#fff] max-h-[500px] overflow-y-auto rounded-lg hidden invisible opacity-0 transition-all duration-300 flex flex-col gap-4 form"
+                    <div class="w-full p-3 bg-[#fff] max-h-[500px] overflow-y-auto rounded-lg hidden invisible opacity-0 transition-all duration-300 flex-col gap-4 form"
                          id="menuCatForm">
                         <h2 class="text-md font-bold text-center"></h2>
                         <div class="flex flex-col gap-3">
@@ -518,6 +520,21 @@
                     </div>
                     {{-- menu item box --}}
 
+                    {{-- menu item box --}}
+                    <div class="w-full p-3 bg-[#fff] max-h-[500px] overflow-y-auto rounded-lg hidden invisible opacity-0 transition-all duration-300 flex-col gap-4 form"
+                         id="deleteMenuCatBox">
+                        <div class="w-full rounded-md flex flex-col gap-3 bg-white relative">
+                            <h2 class="text-center text-gray-800 mb-3" id="deleteCategoryTitle"></h2>
+                           <div id="deleteWithItems" class="w-full p-5 border-1 border-gray-400 flex flex-row justify-center items-center gap-5 hover:ring-2 hover:ring-[#eb3254] hover:ring-offset-2 hover:bg-[#eb3254]/20 rounded-lg transition-all duration-150 cursor-pointer">
+                               <span class="text-gray-700 font-bold">حذف به همراه آیتم ها !</span>
+                            </div>
+                           <div id="deleteWithoutItems" class="w-full p-5 border-1 border-gray-400 flex flex-row justify-center items-center gap-5 hover:ring-2 hover:ring-[#eb3254] hover:ring-offset-2 hover:bg-[#eb3254]/20 rounded-lg transition-all duration-150 cursor-pointer">
+                               <span class="text-gray-700 font-bold text-sm">حذف بدون آیتم (آیتم ها به بدون دسته بندی منتقل میشن)</span>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- menu item box --}}
+
 
                 </div>
             </div>
@@ -553,6 +570,7 @@
             block.classList.remove('invisible')
             block.classList.remove('opacity-0')
             menu.classList.remove('hidden')
+            menu.classList.add('flex')
             if (menuId == null) {
                 menu.classList.remove('opacity-0')
                 menu.classList.remove('invisible')
@@ -729,18 +747,25 @@
             })
         }
 
+       
+
         let menuCatIdInp = document.getElementById('menuCatId')
         let menuCatTitle = document.getElementById('menuCatTitle')
         let menuCatPic = document.getElementById('menuCatPic')
         let menuCatMenuId = document.getElementById('menuCatMenuId')
         let menuListOptions = document.getElementById('menuListOptions')
         let menuCatDescription = document.getElementById('menuCatDescription')
+        let deleteMenuCatBox = document.getElementById('deleteMenuCatBox')
+        let deleteCategoryTitle = document.getElementById('deleteCategoryTitle')
+        let deleteWithItems = document.getElementById('deleteWithItems')
+        let deleteWithoutItems = document.getElementById('deleteWithoutItems')
 
         function menuCatForm(menuCatId = null) {
             let allMenus = document.querySelectorAll('.allMenus')
             block.classList.remove('invisible')
             block.classList.remove('opacity-0')
             categoryForm.classList.remove('hidden')
+            categoryForm.classList.add('flex')
             // selectMenus()
             if (menuCatId == null) {
                 allMenus.forEach((menu) => {
@@ -830,7 +855,7 @@
                                             </svg>
                                     </div>
                                     <div class="flex justify-center cursor-pointer"
-                                         onclick='deleteMenuCat(this, ${data.id})'>
+                                         onclick='deleteCatBox(${data.title}, ${data.id})'>
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                              class="size-4 fill-gray-400 hover:fill-red-600"
                                              viewBox="0 0 448 512">
@@ -877,7 +902,7 @@
                             menuCategories.forEach((category) => {
                                 if (category.getAttribute('data-menu-category-id') == data.id) {
                                     category.children[0].children[0].setAttribute('onclick', `menuCatForm(${data.id})`)
-                                    category.children[0].children[1].setAttribute('onclick', `deleteMenuCat(this, ${data.id})`)
+                                    category.children[0].children[1].setAttribute('onclick', `deleteCatBox(${data.title}, ${data.id})`)
                                     category.children[1].innerText = data.title
                                 }
                             })
@@ -892,7 +917,10 @@
             }
         }
 
-        function deleteMenuCat(el, categoryId) {
+        function deleteMenuCat(categoryId) {
+            console.log(categoryId)
+            return
+            
             el.parentElement.parentElement.children[1].innerHTML = "<div class='w-5 h-5 mx-auto border-3 border-white border-t-[#eb3153] rounded-full animate-spin'></div>"
             $.ajaxSetup({
                 headers: {
@@ -910,6 +938,23 @@
                     console.log('error')
                 }
             })
+        }
+
+         function deleteCatBox(categoryTitle, categoryId){
+            console.log(categoryId)
+            block.classList.remove('opacity-0')
+            block.classList.remove('invisible')
+            deleteCategoryTitle.innerHTML = `حذف دسته <span class="font-bold">${categoryTitle}</span>`
+            deleteMenuCatBox.classList.remove('hidden')
+            deleteMenuCatBox.classList.remove('invisible')
+            deleteMenuCatBox.classList.remove('opacity-0')
+            deleteMenuCatBox.classList.add('flex')
+            deleteWithItems.setAttribute('onclick', `deleteMenuCat(${categoryId})`)
+            deleteWithoutItems.setAttribute('onclick', `deleteMenuCatWithoutItems(${categoryId})`)
+        }
+
+        function deleteMenuCatWithoutItems(categoryId){
+            console.log(categoryId)
         }
 
         let menuItemId = document.getElementById('menuItemId')
@@ -1265,7 +1310,7 @@
                                         </svg>
                                     </div>
                                     <div class="flex justify-center cursor-pointer"
-                                         onclick='deleteMenuCat(this, ${category.id})'>
+                                         onclick='deleteCatBox(${category.title}, ${category.id})'>
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                              class="size-4 fill-gray-400 hover:fill-red-600"
                                              viewBox="0 0 448 512">
@@ -1569,8 +1614,8 @@
                         </svg>
                     </span>
                 </div>
-            </div>
-        </div>
+                </div>
+                </div>
                             `
                         div.innerHTML = inner
                         menuItemList.appendChild(div)
