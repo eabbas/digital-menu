@@ -855,7 +855,7 @@
                                             </svg>
                                     </div>
                                     <div class="flex justify-center cursor-pointer"
-                                         onclick='deleteCatBox(${data.title}, ${data.id})'>
+                                         onclick='deleteCatBox("${data.title}", ${data.id})'>
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                              class="size-4 fill-gray-400 hover:fill-red-600"
                                              viewBox="0 0 448 512">
@@ -902,7 +902,7 @@
                             menuCategories.forEach((category) => {
                                 if (category.getAttribute('data-menu-category-id') == data.id) {
                                     category.children[0].children[0].setAttribute('onclick', `menuCatForm(${data.id})`)
-                                    category.children[0].children[1].setAttribute('onclick', `deleteCatBox(${data.title}, ${data.id})`)
+                                    category.children[0].children[1].setAttribute('onclick', `deleteCatBox("${data.title}", ${data.id})`)
                                     category.children[1].innerText = data.title
                                 }
                             })
@@ -917,31 +917,7 @@
             }
         }
 
-        function deleteMenuCat(categoryId) {
-            console.log(categoryId)
-            return
-            
-            el.parentElement.parentElement.children[1].innerHTML = "<div class='w-5 h-5 mx-auto border-3 border-white border-t-[#eb3153] rounded-full animate-spin'></div>"
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-            $.ajax({
-                url: "{{ url('menuCategory/delete-front/') }}/" + categoryId,
-                type: "GET",
-                success: function (data) {
-
-                    el.parentElement.parentElement.remove()
-                },
-                error: function () {
-                    console.log('error')
-                }
-            })
-        }
-
-         function deleteCatBox(categoryTitle, categoryId){
-            console.log(categoryId)
+        function deleteCatBox(categoryTitle, categoryId){
             block.classList.remove('opacity-0')
             block.classList.remove('invisible')
             deleteCategoryTitle.innerHTML = `حذف دسته <span class="font-bold">${categoryTitle}</span>`
@@ -951,6 +927,38 @@
             deleteMenuCatBox.classList.add('flex')
             deleteWithItems.setAttribute('onclick', `deleteMenuCat(${categoryId})`)
             deleteWithoutItems.setAttribute('onclick', `deleteMenuCatWithoutItems(${categoryId})`)
+        }
+
+        function deleteMenuCat(categoryId) {
+            let menuCategories = document.querySelectorAll('.menuCategories')
+            let menuItems = document.querySelectorAll('.menuItems')
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                }
+            })
+            $.ajax({
+                url: "{{ url('menuCategory/delete-front/') }}/" + categoryId,
+                type: "GET",
+                success: function (data) {
+                    menuCategories.forEach((menuCategory)=>{
+                        if(menuCategory.getAttribute('data-menu-category-id') == data.id){
+                            menuCategory.remove()
+                        }
+                    })
+                    menuItems.forEach((menuItem)=>{
+                        data.menu_item_ids.forEach((itemId)=>{
+                            if(menuItem.getAttribute('data-menu-item-id')==itemId){
+                                menuItem.remove()
+                            }
+                        })
+                    })
+                    closeForm()
+                },
+                error: function () {
+                    console.log('error')
+                }
+            })
         }
 
         function deleteMenuCatWithoutItems(categoryId){
@@ -1310,7 +1318,7 @@
                                         </svg>
                                     </div>
                                     <div class="flex justify-center cursor-pointer"
-                                         onclick='deleteCatBox(${category.title}, ${category.id})'>
+                                         onclick='deleteCatBox("${category.title}", ${category.id})'>
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                              class="size-4 fill-gray-400 hover:fill-red-600"
                                              viewBox="0 0 448 512">
