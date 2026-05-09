@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('logo')->nullable();
             $table->string('cover_img')->nullable();
-            $table->integer('phone');
+            $table->text('phone');
             $table->string('website')->nullable();
             $table->string('address')->nullable();
             $table->string('email')->nullable();

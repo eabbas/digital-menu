@@ -46,7 +46,7 @@
                         </label>
                         <div class="rounded-lg bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                             <input class="p-4 w-full focus:outline-none text-sm text-right font-bold mr-2"
-                                type="tel" name="phone" placeholder="شماره تماس" required>
+                                type="text" name="phone" placeholder="شماره تماس" required>
                         </div>
                     </div>
 
