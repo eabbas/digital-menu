@@ -990,7 +990,7 @@
                                                 Route::is('institute.*') ||
                                                 Route::is('field.fields') ||
                                                 Route::is('lesson.lessons') ||
-                                                Route::is('class.classes') ||) rotate-180 @endif"
+                                                Route::is('class.classes')) rotate-180 @endif"
                                      viewBox="0 0 448 512">
                                     <path
                                             d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"/>
@@ -1001,7 +1001,7 @@
                                         Route::is('institute.*') ||
                                         Route::is('field.fields') ||
                                         Route::is('lesson.lessons') ||
-                                        Route::is('class.classes') ||) max-h-[1000px] @else max-h-0 @endif">
+                                        Route::is('class.classes')) max-h-[1000px] @else max-h-0 @endif">
                                 <li class="pr-3.5 @if(Route::is('institute.institutes')) bg-gray-100 @endif">
                                     <a href="{{ route('institute.institutes') }}"
                                        class="block text-gray-700 py-2 text-md">
