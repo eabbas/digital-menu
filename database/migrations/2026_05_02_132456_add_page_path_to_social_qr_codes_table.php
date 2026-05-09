@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('f_a_q_s', function (Blueprint $table) {
-            $table->id();
-            $table->string('question')->nullable();
-            $table->string('answer')->nullable();
-            $table->tinyInteger('page_id');
-            $table->timestamps();
+        Schema::table('social_qr_codes', function (Blueprint $table) {
+            $table->string('page_path')->nullable();
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('f_a_q_s');
+        Schema::table('social_qr_codes', function (Blueprint $table) {
+            //
+        });
     }
 };

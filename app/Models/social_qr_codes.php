@@ -9,7 +9,8 @@ class social_qr_codes extends Model
   protected $fillable = [
     'page_id',
     'qr_path',
-    'slug'
+    'slug',
+    'page_path',
   ];
 
   public function pages()

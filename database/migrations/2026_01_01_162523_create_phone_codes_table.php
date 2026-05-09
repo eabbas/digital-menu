@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('phone_codes', function (Blueprint $table) {
             $table->id();
             $table->string('phoneNumber')->unique();
-            $table->string('code');
+            $table->string('code')->nullable();
             $table->timestamps();
         });
     }

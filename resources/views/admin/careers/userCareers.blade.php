@@ -53,7 +53,7 @@
                             <span class="block w-24 lg:w-full">توضیحات</span>
                         </div> --}}
                         <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-5">
-                            <span class="block w-[320px] lg:w-full">عملیات</span>
+                            <span class="block w-[260px] lg:w-full">عملیات</span>
                         </div>
 
                     </div>
@@ -98,7 +98,7 @@
                                     </div> --}}
 
                                         <div class="col-span-5">
-                                            <div class="lg:w-full grid grid-cols-4 divide-x divide-[#f1f1f4] items-center w-[320px]">
+                                            <div class="lg:w-full grid grid-cols-3 divide-x divide-[#f1f1f4] items-center @if (count($career->orders)) w-[260px] @else w-[180px] @endif">
 
                                                 <ul class="text-sm mt-1 rounded-sm p-1 grid grid-cols-3 gap-4">
                                                     <li class="flex justify-center">
@@ -135,11 +135,11 @@
                                                         </a>
                                                     </li>
                                                 </ul>
-                                                <div
+                                                {{-- <div
                                                     class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">
                                                     <a href="{{ route('menu.create', [$career]) }}"
                                                         class="text-sky-700">ایجاد منو</a>
-                                                </div>
+                                                </div> --}}
 {{--                                                @if (count($career->menus))--}}
 {{--                                                    <div--}}
 {{--                                                        class="p-1 lg:p-3 text-xs text-center lg:text-sm h-full flex items-center justify-center font-medium">--}}

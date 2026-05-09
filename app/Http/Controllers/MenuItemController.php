@@ -57,7 +57,6 @@ class MenuItemController extends Controller
     }
 
     public function storeFront(Request $request){
-//        return response()->json([$request->all(), $request->menu_category_id]);
         $path = null;
         if (isset($request->image)) {
             $name = $request->image->getClientOriginalName();
@@ -84,7 +83,6 @@ class MenuItemController extends Controller
     }
 
     public function updateFront(Request $request, menu_item $item){
-//        return response()->json(['request'=>$request->all(), 'item'=>$item]);
         $item->title = $request->title;
         if(isset($request->image)){
             $name = $request->image->getClientOriginalName();

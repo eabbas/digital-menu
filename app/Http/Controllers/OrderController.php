@@ -31,7 +31,6 @@ class OrderController extends Controller
             'created_at'=>now(),
             'updated_at'=>now(),
         ]);
-
         foreach($request->carts as $cart_id){
             $cart=cart::find($cart_id);
             $cart->order_id = $order_id;

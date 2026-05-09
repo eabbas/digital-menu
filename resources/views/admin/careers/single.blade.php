@@ -1,7 +1,6 @@
 @extends('admin.app.panel')
 @section('title')
-{{ $career->title }}
-    @dd('moraba')
+    {{ $career->title }}
 @endsection
 @section('content')
     <div class="w-full">
@@ -43,8 +42,8 @@
         </div>
     </div> --}}
         <div class="w-full flex flex-row justify-end">
-            <a href="{{ url()->previous()}}" class="text-xs px-2 py-0.5 rounded-sm bg-gray-500 text-white">بازگشت ←</a>
-               </div>
+            <a href="{{ url()->previous() }}" class="text-xs px-2 py-0.5 rounded-sm bg-gray-500 text-white">بازگشت ←</a>
+        </div>
         <div class="mt-4 lg:mt-5 bg-white">
             <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5">
                 <div class="flex flex-row justify-between items-center border-b border-gray-200">
@@ -83,7 +82,7 @@
                     </div>
                     <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
                         <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
-                            تعداد QRcode
+                            تعداد میز
                         </div>
                         <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
                             {{ count($career->qr_codes) }}
@@ -97,72 +96,81 @@
                             {{ $career->user->name }} {{ $career->user->family }}
                         </div>
                     </div>
-                   
-                    <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
-                        <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
-                            آدرس
+                    @if ($career->province_city)
+                        <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
+                            <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
+                                آدرس
+                            </div>
+                            <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
+                                {{ $career->province_city ? $career->province_city->province->title : '' }} ,
+                                {{ $career->province_city ? $career->province_city->title : '' }} ,
+                                {{ $career->address && $career->address }}
+                            </div>
                         </div>
-                        <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                            {{ $career->province_city ? $career->province_city->province->title : "" }} , {{ $career->province_city ? $career->province_city->title : "" }} , {{ $career->address && $career->address }}
-                        </div>
-                    </div>
-                    <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
-                        <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
-                            ایمیل
-                        </div>
-                        <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                            {{ $career->email }}
-                        </div>
-                    </div>
-                    <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
-                        <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
-                            شماره تلفن رستوران
-                        </div>
-                        <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                            {{ $career->phone }}
-                        </div>
-                    </div>
-                    <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
-                        <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
-                              وضعیت
-                        </div>
-                        <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                             {{ $career->active ? "فعال" : "غیرفعال" }} 
-                        </div>
-                    </div>
-                    <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
-                        <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
-                              نمایش در صفحه اول
-                        </div>
-                        <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                             {{ $career->show_in_home ? "✔" : "❌" }} 
-                        </div>
-                    </div>
-                    @if($career->description)
-                     <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
-                        <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
-                            توضیحات
-                        </div>
-                        <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
-                            {{ $career->description }}
-                        </div>
-                    </div>
                     @endif
-                    @if(json_decode($career->social_media))
+                    @if ($career->email)
+                        <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
+                            <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
+                                ایمیل
+                            </div>
+                            <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
+                                {{ $career->email }}
+                            </div>
+                        </div>
+                    @endif
+                    @if ($career->phone)
+                        <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
+                            <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
+                                شماره تلفن رستوران
+                            </div>
+                            <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
+                                {{ $career->phone }}
+                            </div>
+                        </div>
+                    @endif
+                    <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
+                        <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
+                            وضعیت
+                        </div>
+                        <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
+                            {{ $career->active ? 'فعال' : 'غیرفعال' }}
+                        </div>
+                    </div>
+                    <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
+                        <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
+                            نمایش در صفحه اول
+                        </div>
+                        <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
+                            {{ $career->show_in_home ? '✔' : '❌' }}
+                        </div>
+                    </div>
+                    @if ($career->description)
+                        <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
+                            <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
+                                توضیحات
+                            </div>
+                            <div class="w-full lg:w-1/2 font-medium pr-3 lg:pr-0 text-sm lg:text-base">
+                                {{ $career->description }}
+                            </div>
+                        </div>
+                    @endif
+                    @if (json_decode($career->social_media))
                         <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
                             <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
                                 پل های ارتباطی
                             </div>
                             <div class="w-1/2 flex flex-col items-center gap-3 pr-3 lg:pr-0">
                                 @foreach (json_decode($career->social_media) as $media => $link)
-                                    <div class="w-full flex flex-col lg:flex-row">
-                                        <div class="w-1/2 text-xs lg:text-sm text-gray-400">
-                                            {{ $media }}
+                                    @if ($link)
+                                        <div class="w-full flex flex-col lg:flex-row">
+                                            <div class="w-1/2 text-xs lg:text-sm text-gray-400">
+                                                {{ $media }}
+                                            </div>
+                                            <div class="w-1/2 text-sm lg:text-base">
+                                                {{ $link }}
+                                            </div>
                                         </div>
-                                        <div class="w-1/2 text-sm lg:text-base">
-                                            {{ $link }}
-                                        </div>
-                                    </div>
+                                    @endif
                                 @endforeach
                             </div>
                         </div>

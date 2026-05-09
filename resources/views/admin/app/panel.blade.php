@@ -21,7 +21,7 @@
         <div class="w-full">
             <a href="{{ route('home') }}"
                class="block w-full py-3 text-center font-bold text-3xl text-white border-b border-[darkslategray]">
-                famenu.ir
+                ringaa.ir
             </a>
         </div>
         <div class="py-5 h-[90%] overflow-y-auto flex flex-col gap-5" style="scrollbar-width: none;">
@@ -254,7 +254,7 @@
                         </a>
                     </li>
 
-
+{{-- 
                     @if (count(Auth::user()->careers))
                         <li
                                 class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('menu.createMenu')) bg-gray-700 @endif">
@@ -263,8 +263,8 @@
                                 ایجاد منو برای رستوران
                             </a>
                         </li>
-                    @endif
-                    @if (count(Auth::user()->menus))
+                    @endif --}}
+                    {{-- @if (count(Auth::user()->menus))
                         <li
                                 class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('menu.user_menus')) bg-gray-700 @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
@@ -272,7 +272,7 @@
                                 لیست منو های من
                             </a>
                         </li>
-                    @endif
+                    @endif --}}
                     {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
                         <span class="size-1 bg-white rounded-sm"></span>
                         <a href="{{ route('favoriteCareer.list') }}" class="text-white py-1 block">لیست علاقه مندی ها</a>
@@ -783,7 +783,7 @@
                     <!--! Font Awesome Pro 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                     <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z"/>
                 </svg>
-                <span class="text-sm text-[#5b5c75]">اطلاعات کاربری</span>
+                <span class="text-sm text-[#5b5c75]">حساب کاربری</span>
             </a>
             <a href="{{ route('user.logout') }}"
                class="w-full rounded-lg cursor-pointer px-4 py-2 hover:bg-[#F9FAFC] flex gap-5 items-center">
@@ -1088,7 +1088,7 @@
                                         ایجاد رستوران جدید
                                     </a>
                                 </li>
-                                @if (count(Auth::user()->menus))
+                                {{-- @if (count(Auth::user()->menus))
                                     <li class="pr-3.5 @if(Route::is('menu.user_menus')) bg-gray-100 @endif">
                                         <span class="size-1 rounded-sm"></span>
                                         <a href="{{ route('menu.user_menus', [Auth::user()]) }}"
@@ -1096,15 +1096,15 @@
                                             لیست منو های من
                                         </a>
                                     </li>
-                                @endif
-                                @if (count(Auth::user()->careers))
+                                @endif --}}
+                                {{-- @if (count(Auth::user()->careers))
                                     <li class="pr-3.5 @if(Route::is('menu.createMenu')) bg-gray-100 @endif">
                                         <a href="{{ route('menu.createMenu') }}"
                                            class="block text-gray-700 py-2 text-md">
                                             ایجاد منو برای رستوران
                                         </a>
                                     </li>
-                                @endif
+                                @endif --}}
                                 @if (in_array(1, $ids) || in_array(4, $ids))
 
                                     <li class="pr-3.5 @if(Route::is('career.createUser')) bg-gray-100 @endif">
