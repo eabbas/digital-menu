@@ -981,7 +981,66 @@
                                 </li>
                             </ul>
                         </div>
+                        <div class="pt-3">
+                            <div
+                                    class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
+                                <h3 class="text-md font-bold text-gray-800 mb-1.5">آموزشگاه ها</h3>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="size-4 transition-all duration-300 @if (Route::is('institute.institutes') ||
+                                                Route::is('institute.*') ||
+                                                Route::is('field.fields') ||
+                                                Route::is('lesson.lessons') ||
+                                                Route::is('class.classes') ||) rotate-180 @endif"
+                                     viewBox="0 0 448 512">
+                                    <path
+                                            d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"/>
+                                </svg>
+                            </div>
+                            <ul
+                                    class="transition-all duration-300 overflow-hidden @if (Route::is('institute.institutes') ||
+                                        Route::is('institute.*') ||
+                                        Route::is('field.fields') ||
+                                        Route::is('lesson.lessons') ||
+                                        Route::is('class.classes') ||) max-h-[1000px] @else max-h-0 @endif">
+                                <li class="pr-3.5 @if(Route::is('institute.institutes')) bg-gray-100 @endif">
+                                    <a href="{{ route('institute.institutes') }}"
+                                       class="block text-gray-700 py-2 text-md">
+                                          لیست آموزشگاه ها 
+                                    </a>
+                                </li>
+                                <li class="pr-3.5 @if(Route::is('institute.create')) bg-gray-100 @endif">
+                                    <a href="{{ route('institute.create') }}"
+                                       class="block text-gray-700 py-2 text-md">
+                                         آموزشگاه جدید
+                                    </a>
+                                </li>
+                                @if (Auth::user()->role[0]->title == 'admin')
 
+                                    <li class="pr-3.5 @if(Route::is('field.fields')) bg-gray-100 @endif">
+                                        <span class="size-1 rounded-sm"></span>
+                                        <a href="{{ route('field.fields') }}"
+                                           class="block text-gray-700 py-2 text-md">
+                                              لیست همه رشته ها
+                                        </a>
+                                    </li>
+                                    <li class="pr-3.5 @if(Route::is('lesson.lessons')) bg-gray-100 @endif">
+                                        <span class="size-1 rounded-sm"></span>
+                                        <a href="{{ route('lesson.lessons') }}"
+                                        class="block text-gray-700 py-2 text-md">
+                                        لیست همه درس ها 
+                                    </a>
+                                </li>
+                                <li class="pr-3.5 @if(Route::is('class.classes')) bg-gray-100 @endif">
+                                    <span class="size-1 rounded-sm"></span>
+                                    <a href="{{ route('class.classes') }}"
+                                    class="block text-gray-700 py-2 text-md">
+                                     لیست همه کلاس ها
+                                </a>
+                            </li>
+                            
+                            @endif
+                            </ul>
+                        </div>
                         @if(in_array(1,$ids) || in_array(5,$ids))
                             <div class="pt-3">
                                 <div class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
@@ -1024,7 +1083,7 @@
                             </div>
 
                         @endif
-                        {{--                            suggestion--}}
+                        {{-- suggestion--}}
                         <div class="pt-3">
                             <div
                                     class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
