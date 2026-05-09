@@ -102,7 +102,7 @@
                         <label class="w-30 text-sm mb-1 mt-2.5 flex">آدرس سایت</label>
                         <div class="rounded-lg bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                             <input class="p-4 w-full focus:outline-none text-sm font-bold"
-                                type="url" name="website" placeholder="https://example.com">
+                                type="text" name="website" placeholder="https://example.com">
                         </div>
                     </div>
 

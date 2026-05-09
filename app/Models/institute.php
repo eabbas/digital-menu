@@ -28,7 +28,7 @@ public function user()
 
    public function fields()
 {
-    return $this->hasMany(Field::class);
+    return $this->hasMany(field::class);
 }
 
 public function lessons()

@@ -15,7 +15,7 @@ class field extends Model
    ];
     public function institute()
 {
-    return $this->belongsTo(Institute::class , 'institute_id');
+    return $this->belongsTo(institute::class , 'institute_id');
 }
 
  public function lessons()

@@ -1002,18 +1002,18 @@
                                         Route::is('field.fields') ||
                                         Route::is('lesson.lessons') ||
                                         Route::is('class.classes')) max-h-[1000px] @else max-h-0 @endif">
-                                <li class="pr-3.5 @if(Route::is('institute.institutes')) bg-gray-100 @endif">
-                                    <a href="{{ route('institute.institutes') }}"
-                                       class="block text-gray-700 py-2 text-md">
-                                          لیست آموزشگاه ها 
-                                    </a>
-                                </li>
                                 <li class="pr-3.5 @if(Route::is('institute.create')) bg-gray-100 @endif">
                                     <a href="{{ route('institute.create') }}"
-                                       class="block text-gray-700 py-2 text-md">
-                                         آموزشگاه جدید
-                                    </a>
-                                </li>
+                                    class="block text-gray-700 py-2 text-md">
+                                    ایجاد آموزشگاه جدید
+                                </a>
+                            </li>
+                            <li class="pr-3.5 @if(Route::is('institute.institutes')) bg-gray-100 @endif">
+                                <a href="{{ route('institute.institutes') }}"
+                                   class="block text-gray-700 py-2 text-md">
+                                      لیست آموزشگاه ها 
+                                </a>
+                            </li>
                                 @if (Auth::user()->role[0]->title == 'admin')
 
                                     <li class="pr-3.5 @if(Route::is('field.fields')) bg-gray-100 @endif">
