@@ -116,14 +116,17 @@
                     </div>
 
                     <!-- انتخاب شعبه (اختیاری) -->
-                    <div class="w-full flex flex-col gap-3 items-start max-md:flex-col max-md:gap-1">
+                   <div class="w-full flex flex-col gap-3 items-center max-md:flex-col max-md:gap-1">
                         <label class="w-30 text-sm mb-1 mt-2.5 flex">انتخاب شعبه</label>
                         <div class="rounded-lg bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                             <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2" name="parent_id">
                                 <option value="0">شعبه مرکزی</option>
                                 @if(isset($institutes) && count($institutes))
                                     @foreach ($institutes as $inst)
-                                        <option value="{{ $inst->id }}">{{ $inst->title }}</option>
+                                        <option value="{{ $inst->id }}" 
+                                            {{ request()->get('parent_id') == $inst->id ? 'selected' : '' }}>
+                                            {{ $inst->title }}
+                                        </option>
                                     @endforeach
                                 @endif
                             </select>

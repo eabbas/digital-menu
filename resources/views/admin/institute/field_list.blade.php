@@ -39,7 +39,7 @@
                 {{-- Responsive Table --}}
                 <div class="overflow-x-auto [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 rounded-b-xl">
                     <table class="min-w-[700px] md:min-w-full w-full text-sm">
-                        <thead class="bg-gray-100 text-gray-700 text-xs font-semibold">
+                        <thead class="bg-gray-100 text-gray-700 text-xs font-bold">
                             <tr>
                                 <th class="w-10 p-3 text-center"></th>
                                 <th class="w-12 p-3 text-center">ردیف</th>

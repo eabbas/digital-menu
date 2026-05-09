@@ -72,7 +72,7 @@
 
                 {{-- دکمه‌های سریع برای نقش‌های مختلف --}}
                 <div class="flex flex-wrap justify-center sm:justify-end gap-2 mt-4 sm:mt-0">
-                    @if (Auth::user()->role[0]->title == 'admin')
+                    {{-- @if (Auth::user()->role[0]->title == 'admin') --}}
                         <a href="{{ route('request.form', [$institute]) }}" 
                            class="inline-flex items-center gap-1 px-3 py-1.5 bg-indigo-500 hover:bg-indigo-600 text-white text-sm rounded-lg transition-all duration-200 shadow">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -87,14 +87,14 @@
                             </svg>
                             افزودن استاد
                         </a>
-                        <a href="{{ route('institute.create', [$institute]) }}" 
+                        <a href="{{ route('institute.create', ['parent_id'=>$institute]) }}" 
                            class="inline-flex items-center gap-1 px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm rounded-lg transition-all duration-200 shadow">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2 2H7a2 2 0 00-2 2v14M9 7h6m-6 4h6m-6 4h6" />
                             </svg>
                             افزودن شعبه
                         </a>
-                    @elseif (Auth::user()->role[0]->title == 'student')
+                    @if (Auth::user()->role[0]->title == 'student')
 <a href="{{ route('institute.myClasses', [$institute]) }}" 
                            class="inline-flex items-center gap-1 px-4 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-lg transition-all duration-200 shadow">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -107,7 +107,7 @@
             </div>
 
             {{-- منوی سریع ادمین (ایجاد رشته، درس، کلاس، لیست درخواست‌ها) --}}
-            @if (Auth::user()->role[0]->title == 'admin')
+            {{-- @if (Auth::user()->role[0]->title == 'admin') --}}
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
                 <a href="{{ route('field.create', [$institute]) }}" 
                    class="flex items-center justify-center gap-2 bg-gradient-to-r from-purple-50 to-purple-100 hover:from-purple-100 hover:to-purple-200 p-3 rounded-xl transition-all duration-200 border border-purple-200 group">
@@ -138,10 +138,10 @@
                     <span class="text-sm font-medium text-amber-800">درخواست‌ها</span>
                 </a>
             </div>
-            @endif
+            {{-- @endif --}}
 
             {{-- کارت‌های آمار (فقط ادمین) --}}
-            @if (Auth::user()->role[0]->title == 'admin')
+            {{-- @if (Auth::user()->role[0]->title == 'admin') --}}
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-8">
                 <a href="{{ route('institute.field_list', [$institute]) }}" 
                    class="bg-white rounded-xl p-4 text-center shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group">
@@ -180,7 +180,7 @@
                     <p class="text-xs text-gray-500 mt-1">شعب</p>
                 </a>
             </div>
-            @endif
+            {{-- @endif --}}
 
             {{-- اطلاعات پایه آموزشگاه --}}
             <div class="mt-8 bg-gray-50 rounded-xl p-5 border border-gray-100">
@@ -195,26 +195,26 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                         </svg>
-                        <span><span class="font-semibold">تلفن:</span> {{ $institute->phone }}</span>
+                        <span><span class="font-bold">تلفن:</span> {{ $institute->phone }}</span>
                     </div>
                     <div class="flex items-start gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.66 0 3-4 3-9s-1.34-9-3-9m0 18c-1.66 0-3-4-3-9s1.34-9 3-9" />
                         </svg>
-                        <span><span class="font-semibold">وبسایت:</span> {{ $institute->website }}</span>
+                        <span><span class="font-bold">وبسایت:</span> {{ $institute->website }}</span>
                     </div>
                     <div class="flex items-start gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
                         </svg>
-                        <span><span class="font-semibold">ایمیل:</span> {{ $institute->email }}</span>
+                        <span><span class="font-bold">ایمیل:</span> {{ $institute->email }}</span>
                     </div>
                     <div class="sm:col-span-2 lg:col-span-3 flex items-start gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
-                        <span><span class="font-semibold">آدرس:</span> {{ $institute->address }}</span>
+                        <span><span class="font-bold">آدرس:</span> {{ $institute->address }}</span>
                     </div>
                 </div>
                 <div class="mt-4 pt-2 text-gray-700 text-sm border-t border-gray-200 leading-relaxed">
