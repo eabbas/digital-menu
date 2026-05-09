@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('f_a_q_s', function (Blueprint $table) {
             $table->id();
-            $table->string('question');
-            $table->string('answer');
+            $table->string('question')->nullable();
+            $table->string('answer')->nullable();
             $table->tinyInteger('page_id');
             $table->timestamps();
         });

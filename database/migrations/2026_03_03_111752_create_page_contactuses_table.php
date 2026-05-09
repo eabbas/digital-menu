@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('page_contactuses', function (Blueprint $table) {
             $table->id();
-            $table->string('key');
-            $table->string('value');
+            $table->string('key')->nullable();
+            $table->string('value')->nullable();
             $table->tinyInteger('page_id');
             $table->tinyInteger('block_id');
             $table->timestamps();

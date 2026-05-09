@@ -817,8 +817,12 @@ class UserController extends Controller
 
     public function setAddress(Request $request)
     {
+        $user_id = Auth::id();
+        if(isset($request->user_id)){
+            $user_id = $request->user_id;
+        }
         $address_id = address::create([
-            'user_id' => Auth::id(),
+            'user_id' => $user_id,
             'address' => $request->address,
         ]);
         $address = address::find($address_id);
@@ -997,6 +1001,37 @@ class UserController extends Controller
         }
         $userContacts->setAttribute('roles', $rolesArray);
         return response()->json($userContacts);
+    }
+    public function editInfo(Request $request){
+        $currentUser = Auth::user();
+        if ($request->state == "name") {
+            $currentUser->name = $request->inputValue;
+        }
+        if ($request->state == "family") {
+            $currentUser->family = $request->inputValue;
+        }
+        if ($request->state == "email") {
+            $currentUser->email = $request->inputValue;
+        }
+        if ($request->state == "phoneNumber") {
+            $currentUser->phoneNumber = $request->inputValue;
+        }
+        if ($request->state == "password") {
+            $currentUser->password = Hash::make($request->inputValue);
+        }
+        $currentUser->save();
+
+        return response()->json('ok');
+
+    }
+    public function editProfile(Request $request){
+        // return response()->json($request->all());
+        $name = $request->image->getClientOriginalName();
+        $fullName = time().'_'.$name;
+        $path = $request->file('image')->storeAs('images', $fullName, 'public');
+        Auth::user()->main_image = $path;
+        Auth::user()->save();
+        return response()->json(Auth::user());
     }
 
 

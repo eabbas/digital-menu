@@ -142,4 +142,38 @@ class User extends Authenticatable
     {
         return $this->hasMany(checkList::class);
     }
+    public function class_comments(){
+        return $this->hasMany(class_comment::class);
+    }
+
+    public function institutes(){
+        return $this->belongsToMany(institute::class, 'master_institutes' , 'master_id', 'institute_id');
+    }
+
+    public function classes(){
+        return $this->belongsToMany(lesson_class::class, 'master_classes' , 'master_id', 'class_id');
+    }
+
+    public function student_classes(){
+        return $this->belongsToMany(lesson_class::class, 'class_students' , 'student_id', 'class_id');
+    }
+
+    public function owner_institute(){
+        return $this->hasMany(institute::class);
+    }
+
+    public function user_institutes(){
+        return $this->belongsToMany(institute::class, 'user_institutes' , 'user_id', 'institute_id');
+
+    }
+
+    public function lesson_classes(){
+        return $this->HasMany(lesson_class::class , 'master_id');
+    }
+
+
+    public function requests(){
+     return $this->belongsToMany(institute::class,'institute_requests',"user_id","institute_id")->withPivot(['status']);
+   }
+
 }

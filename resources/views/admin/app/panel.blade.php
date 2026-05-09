@@ -21,7 +21,7 @@
         <div class="w-full">
             <a href="{{ route('home') }}"
                class="block w-full py-3 text-center font-bold text-3xl text-white border-b border-[darkslategray]">
-                famenu.ir
+                ringaa.ir
             </a>
         </div>
         <div class="py-5 h-[90%] overflow-y-auto flex flex-col gap-5" style="scrollbar-width: none;">
@@ -254,7 +254,7 @@
                         </a>
                     </li>
 
-
+{{-- 
                     @if (count(Auth::user()->careers))
                         <li
                                 class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('menu.createMenu')) bg-gray-700 @endif">
@@ -263,8 +263,8 @@
                                 ایجاد منو برای رستوران
                             </a>
                         </li>
-                    @endif
-                    @if (count(Auth::user()->menus))
+                    @endif --}}
+                    {{-- @if (count(Auth::user()->menus))
                         <li
                                 class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('menu.user_menus')) bg-gray-700 @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
@@ -272,7 +272,7 @@
                                 لیست منو های من
                             </a>
                         </li>
-                    @endif
+                    @endif --}}
                     {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm">
                         <span class="size-1 bg-white rounded-sm"></span>
                         <a href="{{ route('favoriteCareer.list') }}" class="text-white py-1 block">لیست علاقه مندی ها</a>
@@ -313,6 +313,56 @@
 
                 </ul>
             </div>
+                <div class="dashboard">
+                    <div
+                        class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if (Route::is('institute.*') || Route::is('field.fields') || Route::is('lesson.lessons') || Route::is('class.classes')) bg-gray-700 @endif">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="size-4 transition-all duration-200 @if (Route::is('institute.*') || Route::is('field.fields') || Route::is('lesson.lessons') || Route::is('class.classes')) rotate-180 @endif"
+                            viewBox="0 0 448 512">
+                            <path fill="white"
+                                d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z" />
+                        </svg>
+                        <div class="flex flex-row-reverse items-center gap-2">
+                            <span class=" text-[white] flex justify-end font-bold">آموزشگاه ها</span>
+                            <svg width="26" height="26" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m12 2.906-.328.164-7.5 3.68-.422.21v1.29h16.5V6.96l-.422-.21-7.5-3.68L12 2.906Zm0 1.688 4.406 2.156H7.594L12 4.594ZM5.25 9v7.5H4.5V18h15v-1.5h-.75V9h-1.5v7.5h-1.5V9h-1.5v7.5h-1.5V9h-1.5v7.5h-1.5V9h-1.5v7.5h-1.5V9h-1.5ZM3 18.75v1.5h18v-1.5H3Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <ul
+                        class="my-1 pr-3 transition-all duration-500 overflow-hidden  @if (Route::is('institute.*') || Route::is('field.fields') || Route::is('lesson.lessons') || Route::is('class.classes')) max-h-[500px] @else max-h-0 @endif">
+                        <li
+                            class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('institute.create')) bg-gray-700 @endif">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('institute.create') }}" class="text-white py-1 block">ایجاد آموزشگاه جدید
+                            </a>
+                        </li>
+                        <li
+                            class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('institute.institutes')) bg-gray-700 @endif">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('institute.institutes') }}" class="text-white py-1 block">لیست همه آموزشگاه ها
+                            </a>
+                        </li>
+                        <li
+                            class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('field.fields')) bg-gray-700 @endif">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('field.fields') }}" class="text-white py-1 block">لیست همه رشته ها 
+                            </a>
+                        </li>
+                        <li
+                            class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('lesson.lessons')) bg-gray-700 @endif">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('lesson.lessons') }}" class="text-white py-1 block">لیست همه دروس
+                            </a>
+                        </li>
+                        <li
+                            class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('class.classes')) bg-gray-700 @endif">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('class.classes') }}" class="text-white py-1 block">لیست همه کلاس ها
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             <div class="dashboard">
                 <div
                         class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if (Route::is('pages.*') || Route::is('socialMedia.create') || Route::is('socialMedia.list')) bg-gray-700 @endif">
@@ -733,7 +783,7 @@
                     <!--! Font Awesome Pro 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                     <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z"/>
                 </svg>
-                <span class="text-sm text-[#5b5c75]">اطلاعات کاربری</span>
+                <span class="text-sm text-[#5b5c75]">حساب کاربری</span>
             </a>
             <a href="{{ route('user.logout') }}"
                class="w-full rounded-lg cursor-pointer px-4 py-2 hover:bg-[#F9FAFC] flex gap-5 items-center">
@@ -1038,7 +1088,7 @@
                                         ایجاد رستوران جدید
                                     </a>
                                 </li>
-                                @if (count(Auth::user()->menus))
+                                {{-- @if (count(Auth::user()->menus))
                                     <li class="pr-3.5 @if(Route::is('menu.user_menus')) bg-gray-100 @endif">
                                         <span class="size-1 rounded-sm"></span>
                                         <a href="{{ route('menu.user_menus', [Auth::user()]) }}"
@@ -1046,15 +1096,15 @@
                                             لیست منو های من
                                         </a>
                                     </li>
-                                @endif
-                                @if (count(Auth::user()->careers))
+                                @endif --}}
+                                {{-- @if (count(Auth::user()->careers))
                                     <li class="pr-3.5 @if(Route::is('menu.createMenu')) bg-gray-100 @endif">
                                         <a href="{{ route('menu.createMenu') }}"
                                            class="block text-gray-700 py-2 text-md">
                                             ایجاد منو برای رستوران
                                         </a>
                                     </li>
-                                @endif
+                                @endif --}}
                                 @if (in_array(1, $ids) || in_array(4, $ids))
 
                                     <li class="pr-3.5 @if(Route::is('career.createUser')) bg-gray-100 @endif">

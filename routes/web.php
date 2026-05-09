@@ -48,25 +48,38 @@ use App\Http\Controllers\PageContactusController;
 use App\Http\Controllers\PageDescriptionController;
 use App\Http\Controllers\CheckListController;
 use App\Http\Middleware\checkListAdmin;
+use App\Http\Controllers\FieldController;
+use App\Http\Controllers\InstituteController;
+use App\Http\Controllers\InstituteRequestController;
+use App\Http\Controllers\LessonClassController;
+use App\Http\Controllers\LessonController;
+use App\Http\Controllers\ClassCommentController;
+use App\Http\Controllers\ClassAttachmentController;
 use App\Http\Middleware\savePreviousUrl;
 
 use App\Models\User;
 use Illuminate\Support\Str;
-use App\Models\career;
+use App\Models\social_qr_codes;
 
 Route::get('/robot', function () {
     return view('abbasScratch.index');
 });
 
-Route::get('/test', function () {
-    $careers = [];
-    foreach(career::all() as $career){
-        $careers[] = $career->load(['menus'=>function($query){
-            $query->with('menu_categories')->get();
-        }]);
+Route::get('/set-page-path', function(){
+    $qrCodes = social_qr_codes::all();
+    foreach($qrCodes as $code){
+        $slugArr = explode('/',$code->slug);
+        $code->page_path = $code->slug;
+        $code->slug=$slugArr[count($slugArr)-1];
+        $code->save();
     }
-    dd($careers);
+    
+});
 
+Route::get('/test', function () {
+    $random = Str::random(10);
+    $link = url('/')."/qrcode/1/" . $random;
+    return $link;
 });
 
 ///suggestion
@@ -93,6 +106,7 @@ Route::group([
     Route::post('/store', 'store')->name('store');
     Route::get('/delete/{user}/{pages}', 'delete')->name('delete');
     Route::get('/showAll/{pages}', 'index')->name('index');
+    Route::get('/customerPage/{page_id}', 'customerPage')->name('page');
 });
 
 Route::group([
@@ -201,6 +215,7 @@ Route::group([
     Route::get('/deleteRequest/{requests}', 'deleteRequest')->name('deleteRequest');
     Route::get('/acceptRequest/{requests}', 'acceptRequest')->name('acceptRequest');
     Route::post('/editInfo', 'editInfo')->name('editInfo');
+    Route::post('/editProfile', 'editProfile')->name('editProfile');
 });
 
 Route::group([
@@ -320,6 +335,7 @@ Route::group([
     Route::post('/update-front', 'updateFront')->name('updateFront');
     Route::get('/delete/{menu_category}', 'delete')->name('delete');
     Route::get('/delete-front/{category}', 'deleteFront')->name('deleteFront');
+    Route::get('/delete-front-without-items/{category}', 'deleteFrontWithoutItems')->name('deleteFrontWithoutItems');
     Route::get('/{menu}', 'menu')->name('menu');
     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
@@ -870,4 +886,178 @@ Route::group([
     Route::get('/delete/{id}', 'delete')->name('deleteChecklist');
 });
 
+
+///institute
+
+Route::group([
+    'prefix' => 'institute',
+    'controller' => InstituteController::class,
+    'as' =>'institute.',
+    'middleware' => [UserMiddleware::class]
+], function(){
+    Route::get('/create/{institute?}', 'create')->name('create');
+    Route::post('/store','store')->name('store');
+    Route::get('/index' , 'index')->name('institutes');
+    Route::get('/single/{institute}', 'single')->name('single');
+    Route::get('/edit/{institute}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/add_master/{institute}', 'add_master')->name('add_master');
+    Route::post('/master_store', 'master_store')->name('master_store');
+    Route::get('/master_list/{institute}', 'master_list')->name('master_list');
+    Route::get('/student_list/{institute}', 'student_list')->name('student_list');
+    Route::get('/field_list/{institute}', 'field_list')->name('field_list');
+    Route::get('/lesson_list/{institute}', 'lesson_list')->name('lesson_list');
+    Route::get('/class_list/{institute}', 'class_list')->name('class_list');
+    Route::get('/master_classes/{master}', 'master_classes')->name('master_classes');
+    Route::get('/delete/{institute}', 'delete')->name('delete');
+    Route::get('/master_delete/{master}', 'master_delete')->name('master_delete');
+    Route::get('/student_delete/{student}', 'student_delete')->name('student_delete');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+    Route::get('/user_institute/{user?}', 'user_institute')->name('user_institutes');
+    Route::get('/myClasses/{institute}/{user?}', 'myClasses')->name('myClasses');
+    Route::get('/branch_list/{institute}', 'branch_list')->name('branch_list');
+});
+
+///institute_request
+
+
+Route::group([
+    'prefix' => 'request',
+    'controller' => InstituteRequestController::class,
+    'as' =>'request.',
+    'middleware' => [UserMiddleware::class]
+], function(){
+    Route::get('/create/{institute}', 'create')->name('form');
+    Route::post('/store','store')->name('store');
+    Route::get('/requests/{institute}' , 'requests')->name('requests');
+    Route::get('/request_approve/{userId}/{instituteId}' , 'approveRequest')->name('request_approve');
+    Route::get('/userDelete/{user}/{institute}' , 'userDelete')->name('userDelete');
+});
+///student 
+
+Route::group([
+    'prefix' => 'student',
+    'controller' => InstituteController::class,
+    'as' =>'student.',
+    'middleware' => [UserMiddleware::class]
+], function(){
+    Route::get('/user_institute/{user?}', 'user_institute')->name('user_institutes');
+    Route::get('/myClasses/{institute}/{user?}', 'myClasses')->name('myClasses');
+});
+
+
+///master 
+
+Route::group([
+    'prefix' => 'master',
+    'controller' => InstituteController::class,
+    'as' =>'master.',
+    'middleware' => [UserMiddleware::class]
+], function(){
+    Route::get('/user_institute/{user?}', 'master_institute')->name('master_institutes');
+   Route::get('/master_classes/{master?}', 'master_classes')->name('master_classes');
+});
+
+
+///field 
+
+Route::group([
+    'prefix' => 'field',
+    'controller' => FieldController::class,
+    'as' =>'field.',
+    'middleware' => [UserMiddleware::class]
+], function(){
+    Route::get('/create/{institute}', 'create')->name('create');
+    Route::post('/store','store')->name('store');
+    Route::get('/index' , 'index')->name('fields');
+    Route::get('/lesson_list/{field}' , 'lesson_list')->name('lesson_list');
+    Route::get('/single/{field}', 'single')->name('single');
+    Route::get('/edit/{field}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{field}', 'delete')->name('delete');
+     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+});
+
+///lesson
+
+Route::group([
+    'prefix' => 'lesson',
+    'controller' => LessonController::class,
+    'as' =>'lesson.',
+    'middleware' => [UserMiddleware::class]
+], function(){
+    Route::get('/create/{institute}/{field?}', 'create')->name('create');
+    Route::post('/store','store')->name('store');
+    Route::get('/index' , 'index')->name('lessons');
+    Route::get('/class_list/{lesson}' , 'class_list')->name('class_list');
+    Route::get('/single/{lesson}', 'single')->name('single');
+    Route::get('/edit/{lesson}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{lesson}', 'delete')->name('delete');
+     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+});
+
+///lesson_class
+
+Route::group([
+    'prefix' => 'class',
+    'controller' => LessonClassController::class,
+    'as' =>'class.',
+    'middleware' => [UserMiddleware::class]
+], function(){
+    Route::get('/create/{institute}', 'create')->name('create');
+    Route::post('/store','store')->name('store');
+    Route::get('/index' , 'index')->name('classes');
+    Route::get('/single/{class}', 'single')->name('single');
+    Route::get('/edit/{class}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{class}', 'delete')->name('delete');
+    Route::get('/comments/{class}', 'comment')->name('comments');
+    Route::get('/add_master/{class}', 'add_master')->name('add_master');
+    Route::get('/add_student/{class}', 'add_student')->name('add_student');
+    Route::post('/attachments/{class}', 'attachments')->name('attachments');
+    Route::post('/master_store', 'master_store')->name('master_store');
+    Route::post('/student_store', 'student_store')->name('student_store');
+    Route::get('/student_list/{class}', 'student_list')->name('student_list');
+    Route::get('/student_delete/{student}', 'student_delete')->name('student_delete');
+    Route::get('/user_classes/{user?}', 'user_classes')->name('user_classes');
+    Route::get('/master_classes/{user?}', 'master_classes')->name('master_classes');
+     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+
+});
+
+///classComment
+
+Route::group([
+    'prefix' => 'comment',
+    'controller' => ClassCommentController::class,
+    'as' =>'comment.',
+    'middleware' => [UserMiddleware::class]
+], function(){
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store','store')->name('store');
+    Route::get('/index' , 'index')->name('comments');
+    Route::get('/edit/{comment}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{comment}', 'delete')->name('delete');
+});
+
+
+
+///classAtachment
+
+Route::group([
+    'prefix' => 'classAttachment',
+    'controller' => ClassAttachmentController::class,
+    'as' =>'classAttachment.',
+    'middleware' => [UserMiddleware::class]
+], function(){
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store','store')->name('store');
+    Route::get('/index' , 'index')->name('index');
+    Route::get('/single/{classAttachment}', 'single')->name('single');
+    Route::get('/edit/{classAttachment}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{classAttachment}', 'delete')->name('delete');
+});
 

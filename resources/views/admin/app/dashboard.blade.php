@@ -1,7 +1,55 @@
 @extends('admin.app.panel')
 @section('content')
     {{--  topol and miss.khodagholipour  --}}
-    <div class=" lg:flex flex-row justify-between gap-8 bg-[#fff] rounded-xl pb-4 shadow-md">
+    <div class="absolute top-0 opacity-0 invisible right-1/2 translate-x-1/2 w-3/4 lg:w-1/3 bg-white rounded-lg shadow-md transition-all duration-500 z-99999999"
+         id="message">
+        <div class="relative">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="size-4 absolute top-1/2 -translate-y-1/2 right-3 cursor-pointer"
+                 onclick="showMessage('close')" viewBox="0 0 384 512">
+                <path d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
+            </svg>
+
+        </div>
+    </div>
+    @if (!isset(Auth::user()->request) && !in_array(1, Auth::user()->role->pluck('id')->toArray()))
+            <a href="{{ route('user.request', [Auth::user()]) }}" onclick="setRequest(event)"
+            class="font-bold text-blue-500 text-xs lg:text-sm mb-4">درخواست نمایندگی</a>
+            <script>
+                let message = document.getElementById('message')
+                let element = document.createElement('div')
+                element.classList = "text-sm font-bold flex flex-row items-center justify-center py-3 gap-2 lg:gap-3"
+                function setRequest(ev){
+                    ev.preventDefault()
+                    showMessage('open')
+                    element.innerHTML = `
+                        <span class="text-green-500">!</span>
+                        <span>ثبت شد</span>
+                    `
+                    message.children[0].appendChild(element)
+                    setTimeout(() => {
+                        showMessage('close')
+                        location.assign("{{ route('user.request', [Auth::user()]) }}")
+                    }, 1000)
+                }
+                function showMessage(state) {
+                    if (state == 'open') {
+                        message.classList.remove('top-0')
+                        message.classList.remove('opacity-0')
+                        message.classList.remove('invisible')
+                        message.classList.add('top-1/10')
+                    }
+                    if (state == 'close') {
+                        message.classList.remove('top-1/10')
+                        message.classList.add('top-0')
+                        message.classList.add('opacity-0')
+                        message.classList.add('invisible')
+                    }
+                }
+            </script>
+            
+    @endif
+    <div class=" lg:flex flex-row justify-between gap-8 bg-[#fff] rounded-xl pb-4 shadow-md mt-4">
         <div class="w-full flex flex-col gap-5 bg-white lg:py-5 rounded-xl px-5 py-2 ">
             <div class="w-full sm:w-full gap-4 flex flex-col sm:flex-row lg:py-5">
                 <div class="w-full lg:10/12 flex flex-col gap-y-5">
