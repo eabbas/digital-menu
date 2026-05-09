@@ -313,6 +313,56 @@
 
                 </ul>
             </div>
+                <div class="dashboard">
+                    <div
+                        class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if (Route::is('institute.*') || Route::is('field.fields') || Route::is('lesson.lessons') || Route::is('class.classes')) bg-gray-700 @endif">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="size-4 transition-all duration-200 @if (Route::is('institute.*') || Route::is('field.fields') || Route::is('lesson.lessons') || Route::is('class.classes')) rotate-180 @endif"
+                            viewBox="0 0 448 512">
+                            <path fill="white"
+                                d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z" />
+                        </svg>
+                        <div class="flex flex-row-reverse items-center gap-2">
+                            <span class=" text-[white] flex justify-end font-bold">آموزشگاه ها</span>
+                            <svg width="26" height="26" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m12 2.906-.328.164-7.5 3.68-.422.21v1.29h16.5V6.96l-.422-.21-7.5-3.68L12 2.906Zm0 1.688 4.406 2.156H7.594L12 4.594ZM5.25 9v7.5H4.5V18h15v-1.5h-.75V9h-1.5v7.5h-1.5V9h-1.5v7.5h-1.5V9h-1.5v7.5h-1.5V9h-1.5v7.5h-1.5V9h-1.5ZM3 18.75v1.5h18v-1.5H3Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <ul
+                        class="my-1 pr-3 transition-all duration-500 overflow-hidden  @if (Route::is('institute.*') || Route::is('field.fields') || Route::is('lesson.lessons') || Route::is('class.classes')) max-h-[500px] @else max-h-0 @endif">
+                        <li
+                            class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('institute.create')) bg-gray-700 @endif">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('institute.create') }}" class="text-white py-1 block">ایجاد آموزشگاه جدید
+                            </a>
+                        </li>
+                        <li
+                            class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('institute.institutes')) bg-gray-700 @endif">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('institute.institutes') }}" class="text-white py-1 block">لیست همه آموزشگاه ها
+                            </a>
+                        </li>
+                        <li
+                            class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('field.fields')) bg-gray-700 @endif">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('field.fields') }}" class="text-white py-1 block">لیست همه رشته ها 
+                            </a>
+                        </li>
+                        <li
+                            class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('lesson.lessons')) bg-gray-700 @endif">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('lesson.lessons') }}" class="text-white py-1 block">لیست همه دروس
+                            </a>
+                        </li>
+                        <li
+                            class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('class.classes')) bg-gray-700 @endif">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('class.classes') }}" class="text-white py-1 block">لیست همه کلاس ها
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             <div class="dashboard">
                 <div
                         class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if (Route::is('pages.*') || Route::is('socialMedia.create') || Route::is('socialMedia.list')) bg-gray-700 @endif">
