@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('image')->nullable();
             $table->string('video')->nullable();
-            $table->integer('price')->nullable();
-            $table->integer('discount')->nullable();
-            $table->integer('duration')->nullable();
+            $table->text('price')->nullable();
+            $table->text('discount')->nullable();
+            $table->text('duration')->nullable();
             $table->integer('field_id');
             $table->timestamps();
         });

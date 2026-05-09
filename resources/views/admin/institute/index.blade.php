@@ -39,7 +39,7 @@
                 <div class="overflow-x-auto [&::-webkit-scrollbar]:h-1.5 rounded-b-xl">
                     <div class="min-w-[800px] md:min-w-full">
                         {{-- Header --}}
-                        <div class="grid grid-cols-12 gap-0 bg-gray-100 text-gray-700 text-xs font-semibold border-b border-gray-200">
+                        <div class="grid grid-cols-12 gap-0 bg-gray-100 text-gray-700 text-xs font-bold border-b border-gray-200">
                             <div class="col-span-1 p-3 text-center"></div>
                             <div class="col-span-1 p-3 text-center">ردیف</div>
                             <div class="col-span-1 p-3 text-center">لوگو</div>
@@ -111,7 +111,7 @@
                                             <button onclick="toggleDropdown(this)" type="button" class="text-white bg-gray-500 hover:bg-gray-600 p-1.5 rounded-md" title="ایجاد رشته، درس، کلاس">
                                                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"/></svg>
                                             </button>
-                                            <div class="dropdown-menu absolute left-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-1 hidden">
+                                            <div class="dropdown-menu absolute left-0 bottom-10 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-99999999999 hidden">
                                                 <div class="py-1">
                                                     <a href="{{ route('field.create', ['institute' => $institute->id]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">➕ ایجاد رشته</a>
                                                     <a href="{{ route('lesson.create', ['institute' => $institute->id]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">📘 ایجاد درس</a>

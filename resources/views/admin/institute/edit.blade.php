@@ -22,11 +22,11 @@
                         <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
                             
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان</label>
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">نام آموزشگاه</label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='title' value="{{$institute->title}}" placeholder="عنوان">
+                                        name='title' value="{{$institute->title}}" placeholder="نام آموزشگاه را وارد کنید">
                                 </div>
                             </div>
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -34,7 +34,7 @@
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm text-right font-bold mr-2 cursor-pointer"
-                                        type="tel"  name="phone" value="{{$institute->phone}}" placeholder="شماره تماس " required>
+                                        type="tel"  name="phone" value="{{$institute->phone}}" placeholder="شماره تماس آموزشگاه را وارد کنید  " required>
                                 </div>
                             </div>
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
