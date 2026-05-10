@@ -20,7 +20,7 @@
                         <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
                             
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان</label>
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex"><span class="required-star text-red-400">*</span>نام درس</label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                <label class="w-30 text-sm mb-1 mt-2.5 flex">مدت</label>
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex"><span class="required-star text-red-400">*</span>مدت</label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="number"
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                <label class="w-30 text-sm mb-1 mt-2.5 flex">قیمت</label>
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex"><span class="required-star text-red-400">*</span>قیمت</label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
@@ -48,7 +48,7 @@
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='discount' placeholder="تخفیف دوره" value="{{$lesson->discount}}" required>
+                                        name='discount' placeholder="تخفیف دوره" value="{{$lesson->discount}}">
                                 </div>
                             </div>
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -56,7 +56,7 @@
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2 cursor-pointer"
-                                        type="file" name='image' title="تصویر"required>
+                                        type="file" name='image' title="تصویر">
                                 </div>
                             </div>
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -68,7 +68,7 @@
                                 </div>
                             </div>
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                <label class="w-30 text-sm mb-1 mt-2.5 flex">انتخاب رشته</label>
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex"><span class="required-star text-red-400">*</span>انتخاب رشته</label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2" name="field_id" id="field_id" type="number" required>
@@ -83,7 +83,7 @@
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <textarea class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='description' placeholder="توضیحات دوره" required>{{$lesson->description}}</textarea>
+                                        name='description' placeholder="توضیحات دوره">{{$lesson->description}}</textarea>
                                 </div>
                             </div>
                         </div>

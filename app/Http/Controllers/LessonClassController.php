@@ -52,7 +52,9 @@ class LessonClassController extends Controller
     }
 
     public function update(Request $request){
+        $lesson = lesson::find($request->lesson_id);
         $class = lesson_class::find($request->id);
+        $image = null;
         if (isset($request->image)) {
             if ($class->image) {
                 Storage::disk('public')->delete($class->image);
@@ -65,11 +67,11 @@ class LessonClassController extends Controller
         $class->title = $request->title;
         $class->description = $request->description;
         $class->image =$image;
-        $class->assignment = $request->assignment;
+        // $class->assignment = $request->assignment;
         $class->lesson_id = $request->lesson_id;
         $class->master_id = $request->master_id;
         $class->save();
-        return to_route('class.classes');
+        return to_route('institute.class_list' , [$lesson->field->institute]);
     }
 
     public function single(lesson_class $class){

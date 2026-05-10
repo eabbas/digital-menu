@@ -1,237 +1,225 @@
 @extends('admin.app.panel')
 @section('title', 'نمایش درس')
+
 @section('content')
 
-<div class="w-full flex flex-col pb-4">
-    <div class="bg-white rounded-lg">
+<div class="w-full py-4 px-3 sm:px-5 md:px-8 bg-gray-50 min-h-screen">
+    <div class="max-w-7xl mx-auto">
 
-        <h2 class="text-lg font-bold text-gray-800 p-4 text-center">
-         اطلاعات درس
-        </h2>
-        {{--  هدر --}}
-        <div class="w-11/12 mx-auto ">
-            <div class="bg-gray-50 border rounded-xl p-6 shadow-sm">
-                    <div class="flex flex-row justify-between">
-                        <div class="flex flex-col justify-end gap-2">
-         
-                         {{-- اطلاعات روی تصویر --}}
-                    <div class="flex flex-col justify-end p-1 text-gray-700">
-
-                        {{-- عنوان --}}
-                        <h1 class="text-2xl font-bold mb-1">
-                             درس {{ $lesson->title }}
-                        </h1>
-                        {{-- آموزشگاه --}}
-                        <div class="flex flex-col gap-2 mb-2">
-                            <a href="{{ route('institute.single', [$lesson->field->institute->id]) }}"> 
-                                <span class="w-fit text-xs text-white bg-purple-500 px-3 py-1 rounded-full">
-                                    آموزشگاه {{ $lesson->field->institute->title }}  
-                                </span>
+        {{-- هدر پیشرفته با گرادیان --}}
+        <div class="relative bg-gradient-to-l from-indigo-800 via-purple-900 to-pink-900 rounded-2xl shadow-xl overflow-hidden mb-6 md:mb-8">
+            <div class="absolute inset-0 bg-black/20 z-0"></div>
+            <div class="relative z-10 px-5 py-5 md:px-7 md:py-6">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                    <div class="flex-1">
+                        {{-- مسیر (آموزشگاه / رشته) --}}
+                        <div class="flex flex-wrap items-center gap-2 text-xs text-white/70 mb-2">
+                            <a href="{{ route('institute.single', $lesson->field->institute->id ?? '#') }}" class="hover:text-white transition">
+                                آموزشگاه {{ $lesson->field->institute->title ?? '-' }}
                             </a>
-                            {{-- رشته --}}
-                            <a href="{{ route('field.single', [$lesson->field->id]) }}">
-                                <span class="w-fit text-xs text-white bg-sky-500 px-3 py-1 rounded-full">
-                                   رشته {{ $lesson->field->title }}
-                                </span>
+                            <span class="text-white/40">›</span>
+                            <a href="{{ route('field.single', $lesson->field->id ?? '#') }}" class="hover:text-white transition">
+                                رشته {{ $lesson->field->title ?? '-' }}
                             </a>
                         </div>
 
-                        {{-- مدت و قیمت --}}
-                        <div class="flex gap-6 text-sm opacity-90">
-                            <span>⏱ {{ $lesson->duration }} ساعت آموزش</span>
+                        {{-- عنوان درس --}}
+                        <h1 class="text-2xl md:text-3xl font-black text-white break-words">
+                            درس {{ $lesson->title }}
+                        </h1>
 
-                            <span class="line-through text-gray-400">
-                                {{ $lesson->price }} تومان
-                            </span>
-
-                            <span class="text-green-400 font-bold">
-                                {{ $lesson->discount }} تومان
-                            </span>
+                        {{-- قیمت و مدت --}}
+                        <div class="flex flex-wrap items-center gap-4 mt-3 text-sm text-white/90">
+                            <span class="flex items-center gap-1">⏱ {{ $lesson->duration ?? 0 }} ساعت آموزش</span>
+                            @if($lesson->price)
+                                <span class="line-through text-white/60">{{ number_format($lesson->price) }} تومان</span>
+                            @endif
+                            @if($lesson->discount_price)
+                                <span class="bg-emerald-500/30 px-2 py-0.5 rounded-full text-emerald-100 font-bold">
+                                    {{ number_format($lesson->discount_price) }} تومان
+                                </span>
+                            @endif
                         </div>
                     </div>
-                       </div>
-                       @if (Auth::user()->role[0]->title == 'admin')
-                       {{-- ایجاد درس --}}
-                       <div class="flex items-start gap-3">
-                           <a href="{{ route('class.create' ,[$lesson->field->institute]) }}"
-                                 class="px-5 py-1 rounded-sm bg-blue-500 hover:bg-blue-600 text-white text-xs lg:text-base">ایجاد 
-                             کلاس </a>
-                           <a href="{{ route('lesson.class_list' ,[$lesson]) }}"
-                                 class="px-5 py-1 rounded-sm bg-blue-500 hover:bg-blue-600 text-white text-xs lg:text-base">لیست 
-                             کلاس ها </a>
-                       </div>
-                       @endif
-                    </div>        
-               </div>
-        </div>
-        <div class="w-11/12 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 pb-6">
 
-            {{-- هدر نمایشی درس --}}
-            <div class="col-span-1 lg:col-span-2 mt-4">
-                <div class="relative rounded-xl overflow-hidden shadow-lg">
-
-                    {{-- بک گراد --}}
-                    <div class="absolute inset-0 bg-gradient-to-l from-slate-900/70 to-slate-800/40 z-10"></div>
-
-                    {{-- تصویر --}}
-                    <img src="{{ asset('storage/'.$lesson->image) }}"
-                        class="w-full h-[300px] object-cover">
-                        <div class="absolute inset-0 z-10 flex items-start justify-end p-3">
-                            @if (Auth::user()->role[0]->title == 'admin')
-                    <a href="{{route('lesson.edit',[$lesson])}}" class="inline-block p-2 rounded-md bg-gray-200 cursor-pointer" title="ویرایش">
-                       <svg xmlns="http://www.w3.org/2000/svg" class="size-4"
-                            viewBox="0 0 512 512">
-                            <path 
-                             d="M256 0c17 0 33.6 1.7 49.8 4.8c7.9 1.5 21.8 6.1 29.4 20.1c2 3.7 3.6 7.6 4.6 11.8l9.3 38.5C350.5 81 360.3 86.7 366 85l38-11.2c4-1.2 8.1-1.8 12.2-1.9c16.1-.5 27 9.4 32.3 15.4c22.1 25.1 39.1 54.6 49.9 86.3c2.6 7.6 5.6 21.8-2.7 35.4c-2.2 3.6-4.9 7-8 10L459 246.3c-4.2 4-4.2 15.5 0 19.5l28.7 27.3c3.1 3 5.8 6.4 8 10c8.2 13.6 5.2 27.8 2.7 35.4c-10.8 31.7-27.8 61.1-49.9 86.3c-5.3 6-16.3 15.9-32.3 15.4c-4.1-.1-8.2-.8-12.2-1.9L366 427c-5.7-1.7-15.5 4-16.9 9.8l-9.3 38.5c-1 4.2-2.6 8.2-4.6 11.8c-7.7 14-21.6 18.5-29.4 20.1C289.6 510.3 273 512 256 512s-33.6-1.7-49.8-4.8c-7.9-1.5-21.8-6.1-29.4-20.1c-2-3.7-3.6-7.6-4.6-11.8l-9.3-38.5c-1.4-5.8-11.2-11.5-16.9-9.8l-38 11.2c-4 1.2-8.1 1.8-12.2 1.9c-16.1 .5-27-9.4-32.3-15.4c-22-25.1-39.1-54.6-49.9-86.3c-2.6-7.6-5.6-21.8 2.7-35.4c2.2-3.6 4.9-7 8-10L53 265.7c4.2-4 4.2-15.5 0-19.5L24.2 218.9c-3.1-3-5.8-6.4-8-10C8 195.3 11 181.1 13.6 173.6c10.8-31.7 27.8-61.1 49.9-86.3c5.3-6 16.3-15.9 32.3-15.4c4.1 .1 8.2 .8 12.2 1.9L146 85c5.7 1.7 15.5-4 16.9-9.8l9.3-38.5c1-4.2 2.6-8.2 4.6-11.8c7.7-14 21.6-18.5 29.4-20.1C222.4 1.7 239 0 256 0zM218.1 51.4l-8.5 35.1c-7.8 32.3-45.3 53.9-77.2 44.6L97.9 120.9c-16.5 19.3-29.5 41.7-38 65.7l26.2 24.9c24 22.8 24 66.2 0 89L59.9 325.4c8.5 24 21.5 46.4 38 65.7l34.6-10.2c31.8-9.4 69.4 12.3 77.2 44.6l8.5 35.1c24.6 4.5 51.3 4.5 75.9 0l8.5-35.1c7.8-32.3 45.3-53.9 77.2-44.6l34.6 10.2c16.5-19.3 29.5-41.7 38-65.7l-26.2-24.9c-24-22.8-24-66.2 0-89l26.2-24.9c-8.5-24-21.5-46.4-38-65.7l-34.6 10.2c-31.8 9.4-69.4-12.3-77.2-44.6l-8.5-35.1c-24.6-4.5-51.3-4.5-75.9 0zM208 256a48 48 0 1 0 96 0 48 48 0 1 0 -96 0zm48 96a96 96 0 1 1 0-192 96 96 0 1 1 0 192z" />
-                       </svg>
-                    </a>
-                    @endif
-                </div>
-                </div>
-            </div>
-            {{-- ویدیو درس --}}
-            <div class="col-span-1 lg:col-span-2">
-                <label class="text-sm text-gray-600">ویدیو معرفی درس</label>
-
-                <div class="mt-2 p-4 bg-gray-50 rounded border flex justify-center">
-                    @if($lesson->video)
-                        <video controls class="w-full lg:w-2/3 rounded shadow">
-                            <source src="{{ asset('storage/'.$lesson->video) }}" type="video/mp4">
-                            مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
-                        </video>
-                    @else
-                        <span class="text-gray-400 text-sm">
-                            ویدیویی برای این درس ثبت نشده است
-                        </span>
+                    {{-- دکمه‌های عملیاتی برای ادمین --}}
+                    @if(Auth::user()->role[0]->title == 'admin')
+                    <div class="flex flex-wrap gap-2 shrink-0">
+                        <a href="{{ route('class.create', [$lesson->field->institute]) }}" 
+                           class="bg-white/20 hover:bg-white/30 text-white px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                            ایجاد کلاس
+                        </a>
+                        <a href="{{ route('lesson.class_list', $lesson) }}" 
+                           class="bg-white/20 hover:bg-white/30 text-white px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                            لیست کلاس‌ها
+                        </a>
+                        <a href="{{ route('lesson.edit', $lesson) }}" 
+                           class="bg-white/20 hover:bg-white/30 text-white px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-1">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                            ویرایش
+                        </a>
+                    </div>
                     @endif
                 </div>
             </div>
-            {{-- عنوان --}}
-            <div>
-                <label class="text-sm text-gray-600">عنوان درس</label>
-                <div class="mt-1 p-3 bg-gray-50 rounded border">
-                    {{ $lesson->title }}
-                </div>
-            </div>
-
-            {{-- مدت درس --}}
-            <div>
-                <label class="text-sm text-gray-600">مدت درس</label>
-                <div class="mt-1 p-3 bg-gray-50 rounded border">
-                    {{ $lesson->duration }} ساعت
-                </div>
-            </div>
-
-            {{-- قیمت --}}
-            <div>
-                <label class="text-sm text-gray-600">قیمت درس</label>
-                <div class="mt-1 p-3 bg-gray-50 rounded border">
-                    {{ $lesson->price }} تومان
-                </div>
-            </div>
-
-            {{-- قیمت با تخفیف --}}
-            <div>
-                <label class="text-sm text-gray-600">قیمت با تخفیف</label>
-                <div class="mt-1 p-3 bg-gray-50 rounded border">
-                    {{ $lesson->discount_price }} تومان
-                </div>
-            </div>
-
-            {{-- رشته --}}
-            <div>
-                <label class="text-sm text-gray-600">رشته</label>
-                <div class="mt-1 p-3 bg-gray-50 rounded border">
-                    {{ $lesson->field->title }}
-                </div>
-            </div>
-
-            {{-- آموزشگاه --}}
-            <div>
-                <label class="text-sm text-gray-600">آموزشگاه</label>
-                <div class="mt-1 p-3 bg-gray-50 rounded border">
-                    {{ $lesson->field->institute->title  }}
-                </div>
-            </div>
-
-            {{-- توضیحات --}}
-            <div class="col-span-1 lg:col-span-2">
-                <label class="text-sm text-gray-600">توضیحات درس</label>
-                <div class="mt-1 p-4 bg-gray-50 rounded border leading-7 text-justify">
-                    {{$lesson->description}}
-                </div>
-            </div>
         </div>
-        
-         {{-- 🟡 کلاس ها --}}
-        {{-- <div class="w-11/12 mx-auto mt-10 pb-10">
 
-            <h2 class="text-lg font-bold text-gray-800 mb-5">
-            کلاس ها
-            </h2>
-
-            @if($lesson->lesson_classes->count())
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                    @foreach($lesson->lesson_classes as $class)
-
-                        <div class="bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition duration-300"> --}}
-
-                            {{-- تصویر رشته --}}
-                            {{-- <img src="{{ asset('storage/'.$class->image) }}"
-                                 class="w-full h-36 object-cover"> --}}
-
-                            {{-- اطلاعات --}}
-                            {{-- <div class="p-4">
-
-                                <h3 class="font-bold text-gray-800 text-sm"> --}}
-                                    {{-- {{ $class->title }} (استاد {{$class->master->name}} {{$class->master->family}}) --}}
-                                {{-- </h3>
-
-                                <p class="text-xs text-gray-500 mt-2 leading-6">
-                                    {{ \Illuminate\Support\Str::limit(strip_tags($class->description), 90) }}
-                                </p>
-
-                                <a href="{{ route('class.single', $class->id) }}"
-                                   class="inline-block mt-4 text-sky-600 text-xs font-medium">
-                                    مشاهده →
-                                </a>
-
-                            </div>
-
-                        </div>
-
-                    @endforeach
-
+        {{-- محتوای اصلی: تصویر و اطلاعات --}}
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            {{-- ستون راست: تصویر درس --}}
+            <div class="relative group">
+                <div class="rounded-xl overflow-hidden shadow-lg border-4 border-white bg-white">
+                    @if($lesson->image && Storage::disk('public')->exists($lesson->image))
+                                <img src="{{ asset('storage/'.$lesson->image) }}" alt="{{ $lesson->title }}" class="w-full h-48 object-cover">
+                            @else
+                                <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-400"><svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
+                            @endif
+                    @if(Auth::user()->role[0]->title == 'admin')
+                    <div class="absolute top-3 left-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                        <a href="{{ route('lesson.edit', $lesson) }}" 
+                           class="inline-flex items-center gap-1.5 bg-gray-900/70 backdrop-blur-md hover:bg-indigo-600 text-white px-2.5 py-1.5 rounded-lg text-xs font-medium">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                            ویرایش
+                        </a>
+                    </div>
+                    @endif
                 </div>
+            </div>
 
-            @else
-
-                <div class="bg-gray-50 border rounded-lg p-6 text-center text-sm text-gray-400">
-                    هیچ درسی برای این رشته ثبت نشده است
+            {{-- ستون چپ: اطلاعات اصلی درس --}}
+            {{-- <div class="bg-white rounded-xl shadow-md p-5 md:p-6 space-y-4 border border-gray-100">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs text-gray-500 uppercase font-semibold">عنوان درس</label>
+                        <div class="mt-1 text-gray-800 font-medium">{{ $lesson->title }}</div>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-500 uppercase font-semibold">مدت زمان</label>
+                        <div class="mt-1 text-gray-800">{{ $lesson->duration ?? 'نامشخص' }} ساعت</div>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-500 uppercase font-semibold">قیمت اصلی</label>
+                        <div class="mt-1 text-gray-800">{{ number_format($lesson->price ?? 0) }} تومان</div>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-500 uppercase font-semibold">قیمت با تخفیف</label>
+                        <div class="mt-1 text-emerald-600 font-bold">{{ number_format($lesson->discount_price ?? 0) }} تومان</div>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-500 uppercase font-semibold">رشته</label>
+                        <div class="mt-1 text-gray-800">{{ $lesson->field->title ?? '-' }}</div>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-500 uppercase font-semibold">آموزشگاه</label>
+                        <div class="mt-1 text-gray-800">{{ $lesson->field->institute->title ?? '-' }}</div>
+                    </div>
                 </div>
-
-            @endif
-
+            </div>
         </div> --}}
-        @if (Auth::user()->role[0]->title == 'student')
-        {{-- دکمه بازگشت --}}
-        <div class="w-11/12 mx-auto pb-6 flex justify-end">
-            <a href="{{ route('institute.myClasses' , [$lesson->field->institute]) }}"
-               class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">
-                بازگشت
-            </a>
+
+        {{-- ویدیو معرفی --}}
+        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 mb-8"><div class="bg-gradient-to-r from-sky-50 to-white px-5 py-3 border-b">
+                <h3 class="flex items-center gap-2 text-base md:text-lg font-bold text-gray-800">
+                    <svg class="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                    ویدیوی معرفی درس
+                </h3>
+            </div>
+            <div class="p-5 md:p-6 flex justify-center">
+                @if($lesson->video)
+                    <video controls class="w-full lg:w-2/3 rounded-lg shadow-md">
+                        <source src="{{ asset('storage/'.$lesson->video) }}" type="video/mp4">
+                        مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
+                    </video>
+                @else
+                    <div class="text-center py-8 text-gray-400 italic">
+                        <svg class="w-12 h-12 mx-auto mb-2 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                        ویدیویی برای این درس ثبت نشده است.
+                    </div>
+                @endif
+            </div>
+        </div>
+
+        {{-- توضیحات درس --}}
+        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 mb-8">
+            <div class="bg-gradient-to-r from-indigo-50 to-white px-5 py-3 border-b">
+                <h3 class="flex items-center gap-2 text-base md:text-lg font-bold text-gray-800">
+                    <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    توضیحات درس
+                </h3>
+            </div>
+            <div class="p-5 md:p-6 prose max-w-none text-gray-600 leading-relaxed text-justify">
+                {!! nl2br(e($lesson->description ?? 'توضیحی ثبت نشده است.')) !!}
+            </div>
+        </div>
+
+        {{-- لیست کلاس‌های این درس (فعال شده و بهبود یافته) --}}
+        {{-- @if(isset($lesson->lesson_classes) && $lesson->lesson_classes->count())
+        <div class="mb-8">
+            <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+                <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    کلاس‌های این درس
+                </h2>
+                <a href="{{ route('lesson.class_list', $lesson) }}" class="text-indigo-600 text-sm hover:underline">مشاهده همه →</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach($lesson->lesson_classes as $class)
+                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 group">
+                    @if($class->image)
+                    <img src="{{ asset('storage/'.$class->image) }}" class="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ $class->title }}">
+                    @else
+                    <div class="w-full h-36 bg-gray-200 flex items-center justify-center text-gray-400"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    </div>
+                    @endif
+                    <div class="p-4">
+                        <h3 class="font-bold text-gray-800">{{ $class->title }}</h3>
+                        <div class="flex items-center gap-2 text-xs text-gray-500 mt-1">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                            <span>استاد: 
+                                @if($class->teacher)
+                                    {{ $class->teacher->name }}
+                                @elseif($class->teacher_name)
+                                    {{ $class->teacher_name }}
+                                @else
+                                    نامشخص
+                                @endif
+                            </span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2 line-clamp-2">{{ Str::limit(strip_tags($class->description ?? ''), 80) }}</p>
+                        <a href="{{ route('class.single', $class->id) }}" class="inline-block mt-3 text-indigo-600 text-sm font-medium hover:underline">مشاهده کلاس →</a>
+                    </div>
+                </div>
+                @endforeach
+            </div>
         </div>
         @else
-        {{-- دکمه بازگشت --}}
-        <div class="w-11/12 mx-auto pb-6 flex justify-end">
-            <a href="{{ route('institute.lesson_list' , [$lesson->field->institute]) }}"
-               class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">
-                بازگشت
-            </a>
+        <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 text-center text-gray-400 mb-8">
+            <svg class="w-10 h-10 mx-auto mb-2 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            هیچ کلاسی برای این درس ثبت نشده است.
+            @if(Auth::user()->role[0]->title == 'admin')
+            <div class="mt-3"><a href="{{ route('class.create', [$lesson->field->institute]) }}" class="bg-indigo-600 text-white px-4 py-1.5 rounded-lg text-sm">ایجاد اولین کلاس</a></div>
+            @endif
         </div>
-        @endif
+        @endif --}}
+
+        {{-- دکمه بازگشت (بر اساس نقش) --}}
+        {{-- <div class="flex justify-end pb-4">
+            @if(Auth::user()->role[0]->title == 'student')
+                <a href="{{ route('institute.myClasses', $lesson->field->institute) }}" 
+                   class="inline-flex items-center gap-2 text-gray-600 bg-white hover:bg-gray-100 px-4 py-2 rounded-xl shadow-sm transition text-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    بازگشت به کلاس‌های من
+                </a>
+            @else
+                <a href="{{ route('institute.lesson_list', $lesson->field->institute) }}" 
+                   class="inline-flex items-center gap-2 text-gray-600 bg-white hover:bg-gray-100 px-4 py-2 rounded-xl shadow-sm transition text-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    بازگشت به لیست دروس
+                </a>
+            @endif
+        </div> --}}
     </div>
 </div>
 

@@ -50,7 +50,7 @@
                                 <div class="text-white/60 text-xs">جلسات برگزار شده</div>
                                 <div class="text-white text-xl font-bold">{{ $class->sessions_completed ?? 8 }}/{{ $class->total_sessions ?? 12 }}</div>
                             </div>
-<div class="bg-white/10 backdrop-blur-sm rounded-xl p-2 text-center">
+                            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-2 text-center">
                                 <div class="text-white/60 text-xs">میانگین نمرات</div>
                                 <div class="text-white text-xl font-bold">{{ $class->avg_grade ?? 17.4 }}</div>
                             </div>
@@ -97,7 +97,7 @@
             <div class="border-b border-gray-200 overflow-x-auto">
                 <div class="flex min-w-max md:min-w-0">
                     <button class="tab-button active px-5 py-3 text-sm font-medium text-indigo-600 border-b-2 border-indigo-600" data-tab="info">اطلاعات کلاس</button>
-<a href="{{ route('class.student_list', [$class]) }}" class="tab-button px-5 py-3 text-sm font-medium text-gray-600 hover:border-b-2 border-indigo-600" data-tab="students">دانش‌آموزان</a>
+                <a href="{{ route('class.student_list', [$class]) }}" class="tab-button px-5 py-3 text-sm font-medium text-gray-600 hover:border-b-2 border-indigo-600" data-tab="students">دانش‌آموزان</a>
                     <button class="tab-button px-5 py-3 text-sm font-medium text-gray-600" data-tab="assignments">تکالیف</button>
                     <button class="tab-button px-5 py-3 text-sm font-medium text-gray-600" data-tab="comments">نظرات</button>
                 </div>

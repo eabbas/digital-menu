@@ -20,11 +20,11 @@
                         <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
                             
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان</label>
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex"><span class="required-star text-red-400">*</span>نام کلاس</label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='title' placeholder="عنوان" value="{{$class->title}}" required>
+                                        name='title' placeholder="نام کلاس را وارد کنبد" value="{{$class->title}}" required>
                                 </div>
                             </div>
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                <label class="w-30 text-sm mb-1 mt-2.5 flex">انتخاب درس</label>
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex"><span class="required-star text-red-400">*</span>انتخاب درس </label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2" name="lesson_id" id="lesson_id" type="number" required> 
@@ -72,17 +72,17 @@
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <textarea class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='description' placeholder="توضیحات رشته" required>{{$class->description}}</textarea>
+                                        name='description' placeholder="توضیحات رشته">{{$class->description}}</textarea>
                                 </div>
                             </div>
-                            <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1 lg:col-span-2">
+                            {{-- <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1 lg:col-span-2">
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">تکالیف</label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <textarea class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
                                         name='assignment' placeholder="تکالیف کلاس">{{$class->assignment}}</textarea>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="w-full text-left mt-3">
                             <button type="submit"

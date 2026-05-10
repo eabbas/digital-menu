@@ -50,7 +50,9 @@ class LessonController extends Controller
     }
 
     public function update(Request $request){
+        $field = field::find($request->field_id);
         $lesson = lesson::find($request->id);
+        $image = null;
         if (isset($request->image)) {
             if ($lesson->image) {
                 Storage::disk('public')->delete($lesson->image);
@@ -68,7 +70,7 @@ class LessonController extends Controller
         $lesson->video = $request->video;
         $lesson->field_id = $request->field_id;
         $lesson->save();
-        return to_route('lesson.lessons');
+        return to_route('institute.lesson_list' , [$field->institute]);
     }
 
     public function class_list(lesson $lesson){
