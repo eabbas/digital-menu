@@ -14,11 +14,12 @@ class InstituteController extends Controller
 {
     public function create(institute $institute){
         $provinces = province_cities::where('parent', 0)->get();
+        $institutes = institute::all();
         // if(Auth::user()->institutes == Null){
         //     $institutes =  $institute->user->load('institutes');
         //     return view('admin.institute.create' ,['provinces'=>$provinces , 'institutes'=>$institutes , 'request'=>$institute]);
         // }else{
-            return view('admin.institute.create' ,['provinces'=>$provinces , 'institute'=>$institute]);
+            return view('admin.institute.create' ,['provinces'=>$provinces , 'institute'=>$institute , 'institutes'=>$institutes]);
 
         // }
         // dd($institutes);

@@ -40,7 +40,7 @@
                 <div class="overflow-x-auto [&::-webkit-scrollbar]:h-1.5 rounded-b-xl">
                     <div class="min-w-[800px] md:min-w-full">
                         {{-- Header --}}
-                        <div class="grid grid-cols-12 gap-0 bg-gray-100 text-gray-700 text-xs font-semibold border-b border-gray-200">
+                        <div class="grid grid-cols-12 gap-0 bg-gray-100 text-gray-700 text-xs font-bold border-b border-gray-200">
                             <div class="col-span-1 p-3 text-center"></div>
                             <div class="col-span-1 p-3 text-center">ردیف</div>
                             <div class="col-span-1 p-3 text-center">تصویر</div>
