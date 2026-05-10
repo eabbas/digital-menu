@@ -32,11 +32,11 @@
                         <div class="flex flex-wrap items-center gap-4 mt-3 text-sm text-white/90">
                             <span class="flex items-center gap-1">⏱ {{ $lesson->duration ?? 0 }} ساعت آموزش</span>
                             @if($lesson->price)
-                                <span class="line-through text-white/60">{{ number_format($lesson->price) }} تومان</span>
+                                <span class="line-through text-white/60"> {{ $lesson->price }} تومان</span>
                             @endif
                             @if($lesson->discount_price)
                                 <span class="bg-emerald-500/30 px-2 py-0.5 rounded-full text-emerald-100 font-bold">
-                                    {{ number_format($lesson->discount_price) }} تومان
+                                    {{ $lesson->discount_price }} تومان
                                 </span>
                             @endif
                         </div>
