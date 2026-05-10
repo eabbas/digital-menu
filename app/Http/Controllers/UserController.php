@@ -330,11 +330,6 @@ class UserController extends Controller
                 $contact->delete();
             }
         }
-        if (count($user->introCats)) {
-            foreach ($user->introCats as $introCat) {
-                $introCat->delete();
-            }
-        }
         if (count($user->specialPages)) {
             foreach ($user->specialPages as $specialPage) {
                 $specialPage->delete();
@@ -412,6 +407,7 @@ class UserController extends Controller
             $career->delete();
         }
         $user->delete();
+        role_user::where('user_id', $user->id)->delete();
         return to_route('user.list');
     }
 

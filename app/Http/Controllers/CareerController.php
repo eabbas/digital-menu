@@ -8,6 +8,7 @@ use App\Models\menu_item;
 use App\Models\province_cities;
 use App\Models\qr_code;
 use App\Models\role_user;
+use App\Models\role;
 use App\Models\User;
 use App\Models\menu;
 use App\Models\menu_category;
@@ -30,7 +31,10 @@ class CareerController extends Controller
         if (!$user) {
             $user = Auth::user();
         }
-        return view('admin.careers.create', ['user' => $user, 'careerCategories' => $careerCategories, 'provinces' => $provinces, 'cities' => $cities]);
+   
+        $userRoles = role_user::where('user_id', $user->id)->get();
+        $userRoleIds = $userRoles->pluck('role_id')->toArray();
+        return view('admin.careers.create', ['user' => $user, 'careerCategories' => $careerCategories, 'provinces' => $provinces, 'cities' => $cities, 'userRoleIds'=>$userRoleIds]);
     }
 
     public function createRestaurant(User $user = null, pages $page)
@@ -45,6 +49,7 @@ class CareerController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
         $user = user::find($request->user_id);
         $page_id = 0;
         $path = null;
@@ -97,8 +102,8 @@ class CareerController extends Controller
             'banner' => $bannerPath,
             'qr_count' => $request->qr_count ? $request->qr_count : 0,
             'page_id' => $page_id,
-            'show_in_home'=> $request->show_in_home ? 1 : 0,
-            'active'=> $request->active ? 1 : 0
+            'show_in_home'=> isset($request->show_in_home) ? 1 : 0,
+            'active'=> isset($request->active) ? 1 : 0
         ]);
         $counter = 1;
         for ($i = 0; $i < $request->qr_count; $i++) {
