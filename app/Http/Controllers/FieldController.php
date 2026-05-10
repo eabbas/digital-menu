@@ -52,6 +52,7 @@ class FieldController extends Controller
     }
 
     public function update(Request $request){
+        $institute = institute::find($request->institute_id);
         $field = field::find($request->id);
         if (isset($request->image)) {
             if ($field->image) {
@@ -68,7 +69,7 @@ class FieldController extends Controller
         $field->status = $request->status;
         $field->institute_id = $request->institute_id;
         $field->save();
-        return to_route('field.fields');
+        return to_route('institute.field_list' , ['institute'=>$institute]);
         }
 
         public function lesson_list(field $field){

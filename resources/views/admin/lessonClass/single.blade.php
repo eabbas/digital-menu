@@ -3,7 +3,7 @@
 
 @section('content')
 
-<div class="w-full py-4 px-3 sm:px-5 md:px-8 bg-gray-50 min-h-screen">
+<div class="w-full py-4 px-0 sm:px-5 md:px-8 bg-gray-50 min-h-screen">
     <div class="max-w-7xl mx-auto">
 
         {{-- هدر پیشرفته با آمار و وضعیت --}}
@@ -14,11 +14,11 @@
                     <div class="flex-1">
                         {{-- رشته و آموزشگاه --}}
                         <div class="flex flex-wrap items-center gap-2 text-xs text-white/70 mb-2">
-                            <a href="{{ route('institute.single', $class->field->institute->id ?? '#') }}" class="hover:text-white transition">
+                            <a href="{{ route('institute.single', [$class->lesson->field->institute->id]) }}" class="hover:text-white transition">
                                 آموزشگاه {{ $class->lesson->field->institute->title }}
                             </a>
                             <span class="text-white/40">›</span>
-                            <a href="{{ route('field.single', $class->field->id ?? '#') }}" class="hover:text-white transition">
+                            <a href="{{ route('lesson.single', [$class->lesson->id]) }}" class="hover:text-white transition">
                                 درس {{ $class->lesson->title }}
                             </a>
                             <span class="text-white/40">›</span>
@@ -50,7 +50,7 @@
                                 <div class="text-white/60 text-xs">جلسات برگزار شده</div>
                                 <div class="text-white text-xl font-bold">{{ $class->sessions_completed ?? 8 }}/{{ $class->total_sessions ?? 12 }}</div>
                             </div>
-<div class="bg-white/10 backdrop-blur-sm rounded-xl p-2 text-center">
+                            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-2 text-center">
                                 <div class="text-white/60 text-xs">میانگین نمرات</div>
                                 <div class="text-white text-xl font-bold">{{ $class->avg_grade ?? 17.4 }}</div>
                             </div>
@@ -97,7 +97,7 @@
             <div class="border-b border-gray-200 overflow-x-auto">
                 <div class="flex min-w-max md:min-w-0">
                     <button class="tab-button active px-5 py-3 text-sm font-medium text-indigo-600 border-b-2 border-indigo-600" data-tab="info">اطلاعات کلاس</button>
-<a href="{{ route('class.student_list', [$class]) }}" class="tab-button px-5 py-3 text-sm font-medium text-gray-600 hover:border-b-2 border-indigo-600" data-tab="students">دانش‌آموزان</a>
+                <a href="{{ route('class.student_list', [$class]) }}" class="tab-button px-5 py-3 text-sm font-medium text-gray-600 hover:border-b-2 border-indigo-600" data-tab="students">دانش‌آموزان</a>
                     <button class="tab-button px-5 py-3 text-sm font-medium text-gray-600" data-tab="assignments">تکالیف</button>
                     <button class="tab-button px-5 py-3 text-sm font-medium text-gray-600" data-tab="comments">نظرات</button>
                 </div>

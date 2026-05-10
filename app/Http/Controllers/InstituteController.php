@@ -29,7 +29,7 @@ class InstituteController extends Controller
         // dd($request->all());
            $user = Auth::user();
            $logo = null;
-            $cover_img = null;
+           $cover_img = null;
            if(isset($request->logo)) {
                 $name = $request->logo->getClientOriginalName();
                 $fullName = Str::uuid() . '_' . $name;
@@ -67,7 +67,8 @@ class InstituteController extends Controller
     }
 
     public function update(Request $request){
-        // dd($request->cover_img);
+        $logo = null;
+        $cover_img = null;
         $institute = institute::find($request->id);
         if(isset($request->logo)) {
                 $name = $request->logo->getClientOriginalName();
