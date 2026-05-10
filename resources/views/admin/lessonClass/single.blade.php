@@ -81,12 +81,12 @@
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                             افزودن استاد
                         </a>
-                        @if(Auth::user()->role[0]->title == 'admin')
+                        {{-- @if(Auth::user()->role[0]->title == 'admin')
                         <a href="{{ route('class.edit', $class) }}" class="bg-white/20 hover:bg-white/30 text-white px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-1">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
                             ویرایش
                         </a>
-                        @endif
+                        @endif --}}
                     </div>
                 </div>
             </div>
@@ -109,6 +109,12 @@
                     {{-- ستون تصویر و اطلاعات جانبی --}}
                     <div class="lg:col-span-1">
                         <div class="rounded-xl overflow-hidden shadow-md mb-4">
+                             @if(Auth::user()->role[0]->title == 'admin')
+                        <a href="{{ route('class.edit', $class) }}" class="bg-white/20 hover:bg-white/30 text-gray-500 px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                            ویرایش
+                        </a>
+                        @endif
                             @if($class->image && Storage::disk('public')->exists($class->image))
                                 <img src="{{ asset('storage/'.$class->image) }}" alt="{{ $class->title }}" class="w-full h-48 object-cover">
                             @else
