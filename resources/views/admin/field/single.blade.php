@@ -95,7 +95,7 @@
         </div>
 
         {{-- دکمه بازگشت --}}
-        <div class="px-5 pb-6 md:px-8 md:pb-8 flex justify-end">
+        {{-- <div class="px-5 pb-6 md:px-8 md:pb-8 flex justify-end">
             <a href="{{ route('institute.field_list', $field->institute) }}" 
                class="inline-flex items-center gap-1.5 text-gray-500 hover:text-indigo-600 bg-gray-100 hover:bg-indigo-50 px-4 py-2 rounded-xl transition-all text-sm font-medium">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -103,7 +103,7 @@
                 </svg>
                 بازگشت
             </a>
-        </div>
+        </div> --}}
     </div>
 </div>
 

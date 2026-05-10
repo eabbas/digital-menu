@@ -3,7 +3,7 @@
 
 @section('content')
 
-<div class="w-full max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-6">
+<div class="w-full max-w-7xl mx-auto sm:px-6 lg:px-8 py-6">
     {{-- کارت اصلی --}}
     <div class="bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl">
         
