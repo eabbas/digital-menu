@@ -49,7 +49,6 @@ class CareerController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
         $user = user::find($request->user_id);
         $page_id = 0;
         $path = null;
@@ -123,7 +122,7 @@ class CareerController extends Controller
             $counter++;
         }
         if (isset($request->page_id)) {
-//            menu create
+            //    menu create
             $menu_id = menu::insertGetId([
                 'title' => 'منو 1',
                 'subtitle' => null,
@@ -134,7 +133,7 @@ class CareerController extends Controller
                 'updated_at' => now()
             ]);
 
-//            menu category create
+            // menu category create
             $menu_cat_id = menu_category::insertGetId([
                 'title'=>'بدون دسته بندی',
                 'description'=>'آیتم هایی که زیر مجموعه دسته ای نباشند در این دسته قرار میگیرند',
@@ -144,7 +143,7 @@ class CareerController extends Controller
                 'updated_at'=>now()
             ]);
 
-//            menu item create
+            // menu item create
             menu_item::insertGetId([
                 'title' => 'آیتم 1',
                 'description' => null,
@@ -160,7 +159,7 @@ class CareerController extends Controller
             ]);
             $career = career::find($career_id);
             return response()->json($career);
-//            return to_route('career.showWithMenu', [$career_id]);
+            //  return to_route('career.showWithMenu', [$career_id]);
         }
         return to_route('career.careers', ['user' => $request->user_id]);
     }
