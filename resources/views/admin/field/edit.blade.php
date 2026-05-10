@@ -20,11 +20,11 @@
                         <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
                             
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان</label>
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex"><span class="required-star text-red-400">*</span>نام رشته </label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='title' placeholder="عنوان" value="{{$field->title}}" required>
+                                        name='title' placeholder="نام رشته را وارد کنید" value="{{$field->title}}" required>
                                 </div>
                             </div>
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                                <label class="w-30 text-sm mb-1 mt-2.5 flex">آموزشگاه</label>
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex"><span class="required-star text-red-400">*</span>آموزشگاه</label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     @if(Auth::user()->role[0]->title == 'admin')
@@ -63,7 +63,7 @@
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <textarea class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='description' placeholder="توضیحات رشته" required>{{$field->description}}</textarea>
+                                        name='description' placeholder="توضیحات رشته">{{$field->description}}</textarea>
                                 </div>
                             </div>
                         </div>

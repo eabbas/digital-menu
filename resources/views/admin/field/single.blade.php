@@ -3,11 +3,11 @@
 
 @section('content')
 
-<div class="w-full py-4 px-3 sm:px-5 md:px-8"> {{-- کاهش فاصله از بغل در موبایل --}}
+<div class="w-full py-4 px-0 sm:px-5 md:px-8"> {{-- کاهش فاصله از بغل در موبایل --}}
     <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
 
         {{-- هدر گرادیانی --}}
-        <div class="relative bg-gradient-to-l from-indigo-700 via-purple-700 to-pink-600 px-5 py-5 md:px-8 md:py-6">
+        <div class="relative bg-gradient-to-l from-indigo-800 via-purple-900 to-pink-900 px-5 py-5 md:px-8 md:py-6">
             <div class="relative flex flex-col gap-4 z-10">
                 {{-- بالای هدر: لینک آموزشگاه و عنوان --}}
                 <div class="flex flex-col gap-2">
@@ -26,18 +26,18 @@
                 {{-- ردیف آمار و دکمه‌ها (در موبایل ستونی) --}}
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                     <div class="flex flex-wrap items-center gap-2 text-white/90 text-xs">
-                        <div class="flex items-center gap-1 bg-black/20 rounded-full px-2.5 py-1">
+                        {{-- <div class="flex items-center gap-1 bg-black/20 rounded-full px-2.5 py-1">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                             </svg>
                             <span>{{ $field->lessons->count() ?? 0 }} درس</span>
-                        </div>
-                        <div class="flex items-center gap-1">
+                        </div> --}}
+                        {{-- <div class="flex items-center gap-1">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
                             <span>ثبت: {{ $field->created_at ? $field->created_at->format('Y/m/d') : 'نامشخص' }}</span>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-2">
@@ -49,7 +49,7 @@
                             ایجاد درس
                         </a>
                         <a href="{{ route('field.lesson_list', $field) }}" 
-                           class="inline-flex items-center justify-center gap-2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-semibold px-4 py-2 rounded-xl transition-all text-sm">
+                           class="inline-flex items-center justify-center gap-2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold px-4 py-2 rounded-xl transition-all text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                             </svg>

@@ -3,7 +3,7 @@
 
 @section('content')
 
-<div class="w-full py-4 px-3 sm:px-5 md:px-8 bg-gray-50 min-h-screen">
+<div class="w-full py-4 px-0 sm:px-5 md:px-8 bg-gray-50 min-h-screen">
     <div class="max-w-7xl mx-auto">
 
         {{-- هدر پیشرفته با آمار و وضعیت --}}
@@ -14,11 +14,11 @@
                     <div class="flex-1">
                         {{-- رشته و آموزشگاه --}}
                         <div class="flex flex-wrap items-center gap-2 text-xs text-white/70 mb-2">
-                            <a href="{{ route('institute.single', $class->field->institute->id ?? '#') }}" class="hover:text-white transition">
+                            <a href="{{ route('institute.single', [$class->lesson->field->institute->id]) }}" class="hover:text-white transition">
                                 آموزشگاه {{ $class->lesson->field->institute->title }}
                             </a>
                             <span class="text-white/40">›</span>
-                            <a href="{{ route('field.single', $class->field->id ?? '#') }}" class="hover:text-white transition">
+                            <a href="{{ route('lesson.single', [$class->lesson->id]) }}" class="hover:text-white transition">
                                 درس {{ $class->lesson->title }}
                             </a>
                             <span class="text-white/40">›</span>
