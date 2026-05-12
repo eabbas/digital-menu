@@ -134,7 +134,7 @@
                                 </div>
                                  <div class="w-full px-4 flex flex-col gap-2 overflow-y-hidden max-h-0 transition-all duration-400" id="account_user_items">
                                     @foreach(Auth::user()->pages as $page)
-                                    <a href="{{ route('pages.single', [$page]) }}" class="block w-full rounded-lg cursor-pointer py-1 hover:bg-[#F9FAFC] flex gap-5 items-center">
+                                    <a href="{{ route('pages.single', [$page]) }}" class="w-full rounded-lg cursor-pointer py-1 hover:bg-[#F9FAFC] flex gap-5 items-center">
                                         <div class="min-w-10 max-w-10 min-h-10 max-h-10">
                                             <img src="{{ $page->logo_path ? asset('storage/'. $page->logo_path) : asset('assets/img/user.png') }}" class="size-9 rounded-full" alt="user accont image">
                                         </div>

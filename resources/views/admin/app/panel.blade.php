@@ -896,13 +896,14 @@
            
             <!-- hamburger menu end -->
         </header>
-        <div class="w-full h-dvh lg:w-[calc(100%-265px)] float-end pt-24 lg:px-5 overflow-y-auto px-5 relative bg-[#F2F2F2] z-9"
+        <div class="w-full h-dvh lg:w-[calc(100%-265px)] pb-[60px] float-end pt-24 lg:px-5 overflow-y-auto px-5 relative bg-[#F2F2F2] z-9"
             style="scrollbar-width:none;">
             @yield('content')
-
+            @include('footer')
         </div>
     </div>
 
+    
 
     {{-- <script src="{{ asset('assets/js/ecomm_product_create.js') }}"></script> --}}
 
