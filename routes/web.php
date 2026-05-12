@@ -61,6 +61,10 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\social_qr_codes;
 
+Route::get("mahdi/test" , function(){
+   return view('english');
+});
+
 Route::get('/robot', function () {
     return view('abbasScratch.index');
 });
