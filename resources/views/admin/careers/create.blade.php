@@ -31,7 +31,9 @@
                 <div class="text-center mb-4">
                     <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="w-30 text-sm mb-1 mt-2.5 flex">لوگو رستوران *</label>
+                            <label class="w-30 text-sm mb-1 mt-2.5 flex flex-row gap-1">لوگو رستوران 
+                                <span class="text-red-500">*</span>
+                            </label>
                             <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="file"
@@ -41,7 +43,9 @@
                             <input type="hidden" name="user_id" value="{{ $user->id }}">
                         </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="w-30 text-sm mb-1 mt-2.5 flex">نام رستوران *</label>
+                            <label class="w-30 text-sm mb-1 mt-2.5 flex flex-row gap-1">نام رستوران
+                                <span class="text-red-500">*</span>
+                            </label>
                             <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
@@ -69,7 +73,9 @@
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="w-30 text-sm mb-1 mt-2.5 flex">بنر رستوران *</label>
+                            <label class="w-30 text-sm mb-1 mt-2.5 flex flex-row gap-1">بنر رستوران 
+                                <span class="text-red-500">*</span>
+                            </label>
 
                             <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
@@ -78,7 +84,9 @@
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="w-30 text-sm mb-1 mt-2.5 flex">شماره تلفن *</label>
+                            <label class="w-30 text-sm mb-1 mt-2.5 flex flex-row gap-1">شماره تلفن 
+                                <span class="text-red-500">*</span>
+                            </label>
 
                             <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
@@ -88,7 +96,9 @@
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="w-30 text-sm mb-1 mt-2.5 flex">استان *</label>
+                            <label class="w-30 text-sm mb-1 mt-2.5 flex flex-row gap-1">استان 
+                                <span class="text-red-500">*</span>
+                            </label>
 
                             <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
@@ -102,7 +112,9 @@
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="w-30 text-sm mb-1 mt-2.5 flex">شهر *</label>
+                            <label class="w-30 text-sm mb-1 mt-2.5 flex flex-row gap-1">شهر 
+                                <span class="text-red-500">*</span>
+                            </label>
                             <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2 cursor-pointer"
@@ -115,7 +127,9 @@
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
-                            <label class="w-30 text-sm mb-1 mt-2.5 flex">آدرس *</label>
+                            <label class="w-30 text-sm mb-1 mt-2.5 flex flex-row gap-1">آدرس 
+                                <span class="text-red-500">*</span>
+                            </label>
                             <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
@@ -168,22 +182,22 @@
                             </div>
                         </div>
                         @if(in_array(1, $userRoleIds))
-                        <div class="w-full flex flex-rows gap-3 itmes-center max-md:flex-row max-md:gap-1">
-                            <label class="text-sm mb-1 mt-2.5 flex">فعال</label>
-                            <div
-                                    class="text-[#99A1B7] flex">
-                                <input class="p-1 w-full focus:outline-none text-sm font-bold mr-2" type="checkbox" value="1"
-                                       name='active'>
+                            <div class="w-full flex flex-rows gap-3 itmes-center max-md:flex-row max-md:gap-1">
+                                <label class="text-sm mb-1 mt-2.5 flex">فعال</label>
+                                <div
+                                        class="text-[#99A1B7] flex">
+                                    <input class="p-1 w-full focus:outline-none text-sm font-bold mr-2" type="checkbox" value="1"
+                                        name='active'>
+                                </div>
                             </div>
-                        </div>
-                        <div class="w-full flex flex-rows gap-3 itmes-center max-md:flex-row max-md:gap-1">
-                            <label class="w-30 text-sm mb-1 mt-2.5 flex">نمایش در صفحه اول</label>
-                            <div
-                                    class="text-[#99A1B7] flex">
-                                <input class="p-1 w-full focus:outline-none text-sm font-bold mr-2" type="checkbox" value="1"
-                                       name='show_in_home'>
+                            <div class="w-full flex flex-rows gap-3 itmes-center max-md:flex-row max-md:gap-1">
+                                <label class="w-30 text-sm mb-1 mt-2.5 flex">نمایش در صفحه اول</label>
+                                <div
+                                        class="text-[#99A1B7] flex">
+                                    <input class="p-1 w-full focus:outline-none text-sm font-bold mr-2" type="checkbox" value="1"
+                                        name='show_in_home'>
+                                </div>
                             </div>
-                        </div>
                         @endif
                     </div>
                     <div class="w-full text-left">

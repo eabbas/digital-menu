@@ -167,8 +167,8 @@
                         @endif
                 <div class="w-full h-[100vh] fixed top-0 left-0 transition-all duration-400 invisible opacity-0" id="close_pup_up_profile_all_viwe" onclick="pup_up_profil('close')"></div>
                     <script>
-                        let pup_up_profile= document.getElementById('pup_up_profile')
-                        let close_pup_up_profile_all_viwe=document.getElementById('close_pup_up_profile_all_viwe')
+                        // let pup_up_profile= document.getElementById('pup_up_profile')
+                        // let close_pup_up_profile_all_viwe=document.getElementById('close_pup_up_profile_all_viwe')
                         function pup_up_profil(viwe){
                             if(viwe =='open'){
                                 pup_up_profile.classList.toggle('max-h-0')
@@ -245,12 +245,12 @@
         </div>
     @endif
     {{-- bottom menu mobile end --}}
-    <footer class="hidden lg:block lg:w-full mx-auto">
+    {{-- <footer class="hidden lg:block lg:w-full mx-auto">
         <div class="w-full bg-gray-600 flex flex-col gap-1 pt-1 justify-center items-center rounded-t-sm">
             <span class="text-white">آکادمی فائوس</span>
             <a href="tel:+989147794595" class="text-gray-100">09147794595</a>
         </div>
-    </footer>
+    </footer> --}}
     
     
     <script>

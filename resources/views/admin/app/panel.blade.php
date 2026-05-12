@@ -13,8 +13,10 @@
 
 <body>
     @php
-        $roles = Auth::user()->role;
-        $ids = $roles->pluck('id')->toArray();
+        if(Auth::check()){
+            $roles = Auth::user()->role;
+            $ids = $roles->pluck('id')->toArray();
+        }
     @endphp
     <div class="w-full flex flex-row relative z-999">
         <div class="hidden lg:block lg:w-[265px] bg-[#0D0E12] fixed z-50 right-0 top-0 h-dvh px-3 text-sm">
@@ -127,7 +129,7 @@
                             <a href="{{ route('ecomm_product.create') }}" class="text-white py-1 block"> ایجاد
                                 محصول </a>
                         </li>
-                        @if (Auth::user()->role[0]->title == 'admin')
+                        @if (in_array(1, $ids))
                             <li
                                 class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('ecomm.list')) bg-gray-700 @endif">
                                 <span class="size-1 bg-white rounded-sm"></span>
@@ -201,7 +203,7 @@
 
 
                 {{-- Suggestion --}}
-                @if (Auth::user()->role[0]->title == 'admin')
+                @if (in_array(1, $ids))
                     <div class="dashboard">
                         <div
                             class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if (Route::is('suggestion.*')) bg-gray-700 @endif ">
@@ -320,7 +322,7 @@
                                 </a>
                             </li>
                         @endif
-                        @if (Auth::user()->role[0]->title == 'admin')
+                        @if (in_array(1, $ids))
                             <li
                                 class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('cc.create')) bg-gray-700 @endif">
                                 <span class="size-1 bg-white rounded-sm"></span>
@@ -438,7 +440,7 @@
                                 من
                             </a>
                         </li>
-                        @if (Auth::user()->role[0]->title == 'admin')
+                        @if (in_array(1, $ids))
                             <li
                                 class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('pages.list')) bg-gray-700 @endif">
                                 <span class="size-1 bg-white rounded-sm"></span>
@@ -450,7 +452,7 @@
                         <span class="size-1 bg-white rounded-sm"></span>
                         <a href="{{ route('pages.list') }}" class=" text-white py-1"> مشاهده لیست همه شبکه های اجتماعی کاربران</a>
                     </li> --}}
-                        @if (Auth::user()->role[0]->title == 'admin')
+                        @if (in_array(1, $ids))
                             <li
                                 class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('socialMedia.create')) bg-gray-700 @endif">
                                 <span class="size-1 bg-white rounded-sm"></span>
@@ -468,6 +470,7 @@
                         @endif
                     </ul>
                 </div>
+                 @if (in_array(1, $ids) || in_array(4, $ids))
                 <div class="dashboard">
                     <div
                         class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if (Route::is('user.list') ||
@@ -496,7 +499,7 @@
                                 Route::is('user.create_user') ||
                                 Route::is('user.myUsers') ||
                                 Route::is('user.requestList')) max-h-[500px] @else max-h-0 @endif">
-                        @if (in_array(1, $ids) || in_array(4, $ids))
+                       
                             <li
                                 class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('user.myUsers')) bg-gray-700 @endif">
                                 <span class="size-1 bg-white rounded-sm"></span>
@@ -504,22 +507,22 @@
                                     مشتریان من
                                 </a>
                             </li>
-                        @endif
-
-                        <li
-                            class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('user.list')) bg-gray-700 @endif">
-                            <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('user.list') }}" class="text-white py-1 block">
-                                همه کاربران
-                            </a>
-                        </li>
-                        <li
-                            class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('user.create_user')) bg-gray-700 @endif">
-                            <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('user.create_user') }}" class="text-white py-1 block">
-                                ایجاد کاربر جدید
-                            </a>
-                        </li>
+                        
+                            <li
+                                class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('user.list')) bg-gray-700 @endif">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('user.list') }}" class="text-white py-1 block">
+                                    همه کاربران
+                                </a>
+                            </li>
+                            <li
+                                class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('user.create_user')) bg-gray-700 @endif">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('user.create_user') }}" class="text-white py-1 block">
+                                    ایجاد کاربر جدید
+                                </a>
+                            </li>
+                        
 
                         @if (in_array(1, $ids) || in_array(4, $ids))
                             <li
@@ -530,53 +533,54 @@
                                 </a>
                             </li>
                         @endif
-                        @if (in_array(1, $ids))
-                        @endif
                     </ul>
                 </div>
-                <div class="dashboard">
-                    <div
-                        class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if (Route::is('slider.*')) bg-gray-700 @endif">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="size-4 transition-all duration-200 @if (Route::is('slider.*')) rotate-180 @endif"
-                            viewBox="0 0 448 512">
-                            <path fill="white"
-                                d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z" />
-                        </svg>
-                        <div class="flex flex-row-reverse items-center gap-2">
-                            <span class=" text-[white] flex justify-end font-bold">اسلایدر</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="800px" height="800px"
-                                class="size-5 fill-white " viewBox="0 0 100 100" enable-background="new 0 0 100 100"
-                                xml:space="preserve">
-                                <path
-                                    d="M22.5,19.7h20c1.4,0,2.5,1.1,2.5,2.5v54.9c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V22.2  C20,20.8,21.1,19.7,22.5,19.7z" />
-                                <path
-                                    d="M57.5,19.6h20c1.4,0,2.5,1.1,2.5,2.5V42c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V22.1  C55,20.7,56.1,19.6,57.5,19.6z" />
-                                <path
-                                    d="M57.5,54.6h20c1.4,0,2.5,1.1,2.5,2.5v19.9c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V57.1  C55,55.8,56.1,54.6,57.5,54.6z" />
+                @endif
+                @if (in_array(1, $ids))
+                    <div class="dashboard">
+                        <div
+                            class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if (Route::is('slider.*')) bg-gray-700 @endif">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="size-4 transition-all duration-200 @if (Route::is('slider.*')) rotate-180 @endif"
+                                viewBox="0 0 448 512">
+                                <path fill="white"
+                                    d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z" />
                             </svg>
+                            <div class="flex flex-row-reverse items-center gap-2">
+                                <span class=" text-[white] flex justify-end font-bold">اسلایدر</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="800px" height="800px"
+                                    class="size-5 fill-white " viewBox="0 0 100 100" enable-background="new 0 0 100 100"
+                                    xml:space="preserve">
+                                    <path
+                                        d="M22.5,19.7h20c1.4,0,2.5,1.1,2.5,2.5v54.9c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V22.2  C20,20.8,21.1,19.7,22.5,19.7z" />
+                                    <path
+                                        d="M57.5,19.6h20c1.4,0,2.5,1.1,2.5,2.5V42c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V22.1  C55,20.7,56.1,19.6,57.5,19.6z" />
+                                    <path
+                                        d="M57.5,54.6h20c1.4,0,2.5,1.1,2.5,2.5v19.9c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V57.1  C55,55.8,56.1,54.6,57.5,54.6z" />
+                                </svg>
+                            </div>
                         </div>
+                        <ul
+                            class="my-1 pr-3 transition-all duration-500 overflow-hidden @if (Route::is('slider.*')) max-h-[500px] @else max-h-0 @endif">
+                            <li
+                                class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('slider.create')) bg-gray-700 @endif">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('slider.create') }}" class="text-white py-1 block">
+                                    ایجاد اسلایدر
+                                </a>
+                            </li>
+                            <li
+                                class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('slider.list')) bg-gray-700 @endif">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('slider.list') }}" class="text-white py-1 block">
+                                    لیست اسلایدر
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                    <ul
-                        class="my-1 pr-3 transition-all duration-500 overflow-hidden @if (Route::is('slider.*')) max-h-[500px] @else max-h-0 @endif">
-                        <li
-                            class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('slider.create')) bg-gray-700 @endif">
-                            <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('slider.create') }}" class="text-white py-1 block">
-                                ایجاد اسلایدر
-                            </a>
-                        </li>
-                        <li
-                            class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('slider.list')) bg-gray-700 @endif">
-                            <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('slider.list') }}" class="text-white py-1 block">
-                                لیست اسلایدر
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                @endif
                 {{-- contactUs --}}
-                @if (Auth::user()->role[0]->title == 'admin')
+                @if (in_array(1, $ids))
                     <div class="dashboard">
                         <div
                             class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if (Route::is('contactUs.*')) bg-gray-700 @endif">
@@ -635,13 +639,15 @@
                     </div>
                     <ul
                         class="my-1 pr-3 transition-all duration-500 overflow-hidden @if (Route::is('aboutUs.create_edit') || Route::is('aboutUs.list')) max-h-[500px] @else max-h-0 @endif">
-                        <li
-                            class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('aboutUs.create_edit')) bg-gray-700 @endif">
-                            <span class="size-1 bg-white rounded-sm"></span>
-                            <a href="{{ route('aboutUs.create_edit') }}" class="text-white py-1 block">
-                                ایجاد درباره ما
-                            </a>
-                        </li>
+                        @if (in_array(1, $ids))
+                            <li
+                                class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('aboutUs.create_edit')) bg-gray-700 @endif">
+                                <span class="size-1 bg-white rounded-sm"></span>
+                                <a href="{{ route('aboutUs.create_edit') }}" class="text-white py-1 block">
+                                    ایجاد درباره ما
+                                </a>
+                            </li>
+                        @endif
                         <li
                             class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('aboutUs.list')) bg-gray-700 @endif">
                             <span class="size-1 bg-white rounded-sm"></span>
@@ -800,7 +806,7 @@
                     id="account_user_items">
                     @foreach (Auth::user()->pages as $page)
                         <a href="{{ route('pages.single', [$page]) }}"
-                            class="block w-full rounded-lg cursor-pointer py-1 hover:bg-[#F9FAFC] flex gap-5 items-center">
+                            class="w-full rounded-lg cursor-pointer py-1 hover:bg-[#F9FAFC] flex gap-5 items-center">
                             <div class="min-w-10 max-w-10 min-h-10 max-h-10">
                                 <img src="{{ $page->logo_path ? asset('storage/' . $page->logo_path) : asset('assets/img/user.png') }}"
                                     class="size-9 rounded-full" alt="user accont image">
@@ -875,8 +881,8 @@
                 }
 
                 //users
-                let account_user_items = document.getElementById('account_user_items')
-                let account_user_sample = document.getElementById('account_user_sample')
+                // let account_user_items = document.getElementById('account_user_items')
+                // let account_user_sample = document.getElementById('account_user_sample')
 
                 function account_user() {
                     account_user_items.classList.toggle('max-h-0')
@@ -906,8 +912,6 @@
     
 
     {{-- <script src="{{ asset('assets/js/ecomm_product_create.js') }}"></script> --}}
-
-    @yield('ajax')
 
     {{-- <script src="{{ asset('assets/js/userPanel.js') }}"></script> --}}
 </body>
