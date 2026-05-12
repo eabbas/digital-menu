@@ -9,7 +9,7 @@
                     class="flex flex-row justify-center lg:justify-start items-center gap-2 text-[#99A1B7] text-[11px] lg:text-sm">
                     {{-- <a href="{{ route('home') }}" class="p-2">خانه</a>
                     <span>/</span> --}}
-                    <a href="{{ route('user.profile', [Auth::user()]) }}"> 3234داشبورد</a>
+                    <a href="{{ route('dashboard') }}">داشبورد</a>
                 </div>
             </div>
 

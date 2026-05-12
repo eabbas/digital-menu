@@ -162,7 +162,7 @@
                             <div class="w-full flex flex-col gap-3 h-6/12 px-5 overflow-y-auto">
                                 @if($myContacts)
                                     @foreach($myContacts as $contact)
-                                        <a href="{{route('pages.single', [$contact->pages[0]['id']])}}"
+                                        <a href="{{route('client.loadLink', [$contact->pages[0]['id']])}}"
                                            class="w-full pb-3 border-b-1 border-[#dadee8] border-dashed flex justify-between  items-center pb-2">
                                             <div class="flex gap-2 items-center">
                                                 <img src="{{ $contact->contact->main_image ? asset('storage/'.$contact->contact->main_image) : asset('assets/img/user.png') }}"

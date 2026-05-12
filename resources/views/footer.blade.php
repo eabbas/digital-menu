@@ -415,6 +415,7 @@
         }
     </script>
     <script src="{{ asset('assets/js/home.js') }}"></script>
+    <script src="{{ asset('assets/js/userPanel.js') }}"></script>
     @RegisterServiceWorkerScript
 </body>
 

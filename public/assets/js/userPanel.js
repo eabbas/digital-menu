@@ -1,7 +1,6 @@
 let menuBlockliet = document.getElementById('menuBlockliet')
 function hamburgerMenu(state){
     if (state == "open") {
-
         menuBlock.classList.remove('invisible')
         menuBlock.classList.remove('opacity-0')
         menuList.classList.remove('translate-x-full')
@@ -59,3 +58,42 @@ dashboards.forEach(dashboard => {
         }
     })
 })
+
+
+let parentFields = document.querySelectorAll('.parentFields')
+parentFields.forEach((parentField) => {
+    parentField.addEventListener('click', () => {
+        if (parentField.nextElementSibling.classList.contains('max-h-0')) {
+            parentFields.forEach(row => {
+                row.nextElementSibling.classList.remove('max-h-[1000px]')
+                row.children[1].classList.remove('rotate-180')
+                row.nextElementSibling.classList.add('max-h-0')
+            })
+            parentField.nextElementSibling.classList.remove('max-h-0')
+            parentField.nextElementSibling.classList.add('max-h-[1000px]')
+            parentField.children[1].classList.add('rotate-180')
+        } else {
+            parentField.nextElementSibling.classList.remove('max-h-[1000px]')
+            parentField.children[1].classList.remove('rotate-180')
+            parentField.nextElementSibling.classList.add('max-h-0')
+        }
+    })
+})
+
+// search popup
+
+let searchP = document.getElementById('searchP')
+let searchSection = document.getElementById('searchSection')
+
+function searchPopup(state){
+    if(state == 'open'){
+        searchP.classList.remove('invisible')
+        searchP.classList.remove('opacity-0')
+        searchSection.classList.remove('-translate-y-full')
+    }
+    if(state == 'close'){
+        searchP.classList.add('invisible')
+        searchP.classList.add('opacity-0')
+        searchSection.classList.add('-translate-y-full')
+    }
+}
