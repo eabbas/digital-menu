@@ -121,42 +121,43 @@ class CareerController extends Controller
             ]);
             $counter++;
         }
+        
+        //    menu create
+        $menu_id = menu::insertGetId([
+            'title' => 'منو 1',
+            'subtitle' => null,
+            'banner' => null,
+            'career_id' => $career_id,
+            'user_id' => $request->user_id,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        // menu category create
+        $menu_cat_id = menu_category::insertGetId([
+            'title'=>'بدون دسته بندی',
+            'description'=>'آیتم هایی که زیر مجموعه دسته ای نباشند در این دسته قرار میگیرند',
+            'image'=>null,
+            'menu_id'=>$menu_id,
+            'created_at'=>now(),
+            'updated_at'=>now()
+        ]);
+
+        // menu item create
+        menu_item::insertGetId([
+            'title' => 'آیتم 1',
+            'description' => null,
+            'price' => 0,
+            'discount' => 0,
+            'customizable' => 0,
+            'image' => null,
+            'parent_id' => 0,
+            'menu_category_id' => $menu_cat_id,
+            'duration' => 0,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
         if (isset($request->page_id)) {
-            //    menu create
-            $menu_id = menu::insertGetId([
-                'title' => 'منو 1',
-                'subtitle' => null,
-                'banner' => null,
-                'career_id' => $career_id,
-                'user_id' => $request->user_id,
-                'created_at' => now(),
-                'updated_at' => now()
-            ]);
-
-            // menu category create
-            $menu_cat_id = menu_category::insertGetId([
-                'title'=>'بدون دسته بندی',
-                'description'=>'آیتم هایی که زیر مجموعه دسته ای نباشند در این دسته قرار میگیرند',
-                'image'=>null,
-                'menu_id'=>$menu_id,
-                'created_at'=>now(),
-                'updated_at'=>now()
-            ]);
-
-            // menu item create
-            menu_item::insertGetId([
-                'title' => 'آیتم 1',
-                'description' => null,
-                'price' => 0,
-                'discount' => 0,
-                'customizable' => 0,
-                'image' => null,
-                'parent_id' => 0,
-                'menu_category_id' => $menu_cat_id,
-                'duration' => 0,
-                'created_at' => now(),
-                'updated_at' => now()
-            ]);
             $career = career::find($career_id);
             return response()->json($career);
             //  return to_route('career.showWithMenu', [$career_id]);

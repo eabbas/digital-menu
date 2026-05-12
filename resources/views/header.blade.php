@@ -240,7 +240,19 @@
         </div>
         {{-- mobile menu end --}}
 
-        <div class="w-full hidden lg:block border-b-1 bg-[#eb3254] border-b-gray-300">
+        <div
+            class="hidden lg:block border-b-1 bg-[#eb3254] border-b-gray-300 mb-5 @if (
+                    Route::is('home') ||
+                    Route::is('aboutUs.clientList') ||
+                    Route::is('contactUs.create') ||
+                    Route::is('search') ||
+                    Route::is('career.categoryCareers') ||
+                    Route::is('career.careersList') ||
+                    Route::is('client.loadLink') ||
+                    Route::is('client.allPages') ||
+                    Route::is('career.careersCategories') ||
+                    Route::is('career.careersList') ||
+                    Route::is('client.menu')) w-full @else w-[calc(100%-265px)] float-end @endif">
             <div class="w-11/12 mx-auto grid grid-cols-3 gap-10">
                 <div class="flex flex-row items-center gap-10">
                     {{-- logo --}}
@@ -305,7 +317,6 @@
                     </form>
                 </div>
                 <div class="flex flex-row justify-end items-center gap-5">
-
                     <div class="relative hover_profile">
                         @if (Auth::check())
                             <div class="cursor-pointer">
@@ -322,7 +333,6 @@
                                 <a href="{{ route('login') }}" class="text-xs font-bold text-white">ورود | ثبت
                                     نام</a>
                             </div>
-
                         @endif
                         @if (Auth::check())
                             <div class="absolute left-0 pt-5 invisible opacity-0 transition-all duration-300 z-999">
@@ -347,7 +357,6 @@
                                                     پروفایل</a>
                                             </li>
                                         @endif
-
                                     </ul>
                                     <div class="w-full h-px bg-gray-300 my-2 "></div>
                                     <div class="rtl text-right ">
@@ -374,7 +383,6 @@
                         </svg>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -470,7 +478,7 @@
                                             فروشگاه جدید
                                         </a>
                                     </li>
-                                    @if (Auth::user()->role[0]->title == 'admin')
+                                    @if (in_array(1, $ids))
                                         <li class="pr-3.5 @if (Route::is('ecomm.list')) bg-gray-100 @endif">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('ecomm.list') }}"
@@ -709,7 +717,7 @@
                                             </a>
                                         </li>
                                     @endif
-                                    @if (Auth::user()->role[0]->title == 'admin')
+                                    @if (in_array(1, $ids))
                                         <li class="pr-3.5 @if (Route::is('career.list')) bg-gray-100 @endif">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('career.list') }}"
@@ -761,15 +769,13 @@
                                             لیست صفحه های من
                                         </a>
                                     </li>
-                                    @if (Auth::user()->role[0]->title == 'admin')
+                                    @if (in_array(1, $ids))
                                         <li class="pr-3.5 @if (Route::is('pages.list')) bg-gray-100 @endif">
                                             <a href="{{ route('pages.list') }}"
                                                 class="block text-gray-700 py-2 text-md">
                                                 لیست همه صفحه ها
                                             </a>
                                         </li>
-                                    @endif
-                                    @if (Auth::user()->role[0]->title == 'admin')
                                         <li class="pr-3.5 @if (Route::is('socialMedia.create')) bg-gray-100 @endif">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('socialMedia.create') }}"
@@ -787,7 +793,7 @@
                                     @endif
                                 </ul>
                             </div>
-                            @if (Auth::user()->role[0]->title == 'admin')
+                            @if (in_array(1, $ids))
                                 <div class="pt-3">
                                     <div
                                         class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
@@ -815,8 +821,6 @@
                                                 </a>
                                             </li>
                                         @endif
-
-
                                         <li class="pr-3.5 @if (Route::is('user.list')) bg-gray-100 @endif">
                                             <a href="{{ route('user.list') }}"
                                                 class="block text-gray-700 py-2 text-md">
@@ -829,25 +833,18 @@
                                                 ایجاد کاربر جدید
                                             </a>
                                         </li>
-
                                         @if (in_array(1, $ids) || in_array(4, $ids))
-                                            @if (in_array(1, $ids))
-                                                <li
-                                                    class="pr-3.5 @if (Route::is('user.requestList')) bg-gray-100 @endif">
-                                                    <a href="{{ route('user.requestList') }}"
-                                                        class="block text-gray-700 py-2 text-md">
-                                                        لیست درخواست ها
-                                                    </a>
-                                                </li>
-                                            @endif
-
+                                            <li class="pr-3.5 @if (Route::is('user.requestList')) bg-gray-100 @endif">
+                                                <a href="{{ route('user.requestList') }}"
+                                                    class="block text-gray-700 py-2 text-md">
+                                                    لیست درخواست ها
+                                                </a>
+                                            </li>
                                         @endif
-
                                     </ul>
                                 </div>
                             @endif
-
-                            @if (Auth::user()->role[0]->title == 'admin')
+                            @if (in_array(1, $ids))
                                 <div class="pt-3">
                                     <div
                                         class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
@@ -875,8 +872,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                            @endif
-                            @if (Auth::user()->role[0]->title == 'admin')
+
                                 <div class="pt-3">
                                     <div
                                         class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
@@ -906,8 +902,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                            @endif
-                            @if (Auth::user()->role[0]->title == 'admin')
+
                                 <div class="pt-3">
                                     <div
                                         class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
@@ -1038,4 +1033,4 @@
 
         @endif
     </header>
-<script src="{{ asset('assets/js/userPanel.js') }}"></script>
+    <script src="{{ asset('assets/js/userPanel.js') }}"></script>

@@ -6,6 +6,12 @@
     @extends('admin.app.panel')
     @section('title', 'ایجاد صفحه معرفی')
     @section('content')
+        @php
+            if (Auth::check()) {
+                $roles = Auth::user()->role;
+                $ids = $roles->pluck('id')->toArray();
+            }
+        @endphp
         <div class="text-center mb-4">
             <h1 class="text-lg font-bold text-gray-800">
                 ایجاد صفحه جدید
@@ -17,7 +23,7 @@
                 <div class="bg-white rounded-2xl shadow-md p-3 w-full lg:w-3/4">
                     <div class="text-center mb-4">
                         <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
-                            
+
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">عنوان</label>
                                 <div
@@ -50,28 +56,28 @@
                                         type="file" name='cover_path' title="کاور"required>
                                 </div>
                             </div>
-                             <div class="w-full flex flex-rows gap-3 itmes-center max-md:flex-row max-md:gap-1">
-                                <label class="text-sm mb-1 mt-2.5 flex">فعال</label>
-                                <div
-                                    class="text-[#99A1B7] flex">
-                                    <input class="p-1 w-full focus:outline-none text-sm font-bold mr-2" type="checkbox"
-                                        name='active[]'>
+                            @if (in_array(1, $ids))
+                                <div class="w-full flex flex-rows gap-3 itmes-center max-md:flex-row max-md:gap-1">
+                                    <label class="text-sm mb-1 mt-2.5 flex">فعال</label>
+                                    <div class="text-[#99A1B7] flex">
+                                        <input class="p-1 w-full focus:outline-none text-sm font-bold mr-2" type="checkbox"
+                                            name='active[]'>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="w-full flex flex-rows gap-3 itmes-center max-md:flex-row max-md:gap-1">
-                                <label class="w-30 text-sm mb-1 mt-2.5 flex">نمایش در صفحه اول</label>
-                                <div
-                                    class="text-[#99A1B7] flex">
-                                    <input class="p-1 w-full focus:outline-none text-sm font-bold mr-2" type="checkbox"
-                                        name='show_in_home[]'>
+                                <div class="w-full flex flex-rows gap-3 itmes-center max-md:flex-row max-md:gap-1">
+                                    <label class="w-30 text-sm mb-1 mt-2.5 flex">نمایش در صفحه اول</label>
+                                    <div class="text-[#99A1B7] flex">
+                                        <input class="p-1 w-full focus:outline-none text-sm font-bold mr-2" type="checkbox"
+                                            name='show_in_home[]'>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1 lg:col-span-2">
                                 <label class="w-30 text-sm mb-1 mt-2.5 flex">توضیحات</label>
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
-                                    <textarea class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                        name='description' placeholder="توضیحات"></textarea>
+                                    <textarea class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text" name='description'
+                                        placeholder="توضیحات"></textarea>
                                 </div>
                             </div>
                         </div>

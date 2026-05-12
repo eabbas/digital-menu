@@ -57,9 +57,12 @@ use App\Http\Controllers\ClassCommentController;
 use App\Http\Controllers\ClassAttachmentController;
 use App\Http\Middleware\savePreviousUrl;
 
-use App\Models\User;
-use Illuminate\Support\Str;
 use App\Models\social_qr_codes;
+
+Route::get('/test', function(){
+     $link = url('/')."/qrcode/5/" . 'Dviq52Dnxp';
+     dd($link);
+});
 
 Route::get("mahdi/test" , function(){
    return view('english');
@@ -78,12 +81,6 @@ Route::get('/set-page-path', function(){
         $code->save();
     }
     
-});
-
-Route::get('/test', function () {
-    $random = Str::random(10);
-    $link = url('/')."/qrcode/1/" . $random;
-    return $link;
 });
 
 ///suggestion
