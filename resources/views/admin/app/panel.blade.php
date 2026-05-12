@@ -909,7 +909,7 @@
 
     @yield('ajax')
 
-    <script src="{{ asset('assets/js/userPanel.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/userPanel.js') }}"></script> --}}
 </body>
 
 </html>

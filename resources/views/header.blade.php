@@ -1038,3 +1038,4 @@
 
         @endif
     </header>
+<script src="{{ asset('assets/js/userPanel.js') }}"></script>
