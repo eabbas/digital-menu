@@ -1,17 +1,9 @@
 let menuBlockliet = document.getElementById('menuBlockliet')
-// let menuList = document.getElementById('menuList')
 function hamburgerMenu(state){
     if (state == "open") {
-
         menuBlock.classList.remove('invisible')
         menuBlock.classList.remove('opacity-0')
         menuList.classList.remove('translate-x-full')
-        // element.children[0].classList.add('-translate-x-[30px]')
-        // element.children[0].classList.add('opacity-0')
-        // element.children[1].classList.add('translate-x-[30px]')
-        // element.children[1].classList.add('opacity-0')
-        // element.children[2].classList.add('-translate-x-[30px]')
-        // element.children[2].classList.add('opacity-0')
         menuBlockliet.children[0].classList.add('-translate-x-[30px]')
         menuBlockliet.children[0].classList.add('opacity-0')
         menuBlockliet.children[1].classList.add('translate-x-[30px]')
@@ -24,12 +16,6 @@ function hamburgerMenu(state){
         menuBlock.classList.add('invisible')
         menuBlock.classList.add('opacity-0')
         menuList.classList.add('translate-x-full')
-        // element.parentElement.previousElementSibling.children[0].children[0].classList.remove('-translate-x-[30px]')
-        // element.parentElement.previousElementSibling.children[0].children[0].classList.remove('opacity-0')
-        // element.parentElement.previousElementSibling.children[0].children[1].classList.remove('translate-x-[30px]')
-        // element.parentElement.previousElementSibling.children[0].children[1].classList.remove('opacity-0')
-        // element.parentElement.previousElementSibling.children[0].children[2].classList.remove('-translate-x-[30px]')
-        // element.parentElement.previousElementSibling.children[0].children[2].classList.remove('opacity-0')
         menuBlockliet.children[0].classList.remove('-translate-x-[30px]')
         menuBlockliet.children[0].classList.remove('opacity-0')
         menuBlockliet.children[1].classList.remove('translate-x-[30px]')
@@ -72,3 +58,42 @@ dashboards.forEach(dashboard => {
         }
     })
 })
+
+
+let parentFields = document.querySelectorAll('.parentFields')
+parentFields.forEach((parentField) => {
+    parentField.addEventListener('click', () => {
+        if (parentField.nextElementSibling.classList.contains('max-h-0')) {
+            parentFields.forEach(row => {
+                row.nextElementSibling.classList.remove('max-h-[1000px]')
+                row.children[1].classList.remove('rotate-180')
+                row.nextElementSibling.classList.add('max-h-0')
+            })
+            parentField.nextElementSibling.classList.remove('max-h-0')
+            parentField.nextElementSibling.classList.add('max-h-[1000px]')
+            parentField.children[1].classList.add('rotate-180')
+        } else {
+            parentField.nextElementSibling.classList.remove('max-h-[1000px]')
+            parentField.children[1].classList.remove('rotate-180')
+            parentField.nextElementSibling.classList.add('max-h-0')
+        }
+    })
+})
+
+// search popup
+
+let searchP = document.getElementById('searchP')
+let searchSection = document.getElementById('searchSection')
+
+function searchPopup(state){
+    if(state == 'open'){
+        searchP.classList.remove('invisible')
+        searchP.classList.remove('opacity-0')
+        searchSection.classList.remove('-translate-y-full')
+    }
+    if(state == 'close'){
+        searchP.classList.add('invisible')
+        searchP.classList.add('opacity-0')
+        searchSection.classList.add('-translate-y-full')
+    }
+}

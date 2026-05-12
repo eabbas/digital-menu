@@ -1,7 +1,6 @@
 @extends('admin.app.panel')
 @section('title', 'ایجاد رستوران')
 @section('content')
-
     <div class="absolute top-0 opacity-0 invisible right-1/2 translate-x-1/2 w-2/3 lg:w-1/3 bg-white rounded-lg shadow-md transition-all duration-500"
          id="message">
         <div class="relative">
@@ -168,22 +167,24 @@
                                               class="w-full px-3 py-1 md:px-2 outline-none text-gray-500"></textarea>
                             </div>
                         </div>
+                        @if(in_array(1, $userRoleIds))
                         <div class="w-full flex flex-rows gap-3 itmes-center max-md:flex-row max-md:gap-1">
                             <label class="text-sm mb-1 mt-2.5 flex">فعال</label>
                             <div
                                     class="text-[#99A1B7] flex">
-                                <input class="p-1 w-full focus:outline-none text-sm font-bold mr-2" type="checkbox"
-                                       name='active[]'>
+                                <input class="p-1 w-full focus:outline-none text-sm font-bold mr-2" type="checkbox" value="1"
+                                       name='active'>
                             </div>
                         </div>
                         <div class="w-full flex flex-rows gap-3 itmes-center max-md:flex-row max-md:gap-1">
                             <label class="w-30 text-sm mb-1 mt-2.5 flex">نمایش در صفحه اول</label>
                             <div
                                     class="text-[#99A1B7] flex">
-                                <input class="p-1 w-full focus:outline-none text-sm font-bold mr-2" type="checkbox"
-                                       name='show_in_home[]'>
+                                <input class="p-1 w-full focus:outline-none text-sm font-bold mr-2" type="checkbox" value="1"
+                                       name='show_in_home'>
                             </div>
                         </div>
+                        @endif
                     </div>
                     <div class="w-full text-left">
                         <button type="button" onclick="showText(this)"
@@ -267,7 +268,7 @@
                         `
                 message.children[0].appendChild(element)
                 showMessage('open')
-                el.setAttribute('disabled', true)
+               // el.setAttribute('disabled', true)
                 el.classList.remove('cursor-pointer')
                 el.classList.add('cursor-no-drop')
                 setTimeout(() => {

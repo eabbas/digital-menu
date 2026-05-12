@@ -2,7 +2,7 @@
 @section('title', 'فامنو | جست و جو')
 @section('content')
 
-    <div class="w-full flex flex-col lg:flex-row gap-5 mt-5 lg:mt-10">
+    <div class="w-full px-3 flex flex-col lg:flex-row gap-5 mt-5 lg:mt-10">
         <div class="w-full lg:w-1/5">
             <div class="w-full py-2 flex flex-row items-center overflow-x-auto [&::-webkit-scrollbar]:hidden lg:hidden">
                 <div class="px-3 py-1 ml-2 rounded-full border-1 border-gray-300 filter cursor-pointer"

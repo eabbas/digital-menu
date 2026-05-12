@@ -8,6 +8,7 @@ use App\Models\menu_item;
 use App\Models\province_cities;
 use App\Models\qr_code;
 use App\Models\role_user;
+use App\Models\role;
 use App\Models\User;
 use App\Models\menu;
 use App\Models\menu_category;
@@ -30,7 +31,10 @@ class CareerController extends Controller
         if (!$user) {
             $user = Auth::user();
         }
-        return view('admin.careers.create', ['user' => $user, 'careerCategories' => $careerCategories, 'provinces' => $provinces, 'cities' => $cities]);
+   
+        $userRoles = role_user::where('user_id', $user->id)->get();
+        $userRoleIds = $userRoles->pluck('role_id')->toArray();
+        return view('admin.careers.create', ['user' => $user, 'careerCategories' => $careerCategories, 'provinces' => $provinces, 'cities' => $cities, 'userRoleIds'=>$userRoleIds]);
     }
 
     public function createRestaurant(User $user = null, pages $page)
@@ -97,8 +101,8 @@ class CareerController extends Controller
             'banner' => $bannerPath,
             'qr_count' => $request->qr_count ? $request->qr_count : 0,
             'page_id' => $page_id,
-            'show_in_home'=> $request->show_in_home ? 1 : 0,
-            'active'=> $request->active ? 1 : 0
+            'show_in_home'=> isset($request->show_in_home) ? 1 : 0,
+            'active'=> isset($request->active) ? 1 : 0
         ]);
         $counter = 1;
         for ($i = 0; $i < $request->qr_count; $i++) {
@@ -118,7 +122,7 @@ class CareerController extends Controller
             $counter++;
         }
         if (isset($request->page_id)) {
-//            menu create
+            //    menu create
             $menu_id = menu::insertGetId([
                 'title' => 'منو 1',
                 'subtitle' => null,
@@ -129,7 +133,7 @@ class CareerController extends Controller
                 'updated_at' => now()
             ]);
 
-//            menu category create
+            // menu category create
             $menu_cat_id = menu_category::insertGetId([
                 'title'=>'بدون دسته بندی',
                 'description'=>'آیتم هایی که زیر مجموعه دسته ای نباشند در این دسته قرار میگیرند',
@@ -139,7 +143,7 @@ class CareerController extends Controller
                 'updated_at'=>now()
             ]);
 
-//            menu item create
+            // menu item create
             menu_item::insertGetId([
                 'title' => 'آیتم 1',
                 'description' => null,
@@ -155,7 +159,7 @@ class CareerController extends Controller
             ]);
             $career = career::find($career_id);
             return response()->json($career);
-//            return to_route('career.showWithMenu', [$career_id]);
+            //  return to_route('career.showWithMenu', [$career_id]);
         }
         return to_route('career.careers', ['user' => $request->user_id]);
     }
