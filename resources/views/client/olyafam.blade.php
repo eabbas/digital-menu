@@ -60,7 +60,7 @@
                                 <div class="p-2 lg:p-4">
                                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="menuItemList">
                                         @foreach ($category->menu_items as $item)
-                                            @if ($item->title != 'آیتم 1')
+                                            {{-- @if ($item->title != 'آیتم 1') --}}
                                                 <div class="w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems"
                                                     data-menu-item-title="{{ $item->title }}"
                                                     data-menu-item-id="{{ $item->id }}">
@@ -155,7 +155,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            @endif
+                                            {{-- @endif --}}
                                         @endforeach
                                     </div>
                                 </div>
