@@ -131,8 +131,8 @@
         </section>
     </header>
     <section class="w-full flex justify-center relative">
-        <div class=" max-w-11/12 min-w-11/12 pt-1 rounded-lg flex items-center px-5 gap-5 overflow-auto">
-{{--            <div class="lg:min-w-[90px] lg:max-w-[90px] lg:h-[150px] min-w-[70px] max-w-[70px] h-[105px] flex flex-col lg:gap-2 gap-0.5">--}}
+        <div class=" max-w-11/12 min-w-11/12 pt-1 rounded-lg flex items-center gap-3 overflow-auto">
+{{--            <div class="lg:min-w-[90px] lg:max-w-[90px] lg:h-[150px] min-w-[70px] max-w-[70px] h-[105px] flex flex-col lg:gap-2 gap-0.5 pup_up_story">--}}
 {{--                <div class="w-full h-2/3 rounded-full gradientereer p-0.5 overflow-hidden">--}}
 {{--                    <div class="w-full h-full rounded-full bg-white p-0.5 flex justify-center items-center">--}}
 {{--                        <div class="w-full h-full rounded-full overflow-hidden flex justify-center items-center">--}}
@@ -144,8 +144,39 @@
 {{--                    <span class="text-caption lg:text-sm text-xs text-[#23254e] text-nowrap">پاوربانک ...</span>--}}
 {{--                </div>--}}
 {{--            </div>--}}
-            
             <!-- video_story -->
+            <div class="min-w-19 max-w-19 flex flex-col gap-1 items-center pup_up_story">
+                <div class="w-full rounded-full border-2 border-red-500 flex jsutfiy-center items-center p-0.5 ">
+                    <div class="w-full h-full rounded-full overflow-hidden flex justify-center items-center">
+                        <img src="{{asset('storage/image/images.jpg')}}" alt="" class="object-cover rounded-full">
+                    </div>
+                </div>
+                <span class="w-full text-md text-nowrap text-center">اطلاعیه ثبت نام</span>
+            </div>
+            <div class="min-w-19 max-w-19 flex flex-col gap-1 items-center pup_up_story">
+                <div class="w-full rounded-full border-2 border-red-500 flex jsutfiy-center items-center p-0.5 ">
+                    <div class="w-full h-full rounded-full overflow-hidden flex justify-center items-center">
+                        <img src="{{asset('storage/image/images.jpg')}}" alt="" class="object-cover rounded-full">
+                    </div>
+                </div>
+                <span class="text-md text-nowrap text-center"> پاور</span>
+            </div>
+            <div class="min-w-19 max-w-19 flex flex-col gap-1 items-center pup_up_story">
+                <div class="w-full rounded-full border-2 border-red-500 flex jsutfiy-center items-center p-0.5 ">
+                    <div class="w-full h-full rounded-full overflow-hidden flex justify-center items-center">
+                        <img src="{{asset('storage/image/images.jpg')}}" alt="" class="object-cover rounded-full">
+                    </div>
+                </div>
+                <span class="text-md "> پاور</span>
+            </div>
+            <div class="min-w-19 max-w-19 flex flex-col gap-1 items-center pup_up_story">
+                <div class="w-full rounded-full border-2 border-red-500 flex jsutfiy-center items-center p-0.5 ">
+                    <div class="w-full h-full rounded-full overflow-hidden flex justify-center items-center">
+                        <img src="{{asset('storage/image/images.jpg')}}" alt="" class="object-cover rounded-full">
+                    </div>
+                </div>
+                <span class="text-md "> پاور</span>
+            </div>
             <div>
                 <div class="w-full h-[100vh] flex justify-center items-center fixed z-5 top-0 right-0 rounded-xl invisible opacity-0 transition-all duration-400" id="pup_up_story_items">
                     <div class="w-full h-[100vh] bg-black/50 fixed top-0 right-0 transition-all duration-400" onclick="pup_up_story_close_out()"></div>
@@ -408,7 +439,7 @@
 {{--                </a>--}}
 {{--            </div>--}}
 {{--        </div>--}}
-        <div class="w-full rounded-md overflow-hidden flex flex-col md:flex-row items-center justify-center md:p-2 mt-5">
+        <div class="w-full rounded-md overflow-hidden flex flex-col md:flex-row items-center justify-center md:p-2 mt-2">
             <div class="w-11/12 order-2 md:order-1 md:w-3/12 md:h-50 overflow-x-auto md:overflow-y-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-purple-300 [&::-webkit-scrollbar-thumb]:rounded-full">
                 <div class="w-11/12 hidden md:flex flex-row md:flex-col items-center gap-x-5 md:gap-y-5 py-3">
                     <div class="relative bg-[url({{asset('storage/image/cat-tiles-bg.png')}})] obgect-cover bg-center min-w-25 md:w-9/10 h-13 md:h-20 bg-[#0b686d] rounded-md font-mono font-bold py-5 text-md md:text-3xl text-white flex items-center justify-center hover:opacity-90 hover:translate-y-[-5px] transition-all cursor-pointer">
@@ -1058,11 +1089,6 @@
 </script>
 
 {{--tastk_mahdi_end--}}
-
-
-
-
-
 
 </body>
 </html>
