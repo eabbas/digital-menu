@@ -3,6 +3,9 @@
 <script src="{{ asset('assets/js/tailwind.js') }}"></script>
 @section('title', 'فامنو | منوی دیجیتال کسب و کار شما')
 @section('content')
+    <script>
+        let flag = "{{ Auth::check() }}"
+    </script>
     <style>
         .money {
             background: #86dbd8;
@@ -67,9 +70,8 @@
 
         .transferBG {
             animation: pastelColorShift 5s ease-in-out infinite;
-
-            padding: 12px 20px;
-            border-radius: 12px;
+            /* padding: 12px 20px; */
+            /* border-radius: 12px; */
             transition: all 0.3s ease;
             text-decoration: none;
         }
@@ -119,14 +121,13 @@
         }
 
         .transferBG a:hover {
-            transform: scale(1.05);
             color: #2d3748;
         }
     </style>
-    <div class="my-3 py-2 w-full flex flex-row items-center justify-center transferBG">
-        <a href="{{ route('pages.create') }}" class="w-fit text-sm text-gray-800">
-            صفحه خودتو ایجاد کن
-        </a>
+    <div class="w-full transferBG cursor-pointer" id="createPageLink">
+        <span class="block py-3 text-center w-full text-sm text-gray-800">
+            صفحه خودتو بساز
+        </span>
     </div>
     <div class="items-center bg-white py-5 rounded-[20px] w-[95%] mx-auto">
         <div class="w-11/12 mx-auto flex flex-row gap-5">
@@ -537,7 +538,7 @@
     </div>
 
     <div id="authenticationDiv"
-        class="fixed w-full h-dvh bg-black/50 backdrop-blur-sm top-0 right-0 flex justify-center items-center transition-all duration-300 opacity-0 invisible">
+        class="fixed w-full h-dvh bg-black/50 backdrop-blur-sm top-0 right-0 flex justify-center items-center transition-all duration-300 opacity-0 invisible z-9999999">
 
         <div class="w-3/4 bg-white rounded-sm p-3 transition-all duration-300 delay-100 scale-95">
             <svg xmlns="http://www.w3.org/2000/svg" class="size-5 cursor-pointer" onclick="closeLoginForm()"
@@ -567,7 +568,7 @@
                     <a href="{{ route('forget_password') }}"
                         class="text-[#eb3254] inline-block max-md:my-1 my-4 max-md:text-sm">فراموشی رمز عبور</a>
                     <span class="text-[#eb3254] inline-block max-md:my-1 my-4 max-md:text-sm cursor-pointer"
-                        onclick="loginWithPassKey(this)">ورود با رمز عبور</span>
+                        id="passKey" onclick="loginWithPassKey(this)">ورود با رمز عبور</span>
                 </div>
                 <button onclick="check(event)"
                     class="focus:bg-[#eb3254] hover:bg-[#eb3254] transition-all duration-400 text-center w-full bg-[#eb3254] p-2 md:p-3 rounded-[10px] text-white cursor-pointer">
@@ -582,7 +583,34 @@
             </form>
         </div>
     </div>
+
+    <div class="fixed w-full h-dvh top-0 right-0 bg-black/50 backdrop-blur z-99999999 flex justify-center items-center transition-all duration-300 invisible opacity-0"
+        id="homeBlock">
+        <div class="w-10/12 bg-white p-4 rounded-md flex flex-col gap-3 box" id="createPageMessageBox">
+            <p class="text-sm text-justify text-gray-800"></p>
+            <div class="text-sm text-gray-800 font-bold flex flex-row items-center gap-2">
+                <span>داشبورد</span>
+                <span>/</span>
+                <span>صفحه ها</span>
+                <span>/</span>
+                <a href="{{ route('pages.create') }}" class="text-blue-600">ایجاد صفحه</a>
+            </div>
+
+        </div>
+    </div>
     <script>
+        let homeBlock = document.getElementById('homeBlock')
+
+        let name = ''
+        let family = ''
+
+        if (flag) {
+            name = "{{ Auth::check() ? Auth::user()->name : 'کاربر' }}"
+            family = "{{ Auth::check() ? Auth::user()->family : '' }}"
+        }
+
+        let createPageMessageBox = document.getElementById('createPageMessageBox')
+
         let countDown = document.getElementById('countDown')
         let loginForm = document.getElementById('loginForm')
 
@@ -591,45 +619,47 @@
         element.classList = "text-sm font-bold flex flex-row items-center justify-center py-3 gap-2 lg:gap-3"
         let authenticationDiv = document.getElementById('authenticationDiv')
 
-        {{-- function storePage(){ --}}
-        {{--    if("{{ Auth::check() }}"){ --}}
-        {{--        $.ajaxSetup({ --}}
-        {{--            headers: { --}}
-        {{--                'X-CSRF-TOKEN': "{{ csrf_token() }}" --}}
-        {{--            } --}}
-        {{--        }) --}}
-        {{--        $.ajax({ --}}
-        {{--            url: "{{ route('pages.storeWithClick') }}", --}}
-        {{--            type: "GET", --}}
-        {{--            success: function (data){ --}}
-        {{--                console.log(data) --}}
-        {{--                showMessage('open') --}}
-        {{--                element.innerHTML = ` --}}
-        {{--                        <span>✅</span> --}}
-        {{--                        <span class="text-shadw-lg">صفحه شما ایجاد شد </span> --}}
-        {{--                    ` --}}
-        {{--                message.children[0].appendChild(element) --}}
-        {{--                setTimeout(() => { --}}
-        {{--                    showMessage('close') --}}
-        {{--                }, 2500) --}}
-        {{--            }, --}}
-        {{--            error: function (){ --}}
-        {{--                showMessage('open') --}}
-        {{--                element.innerHTML = ` --}}
-        {{--                        <span>❌</span> --}}
-        {{--                        <span class="text-shadw-lg">خطا در دریافت اطلاعات!</span> --}}
-        {{--                    ` --}}
-        {{--                message.children[0].appendChild(element) --}}
-        {{--                setTimeout(() => { --}}
-        {{--                    showMessage('close') --}}
-        {{--                }, 2500) --}}
-        {{--            } --}}
-        {{--        }) --}}
-        {{--    } else { --}}
-        {{--        authenticationDiv.classList.remove('invisible') --}}
-        {{--        authenticationDiv.classList.remove('opacity-0') --}}
-        {{--    } --}}
-        {{-- } --}}
+        let createPageLink = document.getElementById('createPageLink')
+
+
+
+        createPageLink.addEventListener('click', () => {
+            if (flag) {
+                homeBlock.classList.remove('invisible')
+                homeBlock.classList.remove('opacity-0')
+                createPageMessageBox.children[0].innerText = name + " " + family +
+                    " عزیز، یه صفحه قبلا برات ایجاد شده. اگه میخوای بازم صفحه بسازی از مسیر زیر میتونی انجامش بدی:"
+                x = true
+            } else {
+                authenticationDiv.classList.remove('invisible')
+                authenticationDiv.classList.remove('opacity-0')
+                authenticationDiv.children[0].classList.remove('scale-95')
+            }
+        })
+
+        let passKey = document.getElementById('passKey')
+        document.addEventListener('click', (event) => {
+            if (!authenticationDiv.children[0].contains(event.target) && !createPageLink.contains(event.target) && !
+                passKey.contains(event.target)) {
+                authenticationDiv.classList.add('invisible')
+                authenticationDiv.classList.add('opacity-0')
+                authenticationDiv.children[0].classList.add('scale-95')
+            }
+
+            // if(homeBlock && !createPageMessageBox.contains(event.target)){
+            //     homeBlock.classList.add('invisible')
+            //     homeBlock.classList.add('opacity-0')
+            // }
+
+            if (homeBlock && !homeBlock.classList.contains('invisible')) {
+                if (!createPageMessageBox.contains(event.target) &&
+                    !createPageLink.contains(event.target)) {
+                    homeBlock.classList.add('invisible')
+                    homeBlock.classList.add('opacity-0')
+                }
+            }
+
+        });
 
         function sendCode() {
 
@@ -757,72 +787,6 @@
             }, 1000)
         }
 
-        {{-- function check(ev) { --}}
-        {{--    ev.preventDefault() --}}
-        {{--    if (phoneNumber.value == "" || password.value == "") { --}}
-        {{--        showMessage('open') --}}
-        {{--        element.innerHTML = ` --}}
-        {{--                <span>لطفا همه فیلد ها را پر کنید</span> --}}
-        {{--                <span class="text-red-500">!</span> --}}
-        {{--            ` --}}
-        {{--        message.children[0].appendChild(element) --}}
-        {{--        setTimeout(() => { --}}
-        {{--            showMessage('close') --}}
-        {{--        }, 2000) --}}
-        {{--    } else { --}}
-        {{--        $.ajaxSetup({ --}}
-        {{--            headers: { --}}
-        {{--                'X-CSRF-TOKEN': "{{ csrf_token() }}" --}}
-        {{--            } --}}
-        {{--        }) --}}
-        {{--        $.ajax({ --}}
-        {{--            url: "{{ route('user.checkFromMenu') }}", --}}
-        {{--            type: "POST", --}}
-        {{--            dataType: "json", --}}
-        {{--            data: { --}}
-        {{--                'phoneNumber': phoneNumber.value, --}}
-        {{--                'password': password.value --}}
-        {{--            }, --}}
-        {{--            success: function (data) { --}}
-
-        {{--                if (data == "incorrectPassword") { --}}
-
-        {{--                    showMessage('open') --}}
-        {{--                    element.innerHTML = ` --}}
-        {{--                        <span>رمز عبور نادرست است</span> --}}
-        {{--                        <span class="text-red-500">!</span> --}}
-        {{--                    ` --}}
-        {{--                    message.children[0].appendChild(element) --}}
-        {{--                    setTimeout(() => { --}}
-        {{--                        showMessage('close') --}}
-        {{--                    }, 2000) --}}
-        {{--                } else { --}}
-        {{--                    showMessage('open') --}}
-        {{--                    element.innerHTML = ` --}}
-        {{--                        <span> خوش اومدی ${data.name} ${data.family} عزیز</span> --}}
-        {{--                    ` --}}
-        {{--                    message.children[0].appendChild(element) --}}
-        {{--                    setTimeout(() => { --}}
-        {{--                        showMessage('close') --}}
-        {{--                        closeLoginForm() --}}
-        {{--                    }, 2000) --}}
-        {{--                } --}}
-        {{--            }, --}}
-        {{--            error: function () { --}}
-        {{--                showMessage('open') --}}
-        {{--                element.innerHTML = ` --}}
-        {{--                <span>خطا در دریافت اطلاعات</span> --}}
-        {{--                <span class="text-red-500">!</span> --}}
-        {{--                ` --}}
-        {{--                message.children[0].appendChild(element) --}}
-        {{--                setTimeout(() => { --}}
-        {{--                    showMessage('close') --}}
-        {{--                }, 2000) --}}
-        {{--            } --}}
-        {{--        }) --}}
-        {{--    } --}}
-        {{-- } --}}
-
         function check(ev) {
             let password = document.getElementById('password')
             console.log(password)
@@ -854,22 +818,37 @@
                         },
                         success: function(data) {
 
-                            if (data == "incorrectPassword") {
-
+                            if (data == "userNotFound") {
                                 showMessage('open')
                                 element.innerHTML = `
-                                <span>رمز عبور نادرست است</span>
-                                <span class="text-red-500">!</span>
-                            `
+                                    <span>ابتدا ثبت نام کنید</span>
+                                `
+                                message.children[0].appendChild(element)
+                                setTimeout(() => {
+                                    showMessage('close')
+                                    location.assign("{{ route('signup') }}")
+                                }, 2000)
+                            }
+                            if (data == "incorrectPassword") {
+                                showMessage('open')
+                                element.innerHTML = `
+                                    <span>رمز عبور نادرست است</span>
+                                    <span class="text-red-500">!</span>
+                                `
                                 message.children[0].appendChild(element)
                                 setTimeout(() => {
                                     showMessage('close')
                                 }, 2000)
-                            } else {
+                            }
+                            if (data.id) {
                                 showMessage('open')
                                 element.innerHTML = `
-                                <span> خوش اومدی ${data.name} ${data.family} عزیز</span>
-                            `
+                                    <span> خوش اومدی ${data.name} ${data.family} عزیز</span>
+                                `
+                                flag = true
+                                userId = data.id
+                                name = data.name
+                                family = data.family
                                 message.children[0].appendChild(element)
                                 setTimeout(() => {
                                     showMessage('close')
@@ -880,9 +859,9 @@
                         error: function() {
                             showMessage('open')
                             element.innerHTML = `
-                        <span>خطا در دریافت اطلاعات</span>
-                        <span class="text-red-500">!</span>
-                        `
+                            <span>خطا در دریافت اطلاعات</span>
+                            <span class="text-red-500">!</span>
+                            `
                             message.children[0].appendChild(element)
                             setTimeout(() => {
                                 showMessage('close')
@@ -917,17 +896,39 @@
                             'code': code.value
                         },
                         success: function(data) {
-                            console.log(data)
-                            showMessage('open')
+                           
+                            if (!data.checkCode) {
+                                showMessage('open')
+                                element.innerHTML = `
+                                    <span>کد وارد شده نامعتبر !</span>
+                                `
+                                message.children[0].appendChild(element)
+                                setTimeout(() => {
+                                    showMessage('close')
+                                }, 2000)
+                            } if (!data.validate) {
+                                showMessage('open')
+                                element.innerHTML = `
+                                    <span>ابتدا ثبت نام کنید</span>
+                                `
+                                message.children[0].appendChild(element)
+                                setTimeout(() => {
+                                    showMessage('close')
+                                    location.assign("{{ route('signup') }}")
+                                }, 2000)
+                            } if(data.validate && data.checkCode) {
 
-                            element.innerHTML = `
-                                <span> خوش اومدی ${data.validate.name} ${data.validate.family} عزیز</span>
-                            `
-                            message.children[0].appendChild(element)
-                            setTimeout(() => {
-                                showMessage('close')
-                                closeLoginForm()
-                            }, 2000)
+                                showMessage('open')
+
+                                element.innerHTML = `
+                                    <span> خوش اومدی ${data.validate.name} ${data.validate.family} عزیز</span>
+                                `
+                                message.children[0].appendChild(element)
+                                setTimeout(() => {
+                                    showMessage('close')
+                                    closeLoginForm()
+                                }, 2000)
+                            }
                         },
                         error: function() {
                             showMessage('open')
@@ -954,35 +955,37 @@
 
         function loginWithPassKey(el) {
             login.innerHTML = `
-                                    <input type="password"
-                                        class="placeholder-gray-400 focus:border-1 focus:border-[#eb3254] p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] focus:outline-none w-full"
-                                        name="password" id="password" placeholder="کلمه عبور" required>
-                                `
-            el.parentElement.children[1].remove()
-            let span = document.createElement('span')
-            span.classList = "text-[#eb3254] inline-block max-md:my-1 my-4 max-md:text-sm cursor-pointer"
-            span.setAttribute('onclick', 'loginWithActivationCode(this)')
-            span.innerText = "ورود با کد فعال ساز"
-            loginWay.appendChild(span)
+                <input type="password"
+                    class="placeholder-gray-400 focus:border-1 focus:border-[#eb3254] p-2 md:p-[9px] mb-1 rounded-[7px] border-1 border-[#DBDFE9] focus:outline-none w-full"
+                    name="password" id="password" placeholder="کلمه عبور" required>
+            `
+            // el.parentElement.children[1].remove()
+            // let span = document.createElement('span')
+            // span.classList = "text-[#eb3254] inline-block max-md:my-1 my-4 max-md:text-sm cursor-pointer"
+            // span.setAttribute('id', 'passKey')
+            passKey.setAttribute('onclick', 'loginWithActivationCode(this)')
+            passKey.innerText = "ورود با کد فعال ساز"
+            // loginWay.appendChild(span)
         }
 
         function loginWithActivationCode(el) {
             login.innerHTML = `
-                                    <div class="w-full flex flex-row items-center gap-3">
-                                        <input type="number"
-                                            class="w-8/12 p-2 placeholder-gray-400 focus:border-[#eb3254] md:p-[9px] rounded-[7px] border-1 border-[#DBDFE9] outline-none"
-                                            name="code" placeholder="کد" required id="code">
-                                        <button type="button"
-                                            class="w-4/12 text-xs lg:text-base h-full p-2 md:p-[9px] rounded-[7px] bg-[#eb3254] hover:bg-[#d52b4a] text-white cursor-pointer"
-                                            onclick="sendCode()" id="countDown">ارسال کد </button>
-                                    </div>
-                                `
-            el.parentElement.children[1].remove()
-            let span = document.createElement('span')
-            span.classList = "text-[#eb3254] inline-block max-md:my-1 my-4 max-md:text-sm cursor-pointer"
-            span.setAttribute('onclick', 'loginWithPassKey(this)')
-            span.innerText = "ورود با رمز عبور"
-            loginWay.appendChild(span)
+                <div class="w-full flex flex-row items-center gap-3">
+                    <input type="number"
+                        class="w-8/12 p-2 placeholder-gray-400 focus:border-[#eb3254] md:p-[9px] rounded-[7px] border-1 border-[#DBDFE9] outline-none"
+                        name="code" placeholder="کد" required id="code">
+                    <button type="button"
+                        class="w-4/12 text-xs lg:text-base h-full p-2 md:p-[9px] rounded-[7px] bg-[#eb3254] hover:bg-[#d52b4a] text-white cursor-pointer"
+                        onclick="sendCode()" id="countDown">ارسال کد </button>
+                </div>
+            `
+            // el.parentElement.children[1].remove()
+            // let span = document.createElement('span')
+            // span.classList = "text-[#eb3254] inline-block max-md:my-1 my-4 max-md:text-sm cursor-pointer"
+            // span.setAttribute('id', 'passKey')
+            passKey.setAttribute('onclick', 'loginWithPassKey(this)')
+            passKey.innerText = "ورود با رمز عبور"
+            // loginWay.appendChild(span)
         }
 
         function showMessage(state) {
@@ -1123,13 +1126,13 @@
 
         function openDropdown() {
             parentFavorite.innerHTML = `
-        <form action="#" method="post">
-            <div class="flex flex-row justify-center items-center">
-                <input type="text" class="w-10/12 py-1 px-3 rounded-lg outline-none border-1 border-gray-300" placeholder="عنوان دسته" id="categoryTitle">
-                <button class="w-2/12 h-full rounded-lg text-xl" onclick="addItem(event)">✅</button>
-            </div>
-        </form>
-        `
+            <form action="#" method="post">
+                <div class="flex flex-row justify-center items-center">
+                    <input type="text" class="w-10/12 py-1 px-3 rounded-lg outline-none border-1 border-gray-300" placeholder="عنوان دسته" id="categoryTitle">
+                    <button class="w-2/12 h-full rounded-lg text-xl" onclick="addItem(event)">✅</button>
+                </div>
+            </form>
+            `
         }
 
         function addItem(ev) {

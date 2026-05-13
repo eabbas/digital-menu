@@ -1,5 +1,4 @@
 <script>
-
     let flag = "{{ Auth::check() }}"
     let userId = "{{ Auth::id() }}";
     // login
@@ -87,10 +86,10 @@
 
     function check(ev) {
         let password = document.getElementById('password')
-        let addCustomer=document.getElementById('addCustomer')
+        let addCustomer = document.getElementById('addCustomer')
         // console.log(password)
         ev.preventDefault()
-        if(password){
+        if (password) {
             if (phoneNumber.value == "" || password.value == "") {
                 showMessage('open')
                 element.innerHTML = `
@@ -115,8 +114,18 @@
                         'phoneNumber': phoneNumber.value,
                         'password': password.value
                     },
-                    success: function (data) {
-
+                    success: function(data) {
+                        if (data == "userNotFound") {
+                            showMessage('open')
+                            element.innerHTML = `
+                                    <span>ابتدا ثبت نام کنید</span>
+                                `
+                            message.children[0].appendChild(element)
+                            setTimeout(() => {
+                                showMessage('close')
+                                location.assign("{{ route('signup') }}")
+                            }, 2000)
+                        }
                         if (data == "incorrectPassword") {
 
                             showMessage('open')
@@ -128,23 +137,24 @@
                             setTimeout(() => {
                                 showMessage('close')
                             }, 2000)
-                        } else {
+                        }
+                        if (data.id) {
                             showMessage('open')
                             element.innerHTML = `
                                 <span> خوش اومدی ${data.name} ${data.family} عزیز</span>
                             `
-                            flag=true
-                        addCustomer.innerHTML=""
-                        if(flag && ({{$page->user->id}} != data.id)){
-                            addCustomer.innerHTML=`<div class="flex justify-center items-center w-40 py-2 bg-blue-500 text-white text-xs font-bold rounded-sm cursor-pointer" onclick="addSpecialCustomer(this , 'page' )">عضویت در باشگاه مشتریان</div>`
-                        }else{
-                            if(flag && ({{$page->user->id}} == data.id))
-                            {
-                                addCustomer.innerHTML = `<a href="{{ route('special-user.index', [$page->id]) }}" class="flex justify-center items-center w-40 py-2 bg-blue-500 text-white text-xs font-bold rounded-sm cursor-pointer" onclick="specialCustomers(this , '${data.type}')">
+                            flag = true
+                            addCustomer.innerHTML = ""
+                            if (flag && ({{ $page->user->id }} != data.id)) {
+                                addCustomer.innerHTML =
+                                    `<div class="flex justify-center items-center w-40 py-2 bg-blue-500 text-white text-xs font-bold rounded-sm cursor-pointer" onclick="addSpecialCustomer(this , 'page' )">عضویت در باشگاه مشتریان</div>`
+                            } else {
+                                if (flag && ({{ $page->user->id }} == data.id)) {
+                                    addCustomer.innerHTML = `<a href="{{ route('special-user.index', [$page->id]) }}" class="flex justify-center items-center w-40 py-2 bg-blue-500 text-white text-xs font-bold rounded-sm cursor-pointer" onclick="specialCustomers(this , '${data.type}')">
                                        باشگاه مشتریان
                               </a>`
+                                }
                             }
-                        }
 
 
                             userId = data.id
@@ -155,7 +165,7 @@
                             }, 2000)
                         }
                     },
-                    error: function () {
+                    error: function() {
                         showMessage('open')
                         element.innerHTML = `
                         <span>خطا در دریافت اطلاعات</span>
@@ -169,7 +179,7 @@
                 })
             }
         }
-        if(!password){
+        if (!password) {
             if (phoneNumber.value == "" || code.value == "") {
                 showMessage('open')
                 element.innerHTML = `
@@ -190,39 +200,61 @@
                     url: "{{ route('checkActivationCode') }}",
                     type: "POST",
                     dataType: "json",
-                    data : {
+                    data: {
                         'phoneNumber': phoneNumber.value,
                         'code': code.value
                     },
-                    success: function (data){
+                    success: function(data) {
                         console.log(data)
-                        showMessage('open')
-
-                        element.innerHTML = `
+                        if (!data.checkCode) {
+                            showMessage('open')
+                            element.innerHTML = `
+                                    <span>کد وارد شده نامعتبر !</span>
+                                `
+                            message.children[0].appendChild(element)
+                            setTimeout(() => {
+                                showMessage('close')
+                            }, 2000)
+                        }
+                        if (!data.validate) {
+                            showMessage('open')
+                            element.innerHTML = `
+                                    <span>ابتدا ثبت نام کنید</span>
+                                `
+                            message.children[0].appendChild(element)
+                            setTimeout(() => {
+                                showMessage('close')
+                                location.assign("{{ route('signup') }}")
+                            }, 2000)
+                        }
+                        if (data.validate && data.checkCode) {
+                            showMessage('open')
+                            element.innerHTML = `
                                 <span> خوش اومدی ${data.validate.name} ${data.validate.family} عزیز</span>
                             `
-                        flag=true
+                            flag = true
 
-                        addCustomer.innerHTML=""
-                        if(flag && ({{$page->user->id}} != data.id)){
-                            addCustomer.innerHTML=`<div class="flex justify-center items-center w-40 py-2 bg-blue-500 text-white text-xs font-bold rounded-sm cursor-pointer" onclick="addSpecialCustomer(this, 'page')">عضویت در باشگاه مشتریان</div>`
-                        }else{
-                            if(flag && ({{$page->user->id}} == data.id))
-                            {
-                                addCustomer.innerHTML = `<a href="{{ route('special-user.index', [$page->id]) }}" class="flex justify-center items-center w-40 py-2 bg-blue-500 text-white text-xs font-bold rounded-sm cursor-pointer" onclick="specialCustomers(this)">
+                            addCustomer.innerHTML = ""
+                            if (flag && ({{ $page->user->id }} != data.id)) {
+                                addCustomer.innerHTML =
+                                    `<div class="flex justify-center items-center w-40 py-2 bg-blue-500 text-white text-xs font-bold rounded-sm cursor-pointer" onclick="addSpecialCustomer(this, 'page')">عضویت در باشگاه مشتریان</div>`
+                            } else {
+                                if (flag && ({{ $page->user->id }} == data.id)) {
+                                    addCustomer.innerHTML = `<a href="{{ route('special-user.index', [$page->id]) }}" class="flex justify-center items-center w-40 py-2 bg-blue-500 text-white text-xs font-bold rounded-sm cursor-pointer" onclick="specialCustomers(this)">
                                        باشگاه مشتریان
                               </a>`
+                                }
                             }
-                        }
 
-                        userId = data.validate.id
-                        message.children[0].appendChild(element)
-                        setTimeout(() => {
-                            showMessage('close')
-                            closeLoginForm()
-                        }, 2000)
+                            userId = data.validate.id
+                            message.children[0].appendChild(element)
+                            setTimeout(() => {
+                                showMessage('close')
+                                closeLoginForm()
+                            }, 2000)
+                        }
                     },
-                    error: function (){
+                    error: function() {
                         showMessage('open')
                         element.innerHTML = `
                         <span>خطا در دریافت اطلاعات</span>
@@ -239,17 +271,17 @@
 
 
 
-        {{--addCustomer.innerHTML=""--}}
-        {{--if(check && ({{$page->user->id}} != "{{Auth::id()}}")){--}}
-        {{--    addCustomer.innerHTML=`<div class="flex justify-center items-center w-40 py-2 bg-blue-500 text-white text-xs font-bold rounded-sm cursor-pointer" onclick="addSpecialCustomer(this , 'page' )">عضویت در باشگاه مشتریان</div>`--}}
-        {{--}else{--}}
-        {{--    if(check && ({{$page->user->id}} == "{{Auth::id()}}"))--}}
-        {{--    {--}}
-        {{--        addCustomer.innerHTML = `<a href="{{ route('special-user.index', [$page->id]) }}" class="flex justify-center items-center w-40 py-2 bg-blue-500 text-white text-xs font-bold rounded-sm cursor-pointer" onclick="specialCustomers(this)">--}}
-        {{--               باشگاه مشتریان--}}
-        {{--      </a>`--}}
-        {{--    }--}}
-        {{--}--}}
+        {{-- addCustomer.innerHTML="" --}}
+        {{-- if(check && ({{$page->user->id}} != "{{Auth::id()}}")){ --}}
+        {{--    addCustomer.innerHTML=`<div class="flex justify-center items-center w-40 py-2 bg-blue-500 text-white text-xs font-bold rounded-sm cursor-pointer" onclick="addSpecialCustomer(this , 'page' )">عضویت در باشگاه مشتریان</div>` --}}
+        {{-- }else{ --}}
+        {{--    if(check && ({{$page->user->id}} == "{{Auth::id()}}")) --}}
+        {{--    { --}}
+        {{--        addCustomer.innerHTML = `<a href="{{ route('special-user.index', [$page->id]) }}" class="flex justify-center items-center w-40 py-2 bg-blue-500 text-white text-xs font-bold rounded-sm cursor-pointer" onclick="specialCustomers(this)"> --}}
+        {{--               باشگاه مشتریان --}}
+        {{--      </a>` --}}
+        {{--    } --}}
+        {{-- } --}}
 
 
 
@@ -260,129 +292,129 @@
 
 
 
-        {{--let password = document.getElementById('password')--}}
-        {{--console.log(password)--}}
-        {{--ev.preventDefault()--}}
-        {{--if(password){--}}
-        {{--    if (phoneNumber.value == "" || password.value == "") {--}}
-        {{--        showMessage('open')--}}
-        {{--        element.innerHTML = `--}}
-        {{--                    <span>لطفا همه فیلد ها را پر کنید</span>--}}
-        {{--                    <span class="text-red-500">!</span>--}}
-        {{--                `--}}
-        {{--        message.children[0].appendChild(element)--}}
-        {{--        setTimeout(() => {--}}
-        {{--            showMessage('close')--}}
-        {{--        }, 2000)--}}
-        {{--    } else {--}}
-        {{--        $.ajaxSetup({--}}
-        {{--            headers: {--}}
-        {{--                'X-CSRF-TOKEN': "{{ csrf_token() }}"--}}
-        {{--            }--}}
-        {{--        })--}}
-        {{--        $.ajax({--}}
-        {{--            url: "{{ route('user.checkFromMenu') }}",--}}
-        {{--            type: "POST",--}}
-        {{--            dataType: "json",--}}
-        {{--            data: {--}}
-        {{--                'phoneNumber': phoneNumber.value,--}}
-        {{--                'password': password.value--}}
-        {{--            },--}}
-        {{--            success: function (data) {--}}
+        {{-- let password = document.getElementById('password') --}}
+        {{-- console.log(password) --}}
+        {{-- ev.preventDefault() --}}
+        {{-- if(password){ --}}
+        {{--    if (phoneNumber.value == "" || password.value == "") { --}}
+        {{--        showMessage('open') --}}
+        {{--        element.innerHTML = ` --}}
+        {{--                    <span>لطفا همه فیلد ها را پر کنید</span> --}}
+        {{--                    <span class="text-red-500">!</span> --}}
+        {{--                ` --}}
+        {{--        message.children[0].appendChild(element) --}}
+        {{--        setTimeout(() => { --}}
+        {{--            showMessage('close') --}}
+        {{--        }, 2000) --}}
+        {{--    } else { --}}
+        {{--        $.ajaxSetup({ --}}
+        {{--            headers: { --}}
+        {{--                'X-CSRF-TOKEN': "{{ csrf_token() }}" --}}
+        {{--            } --}}
+        {{--        }) --}}
+        {{--        $.ajax({ --}}
+        {{--            url: "{{ route('user.checkFromMenu') }}", --}}
+        {{--            type: "POST", --}}
+        {{--            dataType: "json", --}}
+        {{--            data: { --}}
+        {{--                'phoneNumber': phoneNumber.value, --}}
+        {{--                'password': password.value --}}
+        {{--            }, --}}
+        {{--            success: function (data) { --}}
 
-        {{--                if (data == "incorrectPassword") {--}}
+        {{--                if (data == "incorrectPassword") { --}}
 
-        {{--                    showMessage('open')--}}
-        {{--                    element.innerHTML = `--}}
-        {{--                        <span>رمز عبور نادرست است</span>--}}
-        {{--                        <span class="text-red-500">!</span>--}}
-        {{--                    `--}}
-        {{--                    message.children[0].appendChild(element)--}}
-        {{--                    setTimeout(() => {--}}
-        {{--                        showMessage('close')--}}
-        {{--                    }, 2000)--}}
-        {{--                } else {--}}
-        {{--                    showMessage('open')--}}
-        {{--                    element.innerHTML = `--}}
-        {{--                        <span> خوش اومدی ${data.name} ${data.family} عزیز</span>--}}
-        {{--                    `--}}
-        {{--                    flag=true--}}
-        {{--                    userId = data.id--}}
-        {{--                    message.children[0].appendChild(element)--}}
-        {{--                    setTimeout(() => {--}}
-        {{--                        showMessage('close')--}}
-        {{--                        closeLoginForm()--}}
-        {{--                    }, 2000)--}}
-        {{--                }--}}
-        {{--            },--}}
-        {{--            error: function () {--}}
-        {{--                showMessage('open')--}}
-        {{--                element.innerHTML = `--}}
-        {{--                <span>خطا در دریافت اطلاعات</span>--}}
-        {{--                <span class="text-red-500">!</span>--}}
-        {{--                `--}}
-        {{--                message.children[0].appendChild(element)--}}
-        {{--                setTimeout(() => {--}}
-        {{--                    showMessage('close')--}}
-        {{--                }, 2000)--}}
-        {{--            }--}}
-        {{--        })--}}
-        {{--    }--}}
-        {{--}--}}
-        {{--if(!password){--}}
-        {{--    if (phoneNumber.value == "" || code.value == "") {--}}
-        {{--        showMessage('open')--}}
-        {{--        element.innerHTML = `--}}
-        {{--                    <span>لطفا همه فیلد ها را پر کنید</span>--}}
-        {{--                    <span class="text-red-500">!</span>--}}
-        {{--                `--}}
-        {{--        message.children[0].appendChild(element)--}}
-        {{--        setTimeout(() => {--}}
-        {{--            showMessage('close')--}}
-        {{--        }, 2000)--}}
-        {{--    } else {--}}
-        {{--        $.ajaxSetup({--}}
-        {{--            headers: {--}}
-        {{--                'X-CSRF-TOKEN': "{{ csrf_token() }}"--}}
-        {{--            }--}}
-        {{--        })--}}
-        {{--        $.ajax({--}}
-        {{--            url: "{{ route('checkActivationCode') }}",--}}
-        {{--            type: "POST",--}}
-        {{--            dataType: "json",--}}
-        {{--            data : {--}}
-        {{--                'phoneNumber': phoneNumber.value,--}}
-        {{--                'code': code.value--}}
-        {{--            },--}}
-        {{--            success: function (data){--}}
-        {{--                console.log(data)--}}
-        {{--                showMessage('open')--}}
+        {{--                    showMessage('open') --}}
+        {{--                    element.innerHTML = ` --}}
+        {{--                        <span>رمز عبور نادرست است</span> --}}
+        {{--                        <span class="text-red-500">!</span> --}}
+        {{--                    ` --}}
+        {{--                    message.children[0].appendChild(element) --}}
+        {{--                    setTimeout(() => { --}}
+        {{--                        showMessage('close') --}}
+        {{--                    }, 2000) --}}
+        {{--                } else { --}}
+        {{--                    showMessage('open') --}}
+        {{--                    element.innerHTML = ` --}}
+        {{--                        <span> خوش اومدی ${data.name} ${data.family} عزیز</span> --}}
+        {{--                    ` --}}
+        {{--                    flag=true --}}
+        {{--                    userId = data.id --}}
+        {{--                    message.children[0].appendChild(element) --}}
+        {{--                    setTimeout(() => { --}}
+        {{--                        showMessage('close') --}}
+        {{--                        closeLoginForm() --}}
+        {{--                    }, 2000) --}}
+        {{--                } --}}
+        {{--            }, --}}
+        {{--            error: function () { --}}
+        {{--                showMessage('open') --}}
+        {{--                element.innerHTML = ` --}}
+        {{--                <span>خطا در دریافت اطلاعات</span> --}}
+        {{--                <span class="text-red-500">!</span> --}}
+        {{--                ` --}}
+        {{--                message.children[0].appendChild(element) --}}
+        {{--                setTimeout(() => { --}}
+        {{--                    showMessage('close') --}}
+        {{--                }, 2000) --}}
+        {{--            } --}}
+        {{--        }) --}}
+        {{--    } --}}
+        {{-- } --}}
+        {{-- if(!password){ --}}
+        {{--    if (phoneNumber.value == "" || code.value == "") { --}}
+        {{--        showMessage('open') --}}
+        {{--        element.innerHTML = ` --}}
+        {{--                    <span>لطفا همه فیلد ها را پر کنید</span> --}}
+        {{--                    <span class="text-red-500">!</span> --}}
+        {{--                ` --}}
+        {{--        message.children[0].appendChild(element) --}}
+        {{--        setTimeout(() => { --}}
+        {{--            showMessage('close') --}}
+        {{--        }, 2000) --}}
+        {{--    } else { --}}
+        {{--        $.ajaxSetup({ --}}
+        {{--            headers: { --}}
+        {{--                'X-CSRF-TOKEN': "{{ csrf_token() }}" --}}
+        {{--            } --}}
+        {{--        }) --}}
+        {{--        $.ajax({ --}}
+        {{--            url: "{{ route('checkActivationCode') }}", --}}
+        {{--            type: "POST", --}}
+        {{--            dataType: "json", --}}
+        {{--            data : { --}}
+        {{--                'phoneNumber': phoneNumber.value, --}}
+        {{--                'code': code.value --}}
+        {{--            }, --}}
+        {{--            success: function (data){ --}}
+        {{--                console.log(data) --}}
+        {{--                showMessage('open') --}}
 
-        {{--                element.innerHTML = `--}}
-        {{--                        <span> خوش اومدی ${data.validate.name} ${data.validate.family} عزیز</span>--}}
-        {{--                    `--}}
-        {{--                flag=true--}}
-        {{--                userId = data.validate.id--}}
-        {{--                message.children[0].appendChild(element)--}}
-        {{--                setTimeout(() => {--}}
-        {{--                    showMessage('close')--}}
-        {{--                    closeLoginForm()--}}
-        {{--                }, 2000)--}}
-        {{--            },--}}
-        {{--            error: function (){--}}
-        {{--                showMessage('open')--}}
-        {{--                element.innerHTML = `--}}
-        {{--                <span>خطا در دریافت اطلاعات</span>--}}
-        {{--                <span class="text-red-500">!</span>--}}
-        {{--                `--}}
-        {{--                message.children[0].appendChild(element)--}}
-        {{--                setTimeout(() => {--}}
-        {{--                    showMessage('close')--}}
-        {{--                }, 2000)--}}
-        {{--            }--}}
-        {{--        })--}}
-        {{--    }--}}
-        {{--}--}}
+        {{--                element.innerHTML = ` --}}
+        {{--                        <span> خوش اومدی ${data.validate.name} ${data.validate.family} عزیز</span> --}}
+        {{--                    ` --}}
+        {{--                flag=true --}}
+        {{--                userId = data.validate.id --}}
+        {{--                message.children[0].appendChild(element) --}}
+        {{--                setTimeout(() => { --}}
+        {{--                    showMessage('close') --}}
+        {{--                    closeLoginForm() --}}
+        {{--                }, 2000) --}}
+        {{--            }, --}}
+        {{--            error: function (){ --}}
+        {{--                showMessage('open') --}}
+        {{--                element.innerHTML = ` --}}
+        {{--                <span>خطا در دریافت اطلاعات</span> --}}
+        {{--                <span class="text-red-500">!</span> --}}
+        {{--                ` --}}
+        {{--                message.children[0].appendChild(element) --}}
+        {{--                setTimeout(() => { --}}
+        {{--                    showMessage('close') --}}
+        {{--                }, 2000) --}}
+        {{--            } --}}
+        {{--        }) --}}
+        {{--    } --}}
+        {{-- } --}}
 
     }
 
@@ -509,23 +541,24 @@
     // login
 
 
-    function closeLoginBox(){
+    function closeLoginBox() {
         authenticationDiv.classList.add('invisible')
         authenticationDiv.classList.add('opacity-0')
     }
 
 
-    {{--"{{ Auth::check() }}"--}}
-    function addSpecialCustomer(el , type){
+    {{-- "{{ Auth::check() }}" --}}
+
+    function addSpecialCustomer(el, type) {
         // console.log("{{ $page->id }}")
         let text = el.innerText
-        if(flag){
+        if (flag) {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
                 }
             })
-            {{--url: "{{ route('special-user.store') }}",--}}
+            {{-- url: "{{ route('special-user.store') }}", --}}
 
             $.ajax({
                 url: "{{ url('/api/special-user-store') }}",
@@ -534,12 +567,12 @@
                 data: {
                     'page_id': "{{ $page->id }}",
                     'user_id': userId,
-                    'type' : type
+                    'type': type
                 },
-                success: function (data){
+                success: function(data) {
                     console.log(data)
                     // return
-                    if(data){
+                    if (data) {
                         showMessage('open')
                         element.innerHTML = `
                             <span>عضویت شما ثبت شد</span>
@@ -560,11 +593,11 @@
                             showMessage('close')
                         }, 2000)
                     }
-                    
-                    // location.assign("{{ url('/api/special-user-page/'. $page->id) }}")
+
+                    // location.assign("{{ url('/api/special-user-page/' . $page->id) }}")
                     location.assign("{{ route('special-user.page', [$page->id]) }}")
                 },
-                error: function (){
+                error: function() {
                     showMessage('open')
                     element.innerHTML = `
                         <span>خطا در دریافت اطلاعات</span>
@@ -582,7 +615,7 @@
         }
     }
 
-    function specialCustomers(el){
+    function specialCustomers(el) {
         console.log(el)
     }
 

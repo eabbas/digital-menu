@@ -621,20 +621,21 @@ class UserController extends Controller
     {
         $bool = false;
         $user['validate'] = User::where('phoneNumber', $request->phoneNumber)->first();
+        $user['checkCode']=$bool;
         $code = phone_code::where('phoneNumber', $request->phoneNumber)->first();
         if ($user['validate']) {
             if ($code->code == $request->code) {
                 $bool = true;
                 Auth::login($user['validate']);
             }
+            if(isset($request->career_id)){
+                $user['orders'] = order::where('user_id', Auth::id())->where('career_id', $request->career_id)->where('status', 1)->orWhere('status', 2)->orWhere('status', 3)->get();
+            }
+            $user['validate']->load(['carts' => function ($query) {
+                $query->whereNull('order_id');
+            }]);
+            $user['checkCode'] = $bool;
         }
-        if(isset($request->career_id)){
-            $user['orders'] = order::where('user_id', Auth::id())->where('career_id', $request->career_id)->where('status', 1)->orWhere('status', 2)->orWhere('status', 3)->get();
-        }
-        $user['validate']->load(['carts' => function ($query) {
-            $query->whereNull('order_id');
-        }]);
-        $user['checkCode'] = $bool;
         return response()->json($user);
     }
 
@@ -808,7 +809,7 @@ class UserController extends Controller
             }
             return response()->json('incorrectPassword');
         }
-        return to_route('signup');
+        return response()->json('userNotFound');
     }
 
     public function setAddress(Request $request)
