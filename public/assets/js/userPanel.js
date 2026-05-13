@@ -1,4 +1,5 @@
 // let menuBlockliet = document.getElementById('menuBlockliet')
+let menuList = document.getElementById('menuList')
 function hamburgerMenu(state){
     if (state == "open") {
         menuBlock.classList.remove('invisible')
