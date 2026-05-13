@@ -33,7 +33,7 @@
                                 <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                     <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="number"
-                                        name='duration' placeholder="مدت درس را به دقیقه وارد کنید"required>
+                                        name='duration' placeholder="مدت زمان درس را به ساعت وارد کنید"required>
                                 </div>
                             </div>
                             <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1">

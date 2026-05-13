@@ -82,7 +82,7 @@
                                 name="province" id="province_select" onchange="changeCity(this)" required>
                                 <option value="">انتخاب استان</option>
                                 @foreach ($provinces as $province)
-                                    <option value="{{ $province->id }}" {{ old('province', $institute->province_id) == $province->id ? 'selected' : '' }}>
+                                    <option value="{{ $province->id }}" @if(isset($institute->province_city) && ($province->id == $institute->province_city->parent)){{ 'selected' }}@endif>
                                         {{ $province->title }}
                                     </option>
                                 @endforeach
@@ -97,8 +97,10 @@
                         </label>
                         <div class="rounded-lg bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                             <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
-                                name="city" id="city" required>
-                                <option value="">ابتدا استان را انتخاب کنید</option>
+                                name="city" id="city" placeholder="شهر خود را انخاب کنید" required>
+                                 @foreach ($cities as $city)
+                                            <option value="{{ $city->id }}" @if($city->id == $institute->city_id){{ 'selected' }}@endif>{{ $city->title }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -120,7 +122,22 @@
                                 type="email" name="email" value="{{ old('email', $institute->email) }}" placeholder="example@domain.com">
                         </div>
                     </div>
-
+                    <div class="w-full flex flex-col gap-3 items-start max-md:flex-col max-md:gap-1">
+                        <label class="w-30 text-sm mb-1 mt-2.5 flex"><span class="required-star">*</span>انتخاب شعبه</label>
+                        <div class="rounded-lg bg-[#F9F9F9] text-[#99A1B7] w-full flex">
+                            <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2" name="parent_id">
+                                <option value="0">شعبه مرکزی</option>
+                                @if(isset($institutes) && count($institutes))
+                                    @foreach ($institutes as $inst)
+                                        <option value="{{ $inst->id }}" 
+                                            {{ $institute->parent_id == $inst->id ? 'selected' : '' }}>
+                                            {{ $inst->title }}
+                                        </option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                    </div>
                     <!-- آدرس (ضروری) -->
                     <div class="w-full flex flex-col gap-3 items-start max-md:flex-col max-md:gap-1 lg:col-span-2">
                         <label class="w-30 text-sm mb-1 mt-2.5 flex">

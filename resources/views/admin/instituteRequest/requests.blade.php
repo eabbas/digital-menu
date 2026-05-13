@@ -151,12 +151,12 @@
             </form>
         </div>
         {{-- دکمه بازگشت --}}
-        <div class="w-11/12 mx-auto pb-6 flex justify-end mt-3">
+        {{-- <div class="w-11/12 mx-auto pb-6 flex justify-end mt-3">
             <a href="{{ route('institute.single' , [$institute]) }}"
                class="bg-gray-500 hover:bg-gray-600 text-white px-5 py-2 rounded">
                 بازگشت
             </a>
-        </div>
+        </div> --}}
     </div>
     
     <script src="{{ asset('assets/js/checkAll.js') }}"></script>

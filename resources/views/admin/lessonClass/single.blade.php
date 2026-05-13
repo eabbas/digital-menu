@@ -145,10 +145,9 @@
                             <div class="flex items-center gap-3 text-sm">
                                 <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                                 <span><strong>استاد:</strong>
-                                    @if($class->teacher)
-                                        {{ $class->teacher->name }}
-                                    @elseif($class->teacher_name)
-                                        {{ $class->teacher_name }}
+                                    {{-- @dd($class->masters) --}}
+                                    @if($class->master)
+                                        {{ $class->master->name }}  {{ $class->master->family }}
                                     @else
                                         <span class="text-red-500">ثبت نشده</span>
                                         <a href="{{ route('class.add_master', [$class]) }}" class="text-xs text-indigo-500 mr-1">افزودن استاد</a>

@@ -62,8 +62,10 @@ class InstituteController extends Controller
     }
 
     public function edit(institute $institute){
+        // dd($institute->province_city);
          $provinces = province_cities::where('parent', 0)->get();
-        return view('admin.institute.edit', ['provinces'=>$provinces , 'institute'=>$institute]);
+         $cities = province_cities::where('parent', 1)->get();
+        return view('admin.institute.edit', ['provinces'=>$provinces , 'institute'=>$institute , 'cities'=>$cities]);
     }
 
     public function update(Request $request){
@@ -88,6 +90,7 @@ class InstituteController extends Controller
             $institute->website = $request->website;
             $institute->address = $request->address;
             $institute->user_id = $request->user_id;
+            $institute->city_id = $request->city;
             $institute->save();
             return to_route('institute.institutes');
     }
@@ -100,7 +103,6 @@ class InstituteController extends Controller
         }
         // dd($lesson->classes);
         return view('admin.institute.single' , ['institute'=>$institute , 'parent'=>$parent , 'lesson_classes'=>$lesson_classes]);
-        //  return view('admin.institute.single' , ['institute'=>$institute , 'parent'=>$parent]);
 
     }
 

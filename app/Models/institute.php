@@ -52,7 +52,7 @@ public function students(){
 }
 
 public function province_city(){
-    return $this->belongsTo(province_cities::class, 'city_id');
+        return $this->belongsTo(province_cities::class, 'city_id');
 }
 
 public function owner(){

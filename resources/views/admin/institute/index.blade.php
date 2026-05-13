@@ -2,7 +2,7 @@
 @section('title', 'همه آموزشگاه‌ها')
 @section('content')
     <div class="w-full flex flex-col pb-6 px-2 md:px-4">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden relative">
             {{-- Header with title and add button --}}
             <div class="flex flex-col md:flex-row justify-between items-start border-b border-gray-200 p-4 gap-3">
                 <h2 class="text-xl font-bold text-gray-800 text-center md:text-right">
@@ -47,7 +47,7 @@
                             <div class="col-span-2 p-3 text-center">تلفن</div>
                             <div class="col-span-3 p-3 text-center">عملیات</div>
                         </div>
-{{-- Body --}}
+                {{-- Body --}}
                         <div class="divide-y divide-gray-100 bg-white">
                             @forelse($institutes as $index => $institute)
                             <div class="grid grid-cols-12 gap-0 items-center hover:bg-gray-50 transition">
@@ -106,7 +106,7 @@
                                             <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 448 512"><path d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/></svg>
                                         </a>
                                         {{-- Dropdown plus button --}}
-                                        <div class="relative inline-block text-right">
+                                        <div class="absolute inline-block text-right left-12">
                                             <button onclick="toggleDropdown(this)" type="button" class="text-white bg-gray-500 hover:bg-gray-600 p-1.5 rounded-md" title="ایجاد رشته، درس، کلاس">
                                                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"/></svg>
                                             </button>
@@ -115,7 +115,8 @@
                                                     <a href="{{ route('field.create', ['institute' => $institute->id]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">➕ ایجاد رشته</a>
                                                     <a href="{{ route('lesson.create', ['institute' => $institute->id]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">📘 ایجاد درس</a>
                                                     <a href="{{ route('class.create', ['institute' => $institute->id]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">🏫 ایجاد کلاس</a>
-</div>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
