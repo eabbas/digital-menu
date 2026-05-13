@@ -99,7 +99,7 @@
                     </a>
                 </div>
             </div>
-            <div class="p-3 lg:p-5 rounded-full bg-black bottom-10 right-3 lg:-right-10 fixed lg:absolute cursor-pointer z-444"
+            <div class="p-3 lg:p-5 rounded-full bg-black bottom-16 right-3 lg:-right-10 fixed lg:absolute cursor-pointer z-444"
                  onclick="addBlock('open')">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-6 lg:size-10" viewBox="0 0 448 512">
                     <path fill="white"

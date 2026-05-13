@@ -37,7 +37,7 @@
                 }
             </style>
             
-    <div class="lg:hidden w-full fixed bottom-0 bg-white right-0">
+    <div class="lg:hidden w-full fixed bottom-0 bg-white right-0 z-999999">
         <div class="w-full flex flex-row justify-center">
             <ul
                 class="w-full mx-auto flex flex-row justify-between items-center bg-white border-t-1 border-gray-300 p-2">

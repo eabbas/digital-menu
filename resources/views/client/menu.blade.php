@@ -289,7 +289,7 @@
         let sections = document.querySelectorAll('.section')
         let countDown = document.getElementById('countDown')
 
-        let flag = "{{ Auth::check() }}"
+        let flag = "{{ Auth::check() }}";
         let userId = "{{ Auth::id() }}";
 
 
@@ -736,22 +736,33 @@
                             'career_id': "{{ $career->id }}"
                         },
                         success: function (data) {
+                            if (data == "userNotFound") {
+                                showMessage('open')
+                                element.innerHTML = `
+                                    <span>ابتدا ثبت نام کنید</span>
+                                `
+                                message.children[0].appendChild(element)
+                                setTimeout(() => {
+                                    showMessage('close')
+                                    location.assign("{{ route('signup') }}")
+                                }, 2000)
+                            }
                             if (data == "incorrectPassword") {
 
                                 showMessage('open')
                                 element.innerHTML = `
                                 <span>رمز عبور نادرست است</span>
                                 <span class="text-red-500">!</span>
-                            `
+                                `
                                 message.children[0].appendChild(element)
                                 setTimeout(() => {
                                     showMessage('close')
                                 }, 2000)
-                            } else {
+                            } if (data.id) {
                                 showMessage('open')
                                 element.innerHTML = `
                                 <span> خوش اومدی ${data.name} ${data.family} عزیز</span>
-                            `
+                                `
                                 if (data.orders.length > 0) {
                                     orderLink.classList.remove('hidden')
                                 }
@@ -762,8 +773,8 @@
                                 } else {
                                     if (flag && ({{$career->user->id}} == data.id)) {
                                         addCustomer.innerHTML = `<a href="{{ route('special-user.index', [$career->page->id]) }}" class="flex justify-center items-center w-40 py-2 bg-blue-500 text-white text-xs font-bold rounded-sm cursor-pointer" onclick="specialCustomers(this)">
-                                       باشگاه مشتریان
-                              </a>`
+                                             باشگاه مشتریان
+                                        </a>`
                                     }
                                 }
                                 userId = data.id
@@ -826,48 +837,69 @@
                         },
                         success: function (data) {
                             console.log(data)
-                            showMessage('open')
-
-                            element.innerHTML = `
-                                <span> خوش اومدی ${data.validate.name} ${data.validate.family} عزیز</span>
-                            `
-                            if (data.orders.length > 0) {
-                                orderLink.classList.remove('hidden')
+                            if (!data.checkCode) {
+                                showMessage('open')
+                                element.innerHTML = `
+                                    <span>کد وارد شده نامعتبر !</span>
+                                `
+                                message.children[0].appendChild(element)
+                                setTimeout(() => {
+                                    showMessage('close')
+                                }, 2000)
                             }
-                            flag = true
-                            addCustomer.innerHTML = ""
-                            if (flag && ({{$career->user->id}} != data.id)) {
-                                addCustomer.innerHTML = `<div class="flex justify-center items-center w-40 py-2 bg-blue-500 text-white text-xs font-bold rounded-sm cursor-pointer" onclick="addSpecialCustomer(this ,'resturant')">عضویت در باشگاه مشتریان</div>`
-                            } else {
-                                if (flag && ({{$career->user->id}} == data.id)) {
-                                    addCustomer.innerHTML = `<a href="{{ route('special-user.index', [$career->page->id]) }}" class="flex justify-center items-center w-40 py-2 bg-blue-500 text-white text-xs font-bold rounded-sm cursor-pointer" onclick="specialCustomers(this)">
-                                       باشگاه مشتریان
-                              </a>`
+                            if (!data.validate) {
+                                showMessage('open')
+                                element.innerHTML = `
+                                    <span>ابتدا ثبت نام کنید</span>
+                                `
+                                message.children[0].appendChild(element)
+                                setTimeout(() => {
+                                    showMessage('close')
+                                    location.assign("{{ route('signup') }}")
+                                }, 2000)
+                            } if(data.validate && data.checkCode) {
+                                showMessage('open')
+                                element.innerHTML = `
+                                    <span> خوش اومدی ${data.validate.name} ${data.validate.family} عزیز</span>
+                                `
+                                if (data.orders.length > 0) {
+                                    orderLink.classList.remove('hidden')
                                 }
-                            }
-                            userId = data.validate.id
-                            message.children[0].appendChild(element)
+                                flag = true
+                                addCustomer.innerHTML = ""
+                                if (flag && ({{$career->user->id}} != data.id)) {
+                                    addCustomer.innerHTML = `<div class="flex justify-center items-center w-40 py-2 bg-blue-500 text-white text-xs font-bold rounded-sm cursor-pointer" onclick="addSpecialCustomer(this ,'resturant')">عضویت در باشگاه مشتریان</div>`
+                                } else {
+                                    if (flag && ({{$career->user->id}} == data.id)) {
+                                        addCustomer.innerHTML = `<a href="{{ route('special-user.index', [$career->page->id]) }}" class="flex justify-center items-center w-40 py-2 bg-blue-500 text-white text-xs font-bold rounded-sm cursor-pointer" onclick="specialCustomers(this)">
+                                        باشگاه مشتریان
+                                </a>`
+                                    }
+                                }
+                                userId = data.validate.id
+                                message.children[0].appendChild(element)
 
-                            let cartLength = 0
-                            data.validate.carts.forEach((cart) => {
-                                cartLength += parseInt(cart.quantity)
-                            })
-                            if (cartLength != 0) {
-                                orderBasket.classList.remove('hidden')
+                                let cartLength = 0
+                                data.validate.carts.forEach((cart) => {
+                                    cartLength += parseInt(cart.quantity)
+                                })
+                                if (cartLength != 0) {
+                                    orderBasket.classList.remove('hidden')
+                                }
+                                orderBasket.children[0].innerHTML = `  سبد خرید ( <span>${cartLength}</span> )`
+                                showMenu(firstMenu, "{{ $menu_id }}")
+                                setTimeout(() => {
+                                    showMessage('close')
+                                    closeLoginForm()
+                                }, 2000)
                             }
-                            orderBasket.children[0].innerHTML = `  سبد خرید ( <span>${cartLength}</span> )`
-                            showMenu(firstMenu, "{{ $menu_id }}")
-                            setTimeout(() => {
-                                showMessage('close')
-                                closeLoginForm()
-                            }, 2000)
                         },
                         error: function () {
                             showMessage('open')
                             element.innerHTML = `
-                        <span>خطا در دریافت اطلاعات</span>
-                        <span class="text-red-500">!</span>
-                        `
+                                <span>خطا در دریافت اطلاعات</span>
+                                <span class="text-red-500">!</span>
+                                `
                             message.children[0].appendChild(element)
                             setTimeout(() => {
                                 showMessage('close')

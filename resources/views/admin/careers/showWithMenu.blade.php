@@ -76,7 +76,7 @@
             <div class="w-full bg-white rounded-md">
                 <div class="w-11/12 mx-auto flex flex-row items-center gap-8 pb-3 py-4 overflow-x-auto bg-white"
                      style="scrollbar-width: thin;"
-                     id="menuList">
+                     id="menuListCareer">
                     @foreach ($career->menus as $menu)
                         <div class="relative selectItems @if($career->menus[0] == $menu) selected @endif allMenus min-w-20 min-h-20"
                              data-menu-id="{{ $menu->id }}">
@@ -545,7 +545,7 @@
 
     <script>
 
-        let menuList = document.getElementById('menuList')
+        let menuListCareer = document.getElementById('menuListCareer')
         let selectItems = document.querySelectorAll('.allMenus')
         let newCat = document.getElementById('newCat')
         let newItem = document.getElementById('newItem')
@@ -668,7 +668,7 @@
                                 </div>
                             </div>
                             `
-                            menuList.appendChild(element)
+                            menuListCareer.appendChild(element)
                             console.log(element)
                             closeForm()
                         },
@@ -1388,12 +1388,12 @@
                                     div.setAttribute('data-menu-item-id', item.id)
                                     let inner = `<span class="text-xs`
                                     // inner+=`<span class="text-xs`
-                                    if(data.discount == 0){
+                                    if(item.discount == 0){
                                         inner+=` invisible `
                                     }
                                     inner+=` text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">`
-                                    if(data.discount != 0){
-                                        inner+=` ${data.percent}% `
+                                    if(item.discount != 0){
+                                        inner+=` ${item.percent}% `
                                     }
                                     inner+=`</span>`
                                     // let inner = ``
