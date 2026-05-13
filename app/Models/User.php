@@ -168,7 +168,7 @@ class User extends Authenticatable
     }
 
     public function lesson_classes(){
-        return $this->HasMany(lesson_class::class , 'master_id');
+        return $this->hasMany(lesson_class::class , 'master_id');
     }
 
 

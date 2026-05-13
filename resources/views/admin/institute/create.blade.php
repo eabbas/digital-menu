@@ -77,7 +77,7 @@
                             <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2"
                                 name="province" onchange="changeCity(this)" required>
                                 <option value="">انتخاب استان</option>
-@foreach ($provinces as $province)
+                                @foreach ($provinces as $province)
                                     <option value="{{ $province->id }}">{{ $province->title }}</option>
                                 @endforeach
                             </select>
@@ -116,8 +116,8 @@
                     </div>
 
                     <!-- انتخاب شعبه (اختیاری) -->
-                   <div class="w-full flex flex-col gap-3 items-center max-md:flex-col max-md:gap-1">
-                        <label class="w-30 text-sm mb-1 mt-2.5 flex">انتخاب شعبه</label>
+                   <div class="w-full flex flex-col gap-3 items-start max-md:flex-col max-md:gap-1">
+                        <label class="w-30 text-sm mb-1 mt-2.5 flex"><span class="required-star">*</span>انتخاب شعبه</label>
                         <div class="rounded-lg bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                             <select class="p-4 w-full focus:outline-none text-sm font-bold mr-2" name="parent_id">
                                 <option value="0">شعبه مرکزی</option>

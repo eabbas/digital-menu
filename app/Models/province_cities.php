@@ -21,4 +21,7 @@ class province_cities extends Model
     public function province(){
         return $this->belongsTo(province_cities::class, 'parent');
     }
+    public function institute(){
+        return $this->hasMany(institute::class, 'city_id');
+    }
 }
