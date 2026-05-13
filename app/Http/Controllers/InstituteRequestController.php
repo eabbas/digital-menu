@@ -24,6 +24,7 @@ class InstituteRequestController extends Controller
                 'user_id' => Auth::id(),
                 'institute_id' => $request->institute_id,
                 'field_id' => $request->field_id,
+                'status'=> 0,
             ]);
         }
         return to_route('request.requests' , [$request->institute_id]);

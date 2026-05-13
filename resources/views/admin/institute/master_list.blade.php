@@ -81,7 +81,7 @@
                                             <div class="w-20 lg:w-full">
                                                 @if ($master->main_image)
                                              <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
-                                                 src="{{ asset('storage/' . $user->main_image) }}">
+                                                 src="{{ asset('storage/' . $master->main_image) }}">
                                                 @endif
                                                 @if (!$master->main_image)
                                              <img class="max-w-[50px] max-h-[50px] mx-auto size-12 object-cover rounded-md"
