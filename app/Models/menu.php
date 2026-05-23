@@ -21,8 +21,11 @@ class menu extends Model
         return $this->belongsTo(career::class);
     }
 
-    public function menu_categories(){
-        return $this->hasMany(menu_category::class);
+    // public function menu_categories(){
+    //     return $this->hasMany(menu_category::class);
+    // }
+    public function menu_items(){
+        return $this->hasMany(menu_item::class);
     }
 
     public function user(){

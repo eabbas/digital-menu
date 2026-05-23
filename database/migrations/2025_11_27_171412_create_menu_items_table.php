@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('description')->nullable();
             $table->integer('parent_id')->default(0);
-            $table->integer('menu_category_id');
+            // $table->integer('menu_category_id');
             $table->string('image')->nullable();
             $table->tinyInteger('customizable')->default(0);
             $table->integer('price')->default(0);

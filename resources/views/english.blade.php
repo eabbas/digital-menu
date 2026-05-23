@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>english</title>
-    <script src="{{asset('assets/js/tailwind.js')}}"></script>
-    <link rel="stylesheet" href="{{asset('assets/css/fontiran.css')}}">
-</head>
-<body class="bg-zinc-100">
-
+{{--<!DOCTYPE html>--}}
+{{--<html lang="fa" dir="rtl">--}}
+{{--<head>--}}
+{{--    <meta charset="UTF-8">--}}
+{{--    <meta name="viewport" content="width=device-width, initial-scale=1.0">--}}
+{{--    <title>english</title>--}}
+{{--    <script src="{{asset('assets/js/tailwind.js')}}"></script>--}}
+{{--    <link rel="stylesheet" href="{{asset('assets/css/fontiran.css')}}">--}}
+{{--</head>--}}
+{{--<body class="bg-zinc-100">--}}
+@include('header')
 <style>
 
     /*  style mahdi  */
@@ -82,54 +82,54 @@
 </style>
 {{--tasc mahdi--}}
 
-<div class=" w-full h-full max-w-[1700px] flex flex-col gap-32">
-    <header>
-        <section class="w-full flex justify-center">
-            <div class="fixed w-11/12 top-5 bg-white rounded-xl px-5 py-5 flex items-center  lg:justify-between shadow-[0px_0px_6px_6px] shadow-[#ebebf6] z-4">
-                <div class="lg:w-10/12 w-full flex items-center gap-4 justify-center lg:justify-start">
+<div class=" w-full h-full max-w-[1700px] flex flex-col gap-32 mt-5">
+{{--    <header>--}}
+{{--        <section class="w-full flex justify-center">--}}
+{{--            <div class="fixed w-11/12 top-5 bg-white rounded-xl px-5 py-5 flex items-center  lg:justify-between shadow-[0px_0px_6px_6px] shadow-[#ebebf6] z-4">--}}
+{{--                <div class="lg:w-10/12 w-full flex items-center gap-4 justify-center lg:justify-start">--}}
 
-                    <div class="p-3 bg-[#eb3254]  justify-center items-center rounded-lg">
-                        <span class="lg:text-4xl text-2xl md:text-3xl font-bold text-white">famenu</span>
-                    </div>
-                    <div class="w-9/24 hidden lg:flex items-center gap-3">
-                        <div class="flex relative items-center gap-4 heder_hover_phone gap-2 p-2 rounded-lg">
-                            <!-- <div class="w-full h-[100vh] top-0 z-0 right-0 fixed bg-black/50 mddd invisible opacity-0 transition-all duration-200"></div> -->
-                            <span class="text-lg">متن تستی</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="w-2 rotate-90 heder_hover_items_rotate transition-all duration-200"><path d="M47 239c-9.4 9.4-9.4 24.6 0 33.9L207 433c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L97.9 256 241 113c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0L47 239z"></path></svg>
-                            <div class="absolute top-20 right-0 bg-[#fff] rounded-2xl transition-all duration-200 ease-in delay-250 heder_hover_items_item invisible opacity-0">
-                                <ul class="w-45 h-42 flex flex-col gap-3 justify-center pr-4 text-[#838383]">
-                                    <li class="w-full  hover:text-green-600">حساب کاربری</li>
-                                    <li class="w-full  hover:text-green-600">سبد خرید</li>
-                                    <li class="w-full  hover:text-green-600">پرداخت</li>
-                                    <li class="w-full  hover:text-green-600">پروفایل مدرس</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="flex relative items-center gap-4 heder_hover_phone gap-2 p-2 rounded-lg">
-                            <!-- <div class="w-full h-[100vh] top-0 z-0 right-0 fixed bg-black/50 mddd invisible opacity-0 transition-all duration-200"></div> -->
-                            <span class="text-lg">متن تستی</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="w-2 rotate-90 heder_hover_items_rotate transition-all duration-200"><path d="M47 239c-9.4 9.4-9.4 24.6 0 33.9L207 433c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L97.9 256 241 113c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0L47 239z"></path></svg>
-                            <div class="absolute top-20 right-0 bg-[#fff] rounded-2xl transition-all duration-200 ease-in delay-250 heder_hover_items_item invisible opacity-0">
-                                <ul class="w-45 h-42 flex flex-col gap-3 justify-center pr-4 text-[#838383]">
-                                    <li class="w-full  hover:text-green-600">حساب کاربری</li>
-                                    <li class="w-full  hover:text-green-600">سبد خرید</li>
-                                    <li class="w-full  hover:text-green-600">پرداخت</li>
-                                    <li class="w-full  hover:text-green-600">پروفایل مدرس</li>
-                                </ul>
-                            </div>
-                        </div>
+{{--                    <div class="p-3 bg-[#eb3254]  justify-center items-center rounded-lg">--}}
+{{--                        <span class="lg:text-4xl text-2xl md:text-3xl font-bold text-white">famenu</span>--}}
+{{--                    </div>--}}
+{{--                    <div class="w-9/24 hidden lg:flex items-center gap-3">--}}
+{{--                        <div class="flex relative items-center gap-4 heder_hover_phone gap-2 p-2 rounded-lg">--}}
+{{--                            <!-- <div class="w-full h-[100vh] top-0 z-0 right-0 fixed bg-black/50 mddd invisible opacity-0 transition-all duration-200"></div> -->--}}
+{{--                            <span class="text-lg">متن تستی</span>--}}
+{{--                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="w-2 rotate-90 heder_hover_items_rotate transition-all duration-200"><path d="M47 239c-9.4 9.4-9.4 24.6 0 33.9L207 433c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L97.9 256 241 113c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0L47 239z"></path></svg>--}}
+{{--                            <div class="absolute top-20 right-0 bg-[#fff] rounded-2xl transition-all duration-200 ease-in delay-250 heder_hover_items_item invisible opacity-0">--}}
+{{--                                <ul class="w-45 h-42 flex flex-col gap-3 justify-center pr-4 text-[#838383]">--}}
+{{--                                    <li class="w-full  hover:text-green-600">حساب کاربری</li>--}}
+{{--                                    <li class="w-full  hover:text-green-600">سبد خرید</li>--}}
+{{--                                    <li class="w-full  hover:text-green-600">پرداخت</li>--}}
+{{--                                    <li class="w-full  hover:text-green-600">پروفایل مدرس</li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="flex relative items-center gap-4 heder_hover_phone gap-2 p-2 rounded-lg">--}}
+{{--                            <!-- <div class="w-full h-[100vh] top-0 z-0 right-0 fixed bg-black/50 mddd invisible opacity-0 transition-all duration-200"></div> -->--}}
+{{--                            <span class="text-lg">متن تستی</span>--}}
+{{--                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="w-2 rotate-90 heder_hover_items_rotate transition-all duration-200"><path d="M47 239c-9.4 9.4-9.4 24.6 0 33.9L207 433c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L97.9 256 241 113c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0L47 239z"></path></svg>--}}
+{{--                            <div class="absolute top-20 right-0 bg-[#fff] rounded-2xl transition-all duration-200 ease-in delay-250 heder_hover_items_item invisible opacity-0">--}}
+{{--                                <ul class="w-45 h-42 flex flex-col gap-3 justify-center pr-4 text-[#838383]">--}}
+{{--                                    <li class="w-full  hover:text-green-600">حساب کاربری</li>--}}
+{{--                                    <li class="w-full  hover:text-green-600">سبد خرید</li>--}}
+{{--                                    <li class="w-full  hover:text-green-600">پرداخت</li>--}}
+{{--                                    <li class="w-full  hover:text-green-600">پروفایل مدرس</li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
-                    </div>
-                </div>
-                <button class="w-10 h-10 bg-[#ee04c2] flex justify-center items-center rounded-lg hidden lg:flex"  onclick="shopping_bag('open')">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20.232 10.5257C19.6468 7.40452 19.3542 5.84393 18.2433 4.92196C17.1324 4 15.5446 4 12.369 4H11.6479C8.47228 4 6.8845 4 5.7736 4.92196C4.66271 5.84393 4.37009 7.40452 3.78487 10.5257C2.96195 14.9146 2.55049 17.1091 3.75011 18.5545C4.94973 20 7.18244 20 11.6478 20H12.369C16.8344 20 19.0672 20 20.2668 18.5545C20.9628 17.7159 21.1165 16.6252 20.9621 15" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M9.1709 8C9.58273 9.16519 10.694 10 12.0002 10C13.3064 10 14.4177 9.16519 14.8295 8" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                </button>
-            </div>
-        </section>
-    </header>
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <button class="w-10 h-10 bg-[#ee04c2] flex justify-center items-center rounded-lg hidden lg:flex"  onclick="shopping_bag('open')">--}}
+{{--                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                        <path d="M20.232 10.5257C19.6468 7.40452 19.3542 5.84393 18.2433 4.92196C17.1324 4 15.5446 4 12.369 4H11.6479C8.47228 4 6.8845 4 5.7736 4.92196C4.66271 5.84393 4.37009 7.40452 3.78487 10.5257C2.96195 14.9146 2.55049 17.1091 3.75011 18.5545C4.94973 20 7.18244 20 11.6478 20H12.369C16.8344 20 19.0672 20 20.2668 18.5545C20.9628 17.7159 21.1165 16.6252 20.9621 15" stroke="white" stroke-width="1.5" stroke-linecap="round"/>--}}
+{{--                        <path d="M9.1709 8C9.58273 9.16519 10.694 10 12.0002 10C13.3064 10 14.4177 9.16519 14.8295 8" stroke="white" stroke-width="1.5" stroke-linecap="round"/>--}}
+{{--                    </svg>--}}
+{{--                </button>--}}
+{{--            </div>--}}
+{{--        </section>--}}
+{{--    </header>--}}
     <section class="w-full flex justify-center relative">
         <div class=" max-w-11/12 min-w-11/12 pt-1 rounded-lg flex items-center gap-3 overflow-auto">
 {{--            <div class="lg:min-w-[90px] lg:max-w-[90px] lg:h-[150px] min-w-[70px] max-w-[70px] h-[105px] flex flex-col lg:gap-2 gap-0.5 pup_up_story">--}}
@@ -146,7 +146,7 @@
 {{--            </div>--}}
             <!-- video_story -->
             <div class="min-w-19 max-w-19 flex flex-col gap-1 items-center pup_up_story">
-                <div class="w-full rounded-full border-2 border-red-500 flex jsutfiy-center items-center p-0.5 ">
+                <div class="w-full rounded-full border-2 border-[#a175ca] flex jsutfiy-center items-center p-0.5 ">
                     <div class="w-full h-full rounded-full overflow-hidden flex justify-center items-center">
                         <img src="{{asset('storage/image/images.jpg')}}" alt="" class="object-cover rounded-full">
                     </div>
@@ -154,7 +154,7 @@
                 <span class="w-full text-md text-nowrap text-center">اطلاعیه ثبت نام</span>
             </div>
             <div class="min-w-19 max-w-19 flex flex-col gap-1 items-center pup_up_story">
-                <div class="w-full rounded-full border-2 border-red-500 flex jsutfiy-center items-center p-0.5 ">
+                <div class="w-full rounded-full border-2 border-[#a175ca] flex jsutfiy-center items-center p-0.5 ">
                     <div class="w-full h-full rounded-full overflow-hidden flex justify-center items-center">
                         <img src="{{asset('storage/image/images.jpg')}}" alt="" class="object-cover rounded-full">
                     </div>
@@ -162,7 +162,7 @@
                 <span class="text-md text-nowrap text-center"> پاور</span>
             </div>
             <div class="min-w-19 max-w-19 flex flex-col gap-1 items-center pup_up_story">
-                <div class="w-full rounded-full border-2 border-red-500 flex jsutfiy-center items-center p-0.5 ">
+                <div class="w-full rounded-full border-2 border-[#a0b0c8] flex jsutfiy-center items-center p-0.5 ">
                     <div class="w-full h-full rounded-full overflow-hidden flex justify-center items-center">
                         <img src="{{asset('storage/image/images.jpg')}}" alt="" class="object-cover rounded-full">
                     </div>
@@ -170,7 +170,7 @@
                 <span class="text-md "> پاور</span>
             </div>
             <div class="min-w-19 max-w-19 flex flex-col gap-1 items-center pup_up_story">
-                <div class="w-full rounded-full border-2 border-red-500 flex jsutfiy-center items-center p-0.5 ">
+                <div class="w-full rounded-full border-2 border-[#a0b0c8] flex jsutfiy-center items-center p-0.5 ">
                     <div class="w-full h-full rounded-full overflow-hidden flex justify-center items-center">
                         <img src="{{asset('storage/image/images.jpg')}}" alt="" class="object-cover rounded-full">
                     </div>
@@ -552,38 +552,43 @@
         </div>
     </section>
     <!-- Discuss -->
-    <section
-            class="peer mt-10 w-full h-20 mohtava flex items-center justify-between text-zinc-100 cursor-pointer rounded-md p-2 transition-all"
-    >
-        <div class="font-bold text-lg flex items-center justify-center">
-            بزن بریم هم بحثتو پیدا کنیم
-        </div>
-        <div class="peerr transition-all duration-500 decoration-500 ml-3">
-            <svg
-                    class="size-10 fill-zinc-100"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 448 512"
-            >
-                <!--! Font Awesome Pro 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                <path
-                        d="M7.4 273.4C2.7 268.8 0 262.6 0 256s2.7-12.8 7.4-17.4l176-168c9.6-9.2 24.8-8.8 33.9 .8s8.8 24.8-.8 33.9L83.9 232 424 232c13.3 0 24 10.7 24 24s-10.7 24-24 24L83.9 280 216.6 406.6c9.6 9.2 9.9 24.3 .8 33.9s-24.3 9.9-33.9 .8l-176-168z"
-                />
-            </svg>
-        </div>
-    </section>
-    <!-- link -->
-    <section class="w-full flex flex-row items-center justify-between gap-5 mt-15 b md:mt-20">
+    <section class="w-full flex flex-row items-center justify-between gap-5 mt-5 b md:mt-20">
         <div
-                class="w-6/12 md:w-5/11 h-20 sm:h-30 md:h-60 mohtava_1 hover:translate-y-[-10px] transition-all rounded-md flex items-center justify-center text-white text-xl md:text-4xl cursor-pointer"
+                class="w-6/12 md:w-5/11 h-20 sm:h-30 md:h-60 bg-[#D3C0F9] text-[#fff] font-bold hover:translate-y-[-10px] transition-all rounded-md flex items-center justify-center  text-xl md:text-4xl cursor-pointer"
         >
             تعیین سطح
         </div>
         <div
-                class="w-6/12 md:w-5/11 h-20 sm:h-30 md:h-60 mohtava_2 hover:translate-y-[-10px] transition-all rounded-md flex items-center justify-center text-white text-xl md:text-4xl cursor-pointer"
+                class="w-6/12 md:w-5/11 h-20 sm:h-30 md:h-60 bg-[#B5DDD1] text-[#fff] font-bold hover:translate-y-[-10px] transition-all rounded-md flex items-center justify-center  text-xl md:text-4xl cursor-pointer"
         >
             شرکت در دوره
         </div>
     </section>
+    <section
+            class=" mt-5 w-full h-20 flex items-center justify-between text-zinc-100 overflow-hidden cursor-pointer rounded-md transition-all flex justify-between items-center"
+    >
+        <img src="{{ asset('storage/image/dastNevis.png') }}" class="max-w-5/12" alt="">
+        <div class=" max-w-7/12">
+            <img src="{{ asset('storage/image/Screenshot_20260409_130146_Chrome.jpg') }}" alt="" class="object-cover max-w-full">
+        </div>
+
+
+{{--        <div class="font-bold text-lg flex items-center justify-center">--}}
+{{--            بزن بریم هم بحثتو پیدا کنیم--}}
+{{--        </div>--}}
+{{--        <div class="peerr transition-all duration-500 decoration-500 ml-3">--}}
+{{--            <svg--}}
+{{--                    class="size-10 fill-zinc-100"--}}
+{{--                    viewBox="0 0 448 512"--}}
+{{--            >--}}
+{{--                <!--! Font Awesome Pro 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->--}}
+{{--                <path--}}
+{{--                        d="M7.4 273.4C2.7 268.8 0 262.6 0 256s2.7-12.8 7.4-17.4l176-168c9.6-9.2 24.8-8.8 33.9 .8s8.8 24.8-.8 33.9L83.9 232 424 232c13.3 0 24 10.7 24 24s-10.7 24-24 24L83.9 280 216.6 406.6c9.6 9.2 9.9 24.3 .8 33.9s-24.3 9.9-33.9 .8l-176-168z"--}}
+{{--                />--}}
+{{--            </svg>--}}
+{{--        </div>--}}
+    </section>
+    <!-- link -->
     <!-- Reading  -->
     <section class="w-full mt-5 md:mt-20">
         <div class="w-full flex items-center mx-auto">

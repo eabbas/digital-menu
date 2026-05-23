@@ -1,8 +1,15 @@
 @import url("fontiran.css");
 
+/** {*/
+/*    font-family: "IRANSansX";*/
+/*}*/
+
+
 * {
-    font-family: "IRANSansX";
+  font-family: 'IRANSansXFaNum';
 }
+
+
 
 .samim {
     font-family: "Samim";

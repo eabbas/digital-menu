@@ -348,7 +348,7 @@ Route::group([
     'middleware' => [UserMiddleware::class]
 ], function () {
     // Route::get('/{menu_category}', 'index')->name('list');
-    Route::get('/create/{menu_category}', 'create')->name('create');
+    Route::get('/create/{menu}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::post('/store-front', 'storeFront')->name('storeFront');
     Route::get('/edit/{menu_item}', 'edit')->name('edit');

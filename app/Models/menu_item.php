@@ -10,15 +10,19 @@ class menu_item extends Model
         'title',
         'description',
         'parent_id',
-        'menu_category_id',
+        // 'menu_category_id',
+        'menu_id',
         'image',
         'customizable',
         'price',
         'discount',
         'duration'
     ];
-    public function menu_category(){
-        return $this->belongsTo(menu_category::class);
+    // public function menu_category(){
+    //     return $this->belongsTo(menu_category::class);
+    // }
+    public function menu_item(){
+        return $this->belongsTo(menu::class);
     }
     public function ingredients(){
         return $this->hasMany(ingredients::class);

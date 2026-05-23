@@ -5,19 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\ingredients;
 use App\Models\menu_category;
 use App\Models\menu_item;
+use App\Models\menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class MenuItemController extends Controller
 {
-    public function create(menu_category $menu_category)
+    public function create(menu $menu)
     {
-        return view('admin.menu.item.create', ['category' => $menu_category]);
+        return view('admin.menu.item.create', ['menu' => $menu]);
     }
 
     public function store(Request $request)
     {
+        dd($request->all());
         $path = null;
         if (isset($request->image)) {
             $name = $request->image->getClientOriginalName();
@@ -70,7 +72,7 @@ class MenuItemController extends Controller
             'customizable' => isset($request->customizable) ? $request->customizable : 0,
             'image' => $path,
             'parent_id' => isset($request->parent_id) ? $request->parent_id : 0,
-            'menu_category_id' => $request->menu_category_id,
+            'menu_id' => $request->menu_id,
             'duration' => isset($request->duration) ? $request->duration : 0,
             'description'=>$request->description,
         ]);
