@@ -1,13 +1,13 @@
 @extends('admin.app.panel')
 @section('title')
-    ایجاد آیتم منو دسته {{ $category->title }}
+    ایجاد آیتم منوی  {{ $menu->title }}
 @endsection
 
 @section('content')
 <div class="w-full flex flex-row justify-end p-4">
             <a href="{{ url()->previous()}}" class="text-xs px-2 py-0.5 rounded-sm bg-gray-500 text-white">بازگشت ←</a>
                </div>
-    <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">ایجاد آیتم دسته {{ $category->title }}</h1>
+    <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">ایجاد آیتم منوی {{ $menu->title }}</h1>
     <form action="{{ route('menuItem.store') }}" method="post" enctype='multipart/form-data'>
         @csrf
         <div class="min-h-screen flex items-start justify-center">
@@ -15,7 +15,7 @@
                 <div class="text-center mb-4">
 
                     <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
-                        <input type="hidden" name="menu_categories_id" value="{{ $category->id }}">
+                        <input type="hidden" name="menu_id" value="{{ $menu->id }}">
                         <div class="w-full flex flex-col gap-3 max-md:flex-col max-md:gap-1">
                             <label class="w-32 text-sm mb-1 mt-2.5 flex">عنوان آیتم:</label>
                             <div

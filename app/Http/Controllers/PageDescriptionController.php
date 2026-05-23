@@ -36,12 +36,15 @@ class PageDescriptionController extends Controller
     {
         $id = $request->input('id');
         $pd = page_description::find($id);
-        return response()->json($pd);
+        $descriptionStyle = json_decode($pd['style']);
+        return response()->json([
+            'pd'=>$pd,
+            'descriptionStyle'=> $descriptionStyle
+        ]);
     }
     public function update(Request $request)
     {
-
-
+        // return response()->json($request->all());
         $pd = page_description::find($request->id);
         $pd->description = $request->description ? $request->description : null;
         $pd->style = json_encode($request->datas);

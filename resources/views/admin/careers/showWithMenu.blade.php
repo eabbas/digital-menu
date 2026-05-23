@@ -115,7 +115,7 @@
                 </div>
             </div>
         </div>
-        <div>
+        {{-- <div>
             <div class="w-full flex flex-row items-center justify-end mb-4">
                 <span class="text-sm font-bold text-blue-600 cursor-pointer" id="newCat"
                       data-menu-create-cat-id="{{ $career->menus[0]->id }}" onclick="menuCatForm()">دسته جدید</span>
@@ -141,7 +141,6 @@
                                                                 d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
                                                     </svg>
                                                 </div>
-                                                {{-- onclick='deleteMenuCat(this, "{{ $category->id }}")' --}}
                                                 <div class="flex justify-center cursor-pointer"
                                                      onclick='deleteCatBox("{{ $category->title }}", "{{ $category->id }}")'>
                                                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -170,7 +169,6 @@
                                                                 d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
                                                     </svg>
                                                 </div>
-                                                {{-- onclick='deleteMenuCat(this, "{{ $category->id }}")' --}}
                                                 <div class="flex justify-center cursor-pointer"
                                                      onclick='deleteCatBox("{{ $category->title }}", "{{ $category->id }}")'>
                                                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -190,25 +188,96 @@
                     @endforeach
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div id="items">
             <div class="w-full flex flex-row items-center justify-end my-4">
                 <span class="text-sm font-bold text-blue-600 cursor-pointer" onclick="menuItemForm()"
-                      data-menu-create-item-id="{{ $career->menus[0]->menu_categories[0]->id }}"
+                      data-menu-create-item-id="{{ $career->menus[0]->id ?? null }}"
                       id="newItem">آیتم جدید</span>
             </div>
             @foreach ($career->menus as $menu)
                 <div class="flex flex-col gap-3 mt-3 menus" data-menu-id="{{ $menu->id }}">
-                    @foreach ($menu->menu_categories as $category)
+                    {{-- @foreach ($menu->menu_categories as $category) --}}
                         {{--                        @if (count($category->menu_items))--}}
                         <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
                             {{--                            @dd($career->menus[0]->menu_categories)--}}
-                            @if(count($career->menus[0]->menu_categories)>1)
-                                @if($career->menus[0]->menu_categories[1]->id == $category->id)
+                            {{-- @if(count($career->menus[0]->menu_categories)>1)
+                                @if($career->menus[0]->menu_categories[1]->id == $category->id) --}}
+
+                                    {{-- <div class="p-2 lg:p-4">
+                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="menuItemList">
+                                            @foreach ($category->menu_items as $item)
+                                                <div class="w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems"
+                                                     data-menu-item-title="{{ $item->title }}"
+                                                     data-menu-item-id="{{ $item->id }}"> --}}
+                                                    <!--<span class="absolute -top-1 -right-2 bg-[#eb3254] px-2 py-0.5 rounded text-sm text-white">ویژه</span>-->
+                                                    {{-- <input type="hidden" value="{{$item->id}}"> --}}
+                                                    {{-- <span class="text-xs @if (!$item->discount) invisible @else  @endif text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
+                                                        {{ $item->percent }}%
+                                                    </span>
+                                                    <div class="w-full flex items-center justify-between">
+                                                        <div class="w-11/12 flex flex-row gap-5 items-center">
+                                                            <div class="flex items-center gap-2 lg:gap-4 flex-1 cursor-pointer"
+                                                                 onclick="openSingle(this)">
+                                                                <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('assets/img/user.png') }}"
+                                                                     class="size-22 rounded-lg object-cover border border-gray-300"
+                                                                     alt="{{ $item->title }}">
+                                                                <div class="flex-1 min-w-0 max-w-[calc(100%-50px)]">
+                                                                    <h3 class="font-medium text-gray-800 truncate text-sm lg:text-base">{{ $item->title }}</h3>
+                                                                    <p class="text-sm text-gray-500 truncate mt-1 lg:text-sm">{{ $item->description }}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="pl-2 lg:pl-0 lg:ml-4 flex flex-col gap-0.5 lg:gap-3">
+                                                                <div class="flex flex-row items-center gap-3">
+                                                                    <div class="text-left flex flex-col items-end">
+                                                                        @if ($item->discount == 0)
+                                                                            <span class="font-bold text-xs lg:text-sm">{{ number_format($item->price) }} تومان</span>
+                                                                        @else
+                                                                            <span class="font-bold text-xs lg:text-sm">{{ number_format($item->discount) }} تومان</span>
+                                                                            <span class="text-gray-400 text-[10px] line-through lg:text-sm">{{ number_format($item->price) }} تومان</span>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex flex-col items-center gap-2 md:gap-5">
+                                                            <div class="flex justify-center">
+                                                                <span onclick='menuItemForm("{{ $item->id }}")'
+                                                                      class="w-fit flex flex-row items-center justify-center bg-green-500 hover:bg-green-600 p-1 rounded-sm cursor-pointer"
+                                                                      title="ویرایش">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                         class="size-5"
+                                                                         viewBox="0 0 512 512">
+                                                                        <path fill="white"
+                                                                              d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
+                                                                    </svg>
+                                                                </span>
+                                                            </div>
+                                                            <div class="flex justify-center">
+                                                                <span onclick='menuItemDelete(this, "{{ $item->id }}")'
+                                                                      class="w-fit flex flex-row items-center justify-center bg-red-500 hover:bg-red-600 p-1 rounded-sm cursor-pointer"
+                                                                      title="حذف">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                         class="size-5"
+                                                                         viewBox="0 0 448 512">
+                                                                        <path fill="white"
+                                                                              d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
+                                                                    </svg>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif --}}
+                            {{-- @else --}}
+                                @if($career->menus[0]->menu_items[0]->id == $menu->id)
 
                                     <div class="p-2 lg:p-4">
                                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="menuItemList">
-                                            @foreach ($category->menu_items as $item)
+                                            @foreach ($menu->menu_items as $item)
                                                 <div class="w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems"
                                                      data-menu-item-title="{{ $item->title }}"
                                                      data-menu-item-id="{{ $item->id }}">
@@ -274,81 +343,10 @@
                                         </div>
                                     </div>
                                 @endif
-                            @else
-                                @if($career->menus[0]->menu_categories[0]->id == $category->id)
-
-                                    <div class="p-2 lg:p-4">
-                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="menuItemList">
-                                            @foreach ($category->menu_items as $item)
-                                                <div class="w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems"
-                                                     data-menu-item-title="{{ $item->title }}"
-                                                     data-menu-item-id="{{ $item->id }}">
-                                                    <!--<span class="absolute -top-1 -right-2 bg-[#eb3254] px-2 py-0.5 rounded text-sm text-white">ویژه</span>-->
-                                                    {{-- <input type="hidden" value="{{$item->id}}"> --}}
-                                                    <span class="text-xs @if (!$item->discount) invisible @else  @endif text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
-                                                        {{ $item->percent }}%
-                                                    </span>
-                                                    <div class="w-full flex items-center justify-between">
-                                                        <div class="w-11/12 flex flex-row gap-5 items-center">
-                                                            <div class="flex items-center gap-2 lg:gap-4 flex-1 cursor-pointer"
-                                                                 onclick="openSingle(this)">
-                                                                <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('assets/img/user.png') }}"
-                                                                     class="size-22 rounded-lg object-cover border border-gray-300"
-                                                                     alt="{{ $item->title }}">
-                                                                <div class="flex-1 min-w-0 max-w-[calc(100%-50px)]">
-                                                                    <h3 class="font-medium text-gray-800 truncate text-sm lg:text-base">{{ $item->title }}</h3>
-                                                                    <p class="text-sm text-gray-500 truncate mt-1 lg:text-sm">{{ $item->description }}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="pl-2 lg:pl-0 lg:ml-4 flex flex-col gap-0.5 lg:gap-3">
-                                                                <div class="flex flex-row items-center gap-3">
-                                                                    <div class="text-left flex flex-col items-end">
-                                                                        @if ($item->discount == 0)
-                                                                            <span class="font-bold text-xs lg:text-sm">{{ number_format($item->price) }} تومان</span>
-                                                                        @else
-                                                                            <span class="font-bold text-xs lg:text-sm">{{ number_format($item->discount) }} تومان</span>
-                                                                            <span class="text-gray-400 text-[10px] line-through lg:text-sm">{{ number_format($item->price) }} تومان</span>
-                                                                        @endif
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="flex flex-col items-center gap-2 md:gap-5">
-                                                            <div class="flex justify-center">
-                                                                <span onclick='menuItemForm("{{ $item->id }}")'
-                                                                      class="w-fit flex flex-row items-center justify-center bg-green-500 hover:bg-green-600 p-1 rounded-sm cursor-pointer"
-                                                                      title="ویرایش">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                                         class="size-5"
-                                                                         viewBox="0 0 512 512">
-                                                                        <path fill="white"
-                                                                              d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
-                                                                    </svg>
-                                                                </span>
-                                                            </div>
-                                                            <div class="flex justify-center">
-                                                                <span onclick='menuItemDelete(this, "{{ $item->id }}")'
-                                                                      class="w-fit flex flex-row items-center justify-center bg-red-500 hover:bg-red-600 p-1 rounded-sm cursor-pointer"
-                                                                      title="حذف">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                                         class="size-5"
-                                                                         viewBox="0 0 448 512">
-                                                                        <path fill="white"
-                                                                              d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
-                                                                    </svg>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                @endif
-                            @endif
+                            {{-- @endif --}}
                         </div>
                         {{--                        @endif--}}
-                    @endforeach
+                    {{-- @endforeach --}}
                 </div>
             @endforeach
         </div>
@@ -760,242 +758,242 @@
         let deleteWithItems = document.getElementById('deleteWithItems')
         let deleteWithoutItems = document.getElementById('deleteWithoutItems')
 
-        function menuCatForm(menuCatId = null) {
-            let allMenus = document.querySelectorAll('.allMenus')
-            block.classList.remove('invisible')
-            block.classList.remove('opacity-0')
-            categoryForm.classList.remove('hidden')
-            categoryForm.classList.add('flex')
-            // selectMenus()
-            if (menuCatId == null) {
-                allMenus.forEach((menu) => {
-                    if (newCat.getAttribute('data-menu-create-cat-id') == menu.getAttribute('data-menu-id')) {
-                        let text = menu.children[1].children[0].children[1].innerText
-                        let title = 'ایجاد دسته برای ' + text
-                        categoryForm.children[0].innerText = title
-                        console.log(title)
-                    }
-                })
-                categoryForm.classList.remove('invisible')
-                categoryForm.classList.remove('opacity-0')
-            } else {
-                selectMenus()
-                loader.classList.remove('hidden')
-                loader.classList.add('flex')
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                    }
-                })
-                $.ajax({
-                    url: "{{ url('menuCategory/edit-front/') }}/" + menuCatId,
-                    type: "GET",
-                    success: function (data) {
-                        loader.classList.remove('flex')
-                        loader.classList.add('hidden')
-                        categoryForm.classList.remove('invisible')
-                        categoryForm.classList.remove('opacity-0')
-                        menuCatIdInp.value = data.id
-                        menuCatTitle.value = data.title
-                        categoryForm.children[0].innerText = 'ویرایش دسته ' + data.title
-                        menuCatDescription.value = data.description
-                    },
-                    error: function () {
-                        console.log("error")
-                    }
-                })
-            }
-        }
+        // function menuCatForm(menuCatId = null) {
+        //     let allMenus = document.querySelectorAll('.allMenus')
+        //     block.classList.remove('invisible')
+        //     block.classList.remove('opacity-0')
+        //     categoryForm.classList.remove('hidden')
+        //     categoryForm.classList.add('flex')
+        //     // selectMenus()
+        //     if (menuCatId == null) {
+        //         allMenus.forEach((menu) => {
+        //             if (newCat.getAttribute('data-menu-create-cat-id') == menu.getAttribute('data-menu-id')) {
+        //                 let text = menu.children[1].children[0].children[1].innerText
+        //                 let title = 'ایجاد دسته برای ' + text
+        //                 categoryForm.children[0].innerText = title
+        //                 console.log(title)
+        //             }
+        //         })
+        //         categoryForm.classList.remove('invisible')
+        //         categoryForm.classList.remove('opacity-0')
+        //     } else {
+        //         selectMenus()
+        //         loader.classList.remove('hidden')
+        //         loader.classList.add('flex')
+        //         $.ajaxSetup({
+        //             headers: {
+        //                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        //             }
+        //         })
+        //         $.ajax({
+        //             url: "{{ url('menuCategory/edit-front/') }}/" + menuCatId,
+        //             type: "GET",
+        //             success: function (data) {
+        //                 loader.classList.remove('flex')
+        //                 loader.classList.add('hidden')
+        //                 categoryForm.classList.remove('invisible')
+        //                 categoryForm.classList.remove('opacity-0')
+        //                 menuCatIdInp.value = data.id
+        //                 menuCatTitle.value = data.title
+        //                 categoryForm.children[0].innerText = 'ویرایش دسته ' + data.title
+        //                 menuCatDescription.value = data.description
+        //             },
+        //             error: function () {
+        //                 console.log("error")
+        //             }
+        //         })
+        //     }
+        // }
 
-        function submitMenuCatForm(el) {
-            let menuCategories = document.querySelectorAll('.menuCategories')
-            let text = el.innerText
-            if (menuCatTitle.value == "") {
-                menuCatTitle.classList.add('border-b-1')
-                menuCatTitle.classList.add('border-b-red-500')
-            } else {
-                el.innerHTML = "<div class='w-4 h-4 mx-auto border-2 border-white border-t-[#eb3153] rounded-full animate-spin'></div>"
-                if (menuCatIdInp.value == "") {
-                    let formData = new FormData()
-                    formData.append('title', menuCatTitle.value)
-                    if (menuCatPic.value != "") {
-                        formData.append('image', menuCatPic.files[0])
-                    }
-                    if (menuCatDescription.value != "") {
-                        formData.append('description', menuCatDescription.value)
-                    }
-                    formData.append('menu_id', newCat.getAttribute('data-menu-create-cat-id'))
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                        }
-                    })
-                    $.ajax({
-                        url: "{{ route('menuCat.storeFront') }}",
-                        type: "POST",
-                        contentType: false,
-                        processData: false,
-                        data: formData,
-                        success: function (data) {
+        // function submitMenuCatForm(el) {
+        //     let menuCategories = document.querySelectorAll('.menuCategories')
+        //     let text = el.innerText
+        //     if (menuCatTitle.value == "") {
+        //         menuCatTitle.classList.add('border-b-1')
+        //         menuCatTitle.classList.add('border-b-red-500')
+        //     } else {
+        //         el.innerHTML = "<div class='w-4 h-4 mx-auto border-2 border-white border-t-[#eb3153] rounded-full animate-spin'></div>"
+        //         if (menuCatIdInp.value == "") {
+        //             let formData = new FormData()
+        //             formData.append('title', menuCatTitle.value)
+        //             if (menuCatPic.value != "") {
+        //                 formData.append('image', menuCatPic.files[0])
+        //             }
+        //             if (menuCatDescription.value != "") {
+        //                 formData.append('description', menuCatDescription.value)
+        //             }
+        //             formData.append('menu_id', newCat.getAttribute('data-menu-create-cat-id'))
+        //             $.ajaxSetup({
+        //                 headers: {
+        //                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        //                 }
+        //             })
+        //             $.ajax({
+        //                 url: "{{ route('menuCat.storeFront') }}",
+        //                 type: "POST",
+        //                 contentType: false,
+        //                 processData: false,
+        //                 data: formData,
+        //                 success: function (data) {
 
-                            el.innerHTML = text
-                            let element = document.createElement('div')
-                            element.classList = "relative text-center border-1 border-gray-300 rounded-md menuCategories"
-                            element.setAttribute('onclick', `showItems(this, ${data.id})`)
-                            element.setAttribute('data-menu-category-id', data.id)
-                            element.innerHTML = `
-                                <div class="absolute -top-2.5 -left-2.5 flex flex-col items-center gap-4 bg-gray-200 p-1 rounded">
-                                    <div class="flex justify-center cursor-pointer"
-                                        onclick='menuCatForm(${data.id})'>
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                        class="size-4 fill-gray-400 hover:fill-green-600"
-                                        viewBox="0 0 512 512">
-                                            <path
-                                        d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
-                                            </svg>
-                                    </div>
-                                    <div class="flex justify-center cursor-pointer"
-                                         onclick='deleteCatBox("${data.title}", ${data.id})'>
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                             class="size-4 fill-gray-400 hover:fill-red-600"
-                                             viewBox="0 0 448 512">
-                                            <path
-                                                d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <span class="text-sm px-5 flex items-center justify-center min-w-[120px] max-w-[120px] truncate text-center cursor-pointer h-[34px]">${data.title}</span>
-                            `
-                            menuCats.appendChild(element)
-                            closeForm()
-                        },
-                        error: function () {
-                            console.log("error")
-                        }
-                    })
-                } else {
-                    let formData = new FormData()
-                    formData.append('category_id', menuCatIdInp.value)
-                    formData.append('title', menuCatTitle.value)
-                    if(menuListOptions.value != 0){
-                        formData.append('menu_id', menuListOptions.value)
-                    }
-                    if (menuCatPic.value != "") {
-                        formData.append('image', menuCatPic.files[0])
-                    }
-                    if (menuCatDescription.value != "") {
-                        formData.append('description', menuCatDescription.value)
-                    }
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                        }
-                    })
-                    $.ajax({
-                        url: "{{ route('menuCat.updateFront') }}",
-                        type: "POST",
-                        contentType: false,
-                        processData: false,
-                        data: formData,
-                        success: function (data) {
-                            console.log(data)
-                            menuCategories.forEach((category) => {
-                                if (category.getAttribute('data-menu-category-id') == data.id) {
-                                    category.children[0].children[0].setAttribute('onclick', `menuCatForm(${data.id})`)
-                                    category.children[0].children[1].setAttribute('onclick', `deleteCatBox("${data.title}", ${data.id})`)
-                                    category.children[1].innerText = data.title
-                                }
-                            })
-                            el.innerHTML = text
-                            closeForm()
-                        },
-                        error: function () {
-                            console.log('error')
-                        }
-                    })
-                }
-            }
-        }
+        //                     el.innerHTML = text
+        //                     let element = document.createElement('div')
+        //                     element.classList = "relative text-center border-1 border-gray-300 rounded-md menuCategories"
+        //                     element.setAttribute('onclick', `showItems(this, ${data.id})`)
+        //                     element.setAttribute('data-menu-category-id', data.id)
+        //                     element.innerHTML = `
+        //                         <div class="absolute -top-2.5 -left-2.5 flex flex-col items-center gap-4 bg-gray-200 p-1 rounded">
+        //                             <div class="flex justify-center cursor-pointer"
+        //                                 onclick='menuCatForm(${data.id})'>
+        //                                     <svg xmlns="http://www.w3.org/2000/svg"
+        //                                 class="size-4 fill-gray-400 hover:fill-green-600"
+        //                                 viewBox="0 0 512 512">
+        //                                     <path
+        //                                 d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
+        //                                     </svg>
+        //                             </div>
+        //                             <div class="flex justify-center cursor-pointer"
+        //                                  onclick='deleteCatBox("${data.title}", ${data.id})'>
+        //                                 <svg xmlns="http://www.w3.org/2000/svg"
+        //                                      class="size-4 fill-gray-400 hover:fill-red-600"
+        //                                      viewBox="0 0 448 512">
+        //                                     <path
+        //                                         d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
+        //                                 </svg>
+        //                             </div>
+        //                         </div>
+        //                         <span class="text-sm px-5 flex items-center justify-center min-w-[120px] max-w-[120px] truncate text-center cursor-pointer h-[34px]">${data.title}</span>
+        //                     `
+        //                     menuCats.appendChild(element)
+        //                     closeForm()
+        //                 },
+        //                 error: function () {
+        //                     console.log("error")
+        //                 }
+        //             })
+        //         } else {
+        //             let formData = new FormData()
+        //             formData.append('category_id', menuCatIdInp.value)
+        //             formData.append('title', menuCatTitle.value)
+        //             if(menuListOptions.value != 0){
+        //                 formData.append('menu_id', menuListOptions.value)
+        //             }
+        //             if (menuCatPic.value != "") {
+        //                 formData.append('image', menuCatPic.files[0])
+        //             }
+        //             if (menuCatDescription.value != "") {
+        //                 formData.append('description', menuCatDescription.value)
+        //             }
+        //             $.ajaxSetup({
+        //                 headers: {
+        //                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        //                 }
+        //             })
+        //             $.ajax({
+        //                 url: "{{ route('menuCat.updateFront') }}",
+        //                 type: "POST",
+        //                 contentType: false,
+        //                 processData: false,
+        //                 data: formData,
+        //                 success: function (data) {
+        //                     console.log(data)
+        //                     menuCategories.forEach((category) => {
+        //                         if (category.getAttribute('data-menu-category-id') == data.id) {
+        //                             category.children[0].children[0].setAttribute('onclick', `menuCatForm(${data.id})`)
+        //                             category.children[0].children[1].setAttribute('onclick', `deleteCatBox("${data.title}", ${data.id})`)
+        //                             category.children[1].innerText = data.title
+        //                         }
+        //                     })
+        //                     el.innerHTML = text
+        //                     closeForm()
+        //                 },
+        //                 error: function () {
+        //                     console.log('error')
+        //                 }
+        //             })
+        //         }
+        //     }
+        // }
 
-        function deleteCatBox(categoryTitle, categoryId){
-            block.classList.remove('opacity-0')
-            block.classList.remove('invisible')
-            deleteCategoryTitle.innerHTML = `حذف دسته <span class="font-bold">${categoryTitle}</span>`
-            deleteMenuCatBox.classList.remove('hidden')
-            deleteMenuCatBox.classList.remove('invisible')
-            deleteMenuCatBox.classList.remove('opacity-0')
-            deleteMenuCatBox.classList.add('flex')
-            deleteWithItems.setAttribute('onclick', `deleteMenuCat(${categoryId})`)
-            deleteWithoutItems.setAttribute('onclick', `deleteMenuCatWithoutItems(${categoryId})`)
-        }
+        // function deleteCatBox(categoryTitle, categoryId){
+        //     block.classList.remove('opacity-0')
+        //     block.classList.remove('invisible')
+        //     deleteCategoryTitle.innerHTML = `حذف دسته <span class="font-bold">${categoryTitle}</span>`
+        //     deleteMenuCatBox.classList.remove('hidden')
+        //     deleteMenuCatBox.classList.remove('invisible')
+        //     deleteMenuCatBox.classList.remove('opacity-0')
+        //     deleteMenuCatBox.classList.add('flex')
+        //     deleteWithItems.setAttribute('onclick', `deleteMenuCat(${categoryId})`)
+        //     deleteWithoutItems.setAttribute('onclick', `deleteMenuCatWithoutItems(${categoryId})`)
+        // }
 
-        function deleteMenuCat(categoryId) {
-            let menuCategories = document.querySelectorAll('.menuCategories')
-            let menuItems = document.querySelectorAll('.menuItems')
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-            $.ajax({
-                url: "{{ url('menuCategory/delete-front/') }}/" + categoryId,
-                type: "GET",
-                success: function (data) {
-                    menuCategories.forEach((menuCategory)=>{
-                        if(menuCategory.getAttribute('data-menu-category-id') == data.id){
-                            menuCategory.remove()
-                        }
-                    })
-                    menuItems.forEach((menuItem)=>{
-                        data.menu_item_ids.forEach((itemId)=>{
-                            if(menuItem.getAttribute('data-menu-item-id')==itemId){
-                                menuItem.remove()
-                            }
-                        })
-                    })
-                    closeForm()
-                },
-                error: function () {
-                    console.log('error')
-                }
-            })
-        }
+        // function deleteMenuCat(categoryId) {
+        //     let menuCategories = document.querySelectorAll('.menuCategories')
+        //     let menuItems = document.querySelectorAll('.menuItems')
+        //     $.ajaxSetup({
+        //         headers: {
+        //             'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        //         }
+        //     })
+        //     $.ajax({
+        //         url: "{{ url('menuCategory/delete-front/') }}/" + categoryId,
+        //         type: "GET",
+        //         success: function (data) {
+        //             menuCategories.forEach((menuCategory)=>{
+        //                 if(menuCategory.getAttribute('data-menu-category-id') == data.id){
+        //                     menuCategory.remove()
+        //                 }
+        //             })
+        //             menuItems.forEach((menuItem)=>{
+        //                 data.menu_item_ids.forEach((itemId)=>{
+        //                     if(menuItem.getAttribute('data-menu-item-id')==itemId){
+        //                         menuItem.remove()
+        //                     }
+        //                 })
+        //             })
+        //             closeForm()
+        //         },
+        //         error: function () {
+        //             console.log('error')
+        //         }
+        //     })
+        // }
 
-        function deleteMenuCatWithoutItems(categoryId){
-            let menuItems = document.querySelectorAll('.menuItems')
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-            $.ajax({
-                url: "{{ url('menuCategory/delete-front-without-items/') }}/"+categoryId,
-                type: "GET",
-                success: function(data){
-                    console.log(data);
+        // function deleteMenuCatWithoutItems(categoryId){
+        //     let menuItems = document.querySelectorAll('.menuItems')
+        //     $.ajaxSetup({
+        //         headers: {
+        //             'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        //         }
+        //     })
+        //     $.ajax({
+        //         url: "{{ url('menuCategory/delete-front-without-items/') }}/"+categoryId,
+        //         type: "GET",
+        //         success: function(data){
+        //             console.log(data);
                     
-                    menuCategories.forEach((menuCategory)=>{
-                        if(menuCategory.getAttribute('data-menu-category-id') == data.category.id){
-                            menuCategory.remove()
-                        }
-                        if(menuCategory.getAttribute('data-menu-category-id')==data.withoutCatId){
-                            showItems(menuCategory, data.withoutCatId)
-                        }
-                    })
-                    menuItems.forEach((menuItem)=>{
-                        data.category.menu_item_ids.forEach((itemId)=>{
-                            if(menuItem.getAttribute('data-menu-item-id')==itemId){
-                                menuItem.remove()
-                            }
-                        })
-                    })
-                    closeForm()
-                },
-                error: function(){
-                    console.log('error')
-                }
-            })
-        }
+        //             menuCategories.forEach((menuCategory)=>{
+        //                 if(menuCategory.getAttribute('data-menu-category-id') == data.category.id){
+        //                     menuCategory.remove()
+        //                 }
+        //                 if(menuCategory.getAttribute('data-menu-category-id')==data.withoutCatId){
+        //                     showItems(menuCategory, data.withoutCatId)
+        //                 }
+        //             })
+        //             menuItems.forEach((menuItem)=>{
+        //                 data.category.menu_item_ids.forEach((itemId)=>{
+        //                     if(menuItem.getAttribute('data-menu-item-id')==itemId){
+        //                         menuItem.remove()
+        //                     }
+        //                 })
+        //             })
+        //             closeForm()
+        //         },
+        //         error: function(){
+        //             console.log('error')
+        //         }
+        //     })
+        // }
 
         let menuItemId = document.getElementById('menuItemId')
         let menuItemTitle = document.getElementById('menuItemTitle')
@@ -1008,25 +1006,25 @@
 
         function menuItemForm(itemId = null) {
             closeForm()
-            let menuCategories = document.querySelectorAll('.menuCategories')
+            // let menuCategories = document.querySelectorAll('.menuCategories')
             block.classList.remove('invisible')
             block.classList.remove('opacity-0')
             itemForm.classList.remove('hidden')
             if (itemId == null) {
                 itemForm.classList.remove('invisible')
                 itemForm.classList.remove('opacity-0')
-                menuCategories.forEach((category) => {
-                    if (newItem.getAttribute('data-menu-create-item-id') == category.getAttribute('data-menu-category-id')) {
-                        if (category.children[1]) {
-                            itemForm.children[0].innerText = 'ایجاد آیتم جدید برای دسته ' + category.children[1].innerText
-                            console.log(category.children[1].innerText)
-                        } else {
-                            itemForm.children[0].innerText = 'ایجاد آیتم جدید برای دسته بدون دسته بندی'
-                        }
-                    }
-                })
+                // menuCategories.forEach((category) => {
+                //     if (newItem.getAttribute('data-menu-create-item-id') == category.getAttribute('data-menu-category-id')) {
+                //         if (category.children[1]) {
+                //             itemForm.children[0].innerText = 'ایجاد آیتم جدید برای دسته ' + category.children[1].innerText
+                //             console.log(category.children[1].innerText)
+                //         } else {
+                //             itemForm.children[0].innerText = 'ایجاد آیتم جدید برای دسته بدون دسته بندی'
+                //         }
+                //     }
+                // })
             } else {
-                showCats()
+                // showCats()
                 loader.classList.remove('hidden')
                 loader.classList.add('flex')
                 $.ajaxSetup({
@@ -1057,36 +1055,36 @@
             }
         }
 
-        function showCats(){
-            menuItemCategoryId.innerHTML = ""
-            menuItemCategoryId.classList.remove('hidden')
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-            $.ajax({
-                url: "{{ url('menu/cats') }}/"+newCat.getAttribute('data-menu-create-cat-id'),
-                type: "GET",
-                success: function(data){
-                    data.forEach((category)=>{
-                        if(category.title != 'بدون دسته بندی'){
-                            let option = document.createElement('option')
-                            option.value = category.id
-                            option.innerText = category.title
-                            if(newItem.getAttribute('data-menu-create-item-id') == data.id){
-                                category.selected = true
-                            }
-                            menuItemCategoryId.appendChild(option)
-                        }
-                    })
-                    console.log(data)
-                },
-                error: function(){
-                    console.log('error')
-                }
-            })
-        }
+        // function showCats(){
+        //     menuItemCategoryId.innerHTML = ""
+        //     menuItemCategoryId.classList.remove('hidden')
+        //     $.ajaxSetup({
+        //         headers: {
+        //             'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        //         }
+        //     })
+        //     $.ajax({
+        //         url: "{{ url('menu/cats') }}/"+newCat.getAttribute('data-menu-create-cat-id'),
+        //         type: "GET",
+        //         success: function(data){
+        //             data.forEach((category)=>{
+        //                 if(category.title != 'بدون دسته بندی'){
+        //                     let option = document.createElement('option')
+        //                     option.value = category.id
+        //                     option.innerText = category.title
+        //                     if(newItem.getAttribute('data-menu-create-item-id') == data.id){
+        //                         category.selected = true
+        //                     }
+        //                     menuItemCategoryId.appendChild(option)
+        //                 }
+        //             })
+        //             console.log(data)
+        //         },
+        //         error: function(){
+        //             console.log('error')
+        //         }
+        //     })
+        // }
 
         function submitMenuItem(el) {
             let menuItems = document.querySelectorAll('.menuItems')
@@ -1102,7 +1100,7 @@
                 el.innerHTML = "<div class='w-4 h-4 mx-auto border-2 border-white border-t-[#eb3153] rounded-full animate-spin'></div>"
                 if (menuItemId.value == "") {
                     let formData = new FormData()
-                    formData.append('menu_category_id', newItem.getAttribute('data-menu-create-item-id'))
+                    formData.append('menu_id', newItem.getAttribute('data-menu-create-item-id'))
                     formData.append('title', menuItemTitle.value)
                     if (menuItemPic.value != "") {
                         formData.append('image', menuItemPic.files[0])
@@ -1312,6 +1310,7 @@
         let menuParent = document.querySelectorAll('.menuParent')
 
         function showMenu(el, menuId) {
+            // console.log(menuId)
             let menuParent = document.querySelectorAll('.menuParent')
             menuParent.forEach((menuCild) => {
                 menuCild.parentElement.classList.remove('selected')
@@ -1327,11 +1326,12 @@
                 type: "GET",
                 success: function (data) {
                     console.log(data)
-                    menuCats.innerHTML = ""
+                    // menuCats.innerHTML = ""
                     menuItemList.innerHTML = ""
-                    newCat.setAttribute('data-menu-create-cat-id', data.id)
-                    let categories = data.menu_categories
-                    newItem.setAttribute('data-menu-create-item-id', categories[0].id)
+                    // newCat.setAttribute('data-menu-create-cat-id', data.id)
+                    // let categories = data.menu_categories
+                    // newItem.setAttribute('data-menu-create-item-id', categories[0].id)
+                    newItem.setAttribute('data-menu-create-item-id', data.id)
                     // let allCats = document.createElement('div')
                     // allCats.classList = 'relative text-center border-1 border-gray-300 rounded-md menuCategories'
                     // allCats.setAttribute('data-menu-id', data.id)
@@ -1341,51 +1341,152 @@
                     // allCats.innerHTML = x
                     // menuCats.appendChild(allCats)
 
-                    categories.forEach((category) => {
-                        let element = document.createElement('div')
-                        let html = `
-                            <div class="relative text-center border-1 border-gray-300 rounded-md menuCategories" onclick='showItems(this, ${category.id})' data-menu-category-id="${category.id}">
-                            `
-                        if (category.title != 'بدون دسته بندی') {
-                            html += `
-                            <div class="absolute -top-2.5 -left-2.5 flex flex-col items-center gap-4 bg-gray-200 p-1 rounded">
-                                <div class="flex justify-center cursor-pointer"
-                                     onclick='menuCatForm(${category.id})'>
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                             class="size-4 fill-gray-400 hover:fill-green-600"
-                                             viewBox="0 0 512 512">
-                                            <path
-                                                    d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
-                                        </svg>
-                                    </div>
-                                    <div class="flex justify-center cursor-pointer"
-                                         onclick='deleteCatBox("${category.title}", ${category.id})'>
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                             class="size-4 fill-gray-400 hover:fill-red-600"
-                                             viewBox="0 0 448 512">
-                                            <path
-                                                    d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                              `
-                        }
-                        html += `
-                            <span class="text-sm px-5 flex items-center justify-center min-w-[120px] max-w-[120px] truncate text-center cursor-pointer h-[34px]">${category.title}</span>
-                        </div>
-                        `
-                        element.innerHTML = html
-                        if (categories.length == 1) {
+                    // categories.forEach((category) => {
+                        // let element = document.createElement('div')
+                        // let html = `
+                        //     <div class="relative text-center border-1 border-gray-300 rounded-md menuCategories" onclick='showItems(this, ${category.id})' data-menu-category-id="${category.id}">
+                        //     `
+                        // if (category.title != 'بدون دسته بندی') {
+                        //     html += `
+                        //     <div class="absolute -top-2.5 -left-2.5 flex flex-col items-center gap-4 bg-gray-200 p-1 rounded">
+                        //         <div class="flex justify-center cursor-pointer"
+                        //              onclick='menuCatForm(${category.id})'>
+                        //                 <svg xmlns="http://www.w3.org/2000/svg"
+                        //                      class="size-4 fill-gray-400 hover:fill-green-600"
+                        //                      viewBox="0 0 512 512">
+                        //                     <path
+                        //                             d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
+                        //                 </svg>
+                        //             </div>
+                        //             <div class="flex justify-center cursor-pointer"
+                        //                  onclick='deleteCatBox("${category.title}", ${category.id})'>
+                        //                 <svg xmlns="http://www.w3.org/2000/svg"
+                        //                      class="size-4 fill-gray-400 hover:fill-red-600"
+                        //                      viewBox="0 0 448 512">
+                        //                     <path
+                        //                             d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
+                        //                 </svg>
+                        //             </div>
+                        //         </div>
+                        //       `
+                        // }
+                        // html += `
+                        //     <span class="text-sm px-5 flex items-center justify-center min-w-[120px] max-w-[120px] truncate text-center cursor-pointer h-[34px]">${category.title}</span>
+                        // </div>
+                        // `
+                        // element.innerHTML = html
+                        // if (categories.length == 1) {
 
-                            if (categories[0].id == category.id) {
-                                element.children[0].classList.remove('border-gray-300')
-                                element.children[0].classList.add('border-red-600')
-                                let items = category.menu_items
+                        //     if (categories[0].id == category.id) {
+                        //         element.children[0].classList.remove('border-gray-300')
+                        //         element.children[0].classList.add('border-red-600')
+                        //         let items = category.menu_items
+                        //         items.forEach((item, index) => {
+                        //             let div = document.createElement('div')
+                        //             div.classList = "w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems"
+                        //             div.setAttribute('data-menu-item-title', item.title)
+                        //             div.setAttribute('data-menu-item-id', item.id)
+                        //             let inner = `<span class="text-xs`
+                        //             // inner+=`<span class="text-xs`
+                        //             if(item.discount == 0){
+                        //                 inner+=` invisible `
+                        //             }
+                        //             inner+=` text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">`
+                        //             if(item.discount != 0){
+                        //                 inner+=` ${item.percent}% `
+                        //             }
+                        //             inner+=`</span>`
+                        //             // let inner = ``
+                        //             // if (item.discount != 0) {
+                        //             //     inner += `
+                        //             // <span class="text-xs text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
+                        //             //     ${item.percent}%
+                        //             // </span>`
+                        //             // }
+                        //             // if (item.discount == 0) {
+                        //             //     inner += `
+                        //             // <span class="text-xs text-white invisible bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
+
+                        //             // </span>`
+                        //             // }
+                        //             inner += `
+                        //                 <div class="w-full flex items-center justify-between">
+                        //                     <div class="w-11/12 flex flex-row gap-5 items-center">
+                        //                         <div class="flex items-center gap-2 lg:gap-4 flex-1 cursor-pointer" onclick="openSingle(this)">
+                        //                             <img src='${item.image ? "{{ asset('storage/') }}/" + item.image : "{{ asset('assets/img/user.png') }}"}'
+                        //                                  class="size-22 rounded-lg object-cover border border-gray-300"
+                        //                                  alt="${item.title}">
+                        //                             <div class="flex-1 min-w-0 max-w-[calc(100%-50px)]">
+                        //                                 <h3 class="font-medium text-gray-800 truncate text-sm lg:text-base">${item.title}</h3>
+                        //                                 <p class="text-sm text-gray-500 truncate mt-1 lg:text-sm">${item.description != null ? item.description : ""}</p>
+                        //                             </div>
+                        //                         </div>
+                        //                         <div class="pl-2 lg:pl-0 lg:ml-4 flex flex-col gap-0.5 lg:gap-3">
+                        //                             <div class="flex flex-row items-center gap-3">
+
+                        //                 <div class="text-left flex flex-col items-end">
+                        //                 `
+                        //             let formatter = new Intl.NumberFormat('en-US')
+                        //             if (item.discount == 0) {
+                        //                 inner += `
+                        //                     <span class="font-bold text-xs lg:text-sm">${formatter.format(item.price)}تومان</span>
+                        //                 `
+                        //             } else {
+                        //                 inner += `
+                        //                 <span class="font-bold text-xs lg:text-sm">${formatter.format(item.discount)}  تومان</span>
+                        //                     <span class="text-gray-400 text-[10px] line-through lg:text-sm">${formatter.format(item.price)} تومان</span>
+                        //                 `
+                        //             }
+                        //             inner += `
+
+                        //                                         </div>
+                        //                                     </div>
+                        //                                 </div>
+                        //                             </div>
+                        //                             <div class="flex flex-col items-center gap-2 lg:gap-5">
+                        //                                 <div class="flex justify-center">
+                        //                                     <span onclick='menuItemForm(${item.id})'
+                        //                                       class="w-fit flex flex-row items-center justify-center bg-green-500 hover:bg-green-600 p-1 rounded-sm cursor-pointer"
+                        //                                       title="ویرایش">
+                        //                                     <svg xmlns="http://www.w3.org/2000/svg"
+                        //                                          class="size-5"
+                        //                                          viewBox="0 0 512 512">
+                        //                                         <path fill="white"
+                        //                                               d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
+                        //                                     </svg>
+                        //                                 </span>
+                        //                             </div>
+                        //                             <div class="flex justify-center">
+                        //                                 <span onclick='menuItemDelete(this, ${item.id})'
+                        //                                       class="w-fit flex flex-row items-center justify-center bg-red-500 hover:bg-red-600 p-1 rounded-sm cursor-pointer"
+                        //                                       title="حذف">
+                        //                                     <svg xmlns="http://www.w3.org/2000/svg"
+                        //                                          class="size-5"
+                        //                                          viewBox="0 0 448 512">
+                        //                                         <path fill="white"
+                        //                                               d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
+                        //                                     </svg>
+                        //                                 </span>
+                        //                             </div>
+                        //                         </div>
+                        //                     </div>
+                        //                                         `
+                        //             div.innerHTML = inner
+                        //             menuItemList.appendChild(div)
+
+                        //         })
+                        //     }
+                        // } else {
+                            // if (categories[1].id == category.id) {
+                                // element.children[0].classList.remove('border-gray-300')
+                                // element.children[0].classList.add('border-red-600')
+                                let items = data.menu_items
                                 items.forEach((item, index) => {
                                     let div = document.createElement('div')
                                     div.classList = "w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems"
                                     div.setAttribute('data-menu-item-title', item.title)
                                     div.setAttribute('data-menu-item-id', item.id)
+
                                     let inner = `<span class="text-xs`
                                     // inner+=`<span class="text-xs`
                                     if(item.discount == 0){
@@ -1475,111 +1576,10 @@
                                     menuItemList.appendChild(div)
 
                                 })
-                            }
-                        } else {
-                            if (categories[1].id == category.id) {
-                                element.children[0].classList.remove('border-gray-300')
-                                element.children[0].classList.add('border-red-600')
-                                let items = category.menu_items
-                                items.forEach((item, index) => {
-                                    let div = document.createElement('div')
-                                    div.classList = "w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems"
-                                    div.setAttribute('data-menu-item-title', item.title)
-                                    div.setAttribute('data-menu-item-id', item.id)
-
-                                    let inner = `<span class="text-xs`
-                                    // inner+=`<span class="text-xs`
-                                    if(item.discount == 0){
-                                        inner+=` invisible `
-                                    }
-                                    inner+=` text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">`
-                                    if(item.discount != 0){
-                                        inner+=` ${item.percent}% `
-                                    }
-                                    inner+=`</span>`
-                                    // let inner = ``
-                                    // if (item.discount != 0) {
-                                    //     inner += `
-                                    // <span class="text-xs text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
-                                    //     ${item.percent}%
-                                    // </span>`
-                                    // }
-                                    // if (item.discount == 0) {
-                                    //     inner += `
-                                    // <span class="text-xs text-white invisible bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
-
-                                    // </span>`
-                                    // }
-                                    inner += `
-                                        <div class="w-full flex items-center justify-between">
-                                            <div class="w-11/12 flex flex-row gap-5 items-center">
-                                                <div class="flex items-center gap-2 lg:gap-4 flex-1 cursor-pointer" onclick="openSingle(this)">
-                                                    <img src='${item.image ? "{{ asset('storage/') }}/" + item.image : "{{ asset('assets/img/user.png') }}"}'
-                                                         class="size-22 rounded-lg object-cover border border-gray-300"
-                                                         alt="${item.title}">
-                                                    <div class="flex-1 min-w-0 max-w-[calc(100%-50px)]">
-                                                        <h3 class="font-medium text-gray-800 truncate text-sm lg:text-base">${item.title}</h3>
-                                                        <p class="text-sm text-gray-500 truncate mt-1 lg:text-sm">${item.description != null ? item.description : ""}</p>
-                                                    </div>
-                                                </div>
-                                                <div class="pl-2 lg:pl-0 lg:ml-4 flex flex-col gap-0.5 lg:gap-3">
-                                                    <div class="flex flex-row items-center gap-3">
-
-                                        <div class="text-left flex flex-col items-end">
-                                        `
-                                    let formatter = new Intl.NumberFormat('en-US')
-                                    if (item.discount == 0) {
-                                        inner += `
-                                            <span class="font-bold text-xs lg:text-sm">${formatter.format(item.price)}تومان</span>
-                                        `
-                                    } else {
-                                        inner += `
-                                        <span class="font-bold text-xs lg:text-sm">${formatter.format(item.discount)}  تومان</span>
-                                            <span class="text-gray-400 text-[10px] line-through lg:text-sm">${formatter.format(item.price)} تومان</span>
-                                        `
-                                    }
-                                    inner += `
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex flex-col items-center gap-2 lg:gap-5">
-                                                        <div class="flex justify-center">
-                                                            <span onclick='menuItemForm(${item.id})'
-                                                              class="w-fit flex flex-row items-center justify-center bg-green-500 hover:bg-green-600 p-1 rounded-sm cursor-pointer"
-                                                              title="ویرایش">
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                 class="size-5"
-                                                                 viewBox="0 0 512 512">
-                                                                <path fill="white"
-                                                                      d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
-                                                            </svg>
-                                                        </span>
-                                                    </div>
-                                                    <div class="flex justify-center">
-                                                        <span onclick='menuItemDelete(this, ${item.id})'
-                                                              class="w-fit flex flex-row items-center justify-center bg-red-500 hover:bg-red-600 p-1 rounded-sm cursor-pointer"
-                                                              title="حذف">
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                 class="size-5"
-                                                                 viewBox="0 0 448 512">
-                                                                <path fill="white"
-                                                                      d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
-                                                            </svg>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                                                `
-                                    div.innerHTML = inner
-                                    menuItemList.appendChild(div)
-
-                                })
-                            }
-                        }
-                        menuCats.appendChild(element)
-                    })
+                            // }
+                        // }
+                        // menuCats.appendChild(element)
+                    // })
 
                 },
                 error: function () {

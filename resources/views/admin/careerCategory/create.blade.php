@@ -37,7 +37,7 @@
                             <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2" type="text"
-                                       name='title' placeholder="عنوان" id="title">
+                                       name='title' placeholder="عنوان" id="title" required>
                             </div>
                         </div>
                         <div class="w-full flex flex-row items-center gap-3 itmes-center max-md:flex-row max-md:gap-1">
@@ -49,7 +49,7 @@
                             <div
                                     class="rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9] text-[#99A1B7] w-full flex">
                                 <input class="p-4 w-full focus:outline-none text-sm font-bold mr-2 cursor-pointer"
-                                       type="file" name='main_image' title="تصویر دسته" required>
+                                       type="file" name='main_image' title="تصویر دسته">
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3 itmes-center max-md:flex-col max-md:gap-1 lg:col-span-2">
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="w-full text-left ">
-                        <button type="button" onclick="showText(this)"
+                        <button type="submit"
                                 class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
                             ثبت
                         </button>
@@ -73,53 +73,53 @@
         </div>
     </form>
     <script>
-        let message = document.getElementById('message')
-        let element = document.createElement('div')
-        element.classList = "text-sm font-bold flex flex-row items-center justify-center py-3 gap-2 lg:gap-3"
+        // let message = document.getElementById('message')
+        // let element = document.createElement('div')
+        // element.classList = "text-sm font-bold flex flex-row items-center justify-center py-3 gap-2 lg:gap-3"
 
-        function showText(el) {
-            let title = document.getElementById('title');
-            if (title.value === '') {
-                element.innerHTML = `
-                            <span class="text-red-500">!</span>
-                            <span>لطفا یک عنوان وارد کنید.</span>
-                        `
-                message.children[0].appendChild(element)
-                showMessage('open')
-                setTimeout(() => {
-                    showMessage('close')
-                }, 2000)
-            } else {
-                document.forms[0].submit()
-                element.innerHTML = `
-                            <span class="text-red-500">!</span>
-                            <span>لطفا صبر کنید.</span>
-                        `
-                message.children[0].appendChild(element)
-                showMessage('open')
-                el.setAttribute('disabled', true)
-                el.classList.remove('cursor-pointer')
-                el.classList.add('cursor-no-drop')
-                setTimeout(() => {
-                    showMessage('close')
-                }, 3000)
-            }
-        }
+        // function showText(el) {
+        //     let title = document.getElementById('title');
+        //     if (title.value === '') {
+        //         element.innerHTML = `
+        //                     <span class="text-red-500">!</span>
+        //                     <span>لطفا یک عنوان وارد کنید.</span>
+        //                 `
+        //         message.children[0].appendChild(element)
+        //         showMessage('open')
+        //         setTimeout(() => {
+        //             showMessage('close')
+        //         }, 2000)
+        //     } else {
+        //         document.forms[0].submit()
+        //         element.innerHTML = `
+        //                     <span class="text-red-500">!</span>
+        //                     <span>لطفا صبر کنید.</span>
+        //                 `
+        //         message.children[0].appendChild(element)
+        //         showMessage('open')
+        //         el.setAttribute('disabled', true)
+        //         el.classList.remove('cursor-pointer')
+        //         el.classList.add('cursor-no-drop')
+        //         setTimeout(() => {
+        //             showMessage('close')
+        //         }, 3000)
+        //     }
+        // }
 
 
-        function showMessage(state) {
-            if (state == 'open') {
-                message.classList.remove('top-0')
-                message.classList.remove('opacity-0')
-                message.classList.remove('invisible')
-                message.classList.add('top-2/10')
-            }
-            if (state == 'close') {
-                message.classList.remove('top-2/10')
-                message.classList.add('top-0')
-                message.classList.add('opacity-0')
-                message.classList.add('invisible')
-            }
-        }
+        // function showMessage(state) {
+        //     if (state == 'open') {
+        //         message.classList.remove('top-0')
+        //         message.classList.remove('opacity-0')
+        //         message.classList.remove('invisible')
+        //         message.classList.add('top-2/10')
+        //     }
+        //     if (state == 'close') {
+        //         message.classList.remove('top-2/10')
+        //         message.classList.add('top-0')
+        //         message.classList.add('opacity-0')
+        //         message.classList.add('invisible')
+        //     }
+        // }
     </script>
 @endsection

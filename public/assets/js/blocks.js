@@ -472,41 +472,129 @@ function addFontDirection(){
 
 
 }
+// function sizeCreate(state){
+//     let size_input = document.getElementById('size_input')
+//     let createPDsize = document.querySelector('.createPDsize')
+//     if(state=="s-txt"){
+//         size_input.setAttribute('data-size' , 'text-16')
+//         size_input.value = "متن کوچک"
+//         createPDsize.classList.add('invisible')
+//         createPDsize.classList.add('opacity-0')
+//
+//     }
+//     if(state=="m-txt"){
+//         size_input.setAttribute('data-size' , 'text-20')
+//         size_input.value = "متن متوسط"
+//         createPDsize.classList.add('invisible')
+//         createPDsize.classList.add('opacity-0')
+//
+//     }
+//     if(state=="l-txt"){
+//         size_input.setAttribute('data-size' , 'text-24')
+//         size_input.value = "متن بزرگ"
+//         createPDsize.classList.add('invisible')
+//         createPDsize.classList.add('opacity-0')
+//
+//     }
+//     if(state=="s-lable"){
+//         size_input.setAttribute('data-size' , 'font-xs')
+//         size_input.value = "عنوان کوچک"
+//         createPDsize.classList.add('invisible')
+//         createPDsize.classList.add('opacity-0')
+//
+//     }
+//     if(state=="m-lable"){
+//         size_input.setAttribute('data-size' , 'font-semibold')
+//         size_input.value = "عنوان متوسط"
+//         createPDsize.classList.add('invisible')
+//         createPDsize.classList.add('opacity-0')
+//
+//     }
+//     if(state=="l-lable"){
+//         size_input.setAttribute('data-size' , 'font-bold')
+//         size_input.value = "عنوان بزرگ"
+//         createPDsize.classList.add('invisible')
+//         createPDsize.classList.add('opacity-0')
+//
+//     }
+//     pdForm.classList.remove('invisible')
+//     pdForm.classList.remove('opacity-0')
+//     pdForm.classList.remove('top-full')
+//     pdForm.classList.add('top-0')
+//     pdForm.classList.add('-translate-y-1/4')
+// }
+// function directionCreate(state){
+//     let direction_input = document.getElementById('direction_input')
+//     let createPDdirection = document.querySelector('.createPDdirection')
+//     if(state=="rtl"){
+//         direction_input.setAttribute('data-direction' , 'text-right')
+//         direction_input.value = "راست چین"
+//         createPDdirection.classList.add('invisible')
+//         createPDdirection.classList.add('opacity-0')
+//
+//     }
+//     if(state=="center"){
+//         direction_input.setAttribute('data-direction' , 'text-center')
+//         direction_input.value = "وسط چین"
+//         createPDdirection.classList.add('invisible')
+//         createPDdirection.classList.add('opacity-0')
+//
+//     }
+//     if(state=="ltr"){
+//         direction_input.setAttribute('data-direction' , 'text-left')
+//         direction_input.value = "چپ چین"
+//         createPDdirection.classList.add('invisible')
+//         createPDdirection.classList.add('opacity-0')
+//
+//     }
+//     pdForm.classList.remove('invisible')
+//     pdForm.classList.remove('opacity-0')
+//     pdForm.classList.remove('top-full')
+//     pdForm.classList.add('top-0')
+//     pdForm.classList.add('-translate-y-1/4')
+// }
+
 function sizeCreate(state){
     let size_input = document.getElementById('size_input')
     let createPDsize = document.querySelector('.createPDsize')
     if(state=="s-txt"){
-        size_input.value = "text-16"
+        size_input.setAttribute('data-size' , 'text-16')
+        size_input.value = "متن کوچک"
         createPDsize.classList.add('invisible')
         createPDsize.classList.add('opacity-0')
 
     }
     if(state=="m-txt"){
-        size_input.value = "text-20"
+        size_input.setAttribute('data-size' , 'text-20')
+        size_input.value = "متن متوسط"
         createPDsize.classList.add('invisible')
         createPDsize.classList.add('opacity-0')
 
     }
     if(state=="l-txt"){
-        size_input.value = "text-24"
+        size_input.setAttribute('data-size' , 'text-24')
+        size_input.value = "متن بزرگ"
         createPDsize.classList.add('invisible')
         createPDsize.classList.add('opacity-0')
 
     }
     if(state=="s-lable"){
-        size_input.value = "font-xs"
+        size_input.setAttribute('data-size' , 'font-xs')
+        size_input.value = "عنوان کوچک"
         createPDsize.classList.add('invisible')
         createPDsize.classList.add('opacity-0')
 
     }
     if(state=="m-lable"){
-        size_input.value = "font-semibold"
+        size_input.setAttribute('data-size' , 'font-semibold')
+        size_input.value = "عنوان متوسط"
         createPDsize.classList.add('invisible')
         createPDsize.classList.add('opacity-0')
 
     }
     if(state=="l-lable"){
-        size_input.value = "font-bold"
+        size_input.setAttribute('data-size' , 'font-bold')
+        size_input.value = "عنوان بزرگ"
         createPDsize.classList.add('invisible')
         createPDsize.classList.add('opacity-0')
 
@@ -521,19 +609,22 @@ function directionCreate(state){
     let direction_input = document.getElementById('direction_input')
     let createPDdirection = document.querySelector('.createPDdirection')
     if(state=="rtl"){
-        direction_input.value = "text-right"
+        direction_input.setAttribute('data-direction' , 'text-right')
+        direction_input.value = "راست چین"
         createPDdirection.classList.add('invisible')
         createPDdirection.classList.add('opacity-0')
 
     }
     if(state=="center"){
-        direction_input.value = "text-center"
+        direction_input.setAttribute('data-direction' , 'text-center')
+        direction_input.value = "وسط چین"
         createPDdirection.classList.add('invisible')
         createPDdirection.classList.add('opacity-0')
 
     }
     if(state=="ltr"){
-        direction_input.value = "text-left"
+        direction_input.setAttribute('data-direction' , 'text-left')
+        direction_input.value = "چپ چین"
         createPDdirection.classList.add('invisible')
         createPDdirection.classList.add('opacity-0')
 
@@ -544,6 +635,8 @@ function directionCreate(state){
     pdForm.classList.add('top-0')
     pdForm.classList.add('-translate-y-1/4')
 }
+
+
 // edit page description
 let pdEditForm = document.getElementById('pdEditForm')
 function addFontSizeEdit(){
@@ -582,37 +675,43 @@ function sizeCreateEdit(state){
     let edit_size_input = document.getElementById('edit_size_input')
     let createPDsizeEdit = document.querySelector('.createPDsizeEdit')
     if(state=="s-txt"){
-        edit_size_input.value = "text-16"
+        edit_size_input.setAttribute('data-size-edit' , 'text-16')
+        edit_size_input.value = "متن کوچک"
         createPDsizeEdit.classList.add('invisible')
         createPDsizeEdit.classList.add('opacity-0')
 
     }
     if(state=="m-txt"){
-        edit_size_input.value = "text-20"
+        edit_size_input.setAttribute('data-size-edit' , 'text-20')
+        edit_size_input.value = "متن متوسط"
         createPDsizeEdit.classList.add('invisible')
         createPDsizeEdit.classList.add('opacity-0')
 
     }
     if(state=="l-txt"){
-        edit_size_input.value = "text-24"
+        edit_size_input.setAttribute('data-size-edit' , 'text-24')
+        edit_size_input.value = "متن بزرگ"
         createPDsizeEdit.classList.add('invisible')
         createPDsizeEdit.classList.add('opacity-0')
 
     }
     if(state=="s-lable"){
-        edit_size_input.value = "font-xs"
+        edit_size_input.setAttribute('data-size-edit' , 'font-xs')
+        edit_size_input.value = "عنوان کوچک"
         createPDsizeEdit.classList.add('invisible')
         createPDsizeEdit.classList.add('opacity-0')
 
     }
     if(state=="m-lable"){
-        edit_size_input.value = "font-semibold"
+        edit_size_input.setAttribute('data-size-edit' , 'font-semibold')
+        edit_size_input.value = "عنوان متوسط"
         createPDsizeEdit.classList.add('invisible')
         createPDsizeEdit.classList.add('opacity-0')
 
     }
     if(state=="l-lable"){
-        edit_size_input.value = "font-bold"
+        edit_size_input.setAttribute('data-size-edit' , 'font-bold')
+        edit_size_input.value = "عنوان بزرگ"
         createPDsizeEdit.classList.add('invisible')
         createPDsizeEdit.classList.add('opacity-0')
 
@@ -627,19 +726,22 @@ function directionCreateEdit(state){
     let edit_direction_input = document.getElementById('edit_direction_input')
     let createPDdirectionEdit = document.querySelector('.createPDdirectionEdit')
     if(state=="rtl"){
-        edit_direction_input.value = "text-right"
+        edit_direction_input.setAttribute('data-direction-edit' , 'text-right')
+        edit_direction_input.value = "راست چین"
         createPDdirectionEdit.classList.add('invisible')
         createPDdirectionEdit.classList.add('opacity-0')
 
     }
     if(state=="center"){
-        edit_direction_input.value = "text-center"
+        edit_direction_input.setAttribute('data-direction-edit' , 'text-center')
+        edit_direction_input.value = "وسط چین"
         createPDdirectionEdit.classList.add('invisible')
         createPDdirectionEdit.classList.add('opacity-0')
 
     }
     if(state=="ltr"){
-        edit_direction_input.value = "text-left"
+        edit_direction_input.setAttribute('data-direction-edit' , 'text-left')
+        edit_direction_input.value = "چپ چین"
         createPDdirectionEdit.classList.add('invisible')
         createPDdirectionEdit.classList.add('opacity-0')
 
@@ -650,6 +752,87 @@ function directionCreateEdit(state){
     // pdeForm.classList.add('top-0')
     // pdeForm.classList.add('-translate-y-1/4')
 }
+// function sizeCreateEdit(state){
+//     let edit_size_input = document.getElementById('edit_size_input')
+//     let createPDsizeEdit = document.querySelector('.createPDsizeEdit')
+//     if(state=="s-txt"){
+//         edit_size_input.setAttribute('data-size-edit' , 'text-16')
+//         edit_size_input.value = "متن کوچک"
+//         createPDsizeEdit.classList.add('invisible')
+//         createPDsizeEdit.classList.add('opacity-0')
+//
+//     }
+//     if(state=="m-txt"){
+//         edit_size_input.setAttribute('data-size-edit' , 'text-20')
+//         edit_size_input.value = "متن متوسط"
+//         createPDsizeEdit.classList.add('invisible')
+//         createPDsizeEdit.classList.add('opacity-0')
+//
+//     }
+//     if(state=="l-txt"){
+//         edit_size_input.setAttribute('data-size-edit' , 'text-24')
+//         edit_size_input.value = "متن بزرگ"
+//         createPDsizeEdit.classList.add('invisible')
+//         createPDsizeEdit.classList.add('opacity-0')
+//
+//     }
+//     if(state=="s-lable"){
+//         edit_size_input.setAttribute('data-size-edit' , 'font-xs')
+//         edit_size_input.value = "عنوان کوچک"
+//         createPDsizeEdit.classList.add('invisible')
+//         createPDsizeEdit.classList.add('opacity-0')
+//
+//     }
+//     if(state=="m-lable"){
+//         edit_size_input.setAttribute('data-size-edit' , 'font-semibold')
+//         edit_size_input.value = "عنوان متوسط"
+//         createPDsizeEdit.classList.add('invisible')
+//         createPDsizeEdit.classList.add('opacity-0')
+//
+//     }
+//     if(state=="l-lable"){
+//         edit_size_input.setAttribute('data-size-edit' , 'font-bold')
+//         edit_size_input.value = "عنوان بزرگ"
+//         createPDsizeEdit.classList.add('invisible')
+//         createPDsizeEdit.classList.add('opacity-0')
+//
+//     }
+//     pdeForm.classList.remove('invisible')
+//     pdeForm.classList.remove('opacity-0')
+//     // pdeForm.classList.remove('top-full')
+//     // pdeForm.classList.add('top-0')
+//     // pdeForm.classList.add('-translate-y-1/4')
+// }
+// function directionCreateEdit(state){
+//     let edit_direction_input = document.getElementById('edit_direction_input')
+//     let createPDdirectionEdit = document.querySelector('.createPDdirectionEdit')
+//     if(state=="rtl"){
+//         edit_direction_input.setAttribute('data-direction-edit' , 'text-right')
+//         edit_direction_input.value = "راست چین"
+//         createPDdirectionEdit.classList.add('invisible')
+//         createPDdirectionEdit.classList.add('opacity-0')
+//
+//     }
+//     if(state=="center"){
+//         edit_direction_input.setAttribute('data-direction-edit' , 'text-center')
+//         edit_direction_input.value = "وسط چین"
+//         createPDdirectionEdit.classList.add('invisible')
+//         createPDdirectionEdit.classList.add('opacity-0')
+//
+//     }
+//     if(state=="ltr"){
+//         edit_direction_input.setAttribute('data-direction-edit' , 'text-left')
+//         edit_direction_input.value = "چپ چین"
+//         createPDdirectionEdit.classList.add('invisible')
+//         createPDdirectionEdit.classList.add('opacity-0')
+//
+//     }
+//     pdeForm.classList.remove('invisible')
+//     pdeForm.classList.remove('opacity-0')
+//     pdeForm.classList.remove('top-full')
+//     // pdeForm.classList.add('top-0')
+//     // pdeForm.classList.add('-translate-y-1/4')
+// }
 function qrCard(state) {
     if (state == 'open') {
         qrcode.classList.remove('invisible')
