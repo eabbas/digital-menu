@@ -134,14 +134,14 @@ class CareerController extends Controller
         ]);
 
         // menu category create
-        $menu_cat_id = menu_category::insertGetId([
-            'title'=>'بدون دسته بندی',
-            'description'=>'آیتم هایی که زیر مجموعه دسته ای نباشند در این دسته قرار میگیرند',
-            'image'=>null,
-            'menu_id'=>$menu_id,
-            'created_at'=>now(),
-            'updated_at'=>now()
-        ]);
+        // $menu_cat_id = menu_category::insertGetId([
+        //     'title'=>'بدون دسته بندی',
+        //     'description'=>'آیتم هایی که زیر مجموعه دسته ای نباشند در این دسته قرار میگیرند',
+        //     'image'=>null,
+        //     'menu_id'=>$menu_id,
+        //     'created_at'=>now(),
+        //     'updated_at'=>now()
+        // ]);
 
         // menu item create
         menu_item::insertGetId([
@@ -152,7 +152,7 @@ class CareerController extends Controller
             'customizable' => 0,
             'image' => null,
             'parent_id' => 0,
-            'menu_category_id' => $menu_cat_id,
+            'menu_id' => $menu_id,
             'duration' => 0,
             'created_at' => now(),
             'updated_at' => now()
@@ -278,10 +278,10 @@ class CareerController extends Controller
         }
         if (count($career->menus)) {
             foreach ($career->menus as $menu) {
-                if (count($menu->menu_categories)) {
-                    foreach ($menu->menu_categories as $category) {
-                        if (count($category->menu_items)) {
-                            foreach ($category->menu_items as $item) {
+                // if (count($menu->menu_categories)) {
+                    // foreach ($menu->menu_categories as $category) {
+                        if (count($menu->menu_items)) {
+                            foreach ($menu->menu_items as $item) {
                                 if (count($item->ingredients)) {
                                     foreach ($item->ingredients as $ingredients) {
                                          if ($ingredients->image) {
@@ -295,13 +295,13 @@ class CareerController extends Controller
                                 }
                                 $item->delete();
                             }
-                        }
-                        if ($category->image) {
-                        Storage::disk('public')->delete($category->image);
-                        }
-                        $category->delete();
+                        // }
+                        // if ($category->image) {
+                        // Storage::disk('public')->delete($category->image);
+                        // }
+                        // $category->delete();
                     }
-                }
+                // }
                  if ($menu->banner) {
                 Storage::disk('public')->delete($menu->banner);
                 }
