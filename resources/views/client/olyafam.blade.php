@@ -6,7 +6,7 @@
         <div class="w-11/12 mx-auto flex flex-row items-center gap-8 pb-3 py-4 overflow-x-auto bg-white"
             style="scrollbar-width: thin;" id="menuList">
             @foreach ($career->menus as $menu)
-                @if (count($menu->menu_categories) > 1)
+                @if (count($menu->menu_items) > 1)
                     <div class="relative selectItems @if ($career->menus[0] == $menu) selected @endif allMenus min-w-20 min-h-20"
                         data-menu-id="{{ $menu->id }}">
                         <div class="cursor-pointer rounded-lg menuParent" title="{{ $menu->title }}"
@@ -25,7 +25,7 @@
         </div>
     </div>
 </div>
-<div class="w-11/12 mx-auto mt-3">
+{{-- <div class="w-11/12 mx-auto mt-3">
     <div class="w-full overflow-x-auto bg-white rounded-md py-2" style="scrollbar-width: thin;">
         <div class="w-11/12 mx-auto flex flex-row items-center gap-4 py-4" id="menuCats">
             @foreach ($career->menus as $menu)
@@ -48,18 +48,18 @@
             @endforeach
         </div>
     </div>
-</div>
+</div> --}}
 <div class="w-11/12 mx-auto" id="items">
     @foreach ($career->menus as $menu)
-        @if (count($menu->menu_categories) > 1)
+        {{-- @if (count($menu->menu_categories) > 1) --}}
             <div class="flex flex-col gap-3 mt-3 menus" data-menu-id="{{ $menu->id }}">
-                @foreach ($menu->menu_categories as $category)
-                    @if (count($category->menu_items))
+                {{-- @foreach ($menu->menu_categories as $category) --}}
+                    @if (count($menu->menu_items))
                         <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-                            @if ($career->menus[0]->menu_categories[1]->id == $category->id)
+                            {{-- @if ($career->menus[0]->menu_categories[1]->id == $category->id) --}}
                                 <div class="p-2 lg:p-4">
                                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="menuItemList">
-                                        @foreach ($category->menu_items as $item)
+                                        @foreach ($menu->menu_items as $item)
                                             {{-- @if ($item->title != 'آیتم 1') --}}
                                                 <div class="w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems"
                                                     data-menu-item-title="{{ $item->title }}"
@@ -159,12 +159,12 @@
                                         @endforeach
                                     </div>
                                 </div>
-                            @endif
+                            {{-- @endif --}}
                         </div>
                     @endif
-                @endforeach
+                {{-- @endforeach --}}
             </div>
-        @endif
+        {{-- @endif --}}
     @endforeach
 </div>
 

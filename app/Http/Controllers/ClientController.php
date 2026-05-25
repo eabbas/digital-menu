@@ -27,15 +27,15 @@ class ClientController extends Controller
     //    }
         $menus = $career->menus;
         foreach ($menus as $menu) {
-            foreach ($menu->menu_categories as $category) {
-                foreach ($category->menu_items as $item) {
+            // foreach ($menu->menu_categories as $category) {
+                foreach ($menu->menu_items as $item) {
                     if ($item->discount > 0) {
                         $campare = $item->price - $item->discount;
                         $x = $campare / $item->price;
                         $item['percent'] = intval($x * 100);
                     }
                 }
-            }
+            // }
         }
         $cartCount = 0;
         $orders = null;

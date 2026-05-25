@@ -73,7 +73,7 @@ class MenuController extends Controller
         // ]);
         // menu item create
 
-        $menu_item_id = menu_item::insertGetId([
+        menu_item::create([
             'title' => 'آیتم 1',
             'description' => null,
             'price' => 0,
@@ -237,12 +237,12 @@ class MenuController extends Controller
     public function showMenuClient(menu $menu)
     {
 
-        $categories = $menu->load(['menu_categories' => function ($query) {
+        $menu = $menu->load(['menu_items' => function ($query) {
             $query->with('menu_items')->get();
         }]);
 
-        foreach ($categories->menu_categories as $category) {
-            foreach ($category->menu_items as $item) {
+        // foreach ($categories->menu_categories as $category) {
+            foreach ($menu->menu_items as $item) {
                 if ($item->discount != 0) {
                     $campare = $item->price - $item->discount;
                     $x = $campare / $item->price;
@@ -250,13 +250,13 @@ class MenuController extends Controller
                 }
                 $item['cart'] = cart::where('user_id', Auth::id())->where('order_id', null)->where('menu_item_id', $item->id)->where('career_id', $menu->career->id)->first();
             }
-        }
+        // }
         $user = null;
         if (Auth::check()) {
             $user = Auth::user();
             $user->carts;
         }
-        return response()->json(['categories' => $categories, 'user' => $user]);
+        return response()->json(['categories' => $menu, 'user' => $user]);
     }
 
     public function createMenu()

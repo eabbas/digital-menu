@@ -23,7 +23,9 @@ class User extends Authenticatable
         'password',
         'family',
         'main_image',
+        'scan_count',
         'email',
+        'parent_id',
         'ref_code'
     ];
 

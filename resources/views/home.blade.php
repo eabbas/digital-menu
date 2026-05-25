@@ -18,8 +18,7 @@
     <main class="flex flex-col gap-4">
         <!-- filter -->
         <section class="w-full px-5 bg-white h-10 mx-auto flex justify-center">
-            <div class="w-full flex items-center justify-between">
-                <div class="w-1/3"></div>
+            <div class="w-full flex items-center justify-end">
                 <div class="w-1/3 flex items-center justify-center gap-2 cursor-pointer">
                     <img src="{{asset('storage/mahdi/8c65ff18-bf87-4a68-b814-cc4b24a2ee59.jpg')}}" alt="" class="w-4">
                     <div class="flex items-center gap-0.5 text-xs">
