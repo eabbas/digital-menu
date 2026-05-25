@@ -18,7 +18,7 @@
      @endphp
         <section class="w-full flex flex-col gap-3 mt-10">
             <div class="w-full flex flex-col gap-4">
-                <div class="flex flex-row items-center justify-end gap-5 @if (in_array(1, $ids) || count($page->introCats) && count($page->introPros)) block @else hidden @endif">
+                <div class="flex flex-row items-center justify-end gap-5">
 {{--                    <span>|</span>--}}
                     <div class="text-sm text-blue-800 cursor-pointer text-end" onclick="categoryform(this , 'townext' , 'open')">
                         ایجاد دسته جدید
@@ -34,18 +34,18 @@
                 </div>
                 <div class="w-full flex gap-4 items-center pb-2  text-[15px] overflow-x-auto [&-webkit-scrollbar]:hidden"
                      id="intro_categories">
-                    @if (in_array(1, $ids) || in_array(2, $ids) || count($page->introCats) && count($page->introPros))
+
                         <span class="px-5 h-12 text-nowrap bg-gray-200 shadow flex justify-center items-center rounded-xl cursor-pointer"
                               onclick="allProducts(this)">همه</span>
                         @foreach ($page->introCats as $introCat)
                             <div class="flex gap-2">
-                            <div class="px-2 h-12 text-nowrap bg-white text-[15px] shadow flex justify-center items-center rounded-xl w-30 cursor-pointer relative introCategories" onclick="showProduct(this)"
-                                 data-cat-id="{{ $introCat->id }}">
-                                <span>
-                                    {{ $introCat->title }}
-                                </span>
-                                <input type="hidden" value="{{ $introCat->show_in_home }}" id="show_in_home_cat">
-                            </div>
+                                <div class="px-2 h-12 text-nowrap bg-white text-[15px] shadow flex justify-center items-center rounded-xl w-30 cursor-pointer relative introCategories" onclick="showProduct(this)"
+                                    data-cat-id="{{ $introCat->id }}">
+                                    <span>
+                                        {{ $introCat->title }}
+                                    </span>
+                                    <input type="hidden" value="{{ $introCat->show_in_home }}" id="show_in_home_cat">
+                                </div>
                                 <div class="flex flex-col gap-1">
                                     <div class="w-6 bg-red-600 h-6 flex justify-center items-center cursor-pointer rounded-md" onclick="deleteCategory(this , {{ $introCat->id }})">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="size-3" viewBox="0 0 448 512">
@@ -62,7 +62,6 @@
                                 </div>
                             </div>
                         @endforeach
-                    @endif
                 </div>
             </div>
             <div class="w-full grid grid-cols-2 lg:grid-cols-4 gap-4" id="allProducts">
@@ -113,13 +112,6 @@
                 </div>
             </div>
         </section>
-    @if (in_array(1, $ids) || count($page->introCats) && count($page->introPros))
-
-        @else
-        <div class="text-sm text-blue-800 cursor-pointer text-end" onclick="categoryform(this , 'onenext' , 'open')">
-            ایجاد دسته جدید
-        </div>
-        @endif
 
 {{-- <span>createCategory</span>--}}
         <div class="fixed top-0 right-0 bg-black/50 opacity-0 invisible w-full flex items-center justify-end h-dvh transtion-all duration-300">
@@ -348,15 +340,14 @@
 
     <script>
 
-        let introCategoriesEdit = document.querySelectorAll('.introCategories')
         let EditCategory=document.getElementById('EditCategory')
         let titleCategoryEdit=document.getElementById('titleCategoryEdit')
         let show_in_home_categoryEdit=document.getElementById('show_in_home_categoryEdit')
         let editCategory_id=document.getElementById('editCategory_id')
         function  EditCategoryForm(cat_id){
+        let introCategoriesEdit = document.querySelectorAll('.introCategories')
             introCategoriesEdit.forEach((category)=>{
             if(category.getAttribute('data-cat-id')==cat_id){
-
                 editCategory_id.value=cat_id
                 titleCategoryEdit.value=category.children[0].innerText
                 if(category.children[1].value==1){
@@ -630,11 +621,16 @@
                     parentdiv.classList="flex gap-2"
                     let div=document.createElement('div')
                     let span=document.createElement('span')
+                    let input=document.createElement('input')
                     div.classList="px-2 h-12 text-nowrap bg-white text-[15px] shadow flex justify-center items-center rounded-xl w-30 cursor-pointer relative introCategories"
                     div.setAttribute('data-cat-id',data['id'])
                     div.setAttribute('onclick','showProduct(this)')
                     span.innerText=data['title']
+                    input.type='hidden'
+                    input.value=data['show_in_home']
+                    input.id='show_in_home'
                     div.appendChild(span)
+                    div.appendChild(input)
                     let editDeleteDiv=document.createElement('div')
                     editDeleteDiv.classList="flex flex-col gap-1"
                         editDeleteDiv.innerHTML=`
@@ -672,12 +668,12 @@
         // اتمام توضیحات
         let allPros = document.getElementById('allProducts')
         // let customProducts = document.getElementById('customProducts')
-        let introCategories = document.querySelectorAll('.introCategories')
 
         // introCategories.forEach((introProduct) => {
         //     introProduct.addEventListener('click', () => {
 
         function showProduct(element) {
+        let introCategories = document.querySelectorAll('.introCategories')
             customProducts.innerHTML = `
             <div class="col-span-2 w-full h-[284px] flex justify-center items-center">
                 <div class="loading-wave">
@@ -690,8 +686,8 @@
             `
             allPros.classList.remove('grid')
             allPros.classList.add('hidden')
-            element.parentElement.children[0].classList.remove('bg-gray-200')
-            element.parentElement.children[0].classList.add('bg-white')
+            element.parentElement.parentElement.children[0].classList.remove('bg-gray-200')
+            element.parentElement.parentElement.children[0].classList.add('bg-white')
             if (element.classList.contains('bg-white')) {
                 introCategories.forEach((item) => {
                     item.classList.add('bg-white')
@@ -776,6 +772,7 @@
         }
             // })
         // })
+        let introCategories = document.querySelectorAll('.introCategories')
 
         function allProducts(el) {
             // console.log(allPros)

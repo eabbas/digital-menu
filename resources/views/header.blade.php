@@ -88,7 +88,8 @@
     </div>
     <header>
         {{-- mobile menu --}}
-        <div class="w-full px-3 pt-4 pb-4 bg-[#eb3254] lg:hidden">
+{{--        bg-[#eb3254]--}}
+        <div class="w-full px-3 py-2 bg-[#38598B] lg:hidden">
             <div class="w-full flex flex-row items-center gap-3">
                 <div class="w-1/3 flex items-center">
                     <div class="flex flex-col w-8 h-5 justify-between cursor-pointer" onclick="hamburgerMenu('open')"

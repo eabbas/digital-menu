@@ -168,16 +168,15 @@ class CareerController extends Controller
 
     public function showWithMenu(career $career)
     {
+        // dd($career->menu_items);
         $menus = $career->menus;
         foreach ($menus as $menu) {
-            foreach ($menu->menu_categories as $category) {
-                foreach ($category->menu_items as $item) {
+            foreach ($menu->menu_items as $item) {
                     if($item->discount != 0){
                         $campare = $item->price - $item->discount;
                         $x = $campare / $item->price;
                         $item['percent'] = intval($x * 100);
                     }
-                }
             }
         }
         return view('admin.careers.showWithMenu', ['career' => $career]);

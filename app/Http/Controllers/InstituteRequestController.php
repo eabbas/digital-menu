@@ -27,7 +27,7 @@ class InstituteRequestController extends Controller
                 'status'=> 0,
             ]);
         }
-        return to_route('request.requests' , [$request->institute_id]);
+        return to_route('institute.single' , [$request->institute_id]);
     }
 
     public function requests(institute $institute){

@@ -24,7 +24,6 @@ class MenuController extends Controller
 
     public function store(Request $request)
     {
-//        dd($request->all());
         $bannerPath = null;
         if (isset($request->banner)) {
             $bannerName = $request->banner->getClientOriginalName();
@@ -46,7 +45,7 @@ class MenuController extends Controller
 
     public function storeFront(Request $request)
     {
-//        return response()->json([$request->title, $request->subtitle, $request->banner]);
+        // return response()->json([$request->title, $request->subtitle, $request->banner]);
         $bannerPath = null;
         if ($request->banner) {
             $bannerName = $request->banner->getClientOriginalName();
@@ -63,17 +62,17 @@ class MenuController extends Controller
             'updated_at' => now()
         ]);
 
-//            menu category create
-        $menu_cat_id = menu_category::insertGetId([
-            'title' => 'بدون دسته بندی',
-            'description' => 'آیتم هایی که زیر مجموعه دسته ای نباشند در این دسته قرار میگیرند',
-            'image' => null,
-            'menu_id' => $menu->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // menu category create
+        // $menu_cat_id = menu_category::insertGetId([
+        //     'title' => 'بدون دسته بندی',
+        //     'description' => 'آیتم هایی که زیر مجموعه دسته ای نباشند در این دسته قرار میگیرند',
+        //     'image' => null,
+        //     'menu_id' => $menu->id,
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ]);
+        // menu item create
 
-//            menu item create
         $menu_item_id = menu_item::insertGetId([
             'title' => 'آیتم 1',
             'description' => null,
@@ -82,7 +81,7 @@ class MenuController extends Controller
             'customizable' => 0,
             'image' => null,
             'parent_id' => 0,
-            'menu_category_id' => $menu_cat_id,
+            'menu_id' => $menu->id,
             'duration' => 0,
             'created_at' => now(),
             'updated_at' => now()
@@ -146,10 +145,10 @@ class MenuController extends Controller
     {
         $allmenu = menu::where('career_id', $request->career_id)->get();
         if (count($allmenu) > 1) {
-            if (count($menu->menu_categories)) {
-                foreach ($menu->menu_categories as $category) {
-                    if (count($category->menu_items)) {
-                        foreach ($category->menu_items as $item) {
+            // if (count($menu->menu_categories)) {
+                // foreach ($menu->menu_categories as $category) {
+                    // if (count($category->menu_items)) {
+                        foreach ($menu->menu_items as $item) {
                             if (count($item->ingredients)) {
                                 foreach ($item->ingredients as $ingredients) {
                                     if ($ingredients->image) {
@@ -163,13 +162,13 @@ class MenuController extends Controller
                             }
                             $item->delete();
                         }
-                    }
-                    if ($category->image) {
-                        Storage::disk('public')->delete($category->image);
-                    }
-                    $category->delete();
-                }
-            }
+                    // }
+                    // if ($category->image) {
+                    //     Storage::disk('public')->delete($category->image);
+                    // }
+                    // $category->delete();
+                // }
+            // }
             if ($menu->banner) {
                 Storage::disk('public')->delete($menu->banner);
             }
@@ -219,19 +218,20 @@ class MenuController extends Controller
     public function showMenu(menu $menu)
     {
 //        return view('admin.menu.menu', ['menu' => $menu]);
-        $categories = $menu->load(['menu_categories' => function ($query) {
-            $query->with('menu_items')->get();
-        }]);
-        foreach ($menu->menu_categories as $category) {
-            foreach ($category->menu_items as $item) {
+        // $categories = $menu->load(['menu_categories' => function ($query) {
+        //     $query->with('menu_items')->get();
+        // }]);
+        $menus = $menu->load(['menu_items']);
+        // foreach ($menu->menu_categories as $category) {
+            foreach ($menu->menu_items as $item) {
                 if ($item->discount != 0) {
                     $campare = $item->price - $item->discount;
                     $x = $campare / $item->price;
                     $item['percent'] = intval($x * 100);
                 }
             }
-        }
-        return response()->json($categories);
+        // }
+        return response()->json($menus);
     }
 
     public function showMenuClient(menu $menu)

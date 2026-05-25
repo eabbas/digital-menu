@@ -114,21 +114,21 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l5 5a2 2 0 01.586 1.414V19a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2z" />
                     </svg>
-                    <span class="text-sm font-medium text-purple-800">رشته جدید</span>
+                    <span class="text-sm font-medium text-purple-800">ایجاد رشته</span>
                 </a>
                 <a href="{{ route('lesson.create', [$institute]) }}" 
                    class="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 p-3 rounded-xl transition-all duration-200 border border-blue-200">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                     </svg>
-                    <span class="text-sm font-medium text-blue-800">درس جدید</span>
+                    <span class="text-sm font-medium text-blue-800">ایجاد درس</span>
                 </a>
                 <a href="{{ route('class.create', [$institute]) }}" 
                    class="flex items-center justify-center gap-2 bg-gradient-to-r from-green-50 to-green-100 hover:from-green-100 hover:to-green-200 p-3 rounded-xl transition-all duration-200 border border-green-200">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                     </svg>
-                    <span class="text-sm font-medium text-green-800">کلاس جدید</span>
+                    <span class="text-sm font-medium text-green-800">ایجاد کلاس</span>
                 </a>
                 <a href="{{ route('request.requests', [$institute]) }}" 
                    class="flex items-center justify-center gap-2 bg-gradient-to-r from-amber-50 to-amber-100 hover:from-amber-100 hover:to-amber-200 p-3 rounded-xl transition-all duration-200 border border-amber-200">
@@ -146,12 +146,12 @@
                 <a href="{{ route('institute.field_list', [$institute]) }}" 
                    class="bg-white rounded-xl p-4 text-center shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group">
                     <p class="text-2xl font-bold text-purple-600 group-hover:text-purple-700">{{ $institute->fields->count() }}</p>
-                    <p class="text-xs text-gray-500 mt-1">رشته‌ها</p>
+                    <p class="text-xs text-gray-500 mt-1">لیست رشته ها</p>
                 </a>
                 <a href="{{ route('institute.lesson_list', [$institute]) }}" 
                    class="bg-white rounded-xl p-4 text-center shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group">
                     <p class="text-2xl font-bold text-blue-600 group-hover:text-blue-700">{{ $institute->lessons->count() }}</p>
-                    <p class="text-xs text-gray-500 mt-1">دروس</p>
+                    <p class="text-xs text-gray-500 mt-1">لیست دروس</p>
                 </a>
                 <a href="{{ route('institute.class_list', [$institute]) }}" 
                    class="bg-white rounded-xl p-4 text-center shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group">
@@ -162,17 +162,17 @@
                         @endforeach
                         {{ $totalLessonClasses }}
                    </p>
-                    <p class="text-xs text-gray-500 mt-1">کلاس‌ها</p>
+                    <p class="text-xs text-gray-500 mt-1">لیست کلاس ها</p>
                 </a>
                 <a href="{{ route('institute.master_list', [$institute]) }}" 
                    class="bg-white rounded-xl p-4 text-center shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group">
                     <p class="text-2xl font-bold text-amber-600 group-hover:text-amber-700">{{ $institute->masters->count() }}</p>
-                    <p class="text-xs text-gray-500 mt-1">اساتید</p>
+                    <p class="text-xs text-gray-500 mt-1">لیست اساتید</p>
                 </a>
                 <a href="{{ route('institute.student_list', [$institute]) }}" 
                    class="bg-white rounded-xl p-4 text-center shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group">
                     <p class="text-2xl font-bold text-rose-600 group-hover:text-rose-700">{{ $institute->students->count() }}</p>
-                    <p class="text-xs text-gray-500 mt-1">دانش‌آموزان</p>
+                    <p class="text-xs text-gray-500 mt-1">لیست دانش آموزان</p>
                 </a>
                 <a href="{{ route('institute.branch_list', [$institute]) }}" 
                    class="bg-white rounded-xl p-4 text-center shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group">
@@ -214,7 +214,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
-                        <span><span class="font-bold">آدرس:</span> {{ $institute->address }}</span>
+                        <span><span class="font-bold">آدرس:</span>
+                        {{ $institute->province_city ? $institute->province_city->province->title : '' }},
+                                {{ $institute->province_city ? $institute->province_city->title : '' }},
+                         {{ $institute->address }}</span>
                     </div>
                 </div>
                 <div class="mt-4 pt-2 text-gray-700 text-sm border-t border-gray-200 leading-relaxed">

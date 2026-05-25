@@ -4701,79 +4701,6 @@
         // store pageDescription
         let pd = document.getElementById('pd')
         let page_description_title_create = document.getElementById('page_description_title_create')
-
-        {{--function storePageDescription(e, el) {--}}
-        {{--    e.preventDefault()--}}
-        {{--    let size_input = document.getElementById('size_input')--}}
-        {{--    let direction_input = document.getElementById('direction_input')--}}
-        {{--    let createPdRequire = document.querySelectorAll('.createPdRequire ')--}}
-        {{--    let parentPDs = document.querySelectorAll('.parentPDs')--}}
-        {{--    let array = []--}}
-        {{--    let errorText = ""--}}
-        {{--    let flag = true--}}
-
-        {{--    // console.log(createPdRequire)--}}
-        {{--    createPdRequire.forEach((item) => {--}}
-        {{--        if (item.value == "") {--}}
-        {{--            item.classList.add('border-1')--}}
-        {{--            item.classList.add('border-red-500')--}}
-        {{--            item.parentElement.children[0].classList.remove('opacity-0')--}}
-        {{--            flag = false--}}
-        {{--        }--}}
-        {{--    })--}}
-
-        {{--    parentPDs.forEach((pd) => {--}}
-        {{--        let datas = [pd.children[1].value, pd.children[3].value]--}}
-        {{--        array.push(datas)--}}
-        {{--    })--}}
-        {{--    if (flag) {--}}
-        {{--        createDescription.children[0].classList.remove('hidden')--}}
-        {{--        createDescription.children[0].classList.add('flex')--}}
-        {{--        createDescription.children[0].innerHTML = `--}}
-        {{--        <div class="loading-wave">--}}
-        {{--            <div class="loading-bar"></div>--}}
-        {{--            <div class="loading-bar"></div>--}}
-        {{--            <div class="loading-bar"></div>--}}
-        {{--            <div class="loading-bar"></div>--}}
-        {{--            </div>--}}
-        {{--            `--}}
-        {{--        $.ajaxSetup({--}}
-        {{--            headers: {--}}
-        {{--                'X-CSRF-TOKEN': "{{ csrf_token() }}"--}}
-        {{--            }--}}
-        {{--        })--}}
-
-        {{--        $.ajax({--}}
-        {{--            url: "{{ route('PD.store') }}",--}}
-        {{--            type: "POST",--}}
-        {{--            dataType: "json",--}}
-        {{--            data: {--}}
-        {{--                'description': page_description_title_create.value,--}}
-        {{--                'datas': array[0],--}}
-        {{--                'page_id': "{{ $page->id }}",--}}
-        {{--            },--}}
-        {{--            success: function (response) {--}}
-        {{--                console.log(response)--}}
-        {{--                createDescription.children[0].classList.remove('flex')--}}
-        {{--                createDescription.children[0].classList.add('hidden')--}}
-        {{--                page_description_title_create.value = ""--}}
-        {{--                size_input.value = ""--}}
-        {{--                direction_input.value = ""--}}
-        {{--                parentPDs.innerHTML = ""--}}
-
-        {{--                let mainDiv = document.createElement('div')--}}
-        {{--                mainDiv.className = "lg:py-2"--}}
-        {{--                let element = `--}}
-        {{--                    <div class="text-gray-800 ${response.descriptionStyle[0]} ${response.descriptionStyle[1]} cursor-pointer viewDescriptionPage" onclick='editDescription("${response.description.id}" ,"${response.descriptionStyle[0]}" ,"${response.descriptionStyle[1]}" , "${response.block.id}" , this)' data-view-pd-id="${response.description.id}">${response.description.description}</div>--}}
-        {{--                `--}}
-        {{--                mainDiv.innerHTML = element--}}
-        {{--                pd.appendChild(mainDiv)--}}
-        {{--                closeForm()--}}
-        {{--            }--}}
-        {{--        })--}}
-        {{--    }--}}
-
-        {{--}--}}
         function storePageDescription(e, el) {
             e.preventDefault()
             let size_input = document.getElementById('size_input')
@@ -4826,6 +4753,8 @@
                     },
                     success: function (response) {
                         console.log(response)
+                        console.log(response.descriptionStyle[0] + ' store style')
+                        console.log(response.descriptionStyle[1] + ' store style')
                         createDescription.children[0].classList.remove('flex')
                         createDescription.children[0].classList.add('hidden')
                         page_description_title_create.value = ""
@@ -4846,6 +4775,79 @@
             }
 
         }
+        {{--function storePageDescription(e, el) {--}}
+        {{--    e.preventDefault()--}}
+        {{--    let size_input = document.getElementById('size_input')--}}
+        {{--    let direction_input = document.getElementById('direction_input')--}}
+        {{--    let createPdRequire = document.querySelectorAll('.createPdRequire ')--}}
+        {{--    let parentPDs = document.querySelectorAll('.parentPDs')--}}
+        {{--    let array = []--}}
+        {{--    let errorText = ""--}}
+        {{--    let flag = true--}}
+
+        {{--    // console.log(createPdRequire)--}}
+        {{--    createPdRequire.forEach((item) => {--}}
+        {{--        if (item.value == "") {--}}
+        {{--            item.classList.add('border-1')--}}
+        {{--            item.classList.add('border-red-500')--}}
+        {{--            item.parentElement.children[0].classList.remove('opacity-0')--}}
+        {{--            flag = false--}}
+        {{--        }--}}
+        {{--    })--}}
+
+        {{--    parentPDs.forEach((pd) => {--}}
+        {{--        let datas = [pd.children[1].getAttribute('data-size'), pd.children[3].getAttribute('data-direction')]--}}
+        {{--        array.push(datas)--}}
+        {{--    })--}}
+        {{--    if (flag) {--}}
+        {{--        createDescription.children[0].classList.remove('hidden')--}}
+        {{--        createDescription.children[0].classList.add('flex')--}}
+        {{--        createDescription.children[0].innerHTML = `--}}
+        {{--        <div class="loading-wave">--}}
+        {{--            <div class="loading-bar"></div>--}}
+        {{--            <div class="loading-bar"></div>--}}
+        {{--            <div class="loading-bar"></div>--}}
+        {{--            <div class="loading-bar"></div>--}}
+        {{--            </div>--}}
+        {{--            `--}}
+        {{--        $.ajaxSetup({--}}
+        {{--            headers: {--}}
+        {{--                'X-CSRF-TOKEN': "{{ csrf_token() }}"--}}
+        {{--            }--}}
+        {{--        })--}}
+
+        {{--        $.ajax({--}}
+        {{--            url: "{{ route('PD.store') }}",--}}
+        {{--            type: "POST",--}}
+        {{--            dataType: "json",--}}
+        {{--            data: {--}}
+        {{--                'description': page_description_title_create.value,--}}
+        {{--                'datas': array[0],--}}
+        {{--                'page_id': "{{ $page->id }}",--}}
+        {{--            },--}}
+        {{--            success: function (response) {--}}
+        {{--                console.log(response)--}}
+        {{--                createDescription.children[0].classList.remove('flex')--}}
+        {{--                createDescription.children[0].classList.add('hidden')--}}
+        {{--                page_description_title_create.value = ""--}}
+        {{--                size_input.value = ""--}}
+        {{--                direction_input.value = ""--}}
+        {{--                parentPDs.innerHTML = ""--}}
+
+        {{--                let mainDiv = document.createElement('div')--}}
+        {{--                mainDiv.className = "lg:py-2"--}}
+        {{--                let element = `--}}
+        {{--                    <div class="text-gray-800 ${response.descriptionStyle[0]} ${response.descriptionStyle[1]} cursor-pointer viewDescriptionPage" onclick='editDescription("${response.description.id}" ,"${response.descriptionStyle[0]}" ,"${response.descriptionStyle[1]}" , "${response.block.id}" , this)' data-view-pd-id="${response.description.id}">${response.description.description}</div>--}}
+        {{--                `--}}
+        {{--                mainDiv.innerHTML = element--}}
+        {{--                pd.appendChild(mainDiv)--}}
+        {{--                closeForm()--}}
+        {{--            }--}}
+        {{--        })--}}
+        {{--    }--}}
+
+        {{--}--}}
+
 
 
         // edit description
@@ -4855,50 +4857,6 @@
         let page_description_title_edit = document.getElementById('page_description_title_edit')
         let PDId = document.getElementById('PDId')
         let pdBlockId = document.getElementById('pdBlockId')
-
-        {{--function editDescription(pdId, textStyle, directionStyle, pdBlockIdValue, el) {--}}
-        {{--    console.log('mohammad')--}}
-        {{--    editDescriptionForm.classList.remove('invisible')--}}
-        {{--    editDescriptionForm.classList.remove('opacity-0')--}}
-        {{--    editDescriptionForm.children[0].classList.remove('hidden')--}}
-        {{--    editDescriptionForm.children[0].classList.add('flex')--}}
-        {{--    // pdEditForm.classList.remove('top-full')--}}
-        {{--    // pdEditForm.classList.remove('top-0')--}}
-        {{--    pdBlockId.value = pdBlockIdValue--}}
-        {{--    globalElement = el--}}
-        {{--    block.classList.remove('invisible')--}}
-        {{--    block.classList.remove('opacity-0')--}}
-        {{--    editDescriptionForm.children[0].innerHTML = `--}}
-        {{--        <div class='size-10 mx-auto border-4 border-white border-t-[#eb3153] rounded-full animate-spin'></div>--}}
-        {{--    `--}}
-        {{--    $.ajaxSetup({--}}
-        {{--        headers: {--}}
-        {{--            'X-CSRF-TOKEN': "{{ csrf_token() }}"--}}
-        {{--        }--}}
-        {{--    })--}}
-        {{--    $.ajax({--}}
-        {{--        url: "{{ route('PD.edit') }}",--}}
-        {{--        type: "POST",--}}
-        {{--        dataType: "json",--}}
-        {{--        data: {--}}
-        {{--            'id': pdId--}}
-        {{--        },--}}
-        {{--        success: function (data) {--}}
-        {{--            console.log(data)--}}
-        {{--            page_description_title_edit.value = data.description--}}
-        {{--            edit_size_input.value = textStyle--}}
-        {{--            edit_direction_input.value = directionStyle--}}
-
-        {{--            PDId.value = data.id--}}
-        {{--            // deletePageDescription(pdId)--}}
-
-
-        {{--        },--}}
-        {{--        error: function () {--}}
-        {{--            alert('خطا در بارگذاری اطلاعات')--}}
-        {{--        }--}}
-        {{--    })--}}
-        {{--}--}}
         function editDescription(pdId, textStyle, directionStyle, pdBlockIdValue, el) {
             console.log(textStyle)
             console.log(directionStyle)
@@ -4929,55 +4887,192 @@
                 },
                 success: function (data) {
                     console.log(data)
-                    page_description_title_edit.value = data.description
-                    if(textStyle == "text-16"){
-                        edit_size_input.setAttribute('data-size-edit' , 'text-16')
+                    page_description_title_edit.value = data.pd.description
+                    if(data.descriptionStyle[0] == "text-16"){
+                        edit_size_input.setAttribute('data-size-edit' , data.descriptionStyle[0])
                         edit_size_input.value = "متن کوچک"
                     }
-                    if(textStyle == "text-20"){
-                        edit_size_input.setAttribute('data-size-edit' , 'text-20')
+                    if(data.descriptionStyle[0] == "text-20"){
+                        edit_size_input.setAttribute('data-size-edit' , data.descriptionStyle[0])
                         edit_size_input.value = "متن متوسط"
                     }
-                    if(textStyle == "text-24"){
-                        edit_size_input.setAttribute('data-size-edit' , 'text-24')
+                    if(data.descriptionStyle[0] == "text-24"){
+                        edit_size_input.setAttribute('data-size-edit' , data.descriptionStyle[0])
                         edit_size_input.value = "متن بزرگ"
                     }
-                    if(textStyle == "font-xs"){
-                        edit_size_input.setAttribute('data-size-edit' , 'font-xs')
+                    if(data.descriptionStyle[0] == "font-xs"){
+                        edit_size_input.setAttribute('data-size-edit' , data.descriptionStyle[0])
                         edit_size_input.value = "عنوان کوچک"
                     }
-                    if(textStyle == "font-semibold"){
-                        edit_size_input.setAttribute('data-size-edit' , 'font-semibold')
+                    if(data.descriptionStyle[0] == "font-semibold"){
+                        edit_size_input.setAttribute('data-size-edit' , data.descriptionStyle[0])
                         edit_size_input.value = "عنوان متوسط"
                     }
-                    if(textStyle == "font-bold"){
-                        edit_size_input.setAttribute('data-size-edit' , 'font-bold')
+                    if(data.descriptionStyle[0] == "font-bold"){
+                        console.log('font-bold console')
+                        edit_size_input.setAttribute('data-size-edit' , data.descriptionStyle[0])
                         edit_size_input.value = "عنوان بزرگ"
                     }
-                    if(directionStyle == "text-right"){
-                        edit_direction_input.setAttribute('data-direction-edit' , 'text-right')
+                    if(data.descriptionStyle[1] == "text-right"){
+                        console.log('text-right console')
+                        edit_direction_input.setAttribute('data-direction-edit' , data.descriptionStyle[1])
                         edit_direction_input.value = "راست چین"
                     }
-                    if(directionStyle == "text-center"){
-                        edit_direction_input.setAttribute('data-direction-edit' , 'text-center')
+                    if(data.descriptionStyle[1] == "text-center"){
+                        edit_direction_input.setAttribute('data-direction-edit' , data.descriptionStyle[1])
                         edit_direction_input.value = "وسط چین"
                     }
-                    if(directionStyle == "text-left"){
-                        edit_direction_input.setAttribute('data-direction-edit' , 'text-left')
+                    if(data.descriptionStyle[1] == "text-left"){
+                        edit_direction_input.setAttribute('data-direction-edit' , data.descriptionStyle[1])
                         edit_direction_input.value = "چپ چین"
                     }
-
-                    PDId.value = data.id
-                    // deletePageDescription(pdId)
-
-
+                    PDId.value = data.pd.id
                 },
                 error: function () {
                     alert('خطا در بارگذاری اطلاعات')
                 }
             })
         }
+
         // update pageDescription
+        function updatePageDescription(e) {
+            e.preventDefault()
+            editDescriptionForm.children[0].classList.remove('hidden')
+            editDescriptionForm.children[0].classList.add('flex')
+            editDescriptionForm.children[0].innerHTML = `
+                <div class='size-10 mx-auto border-4 border-white border-t-[#eb3153] rounded-full animate-spin'></div>
+            `
+            let parentPDs = document.querySelectorAll('.parentPDsEdit')
+            let array = []
+            parentPDs.forEach((pd) => {
+                let datas = [pd.children[1].children[0].children[1].getAttribute('data-size-edit') , pd.children[3].children[0].children[1].getAttribute('data-direction-edit')]
+                array.push(datas)
+            })
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                }
+            })
+            $.ajax({
+                url: "{{ route('PD.update') }}",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    'id': PDId.value,
+                    'description': page_description_title_edit.value,
+                    'datas': array[0],
+                    'page_id': "{{ $page->id }}"
+                },
+                success: function (data) {
+                    console.log(data)
+                    console.log(data.descriptionStyle[0])
+                    console.log(data.descriptionStyle[1])
+                    let children = pd.children
+                    page_description_title_edit.value = data.pd.description
+                    editDescriptionForm.children[0].classList.remove('flex')
+                    editDescriptionForm.children[0].classList.add('hidden')
+                    for(let child of children){
+                        // let id =  child.children[0].getAttribute('data-view-pd-id')
+                        // if(id == data.pd.block_id){
+                            child.innerHTML = ""
+                            let mainDiv = document.createElement('div')
+                            mainDiv.classList = "lg:py-2"
+                            let element = `
+                                    <div class="text-gray-800 ${data.descriptionStyle[0]} ${data.descriptionStyle[1]} cursor-pointer viewDescription" onclick='editDescription(${data.pd.id} ,"${data.descriptionStyle[0]}" ,"${data.descriptionStyle[1]}", "${data.pd.block_id}", this)' data-view-pd-id="${data.pd.id}">${data.pd.description}</div>
+                                `
+                            mainDiv.innerHTML = element
+                            child.appendChild(mainDiv)
+                        // }
+                    }
+                    closeForm()
+                },
+                error: function () {
+                    alert('خطا در ارسال داده')
+                }
+            })
+
+        }
+        {{--function editDescription(pdId, textStyle, directionStyle, pdBlockIdValue, el) {--}}
+        {{--    console.log(textStyle)--}}
+        {{--    console.log(directionStyle)--}}
+        {{--    editDescriptionForm.classList.remove('invisible')--}}
+        {{--    editDescriptionForm.classList.remove('opacity-0')--}}
+        {{--    editDescriptionForm.children[0].classList.remove('hidden')--}}
+        {{--    editDescriptionForm.children[0].classList.add('flex')--}}
+        {{--    // pdEditForm.classList.remove('top-full')--}}
+        {{--    // pdEditForm.classList.remove('top-0')--}}
+        {{--    pdBlockId.value = pdBlockIdValue--}}
+        {{--    globalElement = el--}}
+        {{--    block.classList.remove('invisible')--}}
+        {{--    block.classList.remove('opacity-0')--}}
+        {{--    editDescriptionForm.children[0].innerHTML = `--}}
+        {{--        <div class='size-10 mx-auto border-4 border-white border-t-[#eb3153] rounded-full animate-spin'></div>--}}
+        {{--    `--}}
+        {{--    $.ajaxSetup({--}}
+        {{--        headers: {--}}
+        {{--            'X-CSRF-TOKEN': "{{ csrf_token() }}"--}}
+        {{--        }--}}
+        {{--    })--}}
+        {{--    $.ajax({--}}
+        {{--        url: "{{ route('PD.edit') }}",--}}
+        {{--        type: "POST",--}}
+        {{--        dataType: "json",--}}
+        {{--        data: {--}}
+        {{--            'id': pdId--}}
+        {{--        },--}}
+        {{--        success: function (data) {--}}
+        {{--            console.log(data)--}}
+        {{--            page_description_title_edit.value = data.description--}}
+        {{--            if(textStyle == "text-16"){--}}
+        {{--                edit_size_input.setAttribute('data-size-edit' , 'text-16')--}}
+        {{--                edit_size_input.value = "متن کوچک"--}}
+        {{--            }--}}
+        {{--            if(textStyle == "text-20"){--}}
+        {{--                edit_size_input.setAttribute('data-size-edit' , 'text-20')--}}
+        {{--                edit_size_input.value = "متن متوسط"--}}
+        {{--            }--}}
+        {{--            if(textStyle == "text-24"){--}}
+        {{--                edit_size_input.setAttribute('data-size-edit' , 'text-24')--}}
+        {{--                edit_size_input.value = "متن بزرگ"--}}
+        {{--            }--}}
+        {{--            if(textStyle == "font-xs"){--}}
+        {{--                edit_size_input.setAttribute('data-size-edit' , 'font-xs')--}}
+        {{--                edit_size_input.value = "عنوان کوچک"--}}
+        {{--            }--}}
+        {{--            if(textStyle == "font-semibold"){--}}
+        {{--                edit_size_input.setAttribute('data-size-edit' , 'font-semibold')--}}
+        {{--                edit_size_input.value = "عنوان متوسط"--}}
+        {{--            }--}}
+        {{--            if(textStyle == "font-bold"){--}}
+        {{--                edit_size_input.setAttribute('data-size-edit' , 'font-bold')--}}
+        {{--                edit_size_input.value = "عنوان بزرگ"--}}
+        {{--            }--}}
+        {{--            if(directionStyle == "text-right"){--}}
+        {{--                edit_direction_input.setAttribute('data-direction-edit' , 'text-right')--}}
+        {{--                edit_direction_input.value = "راست چین"--}}
+        {{--            }--}}
+        {{--            if(directionStyle == "text-center"){--}}
+        {{--                edit_direction_input.setAttribute('data-direction-edit' , 'text-center')--}}
+        {{--                edit_direction_input.value = "وسط چین"--}}
+        {{--            }--}}
+        {{--            if(directionStyle == "text-left"){--}}
+        {{--                edit_direction_input.setAttribute('data-direction-edit' , 'text-left')--}}
+        {{--                edit_direction_input.value = "چپ چین"--}}
+        {{--            }--}}
+
+        {{--            PDId.value = data.id--}}
+        {{--            // deletePageDescription(pdId)--}}
+
+
+        {{--        },--}}
+        {{--        error: function () {--}}
+        {{--            alert('خطا در بارگذاری اطلاعات')--}}
+        {{--        }--}}
+        {{--    })--}}
+        {{--}--}}
+
+
+        {{--// update pageDescription--}}
         {{--function updatePageDescription(e) {--}}
         {{--    e.preventDefault()--}}
 
@@ -4989,7 +5084,8 @@
         {{--    let parentPDs = document.querySelectorAll('.parentPDsEdit')--}}
         {{--    let array = []--}}
         {{--    parentPDs.forEach((pd) => {--}}
-        {{--        let datas = [pd.children[1].children[0].children[1].value, pd.children[3].children[0].children[1].value]--}}
+        {{--        console.log(pd.children[1].children[0].children[1].getAttribute('data-size-edit'))--}}
+        {{--        let datas = [pd.children[1].children[0].children[1].value, pd.children[3].children[0].children[1].getAttribute('data-direction-edit')]--}}
         {{--        array.push(datas)--}}
         {{--    })--}}
 
@@ -5009,27 +5105,27 @@
         {{--            'page_id': "{{ $page->id }}"--}}
         {{--        },--}}
         {{--        success: function (data) {--}}
-        {{--            console.log(data.pd.description)--}}
-        {{--            // data.descriptionStyle.forEach((item)=>{--}}
-        {{--            // })--}}
+        {{--            console.log(data)--}}
+        {{--            let children = pd.children--}}
+
         {{--            page_description_title_edit.value = data.pd.description--}}
         {{--            edit_size_input.value = data.descriptionStyle[0]--}}
         {{--            edit_direction_input = data.descriptionStyle[1]--}}
         {{--            editDescriptionForm.children[0].classList.remove('flex')--}}
         {{--            editDescriptionForm.children[0].classList.add('hidden')--}}
-        {{--            // parentPDs.innerHTML = ""--}}
-        {{--            // edit_size_input.value = ""--}}
-        {{--            // edit_direction_input.value = ""--}}
-        {{--            // page_description_title_edit = ""--}}
-        {{--            // globalElement.parentElement.parentElement.remove()--}}
-        {{--            let mainDiv = document.createElement('div')--}}
-        {{--            mainDiv.classList = "lg:py-2"--}}
-        {{--            let element = `--}}
-        {{--                    <div class="text-gray-800 ${data.descriptionStyle[0]} ${data.descriptionStyle[1]} cursor-pointer viewDescription" onclick='editDescription(${data.pd.id} ,"${data.descriptionStyle[0]}" ,"${data.descriptionStyle[1]}", "${data.id}", this)' data-view-pd-id="${data.pd.id}">${data.pd.description}</div>--}}
-        {{--                `--}}
-        {{--            // mainDiv.innerHTML = element--}}
-        {{--            pd.innerHTML = element--}}
-
+        {{--            for(let child of children){--}}
+        {{--                let id =  child.children[0].getAttribute('data-view-pd-id')--}}
+        {{--                if(id == data.pd.block_id){--}}
+        {{--                    child.innerHTML = ""--}}
+        {{--                    let mainDiv = document.createElement('div')--}}
+        {{--                    mainDiv.classList = "lg:py-2"--}}
+        {{--                    let element = `--}}
+        {{--                            <div class="text-gray-800 ${data.descriptionStyle[0]} ${data.descriptionStyle[1]} cursor-pointer viewDescription" onclick='editDescription(${data.pd.id} ,"${data.descriptionStyle[0]}" ,"${data.descriptionStyle[1]}", "${data.id}", this)' data-view-pd-id="${data.pd.id}">${data.pd.description}</div>--}}
+        {{--                        `--}}
+        {{--                    mainDiv.innerHTML = element--}}
+        {{--                    child.appendChild(mainDiv)--}}
+        {{--                }--}}
+        {{--            }--}}
         {{--            closeForm()--}}
 
         {{--        },--}}
@@ -5039,69 +5135,6 @@
         {{--    })--}}
 
         {{--}--}}
-        // update pageDescription
-        function updatePageDescription(e) {
-            e.preventDefault()
-
-            editDescriptionForm.children[0].classList.remove('hidden')
-            editDescriptionForm.children[0].classList.add('flex')
-            editDescriptionForm.children[0].innerHTML = `
-                <div class='size-10 mx-auto border-4 border-white border-t-[#eb3153] rounded-full animate-spin'></div>
-            `
-            let parentPDs = document.querySelectorAll('.parentPDsEdit')
-            let array = []
-            parentPDs.forEach((pd) => {
-                console.log(pd.children[1].children[0].children[1].getAttribute('data-size-edit'))
-                let datas = [pd.children[1].children[0].children[1].value, pd.children[3].children[0].children[1].getAttribute('data-direction-edit')]
-                array.push(datas)
-            })
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-            $.ajax({
-                url: "{{ route('PD.update') }}",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    'id': PDId.value,
-                    'description': page_description_title_edit.value,
-                    'datas': array[0],
-                    'page_id': "{{ $page->id }}"
-                },
-                success: function (data) {
-                    console.log(data)
-                    let children = pd.children
-
-                    page_description_title_edit.value = data.pd.description
-                    edit_size_input.value = data.descriptionStyle[0]
-                    edit_direction_input = data.descriptionStyle[1]
-                    editDescriptionForm.children[0].classList.remove('flex')
-                    editDescriptionForm.children[0].classList.add('hidden')
-                    for(let child of children){
-                        let id =  child.children[0].getAttribute('data-view-pd-id')
-                        if(id == data.pd.block_id){
-                            child.innerHTML = ""
-                            let mainDiv = document.createElement('div')
-                            mainDiv.classList = "lg:py-2"
-                            let element = `
-                                    <div class="text-gray-800 ${data.descriptionStyle[0]} ${data.descriptionStyle[1]} cursor-pointer viewDescription" onclick='editDescription(${data.pd.id} ,"${data.descriptionStyle[0]}" ,"${data.descriptionStyle[1]}", "${data.id}", this)' data-view-pd-id="${data.pd.id}">${data.pd.description}</div>
-                                `
-                            mainDiv.innerHTML = element
-                            child.appendChild(mainDiv)
-                        }
-                    }
-                    closeForm()
-
-                },
-                error: function () {
-                    alert('خطا در ارسال داده')
-                }
-            })
-
-        }
 
 
 
@@ -5264,11 +5297,11 @@
                 let subTitleInput = document.getElementById('subTitleInput')
 
                 let formData = new FormData();
-
+                
                 let pageId = document.getElementById('page_id')
-
+                
                 formData.append('page_id', pageId.value)
-
+                
 
                 if (coverImage) {
                     formData.append('cover_image', coverImage.files[0])
@@ -5311,18 +5344,18 @@
                         if (response.subTitle) {
                             pageSubTitle.innerText = response.subTitle
                         }
-
-
+        
+                    
                         pup_up_edit('close')
-
+                        
                     },
                     error: function() {
                         alert(eror);
                     }
                 });
             }
-
-
+            
+            
 
         </script>
     @endisset
