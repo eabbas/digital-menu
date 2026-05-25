@@ -4,6 +4,13 @@
 /*    font-family: "IRANSansX";*/
 /*}*/
 
+:root{
+    /*--primary-text-color: #0D1B2A;*/
+    --primary-text-color: #111827;
+    --secondary-text-color: #6B7280;
+    --primary-color: #fc8e21;
+    --hover-primary-color: #e57200;
+}
 
 * {
   font-family: 'IRANSansXFaNum';

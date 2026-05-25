@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\page_blocks;
 use App\Models\page_description;
+
 class PageDescriptionController extends Controller
 {
     public function store(Request $request)
@@ -28,7 +29,7 @@ class PageDescriptionController extends Controller
         $descriptionStyle = json_decode($description['style']);
         return response()->json([
             'description' => $description,
-            'descriptionStyle'=> $descriptionStyle,
+            'descriptionStyle' => $descriptionStyle,
             'block' => $blockTitle
         ]);
     }
@@ -38,8 +39,8 @@ class PageDescriptionController extends Controller
         $pd = page_description::find($id);
         $descriptionStyle = json_decode($pd['style']);
         return response()->json([
-            'pd'=>$pd,
-            'descriptionStyle'=> $descriptionStyle
+            'pd' => $pd,
+            'descriptionStyle' => $descriptionStyle
         ]);
     }
     public function update(Request $request)
@@ -51,8 +52,8 @@ class PageDescriptionController extends Controller
         $pd->save();
         $descriptionStyle = json_decode($pd['style']);
         return response()->json([
-            'descriptionStyle'=> $descriptionStyle,
-            'pd'=>$pd ,
+            'descriptionStyle' => $descriptionStyle,
+            'pd' => $pd,
         ]);
     }
     public function delete(Request $request)
@@ -63,4 +64,3 @@ class PageDescriptionController extends Controller
         return response()->json('ok');
     }
 }
-

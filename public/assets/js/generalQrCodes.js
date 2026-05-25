@@ -63,7 +63,8 @@ function updateQrCodeAjax(qrCodeId, values) {
         },
         success: function (data) {
             let qrCode = document.getElementById(`qrCode-${qrCodeId}`)
-            qrCode.children[1].src = `https://famenu.ir/storage/${data.image_path}`
+            // qrCode.children[1].src = `https://famenu.ir/storage/${data.image_path}`
+            qrCode.children[1].src = imageAddress + '/' + data.image_path
             if (data.title) {
                 qrCode.children[3].innerText = data.title
             } else {

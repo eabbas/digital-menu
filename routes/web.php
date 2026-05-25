@@ -59,28 +59,44 @@ use App\Http\Middleware\savePreviousUrl;
 
 use App\Models\social_qr_codes;
 
-Route::get('/test', function(){
-     $link = url('/')."/qrcode/5/" . 'Dviq52Dnxp';
-     dd($link);
+Route::group([
+    'prefix' => 'guys',
+    'as' => 'guy.'
+], function () {
+    Route::get('/najafi', function () {
+        return view('guys.najafi');
+    })->name('najafi');
 });
 
-Route::get("mahdi/test" , function(){
-   return view('english');
+Route::get('rinform', function () {
+    return view('newhome');
+});
+
+Route::get('/test', function () {
+    $link = url('/') . "/qrcode/5/" . 'Dviq52Dnxp';
+    dd($link);
+});
+
+Route::get("mahdi/test", function () {
+    return view('english');
+});
+
+Route::get("ringaa/mahdi", function () {
+    return view('ringaa');
 });
 
 Route::get('/robot', function () {
     return view('abbasScratch.index');
 });
 
-Route::get('/set-page-path', function(){
+Route::get('/set-page-path', function () {
     $qrCodes = social_qr_codes::all();
-    foreach($qrCodes as $code){
-        $slugArr = explode('/',$code->slug);
+    foreach ($qrCodes as $code) {
+        $slugArr = explode('/', $code->slug);
         $code->page_path = $code->slug;
-        $code->slug=$slugArr[count($slugArr)-1];
+        $code->slug = $slugArr[count($slugArr) - 1];
         $code->save();
     }
-    
 });
 
 ///suggestion
@@ -135,7 +151,7 @@ Route::group([
     Route::post('/update', 'update')->name('update');
     Route::post('/delete', 'delete')->name('delete');
     Route::get('/selectCats/{pages?}', 'selectCats')->name('selectCats');
-//    Route::get('/selectCats', 'selectCats')->name('selectCats');
+    //    Route::get('/selectCats', 'selectCats')->name('selectCats');
     Route::get('/user-intro-categories/{user?}', 'user_cats')->name('list');
     Route::get('/products/{intro_category}', 'products')->name('products')->withoutMiddleware([UserMiddleware::class]);
     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
@@ -158,7 +174,7 @@ Route::group([
     Route::post('/editSingle', 'editSingle')->name('editSingle');
     Route::get('/single/{intro_product}', 'single')->name('single');
     Route::get('/user-show/{intro_product}', 'showForUser')->name('showForUser')->withoutMiddleware([UserMiddleware::class]);
-//     Route::get('/user-intro-categories/{user}', 'user_cats')->name('list');
+    //     Route::get('/user-intro-categories/{user}', 'user_cats')->name('list');
     Route::get('/products/{intro_category}', 'products')->name('products');
     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
@@ -348,7 +364,7 @@ Route::group([
     'middleware' => [UserMiddleware::class]
 ], function () {
     // Route::get('/{menu_category}', 'index')->name('list');
-    Route::get('/create/{menu}', 'create')->name('create');
+    Route::get('/create/{menu_category}', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::post('/store-front', 'storeFront')->name('storeFront');
     Route::get('/edit/{menu_item}', 'edit')->name('edit');
@@ -396,7 +412,6 @@ Route::group([
     Route::post('/update', 'update')->name('update');
     Route::post('/delete', 'delete')->name('delete');
     Route::post('/add-question', 'addQuestion')->name('addQuestion');
-
 });
 ///pageBlocks
 Route::group([
@@ -695,7 +710,7 @@ Route::group([
 ], function () {
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-//    Route::get('/store-with-click', 'storeWithClick')->name('storeWithClick')->withoutMiddleware([UserMiddleware::class]);
+    //    Route::get('/store-with-click', 'storeWithClick')->name('storeWithClick')->withoutMiddleware([UserMiddleware::class]);
     Route::get('/social_list', 'social_list')->name('social_list');
     Route::get('/pages', 'index')->name('list');
     Route::get('/edit/{pages}', 'edit')->name('edit');
@@ -761,10 +776,12 @@ Route::group([
     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
 
-Route::group(['prefix' => 'ecomm_category',
+Route::group([
+    'prefix' => 'ecomm_category',
     'controller' => EcommCategoryController::class,
     'as' => 'ecomm_category.',
-    'middleware' => [UserMiddleware::class]], function () {
+    'middleware' => [UserMiddleware::class]
+], function () {
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::get('/', 'index')->name('index');
@@ -893,12 +910,12 @@ Route::group([
 Route::group([
     'prefix' => 'institute',
     'controller' => InstituteController::class,
-    'as' =>'institute.',
+    'as' => 'institute.',
     'middleware' => [UserMiddleware::class]
-], function(){
+], function () {
     Route::get('/create/{institute?}', 'create')->name('create');
-    Route::post('/store','store')->name('store');
-    Route::get('/index' , 'index')->name('institutes');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/index', 'index')->name('institutes');
     Route::get('/single/{institute}', 'single')->name('single');
     Route::get('/edit/{institute}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
@@ -925,23 +942,23 @@ Route::group([
 Route::group([
     'prefix' => 'request',
     'controller' => InstituteRequestController::class,
-    'as' =>'request.',
+    'as' => 'request.',
     'middleware' => [UserMiddleware::class]
-], function(){
+], function () {
     Route::get('/create/{institute}', 'create')->name('form');
-    Route::post('/store','store')->name('store');
-    Route::get('/requests/{institute}' , 'requests')->name('requests');
-    Route::get('/request_approve/{userId}/{instituteId}' , 'approveRequest')->name('request_approve');
-    Route::get('/userDelete/{user}/{institute}' , 'userDelete')->name('userDelete');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/requests/{institute}', 'requests')->name('requests');
+    Route::get('/request_approve/{userId}/{instituteId}', 'approveRequest')->name('request_approve');
+    Route::get('/userDelete/{user}/{institute}', 'userDelete')->name('userDelete');
 });
 ///student 
 
 Route::group([
     'prefix' => 'student',
     'controller' => InstituteController::class,
-    'as' =>'student.',
+    'as' => 'student.',
     'middleware' => [UserMiddleware::class]
-], function(){
+], function () {
     Route::get('/user_institute/{user?}', 'user_institute')->name('user_institutes');
     Route::get('/myClasses/{institute}/{user?}', 'myClasses')->name('myClasses');
 });
@@ -952,11 +969,11 @@ Route::group([
 Route::group([
     'prefix' => 'master',
     'controller' => InstituteController::class,
-    'as' =>'master.',
+    'as' => 'master.',
     'middleware' => [UserMiddleware::class]
-], function(){
+], function () {
     Route::get('/user_institute/{user?}', 'master_institute')->name('master_institutes');
-   Route::get('/master_classes/{master?}', 'master_classes')->name('master_classes');
+    Route::get('/master_classes/{master?}', 'master_classes')->name('master_classes');
 });
 
 
@@ -965,18 +982,18 @@ Route::group([
 Route::group([
     'prefix' => 'field',
     'controller' => FieldController::class,
-    'as' =>'field.',
+    'as' => 'field.',
     'middleware' => [UserMiddleware::class]
-], function(){
+], function () {
     Route::get('/create/{institute}', 'create')->name('create');
-    Route::post('/store','store')->name('store');
-    Route::get('/index' , 'index')->name('fields');
-    Route::get('/lesson_list/{field}' , 'lesson_list')->name('lesson_list');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/index', 'index')->name('fields');
+    Route::get('/lesson_list/{field}', 'lesson_list')->name('lesson_list');
     Route::get('/single/{field}', 'single')->name('single');
     Route::get('/edit/{field}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{field}', 'delete')->name('delete');
-     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
 
 ///lesson
@@ -984,18 +1001,18 @@ Route::group([
 Route::group([
     'prefix' => 'lesson',
     'controller' => LessonController::class,
-    'as' =>'lesson.',
+    'as' => 'lesson.',
     'middleware' => [UserMiddleware::class]
-], function(){
+], function () {
     Route::get('/create/{institute}/{field?}', 'create')->name('create');
-    Route::post('/store','store')->name('store');
-    Route::get('/index' , 'index')->name('lessons');
-    Route::get('/class_list/{lesson}' , 'class_list')->name('class_list');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/index', 'index')->name('lessons');
+    Route::get('/class_list/{lesson}', 'class_list')->name('class_list');
     Route::get('/single/{lesson}', 'single')->name('single');
     Route::get('/edit/{lesson}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{lesson}', 'delete')->name('delete');
-     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
 
 ///lesson_class
@@ -1003,12 +1020,12 @@ Route::group([
 Route::group([
     'prefix' => 'class',
     'controller' => LessonClassController::class,
-    'as' =>'class.',
+    'as' => 'class.',
     'middleware' => [UserMiddleware::class]
-], function(){
+], function () {
     Route::get('/create/{institute}', 'create')->name('create');
-    Route::post('/store','store')->name('store');
-    Route::get('/index' , 'index')->name('classes');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/index', 'index')->name('classes');
     Route::get('/single/{class}', 'single')->name('single');
     Route::get('/edit/{class}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
@@ -1023,8 +1040,7 @@ Route::group([
     Route::get('/student_delete/{student}', 'student_delete')->name('student_delete');
     Route::get('/user_classes/{user?}', 'user_classes')->name('user_classes');
     Route::get('/master_classes/{user?}', 'master_classes')->name('master_classes');
-     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
-
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
 
 ///classComment
@@ -1032,12 +1048,12 @@ Route::group([
 Route::group([
     'prefix' => 'comment',
     'controller' => ClassCommentController::class,
-    'as' =>'comment.',
+    'as' => 'comment.',
     'middleware' => [UserMiddleware::class]
-], function(){
+], function () {
     Route::get('/create', 'create')->name('create');
-    Route::post('/store','store')->name('store');
-    Route::get('/index' , 'index')->name('comments');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/index', 'index')->name('comments');
     Route::get('/edit/{comment}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{comment}', 'delete')->name('delete');
@@ -1050,15 +1066,14 @@ Route::group([
 Route::group([
     'prefix' => 'classAttachment',
     'controller' => ClassAttachmentController::class,
-    'as' =>'classAttachment.',
+    'as' => 'classAttachment.',
     'middleware' => [UserMiddleware::class]
-], function(){
+], function () {
     Route::get('/create', 'create')->name('create');
-    Route::post('/store','store')->name('store');
-    Route::get('/index' , 'index')->name('index');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/index', 'index')->name('index');
     Route::get('/single/{classAttachment}', 'single')->name('single');
     Route::get('/edit/{classAttachment}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{classAttachment}', 'delete')->name('delete');
 });
-

@@ -539,7 +539,7 @@
             <div class="p-5 rounded-lg bg-white relative -translate-y-20 lg:translate-y-0">
                 <button
                     class="flex justify-center items-center size-8 bg-white rounded-full absolute -top-3 -right-3 cursor-pointer z-99999"
-                    onchange="showProfile(this, 'close')">❌</button>
+                    onclick="showProfile(this, 'close')">❌</button>
                 <img src=""
                     class="max-w-[300px] max-h-[300px] lg:max-w-[400px] lg:max-h-[400px] object-cover rounded-sm"
                     id="profileImage" alt="">
@@ -558,11 +558,14 @@
 
         function showProfile(el, state = 'open') {
             if (state == 'open') {
+                console.log("11111")
                 block.classList.remove('invisible')
                 block.classList.remove('opacity-0')
                 profile.setAttribute('src', el.getAttribute('src'))
             }
             if (state == 'close') {
+                console.log("2222")
+
                 block.classList.add('invisible')
                 block.classList.add('opacity-0')
             }

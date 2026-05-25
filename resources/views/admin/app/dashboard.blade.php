@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 @extends('admin.app.panel')
 @section('content')
     {{--  topol and miss.khodagholipour  --}}
@@ -62,8 +55,8 @@
             <div onclick="toggleDropdown(this)" class="cursor-pointer">
                 <div class="flex justify-between items-center p-4 group">
                     <div class="flex items-center gap-2">
-                        <div class="p-2 bg-orange-50 rounded-lg group-hover:bg-orange-100 transition-all duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-orange-500" viewBox="0 0 576 512">
+                        <div class="p-2 bg-(--primary-color)/10 rounded-lg group-hover:bg-(--hover-primary-color)/20 transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-(--primary-color)/50" viewBox="0 0 576 512">
                                 <path d="M475.3 27.3c5.8-5.8 6.3-15.1 1.1-21.5S462-1.9 455.1 2.7l-106.5 71C320.8 92.3 304 123.6 304 157.1c0 19.3 5.5 37.9 15.7 53.9L73.4 457.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L365 256.3c16 10.2 34.7 15.7 53.9 15.7c33.5 0 64.8-16.8 83.4-44.6l71-106.5c4.6-6.8 3.2-16-3.2-21.2s-15.6-4.8-21.5 1.1L457.4 192c-5.2 5.2-13.6 5.2-18.8 0c-4.9-4.9-5.2-12.8-.6-18.1l86.1-99.4c5.5-6.3 5.2-15.9-.8-21.8s-15.4-6.3-21.8-.8L402.1 138c-5.3 4.6-13.2 4.3-18.1-.6c-5.2-5.2-5.2-13.6 0-18.8l91.3-91.3zM52.5 7.3C47.9 2.6 41.5 0 34.9 0c-11.2 0-21 7.5-23.5 18.4C6.7 38.6 0 71.5 0 96c0 83.3 48.2 130.5 128.9 209.4c6.5 6.4 13.3 13 20.3 19.9c1.9 1.8 3.8 3.5 5.9 5.1L265.4 220.1 52.5 7.3zM457.4 502.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L355.9 310.6l-45.3 45.3L457.4 502.6z"/>
                             </svg>
                         </div>
@@ -81,15 +74,11 @@
                 <div class="p-3 space-y-2 pr-10 max-h-48 overflow-y-auto">
                     @if(Auth::user()->careers && count(Auth::user()->careers) > 0)
                         @foreach(Auth::user()->careers as $career)
-                            <a href="{{ route('career.showWithMenu', $career->id) }}" 
-                               class="flex items-center gap-3 p-2 rounded-lg hover:bg-orange-50 transition-all duration-200 group">
-                               
+                            <a href="{{ route('career.showWithMenu', $career->id) }}"
+                               class="flex items-center gap-3 p-2 rounded-lg hover:bg-(--primary-color)/10 transition-all duration-200 group">
                                 <img src="{{ $career->logo ? asset('storage/' . $career->logo) : asset('assets/img/user.png') }}" alt="{{ $career->title }}"
-                                     class="size-8 rounded-full object-cover border border-orange-200 group-hover:border-orange-400 transition-all">
-                                <span class="text-sm text-gray-700 group-hover:text-orange-600 transition-colors flex-1">{{ $career->title }}</span>
-                                <svg class="w-3 h-3 text-gray-300 group-hover:text-orange-400 transition-all group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                                </svg>
+                                     class="size-8 rounded-full object-cover border border-(--primary-color)/20 group-hover:border-(--primary-color)/40 transition-all">
+                                <span class="text-sm text-gray-700 group-hover:text-(--primary-color) transition-colors flex-1">{{ $career->title }}</span>
                             </a>
                         @endforeach
                     @else
@@ -106,8 +95,8 @@
             <div onclick="toggleDropdown(this)" class="cursor-pointer">
                 <div class="flex justify-between items-center p-4 group">
                     <div class="flex items-center gap-2">
-                        <div class="p-2 bg-purple-50 rounded-lg group-hover:bg-purple-100 transition-all duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-purple-500" viewBox="0 0 512 512">
+                        <div class="p-2 bg-(--primary-color)/10 rounded-lg group-hover:bg-(--hover-primary-color)/20 transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-(--primary-color)/50" viewBox="0 0 512 512">
                                 <path d="M256 464c7.4 0 27-7.2 47.6-48.4c8.8-17.7 16.4-39.2 22-63.6H186.4c5.6 24.4 13.2 45.9 22 63.6C229 456.8 248.6 464 256 464zM178.5 304h155c1.6-15.3 2.5-31.4 2.5-48s-.9-32.7-2.5-48h-155c-1.6 15.3-2.5 31.4-2.5 48s.9 32.7 2.5 48zm7.9-144H325.6c-5.6-24.4-13.2-45.9-22-63.6C283 55.2 263.4 48 256 48s-27 7.2-47.6 48.4c-8.8 17.7-16.4 39.2-22 63.6zm195.3 48c1.5 15.5 2.2 31.6 2.2 48s-.8 32.5-2.2 48h76.7c3.6-15.4 5.6-31.5 5.6-48s-1.9-32.6-5.6-48H381.8zm58.8-48c-21.4-41.1-56.1-74.1-98.4-93.4c14.1 25.6 25.3 57.5 32.6 93.4h65.9zm-303.3 0c7.3-35.9 18.5-67.7 32.6-93.4c-42.3 19.3-77 52.3-98.4 93.4h65.9zM53.6 208c-3.6 15.4-5.6 31.5-5.6 48s1.9 32.6 5.6 48h76.7c-1.5-15.5-2.2-31.6-2.2-48s.8-32.5 2.2-48H53.6zM342.1 445.4c42.3-19.3 77-52.3 98.4-93.4H374.7c-7.3 35.9-18.5 67.7-32.6 93.4zm-172.2 0c-14.1-25.6-25.3-57.5-32.6-93.4H71.4c21.4 41.1 56.1 74.1 98.4 93.4zM256 512A256 256 0 1 1 256 0a256 256 0 1 1 0 512z"/>
                             </svg>
                         </div>
@@ -125,14 +114,14 @@
                 <div class="p-3 space-y-2 pr-10 max-h-48 overflow-y-auto">
                     @if(Auth::user()->pages && count(Auth::user()->pages) > 0)
                         @foreach(Auth::user()->pages as $page)
-                            <a href="{{ route('pages.social_list') }}" 
-                               class="flex items-center gap-3 p-2 rounded-lg hover:bg-purple-50 transition-all duration-200 group">
+                            <a href="{{ route('pages.social_list') }}"
+                               class="flex items-center gap-3 p-2 rounded-lg hover:bg-(--primary-color)/10 transition-all duration-200 group">
                                 <img src="{{ $page->logo_path ? asset('storage/' . $page->logo_path) : asset('assets/img/user.png') }}" alt="{{ $page->title }}"
-                                     class="size-8 rounded-full object-cover border border-purple-200 group-hover:border-purple-400 transition-all">
-                                <span class="text-sm text-gray-700 group-hover:text-purple-600 transition-colors flex-1">{{ $page->title }}</span>
-                                <svg class="w-3 h-3 text-gray-300 group-hover:text-purple-400 transition-all group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                                </svg>
+                                     class="size-8 rounded-full object-cover border border-(--primary-color)/20 group-hover:border-(--primary-color)/40 transition-all">
+                                <span class="text-sm text-gray-700 group-hover:text-(--primary-color) transition-colors flex-1">{{ $page->title }}</span>
+{{--                                <svg class="w-3 h-3 text-gray-300 group-hover:text-purple-400 transition-all group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">--}}
+{{--                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>--}}
+{{--                                </svg>--}}
                             </a>
                         @endforeach
                     @else
@@ -168,7 +157,7 @@
             <div class="mb-4">
                 <span class="font-bold text-gray-700">ارتباطات من</span>
             </div>
-            
+
             <div class="relative flex flex-row flex-wrap gap-2">
                 @php
                     $x = 0;
@@ -181,7 +170,7 @@
                     </div>
                     @php $x++; @endphp
                 @endforeach
-                
+
                 @if(count($myContacts) > 0)
                     <div class="relative size-11 bg-gray-200 rounded-full hover:scale-110 transition-all duration-300 flex justify-center items-center cursor-pointer shadow-md text-sm font-bold text-gray-600"
                          onclick="pap_up_all_customer('open')">
@@ -203,7 +192,7 @@
          id="pap_up_all_customer_items">
         <div class="w-full lg:w-[calc(100%-265px)] float-end h-dvh flex justify-center items-center">
             <div class="w-full lg:w-3/4 bg-white rounded-2xl overflow-hidden shadow-2xl">
-                <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-4 flex justify-between items-center">
+                <div class="bg-(--primary-color) p-4 flex justify-between items-center">
                     <h2 class="text-white font-bold text-lg">ارتباطات من</h2>
                     <button onclick="pap_up_all_customer('close')" class="text-white hover:bg-white/20 p-2 rounded-full transition-all">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -220,15 +209,15 @@
                                     <img src="{{ $contact->contact->main_image ? asset('storage/'.$contact->contact->main_image) : asset('assets/img/user.png') }}"
                                          class="size-10 rounded-full object-cover" alt="">
                                     <div>
-                                        <div class="font-medium text-gray-800 group-hover:text-blue-600 transition-colors text-sm">
+                                        <div class="font-medium text-gray-800 group-hover:text-(--hover-primary-color) transition-colors text-sm">
                                             {{ $contact->contact->name ?? 'بدون نام' }} {{ $contact->contact->family ?? '' }}
                                         </div>
                                         <div class="text-xs text-gray-400">{{ $contact->contact->email ?? 'بدون ایمیل' }}</div>
                                     </div>
                                 </div>
-                                <svg class="w-4 h-4 text-gray-300 group-hover:text-blue-400 transition-all group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                                </svg>
+{{--                                <svg class="w-4 h-4 text-gray-300 group-hover:text-blue-400 transition-all group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">--}}
+{{--                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>--}}
+{{--                                </svg>--}}
                             </a>
                         @endforeach
                     @endif
@@ -252,32 +241,32 @@
             // Find the clicked dropdown content and arrow
             const clickedDropdown = element.nextElementSibling;
             const clickedArrow = element.querySelector('.dropdown-arrow');
-            
+
             // Check if the clicked one is currently closed
             const isClickedClosed = clickedDropdown.classList.contains('max-h-0');
-            
+
             // Find both section containers and their arrows
             const restaurantSection = document.querySelector('.restaurant-section');
             const pagesSection = document.querySelector('.pages-section');
-            
+
             const restaurantDropdown = restaurantSection?.querySelector('.dropdown-content');
             const pagesDropdown = pagesSection?.querySelector('.dropdown-content');
             const restaurantArrow = restaurantSection?.querySelector('.dropdown-arrow');
             const pagesArrow = pagesSection?.querySelector('.dropdown-arrow');
-            
+
             // First, close both dropdowns
             if (restaurantDropdown && restaurantDropdown !== clickedDropdown) {
                 restaurantDropdown.classList.remove('max-h-[400px]', 'opacity-100');
                 restaurantDropdown.classList.add('max-h-0', 'opacity-0');
                 if (restaurantArrow) restaurantArrow.classList.remove('rotate-180');
             }
-            
+
             if (pagesDropdown && pagesDropdown !== clickedDropdown) {
                 pagesDropdown.classList.remove('max-h-[400px]', 'opacity-100');
                 pagesDropdown.classList.add('max-h-0', 'opacity-0');
                 if (pagesArrow) pagesArrow.classList.remove('rotate-180');
             }
-            
+
             // Then toggle the clicked one
             if (isClickedClosed) {
                 clickedDropdown.classList.remove('max-h-0', 'opacity-0');
@@ -334,12 +323,12 @@
                     let fullName = (data.name ?? 'بدون نام') + ' ' + (data.family ?? '')
                     let phoneNum = data.phoneNumber
                     let email = data.email ?? 'بدون ایمیل'
-                    
+
                     let rolesHtml = ''
                     data.roles.forEach((role) => {
                         rolesHtml += `<span class="inline-block bg-gray-100 px-2 py-0.5 rounded-md text-xs m-0.5">${role}</span>`
                     })
-                    
+
                     let html = `
                         <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-4 flex justify-between items-center sticky top-0">
                             <h2 class="text-white font-bold text-lg">پروفایل کاربر</h2>
@@ -352,7 +341,7 @@
                         <div class="p-5">
                             <div class="flex flex-col items-center mb-5">
                                 <img class="size-24 rounded-full border-4 border-blue-200 object-cover"
-                                     src="${data.main_image ? '{{ asset('storage/') }}/' + data.main_image : '{{ asset('assets/img/user.png') }}'}" 
+                                     src="${data.main_image ? '{{ asset('storage/') }}/' + data.main_image : '{{ asset('assets/img/user.png') }}'}"
                                      alt="user__picture">
                                 <h3 class="font-bold text-lg mt-3">${fullName}</h3>
                                 <span class="text-xs text-gray-500 mt-1">${data.phoneNumber}</span>

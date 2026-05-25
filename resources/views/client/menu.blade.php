@@ -45,10 +45,7 @@
                      id="orderLink">
                     <div class="text-sky-700 cursor-pointer" onclick="orders('open')">سفارشات من</div>
                 </div>
-                {{--<div class="flex justify-center items-center w-40 py-2 bg-blue-500 text-white text-xs font-bold rounded-sm cursor-pointer"--}}
-                {{--onclick="addSpecialCustomer(this , 'resturant')">--}}
-                {{--عضویت در باشگاه مشتریان--}}
-                {{--</div>--}}
+     
                 @include('client.xMamad')
             </div>
         </div>
@@ -761,7 +758,7 @@
                             } if (data.id) {
                                 showMessage('open')
                                 element.innerHTML = `
-                                <span> خوش اومدی ${data.name} ${data.family} عزیز</span>
+                                <span> خوش اومدی ${data.name ?? 'کاربر'} ${data.family ?? 'رینگا'} عزیز</span>
                                 `
                                 if (data.orders.length > 0) {
                                     orderLink.classList.remove('hidden')
@@ -860,7 +857,7 @@
                             } if(data.validate && data.checkCode) {
                                 showMessage('open')
                                 element.innerHTML = `
-                                    <span> خوش اومدی ${data.validate.name} ${data.validate.family} عزیز</span>
+                                    <span> خوش اومدی ${data.validate.name ?? 'کاربر'} ${data.validate.family ?? 'رینگا'} عزیز</span>
                                 `
                                 if (data.orders.length > 0) {
                                     orderLink.classList.remove('hidden')
