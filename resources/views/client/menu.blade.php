@@ -1379,62 +1379,7 @@
         }
 
 
-        {{--function addSpecialCustomer(el) {--}}
-        {{--    let text = el.innerText--}}
-        {{--    if ("{{ Auth::check() }}") {--}}
-        {{--        $.ajaxSetup({--}}
-        {{--            headers: {--}}
-        {{--                'X-CSRF-TOKEN': "{{ csrf_token() }}"--}}
-        {{--            }--}}
-        {{--        })--}}
-        {{--        $.ajax({--}}
-        {{--            url: "{{ route('special-user.store') }}",--}}
-        {{--            type: "POST",--}}
-        {{--            dataType: "json",--}}
-        {{--            data: {--}}
-        {{--                'page_id': "{{ $career->page->id }}",--}}
-        {{--            },--}}
-        {{--            success: function (data) {--}}
-        {{--                console.log(data)--}}
-        {{--                if (data) {--}}
-        {{--                    showMessage('open')--}}
-        {{--                    element.innerHTML = `--}}
-        {{--                    <span>عضویت شما ثبت شد</span>--}}
-        {{--                    <span>✅</span>--}}
-        {{--                    `--}}
-        {{--                    message.children[0].appendChild(element)--}}
-        {{--                    setTimeout(() => {--}}
-        {{--                        showMessage('close')--}}
-        {{--                    }, 2000)--}}
-        {{--                } else {--}}
-        {{--                    showMessage('open')--}}
-        {{--                    element.innerHTML = `--}}
-        {{--                    <span>شما قبلا عضو شده اید</span>--}}
-        {{--                    <span>✅</span>--}}
-        {{--                    `--}}
-        {{--                    message.children[0].appendChild(element)--}}
-        {{--                    setTimeout(() => {--}}
-        {{--                        showMessage('close')--}}
-        {{--                    }, 2000)--}}
-        {{--                }--}}
-        {{--            },--}}
-        {{--            error: function () {--}}
-        {{--                showMessage('open')--}}
-        {{--                element.innerHTML = `--}}
-        {{--                <span>خطا در دریافت اطلاعات</span>--}}
-        {{--                <span class="text-red-500">!</span>--}}
-        {{--                `--}}
-        {{--                message.children[0].appendChild(element)--}}
-        {{--                setTimeout(() => {--}}
-        {{--                    showMessage('close')--}}
-        {{--                }, 2000)--}}
-        {{--            }--}}
-        {{--        })--}}
-        {{--    } else {--}}
-        {{--        authenticationDiv.classList.remove('invisible')--}}
-        {{--        authenticationDiv.classList.remove('opacity-0')--}}
-        {{--    }--}}
-        {{--}--}}
+       
 
         let faqBox = document.querySelectorAll(".faqBox")
         faqBox.forEach(faq => {

@@ -146,7 +146,7 @@
                     </div>
                     <span class="font-bold text-gray-700">اسکن‌های من</span>
                 </div>
-                <span class="text-sm font-bold text-green-600">{{ Auth::user()->qr_count==0 }}</span>
+                <span class="text-sm font-bold text-green-600">{{ Auth::user()->scan_count }}</span>
             </div>
         </div>
     </div>

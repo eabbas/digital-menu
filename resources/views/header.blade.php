@@ -86,7 +86,7 @@
     <header>
         <header class="w-full bg-white flex justify-center items-center fixed z-3">
             <div class="w-11/12 flex items-center justify-between">
-                <div class="flex relative p-1 flex justify-center items-center cursor-pointer">
+                <div class="flex relative p-1 justify-center items-center cursor-pointer">
                     <div class="flex items-center">
                         <div class="flex flex-col w-8 h-5 justify-between cursor-pointer" onclick="hamburgerMenu('open')"
                              id="menuBlockliet">
@@ -96,9 +96,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="cursor-pointer">
+                <a href="{{ route('home') }}" class="block cursor-pointer">
                     <img src="{{asset('storage/logos/ringaLogo.png')}}" alt="" class="w-30 max-h-[60px] object-cover">
-                </div>
+                </a>
 
 
                 <div onclick="searchPopup('open')" class="cursor-pointer">
@@ -215,7 +215,7 @@
                         @csrf
                         <div class="w-full flex flex-row items-center samim">
                             <div
-                                class="w-full bg-white flex flex-row rounded-full items-center gap-2 px-3 bg-[#F9F9F9]">
+                                class="w-full flex flex-row rounded-full items-center gap-2 px-3 bg-[#F9F9F9]">
                                 <input class="outline-none p-2 w-full rounded-lg" type="text" name="search"
                                     placeholder="جست و جو"
                                     @if (isset($searchTitle)) value="{{ $searchTitle }}" @endif>
