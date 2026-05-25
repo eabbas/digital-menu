@@ -124,15 +124,17 @@
             color: #2d3748;
         }
     </style>
+    <div id="edu" class="fixed w-full h-dvh top-0 right-0 bg-black/50 z-9999999"></div>
     <div class="w-full transferBG cursor-pointer" id="createPageLink">
         <span class="block py-3 text-center w-full text-sm text-gray-800">
             صفحه خودتو بساز
         </span>
     </div>
     <div class="items-center bg-white py-5 rounded-[20px] w-[95%] mx-auto">
-        <div class="w-11/12 mx-auto flex flex-row gap-5">
-            <a href="#"
-                class="text-sm font-bold flex flex-col items-center rounded-3xl w-1/2 money text-white py-2 relative h-24">
+        <div class="w-11/12 mx-auto flex flex-row gap-5 relative">
+            <!-- z-9999999 -->
+            <a href="#" 
+                class="text-sm font-bold flex flex-col items-center rounded-3xl w-1/2 money text-white py-2 relative h-24 z-9999999 parentEdu" data-edu-step="1">
                 <img src="{{ asset('assets/img/income2.png') }}" class="size-24 absolute top-4 -right-5" alt="">
                 <div class="absolute top-4 left-4 text-lg flex flex-col items-end gap-4">
                     <span>
@@ -143,6 +145,10 @@
                     </span>
                 </div>
             </a>
+            <div class="absolute p-3 -bottom-full left-10 bg-white rounded-tr-none rounded-md z-9999999 childEdu" data-edu-step="1">
+                <p class="text-sm text-gray-700">در این قسمت میتونی از وبسایت ما درامد کسب کنی</p>
+                <button class="text-xs text-white bg-blue-600 p-1 rounded-sm mt-3 float-end cursor-pointer step" data-state="+">بعدی</button>
+            </div>
             <a href="#"
                 class="text-sm font-bold flex flex-col items-center rounded-3xl w-1/2 group text-white py-2 relative h-24">
                 <img src="{{ asset('assets/img/group2.png') }}" class="size-26 absolute top-6 -right-5" alt="">
@@ -172,7 +178,7 @@
 
                     {{--                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5 fill-[#59cfcb]" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M215 62.8l4.9-24.3-15.7-3.1 15.7 3.1c.3-1.5 1-2.8 1.9-3.8C232.9 32.9 244.4 32 256 32s23.1 .9 34.2 2.6c1 1.1 1.6 2.4 1.9 3.8L297 62.8c2.9 14.4 13.2 25.2 25.5 30.3l0 0 1.5 .6 0 0c12.3 5.2 27.3 4.8 39.5-3.3l20.6-13.8c1.2-.8 2.6-1.3 4.1-1.3c9.1 6.7 17.7 14 25.6 21.9l.8 .8 0 0c7.9 8 15.3 16.5 21.9 25.6c-.1 1.4-.5 2.8-1.3 4.1l-13.8 20.6c-8.1 12.2-8.5 27.1-3.3 39.5l0 0 .6 1.5 0 0c5.1 12.4 15.9 22.6 30.3 25.5l24.3 4.9c1.5 .3 2.8 1 3.8 1.9c1.7 11.1 2.6 22.4 2.6 34v.4c0 11.6-.9 22.9-2.6 34c-1.1 1-2.4 1.6-3.8 1.9L449.2 297c-14.4 2.9-25.2 13.2-30.3 25.5l0 0-.6 1.5 0 0c-5.2 12.3-4.8 27.3 3.3 39.5l13.8 20.6c.8 1.2 1.3 2.6 1.3 4.1c-13.6 18.5-29.9 34.9-48.4 48.4c-1.4-.1-2.8-.5-4.1-1.3l-20.6-13.8c-12.2-8.1-27.1-8.5-39.5-3.3l0 0-1.5 .6 0 0c-12.4 5.1-22.6 15.9-25.5 30.3l-4.9 24.3c-.3 1.5-1 2.8-1.9 3.8c-11.1 1.7-22.6 2.6-34.2 2.6s-23.1-.9-34.2-2.6c-1-1.1-1.6-2.4-1.9-3.8L215 449.2c-2.9-14.4-13.2-25.2-25.5-30.3l0 0-1.5-.6 0 0c-12.3-5.2-27.3-4.8-39.5 3.3l-20.6 13.8c-1.2 .8-2.6 1.3-4.1 1.3c-18.5-13.6-34.9-29.9-48.4-48.4c.1-1.4 .5-2.8 1.3-4.1l13.8-20.6c8.1-12.2 8.5-27.1 3.3-39.5l0 0-.6-1.5 0 0c-5.1-12.4-15.9-22.6-30.3-25.5l-24.3-4.9c-1.5-.3-2.8-1-3.8-1.9C32.9 279.1 32 267.6 32 256s.9-23.1 2.6-34.2c1.1-1 2.4-1.6 3.8-1.9L62.8 215c14.4-2.9 25.2-13.2 30.3-25.5l0 0 .6-1.5 0 0c5.2-12.3 4.8-27.3-3.3-39.5L76.6 127.7c-.8-1.2-1.3-2.6-1.3-4.1c6.7-9.1 14-17.7 22-25.7l.8-.8 0 0c8-7.9 16.6-15.3 25.7-22c1.4 .1 2.8 .5 4.1 1.3l20.6 13.8c12.2 8.1 27.1 8.5 39.5 3.3l0 0 1.5-.6 0 0c12.4-5.1 22.7-15.9 25.5-30.3zM256 0c-14.8 0-29.3 1.3-43.4 3.7c-2 .3-3.9 1-5.6 2.1c-9.4 5.6-16.3 15.1-18.6 26.4l-4.9 24.3c-.5 2.6-2.6 5.4-6.3 6.9l0 0-.1 0-1.7 .7 0 0-.1 0c-3.7 1.5-7.1 1-9.4-.4L145.5 50c-9.6-6.4-21.2-8.2-31.7-5.6c-1.9 .5-3.8 1.3-5.4 2.5C96.6 55.2 85.6 64.4 75.4 74.5l0 0-.8 .8 0 0C64.4 85.6 55.2 96.6 46.9 108.3c-1.2 1.6-2 3.5-2.5 5.4c-2.6 10.6-.8 22.1 5.6 31.7l13.8 20.6c1.5 2.2 2 5.7 .4 9.4l0 .1-.7 1.7 0 0 0 .1c-1.5 3.7-4.3 5.8-6.9 6.3l-24.3 4.9c-11.4 2.3-20.8 9.2-26.4 18.6c-1 1.7-1.7 3.6-2.1 5.6C1.3 226.7 0 241.2 0 256s1.3 29.3 3.7 43.4c.3 2 1 3.9 2.1 5.6c5.6 9.4 15.1 16.3 26.4 18.6l24.3 4.9c2.6 .5 5.4 2.6 6.9 6.3l0 .1 .7 1.7 0 .1c1.5 3.7 1 7.1-.4 9.4L50 366.5c-6.4 9.6-8.2 21.2-5.6 31.7c.5 1.9 1.3 3.8 2.5 5.4c16.8 23.8 37.6 44.6 61.5 61.5c1.6 1.2 3.5 2 5.4 2.5c10.6 2.6 22.1 .8 31.7-5.6l20.6-13.8c2.2-1.5 5.7-2 9.4-.4l.1 0 1.7 .7 .1 0c3.7 1.5 5.8 4.3 6.3 6.9l4.9 24.3c2.3 11.4 9.2 20.8 18.6 26.4c1.7 1 3.6 1.7 5.6 2.1c14.1 2.4 28.6 3.7 43.4 3.7s29.3-1.3 43.4-3.7c2-.3 3.9-1 5.6-2.1c9.4-5.6 16.3-15.1 18.6-26.4l4.9-24.3c.5-2.6 2.6-5.4 6.3-6.9l.1 0 1.7-.7 .1 0c3.7-1.5 7.1-1 9.4 .4L366.5 462c9.6 6.4 21.2 8.2 31.7 5.6c1.9-.5 3.8-1.3 5.4-2.5c23.8-16.8 44.6-37.6 61.5-61.4c1.2-1.6 2-3.5 2.5-5.4c2.6-10.6 .8-22.1-5.6-31.7l-13.8-20.6c-1.5-2.2-2-5.7-.4-9.4l0-.1 .7-1.7 0-.1c1.5-3.7 4.3-5.8 6.9-6.3l24.3-4.9-3.1-15.7 3.1 15.7c11.4-2.3 20.8-9.2 26.4-18.6c1-1.7 1.7-3.6 2.1-5.6c2.4-14 3.7-28.5 3.7-43.2v0-.4 0c0-14.7-1.3-29.1-3.7-43.2c-.3-2-1-3.9-2.1-5.6c-5.6-9.4-15.1-16.3-26.4-18.6l-24.3-4.9c-2.6-.5-5.4-2.6-6.9-6.3l0-.1-.7-1.7 0-.1c-1.5-3.7-1-7.1 .4-9.4L462 145.5c6.4-9.6 8.2-21.2 5.6-31.7c-.5-1.9-1.3-3.8-2.5-5.4c-8.3-11.7-17.5-22.7-27.6-32.9l0 0-.9-.9 0 0c-10.1-10.1-21.1-19.3-32.9-27.6c-1.6-1.2-3.5-2-5.4-2.5c-10.6-2.6-22.1-.8-31.7 5.6L345.9 63.7c-2.2 1.5-5.7 2-9.4 .4l-.1 0-1.7-.7-.1 0c-3.7-1.5-5.8-4.3-6.3-6.9l-4.9-24.3c-2.3-11.4-9.2-20.8-18.6-26.4c-1.7-1-3.6-1.7-5.6-2.1C285.3 1.3 270.8 0 256 0zM192 256a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm160 0a96 96 0 1 0 -192 0 96 96 0 1 0 192 0z"/></svg> --}}
                 </div>
-                <div class="w-full grid grid-cols-4 gap-3 mt-4">
+                <div class="w-full grid grid-cols-4 gap-3 mt-4 relative">
                     <a href="#" class="flex flex-col items-center gap-2 py-1.5 relative overflow-hidden selectItems">
                         <div class="rounded-lg size-14 money flex justify-center items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-10 fill-white" viewBox="0 0 512 512">
@@ -184,9 +190,9 @@
                             طراحی سایت
                         </span>
                     </a>
-
+                  
                     <a href="{{ route('career.careersList') }}"
-                        class="flex flex-col items-center gap-2 rounded-lg py-1.5 relative overflow-hidden selectItems">
+                        class="flex flex-col items-center gap-2 rounded-lg py-1.5 relative overflow-hidden selectItems parentEdu" data-edu-step="2">
 
                         <div class="rounded-lg size-14 food flex justify-center items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-10 fill-white" viewBox="0 0 640 512">
@@ -198,6 +204,12 @@
                             سفارش غذا
                         </span>
                     </a>
+                    <div class="absolute p-3 bottom-[54px] left-20 bg-white rounded-tr-none rounded-md z-9999999 hidden childEdu" data-edu-step="2">
+                        <p class="text-sm text-gray-700">از این قسمت میتونی غذا سفارش بدی</p>
+                        <button class="text-xs text-white bg-blue-600 p-1 rounded-sm mt-3 float-end cursor-pointer mr-3 step" data-state="end">بستن</button>
+                        <button class="text-xs text-white bg-blue-600 p-1 rounded-sm mt-3 float-end cursor-pointer step" data-state="-">قبلی</button>
+                    </div>
+                    
 
                     <a href="{{ route('printery') }}"
                         class="flex flex-col items-center gap-2 rounded-lg py-1.5 relative overflow-hidden selectItems">
@@ -916,7 +928,7 @@
                                     showMessage('close')
                                     location.assign("{{ route('signup') }}")
                                 }, 2000)
-                            } if(data.validate && data.checkCode) {
+                            }   
 
                                 showMessage('open')
 
@@ -1301,4 +1313,5 @@
             })
         }
     </script>
+    <script src="{{ asset('assets/js/educationTour.js') }}"></script>
 @endsection
