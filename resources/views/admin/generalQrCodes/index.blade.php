@@ -108,5 +108,6 @@
     const csrfToken = "{{ csrf_token() }}"
     const editRoute = "{{ route('generalQrCodes.edit') }}"
     const updateRoute = "{{ route('generalQrCodes.update') }}"
+    const imageAddress = "{{ asset('storage/') }}"
 </script>
 <script src="{{ asset('assets/js/generalQrCodes.js') }}"></script>

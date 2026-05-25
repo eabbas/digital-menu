@@ -79,7 +79,7 @@ class UserController extends Controller
             $user = User::find($user_id);
             Auth::login($user);
             $this->storeWithClick();
-            return to_route('home');
+            return to_route('dashboard');
         }
         return to_route('signup');
     }
@@ -94,7 +94,7 @@ class UserController extends Controller
                 $checkHash = Hash::check($request->password, $user->password);
                 if ($checkHash) {
                     Auth::login($user);
-                    return to_route('user.profile');
+                    return to_route('dashboard');
                 }
                 return to_route('login', ['message' => 'لطفا اطلاعات خود را مجددا بررسی کنید']);
             }
@@ -102,11 +102,10 @@ class UserController extends Controller
                 $code = phone_code::where('phoneNumber', $request->phoneNumber)->first();
                 if ($code->code == $request->code) {
                     Auth::login($user);
-                    return to_route('user.profile');
+                    return to_route('dashboard');
                 }
                 return to_route('login', ['message' => 'لطفا اطلاعات خود را مجددا بررسی کنید']);
             }
-
         }
         return to_route('signup');
     }
@@ -216,7 +215,7 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-//        dd($request->all(), $user);
+        //        dd($request->all(), $user);
         $user = User::find($request->user_id);
         if (isset($request->roles)) {
             role_user::where('user_id', $user->id)->delete();
@@ -621,14 +620,14 @@ class UserController extends Controller
     {
         $bool = false;
         $user['validate'] = User::where('phoneNumber', $request->phoneNumber)->first();
-        $user['checkCode']=$bool;
+        $user['checkCode'] = $bool;
         $code = phone_code::where('phoneNumber', $request->phoneNumber)->first();
         if ($user['validate']) {
             if ($code->code == $request->code) {
                 $bool = true;
                 Auth::login($user['validate']);
             }
-            if(isset($request->career_id)){
+            if (isset($request->career_id)) {
                 $user['orders'] = order::where('user_id', Auth::id())->where('career_id', $request->career_id)->where('status', 1)->orWhere('status', 2)->orWhere('status', 3)->get();
             }
             $user['validate']->load(['carts' => function ($query) {
@@ -793,7 +792,7 @@ class UserController extends Controller
 
     public function checkFromMenu(Request $request)
     {
-//        return response()->json($request->all());
+        //        return response()->json($request->all());
         $user = User::where('phoneNumber', $request->phoneNumber)->first();
         if ($user) {
             $checkHash = Hash::check($request->password, $user->password);
@@ -802,7 +801,7 @@ class UserController extends Controller
                 $user->load(['carts' => function ($query) {
                     $query->whereNull('order_id');
                 }]);
-                if(isset($request->career_id)){
+                if (isset($request->career_id)) {
                     $user['orders'] = order::where('user_id', Auth::id())->where('career_id', $request->career_id)->where('status', 1)->orWhere('status', 2)->orWhere('status', 3)->get();
                 }
                 return response()->json($user);
@@ -815,7 +814,7 @@ class UserController extends Controller
     public function setAddress(Request $request)
     {
         $user_id = Auth::id();
-        if(isset($request->user_id)){
+        if (isset($request->user_id)) {
             $user_id = $request->user_id;
         }
         $address_id = address::create([
@@ -970,7 +969,7 @@ class UserController extends Controller
                 $contact['pages'] = $user->pages;
             }
         }
-//        return $myContacts;
+        //        return $myContacts;
         $user = Auth::user();
         return view('admin.app.dashboard', ['myContacts' => $myContacts, 'user' => $user]);
     }
@@ -999,7 +998,8 @@ class UserController extends Controller
         $userContacts->setAttribute('roles', $rolesArray);
         return response()->json($userContacts);
     }
-    public function editInfo(Request $request){
+    public function editInfo(Request $request)
+    {
         $currentUser = Auth::user();
         if ($request->state == "name") {
             $currentUser->name = $request->inputValue;
@@ -1019,17 +1019,15 @@ class UserController extends Controller
         $currentUser->save();
 
         return response()->json('ok');
-
     }
-    public function editProfile(Request $request){
+    public function editProfile(Request $request)
+    {
         // return response()->json($request->all());
         $name = $request->image->getClientOriginalName();
-        $fullName = time().'_'.$name;
+        $fullName = time() . '_' . $name;
         $path = $request->file('image')->storeAs('images', $fullName, 'public');
         Auth::user()->main_image = $path;
         Auth::user()->save();
         return response()->json(Auth::user());
     }
-
-
 }

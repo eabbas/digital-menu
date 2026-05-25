@@ -141,7 +141,7 @@
                         if (data.id) {
                             showMessage('open')
                             element.innerHTML = `
-                                <span> خوش اومدی ${data.name} ${data.family} عزیز</span>
+                                <span> خوش اومدی ${data.name ?? 'کاربر'} ${data.family ?? 'رینگا'} عزیز</span>
                             `
                             flag = true
                             addCustomer.innerHTML = ""
@@ -230,7 +230,7 @@
                         if (data.validate && data.checkCode) {
                             showMessage('open')
                             element.innerHTML = `
-                                <span> خوش اومدی ${data.validate.name} ${data.validate.family} عزیز</span>
+                                <span> خوش اومدی ${data.validate.name ?? 'کاربر'} ${data.validate.family ?? 'رینگا'} عزیز</span>
                             `
                             flag = true
 

@@ -201,7 +201,7 @@
                         @endif
                     </div>
                     <div class="w-full text-left">
-                        <button type="button" onclick="showText(this)"
+                        <button type="submit"
                                 class="active:bg-[#0080e5] mt-2 bg-[#03A9F4] btn text-white p-3 max-md:p-2 rounded-md hover:bg-blue-700 transition duration-200 font-medium cursor-pointer">
                             ثبت
                         </button>
@@ -263,48 +263,48 @@
         let element = document.createElement('div')
         element.classList = "text-sm font-bold flex flex-row items-center justify-center py-3 gap-2 lg:gap-3"
 
-        function showText(el) {
-            if (title.value === '' || logo.value === '' || banner.value === '' || phoneNum.value === '' || address.value === '' || message.value === '') {
-                element.innerHTML = `
-                            <span class="text-red-500">!</span>
-                            <span>لطفا تمام فیلد های ستاره دار را پر کنید.</span>
-                        `
-                message.children[0].appendChild(element)
-                showMessage('open')
-                setTimeout(() => {
-                    showMessage('close')
-                }, 2000)
-            } else {
-                document.forms[0].submit()
-                element.innerHTML = `
-                            <span class="text-red-500">!</span>
-                            <span>لطفا صبر کنید.</span>
-                        `
-                message.children[0].appendChild(element)
-                showMessage('open')
-               // el.setAttribute('disabled', true)
-                el.classList.remove('cursor-pointer')
-                el.classList.add('cursor-no-drop')
-                setTimeout(() => {
-                    showMessage('close')
-                }, 3000)
-            }
-        }
+        // function showText(el) {
+        //     if (title.value === '' || logo.value === '' || banner.value === '' || phoneNum.value === '' || address.value === '' || message.value === '') {
+        //         element.innerHTML = `
+        //                     <span class="text-red-500">!</span>
+        //                     <span>لطفا تمام فیلد های ستاره دار را پر کنید.</span>
+        //                 `
+        //         message.children[0].appendChild(element)
+        //         showMessage('open')
+        //         setTimeout(() => {
+        //             showMessage('close')
+        //         }, 2000)
+        //     } else {
+        //         document.forms[0].submit()
+        //         element.innerHTML = `
+        //                     <span class="text-red-500">!</span>
+        //                     <span>لطفا صبر کنید.</span>
+        //                 `
+        //         message.children[0].appendChild(element)
+        //         showMessage('open')
+        //        // el.setAttribute('disabled', true)
+        //         el.classList.remove('cursor-pointer')
+        //         el.classList.add('cursor-no-drop')
+        //         setTimeout(() => {
+        //             showMessage('close')
+        //         }, 3000)
+        //     }
+        // }
 
 
-        function showMessage(state) {
-            if (state == 'open') {
-                message.classList.remove('top-0')
-                message.classList.remove('opacity-0')
-                message.classList.remove('invisible')
-                message.classList.add('top-2/10')
-            }
-            if (state == 'close') {
-                message.classList.remove('top-2/10')
-                message.classList.add('top-0')
-                message.classList.add('opacity-0')
-                message.classList.add('invisible')
-            }
-        }
+        // function showMessage(state) {
+        //     if (state == 'open') {
+        //         message.classList.remove('top-0')
+        //         message.classList.remove('opacity-0')
+        //         message.classList.remove('invisible')
+        //         message.classList.add('top-2/10')
+        //     }
+        //     if (state == 'close') {
+        //         message.classList.remove('top-2/10')
+        //         message.classList.add('top-0')
+        //         message.classList.add('opacity-0')
+        //         message.classList.add('invisible')
+        //     }
+        // }
     </script>
 @endsection

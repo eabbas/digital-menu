@@ -273,7 +273,7 @@
                                     </div>
                                 @endif --}}
                             {{-- @else --}}
-                                @if($career->menus[0]->menu_items[0]->id == $menu->id)
+                                {{-- @if($career->menus[0]->menu_items[0]->id == $menu->id) --}}
 
                                     <div class="p-2 lg:p-4">
                                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="menuItemList">
@@ -342,7 +342,7 @@
                                             @endforeach
                                         </div>
                                     </div>
-                                @endif
+                                {{-- @endif --}}
                             {{-- @endif --}}
                         </div>
                         {{--                        @endif--}}

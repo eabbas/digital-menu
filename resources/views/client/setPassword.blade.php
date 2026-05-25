@@ -1,21 +1,5 @@
-<!doctype html>
-<html lang="fa" dir="rtl">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>-->
-    <script src="{{ asset('assets/js/tailwind.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
-     <script src="{{ asset('assets/js/html5-qrcode.min.js') }}"></script>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
-    <link rel="shortcut icon" href="{{ asset('storage/images/icon.png') }}" type="image/png">
-    <title>ذخیره رمز جدید</title>
-   
-</head>
-
-<body>
+@include('header')
     <div class="w-full flex flex-col justify-start items-center md:flex-row-reverse">
         <div class="flex justify-center max-sm:h-30 max-md:h-35 md:h-dvh md:w-4/12 lg:w-5/12 xl:w-6/12 bg-[#eb3254]">
             <div class="flex flex-col my-12 items-center justify-center">

@@ -5,13 +5,10 @@
     @PwaHead
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>-->
     <script src="{{ asset('assets/js/tailwind.js') }}"></script>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
     <script src="{{ asset('assets/js/jquery.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
     <link rel="shortcut icon" href="{{ asset('storage/images/icon.png') }}" type="image/png">
-    <!--<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>-->
     <script src="{{ asset('assets/js/html5-qrcode.min.js') }}"></script>
     <title>@yield('title')</title>
 </head>
@@ -87,162 +84,81 @@
         </div>
     </div>
     <header>
-        {{-- mobile menu --}}
-{{--        bg-[#eb3254]--}}
-        <div class="w-full px-3 py-2 bg-[#38598B] lg:hidden">
-            <div class="w-full flex flex-row items-center gap-3">
-                <div class="w-1/3 flex items-center">
-                    <div class="flex flex-col w-8 h-5 justify-between cursor-pointer" onclick="hamburgerMenu('open')"
-                        id="menuBlockliet">
-                        <span class="w-full h-0.5 bg-white transition-all duration-300"></span>
-                        <span class="w-full h-0.5 bg-white transition-all duration-300"></span>
-                        <span class="w-full h-0.5 bg-white transition-all duration-300"></span>
+        <header class="w-full bg-white flex justify-center items-center fixed z-3">
+            <div class="w-11/12 flex items-center justify-between">
+                <div class="flex relative p-1 flex justify-center items-center cursor-pointer">
+                    <div class="flex items-center">
+                        <div class="flex flex-col w-8 h-5 justify-between cursor-pointer" onclick="hamburgerMenu('open')"
+                             id="menuBlockliet">
+                            <span class="w-full h-0.5 bg-black transition-all duration-300"></span>
+                            <span class="w-full h-0.5 bg-black transition-all duration-300"></span>
+                            <span class="w-full h-0.5 bg-black transition-all duration-300"></span>
+                        </div>
                     </div>
                 </div>
-                <div class="w-1/3 flex justify-center items-center">
-                    <a href="{{ route('home') }}" class="block size-[50px]">
-                        <img class="size-full" src="{{ asset('storage/images/Famenu1.png') }}" alt="">
-                    </a>
+                <div class="cursor-pointer">
+                    <img src="{{asset('storage/logos/ringaLogo.png')}}" alt="" class="w-30 max-h-[60px] object-cover">
                 </div>
-                <div class="w-1/3 flex justify-end items-center">
-                    <div class="p-2 flex justify-center items-center rounded-full bg-white mr-2 cursor-pointer">
-                        <button class="cursor-pointer" onclick="searchPopup('open')">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="fixed w-full h-dvh z-99999 top-0 right-0 invisible opacity-0 bg-black/50 backdrop-blur transition-all duration-300"
-                        id="searchP">
-                        <div class="w-full pt-4 pb-8 bg-white transition-all duration-300 -translate-y-full"
-                            id="searchSection">
-                            <div class="w-full pb-5 pr-5">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="size-5 cursor-pointer"
-                                    viewBox="0 0 384 512" onclick="searchPopup('close')">
-                                    <path
-                                        d="M324.5 411.1c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L214.6 256 347.1 123.5c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L192 233.4 59.5 100.9c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L169.4 256 36.9 388.5c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L192 278.6 324.5 411.1z" />
-                                </svg>
-                            </div>
-                            <form action="{{ route('search') }}" method="post" class="w-[calc(100%-60px)] mx-auto">
-                                @csrf
-                                <div class="w-full flex flex-row items-center samim">
-                                    <div {{-- class="w-full bg-white border-1 border-[#eb3254] flex flex-row rounded-full items-center gap-2 px-3 relative"> --}}
-                                        class="w-full bg-white border-1 border-gray-400 flex flex-row rounded-full items-center gap-2 px-3 relative">
 
-                                        <input class="outline-none py-3 w-full" type="text" name="search"
-                                            placeholder="جست و جو"
-                                            @if (isset($searchTitle)) value="{{ $searchTitle }}" @endif>
-                                        <div {{-- class="absolute top-1 left-1 p-2 flex justify-center items-center rounded-full bg-[#eb3254] mr-2 cursor-pointer"> --}}
-                                            class="absolute top-1 left-1 p-2 flex justify-center items-center rounded-full bg-white mr-2 cursor-pointer">
-                                            <button class="cursor-pointer flex flex-row justify-center items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="size-6"
-                                                    viewBox="0 0 512 512">
-                                                    {{-- <path fill="white" --}}
-                                                    <path fill="gray"
-                                                        d="M384 208A176 176 0 1 0 32 208a176 176 0 1 0 352 0zM343.3 366C307 397.2 259.7 416 208 416C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208c0 51.7-18.8 99-50 135.3L507.3 484.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0L343.3 366z" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    {{-- <div
-                                        class="p-2 flex justify-center items-center rounded-full bg-white mr-2 cursor-pointer">
-                                        <button class="cursor-pointer">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                class="size-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+
+                <div onclick="searchPopup('open')" class="cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4"><path d="M384 208A176 176 0 1 0 32 208a176 176 0 1 0 352 0zM343.3 366C307 397.2 259.7 416 208 416C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208c0 51.7-18.8 99-50 135.3L507.3 484.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0L343.3 366z"/></svg>
+
+                </div>
+                <div class="fixed w-full h-dvh z-99999 top-0 right-0 invisible opacity-0 bg-black/50 backdrop-blur transition-all duration-300"
+                     id="searchP">
+                    <div class="w-full pt-4 pb-8 bg-white transition-all duration-300 -translate-y-full"
+                         id="searchSection">
+                        <div class="w-full pb-5 pr-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5 cursor-pointer"
+                                 viewBox="0 0 384 512" onclick="searchPopup('close')">
+                                <path
+                                        d="M324.5 411.1c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L214.6 256 347.1 123.5c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L192 233.4 59.5 100.9c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L169.4 256 36.9 388.5c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L192 278.6 324.5 411.1z" />
+                            </svg>
+                        </div>
+                        <form action="{{ route('search') }}" method="post" class="w-[calc(100%-60px)] mx-auto">
+                            @csrf
+                            <div class="w-full flex flex-row items-center samim">
+                                <div
+                                     class="w-full bg-white border-1 border-gray-400 flex flex-row rounded-full items-center gap-2 px-3 relative">
+
+                                    <input class="outline-none py-3 w-full" type="text" name="search"
+                                           placeholder="جست و جو"
+                                           @if (isset($searchTitle)) value="{{ $searchTitle }}" @endif>
+                                    <div
+                                         class="absolute top-1 left-1 p-2 flex justify-center items-center rounded-full bg-white mr-2 cursor-pointer">
+                                        <button class="cursor-pointer flex flex-row justify-center items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-6"
+                                                 viewBox="0 0 512 512">
+                                                {{-- <path fill="white" --}}
+                                                <path fill="gray"
+                                                      d="M384 208A176 176 0 1 0 32 208a176 176 0 1 0 352 0zM343.3 366C307 397.2 259.7 416 208 416C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208c0 51.7-18.8 99-50 135.3L507.3 484.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0L343.3 366z" />
                                             </svg>
                                         </button>
-                                    </div> --}}
+                                    </div>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="w-full h-[calc(100%-122px)]" onclick="searchPopup('close')"></div>
+                                {{-- <div
+                                    class="p-2 flex justify-center items-center rounded-full bg-white mr-2 cursor-pointer">
+                                    <button class="cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                            class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                        </svg>
+                                    </button>
+                                </div> --}}
+                            </div>
+                        </form>
                     </div>
+                    <div class="w-full h-[calc(100%-122px)]" onclick="searchPopup('close')"></div>
                 </div>
-
-
             </div>
-            {{-- <!-- hamburger menu -->
-
-            <!--<div class="fixed w-full h-dvh top-0 -right-full transition-all duration-500 opacity-0 bg-black/50 flex flex-row z-50"-->
-            <!--    id="home_hamburger_menu">-->
-            <!--    <div class="w-2/3 h-full bg-[#c9697a] p-3 relative">-->
-            <!--        <div-->
-            <!--            class="absolute w-full p-2 h-20 bg-[#c9697a] rounded-l-full -left-8 top-10 flex flex-row justify-end items-center gap-5">-->
-            <!--            @if (Auth::check())-->
-            <!--                <div class="flex flex-col gap-1">-->
-            <!--                    <div class="text-white font-medium">{{ Auth::user()->name }} {{ Auth::user()->family }}-->
-            <!--                    </div>-->
-            <!--                    @if (Auth::user()->email)-->
-            <!--                        <div class="text-white text-xs">{{ Auth::user()->email }}</div>-->
-            <!--                    @endif-->
-            <!--                </div>-->
-            <!--                <img class="size-16 rounded-full" src="{{ asset('storage/' . Auth::user()->main_image) }}"-->
-            <!--                    alt="">-->
-            <!--            @endif-->
-            <!--            @if (!Auth::check())-->
-            <!--                <img class="size-16 rounded-full" src="{{ asset('assets/img/user.png') }}" alt="">-->
-            <!--            @endif-->
-            <!--        </div>-->
-            <!--        <div class="w-full mt-28">-->
-            <!--            <ul class="w-full flex flex-col gap-1 pr-5">-->
-            <!--                @if (!Auth::check())-->
-            <!--                    <li>-->
-            <!--                        <a href="{{ route('login') }}" class="block py-2 text-white font-medium">-->
-            <!--                            ورود | ثبت نام-->
-            <!--                        </a>-->
-            <!--                    </li>-->
-            <!--                @else-->
-            <!--                    <li>-->
-            <!--                        <a href="{{ route('user.profile', [Auth::user()]) }}"-->
-            <!--                            class="block py-2 text-white font-medium">-->
-            <!--                            پروفایل-->
-            <!--                        </a>-->
-            <!--                    </li>-->
-            <!--                @endif-->
-            <!--                <li>-->
-            <!--                    <a href="{{ route('home') }}" class="block py-2 text-white font-medium">-->
-            <!--                        خانه-->
-            <!--                    </a>-->
-            <!--                </li>-->
-            <!--                <li>-->
-            <!--                    <a href="{{ route('aboutUs.clientList') }}" class="block py-2 text-white font-medium">-->
-            <!--                        درباره ما-->
-            <!--                    </a>-->
-            <!--                </li>-->
-            <!--                <li>-->
-            <!--                    <a href="{{ route('contactUs.create') }}" class="block py-2 text-white font-medium">-->
-            <!--                        ارتباط با ما-->
-            <!--                    </a>-->
-            <!--                </li>-->
-            <!--            </ul>-->
-            <!--        </div>-->
-            <!--        @if (Auth::check())-->
-            <!--            <a href="{{ route('user.logout') }}"-->
-            <!--                class="absolute bottom-5 left-5 w-1/3 p-2 rounded-md bg-white/10 flex flex-row items-center gap-5">-->
-            <!--                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 512 512">-->
-            <!--                    <path fill="white"-->
-            <!--                        d="M280 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V264c0 13.3 10.7 24 24 24s24-10.7 24-24V24zM134.2 107.3c10.7-7.9 12.9-22.9 5.1-33.6s-22.9-12.9-33.6-5.1C46.5 112.3 8 182.7 8 262C8 394.6 115.5 502 248 502s240-107.5 240-240c0-79.3-38.5-149.7-97.8-193.3c-10.7-7.9-25.7-5.6-33.6 5.1s-5.6 25.7 5.1 33.6c47.5 35 78.2 91.2 78.2 154.7c0 106-86 192-192 192S56 368 56 262c0-63.4 30.7-119.7 78.2-154.7z" />-->
-            <!--                </svg>-->
-            <!--                <span class="text-xs text-white">-->
-            <!--                    خروج-->
-            <!--                </span>-->
-            <!--            </a>-->
-            <!--        @endif-->
-            <!--    </div>-->
-            <!--    <div class="w-1/3 h-full bg-inherit" onclick="home_menu('close')"></div>-->
-            <!--</div>-->
-
-            <!-- hamburger menu end --> --}}
-        </div>
-        {{-- mobile menu end --}}
+{{--            @include('newHeader')--}}
+        </header>
 
         <div
-            class="hidden lg:block border-b-1 bg-[#eb3254] border-b-gray-300 mb-5 @if (
+            class="hidden border-b-1 bg-[#eb3254] border-b-gray-300 mb-5 @if (
                     Route::is('home') ||
                     Route::is('aboutUs.clientList') ||
                     Route::is('contactUs.create') ||

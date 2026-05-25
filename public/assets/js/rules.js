@@ -19,14 +19,14 @@ let signupButton = document.getElementById('signupButton')
 let rule = document.getElementById('rule')
 function checkRule() {
     if (rule.checked) {
-        signupButton.classList.remove('bg-gray-400')
-        signupButton.classList.add('bg-[#eb3254]')
+        signupButton.classList.remove('bg-(--secondary-text-color)/50')
+        signupButton.classList.add('bg-(--primary-color)')
         signupButton.classList.add('cursor-pointer')
         signupButton.removeAttribute('disabled')
     }
     if (!rule.checked) {
-        signupButton.classList.add('bg-gray-400')
-        signupButton.classList.remove('bg-[#eb3254]')
+        signupButton.classList.add('bg-(--secondary-text-color)/50')
+        signupButton.classList.remove('bg-(--primary-color)')
         signupButton.classList.remove('cursor-pointer')
         signupButton.setAttribute('disabled', true)
     }
