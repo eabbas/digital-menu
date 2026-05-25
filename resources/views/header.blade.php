@@ -361,7 +361,14 @@
                             <div class="pt-3">
                                 <div
                                     class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
-                                    <h3 class="text-md font-bold text-gray-800 mb-1.5">فروشگاه ها</h3>
+                                    <div class="flex flex-row-reverse items-center gap-2">
+                                         <h3 class="text-md font-bold text-gray-800 mb-1">فروشگاه ها</h3>
+                                        {{-- <span class=" text-[white] flex justify-end font-bold">فروشگاه</span> --}}
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 576 512">
+                                            <path
+                                                d="M507.1 129.5l0 0c5.8 9.2 6.4 20.5 2.3 30.1c-3.9 9.2-11.1 14.8-20.1 16c-2 .3-3.9 .4-5.8 .4c-11.7 0-22.2-5.1-29.7-13.2c-9.1-10-22-15.7-35.6-15.7s-26.5 5.8-35.5 15.8c-7.3 8.1-17.7 13.2-29.6 13.2c-11.8 0-22.3-5.1-29.6-13.2c-9.1-10.1-22-15.8-35.6-15.8s-26.5 5.7-35.6 15.8c-7.3 8.1-17.7 13.2-29.6 13.2c-11.8 0-22.3-5.1-29.6-13.2c-9.1-10.1-22-15.8-35.6-15.8s-26.5 5.7-35.6 15.8c-7.3 8.1-17.7 13.2-29.6 13.2c-1.8 0-3.8-.1-5.8-.4c-8.9-1.2-16-6.8-19.9-16c-4.1-9.6-3.5-20.9 2.3-30.1l0 0 0 0L120.4 48H455.6l51.5 81.5zM483.5 224c4.1 0 8.1-.3 12-.8c55.5-7.4 81.8-72.5 52.1-119.4L490.3 13.1C485.2 5 476.1 0 466.4 0H109.6C99.9 0 90.8 5 85.7 13.1L28.3 103.8c-29.6 46.8-3.4 111.9 51.9 119.4c4 .5 8.1 .8 12.1 .8c0 0 0 0 0 0c19.6 0 37.5-6.4 51.9-17c4.8-3.5 9.2-7.6 13.2-11.9c4 4.4 8.4 8.4 13.2 11.9c14.5 10.6 32.4 17 52 17c19.6 0 37.5-6.4 52-17c4.8-3.5 9.2-7.6 13.2-12c4 4.4 8.4 8.4 13.2 11.9c14.5 10.6 32.4 17 52 17c19.8 0 37.8-6.5 52.3-17.3c4.7-3.5 9-7.4 12.9-11.7c3.9 4.3 8.3 8.3 13 11.8c14.5 10.7 32.5 17.2 52.2 17.2c0 0 0 0 0 0zM112 336V254.4c-6.4 1.1-12.9 1.6-19.6 1.6c-5.5 0-11-.4-16.3-1.1l-.1 0c-4.1-.6-8.1-1.3-12-2.3V336v48 64c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V384 336 252.6c-4 1-8 1.8-12.3 2.3l-.1 0c-5.3 .7-10.7 1.1-16.2 1.1c-6.6 0-13.1-.5-19.4-1.6V336H112zm352 48v64c0 8.8-7.2 16-16 16H128c-8.8 0-16-7.2-16-16V384H464z" />
+                                        </svg>
+                                    </div>
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         class="size-4 transition-all duration-300 @if (Route::is('ecomm.ecomms') ||
                                                 Route::is('ecomm.*') ||
@@ -443,7 +450,16 @@
                             <div class="pt-3">
                                 <div
                                     class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
-                                    <h3 class="text-md font-bold text-gray-800 mb-1.5">آموزشگاه ها</h3>
+                                    <div class="flex flex-row-reverse items-center gap-2">
+                                        {{-- <span class=" text-[white] flex justify-end font-bold">آموزشگاه ها</span> --}}
+                                        <h3 class="text-md font-bold text-gray-800 mb-1">آموزشگاه ها</h3>
+                                        <svg width="26" height="26" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="m12 2.906-.328.164-7.5 3.68-.422.21v1.29h16.5V6.96l-.422-.21-7.5-3.68L12 2.906Zm0 1.688 4.406 2.156H7.594L12 4.594ZM5.25 9v7.5H4.5V18h15v-1.5h-.75V9h-1.5v7.5h-1.5V9h-1.5v7.5h-1.5V9h-1.5v7.5h-1.5V9h-1.5v7.5h-1.5V9h-1.5ZM3 18.75v1.5h18v-1.5H3Z">
+                                            </path>
+                                        </svg>
+                                    </div>
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         class="size-4 transition-all duration-300 @if (Route::is('institute.institutes') ||
                                                 Route::is('institute.*') ||
@@ -502,7 +518,14 @@
                                 <div class="pt-3">
                                     <div
                                         class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
-                                        <h3 class="text-md font-bold text-gray-800 mb-1.5"> چک لیست</h3>
+                                        <div class="flex flex-row-reverse items-center gap-2">
+                                            {{-- <span class=" text-[white] flex justify-end font-bold">چک لیست</span> --}}
+                                            <h3 class="text-md font-bold text-gray-800 mb-1"> چک لیست</h3>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 512 512">
+                                                <path
+                                                    d="M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 113C-2.3 103.6-2.3 88.4 7 79s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM224 96c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zM160 416c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H192c-17.7 0-32-14.3-32-32zM48 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+                                            </svg>
+                                        </div>
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             class="size-4 transition-all duration-300 @if (Route::is('checkList.formCheckList') || Route::is('checkList.myList')) rotate-180 @endif"
                                             viewBox="0 0 448 512">
@@ -549,7 +572,14 @@
                             <div class="pt-3">
                                 <div
                                     class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
-                                    <h3 class="text-md font-bold text-gray-800 mb-1.5">پیشنهادات</h3>
+                                    <div class="flex flex-row-reverse items-center gap-2">
+                                        {{-- <span class=" text-[white] flex justify-end font-bold"> پیشنهادات</span> --}}
+                                        <h3 class="text-md font-bold text-gray-800 mb-1">پیشنهادات</h3>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 512 512">
+                                            <path
+                                                d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z" />
+                                        </svg>
+                                    </div>
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         class="size-4 transition-all duration-300 @if (Route::is('suggestion.*')) rotate-180 @endif"
                                         viewBox="0 0 448 512">
@@ -578,7 +608,14 @@
                             <div class="pt-3">
                                 <div
                                     class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
-                                    <h3 class="text-md font-bold text-gray-800 mb-1.5">رستوران ها</h3>
+                                    <div class="flex flex-row-reverse items-center gap-2">
+                                        {{-- <span class=" text-[white] flex justify-end font-bold">رستوران</span> --}}
+                                        <h3 class="text-md font-bold text-gray-800 mb-1">رستوران ها</h3>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
+                                            <path
+                                                d="M173.8 5.5c11-7.3 25.4-7.3 36.4 0L228 17.2c6 3.9 13 5.8 20.1 5.4l21.3-1.3c13.2-.8 25.6 6.4 31.5 18.2l9.6 19.1c3.2 6.4 8.4 11.5 14.7 14.7L344.5 83c11.8 5.9 19 18.3 18.2 31.5l-1.3 21.3c-.4 7.1 1.5 14.2 5.4 20.1l11.8 17.8c7.3 11 7.3 25.4 0 36.4L366.8 228c-3.9 6-5.8 13-5.4 20.1l1.3 21.3c.8 13.2-6.4 25.6-18.2 31.5l-19.1 9.6c-6.4 3.2-11.5 8.4-14.7 14.7L301 344.5c-5.9 11.8-18.3 19-31.5 18.2l-21.3-1.3c-7.1-.4-14.2 1.5-20.1 5.4l-17.8 11.8c-11 7.3-25.4 7.3-36.4 0L156 366.8c-6-3.9-13-5.8-20.1-5.4l-21.3 1.3c-13.2 .8-25.6-6.4-31.5-18.2l-9.6-19.1c-3.2-6.4-8.4-11.5-14.7-14.7L39.5 301c-11.8-5.9-19-18.3-18.2-31.5l1.3-21.3c.4-7.1-1.5-14.2-5.4-20.1L5.5 210.2c-7.3-11-7.3-25.4 0-36.4L17.2 156c3.9-6 5.8-13 5.4-20.1l-1.3-21.3c-.8-13.2 6.4-25.6 18.2-31.5l19.1-9.6C65 70.2 70.2 65 73.4 58.6L83 39.5c5.9-11.8 18.3-19 31.5-18.2l21.3 1.3c7.1 .4 14.2-1.5 20.1-5.4L173.8 5.5zM272 192c0-44.2-35.8-80-80-80s-80 35.8-80 80s35.8 80 80 80s80-35.8 80-80zM1.3 441.8L44.4 339.3c.2 .1 .3 .2 .4 .4l9.6 19.1c11.7 23.2 36 37.3 62 35.8l21.3-1.3c.2 0 .5 0 .7 .2l17.8 11.8c5.1 3.3 10.5 5.9 16.1 7.7l-37.6 89.3c-2.3 5.5-7.4 9.2-13.3 9.7s-11.6-2.2-14.8-7.2L74.4 455.5l-56.1 8.3c-5.7 .8-11.4-1.5-15-6s-4.3-10.7-2.1-16zm248 60.4L211.7 413c5.6-1.8 11-4.3 16.1-7.7l17.8-11.8c.2-.1 .4-.2 .7-.2l21.3 1.3c26 1.5 50.3-12.6 62-35.8l9.6-19.1c.1-.2 .2-.3 .4-.4l43.2 102.5c2.2 5.3 1.4 11.4-2.1 16s-9.3 6.9-15 6l-56.1-8.3-32.2 49.2c-3.2 5-8.9 7.7-14.8 7.2s-11-4.3-13.3-9.7z" />
+                                        </svg>
+                                    </div>
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         class="size-4 transition-all duration-300 @if (Route::is('career.*') ||
                                                 Route::is('menu.createMenu') ||
@@ -664,7 +701,14 @@
                             <div class="pt-3">
                                 <div
                                     class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
-                                    <h3 class="text-md font-bold text-gray-800 mb-1.5">صفحه ها</h3>
+                                    <div class="flex flex-row-reverse items-center gap-2">
+                                        {{-- <span class=" text-[white] flex justify-end font-bold">صفحه ها</span> --}}
+                                        <h3 class="text-md font-bold text-gray-800 mb-1">صفحه ها</h3>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 512 512">
+                                            <path
+                                                d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z" />
+                                        </svg>
+                                    </div>
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         class="size-4 transition-all duration-300 @if (Route::is('pages.*') || Route::is('socialMedia.*')) rotate-180 @endif"
                                         viewBox="0 0 448 512">
@@ -714,7 +758,14 @@
                                 <div class="pt-3">
                                     <div
                                         class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
-                                        <h3 class="text-md font-bold text-gray-800 mb-1.5">کاربران</h3>
+                                        <div class="flex flex-row-reverse items-center gap-2">
+                                            {{-- <span class=" text-[white] flex justify-end font-bold">کاربران</span> --}}
+                                            <h3 class="text-md font-bold text-gray-800 mb-1">کاربران</h3>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 448 512">
+                                                <path
+                                                    d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+                                            </svg>
+                                        </div>
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             class="size-4 transition-all duration-300 @if (Route::is('user.list') ||
                                                     Route::is('user.create_user') ||
@@ -765,7 +816,20 @@
                                 <div class="pt-3">
                                     <div
                                         class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
-                                        <h3 class="text-md font-bold text-gray-800 mb-1.5">اسلایدر</h3>
+                                        <div class="flex flex-row-reverse items-center gap-2">
+                                            {{-- <span class=" text-[white] flex justify-end font-bold">اسلایدر</span> --}}
+                                            <h3 class="text-md font-bold text-gray-800 mb-1">اسلایدر</h3>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="800px" height="800px"
+                                                class="size-5" viewBox="0 0 100 100" enable-background="new 0 0 100 100"
+                                                xml:space="preserve">
+                                                <path
+                                                    d="M22.5,19.7h20c1.4,0,2.5,1.1,2.5,2.5v54.9c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V22.2  C20,20.8,21.1,19.7,22.5,19.7z" />
+                                                <path
+                                                    d="M57.5,19.6h20c1.4,0,2.5,1.1,2.5,2.5V42c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V22.1  C55,20.7,56.1,19.6,57.5,19.6z" />
+                                                <path
+                                                    d="M57.5,54.6h20c1.4,0,2.5,1.1,2.5,2.5v19.9c0,1.4-1.1,2.5-2.5,2.5h-20c-1.4,0-2.5-1.1-2.5-2.5V57.1  C55,55.8,56.1,54.6,57.5,54.6z" />
+                                            </svg>
+                                        </div>
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             class="size-4 transition-all duration-300 @if (Route::is('slider.*')) rotate-180 @endif"
                                             viewBox="0 0 448 512">
@@ -793,9 +857,16 @@
                                 <div class="pt-3">
                                     <div
                                         class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
-                                        <h3 class="text-md font-bold text-gray-800 mb-1.5">
-                                            درباره ما
-                                        </h3>
+                                        <div class="flex flex-row-reverse items-center gap-2">
+                                            {{-- <span class=" text-[white] flex justify-end font-bold">درباره ما</span> --}}
+                                            <h3 class="text-md font-bold text-gray-800 mb-1">
+                                                درباره ما
+                                            </h3>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-6" viewBox="0 0 640 512">
+                                                <path
+                                                    d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z" />
+                                            </svg>
+                                        </div>
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             class="size-4 transition-all duration-300 @if (Route::is('aboutUs.*')) rotate-180 @endif"
                                             viewBox="0 0 448 512">
@@ -823,9 +894,16 @@
                                 <div class="pt-3">
                                     <div
                                         class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
-                                        <h3 class="text-md font-bold text-gray-800 mb-1.5">
-                                            ارتباط با ما
-                                        </h3>
+                                        <div class="flex flex-row-reverse items-center gap-2">
+                                            {{-- <span class=" text-[white] flex justify-end font-bold">ارتباط باما</span> --}}
+                                            <h3 class="text-md font-bold text-gray-800 mb-1">
+                                                ارتباط با ما
+                                            </h3>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 512 512">
+                                                <path
+                                                    d="M384 48c8.8 0 16 7.2 16 16V448c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16H384zM96 0C60.7 0 32 28.7 32 64V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H96zM240 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128zm-32 32c-44.2 0-80 35.8-80 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16c0-44.2-35.8-80-80-80H208zM512 80c0-8.8-7.2-16-16-16s-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V80zM496 192c-8.8 0-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm16 144c0-8.8-7.2-16-16-16s-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V336z" />
+                                            </svg>
+                                        </div>
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             class="size-4 transition-all duration-300 @if (Route::is('contactUs.*')) rotate-180 @endif"
                                             viewBox="0 0 448 512">
@@ -854,9 +932,16 @@
                             <div class="pt-3">
                                 <div
                                     class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
-                                    <h3 class="text-md font-bold text-gray-800 mb-1.5">
-                                        کیوآر کد
-                                    </h3>
+                                    <div class="flex flex-row-reverse items-center gap-2">
+                                        {{-- <span class=" text-[white] flex justify-end font-bold">کیوآر کد</span> --}}
+                                        <h3 class="text-md font-bold text-gray-800 mb-1">
+                                            کیوآر کد
+                                        </h3>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-6" viewBox="0 0 448 512">
+                                            <path
+                                                d="M0 80C0 53.5 21.5 32 48 32h96c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80zM64 96v64h64V96H64zM0 336c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V336zm64 16v64h64V352H64zM304 32h96c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48H304c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48zm80 64H320v64h64V96zM256 304c0-8.8 7.2-16 16-16h64c8.8 0 16 7.2 16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s7.2-16 16-16s16 7.2 16 16v96c0 8.8-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s-7.2-16-16-16s-16 7.2-16 16v64c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V304zM368 480a16 16 0 1 1 0-32 16 16 0 1 1 0 32zm64 0a16 16 0 1 1 0-32 16 16 0 1 1 0 32z" />
+                                        </svg>
+                                    </div>
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         class="size-4 transition-all duration-300 @if (Route::is('generalQrCodes.*')) rotate-180 @endif"
                                         viewBox="0 0 448 512">
