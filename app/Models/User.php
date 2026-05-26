@@ -54,7 +54,7 @@ class User extends Authenticatable
 
     public function careers()
     {
-        return $this->hasMany(career::class)->chaperOne();
+        return $this->hasMany(career::class , 'user_id')->chaperOne();
     }
 
     public function ecomms()

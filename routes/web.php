@@ -58,6 +58,18 @@ use App\Http\Controllers\ClassAttachmentController;
 use App\Http\Middleware\savePreviousUrl;
 
 use App\Models\social_qr_codes;
+// this route called once
+use App\Models\menu_item;
+use App\Models\menu_category;
+
+Route::get('transfer-ids', function () {
+    $menuItems = menu_item::all();
+    foreach ($menuItems as $menuItem) {
+        $menuCats = menu_category::select('id', 'menu_id')->where('id', $menuItem->menu_category_id)->first();
+        $menuItem->update(['menu_id' => $menuCats->menu_id]);
+    }
+});
+// end
 
 Route::group([
     'prefix' => 'guys',
@@ -71,6 +83,7 @@ Route::group([
 Route::get('rinform', function () {
     return view('newhome');
 });
+
 
 Route::get('/test', function () {
     $link = url('/') . "/qrcode/5/" . 'Dviq52Dnxp';
