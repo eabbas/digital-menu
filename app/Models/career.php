@@ -88,8 +88,9 @@ class career extends Model
     {
         return $this->hasMany(favorites::class, 'item_id');
     }
-
+    
     public function page(){
         return $this->belongsTo(pages::class, 'page_id');
     }
+   
 }

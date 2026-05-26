@@ -1,11 +1,10 @@
 <div class="w-11/12 mx-auto py-3">
-
     <h3 class="w-full text-base font-bold lg:text-md mb-3">منو های {{ $career->title }}</h3>
-
+    
     <div class="w-full bg-white rounded-md">
         <div class="w-11/12 mx-auto flex flex-row items-center gap-8 pb-3 py-4 overflow-x-auto bg-white"
-            style="scrollbar-width: thin;" id="menuList">
-            @foreach ($career->menus as $menu)
+        style="scrollbar-width: thin;" id="menuList">
+        @foreach ($career->menus as $menu)
                 @if (count($menu->menu_items) > 1)
                     <div class="relative selectItems @if ($career->menus[0] == $menu) selected @endif allMenus min-w-20 min-h-20"
                         data-menu-id="{{ $menu->id }}">
