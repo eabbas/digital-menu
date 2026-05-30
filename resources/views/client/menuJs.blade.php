@@ -5,8 +5,8 @@
     // let menuCats = document.getElementById('menuCats')
     let menuItemList = document.getElementById('menuItemList')
 
+
     function showMenu(el, menuId) {
-        let menuParent = document.querySelectorAll('.menuParent')
         menuParent.forEach((menuCild) => {
             menuCild.parentElement.classList.remove('selected')
         })
@@ -20,13 +20,13 @@
             url: "{{ url('menu/showMenuClient/') }}/" + menuId,
             type: "GET",
             success: function (data) {
-                console.log(data)
+                console.log('Response data:', data.menus.id);
+                console.log('Menu items:', data.menus.menu_items);
                 // menuCats.innerHTML = ""
-                console.log(menuItemList)
                 menuItemList.innerHTML = ""
-                let menus = data.menus
-                if(menus.length != 0){
-                    menus.forEach((menu) => {
+                // let menus = data.menus
+                // if(menus.length != 0){
+                //     menus.forEach((menu) => {
                         // if (category.title != 'بدون دسته بندی') {
                             // let elementDiv = document.createElement('div')
                             // let html = `
@@ -35,10 +35,10 @@
                             // </div>
                             // `
                             // elementDiv.innerHTML = html
-                            if (menus[1].id == menu.id) {
-                                elementDiv.children[0].classList.remove('border-gray-300')
-                                elementDiv.children[0].classList.add('border-red-600')
-                                let items = menu.menu_items
+                            // if (menus[1].id == menu.id) {
+                                // elementDiv.children[0].classList.remove('border-gray-300')
+                                // elementDiv.children[0].classList.add('border-red-600')
+                                let items = data.menus.menu_items
                                 items.forEach((item) => {
                                     console.log(item)
                                     let div = document.createElement('div')
@@ -144,15 +144,16 @@
                                     menuItemList.appendChild(div)
     
                                 })
-                            }
+                            
+                            // }
                             // menuCats.appendChild(elementDiv)
                         // }
-                    })
-                }
+                //     })
+                // }
 
             },
             error: function () {
-                console.log('error')
+                console.log('error showMenu')
             }
         })
     }

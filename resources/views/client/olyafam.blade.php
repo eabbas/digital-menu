@@ -52,6 +52,7 @@
     @foreach ($career->menus as $menu)
         {{-- @if (count($menu->menu_categories) > 1) --}}
             <div class="flex flex-col gap-3 mt-3 menus" data-menu-id="{{ $menu->id }}">
+                @if ($career->menus[0]->id == $menu->id)
                 {{-- @foreach ($menu->menu_categories as $category) --}}
                     @if (count($menu->menu_items))
                         <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
@@ -59,6 +60,7 @@
                                 <div class="p-2 lg:p-4">
                                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="menuItemList">
                                         @foreach ($menu->menu_items as $item)
+                                        
                                             {{-- @if ($item->title != 'آیتم 1') --}}
                                                 <div class="w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems"
                                                     data-menu-item-title="{{ $item->title }}"
@@ -162,6 +164,7 @@
                         </div>
                     @endif
                 {{-- @endforeach --}}
+                @endif
             </div>
         {{-- @endif --}}
     @endforeach
