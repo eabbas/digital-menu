@@ -1,10 +1,13 @@
 {{-- bottom menu mobile --}}
 
-<footer class="w-full flex justify-center rounded-t-4xl bg-white fixed bottom-0 right-0 py-1.5 z-999999">
-    <div class="w-11/12 mt-2 flex justify-between items-center ">
+<footer class="w-full flex justify-center rounded-t-4xl bg-white fixed bottom-0 right-0 py-1.5 z-999">
+    <div class="w-11/12 mt-1 flex justify-between items-center ">
         <a href="{{{ route('home') }}}" class="w-1/7 flex flex-col items-center gap-2" id="homeIcon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="w-5">
-                <path fill="@if(Route::is('home')) #fc8e21 @else var(--secondary-text-color) @endif" d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/>
+{{--            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"  class="w-5">--}}
+{{--                <path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/>--}}
+{{--            </svg>--}}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="w-5" fill="none" stroke="@if(Route::is('home')) #fc8e21 @else var(--secondary-text-color) @endif" stroke-width="32" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/>
             </svg>
             <span class="text-xs @if(Route::is('home')) text-[#fc8e21] @else text-(--secondary-text-color) @endif">خانه</span>
         </a>
@@ -29,9 +32,11 @@
             </div>
         </div>
         <div class="w-1/7 flex flex-col items-center gap-2 relative">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5" fill="#7f7e84">
-                <path d="M160 512l48-32 96-64H464h48V368 48 0H464 48 0V48 368v48H48h64 48v38.3V464v48zM277.4 376.1L208 422.3V416 368H160 48V48H464V368H304 289.5l-12.1 8.1zM144 240a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm144-32a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm80 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/>
-            </svg>
+{{--            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"  fill="#7f7e84">--}}
+{{--                <path d="M160 512l48-32 96-64H464h48V368 48 0H464 48 0V48 368v48H48h64 48v38.3V464v48zM277.4 376.1L208 422.3V416 368H160 48V48H464V368H304 289.5l-12.1 8.1zM144 240a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm144-32a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm80 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/>--}}
+{{--            </svg>--}}
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5" viewBox="0 0 512 512">
+                <path fill="var(--secondary-text-color)" d="M208 416c0-26.5-21.5-48-48-48H64c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16H448c8.8 0 16 7.2 16 16V352c0 8.8-7.2 16-16 16H309.3c-10.4 0-20.5 3.4-28.8 9.6L208 432V416zm-.2 76.2l.2-.2 101.3-76H448c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64C28.7 0 0 28.7 0 64V352c0 35.3 28.7 64 64 64h48 48v48 4 .3 6.4V496c0 6.1 3.4 11.6 8.8 14.3s11.9 2.1 16.8-1.5L202.7 496l5.1-3.8zM144 240a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm144-32a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm80 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/></svg>
             <span class="text-xs text-(--secondary-text-color)">پیام ها</span>
             <span class="w-2 h-2 rounded-full bg-[#fc8e21] absolute right-3 -top-2"></span>
         </div>
