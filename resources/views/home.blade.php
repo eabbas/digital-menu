@@ -15,7 +15,7 @@
         }
     </style>
 
-    <main class="flex flex-col gap-4">
+    <main class="flex flex-col gap-2">
         <!-- filter -->
         <section class="w-full px-5 bg-white h-10 mx-auto flex justify-center">
             <div class="w-full flex items-center justify-end">
@@ -46,7 +46,7 @@
         <!-- filter -->
         <!-- esloyder -->
         <section class="w-full flex justify-center relative px-5">
-            <div class="w-full bg-[#131f2f] rounded-xl flex px-3 py-3">
+            <div class="w-full bg-[#131f2f] rounded-xl flex px-3 py-1">
                 <div class="w-1/2 h-full overflow-hidden flex justify-center items-center">
                     <img src="{{asset('storage/mahdi/b460793d-5101-464d-83e2-7e8ab6773448.jpg')}}" alt="" class="object-cover w-10/12">
                 </div>
@@ -78,77 +78,39 @@
             <!-- chaleng_aloyder  -->
         </section>
         <!-- esloyder -->
-        <!-- خدمات پر طرفدار -->
+
+        <!-- خدمات آموزشی -->
         <section class="w-full flex flex-col justify-center items-center gap-2">
             <div class="w-full px-5 flex items-center justify-between">
-                <h4 class="text-sm font-bold text-(--primary-text-color)">خدمات پر طرفدار</h4>
-                <div class="flex items-center gap-2">
-                    <a href="#" class="text-xs text-[#fc8e21]">مشاهده همه</a>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-2 rotate-90" fill="#fc8e21"><path d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"></path></svg>
-                </div>
+                <h4 class="text-sm font-bold text-(--primary-text-color)">آکادمی رینگا (آموزش)</h4>
+                {{--                <div class="flex items-center gap-2">--}}
+                {{--                    <a href="#" class="text-xs text-[#fc8e21]">مشاهده همه</a>--}}
+                {{--                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-2 rotate-90" fill="#fc8e21"><path d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"></path></svg>--}}
+                {{--                </div>--}}
             </div>
-            <div class="w-full px-5 py-3 bg-white flex items-center justify-between gap-3 overflow-x-auto" style="scrollbar-width:thin;">
-                <a href="#" class="min-w-[110px] max-w-[110px] rounded-xl flex flex-col items-center gap-2 pt-2 pb-3 border-1 border-[#efefef]">
+            <div class="w-full px-5 py-1 bg-white flex items-center gap-2 overflow-x-auto" style="scrollbar-width:thin;">
+                <a href="#" class="min-w-20 max-w-20 rounded-xl flex flex-col items-center gap-1 pt-2 pb-3 ">
                     <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
-                        <img src="{{asset('storage/home/webDesign.jpg')}}" alt="" class="size-14 mx-auto object-cover">
+                        <img src="{{asset('storage/home/programming-learn.jpg')}}" alt="" class="size-12 mx-auto object-cover">
                     </div>
                     <div class="w-10/12 flex justify-center">
                         <span class="text-xs text-nowrap text-(--primary-text-color) font-bold">طراحی وبسایت</span>
                     </div>
                 </a>
-                <a href="{{ route('career.careersList') }}" class="min-w-[110px] max-w-[110px] rounded-xl flex flex-col items-center gap-2 pt-2 pb-3 border-1 border-[#efefef]">
+                <a href="#" class="min-w-20 max-w-20 rounded-xl flex flex-col items-center gap-1 pt-2 pb-3 ">
                     <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
-                        <img src="{{asset('storage/home/foodOrder.jpg')}}" alt="" class="size-14 mx-auto object-cover">
+                        <img src="{{asset('storage/home/learn-english.png')}}" alt="" class="size-12 mx-auto object-cover">
                     </div>
                     <div class="w-10/12 flex justify-center">
-                        <span class="text-xs text-nowrap text-(--primary-text-color) font-bold">سفارش غذا</span>
+                        <span class="text-xs text-nowrap text-(--primary-text-color) font-bold">زبان</span>
                     </div>
                 </a>
-                <a href="#" class="min-w-[110px] max-w-[110px] rounded-xl flex flex-col items-center gap-2 pt-2 pb-3 border-1 border-[#efefef]">
-                    <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
-                        <img src="{{asset('storage/home/printary.jpg')}}" alt="" class="size-14 mx-auto object-cover">
-                    </div>
-                    <div class="w-10/12 flex justify-center">
-                        <span class="text-xs text-nowrap text-(--primary-text-color) font-bold">چاپ</span>
-                    </div>
-                </a>
-                <a href="#" class="min-w-[110px] max-w-[110px] rounded-xl flex flex-col items-center gap-2 pt-2 pb-3 border-1 border-[#efefef]">
-                    <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
-                        <img src="{{asset('storage/home/laptop.jpg')}}" alt="" class="size-14 mx-auto object-cover">
-                    </div>
-                    <div class="w-10/12 flex justify-center">
-                        <span class="text-xs text-nowrap text-(--primary-text-color) font-bold">خدمات کامپیوتر</span>
-                    </div>
-                </a>
-                <a href="#" class="min-w-[110px] max-w-[110px] rounded-xl flex flex-col items-center gap-2 pt-2 pb-3 border-1 border-[#efefef]">
-                    <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
-                        <img src="{{asset('storage/home/brick.jpg')}}" alt="" class="size-14 mx-auto object-cover">
-                    </div>
-                    <div class="w-10/12 flex justify-center">
-                        <span class="text-xs text-nowrap text-(--primary-text-color) font-bold">خدمات ساختمانی</span>
-                    </div>
-                </a>
-                <a href="#" class="min-w-[110px] max-w-[110px] rounded-xl flex flex-col items-center gap-2 pt-2 pb-3 border-1 border-[#efefef]">
-                    <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
-                        <img src="{{asset('storage/home/transport.jpg')}}" alt="" class="size-14 mx-auto object-cover">
-                    </div>
-                    <div class="w-10/12 flex justify-center">
-                        <span class="text-xs text-nowrap text-(--primary-text-color) font-bold">حمل بار و حمل و نقل</span>
-                    </div>
-                </a>
-                <a href="#" class="min-w-[110px] max-w-[110px] rounded-xl flex flex-col items-center gap-2 pt-2 pb-3 border-1 border-[#efefef]">
-                    <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
-                        <img src="{{asset('storage/home/qrcode.png')}}" alt="" class="size-14 mx-auto object-cover">
-                    </div>
-                    <div class="w-10/12 flex justify-center">
-                        <span class="text-xs text-nowrap text-(--primary-text-color) font-bold">ایجاد کد QR</span>
-                    </div>
-                </a>
-
 
             </div>
         </section>
-        <!-- خدمات پر طرفدار -->
+        <!-- خدمات آموزشی -->
+
+
 
         <!-- جایگاه های تبلیغاتی -->
         <section class="w-full flex flex-col justify-center items-center gap-2">
@@ -185,7 +147,7 @@
 
                 <div class="w-7/12 h-full bg-[#131f2f] flex gap-1 flex justify-between items-center gap-2 rounded-xl relative py-5">
                     <div class="w-5/12 h-full relative flex items-end  overflow-x-hidden">
-                        <img src="{{asset('storage/mahdi/Screenshot 2026-05-21 175937.png')}}" alt="" class="object-cover relative -right-1">
+                        <img src="{{asset('storage/home/speaker.png')}}" alt="" class="object-cover relative -right-1">
                     </div>
                     <div class="w-7/12 h-full flex flex-col justify-center items-start gap-2">
                         <h5 class="text-sm font-bold text-white">جایگاه تبلیغاتی ویژه</h5>
@@ -201,71 +163,146 @@
             </div>
         </section>
         <!-- جایگاه های تبلیغاتی -->
-        <!-- صفحات پر طرفدار -->
+
+        <!-- خدمات پر طرفدار -->
         <section class="w-full flex flex-col justify-center items-center gap-2">
             <div class="w-full px-5 flex items-center justify-between">
-                <h4 class="text-sm font-bold text-(--primary-text-color)">صفحه ها</h4>
+                <h4 class="text-sm font-bold text-(--primary-text-color)">خدمات پر طرفدار</h4>
                 <div class="flex items-center gap-2">
-                    <a href="{{ route('client.allPages') }}" class="text-xs text-[#fc8e21]">مشاهده همه</a>
+                    <a href="#" class="text-xs text-[#fc8e21]">مشاهده همه</a>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-2 rotate-90" fill="#fc8e21"><path d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"></path></svg>
                 </div>
             </div>
-            <div class="w-full px-5 py-3 bg-white bg-white flex items-center gap-3 overflow-x-auto" style="scrollbar-width: thin;">
-                @foreach($pages as $page)
-                    @if($page->show_in_home)
-                        <a href="{{ route('client.loadLink', $page->id) }}" class="min-w-[120px] max-w-[120px] rounded-xl flex flex-col gap-2 pt-2 pb-3 border-1 border-[#efefef]">
-                            <div class="w-full rounded-full  flex jsutfiy-center items-center overflow-hidden mr-1">
-                                <img src="{{asset('storage/'.$page->logo_path)}}" alt="" class="size-16 rounded-md mx-auto object-cover">
-                            </div>
-                            <div class="w-10/12 flex flex-col justify-center pr-1 gap-1 mx-auto">
-                                <span class="text-xs text-nowrap font-bold text-(--primary-text-color) truncate" title="{{ $page->title }}">{{ $page->title }}</span>
-                                <span class="text-xs text-(secondary-text-color) text-nowrap">9.1k دنبال کننده</span>
-                            </div>
-                        </a>
-                    @endif
-                @endforeach
+            <div class="w-full px-5 py-3 bg-white flex items-center gap-2 overflow-x-auto" style="scrollbar-width:thin;">
+                <a href="#" class="min-w-20 max-w-20 rounded-xl flex flex-col items-center gap-1 pt-2 pb-3 border-1 border-[#efefef]">
+                    <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
+                        <img src="{{asset('storage/home/webDesign.jpg')}}" alt="" class="size-12 mx-auto object-cover">
+                    </div>
+                    <div class="w-10/12 flex justify-center">
+                        <span class="text-[10px] text-nowrap text-(--primary-text-color) font-bold">طراحی وبسایت</span>
+                    </div>
+                </a>
+                <a href="{{ route('career.careersList') }}" class="min-w-20 max-w-20 rounded-xl flex flex-col items-center gap-1 pt-2 pb-3 border-1 border-[#efefef]">
+                    <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
+                        <img src="{{asset('storage/home/foodOrder.jpg')}}" alt="" class="size-12 mx-auto object-cover">
+                    </div>
+                    <div class="w-10/12 flex justify-center">
+                        <span class="text-[10px] text-nowrap text-(--primary-text-color) font-bold">سفارش غذا</span>
+                    </div>
+                </a>
+                <a href="#" class="min-w-20 max-w-20 rounded-xl flex flex-col items-center gap-1 pt-2 pb-3 border-1 border-[#efefef]">
+                    <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
+                        <img src="{{asset('storage/home/printary.jpg')}}" alt="" class="size-12 mx-auto object-cover">
+                    </div>
+                    <div class="w-10/12 flex justify-center">
+                        <span class="text-[10px] text-nowrap text-(--primary-text-color) font-bold">چاپ</span>
+                    </div>
+                </a>
+                <a href="#" class="min-w-20 max-w-20 rounded-xl flex flex-col items-center gap-1 pt-2 pb-3 border-1 border-[#efefef]">
+                    <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
+                        <img src="{{asset('storage/home/laptop.jpg')}}" alt="" class="size-12 mx-auto object-cover">
+                    </div>
+                    <div class="w-10/12 flex justify-center">
+                        <span class="text-[10px] text-nowrap text-(--primary-text-color) font-bold"> کامپیوتر</span>
+                    </div>
+                </a>
+                <a href="#" class="min-w-20 max-w-20 rounded-xl flex flex-col items-center gap-1 pt-2 pb-3 border-1 border-[#efefef]">
+                    <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
+                        <img src="{{asset('storage/home/brick.jpg')}}" alt="" class="size-12 mx-auto object-cover">
+                    </div>
+                    <div class="w-10/12 flex justify-center">
+                        <span class="text-[10px] text-nowrap text-(--primary-text-color) font-bold"> ساختمانی</span>
+                    </div>
+                </a>
+                <a href="#" class="min-w-20 max-w-20 rounded-xl flex flex-col items-center gap-1 pt-2 pb-3 border-1 border-[#efefef]">
+                    <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
+                        <img src="{{asset('storage/home/transport.jpg')}}" alt="" class="size-12 mx-auto object-cover">
+                    </div>
+                    <div class="w-10/12 flex justify-center">
+                        <span class="text-[10px] text-nowrap text-(--primary-text-color) font-bold">حمل بار</span>
+                    </div>
+                </a>
+                <a href="#" class="min-w-20 max-w-20 rounded-xl flex flex-col items-center gap-1 pt-2 pb-3 border-1 border-[#efefef]">
+                    <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
+                        <img src="{{asset('storage/home/qrcode.png')}}" alt="" class="size-12 mx-auto object-cover">
+                    </div>
+                    <div class="w-10/12 flex justify-center">
+                        <span class="text-[10px] text-nowrap text-(--primary-text-color) font-bold">ایجاد کد QR</span>
+                    </div>
+                </a>
+
 
             </div>
         </section>
-        <!-- صفحات پر طرفدار -->
+        <!-- خدمات پر طرفدار -->
 
-        <!-- کسب و کار ویژه -->
-        <section class="w-full flex flex-col justify-center items-center gap-2 mb-25">
-            <div class="w-full px-5 flex items-center justify-between">
-                <h4 class="text-sm font-bold text-(--primary-text-color)">کسب و کار های ویژه</h4>
-                <div class="flex items-center gap-2">
-                    <a href="{{ route('career.careersList') }}" class="text-xs text-[#fc8e21]">مشاهده همه</a>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-2 rotate-90" fill="#fc8e21"><path d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"></path></svg>
-                </div>
-            </div>
-            <div class="w-full px-5 py-3 bg-white flex items-center gap-3 overflow-x-auto" style="scrollbar-width: thin;">
-                @foreach($careers as $career)
-                    @if($career->show_in_home)
 
-                        <a href="{{ route('client.menu', $career->id) }}" class="min-w-[130px] max-w-[130px] rounded-xl flex flex-col items-center gap-2 pt-2 pb-3 border-1 border-[#efefef]">
-                            <div class="w-full flex jsutfiy-center items-center overflow-hidden px-2">
-                                <img src="{{asset('storage/'.$career->logo)}}" alt="" class="w-full h-18 rounded-md mx-auto object-cover">
-                            </div>
-                            <div class="w-10/12 flex flex-col items-center gap-1">
-                                <span class="text-sm font-bold truncate text-(--primary-text-color) font-bold">{{ $career->title }}</span>
-                                <p class="max-w-full h-8 max-h-8 text-xs text-(--secondary-text-color) ellipsis-2" title="{{ $career->description }}">{{ $career->description }}</p>
+
+{{--        <!-- صفحات پر طرفدار -->--}}
+{{--        <section class="w-full flex flex-col justify-center items-center gap-2">--}}
+{{--            <div class="w-full px-5 flex items-center justify-between">--}}
+{{--                <h4 class="text-sm font-bold text-(--primary-text-color)">صفحه ها</h4>--}}
+{{--                <div class="flex items-center gap-2">--}}
+{{--                    <a href="{{ route('client.allPages') }}" class="text-xs text-[#fc8e21]">مشاهده همه</a>--}}
+{{--                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-2 rotate-90" fill="#fc8e21"><path d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"></path></svg>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="w-full px-5 py-3 bg-white bg-white flex items-center gap-3 overflow-x-auto" style="scrollbar-width: thin;">--}}
+{{--                @foreach($pages as $page)--}}
+{{--                    @if($page->show_in_home)--}}
+{{--                        <a href="{{ route('client.loadLink', $page->id) }}" class="min-w-[120px] max-w-[120px] rounded-xl flex flex-col gap-2 pt-2 pb-3 border-1 border-[#efefef]">--}}
+{{--                            <div class="w-full rounded-full  flex jsutfiy-center items-center overflow-hidden mr-1">--}}
+{{--                                <img src="{{asset('storage/'.$page->logo_path)}}" alt="" class="size-16 rounded-md mx-auto object-cover">--}}
+{{--                            </div>--}}
+{{--                            <div class="w-10/12 flex flex-col justify-center pr-1 gap-1 mx-auto">--}}
+{{--                                <span class="text-xs text-nowrap font-bold text-(--primary-text-color) truncate" title="{{ $page->title }}">{{ $page->title }}</span>--}}
+{{--                                <span class="text-xs text-(secondary-text-color) text-nowrap">9.1k دنبال کننده</span>--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
+{{--                    @endif--}}
+{{--                @endforeach--}}
+
+{{--            </div>--}}
+{{--        </section>--}}
+{{--        <!-- صفحات پر طرفدار -->--}}
+
+{{--        <!-- کسب و کار ویژه -->--}}
+{{--        <section class="w-full flex flex-col justify-center items-center gap-2 mb-25">--}}
+{{--            <div class="w-full px-5 flex items-center justify-between">--}}
+{{--                <h4 class="text-sm font-bold text-(--primary-text-color)">کسب و کار های ویژه</h4>--}}
+{{--                <div class="flex items-center gap-2">--}}
+{{--                    <a href="{{ route('career.careersList') }}" class="text-xs text-[#fc8e21]">مشاهده همه</a>--}}
+{{--                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-2 rotate-90" fill="#fc8e21"><path d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"></path></svg>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="w-full px-5 py-3 bg-white flex items-center gap-3 overflow-x-auto" style="scrollbar-width: thin;">--}}
+{{--                @foreach($careers as $career)--}}
+{{--                    @if($career->show_in_home)--}}
+
+{{--                        <a href="{{ route('client.menu', $career->id) }}" class="min-w-[130px] max-w-[130px] rounded-xl flex flex-col items-center gap-2 pt-2 pb-3 border-1 border-[#efefef]">--}}
+{{--                            <div class="w-full flex jsutfiy-center items-center overflow-hidden px-2">--}}
+{{--                                <img src="{{asset('storage/'.$career->logo)}}" alt="" class="w-full h-18 rounded-md mx-auto object-cover">--}}
+{{--                            </div>--}}
+{{--                            <div class="w-10/12 flex flex-col items-center gap-1">--}}
+{{--                                <span class="text-sm font-bold truncate text-(--primary-text-color) font-bold">{{ $career->title }}</span>--}}
+{{--                                <p class="max-w-full h-8 max-h-8 text-xs text-(--secondary-text-color) ellipsis-2" title="{{ $career->description }}">{{ $career->description }}</p>--}}
 {{--                                <div class="flex gap-1 items-center text-(--secondary-text-color)">--}}
 {{--                                    <span class="text-xs text-nowrap text-(--secondary-text-color)">4.7</span>--}}
 {{--                                    <svg viewBox="0 0 576 512" class="w-2" fill="#ff8900"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>--}}
 {{--                                </div>--}}
-                                <div class="w-full flex flex-row items-center items-end gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-3" viewBox="0 0 384 512">
-                                        <path fill="var(--secondary-text-color)" d="M336 192c0-79.5-64.5-144-144-144S48 112.5 48 192c0 12.4 4.5 31.6 15.3 57.2c10.5 24.8 25.4 52.2 42.5 79.9c28.5 46.2 61.5 90.8 86.2 122.6c24.8-31.8 57.8-76.4 86.2-122.6c17.1-27.7 32-55.1 42.5-79.9C331.5 223.6 336 204.4 336 192zm48 0c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192C0 86 86 0 192 0S384 86 384 192zm-160 0a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm-112 0a80 80 0 1 1 160 0 80 80 0 1 1 -160 0z"/>
-                                    </svg>
-                                    <span class="text-xs truncate text-(--secondary-text-color)">{{ $career->province_city->title ?? '' }}</span>
-                                </div>
-                            </div>
-                        </a>
-                    @endif
-                @endforeach
-            </div>
-        </section>
-        <!-- کسب و کار ویژه -->
+{{--                                <div class="w-full flex flex-row items-center items-end gap-2">--}}
+{{--                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-3" viewBox="0 0 384 512">--}}
+{{--                                        <path fill="var(--secondary-text-color)" d="M336 192c0-79.5-64.5-144-144-144S48 112.5 48 192c0 12.4 4.5 31.6 15.3 57.2c10.5 24.8 25.4 52.2 42.5 79.9c28.5 46.2 61.5 90.8 86.2 122.6c24.8-31.8 57.8-76.4 86.2-122.6c17.1-27.7 32-55.1 42.5-79.9C331.5 223.6 336 204.4 336 192zm48 0c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192C0 86 86 0 192 0S384 86 384 192zm-160 0a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm-112 0a80 80 0 1 1 160 0 80 80 0 1 1 -160 0z"/>--}}
+{{--                                    </svg>--}}
+{{--                                    <span class="text-xs truncate text-(--secondary-text-color)">{{ $career->province_city->title ?? '' }}</span>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
+{{--                    @endif--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
+{{--        </section>--}}
+{{--        <!-- کسب و کار ویژه -->--}}
     </main>
 
     <div class="absolute top-0 opacity-0 invisible right-1/2 translate-x-1/2 w-3/4 lg:w-1/3 bg-white rounded-lg shadow-md transition-all duration-500 z-99999999"

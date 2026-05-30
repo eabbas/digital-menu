@@ -266,14 +266,14 @@
                                             <a href="{{ route('user.profile') }}" class="block w-full p-2">پروفایل
                                                 من</a>
                                         </li>
-                                        @if (!Auth::user()->email)
-                                            <li
-                                                class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto rounded-lg">
-                                                <a href="{{ route('user.compelete_form') }}"
-                                                    class="block w-full p-2">تکمیل
-                                                    پروفایل</a>
-                                            </li>
-                                        @endif
+{{--                                        @if (!Auth::user()->email)--}}
+{{--                                            <li--}}
+{{--                                                class="hover:text-[#1B84FF] hover:bg-[#F1F1F4]  mt-1 w-11/12 ml-auto mr-auto rounded-lg">--}}
+{{--                                                <a href="{{ route('user.compelete_form') }}"--}}
+{{--                                                    class="block w-full p-2">تکمیل--}}
+{{--                                                    پروفایل</a>--}}
+{{--                                            </li>--}}
+{{--                                        @endif--}}
                                     </ul>
                                     <div class="w-full h-px bg-gray-300 my-2 "></div>
                                     <div class="rtl text-right ">
@@ -332,37 +332,46 @@
                                     {{ Auth::user()?->family }}</span>
                             </div>
                         </a>
-                        <div class="overflow-y-auto [&::-webkit-scrollbar]:hidden h-[calc(100vh-134px)] mb-7">
+                        <div class="overflow-y-auto [&::-webkit-scrollbar]:hidden h-[calc(100vh-134px)] mb-12 pb-12">
                             <div class="pt-2 flex flex-col">
                                 <div>
-                                    <a href="{{ route('home') }}" class="block text-gray-700 py-2 text-md">
-                                        صفحه اول
+                                    <a href="{{ route('home') }}" class="flex flex-row items-center gap-3 py-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="w-5" fill="none" stroke="@if(Route::is('home')) var(--primary-color) @else var(--secondary-text-color) @endif" stroke-width="32" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/>
+                                        </svg>
+                                        <span class="text-sm @if(Route::is('home')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">صفحه اول</span>
                                     </a>
                                 </div>
-                                @if (!Auth::user()->email)
-                                    <div>
-                                        <a href="{{ route('user.compelete_form') }}"
-                                            class="block text-gray-700 py-2 text-md">
-                                            تکمیل پروفایل
-                                        </a>
-                                    </div>
-                                @endif
+{{--                                @if (!Auth::user()->email)--}}
+{{--                                    <div>--}}
+{{--                                        <a href="{{ route('user.compelete_form') }}"--}}
+{{--                                            class="block text-gray-700 py-2 text-md">--}}
+{{--                                            تکمیل پروفایل--}}
+{{--                                        </a>--}}
+{{--                                    </div>--}}
+{{--                                @endif--}}
                                 <div>
-                                    <a href="{{ route('user.setting') }}" class="block text-gray-700 py-2 text-md">
-                                        ویرایش پروفایل
+                                    <a href="{{ route('user.setting') }}" class="flex flex-row items-center gap-3 py-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5" viewBox="0 0 512 512">
+                                            <path fill="@if(Route::is('user.setting')) var(--primary-color) @else var(--secondary-text-color) @endif" d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z"/></svg>
+                                        <span class="text-sm @if(Route::is('user.setting')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">ویرایش پروفایل</span>
                                     </a>
                                 </div>
                             </div>
                             <div class="w-6/12 flex justify-start">
-                                <a href="{{ route('dashboard') }}" class="block text-gray-700 py-2 text-md">
-                                    داشبورد
+                                <a href="{{ route('dashboard') }}" class="flex flex-row items-center gap-3 py-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 @if(Route::is('dashboard')) fill-(--primary-color) @else fill-(--secondary-text-color) @endif"  viewBox="0 0 512 512">
+                                        <path fill="@if(Route::is('dashboard')) var-(--primary-color) @else var-(--secondary-text-color) @endif" d="M507.8 37.2c5.9 6.5 5.5 16.7-1.1 22.6l-176 160c-6.3 5.7-16 5.5-22.1-.5L190.4 101 25.4 220.9c-7.1 5.2-17.2 3.6-22.4-3.5s-3.6-17.2 3.5-22.4l176-128c6.4-4.6 15.2-3.9 20.7 1.6L320.5 185.9 485.2 36.2c6.5-5.9 16.7-5.5 22.6 1.1zM80 432V368c0-8.8-7.2-16-16-16s-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16zM64 320c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48s-48-21.5-48-48V368c0-26.5 21.5-48 48-48zm144-48c0-8.8-7.2-16-16-16s-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V272zm-64 0c0-26.5 21.5-48 48-48s48 21.5 48 48V432c0 26.5-21.5 48-48 48s-48-21.5-48-48V272zM336 432V336c0-8.8-7.2-16-16-16s-16 7.2-16 16v96c0 8.8 7.2 16 16 16s16-7.2 16-16zM320 288c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48s-48-21.5-48-48V336c0-26.5 21.5-48 48-48zm144-16c0-8.8-7.2-16-16-16s-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V272zm-64 0c0-26.5 21.5-48 48-48s48 21.5 48 48V432c0 26.5-21.5 48-48 48s-48-21.5-48-48V272z"/>
+                                    </svg>
+                                    <span class="text-sm @if(Route::is('dashboard')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">داشبورد</span>
+
                                 </a>
                             </div>
                             <div class="pt-3">
                                 <div
                                     class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
                                     <div class="flex flex-row-reverse items-center gap-2">
-                                         <h3 class="text-md font-bold text-gray-800 mb-1">فروشگاه ها</h3>
+                                         <h3 class="text-sm text-(--primary-text-color) mb-1">فروشگاه ها</h3>
                                         {{-- <span class=" text-[white] flex justify-end font-bold">فروشگاه</span> --}}
                                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 576 512">
                                             <path
@@ -390,58 +399,58 @@
                                             Route::is('ecomm_category.create') ||
                                             Route::is('ecomm_product.index') ||
                                             Route::is('ecomm_product.create')) max-h-[1000px] @else max-h-0 @endif">
-                                    <li class="pr-3.5 @if (Route::is('ecomm.ecomms')) bg-gray-100 @endif">
+                                    <li class="pr-3.5">
                                         <a href="{{ route('ecomm.ecomms') }}"
-                                            class="block text-gray-700 py-2 text-md">
+                                            class="block text-sm @if (Route::is('ecomm.ecomms')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif py-2">
                                             فروشگاه های من
                                         </a>
                                     </li>
-                                    <li class="pr-3.5 @if (Route::is('ecomm.create')) bg-gray-100 @endif">
+                                    <li class="pr-3.5">
                                         <a href="{{ route('ecomm.create') }}"
-                                            class="block text-gray-700 py-2 text-md">
+                                            class="block py-2 text-sm @if (Route::is('ecomm.create')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                             فروشگاه جدید
                                         </a>
                                     </li>
                                     @if (in_array(1, $ids))
-                                        <li class="pr-3.5 @if (Route::is('ecomm.list')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('ecomm.list') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm @if (Route::is('ecomm.list')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 همه فروشگاه ها
                                             </a>
                                         </li>
                                     @endif
 
                                     @if (count(Auth::user()->ecomms))
-                                        <li class="pr-3.5 @if (Route::is('ecomm_category.index')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('ecomm_category.index') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm @if (Route::is('ecomm_category.index')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 همه دسته ها
                                             </a>
                                         </li>
                                     @endif
 
-                                    <li class="pr-3.5 @if (Route::is('ecomm_category.create')) bg-gray-100 @endif">
+                                    <li class="pr-3.5">
                                         <span class="size-1 rounded-sm"></span>
                                         <a href="{{ route('ecomm_category.create') }}"
-                                            class="block text-gray-700 py-2 text-md">
+                                            class="block py-2 text-sm @if(Route::is('ecomm_category.create')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                             دسته جدید
                                         </a>
                                     </li>
                                     @if (count(Auth::user()->ecomms))
-                                        <li class="pr-3.5 @if (Route::is('ecomm_product.index')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('ecomm_product.index') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm @if(Route::is('ecomm_product.index')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 همه محصولات
                                             </a>
                                         </li>
                                     @endif
-                                    <li class="pr-3.5 @if (Route::is('ecomm_product.create')) bg-gray-100 @endif">
+                                    <li class="pr-3.5">
                                         <span class="size-1 rounded-sm"></span>
                                         <a href="{{ route('ecomm_product.create') }}"
-                                            class="block text-gray-700 py-2 text-md">
+                                            class="block py-2 text-sm @if(Route::is('ecomm_product.create')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                             محصول جدید
                                         </a>
                                     </li>
@@ -452,7 +461,7 @@
                                     class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
                                     <div class="flex flex-row-reverse items-center gap-2">
                                         {{-- <span class=" text-[white] flex justify-end font-bold">آموزشگاه ها</span> --}}
-                                        <h3 class="text-md font-bold text-gray-800 mb-1">آموزشگاه ها</h3>
+                                        <h3 class="text-sm text-(--primary-text-color) mb-1">آموزشگاه ها</h3>
                                         <svg width="26" height="26" viewBox="0 0 24 24"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -477,37 +486,37 @@
                                             Route::is('field.fields') ||
                                             Route::is('lesson.lessons') ||
                                             Route::is('class.classes')) max-h-[1000px] @else max-h-0 @endif">
-                                    <li class="pr-3.5 @if (Route::is('institute.create')) bg-gray-100 @endif">
+                                    <li class="pr-3.5">
                                         <a href="{{ route('institute.create') }}"
-                                            class="block text-gray-700 py-2 text-md">
+                                            class="block py-2 text-sm  @if(Route::is('institute.create')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                             ایجاد آموزشگاه جدید
                                         </a>
                                     </li>
-                                    <li class="pr-3.5 @if (Route::is('institute.institutes')) bg-gray-100 @endif">
+                                    <li class="pr-3.5">
                                         <a href="{{ route('institute.institutes') }}"
-                                            class="block text-gray-700 py-2 text-md">
+                                            class="block py-2 text-sm @if(Route::is('institute.institutes')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                             لیست آموزشگاه ها
                                         </a>
                                     </li>
                                     @if (Auth::user()->role[0]->title == 'admin')
-                                        <li class="pr-3.5 @if (Route::is('field.fields')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('field.fields') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm @if(Route::is('field.fields')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 لیست همه رشته ها
                                             </a>
                                         </li>
-                                        <li class="pr-3.5 @if (Route::is('lesson.lessons')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('lesson.lessons') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm @if(Route::is('lesson.lessons')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 لیست همه درس ها
                                             </a>
                                         </li>
-                                        <li class="pr-3.5 @if (Route::is('class.classes')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('class.classes') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm @if(Route::is('class.classes')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 لیست همه کلاس ها
                                             </a>
                                         </li>
@@ -520,7 +529,7 @@
                                         class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
                                         <div class="flex flex-row-reverse items-center gap-2">
                                             {{-- <span class=" text-[white] flex justify-end font-bold">چک لیست</span> --}}
-                                            <h3 class="text-md font-bold text-gray-800 mb-1"> چک لیست</h3>
+                                            <h3 class="text-sm text-(--primary-text-color) mb-1"> چک لیست</h3>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 512 512">
                                                 <path
                                                     d="M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 113C-2.3 103.6-2.3 88.4 7 79s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM224 96c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zM160 416c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H192c-17.7 0-32-14.3-32-32zM48 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
@@ -535,15 +544,15 @@
                                     </div>
                                     <ul
                                         class="transition-all duration-300 overflow-hidden @if (Route::is('checkList.formCheckList') || Route::is('checkList.myList')) max-h-[1000px] @else max-h-0 @endif">
-                                        <li class="pr-3.5 @if (Route::is('checkList.formCheckList')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <a href="{{ route('checkList.formCheckList') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm @if(Route::is('checkList.formCheckList')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 ثبت چک لیست
                                             </a>
                                         </li>
-                                        <li class="pr-3.5 @if (Route::is('myList')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <a href="{{ route('checkList.myList') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm  @if(Route::is('checkList.myList')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 لیست چک لیست های من
                                             </a>
                                         </li>
@@ -551,15 +560,15 @@
                                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5  rounded-sm">
                                                 <span class="size-1 bg-white rounded-sm"></span>
                                                 <a href="{{ route('checkList.checkList_Users') }}"
-                                                    class=" py-1 block">
+                                                    class=" py-1 block text-sm @if(Route::is('checkList.checkList_Users')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                     مشاهده کاربران
                                                 </a>
                                             </li>
                                             <li
-                                                class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5  rounded-sm @if (Route::is('checkList.checkList_Users')) bg-gray-700 @endif">
+                                                class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5  rounded-sm">
                                                 <span class="size-1 bg-white rounded-sm"></span>
                                                 <a href="{{ route('checkList.all_user_check_lists') }}"
-                                                    class=" py-1 block">
+                                                    class=" py-1 block text-sm @if(Route::is('checkList.all_user_check_lists')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                     لیست تمام چک لیست ها
                                                 </a>
                                             </li>
@@ -574,7 +583,7 @@
                                     class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
                                     <div class="flex flex-row-reverse items-center gap-2">
                                         {{-- <span class=" text-[white] flex justify-end font-bold"> پیشنهادات</span> --}}
-                                        <h3 class="text-md font-bold text-gray-800 mb-1">پیشنهادات</h3>
+                                        <h3 class="text-sm text-(--primary-text-color) mb-1">پیشنهادات</h3>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 512 512">
                                             <path
                                                 d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z" />
@@ -589,15 +598,15 @@
                                 </div>
                                 <ul
                                     class="transition-all duration-300 overflow-hidden @if (Route::is('suggestion.*')) max-h-[1000px] @else max-h-0 @endif">
-                                    <li class="pr-3.5 @if (Route::is('suggestion.create')) bg-gray-100 @endif">
+                                    <li class="pr-3.5">
                                         <a href="{{ route('suggestion.create') }}"
-                                            class="block text-gray-700 py-2 text-md">
+                                            class="block py-2 text-sm @if (Route::is('suggestion.create')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                             افزودن
                                         </a>
                                     </li>
-                                    <li class="pr-3.5 @if (Route::is('suggestion.list')) bg-gray-100 @endif">
+                                    <li class="pr-3.5">
                                         <a href="{{ route('suggestion.list') }}"
-                                            class="block text-gray-700 py-2 text-md">
+                                            class="block py-2 text-sm  @if (Route::is('suggestion.list')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                             مشاهده
                                         </a>
                                     </li>
@@ -610,7 +619,7 @@
                                     class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
                                     <div class="flex flex-row-reverse items-center gap-2">
                                         {{-- <span class=" text-[white] flex justify-end font-bold">رستوران</span> --}}
-                                        <h3 class="text-md font-bold text-gray-800 mb-1">رستوران ها</h3>
+                                        <h3 class="text-sm text-(--primary-text-color) mb-1">رستوران ها</h3>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 384 512">
                                             <path
                                                 d="M173.8 5.5c11-7.3 25.4-7.3 36.4 0L228 17.2c6 3.9 13 5.8 20.1 5.4l21.3-1.3c13.2-.8 25.6 6.4 31.5 18.2l9.6 19.1c3.2 6.4 8.4 11.5 14.7 14.7L344.5 83c11.8 5.9 19 18.3 18.2 31.5l-1.3 21.3c-.4 7.1 1.5 14.2 5.4 20.1l11.8 17.8c7.3 11 7.3 25.4 0 36.4L366.8 228c-3.9 6-5.8 13-5.4 20.1l1.3 21.3c.8 13.2-6.4 25.6-18.2 31.5l-19.1 9.6c-6.4 3.2-11.5 8.4-14.7 14.7L301 344.5c-5.9 11.8-18.3 19-31.5 18.2l-21.3-1.3c-7.1-.4-14.2 1.5-20.1 5.4l-17.8 11.8c-11 7.3-25.4 7.3-36.4 0L156 366.8c-6-3.9-13-5.8-20.1-5.4l-21.3 1.3c-13.2 .8-25.6-6.4-31.5-18.2l-9.6-19.1c-3.2-6.4-8.4-11.5-14.7-14.7L39.5 301c-11.8-5.9-19-18.3-18.2-31.5l1.3-21.3c.4-7.1-1.5-14.2-5.4-20.1L5.5 210.2c-7.3-11-7.3-25.4 0-36.4L17.2 156c3.9-6 5.8-13 5.4-20.1l-1.3-21.3c-.8-13.2 6.4-25.6 18.2-31.5l19.1-9.6C65 70.2 70.2 65 73.4 58.6L83 39.5c5.9-11.8 18.3-19 31.5-18.2l21.3 1.3c7.1 .4 14.2-1.5 20.1-5.4L173.8 5.5zM272 192c0-44.2-35.8-80-80-80s-80 35.8-80 80s35.8 80 80 80s80-35.8 80-80zM1.3 441.8L44.4 339.3c.2 .1 .3 .2 .4 .4l9.6 19.1c11.7 23.2 36 37.3 62 35.8l21.3-1.3c.2 0 .5 0 .7 .2l17.8 11.8c5.1 3.3 10.5 5.9 16.1 7.7l-37.6 89.3c-2.3 5.5-7.4 9.2-13.3 9.7s-11.6-2.2-14.8-7.2L74.4 455.5l-56.1 8.3c-5.7 .8-11.4-1.5-15-6s-4.3-10.7-2.1-16zm248 60.4L211.7 413c5.6-1.8 11-4.3 16.1-7.7l17.8-11.8c.2-.1 .4-.2 .7-.2l21.3 1.3c26 1.5 50.3-12.6 62-35.8l9.6-19.1c.1-.2 .2-.3 .4-.4l43.2 102.5c2.2 5.3 1.4 11.4-2.1 16s-9.3 6.9-15 6l-56.1-8.3-32.2 49.2c-3.2 5-8.9 7.7-14.8 7.2s-11-4.3-13.3-9.7z" />
@@ -633,16 +642,16 @@
                                             Route::is('menu.user_menus') ||
                                             Route::is('cc.create') ||
                                             Route::is('cc.list')) max-h-[1000px] @else max-h-0 @endif">
-                                    <li class="pr-3.5 @if (Route::is('career.careers')) bg-gray-100 @endif">
+                                    <li class="pr-3.5">
                                         <a href="{{ route('career.careers') }}"
-                                            class="block text-gray-700 py-2 text-md">
+                                            class="block py-2 text-sm  @if(Route::is('career.careers')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                             لیست رستوران های من
                                         </a>
                                     </li>
 
-                                    <li class="pr-3.5 @if (Route::is('career.create')) bg-gray-100 @endif">
+                                    <li class="pr-3.5">
                                         <a href="{{ route('career.create') }}"
-                                            class="block text-gray-700 py-2 text-md">
+                                            class="block py-2 text-sm @if (Route::is('career.create')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                             ایجاد رستوران جدید
                                         </a>
                                     </li>
@@ -664,33 +673,33 @@
                                     </li>
                                 @endif --}}
                                     @if (in_array(1, $ids) || in_array(4, $ids))
-                                        <li class="pr-3.5 @if (Route::is('career.createUser')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <a href="{{ route('career.createUser') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm  @if (Route::is('career.createUser')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 ایجاد رستوران برای دیگری
                                             </a>
                                         </li>
                                     @endif
                                     @if (in_array(1, $ids))
-                                        <li class="pr-3.5 @if (Route::is('career.list')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('career.list') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm  @if (Route::is('career.list')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 همه رستوران ها
                                             </a>
                                         </li>
 
-                                        <li class="pr-3.5 @if (Route::is('cc.create')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('cc.create') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm  @if (Route::is('cc.create')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 ایجاد دسته رستوران
                                             </a>
                                         </li>
-                                        <li class="pr-3.5 @if (Route::is('cc.list')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('cc.list') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm @if (Route::is('cc.list')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 همه دسته های رستوران
                                             </a>
                                         </li>
@@ -703,7 +712,7 @@
                                     class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
                                     <div class="flex flex-row-reverse items-center gap-2">
                                         {{-- <span class=" text-[white] flex justify-end font-bold">صفحه ها</span> --}}
-                                        <h3 class="text-md font-bold text-gray-800 mb-1">صفحه ها</h3>
+                                        <h3 class="text-sm text-(--primary-text-color) mb-1">صفحه ها</h3>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 512 512">
                                             <path
                                                 d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z" />
@@ -718,36 +727,36 @@
                                 </div>
                                 <ul
                                     class="transition-all duration-300 overflow-hidden @if (Route::is('pages.*') || Route::is('socialMedia.*')) max-h-[1000px] @else max-h-0 @endif">
-                                    <li class="pr-3.5 @if (Route::is('pages.create')) bg-gray-100 @endif">
+                                    <li class="pr-3.5">
                                         <a href="{{ route('pages.create') }}"
-                                            class="block text-gray-700 py-2 text-md">
+                                            class="block py-2 text-sm  @if(Route::is('pages.create')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                             ایجاد صفحه
                                         </a>
                                     </li>
-                                    <li class="pr-3.5 @if (Route::is('pages.social_list')) bg-gray-100 @endif">
+                                    <li class="pr-3.5">
                                         <a href="{{ route('pages.social_list') }}"
-                                            class="block text-gray-700 py-2 text-md">
+                                            class="block py-2 text-sm  @if (Route::is('pages.social_list')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                             لیست صفحه های من
                                         </a>
                                     </li>
                                     @if (in_array(1, $ids))
-                                        <li class="pr-3.5 @if (Route::is('pages.list')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <a href="{{ route('pages.list') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm  @if (Route::is('pages.list')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 لیست همه صفحه ها
                                             </a>
                                         </li>
-                                        <li class="pr-3.5 @if (Route::is('socialMedia.create')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('socialMedia.create') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm  @if (Route::is('socialMedia.create')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 ایجاد شبکه اجتماعی
                                             </a>
                                         </li>
-                                        <li class="pr-3.5 @if (Route::is('socialMedia.list')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <span class="size-1 rounded-sm"></span>
                                             <a href="{{ route('socialMedia.list') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm  @if (Route::is('socialMedia.list')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 لیست شبکه های اجتماعی
                                             </a>
                                         </li>
@@ -760,7 +769,7 @@
                                         class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
                                         <div class="flex flex-row-reverse items-center gap-2">
                                             {{-- <span class=" text-[white] flex justify-end font-bold">کاربران</span> --}}
-                                            <h3 class="text-md font-bold text-gray-800 mb-1">کاربران</h3>
+                                            <h3 class="text-sm text-(--primary-text-color) mb-1">کاربران</h3>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 448 512">
                                                 <path
                                                     d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
@@ -782,29 +791,29 @@
                                                 Route::is('user.myUsers') ||
                                                 Route::is('user.requestList')) max-h-[1000px] @else max-h-0 @endif">
                                         @if (in_array(1, $ids) || in_array(4, $ids))
-                                            <li class="pr-3.5 @if (Route::is('user.myUsers')) bg-gray-100 @endif">
+                                            <li class="pr-3.5">
                                                 <a href="{{ route('user.myUsers') }}"
-                                                    class="block text-gray-700 py-2 text-md">
+                                                    class="block py-2 text-sm  @if (Route::is('user.myUsers')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                     مشتریان من
                                                 </a>
                                             </li>
                                         @endif
-                                        <li class="pr-3.5 @if (Route::is('user.list')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <a href="{{ route('user.list') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm  @if (Route::is('user.list')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 همه کاربران
                                             </a>
                                         </li>
-                                        <li class="pr-3.5 @if (Route::is('user.create_user')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <a href="{{ route('user.create_user') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm  @if (Route::is('user.create_user')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 ایجاد کاربر جدید
                                             </a>
                                         </li>
                                         @if (in_array(1, $ids) || in_array(4, $ids))
-                                            <li class="pr-3.5 @if (Route::is('user.requestList')) bg-gray-100 @endif">
+                                            <li class="pr-3.5">
                                                 <a href="{{ route('user.requestList') }}"
-                                                    class="block text-gray-700 py-2 text-md">
+                                                    class="block py-2 text-sm  @if (Route::is('user.requestList')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                     لیست درخواست ها
                                                 </a>
                                             </li>
@@ -818,7 +827,7 @@
                                         class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
                                         <div class="flex flex-row-reverse items-center gap-2">
                                             {{-- <span class=" text-[white] flex justify-end font-bold">اسلایدر</span> --}}
-                                            <h3 class="text-md font-bold text-gray-800 mb-1">اسلایدر</h3>
+                                            <h3 class="text-sm text-(--primary-text-color) mb-1">اسلایدر</h3>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="800px" height="800px"
                                                 class="size-5" viewBox="0 0 100 100" enable-background="new 0 0 100 100"
                                                 xml:space="preserve">
@@ -839,15 +848,15 @@
                                     </div>
                                     <ul
                                         class="transition-all duration-300 overflow-hidden @if (Route::is('slider.*')) max-h-[1000px] @else max-h-0 @endif">
-                                        <li class="pr-3.5 @if (Route::is('slider.create')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <a href="{{ route('slider.create') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm  @if (Route::is('slider.create')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 ایجاد اسلایدر
                                             </a>
                                         </li>
-                                        <li class="pr-3.5 @if (Route::is('slider.list')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <a href="{{ route('slider.list') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm  @if (Route::is('slider.list')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 لیست اسلایدر ها
                                             </a>
                                         </li>
@@ -859,7 +868,7 @@
                                         class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
                                         <div class="flex flex-row-reverse items-center gap-2">
                                             {{-- <span class=" text-[white] flex justify-end font-bold">درباره ما</span> --}}
-                                            <h3 class="text-md font-bold text-gray-800 mb-1">
+                                            <h3 class="text-sm text-(--primary-text-color) mb-1">
                                                 درباره ما
                                             </h3>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="size-6" viewBox="0 0 640 512">
@@ -876,15 +885,15 @@
                                     </div>
                                     <ul
                                         class="transition-all duration-300 overflow-hidden @if (Route::is('aboutUs.*')) max-h-[1000px] @else max-h-0 @endif">
-                                        <li class="pr-3.5 @if (Route::is('aboutUs.create_edit')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <a href="{{ route('aboutUs.create_edit') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm  @if (Route::is('aboutUs.create_edit')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 ایجاد درباره ما
                                             </a>
                                         </li>
-                                        <li class="pr-3.5 @if (Route::is('aboutUs.list')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <a href="{{ route('aboutUs.list') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm  @if (Route::is('aboutUs.list')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 درباره ما
                                             </a>
                                         </li>
@@ -896,7 +905,7 @@
                                         class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
                                         <div class="flex flex-row-reverse items-center gap-2">
                                             {{-- <span class=" text-[white] flex justify-end font-bold">ارتباط باما</span> --}}
-                                            <h3 class="text-md font-bold text-gray-800 mb-1">
+                                            <h3 class="text-sm text-(--primary-text-color) mb-1">
                                                 ارتباط با ما
                                             </h3>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 512 512">
@@ -913,15 +922,15 @@
                                     </div>
                                     <ul
                                         class="transition-all duration-300 overflow-hidden @if (Route::is('contactUs.*')) max-h-[1000px] @else max-h-0 @endif">
-                                        <li class="pr-3.5 @if (Route::is('contactUs.create')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <a href="{{ route('contactUs.create') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm  @if (Route::is('contactUs.create')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 فرم ارتباط باما
                                             </a>
                                         </li>
-                                        <li class="pr-3.5 @if (Route::is('contactUs.list')) bg-gray-100 @endif">
+                                        <li class="pr-3.5">
                                             <a href="{{ route('contactUs.list') }}"
-                                                class="block text-gray-700 py-2 text-md">
+                                                class="block py-2 text-sm  @if (Route::is('contactUs.list')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                                 لیست تیکت ها
                                             </a>
                                         </li>
@@ -934,7 +943,7 @@
                                     class="w-full flex flex-row justify-between items-center border-b-1 border-gray-300 py-2 parentFields cursor-pointer">
                                     <div class="flex flex-row-reverse items-center gap-2">
                                         {{-- <span class=" text-[white] flex justify-end font-bold">کیوآر کد</span> --}}
-                                        <h3 class="text-md font-bold text-gray-800 mb-1">
+                                        <h3 class="text-sm text-(--primary-text-color) mb-1">
                                             کیوآر کد
                                         </h3>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="size-6" viewBox="0 0 448 512">
@@ -951,15 +960,15 @@
                                 </div>
                                 <ul
                                     class="transition-all duration-300 overflow-hidden @if (Route::is('generalQrCodes.*')) max-h-[1000px] @else max-h-0 @endif">
-                                    <li class="pr-3.5 @if (Route::is('generalQrCodes.create')) bg-gray-100 @endif">
+                                    <li class="pr-3.5">
                                         <a href="{{ route('generalQrCodes.create') }}"
-                                            class="block text-gray-700 py-2 text-md">
+                                            class="block py-2 text-sm  @if (Route::is('generalQrCodes.create')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                             ایجاد کیوآر کد جدید
                                         </a>
                                     </li>
-                                    <li class="pr-3.5 @if (Route::is('generalQrCodes.list')) bg-gray-100 @endif">
+                                    <li class="pr-3.5">
                                         <a href="{{ route('generalQrCodes.list') }}"
-                                            class="block text-gray-700 py-2 text-md">
+                                            class="block py-2 text-sm  @if (Route::is('generalQrCodes.list')) font-bold text-(--primary-color) @else text-(--secondary-text-color) @endif">
                                             لیست کیوآر کد های من
                                         </a>
                                     </li>
@@ -990,23 +999,31 @@
                     <div>
 
                         <div class="overflow-y-auto [&::-webkit-scrollbar]:hidden h-[calc(100vh-134px)] mb-7">
-                            <a href="{{ route('home') }}" class="w-full py-3 flex items-center gap-5">
-                                <div class="p-2 bg-[#eb3254] rounded-full">
-                                    <img src="{{ asset('storage/images/Famenu1.png') }}" class="size-[30px]"
+                            <a href="{{ route('home') }}" class="w-full py-3 flex items-center justify-center gap-5">
+                                <div class="p-2 rounded-full">
+                                    <img src="{{ asset('storage/logos/ringaLogo1.png') }}" class="w-20 max-h-[40px] object-cover"
                                         alt="">
                                 </div>
-                                <span class="text-sm text-gray-800 font-bold">رینگا</span>
+{{--                                <span class="text-sm text-gray-800 font-bold">رینگا</span>--}}
                             </a>
                             <div class="pt-2 flex flex-col">
                                 <div>
                                     <a href="{{ route('home') }}"
-                                        class="block text-gray-700 py-2 text-md @if (Route::is('home')) bg-gray-100 @endif">
-                                        صفحه اول
+                                        class="flex flex-row items-center gap-3 py-2 px-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="w-5" fill="none" stroke="@if (Route::is('home')) var(--primary-color) @else var(--secondary-text-color) @endif" stroke-width="32" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/>
+                                        </svg>
+                                        <span class="text-sm font-bold @if(Route::is('home')) text-(--primary-color) @else text-(--secondary-text-color) @endif">صفحه اول</span>
+
                                     </a>
                                 </div>
                                 <div>
-                                    <a href="{{ route('login') }}" class="block text-gray-700 py-2 text-md">
-                                        ورود | ثبت نام
+                                    <a href="{{ route('login') }}" class="flex flex-row items-center gap-3 px-1 py-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4" fill="@if (Route::is('login') || Route::is('signup')) var(--primary-color) @else var(--secondary-text-color) @endif">
+                                            <path d="M320 128a96 96 0 1 0 -192 0 96 96 0 1 0 192 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM32 480H416c-1.2-79.7-66.2-144-146.3-144H178.3c-80 0-145 64.3-146.3 144zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z"></path>
+                                        </svg>
+
+                                        <span class="text-sm font-bold @if (Route::is('login') || Route::is('signup')) text-(--primary-color) @else text-(--secondary-text-color) @endif">ورود | ثبت نام</span>
                                     </a>
                                 </div>
                                 {{-- <div>
@@ -1014,18 +1031,18 @@
                                        ثبت نام
                                     </a>
                                 </div> --}}
-                                <div>
-                                    <a href="{{ route('client.allPages') }}"
-                                        class="block text-gray-700 py-2 text-md @if (Route::is('client.allPages')) bg-gray-100 @endif">
-                                        صفحه ها
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="{{ route('career.careersList') }}"
-                                        class="block text-gray-700 py-2 text-md @if (Route::is('career.careersList')) bg-gray-100 @endif">
-                                        رستوران ها
-                                    </a>
-                                </div>
+{{--                                <div>--}}
+{{--                                    <a href="{{ route('client.allPages') }}"--}}
+{{--                                        class="block text-gray-700 py-2 text-md @if (Route::is('client.allPages')) bg-gray-100 @endif">--}}
+{{--                                        صفحه ها--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
+{{--                                <div>--}}
+{{--                                    <a href="{{ route('career.careersList') }}"--}}
+{{--                                        class="block text-gray-700 py-2 text-md @if (Route::is('career.careersList')) bg-gray-100 @endif">--}}
+{{--                                        رستوران ها--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
                             </div>
 
 
