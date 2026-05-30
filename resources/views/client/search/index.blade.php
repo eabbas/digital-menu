@@ -17,14 +17,6 @@
                         </span>
                     </div>
                 </div>
-                    <!-- <div class="px-3 py-1 ml-2 rounded-full border-1 border-gray-300 filter cursor-pointer"
-                        data-title="careerCategory">
-                        <div class=" flex flex-row items-center justify-center gap-1 min-w-[100px]">
-                            <span class="text-xs">
-                                دسته رستوران
-                            </span>
-                        </div>
-                    </div> -->
                 <div class="px-3 py-1 ml-2 rounded-full border-1 border-gray-300 filter cursor-pointer"
                      data-title="career">
                     <div class=" flex flex-row items-center justify-center gap-1 min-w-[70px]">
@@ -49,14 +41,6 @@
                         </span>
                     </div>
                 </div>
-                <!-- <div class="px-3 py-1 ml-2 rounded-full border-1 border-gray-300 filter cursor-pointer"
-                     data-title="ecomm">
-                    <div class=" flex flex-row items-center gap-1 max-w-[100px]">
-                        <span class="text-xs">
-                            فروشگاه
-                        </span>
-                    </div>
-                </div> -->
             </div>
             <div class="w-full p-3 sticky top-5 rounded-lg hidden lg:block border-1 border-gray-300">
                 <div class="w-full flex flex-col">
@@ -92,98 +76,74 @@
                 </span>
             </h2>
             <div class="flex flex-col gap-5 lg:gap-10 mt-5 lg:mt-10" id="items">
-                @if (count($datas['careerCategory']))
-                    <div>
-                        <h2 class="mb-5 font-bold text-sm lg:text-base">دسته های رستوران</h2>
-                        <div class="flex justify-end w-full bg-white rounded-2xl p-2">
-                            @foreach ($datas['careerCategory'] as $restaurantCat)
-                            @if (count($restaurantCat->careers))
-                                    <!-- <a href="{{ route('career.categoryCareers', [$restaurantCat]) }}"
-                                    class="w-full h-40 rounded-[11px] flex flex-col items-center justify-center gap-2 careers"
-                                    title="{{ $restaurantCat->title }}">
-                                        <div class="w-full rounded-md overflow-hidden">
-                                            <img class="size-26 mx-auto rounded-[7px] object-cover"
-                                                src="{{ asset('storage/' . $restaurantCat->main_image) }}"
-                                                alt="careerCat image">
-                                        </div>
-                                        <span class="text-gray-500 text-sm font-medium truncate max-w-[100px]">
-                                            {{ $restaurantCat->title }}
-                                        </span>
-                                    </a> -->
-                                    <div class="flex justify-between w-full">
-                                        <a href="{{ route('career.categoryCareers', [$restaurantCat]) }}" class="w-2/12 flex justify-center items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="size-5 ml-5">
-                                                <path d="M273 239c9.4 9.4 9.4 24.6 0 33.9L113 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143L79 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L273 239z"/>
-                                            </svg>
-                                        </a>
-                                       <div class="w-6/12">
-                                           <span class="text-gray-500 text-sm font-medium truncate max-w-[100px]">
-                                           {{ $restaurantCat->title }}
-                                           </span>
-                                       </div>
-                                        <div class="w-4/12 rounded-md overflow-hidden ">
-                                                <img class="mx-auto rounded-[7px] object-cover"
-                                                    src="{{ asset('storage/' . $restaurantCat->main_image) }}"
-                                                    alt="social address image">
-                                                <div class="absolute top-3 left-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 fill-white">
-                                                        <path d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"/>
-                                                    </svg>
-                                                </div>
-                                        </div>
-                                   </div> 
-                                @endif
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
+{{--                @if (count($datas['careerCategory']))--}}
+{{--                    <div>--}}
+{{--                        <h2 class="mb-5 font-bold text-sm lg:text-base">دسته های رستوران</h2>--}}
+{{--                        <div class="flex flex-col w-full">--}}
+{{--                            @foreach ($datas['careerCategory'] as $restaurantCat)--}}
+{{--                            @if (count($restaurantCat->careers))--}}
+{{--                                    <a href="{{ route('career.categoryCareers', [$restaurantCat]) }}" class="flex justify-between w-full bg-white rounded-2xl p-2">--}}
+{{--                                       <div class="w-6/12 flex justify-between pl-3">--}}
+{{--                                           <div>--}}
+{{--                                           <span class="text-gray-500 text-sm font-medium max-w-[100px]">--}}
+{{--                                           {{ $restaurantCat->title }}--}}
+{{--                                           </span>--}}
+{{--                                           </div>--}}
+{{--                                           <div class="flex flex-col justify-end">--}}
+{{--                                               <div class="flex items-center gap-[2px]">--}}
+{{--                                                   <div class="text-[.6rem] mt-1">۴.۷</div>--}}
+{{--                                                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="size-3 fill-yellow-500">--}}
+{{--                                                       <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>--}}
+{{--                                                   </svg>--}}
+{{--                                               </div>--}}
+{{--                                           </div>--}}
+{{--                                       </div>--}}
+{{--                                        <div class="rounded-md">--}}
+{{--                                                <img class="mx-auto rounded-[7px] object-cover max-w-40 min-w-40 max-h-25 min-h-25"--}}
+{{--                                                    src="{{ asset('storage/' . $restaurantCat->main_image) }}"--}}
+{{--                                                    alt="social address image">--}}
+{{--                                                <div class="absolute top-3 left-3">--}}
+{{--                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 fill-white">--}}
+{{--                                                        <path d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"/>--}}
+{{--                                                    </svg>--}}
+{{--                                                </div>--}}
+{{--                                        </div>--}}
+{{--                                   </a>--}}
+{{--                                @endif--}}
+{{--                            @endforeach--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                @endif--}}
 
                 @if (count($datas['career']))
                     <div>
                         <h2 class="mb-5 font-bold text-sm lg:text-base">رستوران ها</h2>
-                        <div class="flex justify-end w-full bg-white rounded-2xl p-2 relative">
+                        <div class="flex flex-col w-full">
                             @foreach ($datas['career'] as $restaurant)
-                                <!-- <a href="{{ route('client.menu', [$restaurant]) }}"
-                                class="w-full h-40 rounded-[11px] flex flex-col items-center justify-center gap-2 careers"
-                                title="{{ $restaurant->title }}">
-                                    <div class="w-full rounded-md overflow-hidden">
-                                        <img class="size-26 mx-auto rounded-[7px] object-cover"
-                                            src="{{ asset('storage/' . $restaurant->logo) }}" alt="career logo">
-                                    </div>
-                                    <span class="text-gray-500 text-sm font-medium truncate max-w-[100px]">
-                                        {{ $restaurant->title }}
-                                    </span>
-                                </a> -->
-
-                                   <div class="flex justify-between w-full">
-                                        <a href="{{ route('client.menu', [$restaurant]) }}" class="w-2/12 flex justify-center items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="size-5 ml-5">
-                                                <path d="M273 239c9.4 9.4 9.4 24.6 0 33.9L113 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143L79 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L273 239z"/>
-                                            </svg>
-                                        </a>
-                                       <div class="w-6/12 flex justify-between pl-3">
-                                        <div class="flex flex-col gap-1">
-                                            <span class="text-sm font-medium truncate max-w-[100px]">
-                                                {{ $restaurant->title  }}
-                                            </span>
-                                            <span class="text-gray-500 text-xs font-medium truncate max-w-[100px]">
-                                                {{ $restaurant->description  }}
-                                            </span>
-                                            <span class="text-gray-500 text-xs    font-medium truncate max-w-[100px]">
-                                                {{ $restaurant->address  }}
-                                            </span>
-                                        </div>
-                                        <div class="flex flex-col justify-end">
-                                            <div class="flex items-center gap-[2px]">
-                                                <div class="text-[.6rem] mt-1">۴.۷</div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="size-3 fill-yellow-500">
-                                                    <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
-                                                </svg>
+                                   <a href="{{ route('client.menu', [$restaurant]) }}" class="flex justify-between w-full bg-white rounded-2xl p-2 relative">
+                                       <div class="w-6/12 flex justify-between">
+                                            <div class="flex flex-col gap-1">
+                                                <span class="text-sm font-medium max-w-[100px]">
+                                                    {{ $restaurant->title  }}
+                                                </span>
+                                                <span class="text-gray-500 text-xs font-medium truncate max-w-[100px]">
+                                                    {{ $restaurant->description  }}
+                                                </span>
+                                                <span class="text-gray-500 text-xs    font-medium truncate max-w-[100px]">
+                                                    {{ $restaurant->address  }}
+                                                </span>
                                             </div>
-                                        </div>
+                                            <div class="flex flex-col justify-end">
+                                                <div class="flex items-center gap-[2px]">
+                                                    <div class="text-[.6rem] mt-1">۴.۷</div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="size-3 fill-yellow-500">
+                                                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
                                        </div>
-                                        <div class="w-4/12 rounded-md overflow-hidden ">
-                                                <img class="mx-auto rounded-[7px] object-cover"
+                                        <div class="rounded-md">
+                                                <img class="mx-auto rounded-[7px] object-cover max-w-35 min-w-35 max-h-23 min-h-23"
                                                     src="{{ asset('storage/' . $restaurant->logo) }}" alt="social address image">
                                                 <div class="absolute top-3 left-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 fill-white">
@@ -191,7 +151,7 @@
                                                     </svg>
                                                 </div>
                                         </div>
-                                   </div> 
+                                   </a>
                             @endforeach
                         </div>
                     </div>
@@ -200,27 +160,10 @@
                 @if (count($datas['pages']))
                     <div>
                         <h2 class="mb-5 font-bold text-sm lg:text-base">صفحه ها</h2>
-                        <div class="flex justify-end w-full bg-white rounded-2xl p-2 relative">
+                        <div class="flex flex-col w-full">
                             @foreach ($datas['pages'] as $page)
-                                <!-- <a href="{{ route('client.loadLink', [$page]) }}"
-                                class="w-full h-40 rounded-[11px] flex flex-col items-center justify-center gap-2 careers"
-                                title="{{ $page->title }}">
-                                    <div class="w-full rounded-md overflow-hidden">
-                                        <img class="size-26 mx-auto rounded-[7px] object-cover"
-                                            src="{{ asset('storage/' . $page->logo_path) }}"
-                                            alt="social address image">
-                                    </div>
-                                    <span class="text-gray-500 text-sm font-medium truncate max-w-[100px]">
-                                        {{ $page->title }}
-                                    </span>
-                                </a> -->
-                                   <div class="flex justify-between w-full">
-                                        <a href="{{ route('client.loadLink', [$page]) }}" class="w-2/12 flex justify-center items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="size-5 ml-5">
-                                                <path d="M273 239c9.4 9.4 9.4 24.6 0 33.9L113 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143L79 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L273 239z"/>
-                                            </svg>
-                                        </a>
-                                       <div class="w-6/12 flex justify-between pl-3">
+                                   <a href="{{ route('client.loadLink', [$page]) }}" class="flex justify-between w-full bg-white rounded-2xl p-2 relative">
+                                       <div class="w-6/12 flex justify-between">
                                         <div>
                                             <span class="text-sm font-medium truncate max-w-[100px]">
                                                 {{ $page->title }}
@@ -235,8 +178,8 @@
                                             </div>
                                         </div>
                                        </div>
-                                        <div class="w-4/12 rounded-md overflow-hidden ">
-                                                <img class="mx-auto rounded-[7px] object-cover"
+                                        <div class="rounded-md">
+                                                <img class="mx-auto rounded-[7px] object-cover max-w-35 min-w-35 max-h-23 min-h-23"
                                                     src="{{ asset('storage/' . $page->logo_path) }}"
                                                     alt="social address image">
                                                 <div class="absolute top-3 left-3">
@@ -245,7 +188,7 @@
                                                     </svg>
                                                 </div>
                                         </div>
-                                   </div> 
+                                   </a>
                             @endforeach
                         </div>
                     </div>
@@ -254,33 +197,16 @@
                 @if (count($datas['menu']))
                     <div>
                         <h2 class="mb-5 font-bold text-sm lg:text-base">منو ها</h2>
-                        <div class="flex justify-end w-full bg-white rounded-2xl p-2 relative">
+                        <div class="flex flex-col w-full">
                             @foreach ($datas['menu'] as $menu)
                                 @if ($menu->career)
-                                    <!-- <a href="{{ route('client.menu', ['career' => $menu->career->id]) }}"
-                                    class="w-full h-40 rounded-[11px] flex flex-col items-center justify-center gap-2 careers"
-                                    title="{{ $menu->title }}">
-                                        <div class="w-full rounded-md overflow-hidden">
-                                            <img class="size-26 mx-auto rounded-[7px] object-cover"
-                                                src="{{ asset('storage/' . $menu->banner) }}"
-                                                alt="social address image">
-                                        </div>
-                                        <span class="text-gray-500 text-sm font-medium truncate max-w-[100px]">
-                                            {{ $menu->title }}
-                                        </span>
-                                    </a> -->
-                                        <div class="flex justify-between w-full">
-                                            <a href="{{ route('client.loadLink', [$page]) }}" class="w-2/12 flex justify-center items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="size-5 ml-5">
-                                                    <path d="M273 239c9.4 9.4 9.4 24.6 0 33.9L113 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143L79 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L273 239z"/>
-                                                </svg>
-                                            </a>
-                                            <div class="w-6/12 flex justify-between pl-3">
+                                        <a href="{{ route('client.loadLink', [$page]) }}" class="flex justify-between w-full bg-white rounded-2xl p-2 relative">
+                                            <div class="w-6/12 flex justify-between ">
                                                 <div class="flex flex-col gap-1">
                                                     <span class="text-sm font-medium truncate max-w-[100px]">
                                                         {{ $menu->title }}
                                                     </span>
-                                                    <span class="text-gray-500 text-xs    font-medium truncate max-w-[100px]">
+                                                    <span class="text-gray-500 text-xs font-medium truncate max-w-[100px]">
                                                         {{ $menu->subtitle  }}
                                                     </span>
                                                 </div>
@@ -293,8 +219,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="w-4/12 rounded-md overflow-hidden ">
-                                                    <img class="mx-auto rounded-[7px] object-cover"
+                                            <div class="rounded-md">
+                                                    <img class="mx-auto rounded-[7px] object-cover max-w-35 min-w-35 max-h-23 min-h-23"
                                                         src="{{ asset('storage/' . $page->logo_path) }}"
                                                         alt="social address image">
                                                     <div class="absolute top-3 left-3">
@@ -303,34 +229,12 @@
                                                         </svg>
                                                     </div>
                                             </div>
-                                        </div> 
+                                        </a>
                                 @endif
                             @endforeach
                         </div>
                     </div>
                 @endif
-
-                <!-- @if (count($datas['ecomm']))
-                    <div>
-                        <h2 class="mb-5 font-bold text-sm lg:text-base">فروشگاه ها</h2>
-                        <div class="grid grid-cols-3 lg:grid-cols-8 gap-3 lg:gap-4">
-                            @foreach ($datas['ecomm'] as $ecomm)
-                                <a href="#"
-                                class="w-full h-40 rounded-[11px] flex flex-col items-center justify-center gap-2 careers"
-                                title="{{ $ecomm->title }}">
-                                    <div class="w-full rounded-md overflow-hidden">
-                                        <img class="size-26 mx-auto rounded-[7px] object-cover"
-                                            src="{{ asset('storage/' . $ecomm->banner) }}"
-                                            alt="social address image">
-                                    </div>
-                                    <span class="text-gray-500 text-sm font-medium truncate max-w-[100px]">
-                                            {{ $ecomm->title }}
-                                        </span>
-                                </a>
-                            @endforeach
-                        </div>
-                    </div>
-                @endif -->
             </div>
             <div class="flex flex-col gap-5 lg:gap-10 mt-5 lg:mt-10" id="parentItems"></div>
 
@@ -438,26 +342,22 @@
                                 heading.innerText = "دسته های  رستوران"
                                 div.appendChild(heading)
                                 let parentLink = document.createElement('div')
-                                parentLink.classList = "flex justify-end w-full bg-white rounded-2xl p-3"
+                                parentLink.classList = "flex flex-col w-full"
                                 datas[key].forEach((data) => {
                                     let url = "{{ url('careers/categoryCareers/') }}"
                                     url += "/"
                                     url += data.id
-                                    let element = document.createElement('div')
-                                    element.classList = "flex justify-between w-full"
+                                    let element = document.createElement('a')
+                                    element.classList = "flex justify-between w-full bg-white rounded-2xl p-2 relative"
+                                    element.setAttribute('href',url)
                                     element.innerHTML = `
-                                        <a href="${url}" class="w-2/12 flex justify-center items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="size-5 ml-5">
-                                                <path d="M273 239c9.4 9.4 9.4 24.6 0 33.9L113 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143L79 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L273 239z"/>
-                                            </svg>
-                                        </a>
                                        <div class="w-6/12">
                                            <span class="text-gray-500 text-sm font-medium truncate max-w-[100px]">
                                            ${data.title}
                                            </span>
                                        </div>
-                                        <div class="w-4/12 rounded-md overflow-hidden ">
-                                                <img class="mx-auto rounded-[7px] object-cover"
+                                        <div class="rounded-md">
+                                                <img class="mx-auto rounded-[7px] object-cover max-w-35 min-w-35 max-h-23 min-h-23"
                                                     src="${'{{ asset('storage/') }}/' + data.main_image}">
                                                 <div class="absolute top-3 left-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 fill-white">
@@ -479,20 +379,17 @@
                                 heading.innerText = "رستوران ها"
                                 div.appendChild(heading)
                                 let parentLink = document.createElement('div')
-                                parentLink.classList = "flex justify-end w-full bg-white rounded-2xl p-3"
+                                parentLink.classList = "flex flex-col w-full"
                                 datas[key].forEach((data) => {
                                     let url = "{{ url('qrcodes/') }}"
                                     url += "/"
                                     url += data.id
-                                    let element = document.createElement('div')
-                                    element.classList = "flex justify-between w-full"
+                                    let element = document.createElement('a')
+                                    element.classList = "flex justify-between w-full bg-white rounded-2xl p-2 relative"
+                                    element.setAttribute('href',url)
                                     element.innerHTML = `
-                                        <a href="${url}" class="w-2/12 flex justify-center items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="size-5 ml-5">
-                                                <path d="M273 239c9.4 9.4 9.4 24.6 0 33.9L113 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143L79 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L273 239z"/>
-                                            </svg>
-                                        </a>
-                                       <div class="w-6/12 flex flex-col gap-1">
+                                       <div class="w-6/12 flex justify-between">
+                                           <div class="flex flex-col gap-1">
                                            <span class="text-sm font-medium truncate max-w-[100px]">
                                                ${data.title}
                                            </span>
@@ -501,11 +398,19 @@
                                            </span>
                                            <span class="text-gray-500 text-xs font-medium truncate max-w-[100px]">
                                                 ${data.address}
-
                                            </span>
+                                           </div>
+                                             <div class="flex flex-col justify-end">
+                                                <div class="flex items-center gap-[2px]">
+                                                    <div class="text-[.6rem] mt-1">۴.۷</div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="size-3 fill-yellow-500">
+                                                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
                                        </div>
-                                        <div class="w-4/12 rounded-md overflow-hidden ">
-                                                <img class="mx-auto rounded-[7px] object-cover"
+                                        <div class="rounded-md">
+                                                <img class="mx-auto rounded-[7px] object-cover max-w-35 min-w-35 max-h-23 min-h-23"
                                                     src="${'{{ asset('storage/') }}/' + data.logo}">
                                                 <div class="absolute top-3 left-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 fill-white">
@@ -527,26 +432,32 @@
                                 heading.innerText = "صفحه ها"
                                 div.appendChild(heading)
                                 let parentLink = document.createElement('div')
-                                parentLink.classList = "flex justify-end w-full bg-white rounded-2xl p-3"
+                                parentLink.classList = "flex flex-col w-full"
                                 datas[key].forEach((data) => {
                                     let url = "{{ url('qrcodes/links/') }}"
                                     url += "/"
                                     url += data.id
-                                    let element = document.createElement('div')
-                                    element.classList = "flex justify-between w-full"
+                                    let element = document.createElement('a')
+                                    element.classList = "flex justify-between w-full bg-white rounded-2xl p-2 relative"
+                                    element.setAttribute('href',url)
                                     element.innerHTML = `
-                                        <a href="${url}" class="w-2/12 flex justify-center items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="size-5 ml-5">
-                                                <path d="M273 239c9.4 9.4 9.4 24.6 0 33.9L113 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143L79 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L273 239z"/>
-                                            </svg>
-                                        </a>
-                                       <div class="w-6/12">
-                                           <span class="text-sm font-medium truncate max-w-[100px]">
-                                               ${data.title}
-                                           </span>
-                                       </div>
-                                        <div class="w-4/12 rounded-md overflow-hidden ">
-                                                <img class="mx-auto rounded-[7px] object-cover"
+                                       <div class="w-6/12 flex justify-between">
+                                        <div>
+                                            <span class="text-sm font-medium truncate max-w-[100px]">
+                                                ${data.title}
+                                            </span>
+                                        </div>
+                                        <div class="flex flex-col justify-end">
+                                            <div class="flex items-center gap-[2px]">
+                                                <div class="text-[.6rem] mt-1">۴.۷</div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="size-3 fill-yellow-500">
+                                                    <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                      </div>
+                                        <div class="rounded-md">
+                                                <img class="mx-auto rounded-[7px] object-cover max-w-35 min-w-35 max-h-23 min-h-23"
                                                     src="${'{{ asset('storage/') }}/' + data.logo_path}">
                                                 <div class="absolute top-3 left-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 fill-white">
@@ -568,30 +479,36 @@
                                 heading.innerText = "منو ها"
                                 div.appendChild(heading)
                                 let parentLink = document.createElement('div')
-                                parentLink.classList = "flex justify-end w-full bg-white rounded-2xl p-3"
+                                parentLink.classList = "flex flex-col w-full"
                                 datas[key].forEach((data) => {
                                     let url = "{{ url('qrcodes/') }}"
                                     url += "/"
                                     url += data.id
                                     let element = document.createElement('div')
-                                    element.classList = "flex justify-between w-full"
+                                    element.classList = "flex justify-between w-full bg-white rounded-2xl p-2 relative"
+                                    element.setAttribute('href',url)
                                     element.innerHTML = `
-                                            <a href="{{ route('client.loadLink', [$page]) }}" class="w-2/12 flex justify-center items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="size-5 ml-5">
-                                                    <path d="M273 239c9.4 9.4 9.4 24.6 0 33.9L113 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143L79 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L273 239z"/>
-                                                </svg>
-                                            </a>
-                                            <div class="w-6/12 flex flex-col gap-1">
-                                                <span class="text-sm font-medium truncate max-w-[100px]">
-                                                    ${data.title}
-                                                </span>
-                                                <span class="text-gray-500 text-xs font-medium truncate max-w-[100px]">
-                                                     ${data.subtitle}
+                                            <div class="w-6/12 flex justify-between ">
+                                                <div class="flex flex-col gap-1">
+                                                    <span class="text-sm font-medium truncate max-w-[100px]">
+                                                        ${data.title}
+                                                    </span>
+                                                    <span class="text-gray-500 text-xs font-medium truncate max-w-[100px]">
+                                                    ${data.subtitle}
                                                 </span>
                                             </div>
-                                            <div class="w-4/12 rounded-md overflow-hidden ">
-                                                    <img class="mx-auto rounded-[7px] object-cover"
-                                                        src="${'{{ asset('storage/') }}/' + data.banner}">
+                                <div class="flex flex-col justify-end">
+                                    <div class="flex items-center gap-[2px]">
+                                        <div class="text-[.6rem] mt-1">۴.۷</div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="size-3 fill-yellow-500">
+                                            <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-4/12 rounded-md overflow-hidden ">
+                                    <img class="mx-auto rounded-[7px] object-cover"
+                                        src="${'{{ asset('storage/') }}/' + data.banner}">
                                                     <div class="absolute top-3 left-3">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 fill-white">
                                                             <path d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"/>
