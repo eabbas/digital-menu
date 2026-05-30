@@ -65,7 +65,7 @@
         @include('client.olyafam')
 
         <div id="orderBasket"
-             class="w-full fixed bottom-15 right-0 z-0 @if(Auth::check() && count(Auth::user()->carts)) block @else hidden @endif lg:hidden">
+             class="w-full fixed bottom-21 right-0 z-0 @if(Auth::check() && count(Auth::user()->carts)) block @else hidden @endif lg:hidden">
             <button class="w-11/12 mx-auto p-3 flex items-center justify-center lg:p-5 bg-[#eb3254] rounded-md text-center text-white cursor-pointer"
                     onclick="getOpenShoppingCart()('phoneOpen')">
                 سبد خرید ( <span>{{ $cartCount }}</span> )

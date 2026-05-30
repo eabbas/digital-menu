@@ -236,10 +236,8 @@ class MenuController extends Controller
 
     public function showMenuClient(menu $menu)
     {
-
-        $menu = $menu->load(['menu_items' => function ($query) {
-            $query->with('menu_items')->get();
-        }]);
+        // return response()->json($menu);
+        $menu = $menu->load('menu_items');
 
         // foreach ($categories->menu_categories as $category) {
             foreach ($menu->menu_items as $item) {
@@ -256,7 +254,7 @@ class MenuController extends Controller
             $user = Auth::user();
             $user->carts;
         }
-        return response()->json(['categories' => $menu, 'user' => $user]);
+        return response()->json(['menus' => $menu, 'user' => $user]);
     }
 
     public function createMenu()
