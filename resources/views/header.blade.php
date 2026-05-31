@@ -5,11 +5,11 @@
     @PwaHead
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="{{ asset('assets/js/tailwind.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
-    <link rel="shortcut icon" href="{{ asset('storage/icons/ringaLogo1.png') }}" type="image/png">
-    <script src="{{ asset('assets/js/html5-qrcode.min.js') }}"></script>
+    <script src="{{ asset('assets/js/tailwind.js#t=0.1') }}"></script>
+    <script src="{{ asset('assets/js/jquery.js#t=0.1') }}"></script>
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css#t=0.1') }}" type="text/css">
+    <link rel="shortcut icon" href="{{ asset('storage/icons/ringaLogo1.png#t=0.1') }}" type="image/png">
+    <script src="{{ asset('assets/js/html5-qrcode.min.js#t=0.1') }}"></script>
     <title>@yield('title')</title>
 </head>
 
@@ -1052,4 +1052,4 @@
 
         @endif
     </header>
-    <script src="{{ asset('assets/js/userPanel.js') }}"></script>
+    <script src="{{ asset('assets/js/userPanel.js#t=0.1') }}"></script>

@@ -66,7 +66,9 @@ Route::get('transfer-ids', function () {
     $menuItems = menu_item::all();
     foreach ($menuItems as $menuItem) {
         $menuCats = menu_category::select('id', 'menu_id')->where('id', $menuItem->menu_category_id)->first();
-        $menuItem->update(['menu_id' => $menuCats->menu_id]);
+        if(isset($menuCats->menu_id)){
+            $menuItem->update(['menu_id' => $menuCats->menu_id]);
+        }
     }
 });
 // end
