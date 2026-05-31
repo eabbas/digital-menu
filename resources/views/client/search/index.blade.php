@@ -126,12 +126,16 @@
                                                 <span class="text-sm font-medium max-w-[100px]">
                                                     {{ $restaurant->title  }}
                                                 </span>
+                                                @if($restaurant->description!=null)
                                                 <span class="text-gray-500 text-xs font-medium truncate max-w-[100px]">
                                                     {{ $restaurant->description  }}
                                                 </span>
-                                                <span class="text-gray-500 text-xs    font-medium truncate max-w-[100px]">
+                                                @endif
+                                                @if($restaurant->address!=null)
+                                                <span class="text-gray-500 text-xs font-medium truncate max-w-[100px]">
                                                     {{ $restaurant->address  }}
                                                 </span>
+                                                @endif
                                             </div>
                                             <div class="flex flex-col justify-end">
                                                 <div class="flex items-center gap-[2px]">
@@ -206,9 +210,11 @@
                                                     <span class="text-sm font-medium truncate max-w-[100px]">
                                                         {{ $menu->title }}
                                                     </span>
+                                                    @if($menu->subtitle!=null)
                                                     <span class="text-gray-500 text-xs font-medium truncate max-w-[100px]">
                                                         {{ $menu->subtitle  }}
                                                     </span>
+                                                    @endif
                                                 </div>
                                                 <div class="flex flex-col justify-end">
                                                     <div class="flex items-center gap-[2px]">
