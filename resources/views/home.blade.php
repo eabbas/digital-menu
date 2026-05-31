@@ -15,9 +15,9 @@
         }
     </style>
 
-    <main class="flex flex-col gap-2">
+    <main class="flex flex-col gap-3">
         <!-- filter -->
-        <section class="w-full px-5 bg-white h-10 mx-auto flex justify-center">
+        <section class="w-full px-5 bg-white h-10 mx-auto flex justify-center mt-1.5">
             <div class="w-full flex items-center justify-end">
                 <div class="w-1/3 flex items-center justify-center gap-2 cursor-pointer">
                     <img src="{{asset('storage/mahdi/8c65ff18-bf87-4a68-b814-cc4b24a2ee59.jpg')}}" alt="" class="w-4">
@@ -46,7 +46,7 @@
         <!-- filter -->
         <!-- esloyder -->
         <section class="w-full flex justify-center relative px-5">
-            <div class="w-full bg-[#131f2f] rounded-xl flex px-3 py-1">
+            <div class="w-full bg-[#131f2f] rounded-xl flex px-3 py-3">
                 <div class="w-1/2 h-full overflow-hidden flex justify-center items-center">
                     <img src="{{asset('storage/mahdi/b460793d-5101-464d-83e2-7e8ab6773448.jpg')}}" alt="" class="object-cover w-10/12">
                 </div>
@@ -80,7 +80,7 @@
         <!-- esloyder -->
 
         <!-- خدمات آموزشی -->
-        <section class="w-full flex flex-col justify-center items-center gap-2 bg-white pt-3">
+        <section class="w-full flex flex-col justify-center items-center gap-1 bg-white pt-1.5 pb-2.5">
             <div class="w-full px-5 flex items-center justify-between">
                 <h4 class="text-sm font-bold text-(--primary-text-color)">آموزشگاه رینگا</h4>
                 {{--                <div class="flex items-center gap-2">--}}
@@ -88,7 +88,7 @@
                 {{--                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-2 rotate-90" fill="#fc8e21"><path d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"></path></svg>--}}
                 {{--                </div>--}}
             </div>
-            <div class="w-full px-5 py-1 flex items-center gap-2 overflow-x-auto" style="scrollbar-width:thin;">
+            <div class="w-full px-5 flex items-center gap-2 overflow-x-auto" style="scrollbar-width:thin;">
                 <a href="#" class="min-w-20 max-w-20 rounded-xl flex flex-col items-center gap-1 pt-2 pb-3 border-1 border-[#efefef] rounded-xl">
                     <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
                         <img src="{{asset('storage/home/programming-learn.jpg')}}" alt="" class="size-12 mx-auto object-cover">
@@ -113,7 +113,7 @@
 
 
         <!-- جایگاه های تبلیغاتی -->
-        <section class="w-full flex flex-col justify-center items-center gap-2 pt-3 bg-white">
+        <section class="w-full flex flex-col justify-center items-center gap-2 pt-1.5 pb-2.5 bg-white">
             <div class="w-full px-5 flex items-center justify-between">
                 <h4 class="text-sm font-bold text-(--primary-text-color)">جایگاه های تبلیغاتی</h4>
                 <div class="flex items-center gap-2">
@@ -121,7 +121,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-2 rotate-90" fill="#fc8e21"><path d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"></path></svg>
                 </div>
             </div>
-            <div class="w-full px-5 py-3 flex items-center justify-between gap-2">
+            <div class="w-full px-5 flex items-center justify-between gap-2">
                 <div class="w-5/12 h-full flex flex-col gap-2 justify-between items-center">
                     <a href="#" class="w-full bg-[#fff1e8] flex gap-1 flex justify-between items-center p-2 rounded-xl">
                         <div class="w-8/12 flex flex-col justify-center items-start">
@@ -165,7 +165,7 @@
         <!-- جایگاه های تبلیغاتی -->
 
         <!-- خدمات پر طرفدار -->
-        <section class="w-full flex flex-col bg-white justify-center items-center gap-2 pt-3">
+        <section class="w-full flex flex-col bg-white justify-center items-center gap-2 pb-2.5 pt-1.5">
             <div class="w-full px-5 flex items-center justify-between">
                 <h4 class="text-sm font-bold text-(--primary-text-color)">خدمات پر طرفدار</h4>
                 <div class="flex items-center gap-2">
@@ -173,7 +173,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-2 rotate-90" fill="#fc8e21"><path d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z"></path></svg>
                 </div>
             </div>
-            <div class="w-full px-5 py-3 flex items-center gap-2 overflow-x-auto" style="scrollbar-width:thin;">
+            <div class="w-full px-5 flex items-center gap-2 overflow-x-auto" style="scrollbar-width:thin;">
                 <a href="#" class="min-w-20 max-w-20 rounded-xl flex flex-col items-center gap-1 pt-2 pb-3 border-1 border-[#efefef]">
                     <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
                         <img src="{{asset('storage/home/webDesign.jpg')}}" alt="" class="size-12 mx-auto object-cover">
