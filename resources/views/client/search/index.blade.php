@@ -351,9 +351,7 @@
                         'searchTitle': searchTitle.value,
                     },
                     success: function (datas) {
-                        console.log(datas)
                         parentItems.innerHTML = ""
-                        console.log(datas)
                         for (const key in datas) {
                             if (key == "careerCategory") {
                                 let div = document.createElement('div')
@@ -402,33 +400,40 @@
                                 let parentLink = document.createElement('div')
                                 parentLink.classList = "flex flex-col w-full"
                                 datas[key].forEach((data) => {
+                                    let myHtml = ""
                                     let url = "{{ url('qrcodes/') }}"
                                     url += "/"
                                     url += data.id
                                     let element = document.createElement('a')
                                     element.classList = "flex justify-between w-full bg-white rounded-2xl p-2 relative"
                                     element.setAttribute('href',url)
-                                    element.innerHTML = `
-                                       <div class="w-6/12 flex justify-between">
-                                           <div class="flex flex-col gap-1">
-                                           <span class="text-sm font-medium truncate max-w-[100px]">
-                                               ${data.title}
-                                           </span>`
-                                           if(data.description!=null){
-                                            element.innerHTML+=`
-                                               <span class="text-gray-500 text-xs font-medium truncate max-w-[100px]">
-                                               ${data.description}
-                                               </span>`
-                                            }
-                                            if(data.address!=null){
-                                            element.innerHTML+=`
-                                               <span class="text-gray-500 text-xs font-medium truncate max-w-[100px]">
-                                               ${data.address}
-                                               </span>`
-                                            }
-                                            element.innerHTML+=`
-                                           </div>
-                                             <div class="flex flex-col justify-end">
+                                    myHtml = `
+                                        <div class="w-6/12 flex justify-between">
+                                            <div class="flex flex-col gap-1">
+                                                <span class="text-sm font-medium max-w-[100px]">
+                                                    ${data.title}
+                                                    </span>`
+                                                    console.log(element.innerHTML)
+                                                if(data.description!=null){
+                                                    console.log("salam 1")
+                                                    // console.log(data.description)
+                                                    myHtml+=`
+                                                    <span class="text-gray-500 text-xs font-medium truncate max-w-[100px]">
+                                                        ${data.description}
+                                                    </span>`
+                                                    // console.log(element.innerHTML)
+                                                }
+                                                if(data.address!=null){
+                                                    myHtml+=`
+                                                    <span class="text-gray-500 text-xs font-medium truncate max-w-[100px]">
+                                                        ${data.address}
+                                                    </span>`
+                                                }
+                                                console.log("salam 2")
+                                                // console.log(element.innerHTML)
+                                                myHtml+=`
+                                            </div>
+                                            <div class="flex flex-col justify-end">
                                                 <div class="flex items-center gap-[2px]">
                                                     <div class="text-[.6rem] mt-1">۴.۷</div>
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="size-3 fill-yellow-500">
@@ -436,25 +441,26 @@
                                                     </svg>
                                                 </div>
                                             </div>
-                                       </div>
+                                        </div>
                                         <div class="rounded-md">`
-                                        if(data.logo){
-                                            element.innerHTML+=`
-                                            <img class="mx-auto rounded-[7px] object-cover max-w-35 min-w-35 max-h-23 min-h-23"
-                                            src="${'{{ asset('storage/') }}/' + data.logo}">`
-                                        }else{
-                                            element.innerHTML+=`
-                                            <img class="mx-auto rounded-[7px] object-cover max-w-35 min-w-35 max-h-23 min-h-23"
-                                            src="{{ asset('assets/img/restaurant.webp') }}" alt="social address image">`
-                                        }
-                                            element.innerHTML+=`
-                                                <div class="absolute top-3 left-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 fill-white">
-                                                        <path d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"/>
-                                                    </svg>
-                                                </div>
+                                            if(data.logo){
+                                                myHtml+=`
+                                                <img class="mx-auto rounded-[7px] object-cover max-w-35 min-w-35 max-h-23 min-h-23"
+                                                src="${'{{ asset('storage/') }}/' + data.logo}">`
+                                            }else{
+                                                myHtml+=`
+                                                <img class="mx-auto rounded-[7px] object-cover max-w-35 min-w-35 max-h-23 min-h-23"
+                                                src="{{ asset('assets/img/restaurant.webp') }}" alt="social address image">`
+                                            }
+                                                myHtml+=`
+                                                    <div class="absolute top-3 left-3">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 fill-white">
+                                                            <path d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"/>
+                                                        </svg>
+                                                    </div>
                                         </div>
                                     `
+                                    element.innerHTML=myHtml
                                     parentLink.appendChild(element)
                                     div.appendChild(parentLink)
                                 })
