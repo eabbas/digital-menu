@@ -8,7 +8,7 @@
     <script src="{{ asset('assets/js/tailwind.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
-    <link rel="shortcut icon" href="{{ asset('storage/images/icon.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('storage/icons/ringaLogo1.png') }}" type="image/png">
     <script src="{{ asset('assets/js/html5-qrcode.min.js') }}"></script>
     <title>@yield('title')</title>
 </head>
