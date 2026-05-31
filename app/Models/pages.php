@@ -15,6 +15,7 @@ class pages extends Model
         'description',
         'active',
         'show_in_home',
+        'count'
         
     ];
      public function socialMedia(){

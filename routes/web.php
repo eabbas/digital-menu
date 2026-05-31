@@ -462,6 +462,7 @@ Route::group([
     Route::get('/allPages', "allPages")->name('allPages');
     Route::get('/links/{pages}/{slug?}', 'loadLink')->name('loadLink');
     Route::get('/{career}/{slug?}', 'show_menu')->name('menu');
+    Route::get('/{pages}/{slug?}', 'show_page')->name('page');
     // Route::get('/career/{$career}', 'show_career')->name('show_career');
 });
 Route::get('/career/{career}', [ClientController::class, 'show_career'])->name('show_career');

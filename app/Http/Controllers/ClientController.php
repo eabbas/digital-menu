@@ -53,15 +53,22 @@ class ClientController extends Controller
         }
         return view('client.menu', ['career' => $career, 'slug' => $slug, 'cartCount' => $cartCount, 'currentUser' => $currentUser, 'orders'=>$orders]);
     }
-
-    public function loadLink(pages $pages, $slug = null)
-    {
-        $user = $pages->user;
-        $user->scan_count += 1;
-        $user->save();
+    public function show_page(pages $pages, $slug = null){
         $introCats = $pages->introCats()->where('title', '!=', 'بدون دسته بندی')->get();
         $introPros = $pages->introPros;
         return view('client.link.single', ['page' => $pages, 'slug' => $slug, 'introCats' => $introCats, 'introPros' => $introPros]);
+
+    }
+
+    public function loadLink(pages $pages, $slug = null)
+    {
+        Log::info('pages');
+        $pages->count += 1;
+        $pages->save();
+        $user = $pages->user;
+        $user->scan_count += 1;
+        $user->save();
+        return to_route('client.page', [$pages, $slug]);
     }
 
     public function show_career(career $career)
