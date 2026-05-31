@@ -20,8 +20,6 @@
             url: "{{ url('menu/showMenuClient/') }}/" + menuId,
             type: "GET",
             success: function (data) {
-                console.log('Response data:', data.menus.id);
-                console.log('Menu items:', data.menus.menu_items);
                 // menuCats.innerHTML = ""
                 menuItemList.innerHTML = ""
                 // let menus = data.menus
@@ -40,7 +38,6 @@
                                 // elementDiv.children[0].classList.add('border-red-600')
                                 let items = data.menus.menu_items
                                 items.forEach((item) => {
-                                    console.log(item)
                                     let div = document.createElement('div')
                                     div.classList = "w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems"
                                     div.setAttribute('data-menu-item-title', item.title)
@@ -150,7 +147,6 @@
                         // }
                 //     })
                 // }
-
             },
             error: function () {
                 console.log('error showMenu')

@@ -20,7 +20,8 @@ class career extends Model
         'page_id',
         'show_in_home',
         'phone',
-        'active'
+        'active',
+        'count'
     ];
 
     public $timestamps = true;
