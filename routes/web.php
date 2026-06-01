@@ -467,9 +467,8 @@ Route::group([
 ], function () {
     Route::get('/allPages', "allPages")->name('allPages');
     Route::get('/links/{pages}/{slug?}', 'loadLink')->name('loadLink');
-    Route::get('/links/{page}/{slug?}', 'loadPage')->name('loadPage');
+    Route::get('/page/{page}/{slug?}', 'loadPage')->name('loadPage');
     Route::get('/{career}/{slug?}', 'show_menu')->name('menu');
-    // Route::get('/career/{$career}', 'show_career')->name('show_career');
 });
 Route::get('/career/{career}', [ClientController::class, 'show_career'])->name('show_career');
 // Route::get('/socialPage/{pages}', [ClientController::class, 'show_socialPage'])->name('show_socialPage');
