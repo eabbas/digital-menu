@@ -66,10 +66,12 @@ class ClientController extends Controller
         // $introPros = $pages->introPros;
         // return view('client.link.single', ['page' => $pages, 'slug' => $slug, 'introCats' => $introCats, 'introPros' => $introPros]);
         // return view('client.link.single', ['page' => $pages, 'slug' => $slug]);
+        // dd($pages);
         return to_route('client.loadPage', [$pages, $slug]);
     }
 
     public function loadPage(pages $page, $slug = null){
+    
         return view('client.link.single', ['page' => $page, 'slug' => $slug]);
     }
 

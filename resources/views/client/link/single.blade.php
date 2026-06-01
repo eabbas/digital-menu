@@ -4,7 +4,6 @@
 @endsection
 @section('content')
 
-{{--    @dd(Auth::check())--}}
 {{--    <div class="2xl:container w-11/12 lg:max-w-xl mb-10 mx-auto">--}}
     <div class="2xl:w-max-130 w-11/12 lg:max-w-xl mb-10 mx-auto">
         <div class="w-full my-5 flex flex-col relative">
