@@ -35,7 +35,7 @@
                     </div>
 
                 </div>
-                <div class="w-1/3 flex gap-2 items-center justify-end cursor-pointer" id="createPageLink">
+                <div class="w-1/3 flex gap-2 items-center justify-end cursor-pointer" id="createPageLink" onclick="createPageLinkFunc()">
                     <div class="flex justify-center items-center rounded-xl border-1 border-[#efefef] gap-1 px-2 py-1">
                         <div>
                             {{--                            <svg class="w-3" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" ><path class="clr-i-outline clr-i-outline-path-1" d="M14,4H6A2,2,0,0,0,4,6v8a2,2,0,0,0,2,2h8a2,2,0,0,0,2-2V6A2,2,0,0,0,14,4ZM6,14V6h8v8Z"></path><path class="clr-i-outline clr-i-outline-path-2" d="M30,4H22a2,2,0,0,0-2,2v8a2,2,0,0,0,2,2h8a2,2,0,0,0,2-2V6A2,2,0,0,0,30,4ZM22,14V6h8v8Z"></path><path class="clr-i-outline clr-i-outline-path-3" d="M14,20H6a2,2,0,0,0-2,2v8a2,2,0,0,0,2,2h8a2,2,0,0,0,2-2V22A2,2,0,0,0,14,20ZM6,30V22h8v8Z"></path><path class="clr-i-outline clr-i-outline-path-4" d="M30,20H22a2,2,0,0,0-2,2v8a2,2,0,0,0,2,2h8a2,2,0,0,0,2-2V22A2,2,0,0,0,30,20ZM22,30V22h8v8Z"></path><rect class="clr-i-solid clr-i-solid-path-1" x="4" y="4" width="12" height="12" rx="2" ry="2" style="display:none"></rect><rect class="clr-i-solid clr-i-solid-path-2" x="20" y="4" width="12" height="12" rx="2" ry="2" style="display:none"></rect><rect class="clr-i-solid clr-i-solid-path-3" x="4" y="20" width="12" height="12" rx="2" ry="2" style="display:none"></rect><rect class="clr-i-solid clr-i-solid-path-4" x="20" y="20" width="12" height="12" rx="2" ry="2" style="display:none"></rect></svg> --}}
@@ -143,8 +143,7 @@
             </div>
             <div class="w-full px-5 flex items-center justify-between gap-2">
                 <div class="w-5/12 h-full flex flex-col gap-2 justify-between items-center">
-                    <a href="#"
-                        class="w-full bg-[#fff1e8] flex gap-1 justify-between items-center p-2 rounded-xl">
+                    <a href="#" class="w-full bg-[#fff1e8] flex gap-1 justify-between items-center p-2 rounded-xl">
                         <div class="w-8/12 flex flex-col justify-center items-start">
                             <h5 class="text-xs font-bold text-(--primary-text-color)">جایگاه تبلیغاتی</h5>
                             <span class="text-xs text-[#fc8e21]">سایز متوسط</span>
@@ -153,11 +152,11 @@
                             <img src="{{ asset('storage/mahdi/eef6684c-1f94-4865-af88-4fd807a85fb2.jpg') }}" alt="">
                             <div
                                 class="w-5 h-3 bg-[#e8dfd1] absolute bottom-2 -right-2 rounded-xl text-[8px] text-[#9c928d] flex justify-center items-center">
-                                <span>AD</span></div>
+                                <span>AD</span>
+                            </div>
                         </div>
                     </a>
-                    <a href="#"
-                        class="w-full bg-[#f1f2f4] flex gap-1 justify-between items-center p-2 rounded-xl">
+                    <a href="#" class="w-full bg-[#f1f2f4] flex gap-1 justify-between items-center p-2 rounded-xl">
                         <div class="w-8/12 flex flex-col justify-center items-start">
                             <h5 class="text-xs font-bold text-(--primary-text-color)">جایگاه تبلیغاتی</h5>
                             <span class="text-xs text-[#fc8e21]">سایز متوسط</span>
@@ -166,13 +165,13 @@
                             <img src="{{ asset('storage/mahdi/f1d31b51-9378-4249-98f1-ff3a65a629c7.jpg') }}" alt="">
                             <div
                                 class="w-5 h-3 bg-[#e8dfd1] absolute bottom-2 -right-2 rounded-xl text-[8px] text-[#9c928d] flex justify-center items-center">
-                                <span>AD</span></div>
+                                <span>AD</span>
+                            </div>
                         </div>
                     </a>
                 </div>
 
-                <div
-                    class="w-7/12 h-full bg-[#131f2f] flex justify-between items-center gap-2 rounded-xl relative py-5">
+                <div class="w-7/12 h-full bg-[#131f2f] flex justify-between items-center gap-2 rounded-xl relative py-5">
                     <div class="w-5/12 h-full relative flex items-end  overflow-x-hidden">
                         <img src="{{ asset('storage/home/speaker.png') }}" alt=""
                             class="object-cover relative -right-1">
@@ -186,7 +185,8 @@
                     </div>
                     <div
                         class="w-5 h-3 bg-[#242c39] absolute bottom-2 left-2 rounded-sm text-[8px] text-[#9c928d] flex justify-center items-center">
-                        <span>AD</span></div>
+                        <span>AD</span>
+                    </div>
 
                 </div>
 
@@ -268,7 +268,7 @@
                         <span class="text-[10px] text-nowrap text-(--primary-text-color) font-bold">حمل بار</span>
                     </div>
                 </a>
-                <a href="#"
+                <a href="{{ route('generalQrCodes.create') }}" onclick="createQrCode(event)"
                     class="min-w-20 max-w-20 rounded-xl flex flex-col items-center gap-1 pt-2 pb-3 border-1 border-[#efefef]">
                     <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
                         <img src="{{ asset('storage/home/qrcode.png') }}" alt=""
@@ -428,6 +428,8 @@
         </div>
     </div>
     <script>
+        let createPageMessageBox = document.getElementById('createPageMessageBox')
+        let authenticationDiv = document.getElementById('authenticationDiv')
         let homeBlock = document.getElementById('homeBlock')
 
         let name = ''
@@ -438,7 +440,7 @@
             family = "{{ Auth::check() ? Auth::user()->family : '' }}"
         }
 
-        let createPageMessageBox = document.getElementById('createPageMessageBox')
+
 
         let countDown = document.getElementById('countDown')
         let loginForm = document.getElementById('loginForm')
@@ -446,16 +448,31 @@
         let message = document.getElementById('message')
         let element = document.createElement('div')
         element.classList = "text-sm font-bold flex flex-row items-center justify-center py-3 gap-2 lg:gap-3"
-        let authenticationDiv = document.getElementById('authenticationDiv')
 
         let createPageLink = document.getElementById('createPageLink')
 
 
 
-        createPageLink.addEventListener('click', () => {
+        // createPageLink.addEventListener('click', () => {
+        //     if (flag) {
+        //         homeBlock.classList.remove('invisible')
+        //         homeBlock.classList.remove('opacity-0')
+        //         createPageMessageBox.classList.remove('hidden')
+        //         createPageMessageBox.children[0].innerText = name + " " + family +
+        //             " عزیز، یه صفحه قبلا برات ایجاد شده. اگه میخوای بازم صفحه بسازی از مسیر زیر میتونی انجامش بدی:"
+        //         x = true
+        //     } else {
+        //         authenticationDiv.classList.remove('invisible')
+        //         authenticationDiv.classList.remove('opacity-0')
+        //         authenticationDiv.children[0].classList.remove('scale-95')
+        //     }
+        // })
+
+        function createPageLinkFunc(){
             if (flag) {
                 homeBlock.classList.remove('invisible')
                 homeBlock.classList.remove('opacity-0')
+                createPageMessageBox.classList.remove('hidden')
                 createPageMessageBox.children[0].innerText = name + " " + family +
                     " عزیز، یه صفحه قبلا برات ایجاد شده. اگه میخوای بازم صفحه بسازی از مسیر زیر میتونی انجامش بدی:"
                 x = true
@@ -464,7 +481,7 @@
                 authenticationDiv.classList.remove('opacity-0')
                 authenticationDiv.children[0].classList.remove('scale-95')
             }
-        })
+        }
 
         let passKey = document.getElementById('passKey')
         document.addEventListener('click', (event) => {
@@ -1130,6 +1147,17 @@
                     alert('خطا در ارسال داده')
                 }
             })
+        }
+
+        function createQrCode(e) {
+            if (flag === "" || flag === "0" || flag === false) {
+                e.preventDefault()
+                authenticationDiv.classList.remove('invisible')
+                authenticationDiv.classList.remove('opacity-0')
+                authenticationDiv.children[0].classList.remove('scale-95')
+                console.log(e)
+                console.log(authenticationDiv)
+            }
         }
     </script>
 @endsection
