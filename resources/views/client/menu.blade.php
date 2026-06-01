@@ -217,11 +217,11 @@
                      onclick="closeSection()" viewBox="0 0 384 512">
                     <path d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
                 </svg>
-                <h3 class="text-sm font-bold text-center">انتخاب شیوه ارسال</h3>
+                {{-- <h3 class="text-sm font-bold text-center">انتخاب شیوه ارسال</h3> --}}
                 <div class="w-full flex flex-col items-center gap-3 mt-6">
-                    <div class="w-full text-center py-2 border-1 text-sm font-bold border-gray-300 rounded-md cursor-pointer"
+                    {{-- <div class="w-full text-center py-2 border-1 text-sm font-bold border-gray-300 rounded-md cursor-pointer"
                          onclick="setAddress()">انتخاب آدرس
-                    </div>
+                    </div> --}}
                     <select onchange="setOrder('slug', this)"
                             class="w-full font-bold px-2 py-1 md:px-2 outline-none text-gray-500 cursor-pointer border-1 border-gray-300 rounded-md @if(Auth::check() && !count(Auth::user()->addresses)) hidden @endif">
                         <option>انتخاب میز</option>
