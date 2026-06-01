@@ -62,6 +62,10 @@ use App\Models\social_qr_codes;
 use App\Models\menu_item;
 use App\Models\menu_category;
 
+Route::get("resturan/test", function () {
+    return view('resturan_test');
+});
+
 Route::get('transfer-ids', function () {
     $menuItems = menu_item::all();
     foreach ($menuItems as $menuItem) {
