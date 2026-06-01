@@ -1150,6 +1150,7 @@
         }
 
         function createQrCode(e) {
+            
             if (flag === "" || flag === "0" || flag === false) {
                 e.preventDefault()
                 authenticationDiv.classList.remove('invisible')
