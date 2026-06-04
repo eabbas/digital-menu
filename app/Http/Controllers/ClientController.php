@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\career;
 use App\Models\pages;
 use App\Models\order;
+use App\Models\cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Log;
@@ -27,15 +28,17 @@ class ClientController extends Controller
     //    }
         $menus = $career->menus;
         foreach ($menus as $menu) {
-            // foreach ($menu->menu_categories as $category) {
-                foreach ($menu->menu_items as $item) {
-                    if ($item->discount > 0) {
-                        $campare = $item->price - $item->discount;
-                        $x = $campare / $item->price;
-                        $item['percent'] = intval($x * 100);
-                    }
+            foreach ($menu->menu_items as $item) {
+                if ($item->discount > 0) {
+                    $campare = $item->price - $item->discount;
+                    $x = $campare / $item->price;
+                    $item['percent'] = intval($x * 100);
                 }
-            // }
+                $cartItem = cart::where('user_id', Auth::id())->where('menu_item_id', $item->id)->where('order_id', null)->first();
+                if($cartItem){
+                    $item->quantity = $cartItem->quantity;
+                }
+            }
         }
         $cartCount = 0;
         $orders = null;
@@ -51,7 +54,10 @@ class ClientController extends Controller
             }
             $orders = order::where('user_id', Auth::id())->where('career_id', $career->id)->where('status', 1)->orWhere('status', 2)->orWhere('status', 3)->get();
         }
-        return view('client.menu', ['career' => $career, 'slug' => $slug, 'cartCount' => $cartCount, 'currentUser' => $currentUser, 'orders'=>$orders]);
+        $career->province = $career->province_city->province->title;
+        $career->city = $career->province_city->title;
+        return view('newMenu', ['career' => $career, 'slug' => $slug, 'cartCount' => $cartCount, 'currentUser' => $currentUser, 'orders'=>$orders]);
+//        return view('client.menu', ['career' => $career, 'slug' => $slug, 'cartCount' => $cartCount, 'currentUser' => $currentUser, 'orders'=>$orders]);
     }
         
     public function loadLink(pages $pages, $slug = null)

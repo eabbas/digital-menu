@@ -8,9 +8,11 @@
     <script src="{{ asset('assets/js/tailwind.js#t=0.1') }}"></script>
     <script src="{{ asset('assets/js/jquery.js#t=0.1') }}"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css#t=0.1') }}" type="text/css">
-    <link rel="shortcut icon" href="{{ asset('storage/icons/ringaLogo1.png#t=0.1') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('storage/logos/ringaLogo1.png#t=0.1') }}" type="image/png">
+{{--    <link rel="shortcut icon" href="{{ asset('storage/logos/ringaLogo1.png') }}" type="image/png">--}}
     <script src="{{ asset('assets/js/html5-qrcode.min.js#t=0.1') }}"></script>
     <title>@yield('title')</title>
+
 </head>
 
 <body class="bg-[#ffffff]">

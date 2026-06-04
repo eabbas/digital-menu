@@ -58,24 +58,20 @@ use App\Http\Controllers\ClassAttachmentController;
 use App\Http\Middleware\savePreviousUrl;
 
 use App\Models\social_qr_codes;
-// this route called once
-use App\Models\menu_item;
-use App\Models\menu_category;
 
-Route::get("resturan/test", function () {
-    return view('resturan_test');
+Route::get('/hossein/test' , function(){
+    return view('guys.ho.test');
 });
+Route::get('/roadmap', function(){
+    return view('guys.nasiri.roadmap');
+})->name('roadmap');
 
-Route::get('transfer-ids', function () {
-    $menuItems = menu_item::all();
-    foreach ($menuItems as $menuItem) {
-        $menuCats = menu_category::select('id', 'menu_id')->where('id', $menuItem->menu_category_id)->first();
-        if(isset($menuCats->menu_id)){
-            $menuItem->update(['menu_id' => $menuCats->menu_id]);
-        }
-    }
-});
-// end
+Route::get('print/services' , function (){
+    return view('guys.ho.print');
+})->name('print.services');
+Route::get('/computer-services', function () {
+    return view('guys.ft.computer');
+})->name('computer.services');
 
 Route::group([
     'prefix' => 'guys',
