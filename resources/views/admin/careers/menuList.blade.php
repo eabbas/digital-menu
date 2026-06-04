@@ -3,10 +3,6 @@
     لیست منو های {{ $career->title }}
 @endsection
 @section('content')
-    <div class="pb-4 flex flex-row justify-between items-end">
-        <h2 class="text-sm lg:text-lg font-bold text-gray-800">لیست منو هایxxxxxxxxxxxxxxxxxxxxx {{ $career->title }}</h2>
-        <a href="{{ route('career.careers', [$career->user]) }}" class="text-xs px-2 py-0.5 rounded-sm bg-gray-800 text-white">بازگشت</a>
-    </div>
     <div class="w-full flex flex-col pb-4">
         <form action="{{ route('menu.deleteAll') }}" method="post" class="bg-white rounded-lg">
             @csrf

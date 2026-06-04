@@ -8,8 +8,7 @@
             <h2 class="text-lg font-bold text-gray-800 p-4 text-center">لیست سفارشات {{ $career->title }}</h2>
 
             <div class="flex flex-col gap-5">
-
-
+                
                 <div
                         class="w-10/12 mx-auto shadow-md rounded mb-5 overflow-x-auto lg:overflow-visible" style="scrollbar-width: thin;">
                     <div

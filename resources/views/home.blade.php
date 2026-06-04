@@ -23,9 +23,7 @@
                     <img src="{{ asset('storage/mahdi/8c65ff18-bf87-4a68-b814-cc4b24a2ee59.jpg') }}" alt=""
                         class="w-4">
                     <div class="flex items-center gap-0.5 text-xs">
-                        <span>تهران</span>
-                        <span>,</span>
-                        <span>ایران</span>
+                        <span>بناب</span>
                     </div>
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-2">
@@ -101,21 +99,21 @@
                 {{--                </div> --}}
             </div>
             <div class="w-full px-5 flex items-center gap-2 overflow-x-auto" style="scrollbar-width:thin;">
-                <a href="#"
-                    class="min-w-20 max-w-20 flex flex-col items-center gap-1 pt-2 pb-3 border-1 border-[#efefef] rounded-xl">
-                    <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
-                        <img src="{{ asset('storage/home/programming-learn.jpg') }}" alt=""
-                            class="size-12 mx-auto object-cover">
+                <a href="{{ route('roadmap') }}"
+                    class="min-w-22 max-w-22 flex flex-col items-center gap-1 pt-2 pb-3 border-1 border-[#efefef] rounded-xl">
+                    <div class="w-8/12 rounded-sm  flex jsutfiy-center items-center overflow-hidden">
+                        <img src="{{ asset('storage/home/web.png') }}" alt=""
+                            class="min-w-16 max-w-16 mx-auto object-cover">
                     </div>
                     <div class="w-10/12 flex justify-center">
                         <span class="text-xs text-nowrap text-(--primary-text-color) font-bold">طراحی وبسایت</span>
                     </div>
                 </a>
                 <a href="#"
-                    class="min-w-20 max-w-20 flex flex-col items-center gap-1 pt-2 pb-3 border-1 border-[#efefef] rounded-xl">
-                    <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
-                        <img src="{{ asset('storage/home/learn-english.png') }}" alt=""
-                            class="size-12 mx-auto object-cover">
+                    class="min-w-22 max-w-22 flex flex-col items-center gap-1 pt-2 pb-3 border-1 border-[#efefef] rounded-xl">
+                    <div class="w-8/12 rounded-sm flex jsutfiy-center items-center overflow-hidden">
+                        <img src="{{ asset('storage/home/rintalk.png') }}" alt=""
+                            class="min-w-16 max-w-16 mx-auto object-cover">
                     </div>
                     <div class="w-10/12 flex justify-center">
                         <span class="text-xs text-nowrap text-(--primary-text-color) font-bold">زبان</span>
@@ -228,7 +226,7 @@
                         <span class="text-[10px] text-nowrap text-(--primary-text-color) font-bold">سفارش غذا</span>
                     </div>
                 </a>
-                <a href="#"
+                <a href="{{route('print.services')}}"
                     class="min-w-20 max-w-20 rounded-xl flex flex-col items-center gap-1 pt-2 pb-3 border-1 border-[#efefef]">
                     <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
                         <img src="{{ asset('storage/home/printary.jpg') }}" alt=""
@@ -238,7 +236,7 @@
                         <span class="text-[10px] text-nowrap text-(--primary-text-color) font-bold">چاپ</span>
                     </div>
                 </a>
-                <a href="#"
+                <a href="{{ route('computer.services') }}"
                     class="min-w-20 max-w-20 rounded-xl flex flex-col items-center gap-1 pt-2 pb-3 border-1 border-[#efefef]">
                     <div class="w-8/12 rounded-full  flex jsutfiy-center items-center overflow-hidden">
                         <img src="{{ asset('storage/home/laptop.jpg') }}" alt=""

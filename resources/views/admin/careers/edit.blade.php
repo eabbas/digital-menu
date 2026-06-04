@@ -2,9 +2,6 @@
 @section('title', 'ویرایش رستوران')
 @section('content')
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
-    <div class="w-full flex flex-row justify-end">
-            <a href="{{ url()->previous()}}" class="text-xs px-2 py-0.5 rounded-sm bg-gray-500 text-white">بازگشت ←</a>
-               </div>
     <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">فرم ویرایش رستوران</h1>
     <form action="{{ route('career.update') }}" method="post" enctype='multipart/form-data'>
         @csrf

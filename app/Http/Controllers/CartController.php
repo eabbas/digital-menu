@@ -13,7 +13,7 @@ class CartController extends Controller
 {
     public function store(Request $request)
     {
-    //    return response()->json($request->all());
+//        return response()->json($request->all());
         $user_id = Auth::id();
         if (!Auth::check()) {
             $user_id = $request->input('user_id');
@@ -30,7 +30,7 @@ class CartController extends Controller
 
     function update(Request $request)
     {
-        // return response()->json($request->all());
+//         return response()->json($request->all());
         $user_id = $request->input('user_id');
         if (Auth::check()) {
             $user_id = Auth::id();
@@ -82,7 +82,14 @@ class CartController extends Controller
         $cart = cart::where('menu_item_id', $request->menu_item_id)->where('user_id', $request->user_id)->first();
         $data = $cart;
         $cart->delete();
-        return response()->json($data);
+        $count = 0;
+        $carts = cart::where('user_id', $request->user_id)->where('order_id', null)->get();
+        if(count($carts)){
+            foreach ($carts as $cart) {
+                $count += $cart->quantity;
+            }
+        }
+        return response()->json(['cart'=>$data, 'count'=>$count]);
     }
 
     public function deleteAll(Request $request){

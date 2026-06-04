@@ -31,14 +31,40 @@
                 <span class="text-xs text-[#fc8e21]">اسکنر</span>
             </div>
         </div>
-        <div class="w-1/7 flex flex-col items-center gap-2 relative">
-{{--            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"  fill="#7f7e84">--}}
-{{--                <path d="M160 512l48-32 96-64H464h48V368 48 0H464 48 0V48 368v48H48h64 48v38.3V464v48zM277.4 376.1L208 422.3V416 368H160 48V48H464V368H304 289.5l-12.1 8.1zM144 240a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm144-32a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm80 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/>--}}
-{{--            </svg>--}}
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5" viewBox="0 0 512 512">
-                <path fill="var(--secondary-text-color)" d="M208 416c0-26.5-21.5-48-48-48H64c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16H448c8.8 0 16 7.2 16 16V352c0 8.8-7.2 16-16 16H309.3c-10.4 0-20.5 3.4-28.8 9.6L208 432V416zm-.2 76.2l.2-.2 101.3-76H448c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64C28.7 0 0 28.7 0 64V352c0 35.3 28.7 64 64 64h48 48v48 4 .3 6.4V496c0 6.1 3.4 11.6 8.8 14.3s11.9 2.1 16.8-1.5L202.7 496l5.1-3.8zM144 240a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm144-32a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm80 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/></svg>
-            <span class="text-xs text-(--secondary-text-color)">پیام ها</span>
-            <span class="w-2 h-2 rounded-full bg-[#fc8e21] absolute right-3 -top-2"></span>
+        <div class="w-1/7 flex flex-col items-center gap-2 relative cursor-pointer" onclick="getOpenShoppingCart()('phoneOpen')" id="orderBasket">
+            <span class="size-3 text-center rounded-full bg-[#fc8e21] absolute right-3 -top-2 text-white text-[10px] @if(!isset($cartCount) || (isset($cartCount) && $cartCount == 0)) hidden @endif">
+                @if(Auth::check())
+                    {{ isset($cartCount) ? $cartCount : '0' }}
+                @endif
+            </span>
+            <svg version="1.1" class="can-badge can-alert has-solid w-6 @if(!isset($cartCount) || (isset($cartCount) && $cartCount == 0)) fill-(--secondary-text-color) @else fill-(--primary-color) @endif" viewBox="0 0 36 36" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" focusable="false" role="img">
+                <circle cx="13.33" cy="29.75" r="2.25" class="clr-i-outline clr-i-outline-path-1"></circle>
+                <circle cx="27" cy="29.75" r="2.25" class="clr-i-outline clr-i-outline-path-2"></circle>
+                <circle cx="13.33" cy="29.75" r="2.25" class="clr-i-outline--alerted clr-i-outline-path-1--alerted" style="display:none"></circle>
+                <circle cx="27" cy="29.75" r="2.25" class="clr-i-outline--alerted clr-i-outline-path-2--alerted" style="display:none"></circle>
+                <circle cx="13.33" cy="29.75" r="2.25" class="clr-i-outline--badged clr-i-outline-path-1--badged" style="display:none"></circle>
+                <circle cx="27" cy="29.75" r="2.25" class="clr-i-outline--badged clr-i-outline-path-2--badged" style="display:none"></circle>
+                <circle cx="30" cy="6" r="5" class="clr-i-outline--badged clr-i-outline-path-5--badged clr-i-badge" style="display:none"></circle>
+                <circle cx="13.5" cy="29.5" r="2.5" class="clr-i-solid clr-i-solid-path-1" style="display:none"></circle>
+                <circle cx="26.5" cy="29.5" r="2.5" class="clr-i-solid clr-i-solid-path-2" style="display:none"></circle>
+                <circle cx="13.5" cy="29.5" r="2.5" class="clr-i-solid--alerted clr-i-solid-path-1--alerted" style="display:none"></circle>
+                <circle cx="26.5" cy="29.5" r="2.5" class="clr-i-solid--alerted clr-i-solid-path-2--alerted" style="display:none"></circle>
+                <circle cx="13.5" cy="29.5" r="2.5" class="clr-i-solid--badged clr-i-solid-path-1--badged" style="display:none"></circle>
+                <circle cx="26.5" cy="29.5" r="2.5" class="clr-i-solid--badged clr-i-solid-path-2--badged" style="display:none"></circle>
+                <circle cx="30" cy="6" r="5" class="clr-i-solid--badged clr-i-solid-path-4--badged clr-i-badge" style="display:none"></circle>
+                <path d="M33.08,5.37A1,1,0,0,0,32.31,5H11.49l.65,2H31L28.33,19h-15L8.76,4.53a1,1,0,0,0-.66-.65L4,2.62a1,1,0,1,0-.59,1.92L7,5.64l4.59,14.5L9.95,21.48l-.13.13A2.66,2.66,0,0,0,9.74,25,2.75,2.75,0,0,0,12,26H28.69a1,1,0,0,0,0-2H11.84a.67.67,0,0,1-.56-1l2.41-2H29.13a1,1,0,0,0,1-.78l3.17-14A1,1,0,0,0,33.08,5.37Z" class="clr-i-outline clr-i-outline-path-3"></path>
+                <path d="M29.15,15.4,28.33,19h-15L8.76,4.53a1,1,0,0,0-.66-.65L4,2.62a1,1,0,1,0-.59,1.92L7,5.64l4.59,14.5L9.95,21.48l-.13.13A2.66,2.66,0,0,0,9.74,25,2.75,2.75,0,0,0,12,26H28.69a1,1,0,0,0,0-2H11.84a.67.67,0,0,1-.56-1l2.41-2H29.13a1,1,0,0,0,1-.78l1.09-4.82Z" class="clr-i-outline--alerted clr-i-outline-path-4--alerted" style="display:none"></path>
+                <path d="M26.85,1.14,21.13,11A1.28,1.28,0,0,0,22.23,13H33.68A1.28,1.28,0,0,0,34.78,11L29.06,1.14A1.28,1.28,0,0,0,26.85,1.14Z" class="clr-i-outline--alerted clr-i-outline-path-5--alerted clr-i-alert" style="display:none"></path>
+                <path d="M22.57,7a7.52,7.52,0,0,1-.07-1,7.52,7.52,0,0,1,.07-1H11.49l.65,2Z" class="clr-i-outline--badged clr-i-outline-path-3--badged" style="display:none"></path>
+                <path d="M30,13.5l-.42,0L28.33,19h-15L8.76,4.53a1,1,0,0,0-.66-.65L4,2.62a1,1,0,1,0-.59,1.92L7,5.64l4.59,14.5L9.95,21.48l-.13.13A2.66,2.66,0,0,0,9.74,25,2.75,2.75,0,0,0,12,26H28.69a1,1,0,0,0,0-2H11.84a.67.67,0,0,1-.56-1l2.41-2H29.13a1,1,0,0,0,1-.78l1.57-6.91A7.51,7.51,0,0,1,30,13.5Z" class="clr-i-outline--badged clr-i-outline-path-4--badged" style="display:none"></path>
+                <path d="M33.1,6.39A1,1,0,0,0,32.31,6H9.21L8.76,4.57a1,1,0,0,0-.66-.65L4,2.66a1,1,0,1,0-.59,1.92L7,5.68l4.58,14.47L9.95,21.49l-.13.13A2.66,2.66,0,0,0,9.74,25,2.75,2.75,0,0,0,12,26H28.69a1,1,0,0,0,0-2H11.84a.67.67,0,0,1-.56-1l2.41-2H29.12a1,1,0,0,0,1-.76l3.2-13A1,1,0,0,0,33.1,6.39Z" class="clr-i-solid clr-i-solid-path-3" style="display:none"></path>
+                <path d="M22.23,15.4A3.68,3.68,0,0,1,19,9.89L21.29,6H9.21L8.76,4.57a1,1,0,0,0-.66-.65L4,2.66a1,1,0,1,0-.59,1.92L7,5.68l4.58,14.47L9.95,21.49l-.13.13A2.66,2.66,0,0,0,9.74,25,2.75,2.75,0,0,0,12,26H28.69a1,1,0,0,0,0-2H11.84a.67.67,0,0,1-.56-1l2.41-2H29.12a1,1,0,0,0,1-.76l1.19-4.84Z" class="clr-i-solid--alerted clr-i-solid-path-3--alerted" style="display:none"></path>
+                <path d="M26.85,1.14,21.13,11A1.28,1.28,0,0,0,22.23,13H33.68A1.28,1.28,0,0,0,34.78,11L29.06,1.14A1.28,1.28,0,0,0,26.85,1.14Z" class="clr-i-solid--alerted clr-i-solid-path-4--alerted clr-i-alert" style="display:none"></path>
+                <path d="M30,13.5A7.5,7.5,0,0,1,22.5,6H9.21L8.76,4.57a1,1,0,0,0-.66-.65L4,2.66a1,1,0,1,0-.59,1.92L7,5.68l4.58,14.47L9.95,21.49l-.13.13A2.66,2.66,0,0,0,9.74,25,2.75,2.75,0,0,0,12,26H28.69a1,1,0,0,0,0-2H11.84a.67.67,0,0,1-.56-1l2.41-2H29.12a1,1,0,0,0,1-.76l1.71-7A7.49,7.49,0,0,1,30,13.5Z" class="clr-i-solid--badged clr-i-solid-path-3--badged" style="display:none"></path>
+                <polygon points="20.71 7 21.87 5 11.49 5 12.14 7 20.71 7" class="clr-i-outline--alerted clr-i-outline-path-3--alerted" style="display:none"></polygon>
+            </svg>
+            <span class="text-xs text-(--secondary-text-color)">سبد خرید</span>
+
         </div>
         <div class="w-1/7 flex flex-col items-center gap-1 cursor-pointer" id="userIcon">
             @if(Auth::check())
@@ -396,78 +422,6 @@
 
 
 <script>
-
-    {{--        let footerItems = document.querySelectorAll('.footerItems')--}}
-    {{--        footerItems.forEach((footerItem)=>{--}}
-    {{--            footerItem.addEventListener('click', ()=>{--}}
-
-    {{--                footerItems.forEach((item)=>{--}}
-    {{--                    item.classList.remove('underLineBorder')--}}
-    {{--                })--}}
-    {{--                footerItem.classList.add('underLineBorder')--}}
-    {{--            })--}}
-    {{--        })--}}
-
-    {{--        document.addEventListener('DOMContentLoaded', function() {--}}
-    {{--            let shopIcon = document.getElementById('shopIcon');--}}
-    {{--            let comingSoon = document.getElementById('comingSoon');--}}
-    {{--            let contentCommingSoon = document.getElementById('contentCommingSoon');--}}
-    {{--            let closeBtn = document.getElementById('closeModal');--}}
-    {{--            let confirmBtn = document.getElementById('closeForm');--}}
-
-    {{--            if (shopIcon) {--}}
-    {{--                shopIcon.addEventListener('click', function(e) {--}}
-    {{--                    e.preventDefault()--}}
-    {{--                    openModal()--}}
-    {{--                })--}}
-    {{--            }--}}
-
-    {{--            function openModal() {--}}
-    {{--                comingSoon.classList.remove('hidden')--}}
-    {{--                contentCommingSoon.classList.remove('scale-95', 'opacity-0')--}}
-    {{--                contentCommingSoon.classList.add('scale-100', 'opacity-100')--}}
-    {{--            }--}}
-
-    {{--            function closeModal() {--}}
-    {{--                contentCommingSoon.classList.remove('scale-100', 'opacity-100')--}}
-    {{--                contentCommingSoon.classList.add('scale-95', 'opacity-0')--}}
-    {{--                comingSoon.classList.add('hidden')--}}
-
-    {{--            }--}}
-
-    {{--            if (closeBtn) closeBtn.addEventListener('click', closeModal)--}}
-    {{--            if (confirmBtn) confirmBtn.addEventListener('click', closeModal)--}}
-
-    {{--        })--}}
-
-    {{--        let cartIcon = document.getElementById('cartIcon');--}}
-    {{--        let cartModal = document.getElementById('cart');--}}
-    {{--        let cartContent = document.getElementById('contentCart');--}}
-    {{--        let closeCartBtn = document.getElementById('closeCart');--}}
-    {{--        let closeCartForm = document.getElementById('closeFormCart');--}}
-    {{--        // کد مربوط به سبد خرید--}}
-    {{--        if (cartIcon) {--}}
-    {{--            cartIcon.addEventListener('click', function(e) {--}}
-    {{--                e.preventDefault();--}}
-    {{--                openCartModal();--}}
-    {{--            });--}}
-    {{--        }--}}
-
-    {{--        function openCartModal() {--}}
-    {{--            cartModal.classList.remove('hidden')--}}
-    {{--            cartContent.classList.remove('scale-95', 'opacity-0')--}}
-    {{--            cartContent.classList.add('scale-100', 'opacity-100')--}}
-    {{--        }--}}
-
-    {{--        function closeCart() {--}}
-    {{--            cartContent.classList.remove('scale-100', 'opacity-100')--}}
-    {{--            cartContent.classList.add('scale-95', 'opacity-0')--}}
-    {{--            cartModal.classList.add('hidden')--}}
-    {{--        }--}}
-    {{--        if (closeCartBtn) closeCartBtn.addEventListener('click', closeCart)--}}
-    {{--        if (closeCartForm) closeCartForm.addEventListener('click', closeCart)--}}
-
-
     let qrIcon = document.getElementById('qrIcon')
     let homeIcon = document.getElementById('homeIcon')
     let userIcon = document.getElementById('userIcon')
@@ -478,17 +432,7 @@
         const html5QrCode = new Html5Qrcode("reader")
 
         if (state == 'open') {
-            if ("{{ Route::is('home') }}") {
-                {{--                homeIcon.classList.remove('bg-[#eb3254]')--}}
-                {{--                homeIcon.children[0].classList.remove('fill-white')--}}
-                {{--                homeIcon.children[0].classList.add('fill-black')--}}
-            }
-            {{--                if("{{ Route::is('login') || Route::is('signup') || Route::is('reset_password') || Route::is('forget_password') || Route::is('user.*') }}"){--}}
-                    {{--                    userIcon.classList.remove('bg-[#eb3254]')--}}
-                    {{--                    userIcon.children[0].classList.remove('fill-white')--}}
-                    {{--                    userIcon.children[0].classList.add('fill-black')--}}
-                    {{--                }--}}
-                qrIcon.children[0].classList.remove('fill-black')
+            qrIcon.children[0].classList.remove('fill-black')
             qrIcon.children[0].classList.add('fill-white')
             qrIcon.classList.add('bg-[#eb3254]')
             popupQr.classList.remove('invisible')
@@ -522,19 +466,6 @@
             }, config, qrCodeSuccessCallback)
         }
         if (state == 'close') {
-            // qrIcon.children[0].classList.remove('fill-white')
-            // qrIcon.classList.remove('bg-[#eb3254]')
-            // qrIcon.children[0].classList.add('fill-black')
-            if ("{{ Route::is('home') }}") {
-                // homeIcon.children[0].classList.remove('fill-black')
-                // homeIcon.classList.add('bg-[#eb3254]')
-                // homeIcon.children[0].classList.add('fill-white')
-            }
-            if ("{{ Route::is('login') || Route::is('signup') || Route::is('reset_password') || Route::is('forget_password') || Route::is('user.*') }}") {
-                // userIcon.children[0].classList.remove('fill-black')
-                // userIcon.classList.add('bg-[#eb3254]')
-                // userIcon.children[0].classList.add('fill-white')
-            }
             popupQr.classList.add('invisible')
             popupQr.classList.add('opacity-0')
             popupQr.children[0].classList.add('scale-95')
@@ -545,18 +476,11 @@
 
 
 
-    {{--        function openUserOptions(state){--}}
-    {{--            if (state == 'open') {--}}
-    {{--                popupUser.classList.remove('-bottom-full')--}}
-    {{--                popupUser.classList.add('bottom-0')--}}
-    {{--            }--}}
-    {{--            if (state == 'close') {--}}
-    {{--                popupUser.classList.remove('bottom-0')--}}
-    {{--                popupUser.classList.add('-bottom-full')--}}
-    {{--            }--}}
-    {{--        }--}}
 </script>
 <script src="{{ asset('assets/js/home.js') }}"></script>
+@if(Route::is('client.menu'))
+    @include('newMenuJs')
+@endif
 {{--    <script src="{{ asset('assets/js/userPanel.js') }}"></script>--}}
 @RegisterServiceWorkerScript
 </body>

@@ -36,9 +36,6 @@
 
     <div id="parentMenuPage"
         class="@if (Auth::check()) @if (count(Auth::user()->carts))mb-[100px] @endif @endif relative z-888">
-        <div class="w-full flex flex-row justify-end p-3">
-            <a href="{{ url()->previous() }}" class="text-xs px-2 py-0.5 rounded-sm bg-gray-500 text-white">بازگشت ←</a>
-        </div>
         <div class="w-full pt-4 lg:pt-10 pb-4 bg-[#F4F8F9]">
             <div class="w-11/12 mx-auto lg:pt-6 flex flex-row items-center justify-end gap-4">
                 <a href="{{ route('career.edit', [$career->id]) }}"

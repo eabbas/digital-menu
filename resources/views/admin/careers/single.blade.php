@@ -41,9 +41,6 @@
             </div>
         </div>
     </div> --}}
-        <div class="w-full flex flex-row justify-end">
-            <a href="{{ url()->previous() }}" class="text-xs px-2 py-0.5 rounded-sm bg-gray-500 text-white">بازگشت ←</a>
-        </div>
         <div class="mt-4 lg:mt-5 bg-white">
             <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5">
                 <div class="flex flex-row justify-between items-center border-b border-gray-200">
