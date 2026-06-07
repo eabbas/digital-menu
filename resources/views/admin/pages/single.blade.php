@@ -600,7 +600,7 @@
                                             <span class="text-gray-700 font-bold">افزودن رستوران</span>
                                         </span>
                                     </div>
-                                    <div class="w-full">
+                                    {{-- <div class="w-full">
                                         <a href="{{ route('pages.proList', [$page->id]) }}"
                                            class="w-full p-5 border-1 border-gray-400 flex flex-row items-center gap-5 hover:ring-2 hover:ring-[#eb3254] hover:ring-offset-2 hover:bg-[#eb3254]/20 rounded-lg transition-all duration-150 cursor-pointer">
                                             <svg class="size-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -611,7 +611,7 @@
                                             </svg>
                                             <span class="text-gray-700 font-bold">فروشگاه</span>
                                         </a>
-                                    </div>
+                                    </div> --}}
                                     <div class="w-full">
                                         <div onclick="addSocialMedia()"
                                              class="w-full p-5 border-1 border-gray-400 flex flex-row items-center gap-5 hover:ring-2 hover:ring-[#eb3254] hover:ring-offset-2 hover:bg-[#eb3254]/20 rounded-lg transition-all duration-150 cursor-pointer">
@@ -635,7 +635,7 @@
                                         </div>
                                     </div>
                                     {{-- FAQ --}}
-                                    <div class="w-full">
+                                    {{-- <div class="w-full">
                                         <div onclick="addFaq() "
                                              class="w-full p-5 border-1 border-gray-400 flex flex-row items-center gap-5 hover:ring-2 hover:ring-[#eb3254] hover:ring-offset-2 hover:bg-[#eb3254]/20 rounded-lg transition-all duration-150 cursor-pointer">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
@@ -645,7 +645,7 @@
                                             </svg>
                                             <span class="text-gray-700 font-bold">افزودن سوالات متداول</span>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     {{-- FAQ end --}}
                                     {{-- page contactus --}}
                                     <div class="w-full">
@@ -4307,7 +4307,7 @@
                         'page_id': "{{ $page->id }}",
                     },
                     success: function (response) {
-                        console.log(response)
+                        console.log(response.block.title)
                         createPageContactus.children[0].classList.remove('flex')
                         createPageContactus.children[0].classList.add('hidden')
 
@@ -4318,7 +4318,7 @@
                         let mainDiv = document.createElement('div')
                         mainDiv.className = "lg:py-2"
                         let element = `
-                    <h3 class="hidden lg:block text-lg font-bold text-gray-800 text-center cursor-pointer viewFAQ"
+                    <h3 class="lg:block text-lg font-bold text-gray-800 text-center cursor-pointer viewFAQ"
                         onclick='editTitle("${response.block.id}")'
                         data-block-id="${response.block.id}">
                         ${response.block.title}
