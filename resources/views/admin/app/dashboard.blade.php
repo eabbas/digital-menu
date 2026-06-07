@@ -115,7 +115,7 @@
                 <div class="p-3 space-y-2 pr-10 max-h-48 overflow-y-auto">
                     @if(Auth::user()->pages && count(Auth::user()->pages) > 0)
                         @foreach(Auth::user()->pages as $page)
-                            <a href="{{ route('pages.social_list') }}"
+                            <a href="{{ route('pages.single' , [$page->id]) }}"
                                class="flex items-center gap-3 p-2 rounded-lg hover:bg-(--primary-color)/10 transition-all duration-200 group">
                                 <img src="{{ $page->logo_path ? asset('storage/' . $page->logo_path) : asset('assets/img/user.png') }}" alt="{{ $page->title }}"
                                      class="size-8 rounded-full object-cover border border-(--primary-color)/20 group-hover:border-(--primary-color)/40 transition-all">
