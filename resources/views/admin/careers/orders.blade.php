@@ -216,7 +216,7 @@
                     <h4 class="text-xs text-(--primary-text-color) mb-2">آدرس :</h4>
                     <p class="text-xs text-(--secondary-text-color) text-center my-2 in-fa" id="address"></p>
                 </div>
-                <div class="w-full flex flex-col gap-2 max-h-[600px] overflow-y-auto p-3 mt-3 border-t-1 border-gray-200" style="scrollbar-width: thin;" id="itemList"></div>
+                <div class="w-full flex flex-col gap-2 max-h-[500px] overflow-y-auto p-3 mt-3 border-t-1 border-gray-200" style="scrollbar-width: thin;" id="itemList"></div>
             </div>
         </div>
     </div>

@@ -114,7 +114,7 @@
                                         </svg>
                                         <span class="text-[10px] text-(--secondary-text-color)">تعداد سفارش</span>
                                     </div>
-                                    <span class="text-xs font-bold text-(--primary-text-color) in-fa">{{ count($career->orders) }} آیتم</span>
+                                    <span class="text-xs font-bold text-(--primary-text-color) in-fa">{{ count($career->orders) }} سفارش</span>
                                 </a>
                                 <div class="w-1/3 flex flex-col items-center justify-center gap-1.5 border-l-1 border-[#e4e5ea]">
                                     <div class="flex flex-row items-center gap-1.5">

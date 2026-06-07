@@ -1,6 +1,6 @@
 {{-- bottom menu mobile --}}
 
-<footer class="w-full flex justify-center rounded-t-4xl bg-white fixed bottom-0 left-0 lg:w-[calc(100%-265px)] py-1.5 z-999">
+<footer class="w-full flex justify-center rounded-t-4xl bg-white fixed bottom-0 left-0 py-1.5 z-999"><!-- lg:w-[calc(100%-265px)] -->
     <div class="w-11/12 mt-1 flex justify-between items-center ">
         <a href="{{{ route('home') }}}" class="w-1/7 flex flex-col items-center gap-2" id="homeIcon">
 {{--            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"  class="w-5">--}}
