@@ -20,17 +20,18 @@ class OrderController extends Controller
         if(isset($request->slug)){
             $qr_code_id = qr_code::where('slug', $request->slug)->first()->id;
         }
-        $order_code = sprintf('%010d', random_int(0, 9999999999));
         $order_id = order::insertGetId([
             'address_id' => isset($request->address) ? $request->address : null,
             'user_id' => $user_id,
             'qr_code_id' => $qr_code_id,
             'career_id' => $request->career_id,
-            'status'=>1,
-            'order_code'=>$order_code,
+            'order_status_id'=>1,
+            'order_code'=>0,
             'created_at'=>now(),
             'updated_at'=>now(),
         ]);
+        $order_code = "100".$order_id;
+        order::where('id', $order_id)->update(['order_code' => $order_code]);
         foreach($request->carts as $cart_id){
             $cart=cart::find($cart_id);
             $cart->order_id = $order_id;
@@ -45,7 +46,7 @@ class OrderController extends Controller
             $user_id = $request->user_id;
         }
         $datas = [];
-        $orders = order::where('user_id', $user_id)->where('career_id', $request->career_id)->where('status', 1)->orWhere('status', 2)->orWhere('status', 3)->get();
+        $orders = order::where('user_id', $user_id)->where('career_id', $request->career_id)->where('order_status_id', 1)->orWhere('order_status_id', 2)->orWhere('order_status_id', 3)->orWhere('order_status_id', 4)->get();
         foreach($orders as $order){
             if($order->address){
                 $order['address'] =  $order->address;
@@ -53,29 +54,46 @@ class OrderController extends Controller
             if($order->qr_code_id){
                 $order['table'] =  $order->qr_code->description ? $order->qr_code->description : "-";
             }
-            if($order->status == 1){
-                $order['status'] = "در انتظار تایید";
-            }
-            if($order->status == 2){
-                $order['status'] = "در حال آماده سازی";
-            }
-            if($order->status == 3){
-                $order['status'] = "ارسال شد";
-            }
             $datas[] = $order;
         }
         return response()->json($datas);
     }
 
-    public function showItems(Request $request){
+    public function showItems(order $order){
+        $order->carts->load('menu_item');
+        $order->qr_code;
+        $order->status;
+        return response()->json($order);
+    }
+
+    public function acceptOrder(Request $request)
+    {
         $order = order::find($request->order_id);
-        $data = $order->carts->load('menu_item');
-        return response()->json($data);
+
+        if($request->status == 1){
+            $order->order_status_id = 2;
+        }
+        if($request->status == 2){
+            $order->order_status_id = 3;
+        }
+        if($request->status == 3){
+            $order->order_status_id = 4;
+        }
+        if($request->status == 4){
+            $order->order_status_id = 5;
+        }
+        if($request->status == 5){
+            $order->order_status_id = 6;
+        }
+        $order->status;
+        $order->qr_code;
+        $order->carts;
+        $order->save();
+        return response()->json($order);
     }
 
     public function delete(order $order){
-        $order->update(['status'=>4]);
-        $orders = order::where('user_id', Auth::id())->where('career_id', $order->career->id)->where('status', 1)->orWhere('status', 2)->orWhere('status', 3)->get();
-        return response()->json($orders);
+        $order->update(['order_status_id'=>6]);
+        return response()->json($order->id);
     }
 }

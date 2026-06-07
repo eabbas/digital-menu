@@ -14,18 +14,6 @@ class ClientController extends Controller
 {
     public function show_menu(career $career, $slug = null)
     {
-        // $campare = $product->price->price - $product->price->discount;
-        // $x = $campare / $product->price->price;
-        // $persent = $x * 100;
-
-        // $user = $career->user;
-        // $user->scan_count += 1;
-        // $user->save();
-        // set qr count in qrcode controller load method
-    //    $order = null;
-    //    if (Auth::check()) {
-    //        $order = order::where('user_id', Auth::id())->where('status', 1)->first();
-    //    }
         $menus = $career->menus;
         foreach ($menus as $menu) {
             foreach ($menu->menu_items as $item) {
@@ -34,7 +22,7 @@ class ClientController extends Controller
                     $x = $campare / $item->price;
                     $item['percent'] = intval($x * 100);
                 }
-                $cartItem = cart::where('user_id', Auth::id())->where('menu_item_id', $item->id)->where('order_id', null)->first();
+                $cartItem = cart::where('user_id', Auth::id())->where('menu_item_id', $item->id)->where('career_id', $career->id)->where('order_id', null)->first();
                 if($cartItem){
                     $item->quantity = $cartItem->quantity;
                 }
@@ -46,13 +34,13 @@ class ClientController extends Controller
         $currentUser = null;
         if (Auth::check()) {
             $currentUser = Auth::user();
-            $currentUser->load(['carts' => function ($query) {
-                $query->whereNull('order_id');
+            $currentUser->load(['carts' => function ($query) use ($career) {
+                $query->whereNull('order_id')->where('career_id', $career->id)->get();
             }]);
             foreach ($currentUser->carts as $cart) {
                 $cartCount += $cart->quantity;
             }
-            $orders = order::where('user_id', Auth::id())->where('career_id', $career->id)->where('status', 1)->orWhere('status', 2)->orWhere('status', 3)->get();
+            $orders = order::where('user_id', Auth::id())->where('career_id', $career->id)->where('order_status_id', 1)->orWhere('order_status_id', 2)->orWhere('order_status_id', 3)->orWhere('order_status_id', 4)->get();
         }
         $career->province = $career->province_city->province->title;
         $career->city = $career->province_city->title;

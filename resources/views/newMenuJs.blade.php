@@ -10,9 +10,6 @@
         }
     })
 
-
-
-
     let shoppingCartCount = document.getElementById('shoppingCartCount')
     let orderBasket = document.getElementById('orderBasket')
     let parent = document.getElementById('parentMenuPage')
@@ -166,9 +163,6 @@
     }
 
     function setCount(el, state, itemId) {
-        orderBasket.children[0].classList.remove('hidden')
-        orderBasket.children[1].classList.remove('fill-(--secondary-text-color)')
-        orderBasket.children[1].classList.add('fill-(--primary-color)')
         let shoppingCartOrders = document.querySelectorAll('.shoppingCartOrders')
         let menuItemsInPage = document.querySelectorAll('.menuItems')
 
@@ -179,14 +173,14 @@
             `
         if (state == "+") {
             el.parentElement.children[1].value++
-            orderBasket.children[0].innerText++
+            orderBasket.children[2].innerText++
             shoppingCartCount.innerText++
             length++
         }
-        if (el.parentElement.children[1].value != 0 && orderBasket.children[0].innerText != 0) {
+        if (el.parentElement.children[1].value != 0 && orderBasket.children[2].innerText != 0) {
             if (state == "-") {
                 el.parentElement.children[1].value--
-                orderBasket.children[0].innerText--
+                orderBasket.children[2].innerText--
                 shoppingCartCount.innerText--
                 length--
             }
@@ -199,20 +193,21 @@
                 type: "POST",
                 dataType: "json",
                 data: {
+                    'career_id': "{{ $career->id }}",
                     'menu_item_id': itemId,
                     'user_id': userId
                 },
                 success: function (data) {
+                    console.log(data)
                     if(data.count == 0){
-                        orderBasket.children[0].classList.add('hidden')
-                        orderBasket.children[1].classList.remove('fill-(--primary-color)')
-                        orderBasket.children[1].classList.add('fill-(--secondary-text-color)')
-                    }
-                    if(cartList.children[1].children.length == 0){
+                        orderBasket.parentElement.classList.remove('flex')
+                        orderBasket.parentElement.classList.add('hidden')
                         cartList.classList.add('max-h-0')
+                        cartList.classList.remove('bottom-16')
+                        cartList.classList.add('bottom-0')
                         cartList.classList.remove('min-h-[calc(100vh-57px)]')
-                        cartList.children[1].classList.remove('h-[calc(100vh-89px)]')
-                        orderBasket.children[0].removeAttribute('disabled')
+                        cartList.children[1].classList.remove('h-[calc(100vh-300px)]')
+                        orderBasket.removeAttribute('disabled')
                     }
                     shoppingCartOrders.forEach((item)=>{
                         if(item.getAttribute('data-menu-item-id') == data.cart.menu_item_id){
@@ -257,11 +252,13 @@
                     el.removeAttribute('disabled')
                     if (state == "+") {
                         el.innerHTML = "<span class='text-2xl text-white'>+</span>"
-                        el.parentElement.children[1].value == 1 ? el.parentElement.children[2].innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="size-[14px]" viewBox="0 0 448 512"><path fill="white" d="M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 32 24C10.7 80 0 90.7 0 104s10.7 24 24 24H35.6L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3H324.6c33.5 0 61.3-25.9 63.8-59.3L412.4 128H424c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8H367.9 354.2zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8H123.4c-8.4 0-15.3-6.5-16-14.8L83.7 128H364.3z"/></svg>` : el.parentElement.children[2].innerHTML = "<span class='text-2xl text-white'>-</span>"
+                        // el.parentElement.children[1].value == 1 ? el.parentElement.children[2].innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="size-[14px]" viewBox="0 0 448 512"><path fill="white" d="M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 32 24C10.7 80 0 90.7 0 104s10.7 24 24 24H35.6L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3H324.6c33.5 0 61.3-25.9 63.8-59.3L412.4 128H424c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8H367.9 354.2zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8H123.4c-8.4 0-15.3-6.5-16-14.8L83.7 128H364.3z"/></svg>` : el.parentElement.children[2].innerHTML = "<span class='text-2xl text-white'>-</span>"
+                        el.parentElement.children[2].innerHTML = "<span class='text-2xl text-white'>-</span>"
                     }
                     if (state == "-") {
                         el.innerHTML = "<span class='text-2xl text-white'>-</span>"
-                        el.parentElement.children[1].value == 1 ? el.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="size-[14px]" viewBox="0 0 448 512"><path fill="white" d="M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 32 24C10.7 80 0 90.7 0 104s10.7 24 24 24H35.6L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3H324.6c33.5 0 61.3-25.9 63.8-59.3L412.4 128H424c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8H367.9 354.2zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8H123.4c-8.4 0-15.3-6.5-16-14.8L83.7 128H364.3z"/></svg>` : el.innerHTML = "<span class='text-2xl text-white'>-</span>"
+                        // el.parentElement.children[1].value == 1 ? el.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="size-[14px]" viewBox="0 0 448 512"><path fill="white" d="M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 32 24C10.7 80 0 90.7 0 104s10.7 24 24 24H35.6L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3H324.6c33.5 0 61.3-25.9 63.8-59.3L412.4 128H424c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8H367.9 354.2zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8H123.4c-8.4 0-15.3-6.5-16-14.8L83.7 128H364.3z"/></svg>` : el.innerHTML = "<span class='text-2xl text-white'>-</span>"
+                        el.innerHTML = "<span class='text-2xl text-white'>-</span>"
                     }
                     menuItemsInPage.forEach((menuItem)=>{
                         if(menuItem.getAttribute('data-menu-item-id') == data.menu_item_id){
@@ -306,14 +303,13 @@
                     'user_id': userId
                 },
                 success: function (data) {
-                    orderBasket.children[0].classList.remove('hidden')
-                    orderBasket.children[1].classList.remove('fill-(--secondary-text-color)')
-                    orderBasket.children[1].classList.add('fill-(--primary-color)')
+                    orderBasket.parentElement.classList.remove('hidden')
+                    orderBasket.parentElement.classList.add('flex')
                     if (flag) {
                         length = "{{ $cartCount }}"
 
                         length++
-                        orderBasket.children[0].innerText++
+                        orderBasket.children[2].innerText++
                         shoppingCartCount.innerText = length
                         el.parentElement.parentElement.innerHTML = `
                                 <div class="h-full flex flex-col gap-2 items-center justify-between px-1 count" data-item-id="${data.menu_item_id}">
@@ -322,11 +318,7 @@
                                     </button>
                                     <input type="number" readonly="" min="1" value="1" class="size-7 text-center font-bold text-xs text-(--secondary-text-color) outline-none" name="" id="">
                                     <button class="size-7 pt-1 bg-[#f6911e] flex justify-center items-center rounded-md changeButton cursor-pointer" onclick="setCount(this, '-', ${data.menu_item_id})">
-                                        <span class="text-2xl text-white">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-[14px]" viewBox="0 0 448 512">
-                                                <path fill="white" d="M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 32 24C10.7 80 0 90.7 0 104s10.7 24 24 24H35.6L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3H324.6c33.5 0 61.3-25.9 63.8-59.3L412.4 128H424c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8H367.9 354.2zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8H123.4c-8.4 0-15.3-6.5-16-14.8L83.7 128H364.3z"></path>
-                                            </svg>
-                                        </span>
+                                        <span class='text-2xl text-white'>-</span>
                                     </button>
                                 </div>
                             `
@@ -372,15 +364,18 @@
             dataType: "json",
             data: { 'cart_ids': cartIds, 'user_id' : userId },
             success: function(data){
+                console.log(data)
                 el.innerHTML = text
-                orderBasket.children[0].innerText = 0
+                orderBasket.children[2].innerText = 0
                 length = 0
+                cartList.classList.remove('max-h-[calc(100vh-30%)]')
+                cartList.children[1].classList.remove('h-[calc(100vh-300px)]')
                 cartList.classList.add('max-h-0')
-                cartList.classList.remove('min-h-[calc(100vh-57px)]')
-                cartList.children[1].classList.remove('h-[calc(100vh-89px)]')
-                orderBasket.children[1].classList.remove('fill-(--primary-color)')
-                orderBasket.children[0].classList.add('hidden')
-                orderBasket.children[1].classList.add('fill-(--secondary-text-color)')
+                cartList.classList.remove('bottom-16')
+                cartList.classList.add('bottom-0')
+                orderBasket.parentElement.classList.remove('flex')
+                orderBasket.parentElement.classList.add('hidden')
+                orderBasket.disabled = false
                 showMenu(firstMenu, "{{ $menu_id }}")
             },
             error: function(){
@@ -523,15 +518,12 @@
                             data.carts.forEach((cart) => {
                                 cartLength += parseInt(cart.quantity)
                             })
-                            orderBasket.children[1].classList.remove('fill-(--primary-color)')
-                            orderBasket.children[0].classList.add('hidden')
-                            orderBasket.children[1].classList.add('fill-(--secondary-text-color)')
+                            orderBasket.parentElement.classList.remove('flex')
+                            orderBasket.parentElement.classList.add('hidden')
                             if (cartLength != 0) {
-
-                                orderBasket.children[0].classList.remove('hidden')
-                                orderBasket.children[1].classList.remove('fill-(--secondary-text-color)')
-                                orderBasket.children[1].classList.add('fill-(--primary-color)')
-                                orderBasket.children[0].innerHTML = cartLength
+                                orderBasket.parentElement.classList.remove('hidden')
+                                orderBasket.parentElement.classList.add('flex')
+                                orderBasket.children[2].innerText = cartLength
                             }
                             showMenu(firstMenu, "{{ $menu_id }}")
                             message.children[0].appendChild(element)
@@ -676,11 +668,11 @@
 
     function openShoppingCart(state) {
         if (state == 'phoneOpen') {
-            btn = orderBasket.children[0].innerHTML
+            btn = orderBasket.innerHTML
             cartList.children[1].innerHTML = ""
-            orderBasket.children[0].disabled = true
-            orderBasket.children[0].classList.add('cursor-no-drop')
-            orderBasket.children[0].innerHTML = " <div class='size-7 border-3 border-white border-t-(--primary-color) rounded-full animate-spin'></div>"
+            orderBasket.disabled = true
+            orderBasket.classList.add('cursor-no-drop')
+            orderBasket.innerHTML = " <div class='size-6 border-3 border-white border-t-(--primary-color) rounded-full animate-spin'></div>"
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -696,9 +688,13 @@
                 },
                 success: function (data) {
                     cartList.classList.remove('max-h-0')
-                    cartList.classList.add('min-h-[calc(100vh-57px)]')
-                    cartList.children[1].classList.add('h-[calc(100vh-89px)]')
-                    orderBasket.children[0].innerHTML = btn
+                    cartList.classList.remove('bottom-0')
+                    cartList.classList.add('bottom-16')
+                    cartList.classList.add('max-h-[calc(100vh-30%)]')
+                    cartList.children[1].classList.add('h-[calc(100vh-300px)]')
+                    orderBasket.innerHTML = btn
+                    orderBasket.parentElement.classList.remove('flex')
+                    orderBasket.parentElement.classList.add('hidden')
                     data.forEach((item) => {
                         let parentDiv = document.createElement('div')
                         parentDiv.classList = "w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative shoppingCartOrders"
@@ -734,23 +730,23 @@
                                             </div>
                                         </div>
                                         <div class="flex flex-row justify-end items-center gap-3" data-item-id="${item.id}">
-                                            <div class="relative w-16 lg:w-20">
-                                                <button class="absolute right-0 bottom-1.5 rounded size-5 lg:size-6 flex justify-center bg-gray-400 items-center text-white cursor-pointer"
+                                            <div class="relative w-20 lg:w-20">
+                                                <button class="absolute right-0 bottom-1.5 rounded size-6 flex justify-center bg-(--primary-color) font-bold items-center text-white cursor-pointer"
                                                         onclick="setCount(this, '+', ${item.id})">+
                                                 </button>
                                                 <input type="number" class="outline-none w-full rounded text-center text-sm py-1"
                                                        min="1" value="${item.quantity}" disabled>
-                                                <button class="absolute left-0 bottom-1.5 rounded size-5 lg:size-6 flex justify-center bg-gray-400 items-center text-white cursor-pointer"
+                                                <button class="absolute left-0 bottom-1.5 rounded size-6 flex justify-center bg-(--primary-color) font-bold items-center text-white cursor-pointer"
                                                         onclick="setCount(this, '-', ${item.id})">
                                                         `
-                        if(item.quantity > 1){
+                        // if(item.quantity > 1){
                             menuItemEl += `-`
-                        }
-                        if(item.quantity == 1){
-                            menuItemEl += `<svg xmlns="http://www.w3.org/2000/svg" class="size-[14px]" viewBox="0 0 448 512">
-                                                                                <path fill="white" d="M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 32 24C10.7 80 0 90.7 0 104s10.7 24 24 24H35.6L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3H324.6c33.5 0 61.3-25.9 63.8-59.3L412.4 128H424c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8H367.9 354.2zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8H123.4c-8.4 0-15.3-6.5-16-14.8L83.7 128H364.3z"></path>
-                                                                            </svg>`
-                        }
+                        // }
+                        // if(item.quantity == 1){
+                        //     menuItemEl += `<svg xmlns="http://www.w3.org/2000/svg" class="size-[14px]" viewBox="0 0 448 512">
+                        //                                                         <path fill="white" d="M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 32 24C10.7 80 0 90.7 0 104s10.7 24 24 24H35.6L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3H324.6c33.5 0 61.3-25.9 63.8-59.3L412.4 128H424c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8H367.9 354.2zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8H123.4c-8.4 0-15.3-6.5-16-14.8L83.7 128H364.3z"></path>
+                        //                                                     </svg>`
+                        // }
                         menuItemEl+=`
                                                 </button>
                                             </div>
@@ -776,13 +772,17 @@
             })
         }
         if (state == 'phoneClose') {
-            cartList.children[1].classList.remove('h-[calc(100vh-89px)]')
-            cartList.classList.remove('min-h-[calc(100vh-57px)]')
+            cartList.classList.remove('max-h-[calc(100vh-30%)]')
+            cartList.children[1].classList.remove('h-[calc(100vh-300px)]')
             cartList.classList.add('max-h-0')
-            orderBasket.children[0].removeAttribute('disabled')
-            orderBasket.children[0].classList.remove('cursor-no-drop')
-            orderBasket.children[0].innerHTML = btn
-            orderBasket.children[0].disabled = false
+            cartList.classList.remove('bottom-16')
+            cartList.classList.add('bottom-0')
+            orderBasket.parentElement.classList.remove('hidden')
+            orderBasket.parentElement.classList.add('flex')
+            orderBasket.removeAttribute('disabled')
+            orderBasket.classList.remove('cursor-no-drop')
+            orderBasket.innerHTML = btn
+            orderBasket.disabled = false
         }
     }
 
@@ -929,7 +929,7 @@
 
     function setOrder(way, el = null) {
         let count = document.querySelectorAll('.count')
-        orderLink.classList.remove('hidden')
+        // orderLink.classList.remove('hidden')
         let orders = []
         let slug = "{{ $slug }}"
         let addressTitle = address.value
@@ -942,11 +942,6 @@
         let shoppingCartOrders = document.querySelectorAll('.shoppingCartOrders')
         shoppingCartOrders.forEach((item) => {
             orders.push(item.getAttribute('data-order-id'))
-        })
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': "{{ csrf_token() }}"
-            }
         })
         $.ajax({
             url: "{{ url('/api/order/store') }}",
@@ -963,29 +958,28 @@
                 count.forEach((item) => {
 
                     item.innerHTML = `
-                        <div class="w-[82px] h-[32px] lg:w-[90px] lg:h-[36px] flex flex-row justify-end items-center gap-3">
-                            <button class="w-full h-full flex flex-row justify-center items-center bg-green-500 rounded text-white text-sm lg:text-base cursor-pointer set"
-                                    onclick="addToCart(this, ${item.getAttribute('data-item-id')})">افزودن +
-                            </button>
+                        <div class="size-7 pt-1 bg-[#f6911e] flex justify-center items-center rounded-md changeButton cursor-pointer" onclick="addToCart(this, ${item.getAttribute('data-item-id')})">
+                                    <span class="text-2xl text-white">+</span>
                         </div>
                         `
                 })
-                // orderBasket.classList.remove('block')
-                // orderBasket.classList.add('hidden')
-                orderBasket.children[1].classList.remove('fill-(--primary-color)')
-                orderBasket.children[0].classList.add('hidden')
-                orderBasket.children[1].classList.add('fill-(--secondary-text-color)')
+                orderBasket.parentElement.classList.remove('flex')
+                orderBasket.parentElement.classList.add('hidden')
                 cartList.children[1].innerHTML = ""
-                cartList.children[1].classList.remove('h-[calc(100vh-89px)]')
-                cartList.classList.remove('min-h-[calc(100vh-57px)]')
+                cartList.classList.remove('max-h-[calc(100vh-30%)]')
+                cartList.children[1].classList.remove('h-[calc(100vh-300px)]')
                 cartList.classList.add('max-h-0')
-                orderBasket.children[0].disabled = false
+                cartList.classList.remove('bottom-16')
+                cartList.classList.add('bottom-0')
+                orderBasket.disabled = false
+                orderBasket.parentElement.removeAttribute('disabled')
+                orderBasket.children[2].innerText = 0
                 showMessage('open')
                 element.innerHTML = `
                         <span>سفارش شما ثبت شد</span>
                         <span class="text-green-500">!</span>
                         `
-                orderBasket.children[0].innerHTML = `  سبد خرید ( <span>0</span> )`
+
                 message.children[0].appendChild(element)
                 setTimeout(() => {
                     showMessage('close')
@@ -1038,15 +1032,15 @@
 
     function loginWithActivationCode(el) {
         login.innerHTML = `
-                                    <div class="w-full flex flex-row items-center gap-3">
-                                        <input type="number"
-                                            class="w-8/12 p-2 placeholder-gray-400 focus:border-(--primary-color) md:p-[9px] rounded-[7px] border-1 border-[#DBDFE9] outline-none"
-                                            name="code" placeholder="کد" required id="code">
-                                        <button type="button"
-                                            class="w-4/12 text-xs lg:text-base h-full p-2 md:p-[9px] rounded-[7px] bg-(--primary-color) hover:bg-[#d52b4a] text-white cursor-pointer"
-                                            onclick="sendCode()" id="countDown">ارسال کد </button>
-                                    </div>
-                                `
+                        <div class="w-full flex flex-row items-center gap-3">
+                            <input type="number"
+                                class="w-8/12 p-2 placeholder-gray-400 focus:border-(--primary-color) md:p-[9px] rounded-[7px] border-1 border-[#DBDFE9] outline-none"
+                                name="code" placeholder="کد" required id="code">
+                            <button type="button"
+                                class="w-4/12 text-xs lg:text-base h-full p-2 md:p-[9px] rounded-[7px] bg-(--primary-color) hover:bg-[#d52b4a] text-white cursor-pointer"
+                                onclick="sendCode()" id="countDown">ارسال کد </button>
+                        </div>
+                    `
         el.parentElement.children[1].remove()
         let span = document.createElement('span')
         span.classList = "text-(--primary-color) inline-block max-md:my-1 my-4 max-md:text-sm cursor-pointer"
@@ -1183,6 +1177,7 @@
             url: "{{ url('menu/showMenuClient/') }}/" + menuId,
             type: "GET",
             success: function (data) {
+                orderBasket.removeAttribute('disabled')
                 menuItemList.innerHTML = ""
                 let items = data.menus.menu_items
                 items.forEach((item) => {
@@ -1202,8 +1197,8 @@
                             <svg width="64" height="78" viewBox="0 0 64 78" class="size-8 rotate-180">
                                 <path d="M8 0H56V60L32 78L8 60Z" fill="#FF8A00"/>
                                 <circle cx="32" cy="58" r="4" fill="white" opacity="0.9"/>
-                                <text x="53" class="in-fa" y="10" textAnchor="middle" rotate="180"
-                                fontSize="20" fontWeight="700" fill="white"
+                                <text x="68" class="in-fa" y="10" textAnchor="middle" rotate="180"
+                                fontSize="40" style="font-size: 27px !important;" fontWeight="700" fill="white"
                                 class="">${'%'+percent}</text>
                             </svg>
                         </div>`
@@ -1256,17 +1251,17 @@
                                 <button class="size-6 pt-1 bg-[#f6911e] flex justify-center items-center rounded-md changeButton cursor-pointer" onclick="setCount(this, '-', ${item.id})">
                                     <span class="text-2xl text-white">`
 
-                                    if(item.cart.quantity > 1){
+                                    // if(item.cart.quantity > 1){
                                      inner +=`-`
-                                    } else {
-                                        inner+=`
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                 class="size-[14px]"
-                                                 viewBox="0 0 448 512">
-                                                <path fill="white"
-                                                      d="M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 32 24C10.7 80 0 90.7 0 104s10.7 24 24 24H35.6L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3H324.6c33.5 0 61.3-25.9 63.8-59.3L412.4 128H424c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8H367.9 354.2zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8H123.4c-8.4 0-15.3-6.5-16-14.8L83.7 128H364.3z" />
-                                            </svg>`
-                                    }
+                                    // } else {
+                                    //     inner+=`
+                                    //         <svg xmlns="http://www.w3.org/2000/svg"
+                                    //              class="size-[14px]"
+                                    //              viewBox="0 0 448 512">
+                                    //             <path fill="white"
+                                    //                   d="M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 32 24C10.7 80 0 90.7 0 104s10.7 24 24 24H35.6L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3H324.6c33.5 0 61.3-25.9 63.8-59.3L412.4 128H424c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8H367.9 354.2zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8H123.4c-8.4 0-15.3-6.5-16-14.8L83.7 128H364.3z" />
+                                    //         </svg>`
+                                    // }
                                 inner+=`
                                 </span>
                     </button>`
@@ -1375,30 +1370,30 @@
                             `
                             } else {
                                 inner += `
-                                        <div class="relative w-16 lg:w-20">
+                                        <div class="relative w-20 lg:w-20">
 
                                             <div data-item-id="${item.id}" class="count">
-                                                <button class="absolute right-0 bottom-1.5 rounded size-5 lg:size-6 flex justify-center bg-gray-400 items-center text-white cursor-pointer"
+                                                <button class="absolute right-0 bottom-1.5 rounded size-6 flex justify-center bg-(--primary-color) fong-bold items-center text-white cursor-pointer"
                                                     onclick="setCount(this, '+', ${item.id})">+
                                                 </button>
                                                 <input type="number" class="outline-none w-full rounded text-center text-sm py-1"
                                                        min="1" value="${item.cart.quantity}" disabled>
-                                                <button class="absolute left-0 bottom-1.5 rounded size-5 lg:size-6 flex justify-center bg-gray-400 items-center text-white cursor-pointer"
+                                                <button class="absolute left-0 bottom-1.5 rounded size-6 flex justify-center bg-(--primary-color) fong-bold items-center text-white cursor-pointer"
                                                         onclick="setCount(this, '-', ${item.id})">
 
                                                 `
-                                if (item.cart.quantity > 1) {
+                                // if (item.cart.quantity > 1) {
                                     inner += `-`
-                                }
-                                if (item.cart.quantity == 1) {
-                                    inner += `
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                             class="size-[14px]" viewBox="0 0 448 512">
-                                            <path fill="white"
-                                                  d="M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 32 24C10.7 80 0 90.7 0 104s10.7 24 24 24H35.6L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3H324.6c33.5 0 61.3-25.9 63.8-59.3L412.4 128H424c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8H367.9 354.2zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8H123.4c-8.4 0-15.3-6.5-16-14.8L83.7 128H364.3z"/>
-                                        </svg>
-                                        `
-                                }
+                                // }
+                                // if (item.cart.quantity == 1) {
+                                //     inner += `
+                                //         <svg xmlns="http://www.w3.org/2000/svg"
+                                //              class="size-[14px]" viewBox="0 0 448 512">
+                                //             <path fill="white"
+                                //                   d="M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 32 24C10.7 80 0 90.7 0 104s10.7 24 24 24H35.6L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3H324.6c33.5 0 61.3-25.9 63.8-59.3L412.4 128H424c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8H367.9 354.2zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8H123.4c-8.4 0-15.3-6.5-16-14.8L83.7 128H364.3z"/>
+                                //         </svg>
+                                //         `
+                                // }
                                 inner +=  `
                                     </button>
                                     </div>

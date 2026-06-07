@@ -7,7 +7,7 @@
     <script src="{{ asset('assets/js/tailwind.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.js') }}"></script>
     <link rel="stylesheet" href="{{ url('assets/css/style.css') }}" type="text/css">
-    <link rel="shortcut icon" href="{{ asset('storage/images/icon.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('storage/logos/ringaLogo1.png') }}" type="image/png">
     <title>@yield('title')</title>
 </head>
 
@@ -691,6 +691,42 @@
                         </li>
                     </ul>
                 </div>
+                @if(Auth::user()->phoneNumber == '09148770811' || Auth::user()->phoneNumber == '09147794595' || Auth::user()->phoneNumber == '09215371995'|| Auth::user()->phoneNumber == '09051612833')
+                <div class="dashboard">
+                    <div
+                            class="flex justify-between flex-row-reverse cursor-pointer px-2 rounded-sm py-1.5 @if (Route::is('mtest.*')) bg-gray-700 @endif">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             class="size-4 transition-all duration-200 @if (Route::is('mtest.*')) rotate-180 @endif"
+                             viewBox="0 0 448 512">
+                            <path fill="white"
+                                  d="M241 337c-9.4 9.4-24.6 9.4-33.9 0L47 177c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l143 143L367 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L241 337z" />
+                        </svg>
+                        <div class="flex flex-row-reverse items-center gap-2">
+                            <span class=" text-[white] flex justify-end font-bold">مستر شیمی آزمون</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-6" viewBox="0 0 448 512">
+                                <path fill="white"
+                                      d="M0 80C0 53.5 21.5 32 48 32h96c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80zM64 96v64h64V96H64zM0 336c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V336zm64 16v64h64V352H64zM304 32h96c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48H304c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48zm80 64H320v64h64V96zM256 304c0-8.8 7.2-16 16-16h64c8.8 0 16 7.2 16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s7.2-16 16-16s16 7.2 16 16v96c0 8.8-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s-7.2-16-16-16s-16 7.2-16 16v64c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V304zM368 480a16 16 0 1 1 0-32 16 16 0 1 1 0 32zm64 0a16 16 0 1 1 0-32 16 16 0 1 1 0 32z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <ul
+                            class="my-1 pr-3 transition-all duration-500 overflow-hidden @if (Route::is('mtest.create') || Route::is('mtest.list')) max-h-[500px] @else max-h-0 @endif">
+                        <li
+                                class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('mtest.create')) bg-gray-700 @endif">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('mtest.create') }}" class="text-white py-1 block">
+                                ایجاد آزمون </a>
+                        </li>
+                        <li
+                                class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 pr-5 rounded-sm @if (Route::is('mtest.list')) bg-gray-700 @endif">
+                            <span class="size-1 bg-white rounded-sm"></span>
+                            <a href="{{ route('mtest.list') }}" class="text-white py-1 block">
+                                لیست آزمون ها
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                @endif
             </div>
         </div>
     </div>
@@ -902,7 +938,7 @@
            
             <!-- hamburger menu end -->
         </header>
-        <div class="w-full h-dvh lg:w-[calc(100%-265px)] pb-24 float-end pt-20 lg:px-5 overflow-y-auto px-5 relative bg-[#F2F2F2] z-9"
+        <div class="w-full h-dvh lg:w-[calc(100%-265px)] pb-24 float-end pt-20 lg:px-5 overflow-y-auto px-3 relative bg-[#F2F2F2] z-9"
             style="scrollbar-width:none;">
             @yield('content')
             @include('footer')

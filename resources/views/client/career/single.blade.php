@@ -1,6 +1,7 @@
 @extends('client.document')
 @section('title', 'کسب و کار  ')
 @section('content')
+
     <div class="w-11/12 mx-auto">
 
         <div class="flex flex-col border-none rounded-[7px]">
@@ -23,7 +24,7 @@
             @endif
         </div>
         <div class="mt-2 lg:mt-5">
-            <a href="{{ route('client.menu', [$career]) }}" class="px-3 py-1 bg-[#eb3254] text-white text-xs lg:text-sm float-end rounded-lg">مشاهده منو ها</a>
+            <a href="{{ route('client.menu', [$career]) }}" class="px-3 py-1 bg-(--primary-color) text-white text-xs lg:text-sm float-end rounded-lg">مشاهده منو ها</a>
         </div>
         <div class="pt-3">
             <div class="rounded-md lg:p-5 p-2 mb-3 lg:mb-5">
@@ -76,7 +77,7 @@
                             {{ $career->province_city->province->title }} , {{ $career->province_city->title }} , {{ $career->address }}
                         </div>
                     </div>
-                    <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
+                    <div class="w-full lg:py-3 flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center {{ $career->email ? 'flex' : 'hidden' }}">
                         <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
                             ایمیل
                         </div>
@@ -94,13 +95,22 @@
                         </div>
                     </div>
                     @endif
-                    <div class="w-full lg:py-3 flex flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center">
+
+                    @php
+                    $flag = false;
+                        foreach(json_decode($career->social_media) as $key => $value){
+                            if($value !== null){
+                                $flag = true;
+                            }
+                        }
+                    @endphp
+                    <div class="w-full lg:py-3 flex-col gap-2 lg:gap-0 lg:flex-row lg:items-center {{ $flag ? 'flex' : 'hidden' }}">
                         <div class="w-full lg:w-1/2 text-xs lg:text-sm text-gray-400">
                             پل های ارتباطی
                         </div>
                         <div class="w-1/2 flex flex-col items-center gap-3 pr-3 lg:pr-0">
                             @foreach (json_decode($career->social_media) as $media => $link)
-                                <div class="w-full flex flex-col lg:flex-row">
+                                <div class="w-full flex-col lg:flex-row {{ $link ? 'flex' : 'hidden' }}">
                                     <div class="w-1/2 text-xs lg:text-sm text-gray-400">
                                         {{ $media }}
                                     </div>

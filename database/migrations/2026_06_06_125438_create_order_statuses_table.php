@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('order_statuses', function (Blueprint $table) {
             $table->id();
-            $table->integer('address_id')->nullable();
-            $table->integer('user_id');
-            $table->integer('qr_code_id')->nullable();
-            $table->integer('career_id');
-            $table->integer('order_status_id')->default(1);
-            $table->bigInteger('order_code');
+            $table->string('title');
+            $table->string('admin_title');
+            $table->string('color')->default('#ffffff');
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('order_statuses');
     }
 };

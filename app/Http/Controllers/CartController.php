@@ -46,14 +46,15 @@ class CartController extends Controller
     {
 //        return response()->json($request->all());
         $user = null;
+        $career_id = $request->input('career_id');
         if (isset($request->user_id)) {
             $user = User::find($request->user_id);
         }
         if (Auth::check()) {
             $user = Auth::user();
         }
-        $data = $user->load(['carts' => function ($query) {
-            $query->whereNull('order_id')->with('menu_item')->get();
+        $data = $user->load(['carts' => function ($query) use ($career_id) {
+            $query->whereNull('order_id')->where('career_id', $career_id)->with('menu_item')->get();
         }]);
 //        return response()->json($data->carts);
         $datas = [];
@@ -97,6 +98,7 @@ class CartController extends Controller
             $cart = cart::where('menu_item_id', $menu_item_id)->where('user_id', $request->user_id)->first();
             $cart->delete();
         }
+//        return response()->json($cart);
         return response()->json($request->cart_ids);
     }
 }

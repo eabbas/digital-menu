@@ -17,6 +17,9 @@
         <div class="w-full mt-5 p-5 bg-white flex flex-col pb-40 relative rounded-lg">
             <div class="w-full flex flex-row justify-between items-center gap-3 pb-5">
                 <div class="w-full flex flex-row items-center gap-2">
+                    @if(Auth::user()->phoneNumber == '09148770811' || Auth::user()->phoneNumber == '09215371995')
+                    <a href="{{ route('mtest.create') }}" class="text-xs text-blue-600">ایجاد آزمون</a>
+                    @endif
                     {{--                    <div>--}}
                     {{--                        @if($page->logo_path)--}}
                     {{--                            <img src="{{ asset('storage/' . $page->logo_path) }}"--}}
@@ -43,6 +46,7 @@
                     {{--                        </span>--}}
                     {{--                    </div>--}}
                 </div>
+
                 <div>
                     {{-- page qr code --}}
                     <div class="w-full h-dvh fixed top-0 right-0 z-999 bg-black/50 invisible opacity-0 transition-all duration-300"

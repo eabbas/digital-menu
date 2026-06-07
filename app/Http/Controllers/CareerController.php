@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Hash;
+use Hekmatinasser\Verta\Verta;
+use Log;
 
 class CareerController extends Controller
 {
@@ -186,6 +188,15 @@ class CareerController extends Controller
     {
         if (!$user) {
             $user = Auth::user();
+        }
+        foreach($user->careers as $career) {
+            $createdAt = explode(' ', $career->created_at);
+            $date =  verta($createdAt[0]);
+            $date = explode(' ', $date);
+            $originaDate = implode('/',explode('-', $date[0]));
+            $date = $originaDate;
+            $career->date = $date;
+            $career->orders = order::where('career_id', $career->id)->whereNotIn('order_status_id', [5, 6])->get();
         }
         return view('admin.careers.userCareers', ['user' => $user]);
     }
@@ -418,17 +429,18 @@ class CareerController extends Controller
     public function orders(career $career)
     {
 
+        $orders = $career->orders;
+        foreach($orders as $order) {
+            $createdAt = explode(' ', $order->created_at);
+            $time = $createdAt[1];
+            $date =  verta($createdAt[0]);
+            $date = explode(' ', $date);
+            $originaDate = implode('/',explode('-', $date[0]));
+            $date = $originaDate;
+            $order->time = $time;
+            $order->date = $date;
+        }
         return view('admin.careers.orders', ['career' => $career]);
-    }
-
-    public function acceptOrder(Request $request)
-    {
-        $order = order::find($request->order_id);
-        $request->state == 'accept' && $order->status = 2;
-        $request->state == 'send' && $order->status = 3;
-
-        $order->save();
-        return response()->json($order);
     }
 
     public function createUser()
