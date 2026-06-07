@@ -9,6 +9,7 @@ use App\Models\phone_code;
 use App\Models\requests;
 use App\Models\social_qr_codes;
 use App\Models\intro_category;
+use App\Models\cart;
 use http\Env\Response;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\pages;
@@ -112,6 +113,7 @@ class UserController extends Controller
 
     public function logout()
     {
+        cart::where('user_id', Auth::id())->where('order_id', null)->delete();
         Auth::logout();
         return to_route('home');
     }
@@ -628,7 +630,7 @@ class UserController extends Controller
                 Auth::login($user['validate']);
             }
             if (isset($request->career_id)) {
-                $user['orders'] = order::where('user_id', Auth::id())->where('career_id', $request->career_id)->where('status', 1)->orWhere('status', 2)->orWhere('status', 3)->get();
+                $user['orders'] = order::where('user_id', Auth::id())->where('career_id', $request->career_id)->where('order_status_id', 1)->orWhere('order_status_id', 2)->orWhere('order_status_id', 3)->orWhere('order_status_id', 4)->get();
             }
             $user['validate']->load(['carts' => function ($query) {
                 $query->whereNull('order_id');
@@ -792,17 +794,18 @@ class UserController extends Controller
 
     public function checkFromMenu(Request $request)
     {
+        $career_id = $request->input('career_id');
         //        return response()->json($request->all());
         $user = User::where('phoneNumber', $request->phoneNumber)->first();
         if ($user) {
             $checkHash = Hash::check($request->password, $user->password);
             if ($checkHash) {
                 Auth::login($user);
-                $user->load(['carts' => function ($query) {
-                    $query->whereNull('order_id');
+                $user->load(['carts' => function ($query) use ($career_id) {
+                    $query->whereNull('order_id')->where('career_id', $career_id)->get();
                 }]);
                 if (isset($request->career_id)) {
-                    $user['orders'] = order::where('user_id', Auth::id())->where('career_id', $request->career_id)->where('status', 1)->orWhere('status', 2)->orWhere('status', 3)->get();
+                    $user['orders'] = order::where('user_id', Auth::id())->where('career_id', $request->career_id)->where('order_status_id', 1)->orWhere('order_status_id', 2)->orWhere('order_status_id', 3)->orWhere('order_status_id', 4)->get();
                 }
                 return response()->json($user);
             }

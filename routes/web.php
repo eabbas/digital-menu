@@ -47,7 +47,7 @@ use App\Http\Controllers\GeneralQrCodesController;
 use App\Http\Controllers\PageContactusController;
 use App\Http\Controllers\PageDescriptionController;
 use App\Http\Controllers\CheckListController;
-use App\Http\Middleware\checkListAdmin;
+//use App\Http\Middleware\checkListAdmin;
 use App\Http\Controllers\FieldController;
 use App\Http\Controllers\InstituteController;
 use App\Http\Controllers\InstituteRequestController;
@@ -57,11 +57,58 @@ use App\Http\Controllers\ClassCommentController;
 use App\Http\Controllers\ClassAttachmentController;
 use App\Http\Middleware\savePreviousUrl;
 
+
+use App\Http\Controllers\MahdiQuestionController;
+use App\Http\Controllers\MahdiQuestionOptionController;
+use App\Http\Controllers\MahdiTestController;
+
 use App\Models\social_qr_codes;
+
+Route::group([
+    'prefix'=>'mr-chemistry'
+], function(){
+    Route::group([
+        'prefix'=>'test',
+        'controller'=> MahdiTestController::class,
+        'middleware'=> [UserMiddleware::class],
+        'as'=>'mtest.'
+    ], function(){
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/list', 'index')->name('list');
+        Route::get('/edit/{test}', 'edit')->name('edit');
+        Route::post('/update', 'update')->name('update');
+        Route::get('/single/{test}', 'single')->name('single');
+        Route::get('/delete/{test}', 'delete')->name('delete');
+    });
+
+    Route::group([
+        'prefix'=>'question',
+        'controller'=>MahdiQuestionController::class,
+        'middleware'=> [UserMiddleware::class],
+        'as'=>'mquestion.'
+    ], function(){
+        Route::get('/create/{test}', 'create')->name('create');
+        Route::post('/store/{test}', 'store')->name('store');
+        Route::get('/edit/{question}', 'edit')->name('edit');
+        Route::post('/update/{question}', 'update')->name('update');
+        Route::get('/delete/{question}', 'delete')->name('delete');
+        Route::get('/index/{test}', 'index')->name('list');
+        Route::get('/single/{question}', 'single')->name('single');
+    });
+});
+
+
+
 
 Route::get('/hossein/test' , function(){
     return view('guys.ho.test');
 });
+
+Route::get('/ft-orders', function(){
+   return view('guys.ft.orders');
+});
+
 Route::get('/roadmap', function(){
     return view('guys.nasiri.roadmap');
 })->name('roadmap');

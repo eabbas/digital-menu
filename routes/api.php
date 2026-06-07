@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CareerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SpecialUserController;
@@ -27,4 +28,7 @@ Route::post('/cart/delete', [CartController::class, 'delete']);
 Route::post('/cart/deleteAll', [CartController::class, 'deleteAll']);
 Route::post('/order/show', [OrderController::class, 'show']);
 Route::post('/order/store', [OrderController::class, 'store']);
+Route::get('/order/showItems/{order}', [OrderController::class, 'showItems']);
 Route::post('/user/setAddress' , [UserController::class , 'setAddress']);
+Route::post('/order/acceptOrder' , [OrderController::class , 'acceptOrder']);
+Route::get('/order/delete/{order}' , [OrderController::class , 'delete']);

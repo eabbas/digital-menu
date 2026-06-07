@@ -5,12 +5,6 @@
 @section('content')
 
     <style>
-        @import url('{{asset('assets/css/fontiran.css')}}');
-
-        * {
-            font-family: IRANSansX;
-        }
-
         .shadow_box {
             box-shadow: 0px 0px 1px 1px #ebebeb;
         }
@@ -35,12 +29,16 @@
 
     <div class="w-full px-5 flex flex-row items-center justify-between pt-3">
         <div class="w-1/2 flex flex-col gap-3">
-            <div class="w-full @if(Auth::check() && count($orders)) block @else hidden @endif p-1 lg:p-3 text-xs lg:text-sm h-full font-medium"
+{{--            @if(Auth::check() && count($orders)) block @else hidden @endif--}}
+            <div class="w-full hidden p-1 lg:p-3 text-xs lg:text-sm h-full font-medium"
                  id="orderLink">
                 <div class="text-sky-700 cursor-pointer" onclick="orders('open')">سفارشات من</div>
             </div>
 
             @include('client.xMamad')
+        </div>
+        <div class="w-1/2 p-1 lg:p-3 text-xs lg:text-sm h-full font-medium flex items-center justify-end py-2">
+            <a href="{{ route('show_career', [$career]) }}" class="text-sky-700">درباره ما</a>
         </div>
     </div>
     <!-- hossain start -->
@@ -136,8 +134,8 @@
                                             <svg width="64" height="78" viewBox="0 0 64 78" class="size-8 rotate-180">
                                                 <path d="M8 0H56V60L32 78L8 60Z" fill="#FF8A00"/>
                                                 <circle cx="32" cy="58" r="4" fill="white" opacity="0.9"/>
-                                                <text x="53" class="in-fa" y="10" textAnchor="middle" rotate="180"
-                                                      fontSize="20" fontWeight="700" fill="white"
+                                                <text x="68" class="in-fa" y="10" textAnchor="middle" rotate="180"
+                                                      fontSize="40" style="font-size: 27px !important;" fontWeight="700" fill="white"
                                                       class="">{{ '%'.strrev($item->percent) }}</text>
                                             </svg>
                                         </div>
@@ -187,16 +185,16 @@
                                         <input type="number" readonly min="1" value="{{ $item->quantity }}" class="size-6 text-center font-bold text-xs text-(--secondary-text-color) outline-none" name="" id="">
                                         <button class="size-6 pt-1 bg-[#f6911e] flex justify-center items-center rounded-md changeButton cursor-pointer" onclick="setCount(this, '-', {{ $item->id }})">
                                             <span class="text-2xl text-white">
-                                                @if ($userCart->carts[0]->quantity > 1)
+{{--                                                @if ($userCart->carts[0]->quantity > 1)--}}
                                                     -
-                                                @else
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                         class="size-[14px]"
-                                                         viewBox="0 0 448 512">
-                                                        <path fill="white"
-                                                              d="M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 32 24C10.7 80 0 90.7 0 104s10.7 24 24 24H35.6L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3H324.6c33.5 0 61.3-25.9 63.8-59.3L412.4 128H424c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8H367.9 354.2zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8H123.4c-8.4 0-15.3-6.5-16-14.8L83.7 128H364.3z" />
-                                                    </svg>
-                                                @endif
+{{--                                                @else--}}
+{{--                                                    <svg xmlns="http://www.w3.org/2000/svg"--}}
+{{--                                                         class="size-[14px]"--}}
+{{--                                                         viewBox="0 0 448 512">--}}
+{{--                                                        <path fill="white"--}}
+{{--                                                              d="M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 32 24C10.7 80 0 90.7 0 104s10.7 24 24 24H35.6L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3H324.6c33.5 0 61.3-25.9 63.8-59.3L412.4 128H424c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8H367.9 354.2zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8H123.4c-8.4 0-15.3-6.5-16-14.8L83.7 128H364.3z" />--}}
+{{--                                                    </svg>--}}
+{{--                                                @endif--}}
                                             </span>
                                         </button>
                                     @else
@@ -289,7 +287,7 @@
     </div>
 {{--    @include('newMenuJs')--}}
     <div id="cartList"
-         class="w-full fixed lg:hidden top-0 right-0 transition-all duration-300 z-5 max-h-0 overflow-hidden bg-white">
+         class="w-full fixed lg:hidden bottom-0 right-0 transition-all duration-300 z-5 max-h-0 overflow-hidden bg-white">
         <div class="flex flex-row justify-between items-center pt-3 px-3">
             <svg xmlns="http://www.w3.org/2000/svg" class="size-5 cursor-pointer"
                  onclick="openShoppingCart('phoneClose')" viewBox="0 0 384 512">
@@ -415,6 +413,44 @@
                 {{--                    </div>--}}
             </div>
         </div>
+    </div>
+
+
+    <div class="fixed bottom-22 right-0 w-full flex-row items-center justify-center z-9991 @if(!isset($cartCount) || (isset($cartCount) && $cartCount == 0)) hidden @else flex @endif">
+        <button class="w-11/12 mx-auto text-center py-3.5 bg-(--primary-color) text-white font-bold flex flex-row items-center justify-center rounded-xl cursor-pointer" onclick="getOpenShoppingCart()('phoneOpen')" id="orderBasket">
+            <svg version="1.1" class="can-badge can-alert has-solid w-5 rotate-y-180 fill-white ml-2" viewBox="0 0 36 36" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" focusable="false" role="img">
+                <circle cx="13.33" cy="29.75" r="2.25" class="clr-i-outline clr-i-outline-path-1"></circle>
+                <circle cx="27" cy="29.75" r="2.25" class="clr-i-outline clr-i-outline-path-2"></circle>
+                <circle cx="13.33" cy="29.75" r="2.25" class="clr-i-outline--alerted clr-i-outline-path-1--alerted" style="display:none"></circle>
+                <circle cx="27" cy="29.75" r="2.25" class="clr-i-outline--alerted clr-i-outline-path-2--alerted" style="display:none"></circle>
+                <circle cx="13.33" cy="29.75" r="2.25" class="clr-i-outline--badged clr-i-outline-path-1--badged" style="display:none"></circle>
+                <circle cx="27" cy="29.75" r="2.25" class="clr-i-outline--badged clr-i-outline-path-2--badged" style="display:none"></circle>
+                <circle cx="30" cy="6" r="5" class="clr-i-outline--badged clr-i-outline-path-5--badged clr-i-badge" style="display:none"></circle>
+                <circle cx="13.5" cy="29.5" r="2.5" class="clr-i-solid clr-i-solid-path-1" style="display:none"></circle>
+                <circle cx="26.5" cy="29.5" r="2.5" class="clr-i-solid clr-i-solid-path-2" style="display:none"></circle>
+                <circle cx="13.5" cy="29.5" r="2.5" class="clr-i-solid--alerted clr-i-solid-path-1--alerted" style="display:none"></circle>
+                <circle cx="26.5" cy="29.5" r="2.5" class="clr-i-solid--alerted clr-i-solid-path-2--alerted" style="display:none"></circle>
+                <circle cx="13.5" cy="29.5" r="2.5" class="clr-i-solid--badged clr-i-solid-path-1--badged" style="display:none"></circle>
+                <circle cx="26.5" cy="29.5" r="2.5" class="clr-i-solid--badged clr-i-solid-path-2--badged" style="display:none"></circle>
+                <circle cx="30" cy="6" r="5" class="clr-i-solid--badged clr-i-solid-path-4--badged clr-i-badge" style="display:none"></circle>
+                <path d="M33.08,5.37A1,1,0,0,0,32.31,5H11.49l.65,2H31L28.33,19h-15L8.76,4.53a1,1,0,0,0-.66-.65L4,2.62a1,1,0,1,0-.59,1.92L7,5.64l4.59,14.5L9.95,21.48l-.13.13A2.66,2.66,0,0,0,9.74,25,2.75,2.75,0,0,0,12,26H28.69a1,1,0,0,0,0-2H11.84a.67.67,0,0,1-.56-1l2.41-2H29.13a1,1,0,0,0,1-.78l3.17-14A1,1,0,0,0,33.08,5.37Z" class="clr-i-outline clr-i-outline-path-3"></path>
+                <path d="M29.15,15.4,28.33,19h-15L8.76,4.53a1,1,0,0,0-.66-.65L4,2.62a1,1,0,1,0-.59,1.92L7,5.64l4.59,14.5L9.95,21.48l-.13.13A2.66,2.66,0,0,0,9.74,25,2.75,2.75,0,0,0,12,26H28.69a1,1,0,0,0,0-2H11.84a.67.67,0,0,1-.56-1l2.41-2H29.13a1,1,0,0,0,1-.78l1.09-4.82Z" class="clr-i-outline--alerted clr-i-outline-path-4--alerted" style="display:none"></path>
+                <path d="M26.85,1.14,21.13,11A1.28,1.28,0,0,0,22.23,13H33.68A1.28,1.28,0,0,0,34.78,11L29.06,1.14A1.28,1.28,0,0,0,26.85,1.14Z" class="clr-i-outline--alerted clr-i-outline-path-5--alerted clr-i-alert" style="display:none"></path>
+                <path d="M22.57,7a7.52,7.52,0,0,1-.07-1,7.52,7.52,0,0,1,.07-1H11.49l.65,2Z" class="clr-i-outline--badged clr-i-outline-path-3--badged" style="display:none"></path>
+                <path d="M30,13.5l-.42,0L28.33,19h-15L8.76,4.53a1,1,0,0,0-.66-.65L4,2.62a1,1,0,1,0-.59,1.92L7,5.64l4.59,14.5L9.95,21.48l-.13.13A2.66,2.66,0,0,0,9.74,25,2.75,2.75,0,0,0,12,26H28.69a1,1,0,0,0,0-2H11.84a.67.67,0,0,1-.56-1l2.41-2H29.13a1,1,0,0,0,1-.78l1.57-6.91A7.51,7.51,0,0,1,30,13.5Z" class="clr-i-outline--badged clr-i-outline-path-4--badged" style="display:none"></path>
+                <path d="M33.1,6.39A1,1,0,0,0,32.31,6H9.21L8.76,4.57a1,1,0,0,0-.66-.65L4,2.66a1,1,0,1,0-.59,1.92L7,5.68l4.58,14.47L9.95,21.49l-.13.13A2.66,2.66,0,0,0,9.74,25,2.75,2.75,0,0,0,12,26H28.69a1,1,0,0,0,0-2H11.84a.67.67,0,0,1-.56-1l2.41-2H29.12a1,1,0,0,0,1-.76l3.2-13A1,1,0,0,0,33.1,6.39Z" class="clr-i-solid clr-i-solid-path-3" style="display:none"></path>
+                <path d="M22.23,15.4A3.68,3.68,0,0,1,19,9.89L21.29,6H9.21L8.76,4.57a1,1,0,0,0-.66-.65L4,2.66a1,1,0,1,0-.59,1.92L7,5.68l4.58,14.47L9.95,21.49l-.13.13A2.66,2.66,0,0,0,9.74,25,2.75,2.75,0,0,0,12,26H28.69a1,1,0,0,0,0-2H11.84a.67.67,0,0,1-.56-1l2.41-2H29.12a1,1,0,0,0,1-.76l1.19-4.84Z" class="clr-i-solid--alerted clr-i-solid-path-3--alerted" style="display:none"></path>
+                <path d="M26.85,1.14,21.13,11A1.28,1.28,0,0,0,22.23,13H33.68A1.28,1.28,0,0,0,34.78,11L29.06,1.14A1.28,1.28,0,0,0,26.85,1.14Z" class="clr-i-solid--alerted clr-i-solid-path-4--alerted clr-i-alert" style="display:none"></path>
+                <path d="M30,13.5A7.5,7.5,0,0,1,22.5,6H9.21L8.76,4.57a1,1,0,0,0-.66-.65L4,2.66a1,1,0,1,0-.59,1.92L7,5.68l4.58,14.47L9.95,21.49l-.13.13A2.66,2.66,0,0,0,9.74,25,2.75,2.75,0,0,0,12,26H28.69a1,1,0,0,0,0-2H11.84a.67.67,0,0,1-.56-1l2.41-2H29.12a1,1,0,0,0,1-.76l1.71-7A7.49,7.49,0,0,1,30,13.5Z" class="clr-i-solid--badged clr-i-solid-path-3--badged" style="display:none"></path>
+                <polygon points="20.71 7 21.87 5 11.49 5 12.14 7 20.71 7" class="clr-i-outline--alerted clr-i-outline-path-3--alerted" style="display:none"></polygon>
+            </svg>
+            <span class="inline-block ml-0.5">سبد خرید</span>
+            (<span class="in-fa">
+                @if(Auth::check())
+                    {{ isset($cartCount) ? $cartCount : '0' }}
+                @endif
+            </span>)
+        </button>
     </div>
 
 @endsection

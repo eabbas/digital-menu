@@ -11,7 +11,7 @@ class order extends Model
         'user_id',
         'qr_code_id',
         'career_id',
-        'status',
+        'order_status_id',
         'order_code',
     ];
 
@@ -32,5 +32,9 @@ class order extends Model
 
     public function carts(){
         return $this->hasMany(cart::class);
+    }
+
+    public function status(){
+        return $this->belongsTo(order_status::class, 'order_status_id');
     }
 }

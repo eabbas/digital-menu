@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->integer('qr_code_id')->nullable();
             $table->integer('career_id');
-            $table->integer('status')->default(1);
+            $table->integer('order_status_id')->default(1);
             $table->bigInteger('order_code');
             $table->timestamps();
         });

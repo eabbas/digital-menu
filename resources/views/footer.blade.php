@@ -1,6 +1,6 @@
 {{-- bottom menu mobile --}}
 
-<footer class="w-full flex justify-center rounded-t-4xl bg-white fixed bottom-0 right-0 py-1.5 z-999">
+<footer class="w-full flex justify-center rounded-t-4xl bg-white fixed bottom-0 left-0 lg:w-[calc(100%-265px)] py-1.5 z-999">
     <div class="w-11/12 mt-1 flex justify-between items-center ">
         <a href="{{{ route('home') }}}" class="w-1/7 flex flex-col items-center gap-2" id="homeIcon">
 {{--            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"  class="w-5">--}}
@@ -31,13 +31,8 @@
                 <span class="text-xs text-[#fc8e21]">اسکنر</span>
             </div>
         </div>
-        <div class="w-1/7 flex flex-col items-center gap-2 relative cursor-pointer" onclick="getOpenShoppingCart()('phoneOpen')" id="orderBasket">
-            <span class="size-3 text-center rounded-full bg-[#fc8e21] absolute right-3 -top-2 text-white text-[10px] @if(!isset($cartCount) || (isset($cartCount) && $cartCount == 0)) hidden @endif">
-                @if(Auth::check())
-                    {{ isset($cartCount) ? $cartCount : '0' }}
-                @endif
-            </span>
-            <svg version="1.1" class="can-badge can-alert has-solid w-6 @if(!isset($cartCount) || (isset($cartCount) && $cartCount == 0)) fill-(--secondary-text-color) @else fill-(--primary-color) @endif" viewBox="0 0 36 36" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" focusable="false" role="img">
+        <div class="w-1/7 flex flex-col items-center gap-2 relative cursor-pointer">
+            <svg version="1.1" class="can-badge can-alert has-solid w-6 fill-(--secondary-text-color)" viewBox="0 0 36 36" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" focusable="false" role="img">
                 <circle cx="13.33" cy="29.75" r="2.25" class="clr-i-outline clr-i-outline-path-1"></circle>
                 <circle cx="27" cy="29.75" r="2.25" class="clr-i-outline clr-i-outline-path-2"></circle>
                 <circle cx="13.33" cy="29.75" r="2.25" class="clr-i-outline--alerted clr-i-outline-path-1--alerted" style="display:none"></circle>
@@ -69,7 +64,7 @@
         <div class="w-1/7 flex flex-col items-center gap-1 cursor-pointer" id="userIcon">
             @if(Auth::check())
                 <img src="{{ Auth::user()->main_image ? asset('storage/'.Auth::user()->main_image) : asset('assets/img/user.png') }}"
-                     class="w-7 rounded-full" alt="profile image" onclick="pup_up_profil('open')">
+                     class="size-7 object-cover rounded-full" alt="profile image" onclick="pup_up_profil('open')">
             @else
                 <a href="{{ route('login') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4"
