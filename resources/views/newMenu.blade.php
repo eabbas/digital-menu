@@ -30,7 +30,7 @@
     <div class="w-full px-5 flex flex-row items-center justify-between pt-3">
         <div class="w-1/2 flex flex-col gap-3">
 {{--            @if(Auth::check() && count($orders)) block @else hidden @endif--}}
-            <div class="w-full hidden p-1 lg:p-3 text-xs lg:text-sm h-full font-medium"
+            <div class="w-full hidden p-1 lg:p-3 text-xs lg:text-sm h-full font-medium hidden"
                  id="orderLink">
                 <div class="text-sky-700 cursor-pointer" onclick="orders('open')">سفارشات من</div>
             </div>
@@ -66,7 +66,7 @@
             </div>
         </div>
         <div class="w-11/12 flex justify-between items-center">
-            <div class="w-9/12 shadow_box rounded-full flex p-2 gap-2 px-3 items-center">
+            <div class="w-9/12 shadow_box rounded-full flex p-2 gap-2 px-3 items-center bg-white">
                 <button>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-[14px]">
                         <path d="M368 208A160 160 0 1 0 48 208a160 160 0 1 0 320 0zM337.1 371.1C301.7 399.2 256.8 416 208 416C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208c0 48.8-16.8 93.7-44.9 129.1L505 471c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L337.1 371.1z"/>

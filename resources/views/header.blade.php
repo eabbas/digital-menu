@@ -86,9 +86,9 @@
     </div>
 </div>
 <header>
-    <header class="w-full bg-white flex justify-center items-center top-0 left-0 lg:w-[calc(100%-265px)] fixed z-3">
+    <header class="w-full bg-white flex justify-center items-center top-0 left-0 fixed z-3"><!-- lg:w-[calc(100%-265px)] -->
         <div class="w-11/12 flex items-center justify-between">
-            <div class="flex relative p-1 justify-center items-center cursor-pointer lg:hidden">
+            <div class="flex relative p-1 justify-center items-center cursor-pointer"> <!-- lg:hidden -->
                 <div class="flex items-center">
                     <div class="flex flex-col w-8 h-5 justify-between cursor-pointer" onclick="hamburgerMenu('open')"
                          id="menuBlockliet">

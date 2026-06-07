@@ -349,10 +349,14 @@
         let text = el.innerText
         el.innerHTML = "<div class='size-5 border-3 border-white border-t-(--primary-color) rounded-full animate-spin'></div>"
         let cartItems = cartList.children[1].children
+        console.log(cartItems)
+
         let cartIds = []
         for(let item of cartItems){
             cartIds.push(item.getAttribute('data-menu-item-id'))
         }
+        console.log(cartIds)
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -498,9 +502,9 @@
                             element.innerHTML = `
                                 <span> خوش اومدی ${data.name ?? 'کاربر'} ${data.family ?? 'رینگا'} عزیز</span>
                                 `
-                            if (data.orders.length > 0) {
-                                orderLink.classList.remove('hidden')
-                            }
+                            // if (data.orders.length > 0) {
+                            //     orderLink.classList.remove('hidden')
+                            // }
                             flag = true
                             addCustomer.innerHTML = ""
                             if (flag && ({{$career->user->id}} != data.id)) {
@@ -599,9 +603,9 @@
                             element.innerHTML = `
                                     <span> خوش اومدی ${data.validate.name ?? 'کاربر'} ${data.validate.family ?? 'رینگا'} عزیز</span>
                                 `
-                            if (data.orders.length > 0) {
-                                orderLink.classList.remove('hidden')
-                            }
+                            // if (data.orders.length > 0) {
+                            //     orderLink.classList.remove('hidden')
+                            // }
                             flag = true
                             addCustomer.innerHTML = ""
                             if (flag && ({{$career->user->id}} != data.id)) {
