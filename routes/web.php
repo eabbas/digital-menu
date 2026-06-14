@@ -63,6 +63,26 @@ use App\Http\Controllers\MahdiQuestionOptionController;
 use App\Http\Controllers\MahdiTestController;
 
 use App\Models\social_qr_codes;
+use App\Models\order;
+use App\Models\menu_item;
+use App\Models\item_quantity;
+use Hekmatinasser\Verta\Verta;
+
+Route::get('/fttest', function (){
+    $item = menu_item::find(246);
+    $today = explode(' ', Verta::today());
+    $today = $today[0];
+    $itemQuantity = item_quantity::where('menu_item_id', $item->id)->where('date', $today)->first();
+    dd($itemQuantity);
+});
+
+Route::get('/deleteOrder', function(){
+    order::where('user_id', 18)->delete();
+});
+Route::get('/mrShimylogin' , function(){
+   return view('guys.ho.login');
+});
+
 
 Route::group([
     'prefix'=>'mr-chemistry'
@@ -96,6 +116,10 @@ Route::group([
         Route::get('/index/{test}', 'index')->name('list');
         Route::get('/single/{question}', 'single')->name('single');
     });
+
+    Route::get('/home', function(){
+        return view('guys.mrChemistry.home');
+    })->name('m.home');
 });
 
 

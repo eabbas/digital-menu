@@ -7,11 +7,17 @@ use Illuminate\Http\Request;
 use App\Models\order;
 use App\Models\cart;
 use App\Models\User;
+use App\Models\career;
+use App\Models\item_quantity;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Support\Facades\Auth;
+use Log;
 
 class OrderController extends Controller
 {
     public function store(Request $request){
+        $today = explode(' ', Verta::today());
+        $today = $today[0];
         $user_id = Auth::id();
         if(isset($request->user_id)){
             $user_id = $request->user_id;
@@ -36,17 +42,31 @@ class OrderController extends Controller
             $cart=cart::find($cart_id);
             $cart->order_id = $order_id;
             $cart->save();
+            $itemQuantity = item_quantity::where('date', $today)->where('menu_item_id', $cart->menu_item_id)->first();
+            if(!$itemQuantity){
+                $itemQuantity = item_quantity::create([
+                    'order_id'=>$order_id,
+                    'menu_item_id' => $cart->menu_item_id,
+                    'date' => $today,
+                ]);
+            }
+            $itemQuantity->quantity = $itemQuantity->quantity + $cart->quantity;
+            $itemQuantity->save();
         }
+
+
         return response()->json('ok');
     }
 
     public function show(Request $request){
-        $user_id = Auth::id();
-        if(isset($request->user_id)){
+//        $user_id = Auth::id();
+//        if(isset($request->user_id)){
             $user_id = $request->user_id;
-        }
+//        }
         $datas = [];
-        $orders = order::where('user_id', $user_id)->where('career_id', $request->career_id)->where('order_status_id', 1)->orWhere('order_status_id', 2)->orWhere('order_status_id', 3)->orWhere('order_status_id', 4)->get();
+//        $orders = order::where('user_id', $user_id)->where('career_id', $request->career_id)->where('order_status_id', 1)->where('order_status_id', 2)->where('order_status_id', 3)->where('order_status_id', 4)->get();
+//        $orders = order::where('user_id', $user_id)->where('career_id', $request->career_id)->where('order_status_id', 1)->orWhere('order_status_id', 2)->orWhere('order_status_id', 3)->orWhere('order_status_id', 4)->get();
+        $orders = order::where('user_id', $user_id)->where('career_id', $request->career_id)->whereNotIn('order_status_id', [5, 6])->get();
         foreach($orders as $order){
             if($order->address){
                 $order['address'] =  $order->address;
@@ -54,6 +74,11 @@ class OrderController extends Controller
             if($order->qr_code_id){
                 $order['table'] =  $order->qr_code->description ? $order->qr_code->description : "-";
             }
+            $order->status;
+//            $order->carts;
+            $order->load(['carts'=>function($query){
+                $query->with('menu_item')->get();
+            }]);
             $datas[] = $order;
         }
         return response()->json($datas);
@@ -79,12 +104,12 @@ class OrderController extends Controller
         if($request->status == 3){
             $order->order_status_id = 4;
         }
-        if($request->status == 4){
-            $order->order_status_id = 5;
-        }
-        if($request->status == 5){
-            $order->order_status_id = 6;
-        }
+//        if($request->status == 4){
+//            $order->order_status_id = 5;
+//        }
+//        if($request->status == 5){
+//            $order->order_status_id = 6;
+//        }
         $order->status;
         $order->qr_code;
         $order->carts;
@@ -92,8 +117,25 @@ class OrderController extends Controller
         return response()->json($order);
     }
 
-    public function delete(order $order){
+    public function delete(order $order, User $user = null, career $career = null){
         $order->update(['order_status_id'=>6]);
+        if($user && $career){
+            $orders = order::where('user_id', $user->id)->where('career_id', $career->id)->whereNotIn('order_status_id', [5, 6])->get();
+//            $orders = order::where('user_id', $user->id)->where('career_id', $career->id)->where('order_status_id', 1)->orWhere('order_status_id', 2)->orWhere('order_status_id', 3)->orWhere('order_status_id', 4)->get();
+            return response()->json($orders);
+        }
+
         return response()->json($order->id);
+    }
+
+    public function remove(order $order, User $user = null, career $career = null){
+        $id = $order->id;
+        $order->delete();
+        if($user && $career){
+            $orders = order::where('user_id', $user->id)->where('career_id', $career->id)->whereNotIn('order_status_id', [5, 6])->get();
+//            $orders = order::where('user_id', $user->id)->where('career_id', $career->id)->where('order_status_id', 1)->orWhere('order_status_id', 2)->orWhere('order_status_id', 3)->orWhere('order_status_id', 4)->get();
+            return response()->json($orders);
+        }
+        return response()->json($id);
     }
 }

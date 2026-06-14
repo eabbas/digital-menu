@@ -19,7 +19,7 @@ class MenuItemController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+//        dd($request->all());
         $path = null;
         if (isset($request->image)) {
             $name = $request->image->getClientOriginalName();
@@ -35,7 +35,8 @@ class MenuItemController extends Controller
             'image' => $path,
             'parent_id' => isset($request->parent_id) ? $request->parent_id : 0,
             'menu_category_id' => $request->menu_categories_id,
-            'duration' => $request->duration
+            'duration' => $request->duration,
+            'max_unit'=>$request->max_unit,
         ]);
         $imagePath = null;
         if (isset($request->ingredients)) {
@@ -75,6 +76,7 @@ class MenuItemController extends Controller
             'menu_id' => $request->menu_id,
             'duration' => isset($request->duration) ? $request->duration : 0,
             'description'=>$request->description,
+            'max_unit'=>$request->max_unit,
         ]);
         if($item->discount != 0){
             $campare = $item->price - $item->discount;
@@ -101,6 +103,7 @@ class MenuItemController extends Controller
         $item->duration = isset($request->duration) ? $request->duration : 0;
         $item->description = isset($request->description) ? $request->description : null;
         $item->parent_id = isset($request->parent_id) ? $request->parent_id : 0;
+        $item->max_unit = $request->max_unit;
         $item->save();
         if($item->discount != 0){
             $campare = $item->price - $item->discount;
@@ -137,6 +140,7 @@ class MenuItemController extends Controller
         $item->customizable = $request->customizable ? $request->customizable : 0;
         $item->price = $request->price;
         $item->duration = $request->duration;
+        $item->max_unit = $request->max_unit;
         $imagePath = null;
         if (isset($request->discount)) {
             $item->discount = $request->discount;

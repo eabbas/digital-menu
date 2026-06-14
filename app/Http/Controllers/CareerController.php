@@ -156,6 +156,7 @@ class CareerController extends Controller
             'parent_id' => 0,
             'menu_id' => $menu_id,
             'duration' => 0,
+            'max_unit' => 0,
             'created_at' => now(),
             'updated_at' => now()
         ]);

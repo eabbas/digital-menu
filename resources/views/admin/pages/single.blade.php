@@ -599,7 +599,7 @@
                                             <span class="text-gray-700 font-bold">افزودن رستوران</span>
                                         </span>
                                     </div>
-                                    {{-- <div class="w-full">
+                                    <div class="w-full">
                                         <a href="{{ route('pages.proList', [$page->id]) }}"
                                            class="w-full p-5 border-1 border-gray-400 flex flex-row items-center gap-5 hover:ring-2 hover:ring-[#eb3254] hover:ring-offset-2 hover:bg-[#eb3254]/20 rounded-lg transition-all duration-150 cursor-pointer">
                                             <svg class="size-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -610,7 +610,7 @@
                                             </svg>
                                             <span class="text-gray-700 font-bold">فروشگاه</span>
                                         </a>
-                                    </div> --}}
+                                    </div>
                                     <div class="w-full">
                                         <div onclick="addSocialMedia()"
                                              class="w-full p-5 border-1 border-gray-400 flex flex-row items-center gap-5 hover:ring-2 hover:ring-[#eb3254] hover:ring-offset-2 hover:bg-[#eb3254]/20 rounded-lg transition-all duration-150 cursor-pointer">
