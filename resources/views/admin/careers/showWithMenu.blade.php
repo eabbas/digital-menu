@@ -119,11 +119,9 @@
                             <div class="p-2 lg:p-4">
                                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="menuItemList">
                                     @foreach ($menu->menu_items as $item)
-                                        <div class="w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems"
+                                        <div class="w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems relative"
                                             data-menu-item-title="{{ $item->title }}"
                                             data-menu-item-id="{{ $item->id }}">
-                                            <!--<span class="absolute -top-1 -right-2 bg-[#eb3254] px-2 py-0.5 rounded text-sm text-white">ویژه</span>-->
-                                            <input type="hidden" value="{{ $item->id }}">
                                             <span
                                                 class="text-xs @if (!$item->discount) invisible @else @endif text-white bg-red-500 rounded-full px-1.5 -rotate-30 absolute top-0 -left-1">
                                                 {{ $item->percent }}%
@@ -296,6 +294,9 @@
                             <span class="w-full h-[1px] bg-[#e4e6eb] rounded-2xl"></span>
                             <input type="number" class="outline-hidden w-full py-3 text-sm bg-white pr-3 rounded-sm"
                                 id="menuItemDiscount" placeholder="قیمت تخفیف خورده (تومان)">
+                            <span class="w-full h-[1px] bg-[#e4e6eb] rounded-2xl"></span>
+                            <input type="number" class="outline-hidden w-full py-3 text-sm bg-white pr-3 rounded-sm"
+                                id="maxUnit" placeholder="تعداد در روز">
                         </div>
                         <div class="w-full p-4 flex flex-col gap-3 bg-blue-800/10 rounded-lg">
                             <h2 class="text-md font-bold text-center">توضیحات</h2>
@@ -402,6 +403,7 @@
         let menuCats = document.getElementById('menuCats')
         let menuItems = document.querySelectorAll('.menuItems')
         let menuHeading = document.getElementById('menuHeading')
+        let maxUnit = document.getElementById('maxUnit')
 
         let block = document.getElementById('block')
         let menu = document.getElementById('menuForm')
@@ -638,11 +640,11 @@
         //         loader.classList.add('flex')
         //         $.ajaxSetup({
         //             headers: {
-        //                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        //                 'X-CSRF-TOKEN': "{{-- csrf_token() --}}"
         //             }
         //         })
         //         $.ajax({
-        //             url: "{{ url('menuCategory/edit-front/') }}/" + menuCatId,
+        //             url: "{{-- url('menuCategory/edit-front/') --}}/" + menuCatId,
         //             type: "GET",
         //             success: function (data) {
         //                 loader.classList.remove('flex')
@@ -681,11 +683,11 @@
         //             formData.append('menu_id', newCat.getAttribute('data-menu-create-cat-id'))
         //             $.ajaxSetup({
         //                 headers: {
-        //                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        //                     'X-CSRF-TOKEN': "{{-- csrf_token() --}}"
         //                 }
         //             })
         //             $.ajax({
-        //                 url: "{{ route('menuCat.storeFront') }}",
+        //                 url: "{{-- route('menuCat.storeFront') --}}",
         //                 type: "POST",
         //                 contentType: false,
         //                 processData: false,
@@ -742,11 +744,11 @@
         //             }
         //             $.ajaxSetup({
         //                 headers: {
-        //                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        //                     'X-CSRF-TOKEN': "{{-- csrf_token() --}}"
         //                 }
         //             })
         //             $.ajax({
-        //                 url: "{{ route('menuCat.updateFront') }}",
+        //                 url: "{{-- route('menuCat.updateFront') --}}",
         //                 type: "POST",
         //                 contentType: false,
         //                 processData: false,
@@ -788,11 +790,11 @@
         //     let menuItems = document.querySelectorAll('.menuItems')
         //     $.ajaxSetup({
         //         headers: {
-        //             'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        //             'X-CSRF-TOKEN': "{{-- csrf_token() --}}"
         //         }
         //     })
         //     $.ajax({
-        //         url: "{{ url('menuCategory/delete-front/') }}/" + categoryId,
+        //         url: "{{-- url('menuCategory/delete-front/') --}}/" + categoryId,
         //         type: "GET",
         //         success: function (data) {
         //             menuCategories.forEach((menuCategory)=>{
@@ -819,11 +821,11 @@
         //     let menuItems = document.querySelectorAll('.menuItems')
         //     $.ajaxSetup({
         //         headers: {
-        //             'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        //             'X-CSRF-TOKEN': "{{-- csrf_token() --}}"
         //         }
         //     })
         //     $.ajax({
-        //         url: "{{ url('menuCategory/delete-front-without-items/') }}/"+categoryId,
+        //         url: "{{-- url('menuCategory/delete-front-without-items/') --}}/"+categoryId,
         //         type: "GET",
         //         success: function(data){
         //             console.log(data);
@@ -902,6 +904,7 @@
                         menuItemPrice.value = data.price
                         menuItemDiscount.value = data.discount != 0 ? data.discount : ""
                         menuItemDescription.innerText = data.description
+                        maxUnit.value = data.max_unit !== 0 ? data.max_unit : ''
 
                     },
                     error: function() {
@@ -916,11 +919,11 @@
         //     menuItemCategoryId.classList.remove('hidden')
         //     $.ajaxSetup({
         //         headers: {
-        //             'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        //             'X-CSRF-TOKEN': "{{-- csrf_token() --}}"
         //         }
         //     })
         //     $.ajax({
-        //         url: "{{ url('menu/cats') }}/"+newCat.getAttribute('data-menu-create-cat-id'),
+        //         url: "{{-- url('menu/cats') --}}/"+newCat.getAttribute('data-menu-create-cat-id'),
         //         type: "GET",
         //         success: function(data){
         //             data.forEach((category)=>{
@@ -969,6 +972,9 @@
                     if (menuItemDescription.value.trim() != "") {
                         formData.append('description', menuItemDescription.value)
                     }
+                    if(maxUnit.value !== ''){
+                        formData.append('max_unit', maxUnit.value)
+                    }
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -986,7 +992,7 @@
                             console.log(data)
                             let div = document.createElement('div')
                             div.classList =
-                                "w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems"
+                                "w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems relative"
                             div.setAttribute('data-menu-item-title', data.title)
                             div.setAttribute('data-menu-item-id', data.id)
                             let inner = `<span class="text-xs`
@@ -1093,6 +1099,9 @@
                     if (menuItemDescription.value.trim() != "") {
                         formData.append('description', menuItemDescription.value)
                     }
+                    if(maxUnit.value !== ''){
+                        formData.append('max_unit', maxUnit.value)
+                    }
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': "{{ csrf_token() }}",
@@ -1118,7 +1127,10 @@
                                         <span class="text-gray-400 text-[10px] line-through lg:text-sm">${formatter.format(data.price)} تومان</span
                                         `
                                     }
+                                    console.log(item.children[1])
+                                    console.log(item.children[1].children[0])
                                     if (data.discount == 0) {
+
                                         item.children[1].children[0].children[1].children[0].children[0]
                                             .innerHTML = `
                                         <span class="font-bold text-xs lg:text-sm">${formatter.format(data.price)} تومان</span>
@@ -1200,7 +1212,7 @@
                     items.forEach((item, index) => {
                         let div = document.createElement('div')
                         div.classList =
-                            "w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems"
+                            "w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems relative"
                         div.setAttribute('data-menu-item-title', item.title)
                         div.setAttribute('data-menu-item-id', item.id)
 
@@ -1313,7 +1325,7 @@
                     data.forEach((item, index) => {
                         let div = document.createElement('div')
                         div.classList =
-                            "w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems"
+                            "w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems relative"
                         div.setAttribute('data-menu-item-title', item.title)
                         div.setAttribute('data-menu-item-id', item.id)
                         let inner = `<span class="text-xs`

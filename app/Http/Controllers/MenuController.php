@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Models\item_quantity;
+use Hekmatinasser\Verta\Verta;
 
 use function Symfony\Component\Clock\now;
 
@@ -247,6 +249,12 @@ class MenuController extends Controller
                     $item['percent'] = intval($x * 100);
                 }
                 $item['cart'] = cart::where('user_id', Auth::id())->where('order_id', null)->where('menu_item_id', $item->id)->where('career_id', $menu->career->id)->first();
+                $today = explode(' ', Verta::today());
+                $today = $today[0];
+                $itemQuantity = item_quantity::where('menu_item_id', $item->id)->where('date', $today)->where('quantity', $item->max_unit)->first();
+                if($itemQuantity){
+                    $item->outNumber = true;
+                }
             }
         // }
         $user = null;

@@ -7,6 +7,8 @@ use App\Models\pages;
 use App\Models\order;
 use App\Models\cart;
 use Illuminate\Http\Request;
+use App\Models\item_quantity;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Support\Facades\Auth;
 use Log;
 
@@ -26,6 +28,13 @@ class ClientController extends Controller
                 if($cartItem){
                     $item->quantity = $cartItem->quantity;
                 }
+                $today = explode(' ', Verta::today());
+                $today = $today[0];
+                $itemQuantity = item_quantity::where('menu_item_id', $item->id)->where('date', $today)->where('quantity', $item->max_unit)->first();
+                if($itemQuantity){
+                    $item->outNumber = true;
+                }
+//                Log::info($item);
             }
         }
         $cartCount = 0;
@@ -40,7 +49,8 @@ class ClientController extends Controller
             foreach ($currentUser->carts as $cart) {
                 $cartCount += $cart->quantity;
             }
-            $orders = order::where('user_id', Auth::id())->where('career_id', $career->id)->where('order_status_id', 1)->orWhere('order_status_id', 2)->orWhere('order_status_id', 3)->orWhere('order_status_id', 4)->get();
+//            $orders = order::where('user_id', Auth::id())->where('career_id', $career->id)->where('order_status_id', 1)->orWhere('order_status_id', 2)->orWhere('order_status_id', 3)->orWhere('order_status_id', 4)->get();
+            $orders = order::where('user_id', Auth::id())->where('career_id', $career->id)->whereNotIn('order_status_id', [5, 6])->get();
         }
         $career->province = $career->province_city->province->title;
         $career->city = $career->province_city->title;

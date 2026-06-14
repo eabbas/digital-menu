@@ -41,4 +41,9 @@ class MahdiTestController extends Controller
         $test->delete();
         return to_route('mtest.list');
     }
+
+    public function edub(){
+        $all = educational_base::all();
+        return response()->json($all);
+    }
 }

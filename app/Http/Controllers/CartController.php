@@ -7,13 +7,15 @@ use App\Models\cart;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\menu_item;
+use App\Models\item_quantity;
+use Hekmatinasser\Verta\Verta;
 use Log;
 
 class CartController extends Controller
 {
     public function store(Request $request)
     {
-//        return response()->json($request->all());
         $user_id = Auth::id();
         if (!Auth::check()) {
             $user_id = $request->input('user_id');
@@ -39,6 +41,18 @@ class CartController extends Controller
         $cart->quantity = $request->quantity ? $request->quantity : 1;
         $cart->save();
 //        return response()->json([$cart, $cart->quantity, $request->quantity]);
+        $item = menu_item::find($request->menu_item_id);
+        $today = explode(' ', Verta::today());
+        $today = $today[0];
+        $itemQuantity = item_quantity::where('menu_item_id', $item->id)->where('date', $today)->first();
+        $quantity = $cart->quantity;
+        if($itemQuantity){
+            $quantity = $item->max_unit - $itemQuantity->quantity;
+        }
+
+        if($item->max_unit == $quantity){
+            $cart->disabled = true;
+        }
         return response()->json($cart);
     }
 

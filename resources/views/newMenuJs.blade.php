@@ -223,7 +223,6 @@
                             `
                         }
                     })
-
                 },
                 error: function () {
                     showMessage('open')
@@ -249,16 +248,28 @@
                     'user_id': userId
                 },
                 success: function (data) {
+                    console.log(data)
                     el.removeAttribute('disabled')
                     if (state == "+") {
                         el.innerHTML = "<span class='text-2xl text-white'>+</span>"
-                        // el.parentElement.children[1].value == 1 ? el.parentElement.children[2].innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="size-[14px]" viewBox="0 0 448 512"><path fill="white" d="M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 32 24C10.7 80 0 90.7 0 104s10.7 24 24 24H35.6L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3H324.6c33.5 0 61.3-25.9 63.8-59.3L412.4 128H424c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8H367.9 354.2zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8H123.4c-8.4 0-15.3-6.5-16-14.8L83.7 128H364.3z"/></svg>` : el.parentElement.children[2].innerHTML = "<span class='text-2xl text-white'>-</span>"
+                        if(data.disabled){
+                            el.classList.remove('bg-[#f6911e]')
+                            el.classList.add('bg-gray-500')
+                            el.innerHTML = "<span class='text-2xl text-white/50'>+</span>"
+                            el.disabled = true
+                        }
+
                         el.parentElement.children[2].innerHTML = "<span class='text-2xl text-white'>-</span>"
                     }
                     if (state == "-") {
                         el.innerHTML = "<span class='text-2xl text-white'>-</span>"
-                        // el.parentElement.children[1].value == 1 ? el.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="size-[14px]" viewBox="0 0 448 512"><path fill="white" d="M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 32 24C10.7 80 0 90.7 0 104s10.7 24 24 24H35.6L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3H324.6c33.5 0 61.3-25.9 63.8-59.3L412.4 128H424c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8H367.9 354.2zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8H123.4c-8.4 0-15.3-6.5-16-14.8L83.7 128H364.3z"/></svg>` : el.innerHTML = "<span class='text-2xl text-white'>-</span>"
-                        el.innerHTML = "<span class='text-2xl text-white'>-</span>"
+                        if(!data.disabled){
+                            el.parentElement.children[0].classList.remove('bg-gray-500')
+                            el.parentElement.children[0].classList.add('bg-[#f6911e]')
+                            el.parentElement.children[0].innerHTML = "<span class='text-2xl text-white'>+</span>"
+                            el.parentElement.children[0].disabled = false
+                        }
+
                     }
                     menuItemsInPage.forEach((menuItem)=>{
                         if(menuItem.getAttribute('data-menu-item-id') == data.menu_item_id){
@@ -443,7 +454,6 @@
         })
     }
 
-
     function check(ev) {
         let addCustomer = document.getElementById('addCustomer')
         let password = document.getElementById('password')
@@ -502,9 +512,9 @@
                             element.innerHTML = `
                                 <span> خوش اومدی ${data.name ?? 'کاربر'} ${data.family ?? 'رینگا'} عزیز</span>
                                 `
-                            // if (data.orders.length > 0) {
-                            //     orderLink.classList.remove('hidden')
-                            // }
+                            if (data.orders.length > 0) {
+                                orderLink.children[0].classList.remove('scale-0')
+                            }
                             flag = true
                             addCustomer.innerHTML = ""
                             if (flag && ({{$career->user->id}} != data.id)) {
@@ -603,9 +613,9 @@
                             element.innerHTML = `
                                     <span> خوش اومدی ${data.validate.name ?? 'کاربر'} ${data.validate.family ?? 'رینگا'} عزیز</span>
                                 `
-                            // if (data.orders.length > 0) {
-                            //     orderLink.classList.remove('hidden')
-                            // }
+                            if (data.orders.length > 0) {
+                                orderLink.children[0].classList.remove('scale-0')
+                            }
                             flag = true
                             addCustomer.innerHTML = ""
                             if (flag && ({{$career->user->id}} != data.id)) {
@@ -794,8 +804,7 @@
 
     function orders(state) {
         if (state == "open") {
-            orderList.children[0].children[0].children[1].children[0].children[1].innerHTML = ""
-
+            orderList.children[0].children[0].children[1].innerHTML = ""
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -812,55 +821,65 @@
                 success: function (data) {
                     orderList.classList.remove('invisible')
                     orderList.classList.remove('opacity-0')
-                    data.forEach((item) => {
-                        if (item.status != 4) {
-                            let parentDiv = document.createElement('div')
-                            parentDiv.classList = "bg-white divide-y divide-[#f1f1f4]"
-                            let html = `
-                                <div
-                                    class="w-full flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4] py-2">
-                                    <div
-                                        class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center">
-                                        <span class="block w-10 lg:w-full">${counterNum}</span>
-                                    </div>
-                                    <div
-                                        class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 text-center col-span-2">
-                                        <span class="block w-30 lg:w-full">${item.order_code}</span>
-                                    </div>
-                                    <div
-                                        class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 lg:w-full text-center col-span-4">
-                                        <span
-                                            class="block w-[180px] lg:w-full">${item.address ? item.address.address : item.table}</span>
-                                    </div>
-                                    <div
-                                        class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 lg:w-full text-center col-span-4">
-                                        <span
-                                            class="block w-[130px] lg:w-full">${item.status}</span>
-                                    </div>
-    `
-                            if (item.status == "در انتظار تایید") {
-                                html += `
-                                        <div
-                                        class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 lg:w-full text-center col-span-4">
-                                        <span
-                                            class="px-3 block w-[120px] py-1 rounded bg-red-500 text-white lg:w-full cursor-pointer" onclick="deleteOrder(this, ${item.id})">لغو سفارش</span>
-                                    </div>`
-                            }
-                            if (item.status == "ارسال شد") {
-                                html += `
-                                        <div
-                                        class="p-1 lg:p-3 text-xs lg:text-sm h-full flex items-center justify-center text-gray-900 lg:w-full text-center col-span-4">
-                                        <span
-                                            class="px-3 block w-[120px] py-1 rounded bg-red-500 text-white lg:w-full cursor-pointer" onclick="deleteOrder(this, ${item.id})">حذف</span>
-                                    </div>`
-                            }
-                            html += `</div>`
-                            parentDiv.innerHTML = html
+                    data.forEach((order)=>{
+                        let element = document.createElement('div')
+                        element.classList = "w-full p-2 border-1 border-[#e4e5ea] rounded-lg"
+                        let inner = `
+                        <div class="w-full grid grid-cols-12 gap-2 items-center cursor-pointer order-first-row ${data[0].id == order.id && 'mb-5'}">
 
-                            orderList.children[0].children[0].children[1].children[0].children[1].appendChild(parentDiv)
-                            counterNum++
-                        }
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-7 fill-(--secondary-text-color)" onclick="accardeonEvent(this)" viewBox="0 0 448 512">
+                                <path d="M160 96v32H288V96c0-35.3-28.7-64-64-64s-64 28.7-64 64zm-32 64H48c-8.8 0-16 7.2-16 16V416c0 35.3 28.7 64 64 64H352c35.3 0 64-28.7 64-64V176c0-8.8-7.2-16-16-16H320v80c0 8.8-7.2 16-16 16s-16-7.2-16-16V160H160v80c0 8.8-7.2 16-16 16s-16-7.2-16-16V160zm0-32V96c0-53 43-96 96-96s96 43 96 96v32h80c26.5 0 48 21.5 48 48V416c0 53-43 96-96 96H96c-53 0-96-43-96-96V176c0-26.5 21.5-48 48-48h80z"/>
+                            </svg>
+                            <span class="font-bold text-(--primary-text-color) in-fa col-span-2" onclick="accardeonEvent(this)">#${order.order_code}</span>
+                            <span class="bg-[${order.status.color}]/10 border-1 border-[${order.status.color}] text-[${order.status.color}] px-2 py-0.5 rounded-md text-sm col-span-5 text-center">${order.status.title}</span>
+                            <button class="text-white bg-rose-500 px-4 py-0.5 ${order.status.id == 2 || order.status.id == 3 || order.status.id == 5 || order.status.id == 6 ? `invisible` : ``} rounded-md text-sm cursor-pointer col-span-3" onclick="${order.status.id == 4 ? `deleteOrder(this, ${order.id})` : order.status.id == 1 ? `canceleOrder(this, ${order.id})` : '' }">${order.status.id == 4 ? 'حذف' : order.status.id == 1 ? 'لغو' : ''}</button>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 ${data[0].id == order.id && 'rotate-180'} transition-all duration-300 angleDown" onclick="accardeonEvent(this)" viewBox="0 0 448 512">
+                                <path fill="var(--primary-text-color)" d="M212.7 331.3c6.2 6.2 16.4 6.2 22.6 0l160-160c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L224 297.4 75.3 148.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l160 160z"/>
+                            </svg>
+                        </div>
+                        <div class="w-full transition-all duration-300 ease-in-out ${data[0].id == order.id ? 'max-h-[500px]' : 'max-h-0'} overflow-y-auto accardeon" style="scrollbar-width: thin">
+                            <div class="w-full flex flex-row items-center justify-between px-3 pb-4">
+                                <div class="flex flex-row items-center gap-3">
+                                    <span class="text-sm text-(--primary-color)">شماره میز:</span>
+                                    <span class="text-sm text-(--secondary-text-color) in-fa">${order.qr_code.description}</span>
+                                </div>
+                                <div class="flex flex-row items-center gap-3">
+                                    <span class="text-sm text-(--primary-color)"> تعداد آیتم:</span>
+                                    <span class="text-sm text-(--secondary-text-color) in-fa">${order.carts.length}</span>
+                                </div>
+                            </div>
+                            <div class="w-full border-b border-[#e4e5ea]">
+                                <div class="w-full grid grid-cols-12 gap-2 items-center mb-1.5 py-1 rounded-md px-3">
+                                    <span class="col-span-3 text-(--secondary-text-color) text-sm text-center">تصویر</span>
+                                    <span class="text-sm text-(--secondary-text-color) col-span-4 text-center">عنوان</span>
+                                    <span class="text-sm text-(--secondary-text-color) text-center in-fa col-span-2">تعداد</span>
+                                    <span class="text-sm text-(--secondary-text-color) in-fa col-span-3 text-center">جمع کل</span>
+                                </div>
+                            </div>
+                            <div class="w-full flex flex-col pt-2 max-h-[200px] divide-y divide-[#e4e5ea] overflow-y-scroll" style="scrollbar-width: thin;">`
+                            order.carts.forEach((cart)=>{
+                                let price = 0
+                                if(cart.menu_item.discount == 0){
+                                    price = cart.menu_item.price * cart.quantity
+                                } else {
+                                    price = cart.menu_item.discount * cart.quantity
+                                }
+                                inner +=`
+                                    <div class="w-full grid grid-cols-12 gap-2 items-center px-3 py-2">
+                                        <img src="${ '{{ asset('storage/') }}/'+cart.menu_item.image }" class="col-span-3 size-18 rounded-md" alt="">
+                                        <span class="text-sm text-(--secondary-text-color) col-span-4 text-center">${cart.menu_item.title}</span>
+                                        <span class="text-sm text-(--secondary-text-color) text-center in-fa col-span-2">${cart.quantity}</span>
+                                        <span class="text-sm text-(--secondary-text-color) in-fa col-span-3 text-center">${price}</span>
+                                    </div>`
+                            })
+                                inner +=`
+                        </div>
+                    </div>`
+                        element.innerHTML = inner
+                        orderList.children[0].children[0].children[1].appendChild(element)
                     })
+
                 },
                 error: function () {
                     showMessage('open')
@@ -881,24 +900,76 @@
         }
     }
 
-    function deleteOrder(el, id) {
-
-
-        el.innerHTMl = "<div class='w-5 h-5 border-2 border-white border-t-red-500 rounded-full animate-spin'></div>"
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+    function accardeonEvent(el){
+        let angle = el.parentElement.querySelector('.angleDown')
+        let accardeons = document.querySelectorAll('.accardeon');
+        accardeons.forEach((accardeon)=>{
+            if(accardeon !== el.parentElement.parentElement.querySelector('.accardeon')){
+                accardeon.classList.remove('max-h-[500px]');
+                el.parentElement.classList.remove('mb-5')
+                accardeon.parentElement.children[0].classList.remove('mb-5');
+                accardeon.classList.add('max-h-0');
+                angle.classList.remove('rotate-180');
             }
-        })
+        });
+        let acc = el.parentElement.parentElement.querySelector('.accardeon');
+
+        if(acc.classList.contains('max-h-[500px]')){
+            acc.classList.remove('max-h-[500px]');
+            acc.parentElement.classList.remove('mb-5');
+            acc.classList.add('max-h-0');
+            angle.classList.remove('rotate-180');
+        } else {
+            acc.classList.remove('max-h-0');
+            el.parentElement.classList.add('mb-5');
+            acc.classList.add('max-h-[500px]');
+            angle.classList.add('rotate-180');
+        }
+    }
+
+    function deleteOrder(el, orderId) {
+        orderLink = document.getElementById('orderLink')
+        el.innerHTMl = "<div class='w-5 h-5 border-2 border-white border-t-red-500 rounded-full animate-spin'></div>"
         $.ajax({
-            url: "{{ url('orders/delete') }}/" + id,
+            url: "{{ url('/api/order/delete') }}/" + orderId + '/' + userId + "/{{ $career->id }}",
             type: "GET",
             success: function (data) {
+                console.log(data)
+                console.log(orderLink)
                 if (data.length == 0) {
-                    orderLink.classList.add('hidden')
+                    orderLink.children[0].classList.add('scale-0')
+                    orderLink.removeAttribute('onclick')
                     orders('close')
                 }
-                el.parentElement.parentElement.parentElement.remove()
+                el.parentElement.parentElement.remove()
+            },
+            error: function () {
+                showMessage('open')
+                element.innerHTML = `
+                        <span>خطا در دریافت اطلاعات</span>
+                        <span class="text-red-500">!</span>
+                        `
+                message.children[0].appendChild(element)
+                setTimeout(() => {
+                    showMessage('close')
+                }, 2000)
+            }
+        })
+    }
+
+    function canceleOrder(el, orderId) {
+        el.innerHTMl = "<div class='w-5 h-5 border-2 border-white border-t-red-500 rounded-full animate-spin'></div>"
+        $.ajax({
+            url: "{{ url('/api/order/remove') }}/" + orderId + '/' + userId + "/{{ $career->id }}",
+            type: "GET",
+            success: function (data) {
+                console.log(data)
+                if (data.length == 0) {
+                    orderLink.children[0].classList.add('scale-0')
+                    orderLink.removeAttribute('onclick')
+                    orders('close')
+                }
+                el.parentElement.parentElement.remove()
             },
             error: function () {
                 showMessage('open')
@@ -929,11 +1000,11 @@
         }
     }
 
-
-
     function setOrder(way, el = null) {
+        let orderLink = document.getElementById('orderLink')
         let count = document.querySelectorAll('.count')
         // orderLink.classList.remove('hidden')
+
         let orders = []
         let slug = "{{ $slug }}"
         let addressTitle = address.value
@@ -959,6 +1030,10 @@
                 'user_id': userId
             },
             success: function (data) {
+                console.log(orderLink)
+                orderLink.children[0].classList.remove('scale-0')
+                orderLink.setAttribute('onclick', 'orders("open")')
+                console.log(orderLink)
                 count.forEach((item) => {
 
                     item.innerHTML = `
@@ -1056,9 +1131,7 @@
     function getOpenShoppingCart() {
         console.log('get open shopping cart')
         return openShoppingCart;
-    }</script>
-
-<script>
+    }
 
 
     // login
@@ -1132,8 +1205,6 @@
     }
 
 
-
-
     let faqBox = document.querySelectorAll(".faqBox")
     faqBox.forEach(faq => {
         faq.children[0].addEventListener('click', () => {
@@ -1178,7 +1249,7 @@
             }
         })
         $.ajax({
-            url: "{{ url('menu/showMenuClient/') }}/" + menuId,
+            url: "{{ url('api/menu/showMenuClient/') }}/" + menuId,
             type: "GET",
             success: function (data) {
                 orderBasket.removeAttribute('disabled')
@@ -1187,7 +1258,7 @@
                 items.forEach((item) => {
                     let formatter = new Intl.NumberFormat('en-US')
                     let div = document.createElement('div')
-                    div.classList = "w-full px-2 py-1.5 bg-white rounded-xl flex justify-between items-center shadow_box menuItems"
+                    div.classList = "w-full px-2 py-1.5 bg-white rounded-xl flex justify-between items-center shadow_box menuItems relative"
                     div.setAttribute('data-menu-item-title', item.title)
                     div.setAttribute('data-menu-item-id', item.id)
                     let inner = `
@@ -1279,9 +1350,14 @@
                                 </div>`
                             }
                             inner+=`
-                        </div>
-                    </div>
-                `
+                                </div>
+                            </div>`
+                    if(item.outNumber){
+                        inner += `
+                        <div class="absolute w-full h-full bg-black/50 rounded-xl flex justify-center items-center top-0 right-0 z-1">
+                            <div class="text-lg text-red-500 px-5 py-2 rounded-md border-3 bg-white/20 border-red-500 font-bold -rotate-20">تمام شد</div>
+                        </div>`
+                    }
                     div.innerHTML = inner
                     menuItemList.appendChild(div)
                 })

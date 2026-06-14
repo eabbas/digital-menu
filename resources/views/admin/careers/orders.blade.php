@@ -406,12 +406,12 @@
                 url: "{{ url('api/order/delete') }}/" + id,
                 type: "GET",
                 success: function (data) {
+                    console.log(data)
                     orders.forEach((order) => {
                         if (order.getAttribute('data-order-id') == data) {
                             order.remove()
                         }
                     })
-                    console.log(data)
                 },
                 error: function () {
                     console.log('error')

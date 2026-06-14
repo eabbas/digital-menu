@@ -1,11 +1,8 @@
 {{-- bottom menu mobile --}}
 
-<footer class="w-full flex justify-center rounded-t-4xl bg-white fixed bottom-0 left-0 py-1.5 z-999"><!-- lg:w-[calc(100%-265px)] -->
-    <div class="w-11/12 mt-1 flex justify-between items-center ">
+<footer class="w-full flex justify-center rounded-t-4xl bg-white fixed bottom-0 left-0 pt-2 pb-2 z-999" style="box-shadow: 0px 0px 10px 1px var(--secondary-text-color);"><!-- lg:w-[calc(100%-265px)] -->
+    <div class="w-11/12 flex justify-between items-center">
         <a href="{{{ route('home') }}}" class="w-1/7 flex flex-col items-center gap-2" id="homeIcon">
-{{--            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"  class="w-5">--}}
-{{--                <path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/>--}}
-{{--            </svg>--}}
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="w-5" fill="none" stroke="@if(Route::is('home')) #fc8e21 @else var(--secondary-text-color) @endif" stroke-width="32" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/>
             </svg>
@@ -31,34 +28,24 @@
                 <span class="text-xs text-[#fc8e21]">اسکنر</span>
             </div>
         </div>
-        <div class="w-1/7 flex flex-col items-center gap-2 relative cursor-pointer">
-            <svg version="1.1" class="can-badge can-alert has-solid w-6 fill-(--secondary-text-color)" viewBox="0 0 36 36" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" focusable="false" role="img">
-                <circle cx="13.33" cy="29.75" r="2.25" class="clr-i-outline clr-i-outline-path-1"></circle>
-                <circle cx="27" cy="29.75" r="2.25" class="clr-i-outline clr-i-outline-path-2"></circle>
-                <circle cx="13.33" cy="29.75" r="2.25" class="clr-i-outline--alerted clr-i-outline-path-1--alerted" style="display:none"></circle>
-                <circle cx="27" cy="29.75" r="2.25" class="clr-i-outline--alerted clr-i-outline-path-2--alerted" style="display:none"></circle>
-                <circle cx="13.33" cy="29.75" r="2.25" class="clr-i-outline--badged clr-i-outline-path-1--badged" style="display:none"></circle>
-                <circle cx="27" cy="29.75" r="2.25" class="clr-i-outline--badged clr-i-outline-path-2--badged" style="display:none"></circle>
-                <circle cx="30" cy="6" r="5" class="clr-i-outline--badged clr-i-outline-path-5--badged clr-i-badge" style="display:none"></circle>
-                <circle cx="13.5" cy="29.5" r="2.5" class="clr-i-solid clr-i-solid-path-1" style="display:none"></circle>
-                <circle cx="26.5" cy="29.5" r="2.5" class="clr-i-solid clr-i-solid-path-2" style="display:none"></circle>
-                <circle cx="13.5" cy="29.5" r="2.5" class="clr-i-solid--alerted clr-i-solid-path-1--alerted" style="display:none"></circle>
-                <circle cx="26.5" cy="29.5" r="2.5" class="clr-i-solid--alerted clr-i-solid-path-2--alerted" style="display:none"></circle>
-                <circle cx="13.5" cy="29.5" r="2.5" class="clr-i-solid--badged clr-i-solid-path-1--badged" style="display:none"></circle>
-                <circle cx="26.5" cy="29.5" r="2.5" class="clr-i-solid--badged clr-i-solid-path-2--badged" style="display:none"></circle>
-                <circle cx="30" cy="6" r="5" class="clr-i-solid--badged clr-i-solid-path-4--badged clr-i-badge" style="display:none"></circle>
-                <path d="M33.08,5.37A1,1,0,0,0,32.31,5H11.49l.65,2H31L28.33,19h-15L8.76,4.53a1,1,0,0,0-.66-.65L4,2.62a1,1,0,1,0-.59,1.92L7,5.64l4.59,14.5L9.95,21.48l-.13.13A2.66,2.66,0,0,0,9.74,25,2.75,2.75,0,0,0,12,26H28.69a1,1,0,0,0,0-2H11.84a.67.67,0,0,1-.56-1l2.41-2H29.13a1,1,0,0,0,1-.78l3.17-14A1,1,0,0,0,33.08,5.37Z" class="clr-i-outline clr-i-outline-path-3"></path>
-                <path d="M29.15,15.4,28.33,19h-15L8.76,4.53a1,1,0,0,0-.66-.65L4,2.62a1,1,0,1,0-.59,1.92L7,5.64l4.59,14.5L9.95,21.48l-.13.13A2.66,2.66,0,0,0,9.74,25,2.75,2.75,0,0,0,12,26H28.69a1,1,0,0,0,0-2H11.84a.67.67,0,0,1-.56-1l2.41-2H29.13a1,1,0,0,0,1-.78l1.09-4.82Z" class="clr-i-outline--alerted clr-i-outline-path-4--alerted" style="display:none"></path>
-                <path d="M26.85,1.14,21.13,11A1.28,1.28,0,0,0,22.23,13H33.68A1.28,1.28,0,0,0,34.78,11L29.06,1.14A1.28,1.28,0,0,0,26.85,1.14Z" class="clr-i-outline--alerted clr-i-outline-path-5--alerted clr-i-alert" style="display:none"></path>
-                <path d="M22.57,7a7.52,7.52,0,0,1-.07-1,7.52,7.52,0,0,1,.07-1H11.49l.65,2Z" class="clr-i-outline--badged clr-i-outline-path-3--badged" style="display:none"></path>
-                <path d="M30,13.5l-.42,0L28.33,19h-15L8.76,4.53a1,1,0,0,0-.66-.65L4,2.62a1,1,0,1,0-.59,1.92L7,5.64l4.59,14.5L9.95,21.48l-.13.13A2.66,2.66,0,0,0,9.74,25,2.75,2.75,0,0,0,12,26H28.69a1,1,0,0,0,0-2H11.84a.67.67,0,0,1-.56-1l2.41-2H29.13a1,1,0,0,0,1-.78l1.57-6.91A7.51,7.51,0,0,1,30,13.5Z" class="clr-i-outline--badged clr-i-outline-path-4--badged" style="display:none"></path>
-                <path d="M33.1,6.39A1,1,0,0,0,32.31,6H9.21L8.76,4.57a1,1,0,0,0-.66-.65L4,2.66a1,1,0,1,0-.59,1.92L7,5.68l4.58,14.47L9.95,21.49l-.13.13A2.66,2.66,0,0,0,9.74,25,2.75,2.75,0,0,0,12,26H28.69a1,1,0,0,0,0-2H11.84a.67.67,0,0,1-.56-1l2.41-2H29.12a1,1,0,0,0,1-.76l3.2-13A1,1,0,0,0,33.1,6.39Z" class="clr-i-solid clr-i-solid-path-3" style="display:none"></path>
-                <path d="M22.23,15.4A3.68,3.68,0,0,1,19,9.89L21.29,6H9.21L8.76,4.57a1,1,0,0,0-.66-.65L4,2.66a1,1,0,1,0-.59,1.92L7,5.68l4.58,14.47L9.95,21.49l-.13.13A2.66,2.66,0,0,0,9.74,25,2.75,2.75,0,0,0,12,26H28.69a1,1,0,0,0,0-2H11.84a.67.67,0,0,1-.56-1l2.41-2H29.12a1,1,0,0,0,1-.76l1.19-4.84Z" class="clr-i-solid--alerted clr-i-solid-path-3--alerted" style="display:none"></path>
-                <path d="M26.85,1.14,21.13,11A1.28,1.28,0,0,0,22.23,13H33.68A1.28,1.28,0,0,0,34.78,11L29.06,1.14A1.28,1.28,0,0,0,26.85,1.14Z" class="clr-i-solid--alerted clr-i-solid-path-4--alerted clr-i-alert" style="display:none"></path>
-                <path d="M30,13.5A7.5,7.5,0,0,1,22.5,6H9.21L8.76,4.57a1,1,0,0,0-.66-.65L4,2.66a1,1,0,1,0-.59,1.92L7,5.68l4.58,14.47L9.95,21.49l-.13.13A2.66,2.66,0,0,0,9.74,25,2.75,2.75,0,0,0,12,26H28.69a1,1,0,0,0,0-2H11.84a.67.67,0,0,1-.56-1l2.41-2H29.12a1,1,0,0,0,1-.76l1.71-7A7.49,7.49,0,0,1,30,13.5Z" class="clr-i-solid--badged clr-i-solid-path-3--badged" style="display:none"></path>
-                <polygon points="20.71 7 21.87 5 11.49 5 12.14 7 20.71 7" class="clr-i-outline--alerted clr-i-outline-path-3--alerted" style="display:none"></polygon>
+        <div class="w-1/7 flex flex-col items-center gap-1 cursor-pointer relative" @if(Route::is('client.menu') && Auth::check() && (isset($orders) && count($orders))) onclick="orders('open')" @endif id="orderLink">
+            @if(Route::is('client.menu')) <span class="inline-block size-3 rounded-full bg-(--primary-color) absolute right-1/4 -top-[10%] @if(Auth::check() && (isset($orders) && count($orders))) scale-100 @else scale-0 @endif transition-all duration-300"></span> @endif
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="size-6.5"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="var(--secondary-text-color)"
+                 stroke-width="1.5"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+
+                <path d="M6 2L8 4L10 2L12 4L14 2L16 4L18 2V22L16 20L14 22L12 20L10 22L8 20L6 22V2Z"/>
+                <path d="M9 8H15"/>
+                <path d="M9 12H15"/>
+                <path d="M9 16H13"/>
+
             </svg>
-            <span class="text-xs text-(--secondary-text-color)">سبد خرید</span>
+            <span class="text-xs text-(--secondary-text-color)">سفارشات</span>
 
         </div>
         <div class="w-1/7 flex flex-col items-center gap-1 cursor-pointer" id="userIcon">

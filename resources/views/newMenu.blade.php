@@ -29,8 +29,7 @@
 
     <div class="w-full px-5 flex flex-row items-center justify-between pt-3">
         <div class="w-1/2 flex flex-col gap-3">
-{{--            @if(Auth::check() && count($orders)) block @else hidden @endif--}}
-            <div class="w-full hidden p-1 lg:p-3 text-xs lg:text-sm h-full font-medium hidden"
+            <div class="w-full p-1 lg:p-3 text-xs lg:text-sm h-full font-medium hidden"
                  id="orderLink">
                 <div class="text-sky-700 cursor-pointer" onclick="orders('open')">سفارشات من</div>
             </div>
@@ -55,7 +54,7 @@
                         </svg>
                         <span class="text-[.47rem] text-[#aeb5c0] mb-1">
                             {{ $career->province.', '.$career->city.', '.$career->address }}
-                    </span>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -126,7 +125,8 @@
                                 },
                             ]);
                         @endphp
-                        <div class="w-full px-2 py-1.5 bg-white rounded-xl flex justify-between items-center shadow_box menuItems" data-menu-item-id="{{ $item->id }}">
+                        <div class="w-full px-2 py-1.5 bg-white rounded-xl flex justify-between items-center shadow_box menuItems relative" data-menu-item-id="{{ $item->id }}">
+
                             <div class="w-full flex gap-3 items-center relative border-l-1 border-[#f3f3f3]">
                                 <div class="w-7/12 relative">
                                     @if($item->percent != 0 || $item->percent != null)
@@ -219,6 +219,11 @@
 {{--                                    </div>--}}
                                 </div>
                             </div>
+                            @if($item->outNumber)
+                                <div class="absolute w-full h-full bg-black/50 rounded-xl flex justify-center items-center z-1 top-0 right-0">
+                                    <div class="text-lg text-red-500 px-5 py-2 rounded-md border-3 bg-white/20 border-red-500 font-bold -rotate-20">تمام شد</div>
+                                </div>
+                            @endif
                         </div>
                     @endforeach
                 @endif
@@ -308,43 +313,22 @@
         </div>
         <div class="w-full transition-all duration-300 flex flex-col items-center gap-3 p-5 overflow-y-auto"></div>
     </div>
-
+{{--            invisible opacity-0--}}
     <div id="orderList"
-         class="w-full fixed lg:hidden bottom-0 right-0 transition-all h-dvh duration-300 invisible opacity-0 z-5 bg-black/50 flex justify-center items-center">
+         class="w-full fixed lg:hidden bottom-0 right-0 invisible opacity-0 transition-all h-dvh duration-300 z-5 bg-black/50 flex justify-center items-center z-9999999">
 
-        <div class="w-11/12 mx-auto rounded bg-white">
-            <div class="w-full transition-all duration-300 flex flex-col items-center gap-3 relative">
-                <div class="absolute -top-2 -right-2 bg-white rounded-full z-555">
+        <div class="w-11/12 mx-auto rounded-xl bg-white">
+            <div class="w-full transition-all duration-300 flex flex-col items-center gap-3 relative p-4 max-h-[600px] overflow-y-auto" style="scrollbar-width: thin;">
+                <div class="w-full flex justify-between">
+                    <span class="font-bold text-(--primary-text-color)">سفارشات من</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5 cursor-pointer"
                          onclick="orders('close')" viewBox="0 0 384 512">
-                        <path d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
+                        <path fill="var(--primary-text-color)" d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
                     </svg>
                 </div>
-                <div class="w-full shadow-md overflow-y-auto max-h-[500px]" style="scrollbar-width: thin;">
-                    <div class="w-full rounded overflow-x-auto lg:overflow-visible" style="scrollbar-width: thin;">
-                        <div
-                                class="w-full flex flex-row lg:grid lg:grid-cols-12 items-center divide-x divide-[#f1f1f4] sticky -top-5">
-                            <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100">
-                                <span class="block w-10 lg:w-full text-center">ردیف</span>
-                            </div>
-                            <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-2">
-                                <span class="block w-30 lg:w-full">شناسه سفارش</span>
-                            </div>
-                            <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-4">
-                                <span class="block w-[180px] lg:w-full">آدرس</span>
-                            </div>
-                            <div class="px-1 lg:px-6 py-3 text-center text-xs font-medium text-gray-600 bg-gray-100 col-span-4">
-                                <span class="block w-[130px] lg:w-full">وضعیت سفارش</span>
-                            </div>
-                        </div>
-                        <div class="bg-white divide-y divide-[#f1f1f4] pb-4"></div>
-
-                    </div>
-
-                </div>
+                <div class="w-full flex flex-col gap-4 overflow-y-auto max-h-[600px] py-2" style="scrollbar-width: thin;"></div>
             </div>
         </div>
-
     </div>
 
     <div id="setAddress"
