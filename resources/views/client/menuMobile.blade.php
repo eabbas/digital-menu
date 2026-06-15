@@ -77,7 +77,7 @@
                 <li>
                     {{-- category --}}
                     <a href="#" class="size-10 flex justify-center items-center rounded-full">
-                        <?xml version="1.0" encoding="UTF-8"?>
+                        {{-- <?xml version="1.0" encoding="UTF-8"?> --}}
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" id="Layer_1" data-name="Layer 1"
                             viewBox="0 0 24 24" width="512" height="512">
                             <path
@@ -89,7 +89,7 @@
                 <li>
                     <a href="{{ route('career.careers') }}"
                         class="size-10 flex justify-center items-center rounded-full">
-                        <?xml version="1.0" encoding="UTF-8"?>
+                        {{-- <?xml version="1.0" encoding="UTF-8"?> --}}
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" id="Outline" viewBox="0 0 24 24"
                             width="512" height="512">
                             <path
@@ -101,7 +101,7 @@
                 <li>
                     <a href="{{ route('home') }}"
                         class="size-10 bg-[#EB3254] flex justify-center items-center rounded-full">
-                        <?xml version="1.0" encoding="UTF-8"?>
+                        {{-- <?xml version="1.0" encoding="UTF-8"?> --}}
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" id="Layer_1" data-name="Layer 1"
                             viewBox="0 0 24 24">
                             <path fill="white"
@@ -113,7 +113,7 @@
                 <li>
                     {{-- ecommerce --}}
                     <a href="#" class="size-10 flex justify-center items-center rounded-full">
-                        <?xml version="1.0" encoding="UTF-8"?>
+                        {{-- <?xml version="1.0" encoding="UTF-8"?> --}}
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-6" id="Outline" viewBox="0 0 24 24"
                             width="512" height="512">
                             <path
@@ -129,7 +129,7 @@
                     <li>
                         <a href="{{ route('user.profile') }}"
                             class="size-10 flex justify-center items-center rounded-full">
-                            <?xml version="1.0" encoding="UTF-8"?>
+                            {{-- <?xml version="1.0" encoding="UTF-8"?> --}}
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-6" id="Outline"
                                 viewBox="0 0 24 24" width="512" height="512">
                                 <path
@@ -144,7 +144,7 @@
                     <li>
                         <div class="size-10 flex justify-center items-center rounded-full"
                             onclick="openUserOptions('open')">
-                            <?xml version="1.0" encoding="UTF-8"?>
+                            {{-- <?xml version="1.0" encoding="UTF-8"?> --}}
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-6" id="Outline"
                                 viewBox="0 0 24 24" width="512" height="512">
                                 <path
@@ -214,7 +214,7 @@
                 <li>
                     {{-- category --}}
                     <a href="{{ route('home') }}" class="size-10 flex justify-center items-center rounded-full @if(Route::is('home')) bg-[#eb3254] @endif">
-                        <?xml version="1.0" encoding="UTF-8"?>
+                        {{-- <?xml version="1.0" encoding="UTF-8"?> --}}
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5 @if(Route::is('home')) fill-white @endif" id="Layer_1" data-name="Layer 1"
                             viewBox="0 0 24 24" width="512" height="512">
                             <path
@@ -225,7 +225,7 @@
                 </li>
                 <li>
                     <a href="#" id="shopIcon" class="size-10 flex justify-center items-center rounded-full transition cursor-pointer">
-                        <?xml version="1.0" encoding="UTF-8"?>
+                        {{-- <?xml version="1.0" encoding="UTF-8"?> --}}
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5 " id="Outline" viewBox="0 0 24 24"
                             width="512" height="512">
                             <path
@@ -248,7 +248,7 @@
                             <path class="fa-primary"
                                 d="M266.9 7.9C279-2.6 297-2.6 309.1 7.9l256 224c13.3 11.6 14.6 31.9 3 45.2s-31.9 14.6-45.2 3L288 74.5 53.1 280.1c-13.3 11.6-33.5 10.3-45.2-3s-10.3-33.5 3-45.2l256-224z" />
                         </svg> --}}
-                        <?xml version="1.0" encoding="UTF-8"?>
+                        {{-- <?xml version="1.0" encoding="UTF-8"?> --}}
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" id="Layer_1" data-name="Layer 1"
                             viewBox="0 0 24 24">
                             <path
@@ -260,7 +260,7 @@
                 <li>
                     {{-- ecommerce --}}
                     <a href="#" id="cartIcon" class="size-10 flex justify-center items-center rounded-full">
-                        <?xml version="1.0" encoding="UTF-8"?>
+                        {{-- <?xml version="1.0" encoding="UTF-8"?> --}}
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-6" id="Outline" viewBox="0 0 24 24"
                             width="512" height="512">
                             <path
@@ -276,7 +276,7 @@
                     <li>
                         <a href="{{ route('user.profile') }}"
                             class="size-10 flex justify-center items-center rounded-full @if(Route::is('login')) bg-[#eb3254] @endif">
-                            <?xml version="1.0" encoding="UTF-8"?>
+                            {{-- <?xml version="1.0" encoding="UTF-8"?> --}}
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-6 @if(Route::is('login')) fill-white @endif" id="Outline"
                                 viewBox="0 0 24 24" width="512" height="512">
                                 <path
@@ -291,7 +291,7 @@
                     <li>
                         <div class="size-10 flex justify-center items-center rounded-full"
                             onclick="openUserOptions('open')">
-                            <?xml version="1.0" encoding="UTF-8"?>
+                            {{-- <?xml version="1.0" encoding="UTF-8"?> --}}
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-6" id="Outline"
                                 viewBox="0 0 24 24" width="512" height="512">
                                 <path

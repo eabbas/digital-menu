@@ -64,7 +64,7 @@
                     {{-- category --}}
                     <a href="{{ route('home') }}"
                         class="size-10 flex justify-center items-center rounded-full @if (Route::is('home')) bg-[#eb3254] @endif" id="homeIcon">
-                        <?xml version="1.0" encoding="UTF-8"?>
+                        {{-- <?xml version="1.0" encoding="UTF-8"?> --}}
                         <svg xmlns="http://www.w3.org/2000/svg"
                             class="size-5 @if (Route::is('home')) fill-white @endif" id="Layer_1"
                             data-name="Layer 1" viewBox="0 0 24 24" width="512" height="512">
@@ -76,7 +76,7 @@
                 <li>
                     <a href="#" id="shopIcon"
                         class="size-10 flex justify-center items-center rounded-full transition cursor-pointer">
-                        <?xml version="1.0" encoding="UTF-8"?>
+                        {{-- <?xml version="1.0" encoding="UTF-8"?> --}}
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5 " id="Outline" viewBox="0 0 24 24"
                             width="512" height="512">
                             <path
@@ -86,7 +86,7 @@
                 </li>
                 <li onclick="scanQr('open')">
                     <div class="size-10 flex justify-center items-center rounded-full" id="qrIcon">
-                        <?xml version="1.0" encoding="UTF-8"?>
+                        {{-- <?xml version="1.0" encoding="UTF-8"?> --}}
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" id="Layer_1" data-name="Layer 1"
                             viewBox="0 0 24 24">
                             <path
@@ -98,7 +98,7 @@
                 <li>
                     {{-- ecommerce --}}
                     <a href="#" id="cartIcon" class="size-10 flex justify-center items-center rounded-full">
-                        <?xml version="1.0" encoding="UTF-8"?>
+                        {{-- <?xml version="1.0" encoding="UTF-8"?> --}}
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-6" id="Outline" viewBox="0 0 24 24"
                             width="512" height="512">
                             <path
@@ -114,7 +114,7 @@
                 <li>
                     <a href="{{ route('user.profile') }}"
                         class="size-10 flex justify-center items-center rounded-full @if (Route::is('login') || Route::is('signup') || Route::is('reset_password') || Route::is('forget_password')) bg-[#eb3254] @endif" id="userIcon">
-                        <?xml version="1.0" encoding="UTF-8"?>
+                        {{-- <?xml version="1.0" encoding="UTF-8"?> --}}
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-6 @if (Route::is('login') || Route::is('signup') || Route::is('reset_password') || Route::is('forget_password')) fill-white @else fill-black @endif" id="Outline"
                             viewBox="0 0 24 24" width="512" height="512">
                             <path
