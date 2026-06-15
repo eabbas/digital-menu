@@ -108,12 +108,6 @@
                                         <span class="text-xs text-[#5b5c75]">{{$page->title}}</span>
                                     </a>
                                 @endforeach
-                                <a href=""
-                                   class="block w-full rounded-lg cursor-pointer py-1 hover:bg-[#F9FAFC] flex gap-5 items-center">
-                                    <img src="{{ Auth::user()->main_image ? asset('storage/'.Auth::user()->main_image) : asset('assets/img/user.png') }}"
-                                         class="size-9 rounded-full" alt="user accont image">
-                                    <span class="text-sm text-[#5b5c75]">محمد</span>
-                                </a>
                             </div>
                             <a href="{{ route('dashboard') }}"
                                class="w-full rounded-lg cursor-pointer px-4 py-2 hover:bg-[#F9FAFC] flex gap-5 items-center">

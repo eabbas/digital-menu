@@ -68,13 +68,13 @@ use App\Models\menu_item;
 use App\Models\item_quantity;
 use Hekmatinasser\Verta\Verta;
 
-Route::get('/fttest', function (){
-    $item = menu_item::find(246);
-    $today = explode(' ', Verta::today());
-    $today = $today[0];
-    $itemQuantity = item_quantity::where('menu_item_id', $item->id)->where('date', $today)->first();
-    dd($itemQuantity);
-});
+// Route::get('/fttest', function (){
+//     $item = menu_item::find(246);
+//     $today = explode(' ', Verta::today());
+//     $today = $today[0];
+//     $itemQuantity = item_quantity::where('menu_item_id', $item->id)->where('date', $today)->first();
+//     dd($itemQuantity);
+// });
 
 Route::get('/deleteOrder', function(){
     order::where('user_id', 18)->delete();
@@ -514,7 +514,7 @@ Route::group([
 
 // qr-code
 Route::group([
-    'prefix' => 'qrcode',
+    'prefix' => 'digital-menu',
     'controller' => QRCodeController::class,
     'as' => 'qr.',
     'middleware' => [UserMiddleware::class]
