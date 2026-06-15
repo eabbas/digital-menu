@@ -61,14 +61,15 @@ class ClientController extends Controller
             // return view('client.menu', ['career' => $career, 'slug' => $slug, 'cartCount' => $cartCount, 'currentUser' => $currentUser, 'orders'=>$orders]);
     }
 
-    public function storeLog(Request $request){
+    public function storeLog(Request $request, pages $page){
         $agent = new Agent;
         $response = user_logs::create([
             'user_id'=>Auth::check() ? Auth::id() : null,
             'ip'=>$request->ip(),
             'is_mobile'=> $agent->isMobile() ? 1 : 0,
             'browser'=>$agent->browser(),
-            'platform'=>$agent->platform()
+            'platform'=>$agent->platform(),
+            'page_id'=>$page->id
         ]);
     }
         
@@ -82,7 +83,7 @@ class ClientController extends Controller
         $user->save();
         $request = request();
         // Http::post(route('store.log'));
-        $this->storeLog($request);
+        $this->storeLog($request, $pages);
         // $introCats = $pages->introCats()->where('title', '!=', 'بدون دسته بندی')->get();
         // $introPros = $pages->introPros;
         // return view('client.link.single', ['page' => $pages, 'slug' => $slug, 'introCats' => $introCats, 'introPros' => $introPros]);
