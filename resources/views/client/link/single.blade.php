@@ -62,7 +62,7 @@
                                </a>
                            @endif
                             <div class="inline-block p-2 rounded-md bg-gray-200 cursor-pointer" onclick="qrCard('open')">
-                                <?xml version="1.0" encoding="UTF-8"?>
+                                {{-- <?xml version="1.0" encoding="UTF-8"?> --}}
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-4" id="Layer_1" data-name="Layer 1"
                                      viewBox="0 0 24 24">
                                     <path
