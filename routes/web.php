@@ -535,7 +535,7 @@ Route::group([
     Route::get('/allPages', "allPages")->name('allPages');
     Route::get('/links/{pages}/{slug?}', 'loadLink')->name('loadLink');
     Route::get('/page/{page}/{slug?}', 'loadPage')->name('loadPage');
-    Route::get('/{career}/{slug?}', 'show_menu')->name('menu');
+    Route::get('/menu/{career}/{slug?}', 'show_menu')->name('menu');
 });
 Route::get('/career/{career}', [ClientController::class, 'show_career'])->name('show_career');
 // Route::get('/socialPage/{pages}', [ClientController::class, 'show_socialPage'])->name('show_socialPage');
@@ -788,6 +788,8 @@ Route::group([
     Route::post('/delete', 'delete')->name('delete');
 });
 // ////pages
+
+
 Route::group([
     'prefix' => 'pages',
     'controller' => PagesController::class,
@@ -811,6 +813,11 @@ Route::group([
     Route::post('/editInfo', 'editInfo')->name('editInfo');
     Route::post('/saveAll', 'saveAll')->name('saveAll');
 });
+
+// Route::get('/pages/social_list', function(){
+//     return "ft";
+// })->name('pages.social_list');
+
 Route::group([
     'prefix' => 'customProductMaterial',
     'controller' => CustomProductMaterialController::class,
@@ -966,9 +973,7 @@ Route::group([
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{generalQrCodes}', 'delete')->name('delete');
 });
-Route::fallback(function () {
-    return view('404');
-});
+
 
 
 //the best developer of the world mr.topol
@@ -1162,4 +1167,8 @@ Route::group([
     Route::get('/edit/{classAttachment}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{classAttachment}', 'delete')->name('delete');
+});
+
+Route::fallback(function () {
+    return view('404');
 });

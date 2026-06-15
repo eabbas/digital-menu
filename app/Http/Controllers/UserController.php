@@ -31,30 +31,30 @@ class UserController extends Controller
         return view('client.signup', ['slug' => $slug]);
     }
 
-    public function storeWithClick()
-    {
-        $page_id = pages::insertGetId([
-            'title' => "نام من",
-            'subTitle' => Auth::user()->family,
-            'user_id' => Auth::id(),
-        ]);
-        $random = Str::random(10);
-        $link = "famenu.ir/qrcodes/links/$page_id/" . $random;
-        $qr_svg = QrCode::size(100)->generate($link);
-        $fileName = 'qrcodes/' . $page_id . '_' . $random . '.svg';
-        Storage::disk('public')->put($fileName, $qr_svg);
-        social_qr_codes::create([
-            'qr_path' => $fileName,
-            'page_id' => $page_id,
-            'slug' => 'qrcodes/links/' . $page_id . '/' . $random
-        ]);
-        intro_category::create([
-            'title' => 'بدون دسته بندی',
-            'user_id' => Auth::id(),
-            'page_id' => $page_id,
-        ]);
-        return to_route('home');
-    }
+    // public function storeWithClick()
+    // {
+    //     $page_id = pages::insertGetId([
+    //         'title' => "نام من",
+    //         'subTitle' => Auth::user()->family,
+    //         'user_id' => Auth::id(),
+    //     ]);
+    //     $random = Str::random(10);
+    //     $link = "famenu.ir/qrcodes/links/$page_id/" . $random;
+    //     $qr_svg = QrCode::size(100)->generate($link);
+    //     $fileName = 'qrcodes/' . $page_id . '_' . $random . '.svg';
+    //     Storage::disk('public')->put($fileName, $qr_svg);
+    //     social_qr_codes::create([
+    //         'qr_path' => $fileName,
+    //         'page_id' => $page_id,
+    //         'slug' => 'qrcodes/links/' . $page_id . '/' . $random
+    //     ]);
+    //     intro_category::create([
+    //         'title' => 'بدون دسته بندی',
+    //         'user_id' => Auth::id(),
+    //         'page_id' => $page_id,
+    //     ]);
+    //     return to_route('home');
+    // }
 
     public function store(Request $request)
     {
