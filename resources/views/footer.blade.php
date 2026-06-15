@@ -432,7 +432,8 @@
                         <div class="loading-bar"></div>
                     </div>
                     `
-                window.location.assign("https://" + decodedText)
+                window.location.assign(decodedText)
+                // window.location.assign("https://" + decodedText)
             }
             const config = {
                 fps: 10,
