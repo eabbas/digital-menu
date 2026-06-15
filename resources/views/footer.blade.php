@@ -1,5 +1,9 @@
 {{-- bottom menu mobile --}}
-
+<style>
+    #install-prompt{
+        display: none !important;
+    }
+</style>
 <footer class="w-full flex justify-center rounded-t-4xl bg-white fixed bottom-0 left-0 pt-2 pb-2 z-999" style="box-shadow: 0px 0px 10px 1px var(--secondary-text-color);"><!-- lg:w-[calc(100%-265px)] -->
     <div class="w-11/12 flex justify-between items-center">
         <a href="{{{ route('home') }}}" class="w-1/7 flex flex-col items-center gap-2" id="homeIcon">
