@@ -51,14 +51,14 @@ class pagesController extends Controller
             'active'=> $request->active ? 1 : 0
         ]);
         $random = Str::random(10);
-        $link = url('/')."/qrcodes/links/$page_id/" . $random;
+        $link = url('/')."/links/$page_id/" . $random;
         $qr_svg = QrCode::size(100)->generate($link);
         $fileName = 'qrcodes/' . $page_id . '_' . $random . '.svg';
         Storage::disk('public')->put($fileName, $qr_svg);
         social_qr_codes::create([
             'qr_path' => $fileName,
             'page_id' => $page_id,
-            'page_path' => 'qrcodes/links/' . $page_id . '/' . $random,
+            'page_path' => 'links/' . $page_id . '/' . $random,
             'slug'=>$random
         ]);
         intro_category::create([
