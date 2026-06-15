@@ -466,7 +466,7 @@
                     let formData = new FormData()
                     formData.append('title', menuTitle.value)
                     if (menuSubTitle.value != "") {
-                        formData.append('subtitle', menuTitle.value)
+                        formData.append('subtitle', menuSubTitle.value)
                     }
                     if (menuBanner.value != "") {
                         formData.append('banner', menuBanner.files[0])
