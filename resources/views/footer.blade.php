@@ -17,7 +17,7 @@
         <div class="w-1/7 flex flex-col items-center mb-3 cursor-pointer relative" onclick="scanQr('open')">
             <div class=" bg-white flex flex-col gap-2 justify-center items-center rounded-full absolute -bottom-5" id="qrIcon">
                 <div class="size-12 bg-[#fc8e21] rounded-full flex items-center justify-center">
-                    <? xml version = "1.0" encoding = "UTF-8" ?>
+                    {{-- <? xml version = "1.0" encoding = "UTF-8" ?> --}}
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5" id="Layer_1" data-name="Layer 1"
                          viewBox="0 0 24 24">
                         <path fill="white"
