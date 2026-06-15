@@ -12,5 +12,6 @@ class user_logs extends Model
         'is_mobile',
         'browser',
         'platform',
+        'page_id',
     ];
 }
