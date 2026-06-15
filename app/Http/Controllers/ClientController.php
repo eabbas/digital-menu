@@ -6,10 +6,13 @@ use App\Models\career;
 use App\Models\pages;
 use App\Models\order;
 use App\Models\cart;
+use App\Models\user_logs;
+use App\classes\Agent;
 use Illuminate\Http\Request;
 use App\Models\item_quantity;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Log;
 
 class ClientController extends Controller
@@ -34,7 +37,7 @@ class ClientController extends Controller
                 if($itemQuantity){
                     $item->outNumber = true;
                 }
-//                Log::info($item);
+                // Log::info($item);
             }
         }
         $cartCount = 0;
@@ -49,13 +52,24 @@ class ClientController extends Controller
             foreach ($currentUser->carts as $cart) {
                 $cartCount += $cart->quantity;
             }
-//            $orders = order::where('user_id', Auth::id())->where('career_id', $career->id)->where('order_status_id', 1)->orWhere('order_status_id', 2)->orWhere('order_status_id', 3)->orWhere('order_status_id', 4)->get();
+            // $orders = order::where('user_id', Auth::id())->where('career_id', $career->id)->where('order_status_id', 1)->orWhere('order_status_id', 2)->orWhere('order_status_id', 3)->orWhere('order_status_id', 4)->get();
             $orders = order::where('user_id', Auth::id())->where('career_id', $career->id)->whereNotIn('order_status_id', [5, 6])->get();
         }
         $career->province = $career->province_city->province->title;
         $career->city = $career->province_city->title;
         return view('newMenu', ['career' => $career, 'slug' => $slug, 'cartCount' => $cartCount, 'currentUser' => $currentUser, 'orders'=>$orders]);
-//        return view('client.menu', ['career' => $career, 'slug' => $slug, 'cartCount' => $cartCount, 'currentUser' => $currentUser, 'orders'=>$orders]);
+            // return view('client.menu', ['career' => $career, 'slug' => $slug, 'cartCount' => $cartCount, 'currentUser' => $currentUser, 'orders'=>$orders]);
+    }
+
+    public function storeLog(Request $request){
+        $agent = new Agent;
+        $response = user_logs::create([
+            'user_id'=>Auth::check() ? Auth::id() : null,
+            'ip'=>$request->ip(),
+            'is_mobile'=> $agent->isMobile() ? 1 : 0,
+            'browser'=>$agent->browser(),
+            'platform'=>$agent->platform()
+        ]);
     }
         
     public function loadLink(pages $pages, $slug = null)
@@ -66,6 +80,9 @@ class ClientController extends Controller
         $user = $pages->user;
         $user->scan_count += 1;
         $user->save();
+        $request = request();
+        // Http::post(route('store.log'));
+        $this->storeLog($request);
         // $introCats = $pages->introCats()->where('title', '!=', 'بدون دسته بندی')->get();
         // $introPros = $pages->introPros;
         // return view('client.link.single', ['page' => $pages, 'slug' => $slug, 'introCats' => $introCats, 'introPros' => $introPros]);

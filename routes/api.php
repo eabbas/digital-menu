@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CareerController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\MahdiTestController;
 use App\Http\Controllers\MenuController;
 use Illuminate\Http\Request;
@@ -38,3 +39,5 @@ Route::get('/order/delete/{order}/{user?}/{career?}' , [OrderController::class ,
 Route::get('/menu/showMenuClient/{menu}', [MenuController::class, 'showMenuClient']);
 
 Route::get('/educational-base', [MahdiTestController::class, 'edub']);
+
+Route::post('/store-log', [ClientController::class,'storeLog'])->name('store.log');
