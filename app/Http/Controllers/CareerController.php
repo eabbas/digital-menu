@@ -259,7 +259,7 @@ class CareerController extends Controller
                 $counter = 1;
                 while ($qr_count) {
                     $random = Str::random(10);
-                    $link = url('/')."/qrcodes/$career->id/" . $random;
+                    $link = url('/')."/digital-menu/$career->id/" . $random;
                     $qr_svg = QrCode::size(100)->generate($link);
                     $fileName = 'qrcodes/' . $career->id . '_' . $random . '.svg';
                     Storage::disk('public')->put($fileName, $qr_svg);
