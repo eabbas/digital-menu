@@ -234,7 +234,7 @@
     </div>
 
     <div id="authenticationDiv"
-         class="fixed w-full h-dvh bg-black/50 backdrop-blur-sm top-0 right-0 flex justify-center items-center transition-all duration-300 opacity-0 invisible">
+         class="fixed w-full h-dvh bg-black/50 backdrop-blur-sm top-0 right-0 flex justify-center items-center transition-all duration-300 opacity-0 invisible z-10">
 
         <div class="w-3/4 bg-white rounded-sm p-3 transition-all duration-300 delay-100 scale-95">
             <svg xmlns="http://www.w3.org/2000/svg" class="size-5 cursor-pointer"
@@ -383,7 +383,7 @@
                 </select>
                 @if($slug)
                     <div class="w-full text-center py-2 border-1 text-sm font-bold border-gray-300 rounded-md cursor-pointer"
-                         onclick="setOrder('slug')">
+                         onclick="setOrder('slug', this)">
                         سرو در
                         @php
                             $tableName = $career->qr_codes->where('slug', $slug)->first();
