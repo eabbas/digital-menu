@@ -1002,6 +1002,9 @@
     }
 
     function setOrder(way, el = null) {
+        if(el){
+            el.disabled = true
+        }
         let orderLink = document.getElementById('orderLink')
         let count = document.querySelectorAll('.count')
         // orderLink.classList.remove('hidden')
@@ -1031,6 +1034,9 @@
                 'user_id': userId
             },
             success: function (data) {
+                if(el){
+                    el.disabled = false
+                }
                 console.log(orderLink)
                 orderLink.children[0].classList.remove('scale-0')
                 orderLink.setAttribute('onclick', 'orders("open")')
