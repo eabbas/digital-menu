@@ -392,8 +392,17 @@
     </div>
     <div class="fixed z-999 w-full h-dvh bg-black/50 backdrop-blur top-0 right-0 invisible opacity-0 transition-all duration-300 flex flex-row items-center justify-center"
         id="showMenuItemBox"></div>
-
+    @php
+        $menu_id = $firstMenu->id;
+    @endphp
     <script>
+        let firstMenu = ""
+        {{--document.querySelectorAll('.allMenus').forEach((menu) => {--}}
+        {{--    if (menu.getAttribute('data-menu-id') == "{{ $menu_id }}") {--}}
+        {{--        firstMenu = menu--}}
+        {{--        menu.classList.add('selected')--}}
+        {{--    }--}}
+        {{--})--}}
         let menuListCareer = document.getElementById('menuListCareer')
         let selectItems = document.querySelectorAll('.allMenus')
         let newCat = document.getElementById('newCat')
@@ -466,7 +475,7 @@
                     let formData = new FormData()
                     formData.append('title', menuTitle.value)
                     if (menuSubTitle.value != "") {
-                        formData.append('subtitle', menuSubTitle.value)
+                        formData.append('subtitle', menuTitle.value)
                     }
                     if (menuBanner.value != "") {
                         formData.append('banner', menuBanner.files[0])
@@ -596,6 +605,16 @@
                     } else {
                         el.parentElement.parentElement.children[2].remove()
                     }
+                    firstMenu = ""
+                    document.querySelectorAll('.allMenus').forEach((menu) => {
+                        if (menu.getAttribute('data-menu-id') == "{{ $menu_id }}") {
+                            menu.classList.add('selected')
+                            firstMenu = menu
+                            console.log('menu')
+                            console.log(menu)
+                        }
+                    })
+                    showMenu(firstMenu, "{{ $menu_id }}")
                 },
                 error: function() {
                     console.log('error')

@@ -1,5 +1,5 @@
 @php
-    $menu_id = $career->menus[0]->id;
+    $menu_id = $firstMenu->id;
 @endphp
 <script>
     let orderLink = document.getElementById('orderLink')
@@ -7,6 +7,7 @@
     document.querySelectorAll('.menuParent').forEach((menu) => {
         if (menu.getAttribute('data-menu-id') == "{{ $menu_id }}") {
             firstMenu = menu
+            menu.classList.add('selected')
         }
     })
 
