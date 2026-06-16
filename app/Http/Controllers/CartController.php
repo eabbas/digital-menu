@@ -32,7 +32,7 @@ class CartController extends Controller
 
     function update(Request $request)
     {
-//         return response()->json($request->all());
+        // return response()->json($request->all());
         $user_id = $request->input('user_id');
         if (Auth::check()) {
             $user_id = Auth::id();
@@ -40,14 +40,14 @@ class CartController extends Controller
         $cart = cart::where(['career_id' => $request->career_id, 'menu_item_id' => $request->menu_item_id, 'user_id' => $user_id, 'order_id' => null])->first();
         $cart->quantity = $request->quantity ? $request->quantity : 1;
         $cart->save();
-//        return response()->json([$cart, $cart->quantity, $request->quantity]);
+        // return response()->json([$cart, $cart->quantity, $request->quantity]);
         $item = menu_item::find($request->menu_item_id);
         $today = explode(' ', Verta::today());
         $today = $today[0];
         $itemQuantity = item_quantity::where('menu_item_id', $item->id)->where('date', $today)->first();
         $quantity = $cart->quantity;
         if($itemQuantity){
-            $quantity = $item->max_unit - $itemQuantity->quantity;
+            $quantity = $cart->quantity + $itemQuantity->quantity;
         }
 
         if($item->max_unit == $quantity){
