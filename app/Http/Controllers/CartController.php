@@ -20,25 +20,30 @@ class CartController extends Controller
         if (!Auth::check()) {
             $user_id = $request->input('user_id');
         }
-        $cart = cart::where(['career_id' => $request->career_id, 'menu_item_id' => $request->menu_item_id, 'user_id' => $user_id, 'order_id' => null])->first();
-        $item = menu_item::find($request->menu_item_id);
-        $today = explode(' ', Verta::today());
-        $today = $today[0];
-        $itemQuantity = item_quantity::where('menu_item_id', $item->id)->where('date', $today)->first();
-        $quantity = $cart->quantity;
-        if ($itemQuantity) {
-            $quantity = $cart->quantity + $itemQuantity->quantity;
-        }
-
-        if ($item->max_unit == $quantity) {
-            $cart->disabled = true;
-        }
+       
         $cart = cart::create([
             'career_id' => $request->career_id,
             'menu_item_id' => $request->menu_item_id,
             'user_id' => $user_id,
             'quantity' => $request->quantity ? $request->quantity : 1,
         ]);
+        
+        $item = menu_item::find($request->menu_item_id);
+        $today = explode(' ', Verta::today());
+        $today = $today[0];
+        $itemQuantity = item_quantity::where('menu_item_id', $item->id)->where('date', $today)->first();
+        $quantity = $cart->quantity;
+ 
+        if ($itemQuantity) {
+            $quantity = $cart->quantity + $itemQuantity->quantity;
+        }
+        Log::info('item->max_unit : ' . $item->max_unit);
+
+        Log::info('quantity : ' . $quantity);
+
+        if ($item->max_unit == $quantity) {
+            $cart->disabled = true;
+        }
         return response()->json($cart);
     }
 
@@ -58,10 +63,11 @@ class CartController extends Controller
         $today = $today[0];
         $itemQuantity = item_quantity::where('menu_item_id', $item->id)->where('date', $today)->first();
         $quantity = $cart->quantity;
+
         if($itemQuantity){
             $quantity = $cart->quantity + $itemQuantity->quantity;
         }
-   
+
         if($item->max_unit == $quantity){
             $cart->disabled = true;
         }
