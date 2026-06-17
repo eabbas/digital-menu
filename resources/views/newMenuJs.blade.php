@@ -324,8 +324,8 @@
                         orderBasket.children[2].innerText++
                         shoppingCartCount.innerText = length
                         el.parentElement.parentElement.innerHTML = `
-                                <div class="h-full flex flex-col gap-2 items-center justify-between px-1 count" data-item-id="${data.menu_item_id}">
-                                    <button class="size-7 pt-1 bg-[#f6911e] flex justify-center items-center rounded-md changeButton cursor-pointer" onclick="setCount(this, '+', ${data.menu_item_id})">
+                               <div class="h-full flex flex-col gap-2 items-center justify-between px-1 count" data-item-id="${data.menu_item_id}">
+                                    <button class="size-7 pt-1 ${data.disabled ? 'bg-gray-500' : 'bg-[#f6911e]'} flex justify-center items-center rounded-md changeButton cursor-pointer" onclick="setCount(this, '+', ${data.menu_item_id})" ${data.disabled && 'disabled'}>
                                         <span class="text-2xl text-white">+</span>
                                     </button>
                                     <input type="number" readonly="" min="1" value="1" class="size-7 text-center font-bold text-xs text-(--secondary-text-color) outline-none" name="" id="">
