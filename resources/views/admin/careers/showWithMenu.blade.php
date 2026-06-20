@@ -890,6 +890,7 @@
             if (itemId == null) {
                 itemForm.classList.remove('invisible')
                 itemForm.classList.remove('opacity-0')
+                itemForm.children[0].innerText = 'ایجاد آیتم منو' 
                 // menuCategories.forEach((category) => {
                 //     if (newItem.getAttribute('data-menu-create-item-id') == category.getAttribute('data-menu-category-id')) {
                 //         if (category.children[1]) {
@@ -913,6 +914,7 @@
                     url: "{{ url('menuItem/edit-front/') }}/" + itemId,
                     type: "GET",
                     success: function(data) {
+                        console.log(data.description)
                         loader.classList.remove('flex')
                         loader.classList.add('hidden')
                         itemForm.classList.remove('invisible')
@@ -922,9 +924,8 @@
                         menuItemTitle.value = data.title
                         menuItemPrice.value = data.price
                         menuItemDiscount.value = data.discount != 0 ? data.discount : ""
-                        menuItemDescription.innerText = data.description
+                        menuItemDescription.value = data.description
                         maxUnit.value = data.max_unit !== 0 ? data.max_unit : ''
-
                     },
                     error: function() {
                         console.log('error')
@@ -1006,9 +1007,9 @@
                         processData: false,
                         data: formData,
                         success: function(data) {
-
+                            // console.log(data)
                             el.innerHTML = text
-                            console.log(data)
+                            console.log(data.description)
                             let div = document.createElement('div')
                             div.classList =
                                 "w-full flex items-center justify-between bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2.5 lg:p-4 transition-all duration-150 relative menuItems relative"
@@ -1133,7 +1134,7 @@
                         processData: false,
                         data: formData,
                         success: function(data) {
-                            console.log(data)
+                            console.log(data.description)
                             menuItems.forEach((item) => {
                                 if (item.getAttribute('data-menu-item-id') == data.id) {
                                     let formatter = new Intl.NumberFormat('en-US')
@@ -1193,7 +1194,7 @@
                 url: "{{ url('menuItem/delete-front') }}/" + itemId,
                 type: "GET",
                 success: function(data) {
-                    console.log(data)
+                    // console.log(data)
                     el.parentElement.parentElement.parentElement.parentElement.remove()
                 },
                 error: function() {
@@ -1222,7 +1223,7 @@
                 url: "{{ url('menu/showMenu/') }}/" + menuId,
                 type: "GET",
                 success: function(data) {
-                    console.log(data)
+                    // console.log(data)
                     menuItemList.innerHTML = ""
                     console.log(menuItemList)
                     newItem.setAttribute('data-menu-create-item-id', data.id)
@@ -1588,7 +1589,7 @@
                         option.innerText = menu.title
                         menuListOptions.appendChild(option)
                     })
-                    console.log(data)
+                    // console.log(data)
                 },
                 error: function() {
                     console.log("error")
