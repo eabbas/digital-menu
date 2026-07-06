@@ -30,7 +30,7 @@
     <div class="w-full px-5 flex flex-row items-center justify-between pt-3">
         <div class="w-1/2 flex flex-col gap-3">
             <div class="w-full p-1 lg:p-3 text-xs lg:text-sm h-full font-medium hidden"
-                 id="orderLink">
+                >
                 <div class="text-sky-700 cursor-pointer" onclick="orders('open')">سفارشات من</div>
             </div>
 
