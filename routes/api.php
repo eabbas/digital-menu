@@ -15,10 +15,10 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/scratch', function(Request $request) {
+Route::get('/scratch', function (Request $request) {
     return view('abbasScratch.index');
 });
-
+Route::get('/api/order/remove/{orderId}/{userId}/{careerId}', [OrderController::class, 'remove']);
 Route::post('/special-user-store', [SpecialUserController::class, 'store']);
 // Route::post('/special-user-page/{page_id}', [SpecialUserController::class, 'userPage']);
 // Route::get('/special-user-page/{page_id}', function(){
@@ -33,11 +33,11 @@ Route::post('/order/show', [OrderController::class, 'show']);
 Route::post('/order/store', [OrderController::class, 'store']);
 Route::get('/order/remove/{order}/{user?}/{career?}', [OrderController::class, 'remove']);
 Route::get('/order/showItems/{order}', [OrderController::class, 'showItems']);
-Route::post('/user/setAddress' , [UserController::class , 'setAddress']);
-Route::post('/order/acceptOrder' , [OrderController::class , 'acceptOrder']);
-Route::get('/order/delete/{order}/{user?}/{career?}' , [OrderController::class , 'delete']);
+Route::post('/user/setAddress', [UserController::class, 'setAddress']);
+Route::post('/order/acceptOrder', [OrderController::class, 'acceptOrder']);
+Route::get('/order/delete/{order}/{user?}/{career?}', [OrderController::class, 'delete']);
 Route::get('/menu/showMenuClient/{menu}', [MenuController::class, 'showMenuClient']);
 
 Route::get('/educational-base', [MahdiTestController::class, 'edub']);
 
-Route::post('/store-log', [ClientController::class,'storeLog'])->name('store.log');
+Route::post('/store-log', [ClientController::class, 'storeLog'])->name('store.log');

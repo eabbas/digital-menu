@@ -81,7 +81,8 @@
 
             @foreach ($user->careers as $career)
                 @if($career)
-                    <div class="w-full p-3 bg-white rounded-md flex flex-col shadow-[0px_0px_2px_1px_#e7e7ef] orders">
+                <input type="hidden" class="career-id" value="{{ $career->id }}">
+                    <div class="w-full p-3 bg-white rounded-md flex flex-col shadow-[0px_0px_2px_1px_#e7e7ef] orders"  id="career-card-{{ $career->id }}">
                         <div class="w-full flex flex-row items-center justify-between pb-3 border-b border-[#e4e5ea]">
                             <div class="flex flex-row items-center gap-2">
                                 <input type="checkbox" class="check" name="careers[]" value="{{ $career->id }}">
@@ -114,7 +115,7 @@
                                         </svg>
                                         <span class="text-[10px] text-(--secondary-text-color)">تعداد سفارش</span>
                                     </div>
-                                    <span class="text-xs font-bold text-(--primary-text-color) in-fa">{{ count($career->orders) }} سفارش</span>
+                                    <span class="text-xs font-bold text-(--primary-text-color) in-fa order-count">{{ count($career->orders) }} سفارش</span>
                                 </a>
                                 <div class="w-1/3 flex flex-col items-center justify-center gap-1.5 border-l-1 border-[#e4e5ea]">
                                     <div class="flex flex-row items-center gap-1.5">
@@ -177,7 +178,7 @@
                                 @if(count($career->orders))
                                     <div class="w-full flex justify-center">
                                         <a href="{{ route('career.orders', [$career->id]) }}"
-                                           class="min-w-full max-w-full flex items-center justify-center gap-1 bg-(--color-green) py-1 rounded-lg cursor-pointer">
+                                           class="orders-btn min-w-full max-w-full flex items-center justify-center gap-1 bg-(--color-green) py-1 rounded-lg cursor-pointer">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="size-4 fill-white" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M384 80c8.8 0 16 7.2 16 16V320H320c-17.7 0-32 14.3-32 32v80H64c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16H384zM64 480H288h5.5c17 0 33.3-6.7 45.3-18.7l90.5-90.5c12-12 18.7-28.3 18.7-45.3V320 96c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64zm64-120a24 24 0 1 0 -48 0 24 24 0 1 0 48 0zM104 128a24 24 0 1 0 0 48 24 24 0 1 0 0-48zm24 128a24 24 0 1 0 -48 0 24 24 0 1 0 48 0z"/></svg>
                                             <span class="text-white text-sm font-bold">سفارشات</span>
                                         </a>
@@ -191,5 +192,109 @@
         </div>
     </form>
 
+ 
+<script>
+    window.Pusher = Pusher;
+window.Echo = new Echo.default({
+    broadcaster: 'reverb',
+    key: '1gz5uvls0tzdnpjcxp7q',
+    wsHost: '127.0.0.1',
+    wsPort: 8080,
+    forceTLS: false,
+    enabledTransports: ['ws']
+});
+
+let careerIds = document.querySelectorAll('.career-id');
+
+careerIds.forEach(function(input) {
+    let careerId = input.value
+    
+    window.Echo.channel('orderNotification' + careerId)
+        .listen('orders', function(e) {
+            console.log('رویداد سفارش:', e)
+            
+            let card = document.getElementById('career-card-' + careerId)
+            if (!card) {
+                console.log('کارت رستوران پیدا نشد')
+                return
+            }
+            
+            let order = e.order_data
+            
+            if (e.is_cancelled || order.status_id == 6) {
+                let countElement = card.querySelector('.order-count')
+                if (countElement) {
+                    countElement.textContent = e.cart_count + ' سفارش'
+                }
+                
+                if (e.cart_count === 0) {
+                    let ordersBtn = card.querySelector('.orders-btn')
+                    if (ordersBtn) {
+                        let parentDiv = ordersBtn.closest('.w-full.flex.justify-center')
+                        if (parentDiv) {
+                            parentDiv.remove()
+                        }
+                    }
+                }
+                
+                let titleElement = card.querySelector('.order-table')
+                let careerTitle = titleElement ? titleElement.textContent : 'رستوران'
+                showMessage('❌ سفارش #' + order.order_code + ' لغو شد!')
+                return
+            }
+            
+            let countElement = card.querySelector('.order-count')
+            if (countElement) {
+                countElement.textContent = e.cart_count + ' سفارش'
+            }
+
+            let existingButton = card.querySelector('.orders-btn')
+            if (!existingButton && e.cart_count > 0) {
+                let div = document.createElement('div')
+                div.className = 'w-full flex justify-center mt-2'
+                div.innerHTML = `
+                    <a href='${"{{ url('careers/orders/') }}/" + e.career_id}'
+                    class="orders-btn min-w-full max-w-full flex items-center justify-center gap-1 bg-green-500 hover:bg-green-600 py-1.5 rounded-lg cursor-pointer transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 fill-white" viewBox="0 0 448 512">
+                            <path d="M384 80c8.8 0 16 7.2 16 16V320H320c-17.7 0-32 14.3-32 32v80H64c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16H384zM64 480H288h5.5c17 0 33.3-6.7 45.3-18.7l90.5-90.5c12-12 18.7-28.3 18.7-45.3V320 96c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64zm64-120a24 24 0 1 0 -48 0 24 24 0 1 0 48 0zM104 128a24 24 0 1 0 0 48 24 24 0 1 0 0-48zm24 128a24 24 0 1 0 -48 0 24 24 0 1 0 48 0z"/>
+                        </svg>
+                        <span class="text-white text-sm font-bold">سفارشات</span>
+                    </a>
+                `
+                let container = card.querySelector('.pt-3')
+                if (container) {
+                    container.appendChild(div)
+                }
+            }
+
+            let titleElement = card.querySelector('.order-table')
+            let careerTitle = titleElement ? titleElement.textContent : 'رستوران'
+            showMessage('✅ سفارش جدید برای ' + careerTitle + ' دریافت شد!')
+        })
+})
+
+function showMessage(text) {
+    let msg = document.getElementById('message')
+    if (msg) {
+        msg.innerHTML = `
+            <div class="relative p-4">
+                <svg onclick="this.parentElement.parentElement.classList.add('opacity-0','invisible')" 
+                     class="size-4 absolute top-1/2 -translate-y-1/2 right-3 cursor-pointer" 
+                     viewBox="0 0 384 512">
+                    <path d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
+                </svg>
+                <div class="text-center text-sm text-gray-700">${text}</div>
+            </div>
+        `
+        msg.classList.remove('opacity-0', 'invisible')
+        msg.classList.add('opacity-100', 'visible')
+        
+        setTimeout(() => {
+            msg.classList.remove('opacity-100', 'visible')
+            msg.classList.add('opacity-0', 'invisible')
+        }, 5000)
+    }
+}
+</script>
     <script src="{{ asset('assets/js/checkAll.js') }}"></script>
 @endsection

@@ -53,6 +53,12 @@ class ClientController extends Controller
 //            $orders = order::where('user_id', Auth::id())->where('career_id', $career->id)->where('order_status_id', 1)->orWhere('order_status_id', 2)->orWhere('order_status_id', 3)->orWhere('order_status_id', 4)->get();
             $orders = order::where('user_id', Auth::id())->where('career_id', $career->id)->whereNotIn('order_status_id', [5, 6])->get();
         }
+        $orders = order::where('user_id', Auth::id())
+            ->where('career_id', $career->id)
+            ->whereNotIn('order_status_id', [5, 6])
+            ->with(['status', 'qr_code', 'carts.menu_item'])
+            ->get();
+
         $career->province = $career->province_city->province->title;
         $career->city = $career->province_city->title;
         $firstMenu = menu::where('career_id', $career->id)->first();

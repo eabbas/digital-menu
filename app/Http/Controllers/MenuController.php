@@ -148,28 +148,28 @@ class MenuController extends Controller
         $allmenu = menu::where('career_id', $request->career_id)->get();
         if (count($allmenu) > 1) {
             // if (count($menu->menu_categories)) {
-                // foreach ($menu->menu_categories as $category) {
-                    // if (count($category->menu_items)) {
-                        foreach ($menu->menu_items as $item) {
-                            if (count($item->ingredients)) {
-                                foreach ($item->ingredients as $ingredients) {
-                                    if ($ingredients->image) {
-                                        Storage::disk('public')->delete($ingredients->image);
-                                    }
-                                    $ingredients->delete();
-                                }
-                            }
-                            if ($item->image) {
-                                Storage::disk('public')->delete($item->image);
-                            }
-                            $item->delete();
+            // foreach ($menu->menu_categories as $category) {
+            // if (count($category->menu_items)) {
+            foreach ($menu->menu_items as $item) {
+                if (count($item->ingredients)) {
+                    foreach ($item->ingredients as $ingredients) {
+                        if ($ingredients->image) {
+                            Storage::disk('public')->delete($ingredients->image);
                         }
-                    // }
-                    // if ($category->image) {
-                    //     Storage::disk('public')->delete($category->image);
-                    // }
-                    // $category->delete();
-                // }
+                        $ingredients->delete();
+                    }
+                }
+                if ($item->image) {
+                    Storage::disk('public')->delete($item->image);
+                }
+                $item->delete();
+            }
+            // }
+            // if ($category->image) {
+            //     Storage::disk('public')->delete($category->image);
+            // }
+            // $category->delete();
+            // }
             // }
             if ($menu->banner) {
                 Storage::disk('public')->delete($menu->banner);
@@ -178,7 +178,6 @@ class MenuController extends Controller
             return response()->json('ok');
         }
         return response()->json('no');
-
     }
 
     public function delete(menu $menu)
@@ -219,19 +218,19 @@ class MenuController extends Controller
 
     public function showMenu(menu $menu)
     {
-//        return view('admin.menu.menu', ['menu' => $menu]);
+        //        return view('admin.menu.menu', ['menu' => $menu]);
         // $categories = $menu->load(['menu_categories' => function ($query) {
         //     $query->with('menu_items')->get();
         // }]);
         $menus = $menu->load(['menu_items']);
         // foreach ($menu->menu_categories as $category) {
-            foreach ($menu->menu_items as $item) {
-                if ($item->discount != 0) {
-                    $campare = $item->price - $item->discount;
-                    $x = $campare / $item->price;
-                    $item['percent'] = intval($x * 100);
-                }
+        foreach ($menu->menu_items as $item) {
+            if ($item->discount != 0) {
+                $campare = $item->price - $item->discount;
+                $x = $campare / $item->price;
+                $item['percent'] = intval($x * 100);
             }
+        }
         // }
         return response()->json($menus);
     }
@@ -242,20 +241,20 @@ class MenuController extends Controller
         $menu = $menu->load('menu_items');
 
         // foreach ($categories->menu_categories as $category) {
-            foreach ($menu->menu_items as $item) {
-                if ($item->discount != 0) {
-                    $campare = $item->price - $item->discount;
-                    $x = $campare / $item->price;
-                    $item['percent'] = intval($x * 100);
-                }
-                $item['cart'] = cart::where('user_id', Auth::id())->where('order_id', null)->where('menu_item_id', $item->id)->where('career_id', $menu->career->id)->first();
-                $today = explode(' ', Verta::today());
-                $today = $today[0];
-                $itemQuantity = item_quantity::where('menu_item_id', $item->id)->where('date', $today)->where('quantity', $item->max_unit)->first();
-                if($itemQuantity){
-                    $item->outNumber = true;
-                }
+        foreach ($menu->menu_items as $item) {
+            if ($item->discount != 0) {
+                $campare = $item->price - $item->discount;
+                $x = $campare / $item->price;
+                $item['percent'] = intval($x * 100);
             }
+            $item['cart'] = cart::where('user_id', Auth::id())->where('order_id', null)->where('menu_item_id', $item->id)->where('career_id', $menu->career->id)->first();
+            $today = explode(' ', Verta::today());
+            $today = $today[0];
+            $itemQuantity = item_quantity::where('menu_item_id', $item->id)->where('date', $today)->where('quantity', $item->max_unit)->first();
+            if ($itemQuantity) {
+                $item->outNumber = true;
+            }
+        }
         // }
         $user = null;
         if (Auth::check()) {
@@ -323,5 +322,4 @@ class MenuController extends Controller
     {
         return response()->json($menu->menu_categories);
     }
-
 }
