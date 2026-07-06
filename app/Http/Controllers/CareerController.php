@@ -431,17 +431,22 @@ class CareerController extends Controller
     public function orders(career $career)
     {
 
-        $orders = $career->orders;
-        foreach($orders as $order) {
+        $career->load(['orders'=>function ($query){
+            $query->orderBy('created_at' , 'desc')->get();
+        }]);
+        
+        foreach($career->orders as $order) {
             $createdAt = explode(' ', $order->created_at);
             $time = $createdAt[1];
             $date =  verta($createdAt[0]);
             $date = explode(' ', $date);
-            $originaDate = implode('/',explode('-', $date[0]));
-            $date = $originaDate;
+            $originalDate = implode('/',explode('-', $date[0]));
+            $date = $originalDate;
             $order->time = $time;
             $order->date = $date;
+            
         }
+
         return view('admin.careers.orders', ['career' => $career]);
     }
 

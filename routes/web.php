@@ -68,31 +68,36 @@ use App\Models\menu_item;
 use App\Models\item_quantity;
 use Hekmatinasser\Verta\Verta;
 
-// Route::get('/fttest', function (){
-//     $item = menu_item::find(246);
-//     $today = explode(' ', Verta::today());
-//     $today = $today[0];
-//     $itemQuantity = item_quantity::where('menu_item_id', $item->id)->where('date', $today)->first();
-//     dd($itemQuantity);
-// });
+Route::get('/fttest', function () {
+    // $dateTime = verta();
+    // $dateTime = explode(' ' , $dateTime);
+    // $date = implode('/' , explode('-' , $dateTime[0]));
+    // $time = $dateTime[1];
+    // dd($date , $time);
+    // $item = menu_item::find(246);
+    // $today = explode(' ', Verta::today());
+    // $today = $today[0];
+    // $itemQuantity = item_quantity::where('menu_item_id', $item->id)->where('date', $today)->first();
+    // dd($itemQuantity);
+});
 
-Route::get('/deleteOrder', function(){
+Route::get('/deleteOrder', function () {
     order::where('user_id', 18)->delete();
 });
-Route::get('/mrShimylogin' , function(){
-   return view('guys.ho.login');
+Route::get('/mrShimylogin', function () {
+    return view('guys.ho.login');
 });
 
 
 Route::group([
-    'prefix'=>'mr-chemistry'
-], function(){
+    'prefix' => 'mr-chemistry'
+], function () {
     Route::group([
-        'prefix'=>'test',
-        'controller'=> MahdiTestController::class,
-        'middleware'=> [UserMiddleware::class],
-        'as'=>'mtest.'
-    ], function(){
+        'prefix' => 'test',
+        'controller' => MahdiTestController::class,
+        'middleware' => [UserMiddleware::class],
+        'as' => 'mtest.'
+    ], function () {
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
         Route::get('/list', 'index')->name('list');
@@ -103,11 +108,11 @@ Route::group([
     });
 
     Route::group([
-        'prefix'=>'question',
-        'controller'=>MahdiQuestionController::class,
-        'middleware'=> [UserMiddleware::class],
-        'as'=>'mquestion.'
-    ], function(){
+        'prefix' => 'question',
+        'controller' => MahdiQuestionController::class,
+        'middleware' => [UserMiddleware::class],
+        'as' => 'mquestion.'
+    ], function () {
         Route::get('/create/{test}', 'create')->name('create');
         Route::post('/store/{test}', 'store')->name('store');
         Route::get('/edit/{question}', 'edit')->name('edit');
@@ -117,7 +122,7 @@ Route::group([
         Route::get('/single/{question}', 'single')->name('single');
     });
 
-    Route::get('/home', function(){
+    Route::get('/home', function () {
         return view('guys.mrChemistry.home');
     })->name('m.home');
 });
@@ -125,19 +130,19 @@ Route::group([
 
 
 
-Route::get('/hossein/test' , function(){
+Route::get('/hossein/test', function () {
     return view('guys.ho.test');
 });
 
-Route::get('/ft-orders', function(){
-   return view('guys.ft.orders');
+Route::get('/ft-orders', function () {
+    return view('guys.ft.orders');
 });
 
-Route::get('/roadmap', function(){
+Route::get('/roadmap', function () {
     return view('guys.nasiri.roadmap');
 })->name('roadmap');
 
-Route::get('print/services' , function (){
+Route::get('print/services', function () {
     return view('guys.ho.print');
 })->name('print.services');
 Route::get('/computer-services', function () {

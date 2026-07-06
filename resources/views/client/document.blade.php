@@ -7,3 +7,6 @@
     </main>
     
 @include('footer')
+@if(Route::is('client.menu'))
+    @include('newMenuJs')
+@endif

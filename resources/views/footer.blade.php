@@ -459,9 +459,9 @@
 
 </script>
 <script src="{{ asset('assets/js/home.js') }}"></script>
-@if(Route::is('client.menu'))
+{{-- @if(Route::is('client.menu'))
     @include('newMenuJs')
-@endif
+@endif --}}
 {{--    <script src="{{ asset('assets/js/userPanel.js') }}"></script>--}}
 @RegisterServiceWorkerScript
 </body>

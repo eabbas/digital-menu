@@ -1,6 +1,7 @@
 @php
     $menu_id = $firstMenu->id;
 @endphp
+    @include('broad')
 <script>
     let orderLink = document.getElementById('orderLink')
     let firstMenu = ""
@@ -803,38 +804,263 @@
 
     let counterNum = 0
 
-    function orders(state) {
-        if (state == "open") {
-            orderList.children[0].children[0].children[1].innerHTML = ""
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-            $.ajax({
-                url: "{{ url('/api/order/show') }}",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    'career_id': "{{ $career->id }}",
-                    'user_id': userId
-                },
-                success: function (data) {
-                    orderList.classList.remove('invisible')
-                    orderList.classList.remove('opacity-0')
-                    data.forEach((order)=>{
-                        let element = document.createElement('div')
-                        element.classList = "w-full p-2 border-1 border-[#e4e5ea] rounded-lg"
-                        let inner = `
-                        <div class="w-full grid grid-cols-12 gap-2 items-center cursor-pointer order-first-row ${data[0].id == order.id && 'mb-5'}">
+    // function orders(state) {
+        
+    //     if (state == "open") {
+    //         orderList.children[0].children[0].children[1].innerHTML = ""
+    //         $.ajaxSetup({
+    //             headers: {
+    //                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
+    //             }
+    //         })
+    //         $.ajax({
+    //             url: "{{ url('/api/order/show') }}",
+    //             type: "POST",
+    //             dataType: "json",
+    //             data: {
+    //                 'career_id': "{{ $career->id }}",
+    //                 'user_id': userId
+    //             },
+    //             success: function (data) {
+                    
+    //                 orderList.classList.remove('invisible')
+    //                 orderList.classList.remove('opacity-0')
+    //                 data.forEach((order)=>{
 
+    //                     let condition = false
+    //                     let delOrdFlag = false
+    //                     let cancelOrdFlag = false
+    //                     if(order.status.id == 2 || order.status.id == 3 || order.status.id == 5 || order.status.id == 6){
+    //                         condition=true
+    //                     }
+    //                     if(order.status.id == 4){
+    //                         delOrdFlag = true
+    //                     }
+    //                     if(order.status.id == 1){
+    //                         cancelOrdFlag = true
+    //                     }
+
+                        
+    //                         // console.log(order)
+                        
+    //                     let element = document.createElement('div')
+    //                     element.classList = "w-full p-2 border-1 border-[#e4e5ea] rounded-lg"
+    //                     element.setAttribute('data-order-id', order.id)
+    //                     let inner = `
+    //                     <div class="w-full grid grid-cols-12 gap-2 items-center cursor-pointer order-first-row ${data[0].id == order.id && 'mb-5'}">
+
+    //                         <svg xmlns="http://www.w3.org/2000/svg" class="size-7 fill-(--secondary-text-color)" onclick="accardeonEvent(this)" viewBox="0 0 448 512">
+    //                             <path d="M160 96v32H288V96c0-35.3-28.7-64-64-64s-64 28.7-64 64zm-32 64H48c-8.8 0-16 7.2-16 16V416c0 35.3 28.7 64 64 64H352c35.3 0 64-28.7 64-64V176c0-8.8-7.2-16-16-16H320v80c0 8.8-7.2 16-16 16s-16-7.2-16-16V160H160v80c0 8.8-7.2 16-16 16s-16-7.2-16-16V160zm0-32V96c0-53 43-96 96-96s96 43 96 96v32h80c26.5 0 48 21.5 48 48V416c0 53-43 96-96 96H96c-53 0-96-43-96-96V176c0-26.5 21.5-48 48-48h80z"/>
+    //                         </svg>
+    //                         <span class="font-bold text-(--primary-text-color) in-fa col-span-2" onclick="accardeonEvent(this)">#${order.order_code}</span>
+    //                         <span class="bg-[${order.status.color}]/10 border-1 border-[${order.status.color}] text-[${order.status.color}] px-2 py-0.5 rounded-md text-sm col-span-5 text-center order-status">${order.status.title}</span>
+    //                         <button class="text-white bg-rose-500 px-4 py-0.5 ${condition ? `invisible` : ``} rounded-md text-sm cursor-pointer col-span-3" onclick="${delOrdFlag ? `deleteOrder(this, ${order.id})` : cancelOrdFlag ? `canceleOrder(this, ${order.id})` : '' }">${delOrdFlag ? 'حذف' : cancelOrdFlag ? 'لغو' : ''}</button>
+
+    //                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 ${data[0].id == order.id && 'rotate-180'} transition-all duration-300 angleDown" onclick="accardeonEvent(this)" viewBox="0 0 448 512">
+    //                             <path fill="var(--primary-text-color)" d="M212.7 331.3c6.2 6.2 16.4 6.2 22.6 0l160-160c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L224 297.4 75.3 148.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l160 160z"/>
+    //                         </svg>
+    //                     </div>
+    //                     <div class="w-full transition-all duration-300 ease-in-out ${data[0].id == order.id ? 'max-h-[500px]' : 'max-h-0'} overflow-y-auto accardeon" style="scrollbar-width: thin">
+    //                         <div class="w-full flex flex-row items-center justify-between px-3 pb-4">
+    //                             <div class="flex flex-row items-center gap-3">
+    //                                 <span class="text-sm text-(--primary-color)">شماره میز:</span>
+    //                                 <span class="text-sm text-(--secondary-text-color) in-fa">${order.qr_code.description}</span>
+    //                             </div>
+    //                             <div class="flex flex-row items-center gap-3">
+    //                                 <span class="text-sm text-(--primary-color)"> تعداد آیتم:</span>
+    //                                 <span class="text-sm text-(--secondary-text-color) in-fa">${order.carts.length}</span>
+    //                             </div>
+    //                         </div>
+    //                         <div class="w-full border-b border-[#e4e5ea]">
+    //                             <div class="w-full grid grid-cols-12 gap-2 items-center mb-1.5 py-1 rounded-md px-3">
+    //                                 <span class="col-span-3 text-(--secondary-text-color) text-sm text-center">تصویر</span>
+    //                                 <span class="text-sm text-(--secondary-text-color) col-span-4 text-center">عنوان</span>
+    //                                 <span class="text-sm text-(--secondary-text-color) text-center in-fa col-span-2">تعداد</span>
+    //                                 <span class="text-sm text-(--secondary-text-color) in-fa col-span-3 text-center">جمع کل</span>
+    //                             </div>
+    //                         </div>
+    //                         <div class="w-full flex flex-col pt-2 max-h-[200px] divide-y divide-[#e4e5ea] overflow-y-scroll" style="scrollbar-width: thin;">`
+    //                         order.carts.forEach((cart)=>{
+    //                             let price = 0
+    //                             if(cart.menu_item.discount == 0){
+    //                                 price = cart.menu_item.price * cart.quantity
+    //                             } else {
+    //                                 price = cart.menu_item.discount * cart.quantity
+    //                             }
+    //                             inner +=`
+    //                                 <div class="w-full grid grid-cols-12 gap-2 items-center px-3 py-2">
+    //                                     <img src="${ '{{ asset('storage/') }}/'+cart.menu_item.image }" class="col-span-3 size-18 rounded-md" alt="">
+    //                                     <span class="text-sm text-(--secondary-text-color) col-span-4 text-center">${cart.menu_item.title}</span>
+    //                                     <span class="text-sm text-(--secondary-text-color) text-center in-fa col-span-2">${cart.quantity}</span>
+    //                                     <span class="text-sm text-(--secondary-text-color) in-fa col-span-3 text-center">${price}</span>
+    //                                 </div>`
+    //                         })
+    //                             inner +=`
+    //                     </div>
+    //                 </div>`
+    //                     element.innerHTML = inner
+    //                     orderList.children[0].children[0].children[1].prepend(element)
+    //                 })
+    //                 // window.Pusher = Pusher;
+    //                 // window.Echo = new Echo.default({
+    //                 //     broadcaster: 'reverb',
+    //                 //     key: '1gz5uvls0tzdnpjcxp7q',
+    //                 //     wsHost: '127.0.0.1',
+    //                 //     wsPort: 8080,
+    //                 //     forceTLS: false,
+    //                 //     enabledTransports: ['ws']
+    //                 // });
+
+    //                 // window.Echo.channel('userOrderNotification{{ Auth::id() }}')
+    //                 //     .listen('clientOrders', function(e) {
+    //                 //         console.log('وضعیت سفارش:', e.order_data);
+                            
+    //                 //         let order = e.order_data;
+    //                 //         let container = orderList.children[0].children[0].children[1];
+    //                 //         if (!container) return;
+                            
+    //                 //         let card = container.querySelector(`[data-order-id="${order.id}"]`);
+                            
+    //                 //         if (!card) {
+    //                 //             let newCard = document.createElement('div');
+    //                 //             newCard.className = 'w-full p-2 border-1 border-[#e4e5ea] rounded-lg';
+    //                 //             newCard.setAttribute('data-order-id', order.id);
+                                
+    //                 //             let inner = `
+    //                 //                 <div class="w-full grid grid-cols-12 gap-2 items-center cursor-pointer order-first-row">
+    //                 //                     <svg xmlns="http://www.w3.org/2000/svg" class="size-7 fill-(--secondary-text-color)" onclick="accardeonEvent(this)" viewBox="0 0 448 512">
+    //                 //                         <path d="M160 96v32H288V96c0-35.3-28.7-64-64-64s-64 28.7-64 64zm-32 64H48c-8.8 0-16 7.2-16 16V416c0 35.3 28.7 64 64 64H352c35.3 0 64-28.7 64-64V176c0-8.8-7.2-16-16-16H320v80c0 8.8-7.2 16-16 16s-16-7.2-16-16V160H160v80c0 8.8-7.2 16-16 16s-16-7.2-16-16V160zm0-32V96c0-53 43-96 96-96s96 43 96 96v32h80c26.5 0 48 21.5 48 48V416c0 53-43 96-96 96H96c-53 0-96-43-96-96V176c0-26.5 21.5-48 48-48h80z"/>
+    //                 //                     </svg>
+    //                 //                     <span class="font-bold text-(--primary-text-color) in-fa col-span-2" onclick="accardeonEvent(this)">#${order.order_code}</span>
+    //                 //                     <span class="bg-[${order.status.color}]/10 border-1 border-[${order.status.color}] text-[${order.status.color}] px-2 py-0.5 rounded-md text-sm col-span-5 text-center order-status">${order.status.title}</span>
+    //                 //                     <button class="text-white bg-rose-500 px-4 py-0.5 ${order.status.id == 2 || order.status.id == 3 || order.status.id == 5 || order.status.id == 6 ? 'invisible' : ''} rounded-md text-sm cursor-pointer col-span-3" onclick="${order.status.id == 4 ? 'deleteOrder(this, '+order.id+')' : order.status.id == 1 ? 'canceleOrder(this, '+order.id+')' : ''}">${order.status.id == 4 ? 'حذف' : order.status.id == 1 ? 'لغو' : ''}</button>
+    //                 //                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 transition-all duration-300 angleDown" onclick="accardeonEvent(this)" viewBox="0 0 448 512">
+    //                 //                         <path fill="var(--primary-text-color)" d="M212.7 331.3c6.2 6.2 16.4 6.2 22.6 0l160-160c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L224 297.4 75.3 148.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l160 160z"/>
+    //                 //                     </svg>
+    //                 //                 </div>
+    //                 //                 <div class="w-full transition-all duration-300 ease-in-out max-h-0 overflow-y-auto accardeon" style="scrollbar-width: thin">
+    //                 //                     <div class="w-full flex flex-row items-center justify-between px-3 pb-4">
+    //                 //                         <div class="flex flex-row items-center gap-3">
+    //                 //                             <span class="text-sm text-(--primary-color)">شماره میز:</span>
+    //                 //                             <span class="text-sm text-(--secondary-text-color) in-fa">${order.qr_code.description}</span>
+    //                 //                         </div>
+    //                 //                         <div class="flex flex-row items-center gap-3">
+    //                 //                             <span class="text-sm text-(--primary-color)"> تعداد آیتم:</span>
+    //                 //                             <span class="text-sm text-(--secondary-text-color) in-fa">${order.carts.length}</span>
+    //                 //                         </div>
+    //                 //                     </div>
+    //                 //                     <div class="w-full border-b border-[#e4e5ea]">
+    //                 //                         <div class="w-full grid grid-cols-12 gap-2 items-center mb-1.5 py-1 rounded-md px-3">
+    //                 //                             <span class="col-span-3 text-(--secondary-text-color) text-sm text-center">تصویر</span>
+    //                 //                             <span class="text-sm text-(--secondary-text-color) col-span-4 text-center">عنوان</span>
+    //                 //                             <span class="text-sm text-(--secondary-text-color) text-center in-fa col-span-2">تعداد</span>
+    //                 //                             <span class="text-sm text-(--secondary-text-color) in-fa col-span-3 text-center">جمع کل</span>
+    //                 //                         </div>
+    //                 //                     </div>
+    //                 //                     <div class="w-full flex flex-col pt-2 max-h-[200px] divide-y divide-[#e4e5ea] overflow-y-scroll" style="scrollbar-width: thin;">`;
+                                        
+    //                 //                     order.carts.forEach((cart)=>{
+    //                 //                         let price = 0
+    //                 //                         if(cart.menu_item.discount == 0){
+    //                 //                             price = cart.menu_item.price * cart.quantity
+    //                 //                         } else {
+    //                 //                             price = cart.menu_item.discount * cart.quantity
+    //                 //                         }
+    //                 //                         inner += `
+    //                 //                             <div class="w-full grid grid-cols-12 gap-2 items-center px-3 py-2">
+    //                 //                                 <img src="{{ asset('storage/') }}/${cart.menu_item.image}" class="col-span-3 size-18 rounded-md" alt="">
+    //                 //                                 <span class="text-sm text-(--secondary-text-color) col-span-4 text-center">${cart.menu_item.title}</span>
+    //                 //                                 <span class="text-sm text-(--secondary-text-color) text-center in-fa col-span-2">${cart.quantity}</span>
+    //                 //                                 <span class="text-sm text-(--secondary-text-color) in-fa col-span-3 text-center">${price}</span>
+    //                 //                             </div>`;
+    //                 //                     });
+                                        
+    //                 //                     inner += `
+    //                 //                     </div>
+    //                 //                 </div>
+    //                 //             `;
+    //                 //             newCard.innerHTML = inner;
+    //                 //             container.prepend(newCard);
+    //                 //             return;
+    //                 //         }
+                            
+    //                 //         let statusEl = card.querySelector('.order-status');
+    //                 //         if (statusEl) {
+    //                 //             statusEl.textContent = order.status.title;
+    //                 //             statusEl.style.color = order.status.color;
+    //                 //             statusEl.style.borderColor = order.status.color;
+    //                 //             statusEl.style.backgroundColor = order.status.color + '10';
+    //                 //         }
+                            
+    //                 //         if (order.status.id === 5 || order.status.id === 6) {
+    //                 //             card.remove();
+    //                 //         }
+    //                 //     });
+    //                             },
+    //                             error: function () {
+    //                                 showMessage('open')
+    //                                 element.innerHTML = `
+    //                                     <span>خطا در دریافت اطلاعات</span>
+    //                                     <span class="text-red-500">!</span>
+    //                                     `
+    //                                 message.children[0].appendChild(element)
+    //                                 setTimeout(() => {
+    //                                     showMessage('close')
+    //                                 }, 2000)
+    //                             }
+    //                         })
+    //                     }
+    //                     if (state == "close") {
+    //                         orderList.classList.add('invisible')
+    //                         orderList.classList.add('opacity-0')
+    //                     }
+    // }
+    function orders(state) {
+    if (state == "open") {
+        orderList.children[0].children[0].children[1].innerHTML = ""
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            }
+        })
+        $.ajax({
+            url: "{{ url('/api/order/show') }}",
+            type: "POST",
+            dataType: "json",
+            data: {
+                'career_id': "{{ $career->id }}",
+                'user_id': userId
+            },
+            success: function (data) {
+                orderList.classList.remove('invisible')
+                orderList.classList.remove('opacity-0')
+                data.forEach((order) => {
+                    let condition = false
+                    let delOrdFlag = false
+                    let cancelOrdFlag = false
+                    
+                    if (order.status.id == 2 || order.status.id == 3 || order.status.id == 5 || order.status.id == 6) {
+                        condition = true
+                    }
+                    if (order.status.id == 4) {
+                        delOrdFlag = true
+                    }
+                    if (order.status.id == 1) {
+                        cancelOrdFlag = true
+                    }
+
+                    let element = document.createElement('div')
+                    element.classList = "w-full p-2 border-1 border-[#e4e5ea] rounded-lg"
+                    element.setAttribute('data-order-id', order.id)
+                    
+                    let inner = `
+                        <div class="w-full grid grid-cols-12 gap-2 items-center cursor-pointer order-first-row ${data[0].id == order.id && 'mb-5'}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-7 fill-(--secondary-text-color)" onclick="accardeonEvent(this)" viewBox="0 0 448 512">
                                 <path d="M160 96v32H288V96c0-35.3-28.7-64-64-64s-64 28.7-64 64zm-32 64H48c-8.8 0-16 7.2-16 16V416c0 35.3 28.7 64 64 64H352c35.3 0 64-28.7 64-64V176c0-8.8-7.2-16-16-16H320v80c0 8.8-7.2 16-16 16s-16-7.2-16-16V160H160v80c0 8.8-7.2 16-16 16s-16-7.2-16-16V160zm0-32V96c0-53 43-96 96-96s96 43 96 96v32h80c26.5 0 48 21.5 48 48V416c0 53-43 96-96 96H96c-53 0-96-43-96-96V176c0-26.5 21.5-48 48-48h80z"/>
                             </svg>
                             <span class="font-bold text-(--primary-text-color) in-fa col-span-2" onclick="accardeonEvent(this)">#${order.order_code}</span>
-                            <span class="bg-[${order.status.color}]/10 border-1 border-[${order.status.color}] text-[${order.status.color}] px-2 py-0.5 rounded-md text-sm col-span-5 text-center">${order.status.title}</span>
-                            <button class="text-white bg-rose-500 px-4 py-0.5 ${order.status.id == 2 || order.status.id == 3 || order.status.id == 5 || order.status.id == 6 ? `invisible` : ``} rounded-md text-sm cursor-pointer col-span-3" onclick="${order.status.id == 4 ? `deleteOrder(this, ${order.id})` : order.status.id == 1 ? `canceleOrder(this, ${order.id})` : '' }">${order.status.id == 4 ? 'حذف' : order.status.id == 1 ? 'لغو' : ''}</button>
-
+                            <span class="bg-[${order.status.color}]/10 border-1 border-[${order.status.color}] text-[${order.status.color}] px-2 py-0.5 rounded-md text-sm col-span-5 text-center order-status">${order.status.title}</span>
+                            <button class="text-white bg-rose-500 px-4 py-0.5 ${condition ? 'invisible' : ''} rounded-md text-sm cursor-pointer col-span-3" onclick="${delOrdFlag ? 'deleteOrder(this, '+order.id+')' : cancelOrdFlag ? 'canceleOrder(this, '+order.id+')' : ''}">${delOrdFlag ? 'حذف' : cancelOrdFlag ? 'لغو' : ''}</button>
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 ${data[0].id == order.id && 'rotate-180'} transition-all duration-300 angleDown" onclick="accardeonEvent(this)" viewBox="0 0 448 512">
                                 <path fill="var(--primary-text-color)" d="M212.7 331.3c6.2 6.2 16.4 6.2 22.6 0l160-160c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L224 297.4 75.3 148.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l160 160z"/>
                             </svg>
@@ -859,48 +1085,121 @@
                                 </div>
                             </div>
                             <div class="w-full flex flex-col pt-2 max-h-[200px] divide-y divide-[#e4e5ea] overflow-y-scroll" style="scrollbar-width: thin;">`
-                            order.carts.forEach((cart)=>{
-                                let price = 0
-                                if(cart.menu_item.discount == 0){
-                                    price = cart.menu_item.price * cart.quantity
-                                } else {
-                                    price = cart.menu_item.discount * cart.quantity
-                                }
-                                inner +=`
-                                    <div class="w-full grid grid-cols-12 gap-2 items-center px-3 py-2">
-                                        <img src="${ '{{ asset('storage/') }}/'+cart.menu_item.image }" class="col-span-3 size-18 rounded-md" alt="">
-                                        <span class="text-sm text-(--secondary-text-color) col-span-4 text-center">${cart.menu_item.title}</span>
-                                        <span class="text-sm text-(--secondary-text-color) text-center in-fa col-span-2">${cart.quantity}</span>
-                                        <span class="text-sm text-(--secondary-text-color) in-fa col-span-3 text-center">${price}</span>
-                                    </div>`
-                            })
-                                inner +=`
+                    
+                    order.carts.forEach((cart) => {
+                        let price = 0
+                        if (cart.menu_item.discount == 0) {
+                            price = cart.menu_item.price * cart.quantity
+                        } else {
+                            price = cart.menu_item.discount * cart.quantity
+                        }
+                        inner += `
+                            <div class="w-full grid grid-cols-12 gap-2 items-center px-3 py-2">
+                                <img src="${'{{ asset('storage/') }}/' + cart.menu_item.image}" class="col-span-3 size-18 rounded-md" alt="">
+                                <span class="text-sm text-(--secondary-text-color) col-span-4 text-center">${cart.menu_item.title}</span>
+                                <span class="text-sm text-(--secondary-text-color) text-center in-fa col-span-2">${cart.quantity}</span>
+                                <span class="text-sm text-(--secondary-text-color) in-fa col-span-3 text-center">${price}</span>
+                            </div>`
+                    })
+                    
+                    inner += `
+                            </div>
                         </div>
                     </div>`
-                        element.innerHTML = inner
-                        orderList.children[0].children[0].children[1].appendChild(element)
-                    })
-
-                },
-                error: function () {
-                    showMessage('open')
-                    element.innerHTML = `
-                        <span>خطا در دریافت اطلاعات</span>
-                        <span class="text-red-500">!</span>
-                        `
-                    message.children[0].appendChild(element)
-                    setTimeout(() => {
-                        showMessage('close')
-                    }, 2000)
-                }
-            })
-        }
-        if (state == "close") {
-            orderList.classList.add('invisible')
-            orderList.classList.add('opacity-0')
-        }
+                    
+                    element.innerHTML = inner
+                    orderList.children[0].children[0].children[1].prepend(element)
+                })
+            },
+            error: function () {
+                showMessage('open')
+                element.innerHTML = `
+                    <span>خطا در دریافت اطلاعات</span>
+                    <span class="text-red-500">!</span>
+                `
+                message.children[0].appendChild(element)
+                setTimeout(() => {
+                    showMessage('close')
+                }, 2000)
+            }
+        })
     }
+    if (state == "close") {
+        orderList.classList.add('invisible')
+        orderList.classList.add('opacity-0')
+    }
+}
 
+// ============= رویداد clientOrders برای بروزرسانی لحظه‌ای =============
+window.Pusher = Pusher;
+window.Echo = new Echo.default({
+    broadcaster: 'reverb',
+    key: '1gz5uvls0tzdnpjcxp7q',
+    wsHost: '127.0.0.1',
+    wsPort: 8080,
+    forceTLS: false,
+    enabledTransports: ['ws']
+});
+
+window.Echo.channel('userOrderNotification' + userId)
+    .listen('clientOrders', function(e) {
+        console.log('رویداد سفارش مشتری:', e);
+        
+        let order = e.order;
+        let container = orderList.children[0].children[0].children[1];
+        if (!container) return;
+        
+        let card = container.querySelector(`[data-order-id="${order.id}"]`);
+        if (!card) {
+            orders('open');
+            return;
+        }
+        
+        // بروزرسانی وضعیت
+        let statusEl = card.querySelector('.order-status');
+        if (statusEl) {
+            statusEl.textContent = order.status.title;
+            statusEl.style.color = order.status.color;
+            statusEl.style.borderColor = order.status.color;
+            statusEl.style.backgroundColor = order.status.color + '10';
+        }
+        
+        // بروزرسانی دکمه
+        let actionBtn = card.querySelector('.col-span-3');
+        if (actionBtn) {
+            if (order.status.id == 1) {
+                // وضعیت 1: دکمه لغو
+                actionBtn.textContent = 'لغو';
+                actionBtn.className = 'text-white bg-rose-500 px-4 py-0.5 rounded-md text-sm cursor-pointer col-span-3';
+                actionBtn.setAttribute('onclick', `canceleOrder(this, ${order.id})`);
+            } else if (order.status.id == 4) {
+                // وضعیت 4: دکمه حذف
+                actionBtn.textContent = 'حذف';
+                actionBtn.className = 'text-white bg-rose-500 px-4 py-0.5 rounded-md text-sm cursor-pointer col-span-3';
+                actionBtn.setAttribute('onclick', `deleteOrder(this, ${order.id})`);
+            } else if (order.status.id == 2 || order.status.id == 3) {
+                // وضعیت 2 و 3: دکمه مخفی
+                actionBtn.className = 'text-white bg-rose-500 px-4 py-0.5 invisible rounded-md text-sm cursor-pointer col-span-3';
+                actionBtn.textContent = '';
+                actionBtn.removeAttribute('onclick');
+            } else if (order.status.id == 5 || order.status.id == 6) {
+                // وضعیت 5 و 6: کارت رو حذف کن
+                card.remove();
+                if (container.children.length === 0) {
+                    let orderLink = document.getElementById('orderLink');
+                    if (orderLink) {
+                        let badge = orderLink.children[0];
+                        if (badge) {
+                            badge.classList.add('scale-0');
+                        }
+                        orderLink.removeAttribute('onclick');
+                    }
+                    orders('close');
+                }
+            }
+        }
+    });
+    
     function accardeonEvent(el){
         let angle = el.parentElement.querySelector('.angleDown')
         let accardeons = document.querySelectorAll('.accardeon');
@@ -929,6 +1228,7 @@
     }
 
     function deleteOrder(el, orderId) {
+        // console.log(orderId)
         orderLink = document.getElementById('orderLink')
         el.innerHTMl = "<div class='w-5 h-5 border-2 border-white border-t-red-500 rounded-full animate-spin'></div>"
         $.ajax({
@@ -958,33 +1258,41 @@
         })
     }
 
-    function canceleOrder(el, orderId) {
-        el.innerHTMl = "<div class='w-5 h-5 border-2 border-white border-t-red-500 rounded-full animate-spin'></div>"
-        $.ajax({
-            url: "{{ url('/api/order/remove') }}/" + orderId + '/' + userId + "/{{ $career->id }}",
-            type: "GET",
-            success: function (data) {
-                console.log(data)
-                if (data.length == 0) {
-                    orderLink.children[0].classList.add('scale-0')
-                    orderLink.removeAttribute('onclick')
-                    orders('close')
-                }
-                el.parentElement.parentElement.remove()
-            },
-            error: function () {
-                showMessage('open')
-                element.innerHTML = `
-                        <span>خطا در دریافت اطلاعات</span>
-                        <span class="text-red-500">!</span>
-                        `
-                message.children[0].appendChild(element)
-                setTimeout(() => {
-                    showMessage('close')
-                }, 2000)
+function canceleOrder(el, orderId) {
+    el.innerHTML = "<div class='w-5 h-5 border-2 border-white border-t-red-500 rounded-full animate-spin'></div>";
+    $.ajax({
+        url: "{{ url('/api/order/remove') }}/" + orderId + '/' + userId + "/{{ $career->id }}",
+        type: "GET",
+        success: function (data) {
+            console.log('پاسخ سرور:', data)
+            if (data.length == 0) {
+                orderLink.children[0].classList.add('scale-0')
+                orderLink.removeAttribute('onclick')
+                orders('close');
             }
-        })
-    }
+            el.parentElement.parentElement.remove()
+            
+            showMessage('open')
+            element.innerHTML = `<span>سفارش با موفقیت حذف شد</span>`
+            message.children[0].appendChild(element)
+            setTimeout(() => {
+                showMessage('close')
+            }, 2000);
+        },
+        error: function(xhr, status, error) {
+            console.log('خطا:', error)
+            showMessage('open');
+            element.innerHTML = `
+                <span>خطا در حذف سفارش</span>
+                <span class="text-red-500">!</span>
+            `;
+            message.children[0].appendChild(element)
+            setTimeout(() => {
+                showMessage('close');
+            }, 2000)
+        }
+    })
+}
 
     function showMessage(state) {
         if (state == 'open') {
@@ -1005,7 +1313,7 @@
         if(el){
             el.disabled = true
         }
-        let orderLink = document.getElementById('orderLink')
+        orderLink = document.getElementById('orderLink')
         let count = document.querySelectorAll('.count')
         // orderLink.classList.remove('hidden')
 
@@ -1505,5 +1813,166 @@
 
         )
     }
+
+    
+//         window.Pusher = Pusher;
+// window.Echo = new Echo.default({
+//     broadcaster: 'reverb',
+//     key: '1gz5uvls0tzdnpjcxp7q',
+//     wsHost: '127.0.0.1',
+//     wsPort: 8080,
+//     forceTLS: false,
+//     enabledTransports: ['ws']
+// });
+
+// // let userId = "{{ Auth::id() }}"
+// window.Echo.channel('userOrderNotification' + userId)
+//     .listen('clientOrders', function(e) {
+
+//         console.log('رویداد سفارش مشتری:', e)
+        
+//         let order = e.order;
+       
+//         let container = orderList.children[0].children[0].children[1]
+//         if (!container) return
+        
+//         if (e.is_cancelled) {
+//             let card = container.querySelector(`[data-order-id="${order.id}"]`)
+//             if (card) {
+//                 card.remove()
+                
+//                 if (container.children.length === 0) {
+//                     let orderLink = document.getElementById('orderLink')
+//                     if (orderLink) {
+//                         let badge = orderLink.children[0]
+//                         if (badge) {
+//                             badge.classList.add('scale-0')
+//                         }
+//                         orderLink.removeAttribute('onclick')
+//                     }
+//                     orders('close')
+//                 }
+//             }
+//             return
+//         }
+//         let condition = false
+//         let delOrdFlag = false
+//         let cancelOrdFlag = false
+//         if(order.status.id == 2 || order.status.id == 3 || order.status.id == 5 || order.status.id == 6){
+//             condition=true
+//         }
+//         if(order.status.id == 4){
+//             delOrdFlag = true
+//         }
+//         if(order.status.id == 1){
+//             cancelOrdFlag = true
+//         }
+        
+//         let card = container.querySelector(`[data-order-id="${order.id}"]`)
+        
+//         if (!card) {
+//             let newCard = document.createElement('div');
+//             newCard.className = 'w-full p-2 border-1 border-[#e4e5ea] rounded-lg'
+//             newCard.setAttribute('data-order-id', order.id)
+            
+//             let inner = `
+//                 <div class="w-full grid grid-cols-12 gap-2 items-center cursor-pointer order-first-row">
+//                     <svg xmlns="http://www.w3.org/2000/svg" class="size-7 fill-(--secondary-text-color)" onclick="accardeonEvent(this)" viewBox="0 0 448 512">
+//                         <path d="M160 96v32H288V96c0-35.3-28.7-64-64-64s-64 28.7-64 64zm-32 64H48c-8.8 0-16 7.2-16 16V416c0 35.3 28.7 64 64 64H352c35.3 0 64-28.7 64-64V176c0-8.8-7.2-16-16-16H320v80c0 8.8-7.2 16-16 16s-16-7.2-16-16V160H160v80c0 8.8-7.2 16-16 16s-16-7.2-16-16V160zm0-32V96c0-53 43-96 96-96s96 43 96 96v32h80c26.5 0 48 21.5 48 48V416c0 53-43 96-96 96H96c-53 0-96-43-96-96V176c0-26.5 21.5-48 48-48h80z"/>
+//                     </svg>
+//                     <span class="font-bold text-(--primary-text-color) in-fa col-span-2" onclick="accardeonEvent(this)">#${order.order_code}</span>
+//                     <span class="bg-[${order.status.color}]/10 border-1 border-[${order.status.color}] text-[${order.status.color}] px-2 py-0.5 rounded-md text-sm col-span-5 text-center order-status">${order.status.title}</span>
+//                     <button class="text-white bg-rose-500 px-4 py-0.5 ${condition ? `invisible` : ``} rounded-md text-sm cursor-pointer col-span-3" onclick="${delOrdFlag ? `deleteOrder(this, ${order.id})` : cancelOrdFlag ? `canceleOrder(this, ${order.id})` : '' }">${delOrdFlag ? 'حذف' : cancelOrdFlag ? 'لغو' : ''}</button>
+//                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 transition-all duration-300 angleDown" onclick="accardeonEvent(this)" viewBox="0 0 448 512">
+//                         <path fill="var(--primary-text-color)" d="M212.7 331.3c6.2 6.2 16.4 6.2 22.6 0l160-160c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L224 297.4 75.3 148.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l160 160z"/>
+//                     </svg>
+//                 </div>
+//                 <div class="w-full transition-all duration-300 ease-in-out max-h-0 overflow-y-auto accardeon" style="scrollbar-width: thin">
+//                     <div class="w-full flex flex-row items-center justify-between px-3 pb-4">
+//                         <div class="flex flex-row items-center gap-3">
+//                             <span class="text-sm text-(--primary-color)">شماره میز:</span>
+//                             <span class="text-sm text-(--secondary-text-color) in-fa">${order.qr_code ? order.qr_code.description : '-'}</span>
+//                         </div>
+//                         <div class="flex flex-row items-center gap-3">
+//                             <span class="text-sm text-(--primary-color)"> تعداد آیتم:</span>
+//                             <span class="text-sm text-(--secondary-text-color) in-fa">${order.carts ? order.carts.length : 0}</span>
+//                         </div>
+//                     </div>
+//                     <div class="w-full border-b border-[#e4e5ea]">
+//                         <div class="w-full grid grid-cols-12 gap-2 items-center mb-1.5 py-1 rounded-md px-3">
+//                             <span class="col-span-3 text-(--secondary-text-color) text-sm text-center">تصویر</span>
+//                             <span class="text-sm text-(--secondary-text-color) col-span-4 text-center">عنوان</span>
+//                             <span class="text-sm text-(--secondary-text-color) text-center in-fa col-span-2">تعداد</span>
+//                             <span class="text-sm text-(--secondary-text-color) in-fa col-span-3 text-center">جمع کل</span>
+//                         </div>
+//                     </div>
+//                     <div class="w-full flex flex-col pt-2 max-h-[200px] divide-y divide-[#e4e5ea] overflow-y-scroll" style="scrollbar-width: thin;">`;
+                    
+//                     if (order.carts) {
+//                         order.carts.forEach((cart)=>{
+//                             let price = 0;
+//                             if(cart.menu_item.discount == 0){
+//                                 price = cart.menu_item.price * cart.quantity
+//                             } else {
+//                                 price = cart.menu_item.discount * cart.quantity
+//                             }
+//                             inner += `
+//                                 <div class="w-full grid grid-cols-12 gap-2 items-center px-3 py-2">
+//                                     <img src="{{ asset('storage/') }}/${cart.menu_item.image}" class="col-span-3 size-18 rounded-md" alt="">
+//                                     <span class="text-sm text-(--secondary-text-color) col-span-4 text-center">${cart.menu_item.title}</span>
+//                                     <span class="text-sm text-(--secondary-text-color) text-center in-fa col-span-2">${cart.quantity}</span>
+//                                     <span class="text-sm text-(--secondary-text-color) in-fa col-span-3 text-center">${price}</span>
+//                                 </div>`;
+//                         });
+//                     }
+                    
+//                     inner += `
+//                     </div>
+//                 </div>
+//             `
+//             newCard.innerHTML = inner
+//             container.prepend(newCard)
+            
+//             let orderLink = document.getElementById('orderLink')
+//             if (orderLink) {
+//                 let badge = orderLink.children[0];
+//                 if (badge) {
+//                     badge.classList.remove('scale-0')
+//                 }
+//                 orderLink.setAttribute('onclick', 'orders("open")')
+//             }
+            
+//             return
+//         }
+        
+//         // اگر کارت وجود دارد، وضعیت را بروزرسانی کن
+//         let statusEl = card.querySelector('.order-status')
+//         if (statusEl) {
+//             statusEl.textContent = order.status.title
+//             statusEl.style.color = order.status.color
+//             statusEl.style.borderColor = order.status.color
+//             statusEl.style.backgroundColor = order.status.color + '10'
+//         }
+        
+//         // اگر سفارش به وضعیت 5 یا 6 رسید، حذف کن
+//         if (order.status.id === 5 || order.status.id === 6) {
+//             card.remove();
+            
+//             if (container.children.length === 0) {
+//                 let orderLink = document.getElementById('orderLink')
+//                 if (orderLink) {
+//                     let badge = orderLink.children[0]
+//                     if (badge) {
+//                         badge.classList.add('scale-0')
+//                     }
+//                     orderLink.removeAttribute('onclick')
+//                 }
+//                 orders('close');
+//             }
+//         }
+//     })
+   
+
+
 </script>
 <script src="{{ asset('assets/js/menu.js') }}"></script>
