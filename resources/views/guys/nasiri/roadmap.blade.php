@@ -153,13 +153,13 @@
                             </svg>
                         </div>
                         <div class="bg-gray-100 text-[9px] text-[#484a65] rounded-md flex gap-1 p-1 justify-center items-center">
-                            <span>5موضوع</span>
+                            <span class="in-fa">5موضوع</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="fill-[#484a65] size-2" viewBox="0 0 384 512">
                                 <path d="M352 448V192H240c-26.5 0-48-21.5-48-48V32H64C46.3 32 32 46.3 32 64V448c0 17.7 14.3 32 32 32H320c17.7 0 32-14.3 32-32zm-.5-288c-.7-2.8-2.1-5.4-4.2-7.4L231.4 36.7c-2.1-2.1-4.6-3.5-7.4-4.2V144c0 8.8 7.2 16 16 16H351.5zM0 64C0 28.7 28.7 0 64 0H220.1c12.7 0 24.9 5.1 33.9 14.1L369.9 129.9c9 9 14.1 21.2 14.1 33.9V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64z"/>
                             </svg>
                         </div>
                         <div class="bg-gray-100 text-[9px] text-[#484a65] rounded-md flex gap-1 p-1 justify-center items-center">
-                            <span>5تا6ساعت</span>
+                            <span class="in-fa">5تا6ساعت</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="fill-[#484a65] size-2" stroke-width="2" viewBox="0 0 512 512">
                                 <path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/>
                             </svg>
@@ -206,13 +206,13 @@
                             </svg>
                         </div>
                         <div class="bg-gray-100 text-[9px] text-[#484a65] rounded-md flex gap-1 p-1 justify-center items-center">
-                            <span>8موضوع</span>
+                            <span class="in-fa">8موضوع</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="fill-[#484a65] size-2" viewBox="0 0 384 512">
                                 <path d="M352 448V192H240c-26.5 0-48-21.5-48-48V32H64C46.3 32 32 46.3 32 64V448c0 17.7 14.3 32 32 32H320c17.7 0 32-14.3 32-32zm-.5-288c-.7-2.8-2.1-5.4-4.2-7.4L231.4 36.7c-2.1-2.1-4.6-3.5-7.4-4.2V144c0 8.8 7.2 16 16 16H351.5zM0 64C0 28.7 28.7 0 64 0H220.1c12.7 0 24.9 5.1 33.9 14.1L369.9 129.9c9 9 14.1 21.2 14.1 33.9V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64z"/>
                             </svg>
                         </div>
                         <div class="bg-gray-100 text-[9px] text-[#484a65] rounded-md flex gap-1 p-1 justify-center items-center">
-                            <span class="text-nowrap">4تا5 ساعت</span>
+                            <span class="text-nowrap in-fa">4تا5 ساعت</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="fill-[#484a65] size-2" stroke-width="2" viewBox="0 0 512 512">
                                 <path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/>
                             </svg>
@@ -260,13 +260,13 @@
                             </svg>
                         </div>
                         <div class="bg-gray-100 text-[9px] text-[#484a65] rounded-md flex gap-1 p-1 justify-center items-center">
-                            <span>10موضوع</span>
+                            <span class="in-fa">10موضوع</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="fill-[#484a65] size-2" viewBox="0 0 384 512">
                                 <path d="M352 448V192H240c-26.5 0-48-21.5-48-48V32H64C46.3 32 32 46.3 32 64V448c0 17.7 14.3 32 32 32H320c17.7 0 32-14.3 32-32zm-.5-288c-.7-2.8-2.1-5.4-4.2-7.4L231.4 36.7c-2.1-2.1-4.6-3.5-7.4-4.2V144c0 8.8 7.2 16 16 16H351.5zM0 64C0 28.7 28.7 0 64 0H220.1c12.7 0 24.9 5.1 33.9 14.1L369.9 129.9c9 9 14.1 21.2 14.1 33.9V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64z"/>
                             </svg>
                         </div>
                         <div class="bg-gray-100 text-[9px] text-[#484a65] rounded-md flex gap-1 p-1 justify-center items-center">
-                            <span>5تا6 ساعت</span>
+                            <span class="in-fa">5تا6 ساعت</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="fill-[#484a65] size-2" stroke-width="2" viewBox="0 0 512 512">
                                 <path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/>
                             </svg>
@@ -314,13 +314,13 @@
                             </svg>
                         </div>
                         <div class="bg-gray-100 text-[9px] text-[#484a65] rounded-md flex gap-1 p-1 justify-center items-center">
-                            <span>9موضوع</span>
+                            <span class="in-fa">9موضوع</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="fill-[#484a65] size-2" viewBox="0 0 384 512">
                                 <path d="M352 448V192H240c-26.5 0-48-21.5-48-48V32H64C46.3 32 32 46.3 32 64V448c0 17.7 14.3 32 32 32H320c17.7 0 32-14.3 32-32zm-.5-288c-.7-2.8-2.1-5.4-4.2-7.4L231.4 36.7c-2.1-2.1-4.6-3.5-7.4-4.2V144c0 8.8 7.2 16 16 16H351.5zM0 64C0 28.7 28.7 0 64 0H220.1c12.7 0 24.9 5.1 33.9 14.1L369.9 129.9c9 9 14.1 21.2 14.1 33.9V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64z"/>
                             </svg>
                         </div>
                         <div class="bg-gray-100 text-[9px] text-[#484a65] rounded-md flex gap-1 p-1 justify-center items-center">
-                            <span class="text-nowrap">5تا15 ساعت</span>
+                            <span class="text-nowrap in-fa">5تا15 ساعت</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="fill-[#484a65] size-2" stroke-width="2" viewBox="0 0 512 512">
                                 <path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/>
                             </svg>
